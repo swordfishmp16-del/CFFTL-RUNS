@@ -176,7 +176,7 @@
 
   <section class="step" id="stepTemplates">
     <h2><span class="num">1</span> WOODWOP templates</h2>
-    <p class="hint">Load your two tray templates once. This computer remembers them. The app copies the template and only fills in the red tray sizes (tr1w, tr1d &hellip;). Your template files are never changed.</p>
+    <p class="hint">Your two tray templates are built into this app. Only load one here if you change a template in WOODWOP; this computer then remembers it. The app copies the template and only fills in the red tray sizes (tr1w, tr1d &hellip;). Your template files are never changed.</p>
     <div class="tpl-grid">
       <div class="tpl" id="tpl2">
         <h3>2&quot; tall template</h3>
@@ -300,11 +300,23 @@
   function dateCode() { return J.mmddyy($('date').value) || J.mmddyy(todayIso()); }
 
   // ---------- step 1: templates ----------
-  function setTemplate(h, bin, name, remember) {
+  // Your _2 TALL / _3 TALL templates, put in by build.js (null when src/app.html is opened directly).
+  var BUILTIN = /*BUILTIN_TEMPLATES*/null;
+
+  function useBuiltin(h) {
+    var b = BUILTIN && BUILTIN[h];
+    if (!b) { S.templates[h] = null; S.bins[h] = null; return false; }
+    setTemplate(h, atob(b.b64), b.name, false, 'built in, your file from ' + b.saved);
+    return true;
+  }
+
+  function setTemplate(h, bin, name, remember, source) {
     var t = J.parseTemplate(bin, name);
     if (t.heightClass !== h) {
       throw new Error(name + ' has tray height ' + t.th + ' mm, which is not a ' + h + '" template.');
     }
+    t.source = source || 'loaded on this computer';
+    t.builtin = !!source;
     S.templates[h] = t;
     S.bins[h] = bin;
     var kept = true;
@@ -317,10 +329,12 @@
     [2, 3].forEach(function (h) {
       var t = S.templates[h], box = $('tpl' + h);
       box.classList.toggle('ready', !!t);
-      box.querySelector('[data-forget]').hidden = !t;
+      var forget = box.querySelector('[data-forget]');
+      forget.hidden = !t || t.builtin;
+      forget.textContent = BUILTIN && BUILTIN[h] ? 'Go back to the built-in one' : 'Forget';
       box.querySelector('[data-load]').textContent = t ? 'Load a different one' : 'Load ' + h + '" template';
       box.querySelector('.status').innerHTML = t
-        ? '&#10003; <b>' + esc(t.fileName) + '</b><br>' + t.slots + ' trays per board &middot; tray height ' + t.th +
+        ? '&#10003; <b>' + esc(t.fileName) + '</b> (' + esc(t.source) + ')<br>' + t.slots + ' trays per board &middot; tray height ' + t.th +
           ' mm &middot; velvet allowance ' + t.v + ' mm' + (t.warnings.length ? '<br>' + esc(t.warnings.join(' ')) : '')
         : 'Not loaded. Use <b>_' + h + ' TALL DAILY TRAY TEMPLATE.mpr</b>';
     });
@@ -332,9 +346,10 @@
     var forget = e.target.closest('[data-forget]');
     if (forget) {
       var h = +forget.dataset.forget;
-      S.templates[h] = null; S.bins[h] = null; store.del('jtd.tpl.' + h);
+      store.del('jtd.tpl.' + h);
+      var back = useBuiltin(h);
       renderTemplates(); scheduleBoards();
-      msg('tplMsg', h + '" template removed from this computer.', 'ok');
+      msg('tplMsg', back ? 'Back to the built-in ' + h + '" template.' : h + '" template removed from this computer.', 'ok');
     }
   });
 
@@ -667,9 +682,11 @@
   $('date').value = todayIso();
   [2, 3].forEach(function (h) {
     var raw = store.get('jtd.tpl.' + h);
-    if (!raw) return;
-    try { var o = JSON.parse(raw); setTemplate(h, o.bin, o.name, false); }
-    catch (e) { store.del('jtd.tpl.' + h); }
+    if (raw) {
+      try { var o = JSON.parse(raw); setTemplate(h, o.bin, o.name, false); return; }
+      catch (e) { store.del('jtd.tpl.' + h); }
+    }
+    useBuiltin(h);
   });
   renderTemplates();
   showLastRun();

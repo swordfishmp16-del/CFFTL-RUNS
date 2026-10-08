@@ -11,9 +11,10 @@ Open the Shopify export and the app gives you:
 
 1. Copy **`OLD SCHOOL JEWELRY TRAY APP.html`** to the computer, on the desktop or a shared folder.
 2. Double-click it. It opens in Chrome or Edge. There's nothing to install, and it works without internet.
-3. In step 1, load **`_2 TALL DAILY TRAY TEMPLATE.mpr`** and **`_3 TALL DAILY TRAY TEMPLATE.mpr`**. That computer remembers them after the first time.
 
-Do this on each computer that needs it. The app does not change or move any file on the L: drive. Everything it makes goes to the Downloads folder, and you move it where it belongs.
+Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are already inside the app, so there's nothing to load. The app does not change or move any file on the L: drive. Everything it makes goes to the Downloads folder, and you move it where it belongs.
+
+**If you change a template in WOODWOP:** in step 1, click **Load a different one** and pick the new file. That computer uses the new file from then on, and **Go back to the built-in one** undoes it. To change the template for every computer, send the new file so the app can be rebuilt with it.
 
 ## Every day
 
@@ -63,5 +64,6 @@ Mike decided these on 10/8/2026. Rules marked HANDOFF come from `docs/HANDOFF.md
 ## For whoever works on the code
 
 - `src/core.js` holds the tray rules, and `src/app.html` is the screen.
-- `node build.js` combines them into `OLD SCHOOL JEWELRY TRAY APP.html`. Rebuild after every change.
-- `node --test test/core.test.js` checks the rules against the worked examples in `docs/HANDOFF.md`.
+- `templates/` holds Mike's real `_2 TALL` / `_3 TALL` templates, and `templates/templates.json` lists them.
+- `node build.js` combines the code and the templates into `OLD SCHOOL JEWELRY TRAY APP.html`. Rebuild after every change.
+- `node --test test/core.test.js` checks the rules against the worked examples in `docs/HANDOFF.md` and the real templates. Each filled board must match the template byte for byte outside the tray sizes.

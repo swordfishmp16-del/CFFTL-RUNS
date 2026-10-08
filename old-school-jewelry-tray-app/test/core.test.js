@@ -235,6 +235,49 @@ test('bottoms list follows the daily sheet columns', () => {
     '4354,TRAY BOTTOM,4354,1/4 MELAMINE,3,527.05,344.49,N,JEWELRY TRAYS DIRECT\r\n');
 });
 
+// ---------- Mike's real templates (templates/ folder, sent 10/8/2026) ----------
+
+function realTemplate(h) {
+  const file = path.join(__dirname, '..', 'templates', `_${h} TALL DAILY TRAY TEMPLATE.mpr`);
+  const bytes = fs.readFileSync(file);
+  return { bytes, bin: J.bytesToBin(new Uint8Array(bytes)) };
+}
+
+test('real templates: 16 trays on _2 TALL, 12 on _3 TALL', () => {
+  const t2 = J.parseTemplate(realTemplate(2).bin, '_2 TALL DAILY TRAY TEMPLATE.mpr');
+  const t3 = J.parseTemplate(realTemplate(3).bin, '_3 TALL DAILY TRAY TEMPLATE.mpr');
+  assert.deepEqual([t2.slots, t2.th, t2.v, t2.l, t2.heightClass, t2.warnings], [16, 49.21, 4.76, 2438, 2, []]);
+  assert.deepEqual([t3.slots, t3.th, t3.v, t3.l, t3.heightClass, t3.warnings], [12, 73.03, 4.76, 2438, 3, []]);
+});
+
+test('real 2" template: 10/2 board 1 trays come out like Mike\'s file, nothing else changes', () => {
+  const { bytes, bin } = realTemplate(2);
+  const tpl = J.parseTemplate(bin, '_2 TALL DAILY TRAY TEMPLATE.mpr');
+  const plan = J.planBoards([tray(4354, '21 5/16', '14 1/8', 2, 3), tray(4356, '31 5/16', '19 3/4', 2)], { 2: tpl }, { date: '100226' });
+  const out = J.fillTemplate(bin, plan.boards[0].slots);
+  const lines = out.split('\r\n').filter(l => /^tr\d+[wd]=/.test(l));
+  assert.deepEqual(lines.slice(0, 10), [
+    'tr1w="541.34"', 'tr1d="358.78"', 'tr2w="541.34"', 'tr2d="358.78"', 'tr3w="541.34"', 'tr3d="358.78"',
+    'tr4w="795.34"', 'tr4d="102"', 'tr5w="501.65"', 'tr5d="102"'
+  ]);
+  assert.ok(lines.slice(10).every(l => /="102"$/.test(l)));
+  const back = J.binToBytes(out.replace(/^tr(\d+)([wd])="[^"]*"/gm, (_, n, wd) => `tr${n}${wd}="102"`));
+  assert.ok(Buffer.from(back).equals(bytes), 'every other byte matches the real template');
+});
+
+test('real 3" template: filled 12-up board keeps the file intact', () => {
+  const { bytes, bin } = realTemplate(3);
+  const tpl = J.parseTemplate(bin, '_3 TALL DAILY TRAY TEMPLATE.mpr');
+  const trays = [];
+  for (let i = 0; i < 14; i++) trays.push(tray(2391 + i, '14 3/4', '19 5/8', 3));
+  const plan = J.planBoards(trays, { 3: tpl }, { date: '082926' });
+  assert.deepEqual(plan.boards.map(b => [b.fileName, b.slots.length]), [['082926 DAILY TRAYS 1 3IN.mpr', 12], ['082926 DAILY TRAYS 2 3IN.mpr', 2]]);
+  const out = J.fillTemplate(bin, plan.boards[0].slots);
+  assert.match(out, /\r\ntr12w="374.65"\r\nKM="tray 12 width"\r\ntr12d="498.48"\r\n/);
+  const back = J.binToBytes(out.replace(/^tr(\d+)([wd])="[^"]*"/gm, (_, n, wd) => `tr${n}${wd}="102"`));
+  assert.ok(Buffer.from(back).equals(bytes));
+});
+
 test('MMDDYY file date', () => {
   assert.equal(J.mmddyy('2026-10-02'), '100226');
   assert.equal(J.mmddyy(''), '');
