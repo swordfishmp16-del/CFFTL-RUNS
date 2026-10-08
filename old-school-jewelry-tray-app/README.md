@@ -41,6 +41,7 @@ Mike decided these on 10/8/2026. Rules marked HANDOFF come from `docs/HANDOFF.md
 | Qty | A line with qty 3 takes 3 slots. |
 | Tray 1 | At the bottom of the sheet, same as WOODWOP. |
 | Labels | Default to the order number. You can type over a label, e.g. `2391 - 3IN`. |
+| Too long for one strip | Split into 2 side-by-side slots, the way order 4356 was done on 10/2. The first slot holds the tray width and the next holds the tray depth, with `102` in the depth spot of both. The first strip gives the 2 width sides and the second gives the 2 depth sides. The printout labels them `4356 WIDTHS` and `4356 DEPTHS`. A pair is never split across two boards. If only 1 slot is left, the next single tray fills it. The tray still gets just one bottom. (Mike approved this 10/8/2026.) |
 
 ### What it skips (each row stays in the list with the reason)
 
@@ -50,13 +51,12 @@ Mike decided these on 10/8/2026. Rules marked HANDOFF come from `docs/HANDOFF.md
 ### What it flags
 
 - A 4" or 5" tray. There's no template for these yet, so they're done by hand.
-- A tray too long for one strip on the board.
+- A tray too long for the board even when split in two (wider than about 43").
 - A blank height. The app uses 2" and flags it.
 - An order with an "Extra Tray Height" charge whose trays still say 2".
 
 ## Not decided yet
 
-- **Trays too long for one strip.** On 10/2, Mike's board split order 4356 across two slots: the width in one slot and the depth in the next, with the other size left at 102. The app does not do this yet. It lists the tray under "Not on a board".
 - **4" and 5" trays.** The `_4 TALL 36IN TRAYS.mpr` program works differently, so the app does not handle it.
 - **Getting the CSV into CutRite.** The bottoms CSV uses the same columns as the old daily sheet.
 

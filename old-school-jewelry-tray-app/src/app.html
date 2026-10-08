@@ -401,11 +401,12 @@
 
   function sizeOk(text) { return !!J.parseInches(text); }
 
-  function notesHtml(t, why) {
+  function notesHtml(t, why, note) {
     if (!t.include) return '<span class="o">' + esc(t.reason || 'Not cutting today') + '</span>';
     var out = [];
     if (!sizeOk(t.widthText) || !sizeOk(t.depthText)) out.push('<span class="b">Size not readable</span>');
     else if (why) out.push('<span class="b">Not on a board: ' + esc(why) + '</span>');
+    else if (note) out.push('<span class="w">' + esc(note) + '</span>');
     t.warnings.forEach(function (w) { out.push('<span class="w">' + esc(w) + '</span>'); });
     if (t.include && t.reason) out.push('<span class="o">' + esc(t.reason.split(':')[0]) + '</span>');
     return out.join('');
@@ -510,7 +511,7 @@
       s.strip.cuts.forEach(function (x) {
         o.push('<line class="cut" x1="' + x + '" x2="' + x + '" y1="' + (W - y0 + 2) + '" y2="' + (W - y0 - th - 18) + '"/>');
       });
-      var text = String(s.label || ''), fs = Math.min(th * 0.72, 46);
+      var text = String(s.label || '') + (s.part ? ' ' + PART_NAME[s.part].toUpperCase() : ''), fs = Math.min(th * 0.72, 46);
       var room = Math.max(40, s.wMm - v - 40);
       var est = text.length * fs * 0.62;
       if (est > room) { fs = fs * room / est; est = room; }
@@ -527,11 +528,15 @@
     return o.join('');
   }
 
+  // Split trays (too long for one strip): slot W cuts the 2 widths, slot D the 2 depths.
+  var PART_NAME = { W: 'widths', D: 'depths' };
+
   function slotTable(slots) {
     return '<table><thead><tr><th>Tray</th><th>Label</th><th class="n">W in</th><th class="n">D in</th><th class="n">W mm</th><th class="n">D mm</th></tr></thead><tbody>' +
       slots.map(function (s) {
-        return '<tr><td>' + s.slot + '</td><td>' + esc(s.label) + '</td><td class="n">' + esc(J.inchesText(s.wIn)) +
-          '</td><td class="n">' + esc(J.inchesText(s.dIn)) + '</td><td class="n">' + J.mm2(s.wMm) + '</td><td class="n">' + J.mm2(s.dMm) + '</td></tr>';
+        return '<tr><td>' + s.slot + '</td><td>' + esc(s.label) + (s.part ? ' <i>(split: ' + PART_NAME[s.part] + ')</i>' : '') +
+          '</td><td class="n">' + esc(J.inchesText(s.wIn)) + '</td><td class="n">' + (s.part ? '&mdash;' : esc(J.inchesText(s.dIn))) +
+          '</td><td class="n">' + J.mm2(s.wMm) + '</td><td class="n">' + (s.dRaw != null ? esc(s.dRaw) : J.mm2(s.dMm)) + '</td></tr>';
       }).join('') + '</tbody></table>';
   }
 
@@ -543,21 +548,25 @@
     S.bottoms = J.bottomRows(trays);
 
     // notes column: say why a ticked tray is not on a board
-    var why = {};
+    var why = {}, note = {};
     plan.unassigned.forEach(function (u) { why[u.tray.id] = u.reason; });
+    plan.split.forEach(function (x) { note[x.tray.id] = x.note; });
     document.querySelectorAll('#trayTable tbody tr[data-id]').forEach(function (tr) {
       var t = trayById(tr.dataset.id);
-      if (t) tr.querySelector('.notes').innerHTML = notesHtml(t, why[t.id]);
+      if (t) tr.querySelector('.notes').innerHTML = notesHtml(t, why[t.id], note[t.id]);
     });
 
     // summary chips
-    var onBoards = plan.boards.reduce(function (a, b) { return a + b.slots.length; }, 0);
+    var onBoards = plan.boards.reduce(function (a, b) {
+      return a + b.slots.filter(function (s) { return s.part !== 'D'; }).length;
+    }, 0);
     var skipped = trays.filter(function (t) { return !t.include; }).length;
     var warnCount = trays.filter(function (t) { return t.include && t.warnings.length; }).length;
     var chips = [];
     if (trays.length) {
       chips.push('<span class="chip"><b>' + onBoards + '</b> trays on boards</span>');
       chips.push('<span class="chip"><b>' + plan.boards.length + '</b> board' + (plan.boards.length === 1 ? '' : 's') + '</span>');
+      if (plan.split.length) chips.push('<span class="chip"><b>' + plan.split.length + '</b> split in 2 slots</span>');
       if (plan.unassigned.length) chips.push('<span class="chip warn"><b>' + plan.unassigned.length + '</b> not on a board</span>');
       if (warnCount) chips.push('<span class="chip warn"><b>' + warnCount + '</b> to check</span>');
       chips.push('<span class="chip"><b>' + skipped + '</b> skipped</span>');
@@ -581,7 +590,7 @@
           var half = Math.ceil(b.slots.length / 2);
           return '<article class="board">' +
             '<header><div><h3>' + esc(b.fileName) + '</h3><div class="sub">' + b.height + '&quot; tall &middot; ' +
-            b.slots.length + ' of ' + b.template.slots + ' trays &middot; from ' + esc(b.template.fileName) + '</div></div>' +
+            b.slots.length + ' of ' + b.template.slots + ' slots used &middot; from ' + esc(b.template.fileName) + '</div></div>' +
             '<button type="button" class="small screen-only" data-dl="' + i + '">Download .mpr</button></header>' +
             '<p class="print-only">Printed ' + esc(new Date().toLocaleString()) + ' &middot; tray 1 is at the bottom of the sheet</p>' +
             boardSvg(b) +

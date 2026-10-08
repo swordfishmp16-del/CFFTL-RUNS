@@ -278,7 +278,8 @@
     var text = sec.text.replace(/^tr(\d+)([wd])="[^"]*"/gm, function (all, n, wd) {
       var s = bySlot[+n];
       if (!s) return all;
-      return 'tr' + n + wd + '="' + mm2(wd === 'w' ? s.wMm : s.dMm) + '"';
+      var val = wd === 'w' ? mm2(s.wMm) : s.dRaw != null ? s.dRaw : mm2(s.dMm);
+      return 'tr' + n + wd + '="' + val + '"';
     });
     return bin.slice(0, sec.start) + text + bin.slice(sec.end);
   }
@@ -297,6 +298,35 @@
 
   // ---------- boards ----------
 
+  // A tray too long for one strip is cut as two strips in side-by-side slots, the way
+  // Mike did order 4356 on 10/2 (HANDOFF 11 #5, approved 10/8/2026):
+  //   slot A: width  = tray width, depth = 102  -> gives the 2 width sides
+  //   slot B: width  = tray depth, depth = 102  -> gives the 2 depth sides
+  var SPLIT_FILL = '102';
+
+  // Puts a pair in the next two slots. If only one slot is left on the board, the next
+  // single tray in line fills it so no slot is wasted; if there is none, the slot stays empty.
+  function packSlots(units, perBoard) {
+    var boards = [], cur = null, pending = units.slice();
+    function place(u) {
+      u.slots.forEach(function (s) {
+        s = Object.assign({}, s);
+        s.slot = cur.length + 1;
+        cur.push(s);
+      });
+    }
+    while (pending.length) {
+      if (!cur || cur.length >= perBoard) { cur = []; boards.push(cur); }
+      var free = perBoard - cur.length;
+      if (pending[0].slots.length <= free) { place(pending.shift()); continue; }
+      var j = -1;
+      for (var k = 0; k < pending.length; k++) if (pending[k].slots.length <= free) { j = k; break; }
+      if (j >= 0) { place(pending.splice(j, 1)[0]); continue; }
+      cur = null;
+    }
+    return boards;
+  }
+
   // Splits the day's trays onto boards. 2" and 3" never share a board (HANDOFF 5.4).
   // Trays per board = slots in that template (16 on _2 TALL, 12 on _3 TALL).
   function planBoards(trays, templates, opts) {
@@ -304,6 +334,7 @@
     var date = opts.date || '';
     var n = opts.startNumber || 1;
     var unassigned = [];
+    var split = [];
     var queues = { 2: [], 3: [] };
 
     trays.forEach(function (t) {
@@ -318,24 +349,33 @@
       var tpl = templates[h];
       if (!tpl) { unassigned.push({ tray: t, reason: 'Load the ' + h + '" template in Step 1' }); return; }
       var wMm = inToMm(wIn), dMm = inToMm(dIn);
+      var label = t.label || t.orderNumber;
       var st = strip(wMm, dMm, tpl.v);
-      if (st.length > tpl.l) {
-        unassigned.push({ tray: t, reason: 'Too long for the board: strip ' + mm2(st.length) + ' mm, board ' + tpl.l + ' mm' });
-        return;
+      var unit;
+      if (st.length <= tpl.l) {
+        unit = [{ tray: t, wIn: wIn, dIn: dIn, wMm: wMm, dMm: dMm, label: label, strip: st }];
+      } else {
+        var fill = parseFloat(SPLIT_FILL);
+        var stW = strip(wMm, fill, tpl.v), stD = strip(dMm, fill, tpl.v);
+        if (Math.max(stW.length, stD.length) > tpl.l || tpl.slots < 2) {
+          unassigned.push({ tray: t, reason: 'Too long for the board even split in two: ' + mm2(Math.max(stW.length, stD.length)) + ' mm strip, board ' + tpl.l + ' mm' });
+          return;
+        }
+        unit = [
+          { tray: t, part: 'W', wIn: wIn, dIn: dIn, wMm: wMm, dMm: fill, dRaw: SPLIT_FILL, label: label, strip: stW },
+          { tray: t, part: 'D', wIn: dIn, dIn: dIn, wMm: dMm, dMm: fill, dRaw: SPLIT_FILL, label: label, strip: stD }
+        ];
+        split.push({ tray: t, note: 'Too long for one strip: split into 2 slots (widths, then depths)' });
       }
       var qty = Math.max(1, t.qty | 0);
-      for (var i = 0; i < qty; i++) {
-        queues[h].push({ tray: t, wIn: wIn, dIn: dIn, wMm: wMm, dMm: dMm, label: t.label || t.orderNumber, strip: st });
-      }
+      for (var i = 0; i < qty; i++) queues[h].push({ slots: unit });
     });
 
     var boards = [];
     [2, 3].forEach(function (h) {
-      var q = queues[h], tpl = templates[h];
-      for (var i = 0; i < q.length; i += tpl.slots) {
-        var slots = q.slice(i, i + tpl.slots).map(function (s, k) {
-          s = Object.assign({}, s); s.slot = k + 1; return s;
-        });
+      if (!queues[h].length) return;
+      var tpl = templates[h];
+      packSlots(queues[h], tpl.slots).forEach(function (slots) {
         boards.push({
           number: n,
           height: h,
@@ -344,7 +384,7 @@
           slots: slots
         });
         n++;
-      }
+      });
     });
 
     var orderNums = [];
@@ -358,7 +398,7 @@
     if (orderNums.length) {
       folder += ' #' + Math.min.apply(null, orderNums) + '-' + Math.max.apply(null, orderNums);
     }
-    return { boards: boards, unassigned: unassigned, folder: folder };
+    return { boards: boards, unassigned: unassigned, split: split, folder: folder };
   }
 
   // ---------- tray bottoms (HANDOFF 7C) ----------

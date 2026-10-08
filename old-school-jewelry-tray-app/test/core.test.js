@@ -174,6 +174,51 @@ test('boards: 16 per 2" board, 12 per 3" board, never mixed, numbered in order',
   assert.equal(plan.folder, '100226 DAILY TRAYS #4354-4391');
 });
 
+test('too-long tray splits into 2 side-by-side slots like order 4356 on 10/2', () => {
+  // HANDOFF 11 #5: 100226 DAILY TRAYS 1.mpr had tr7w 795.34 / tr8w 501.65, both depths 102.
+  const trays = [];
+  for (let i = 0; i < 6; i++) trays.push(tray(4350 + i, '20', '12', 2));
+  trays.push(tray(4356, '31 5/16', '19 3/4', 2));
+  const plan = J.planBoards(trays, { 2: T2(), 3: T3() }, { date: '100226' });
+  assert.equal(plan.unassigned.length, 0);
+  assert.equal(plan.split.length, 1);
+  const s = plan.boards[0].slots;
+  assert.equal(s.length, 8);
+  assert.deepEqual([s[6].slot, s[6].part, s[6].wMm, s[6].dRaw], [7, 'W', 795.34, '102']);
+  assert.deepEqual([s[7].slot, s[7].part, s[7].wMm, s[7].dRaw], [8, 'D', 501.65, '102']);
+  assert.equal(s[6].strip.length, 1815.64);
+
+  const out = J.fillTemplate(makeTemplate(16, 49.21), s);
+  assert.match(out, /\r\ntr7w="795.34"\r\nKM="tray 7 width"\r\ntr7d="102"\r\n/);
+  assert.match(out, /\r\ntr8w="501.65"\r\nKM="tray 8 width"\r\ntr8d="102"\r\n/);
+  assert.match(out, /\r\ntr6d="304.80"\r\n/);
+
+  // one bottom for the tray, not two
+  assert.equal(J.bottomRows(trays).filter(r => r.unit === '4356').length, 1);
+});
+
+test('a split pair never straddles two boards; the next single tray fills the gap', () => {
+  const trays = [];
+  for (let i = 0; i < 15; i++) trays.push(tray(5000 + i, '20', '12', 2));
+  trays.push(tray(5100, '31 5/16', '19 3/4', 2));
+  trays.push(tray(5101, '20', '12', 2));
+  const plan = J.planBoards(trays, { 2: T2(), 3: T3() }, { date: '100226' });
+  assert.equal(plan.boards.length, 2);
+  assert.equal(plan.boards[0].slots.length, 16);
+  assert.equal(plan.boards[0].slots[15].tray.orderNumber, '5101');
+  assert.deepEqual(plan.boards[1].slots.map(s => [s.slot, s.tray.orderNumber, s.part]), [[1, '5100', 'W'], [2, '5100', 'D']]);
+
+  // no single left to fill the gap: the slot stays empty (102) and the pair starts board 2
+  const plan2 = J.planBoards(trays.slice(0, 16), { 2: T2(), 3: T3() }, { date: '100226' });
+  assert.deepEqual(plan2.boards.map(b => b.slots.length), [15, 2]);
+});
+
+test('qty 2 of a split tray uses 4 slots', () => {
+  const plan = J.planBoards([tray(6000, '31 5/16', '19 3/4', 3, 2)], { 2: T2(), 3: T3() }, { date: '100226' });
+  assert.deepEqual(plan.boards[0].slots.map(s => s.part), ['W', 'D', 'W', 'D']);
+  assert.equal(plan.boards[0].fileName, '100226 DAILY TRAYS 1 3IN.mpr');
+});
+
 test('boards: missing template and unreadable size are reported, not dropped', () => {
   const plan = J.planBoards([tray(1, '20', '12', 3), tray(2, 'abc', '12', 2)], { 2: T2(), 3: null }, { date: '100226' });
   assert.equal(plan.boards.length, 0);
