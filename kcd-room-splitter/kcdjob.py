@@ -93,6 +93,7 @@ def parse(d):
     nl = r.i16()
     [(r.str(), r.i16()) for _ in range(nl)]
     r.str()
+    J['view_at'] = r.p                        # 82 bytes: current room's camera, note count, ...
     r.raw(82)
     assert r.str() == b'** Rooms **'
     sec('header', st, J)

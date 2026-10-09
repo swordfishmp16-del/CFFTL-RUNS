@@ -19,22 +19,27 @@ python kcdsplit.py "JOB FILE.job" 1080458 "OUTPUT FOLDER"
 
 ## What each room file keeps
 
+The tool deletes the other rooms the same way KCD does when you delete a room yourself. The rules were matched byte for byte against a job that KCD saved after rooms were deleted in it.
+
 | Part of the job | What happens |
 |---|---|
-| Room list | Only the one room. It is also the room that opens. |
-| Walls | Only that room's walls, numbered again from 1. |
-| Cabinets and accessories | Only the ones placed on that room's walls, numbered again from 1. Deleted leftovers that KCD keeps in the file are dropped. |
-| Notes and dimension labels | Only that room's notes. Their wall numbers are updated. |
+| Room list | Only the one room. It becomes room 1 and is the room that opens. |
+| Walls | That room's walls are unchanged. Other rooms' walls stay in the file as deleted (blank) entries, as KCD leaves them, so no wall number changes. |
+| Cabinets and accessories | The ones on that room's walls are unchanged. Other rooms' cabinets stay in the file as deleted entries, as KCD leaves them, so no cabinet number changes. |
+| Notes and dimension labels | Only that room's notes. |
 | Handle set and unit-info defaults | The kept room's set. |
-| Job heading, colours, materials, textures, error log, print pages, 3D view data | Copied unchanged. |
+| Saved camera view | The kept room's view. |
+| Job heading, colours, materials, textures, error log, print pages | Copied unchanged. |
+| 3D view data | Copied unchanged. KCD rebuilds it the next time the room file is saved. |
 
-Every file is read back after it is made. If it does not come out with exactly the one room, its walls, its cabinets and its notes, the tool stops and saves nothing for that job.
+Every file is read back after it is made. If any room does not come out with exactly its own walls, cabinets and notes, the tool stops and saves nothing for that job. It also stops, without changing anything, if a room file with the same name is already in the output folder.
 
 ## Limits
 
 - Only KCD version 23 jobs.
 - A few jobs use record layouts the tool does not read yet. The tool stops with an error on those instead of guessing.
-- The 3D view data and print pages are copied whole, so each room file is about the size of the original job.
+- The 3D view data and print pages are copied whole, so each room file is about the size of the original job. If a room's 3D view looks wrong when it opens, save the file once in KCD and KCD rebuilds it.
+- A few cabinet figures that KCD works out itself (they look like price totals) are left as they were in the full job. KCD updates them when the room file is saved.
 
 ## Files
 

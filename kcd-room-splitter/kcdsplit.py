@@ -1,8 +1,9 @@
 """Split a multi-room KCD v23 .job into one file per room.
 
-Each output keeps exactly one room: its walls, the cabinets on those walls, its notes,
-its handle set and its unit-info defaults. Walls and units are renumbered 1..N and every
-reference to them is updated. Job-wide sections are copied byte for byte.
+This does what KCD does when you delete rooms: the walls and cabinets of the other rooms
+stay in the file as deleted entries (so no wall or cabinet number changes), their notes
+are removed, and the kept room becomes room 1. The rules were matched byte for byte
+against a file KCD itself saved after deleting rooms.
 """
 import os
 import re
@@ -11,6 +12,14 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import kcdjob  # noqa: E402
+
+# Wall record bytes KCD keeps when it deletes a wall (colour and type fields);
+# every other byte from 16 to 112 is zeroed, and the room (129) is set to 0.
+WALL_KEEP = {32, 33, 34, 35, 46, 47, 48, 49, 82, 83, 84, 85}
+# Unit fields (offsets in the 86-byte block) KCD zeroes when it deletes a cabinet:
+# the wall number, its placement, and one flag.
+UNIT_F86_ZERO = list(range(0, 4)) + list(range(16, 40)) + [66]
+VIEW_NOTES_AT = 60           # note count inside the 82-byte view block
 
 
 def _i16(v):
@@ -21,130 +30,164 @@ def _i32(v):
     return struct.pack('<i', v)
 
 
-def split_room(d, keep):
-    """Return the bytes of a job containing only room number `keep` (1-based)."""
+def _str(s):
+    return struct.pack('<H', len(s)) + s
+
+
+def deleted_wall(rec):
+    r = bytearray(rec)
+    for k in range(16, 113):
+        if k not in WALL_KEEP:
+            r[k] = 0
+    r[129:133] = _i32(0)
+    return bytes(r)
+
+
+def deleted_unit(d, u):
+    f = bytearray(u['f86'])
+    for k in UNIT_F86_ZERO:
+        f[k] = 0
+    body = (_str(u['cat']) + _str(b'') * 4 + _str(u['name'].strip()) + _str(u['edge'])
+            + _str(b'SQ3.shp') + _str(b'3" Square') + bytes(f) + _str(b'') * 15
+            + bytes(10) + _str(b'') + _str(b''))
+    sfx = bytearray(d[u['suffix_at']:u['end']])
+    sfx[0:8] = bytes(8)
+    return bytes(kcdjob.UNIT_PREFIX) + body + bytes(sfx)
+
+
+def keep_rooms(d, keep):
+    """Return a job holding only the rooms in `keep` (1-based, original order), renumbered 1..n."""
     S = kcdjob.parse(d)
     sec = {n: (a, b, i) for n, a, b, i in S}
+    rooms = sec['rooms'][2]
+    keep = sorted(set(keep))
+    if not keep or keep[0] < 1 or keep[-1] > rooms['n']:
+        raise ValueError('room numbers must be 1..%d' % rooms['n'])
+    newnum = {old: i + 1 for i, old in enumerate(keep)}
+
+    walls = sec['walls'][2]['list']
+    wall_room = {w['id']: w['room'] for w in walls}
+    units = sec['units'][2]['list']
+
+    def unit_kept(u):
+        return wall_room.get(u['wall'], 0) in newnum
+
+    notes = [n for n in sec['notes'][2]['list'] if n['room'] in newnum or n['room'] == 0]
     out = []
 
-    rooms = sec['rooms'][2]
-    if not 1 <= keep <= rooms['n']:
-        raise ValueError('room %d out of range 1..%d' % (keep, rooms['n']))
-
-    # ---- walls to keep, old id -> new id ---------------------------------
-    walls = sec['walls'][2]['list']
-    kept_walls = [w for w in walls if w['room'] == keep]
-    wmap = {w['id']: i + 1 for i, w in enumerate(kept_walls)}
-
-    # ---- units to keep (placed on one of the kept walls) -------------------
-    units = sec['units'][2]['list']
-    kept_units = [u for u in units if u['wall'] in wmap]
-    umap = {u['id']: i + 1 for i, u in enumerate(kept_units)}
-
-    # ---- header: patch wall/unit counts -------------------------------------
+    # ---- header: current-room camera and the note count in the view block ------
     a, b, J = sec['header']
     h = bytearray(d[a:b])
-    off = J['nwalls_at'] - a
-    h[off:off + 4] = _i16(len(kept_walls)) + _i16(len(kept_units))
+    v = J['view_at'] - a
+    first = rooms['list'][keep[0] - 1]
+    h[v:v + 52] = d[first['start']:first['start'] + 52]
+    h[v + VIEW_NOTES_AT:v + VIEW_NOTES_AT + 4] = _i32(len(notes))
     out.append(bytes(h))
 
-    # ---- rooms: one room, current room = 1 -----------------------------------
+    # ---- rooms ----------------------------------------------------------------
     a, b, R = sec['rooms']
-    rec = R['list'][keep - 1]
-    out.append(_i16(1) + d[a + 2:a + 4] + _i32(1) + d[rec['start']:rec['end']])
+    out.append(_i16(len(keep)) + d[a + 2:a + 4] + _i32(1)
+               + b''.join(d[R['list'][k - 1]['start']:R['list'][k - 1]['end']] for k in keep))
 
-    # ---- handle sets: default set (0) + the kept room's set -------------------
+    # ---- handle sets: set 0 is the default, set k belongs to room k -------------------
     sets = sec['handles'][2]['sets']
-    out.append(d[sets[0][0]:sets[0][1]] + d[sets[keep][0]:sets[keep][1]])
+    out.append(b''.join(d[sets[k][0]:sets[k][1]] for k in [0] + keep))
 
-    # ---- settings: filter the (unit id, code) pair list --------------------------
+    # ---- settings: drop (unit, code) pairs whose cabinet is deleted -------------------
     a, b, T = sec['settings']
+    by_id = {u['id']: u for u in units}
     pairs = [struct.unpack_from('<hh', d, T['npair_at'] + 2 + 4 * i) for i in range(T['npair'])]
-    pairs = [(umap[u], c) for u, c in pairs if u in umap]
+    pairs = [(u, c) for u, c in pairs if u in by_id and unit_kept(by_id[u])]
     out.append(d[a:T['npair_at']] + _i16(len(pairs)) + b''.join(struct.pack('<hh', u, c) for u, c in pairs))
 
-    # ---- walls ------------------------------------------------------------------
-    for w in kept_walls:
-        r = bytearray(d[w['start']:w['end']])
-        new = wmap[w['id']]
-        for o in (117, 119, 121, 123):
-            r[o:o + 2] = _i16(new)
-        r[125:129] = _i32(new)
-        r[129:133] = _i32(1)
-        for o in (36, 40):
-            v = struct.unpack_from('<i', r, o)[0]
-            r[o:o + 4] = _i32(wmap.get(v, 0))
-        out.append(bytes(r))
+    # ---- walls: kept rooms renumbered, other rooms' walls deleted --------------------
+    for w in walls:
+        rec = d[w['start']:w['end']]
+        if w['room'] in newnum:
+            r = bytearray(rec)
+            r[129:133] = _i32(newnum[w['room']])
+            rec = bytes(r)
+        elif w['room'] != 0:
+            rec = deleted_wall(rec)
+        out.append(rec)
 
     a, b, _ = sec['postwall']
     out.append(d[a:b])
 
-    # ---- units ------------------------------------------------------------------
-    for u in kept_units:
-        r = bytearray(d[u['start']:u['end']])
-        o = u['f86_at'] - u['start']
-        r[o:o + 2] = _i16(wmap[u['wall']])
-        o = u['suffix_at'] - u['start']
-        new = umap[u['id']]
-        for k in (12, 14, 16):
-            r[o + k:o + k + 2] = _i16(new)
-        out.append(bytes(r))
+    # ---- units: cabinets on deleted walls become deleted entries ----------------------
+    for u in units:
+        if u['wall'] and not unit_kept(u):
+            out.append(deleted_unit(d, u))
+        else:
+            out.append(d[u['start']:u['end']])
 
-    # ---- 3D mesh cache: copied unchanged ---------------------------------------
+    # ---- 3D view cache: copied (KCD rebuilds it when the job is saved) ----------------
     a, b, _ = sec['mesh']
     out.append(d[a:b])
 
-    # ---- notes --------------------------------------------------------------------
-    notes = [n for n in sec['notes'][2]['list'] if n['room'] == keep]
-    blk = [b'\x0b\x00** Notes **', _i16(len(notes))]
+    # ---- notes ----------------------------------------------------------------------
+    blk = [_str(b'** Notes **'), _i16(len(notes))]
     for n in notes:
         r = bytearray(d[n['start']:n['end']])
-        wall = struct.unpack_from('<h', r, 24)[0]
-        if wall:
-            r[24:26] = _i16(wmap.get(wall, 0))
-        o = n['room_at'] - n['start']
-        r[o:o + 4] = _i32(1)
+        if n['room']:
+            o = n['room_at'] - n['start']
+            r[o:o + 4] = _i32(newnum[n['room']])
         blk.append(bytes(r))
     out.append(b''.join(blk))
 
-    # ---- per-room shapes: keep shapes tagged with this room ------------------------
+    # ---- room shapes: one slot per room plus one ---------------------------------------
     a, b, X = sec['roomshapes']
+    slots = X['slots']
+    if any(s['items'] for s in slots[1:]):
+        raise ValueError('room shapes outside the first slot are not supported yet')
     items = []
-    for slot in X['slots']:
-        for s0, s1, tag, tag_off in slot['items']:
-            if tag == keep:
-                r = bytearray(d[s0:s1])
-                r[tag_off:tag_off + 4] = _i32(1)
-                items.append(bytes(r))
-    out.append(d[a:a + 2] + _i32(len(items)) + b''.join(items) + _i32(0))
+    for s0, s1, tag, tag_off in slots[0]['items']:
+        if tag in newnum:
+            r = bytearray(d[s0:s1])
+            r[tag_off:tag_off + 4] = _i32(newnum[tag])
+            items.append(bytes(r))
+    out.append(d[a:a + 2] + _i32(len(items)) + b''.join(items) + _i32(0) * len(keep))
 
-    # ---- job-wide sections copied unchanged -------------------------------------------
+    # ---- job-wide sections copied unchanged ---------------------------------------------
     for name in ('materials', 'errlog', 'gap', 'pictemp'):
         a, b, _ = sec[name]
         out.append(d[a:b])
 
-    # ---- unit-info defaults: one set (0-based room index) --------------------------------
+    # ---- unit-info defaults: set k-1 belongs to room k -------------------------------------
     a, b, D = sec['defaults']
-    s0, s1 = D['sets'][keep - 1]
-    out.append(b'\x16\x00Start-UnitInfoDefaults' + _i32(D['a']) + _i32(0) + d[s0:s1])
+    out.append(_str(b'Start-UnitInfoDefaults') + _i32(D['a']) + _i32(len(keep) - 1)
+               + b''.join(d[D['sets'][k - 1][0]:D['sets'][k - 1][1]] for k in keep))
 
     res = b''.join(out)
-    check(res, rooms['list'][keep - 1]['name'], len(kept_walls), len(kept_units), len(notes))
+    check(d, res, keep)
     return res
 
 
-def check(data, name, nwalls, nunits, nnotes):
-    """Re-parse the output and confirm it holds exactly what we meant to write."""
-    S = kcdjob.parse(data)
-    sec = {n: i for n, a, b, i in S}
-    assert sec['rooms']['n'] == 1 and sec['rooms']['list'][0]['name'] == name
-    assert len(sec['walls']['list']) == nwalls and len(sec['units']['list']) == nunits
-    assert len(sec['notes']['list']) == nnotes
-    assert all(w['room'] == 1 for w in sec['walls']['list'])
-    ids = {w['id'] for w in sec['walls']['list']}
-    assert all(u['wall'] in ids for u in sec['units']['list'])
-    assert [u['id'] for u in sec['units']['list']] == list(range(1, nunits + 1))
-    assert all(n['room'] == 1 for n in sec['notes']['list'])
+def check(src, res, keep):
+    """Re-read the new file and confirm it holds exactly the kept rooms' content."""
+    A = {n: i for n, a, b, i in kcdjob.parse(src)}
+    B = {n: i for n, a, b, i in kcdjob.parse(res)}
+    newnum = {old: i + 1 for i, old in enumerate(sorted(keep))}
+    assert [r['name'] for r in B['rooms']['list']] == [A['rooms']['list'][k - 1]['name'] for k in sorted(keep)]
+    wa, wb = A['walls']['list'], B['walls']['list']
+    assert [w['id'] for w in wa] == [w['id'] for w in wb]
+    assert all(y['room'] == newnum.get(x['room'], 0) for x, y in zip(wa, wb))
+    room_a = {w['id']: w['room'] for w in wa}
+    ua, ub = A['units']['list'], B['units']['list']
+    assert [u['id'] for u in ua] == [u['id'] for u in ub]
+    for x, y in zip(ua, ub):
+        if room_a.get(x['wall'], 0) in newnum:
+            assert x['wall'] == y['wall'] and x['cab'] == y['cab'] and x['f86'] == y['f86']
+        else:
+            assert y['wall'] == 0
+    want = sorted(newnum[n['room']] for n in A['notes']['list'] if n['room'] in newnum)
+    assert sorted(n['room'] for n in B['notes']['list'] if n['room']) == want
+    assert B['defaults']['b'] == len(keep) - 1
+    assert len(B['handles']['sets']) == len(keep) + 1
+
+
+def split_room(d, k):
+    return keep_rooms(d, [k])
 
 
 def safe_name(s):
