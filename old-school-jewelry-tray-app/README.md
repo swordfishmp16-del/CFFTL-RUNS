@@ -9,10 +9,20 @@ Open the Shopify export and the app gives you:
 
 ## Putting it on a computer
 
-1. Copy **`OLD SCHOOL JEWELRY TRAY APP.html`** to the computer, on the desktop or a shared folder.
-2. Double-click it. It opens in Chrome or Edge. There's nothing to install, and it works without internet.
+**Stand-alone program (use this one):**
+1. Copy **`OLD SCHOOL JEWELRY TRAY APP.exe`** to the computer, on the desktop or in a folder of your choice. There's nothing to install.
+2. Double-click it. The app opens in its own window. It uses Microsoft Edge (or Chrome) to draw the screen but has no address bar and needs no internet.
+3. The first time, in step 1 under **Save folder on this computer**, click **Choose folder…** and pick where each day's folder should go, e.g. `C:\Jewelry Trays\Boards`. You can also type the path. **The L: drive is refused**, including another drive letter or a `\\server\share` path that leads to the same place as L:. Each person can pick their own folder, and each computer remembers its own choice.
+4. Each day, click **Save everything to folder**. The app makes a folder like `101026 DAILY TRAYS #4354-4377` in your save folder, with the board files and bottoms list inside. Click **Open folder** to see it, then move that folder to the L: drive when it's needed.
+   - Nothing is ever overwritten. Saving the same day again makes `… (2)`, and a single board saved twice becomes `… 1 (2).mpr`.
+   - **Save .mpr to folder** on a board saves just that board into the day's folder.
+5. Closing the window closes the app. The program stops by itself about 10 minutes later. Opening it again while it's still running just opens a new window.
 
-Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are already inside the app, so there's nothing to load. The app does not change or move any file on the L: drive. Everything it makes goes to the Downloads folder, and you move it where it belongs.
+The first time Windows runs it, it may say "Windows protected your PC" because the program isn't signed by a publisher. Click **More info**, then **Run anyway**. If your company's IT blocks unsigned programs, use the single-file version below.
+
+**Single-file version (backup):** `OLD SCHOOL JEWELRY TRAY APP.html` does the same work in a browser tab, but files go to the Downloads folder (as a .zip) instead of a folder you pick.
+
+Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are inside both versions, so there's nothing to load. Neither version touches Shopify or the internet, and neither ever writes to the L: drive.
 
 **If you change a template in WOODWOP:** in step 1, click **Load a different one** and pick the new file. That computer uses the new file from then on, and **Go back to the built-in one** undoes it. To change the template for every computer, send the new file so the app can be rebuilt with it.
 
@@ -32,9 +42,9 @@ Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are already 
 
 ## Sharing with the team
 
-- Every computer runs its own copy of the same file. Put the file in a shared folder and everyone opens the same copy, so an update only has to be dropped in once.
-- Nothing goes over the internet. The app never sends anything anywhere, never touches Shopify, and never writes to the L: drive.
-- What each computer remembers is kept only on that computer: the last order number boards were made for, the stock sizes picked, and any template loaded by hand. Two people building boards on two computers won't see each other's work, so agree on who runs the boards each day.
+- Any team member can run it: copy the `.exe` to their computer, or keep one copy in a shared folder (not on L:) so an update only has to be dropped in once.
+- Nothing goes over the internet. The program only listens on its own computer (127.0.0.1), never touches Shopify, and never writes to the L: drive.
+- What each computer remembers is kept only on that computer: its save folder, the last order number boards were made for, the stock sizes picked, and any template loaded by hand. The settings are in `%LOCALAPPDATA%\OldSchoolJewelryTrayApp`. Two people building boards on two computers won't see each other's work, so agree on who runs the boards each day.
 
 ## Logo
 
@@ -80,5 +90,7 @@ Mike decided these on 10/8/2026. Rules marked HANDOFF come from `docs/HANDOFF.md
 
 - `src/core.js` holds the tray rules, and `src/app.html` is the screen.
 - `templates/` holds Mike's real `_2 TALL` / `_3 TALL` templates, and `templates/templates.json` lists them.
-- `node build.js` combines the code and the templates into `OLD SCHOOL JEWELRY TRAY APP.html`. Rebuild after every change.
+- `desktop/` is the stand-alone Windows program (Go, standard library only). It shows the same page in its own Edge/Chrome window, saves files into the picked folder, and refuses L: (`desktop/folders.go`). The icon and version info are in `desktop/rsrc_windows_amd64.syso`, made from `assets/icon.png` with go-winres.
+- `node build.js` combines the code and the templates into `OLD SCHOOL JEWELRY TRAY APP.html` and, if Go is installed, builds `OLD SCHOOL JEWELRY TRAY APP.exe` (Windows 64-bit). Rebuild after every change.
+- `cd desktop && go test ./...` checks the L: drive rules, the no-overwrite saving and the day-folder naming.
 - `node --test test/core.test.js` checks the rules against the worked examples in `docs/HANDOFF.md` and the real templates. Each filled board must match the template byte for byte outside the tray sizes.

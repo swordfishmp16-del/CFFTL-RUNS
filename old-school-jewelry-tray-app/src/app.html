@@ -23,6 +23,7 @@
     --cut: #d0201a;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html, body { margin: 0; }
   body {
     background: var(--paper);
@@ -148,6 +149,11 @@
     padding: 8px 12px; margin-bottom: 10px; font-size: 15px;
   }
   .fillbar select { min-height: 32px; padding: 3px 6px; }
+  .savecard { margin-top: 16px; border: 1px solid var(--accent); border-radius: 6px; padding: 14px; background: #f1f7f2; display: grid; gap: 8px; }
+  .savecard h3 { font-size: 17px; }
+  .savecard .folder { font: 600 15px/1.3 Consolas, monospace; overflow-wrap: anywhere; }
+  .savecard .row { align-items: center; gap: 8px 12px; }
+  .savecard input[type=text] { flex: 1 1 320px; min-width: 0; }
   .stockpanel { border: 1px solid var(--rule); border-radius: 6px; padding: 10px 14px 12px; margin-bottom: 16px; background: #fbf8f0; }
   .stockpanel h3 { font-size: 17px; margin-bottom: 2px; }
   .stockpanel .hint { margin: 0 0 8px; font-size: 14px; }
@@ -221,6 +227,20 @@
     </div>
     <input type="file" id="tplFile" accept=".mpr" hidden>
     <div class="msg" id="tplMsg" role="status"></div>
+    <div class="savecard" id="saveCard" hidden>
+      <h3>Save folder on this computer</h3>
+      <div class="hint" style="margin:0">Each day's boards and bottoms list are saved in their own folder inside this one. It can be anywhere on this computer except the L: drive; move the finished folders to L: yourself.</div>
+      <div class="folder" id="saveFolder">No folder picked yet.</div>
+      <div class="row">
+        <button type="button" id="pickFolder">Choose folder&hellip;</button>
+        <button type="button" class="plain" id="openSaveFolder" hidden>Open folder</button>
+      </div>
+      <div class="row">
+        <input type="text" id="folderPath" placeholder="or type a path, e.g. C:\Jewelry Trays\Boards" aria-label="Save folder path">
+        <button type="button" class="plain" id="useFolder">Use this folder</button>
+      </div>
+      <div class="msg" id="folderMsg" role="status"></div>
+    </div>
   </section>
 
   <section class="step" id="stepOrders">
@@ -276,13 +296,15 @@
 
   <section class="step" id="stepBoards">
     <h2><span class="num">3</span> Boards and bottoms</h2>
-    <p class="hint">2&quot; and 3&quot; trays never share a board. Tray 1 is at the bottom of the sheet, like WOODWOP. Move the downloaded files to the cut folder yourself.</p>
+    <p class="hint">2&quot; and 3&quot; trays never share a board. Tray 1 is at the bottom of the sheet, like WOODWOP. Move the saved (or downloaded) day folder to the L: drive yourself.</p>
     <div class="toolbar">
+      <button type="button" id="saveAll" hidden disabled>Save everything to folder</button>
       <button type="button" id="dlAll" disabled>Download everything (.zip)</button>
       <button type="button" class="plain" id="printBoards" disabled>Print boards with labels</button>
       <button type="button" class="plain" id="dlBottoms" disabled>Download bottoms list (.csv)</button>
       <button type="button" class="plain" id="printBottoms" disabled>Print bottoms list</button>
     </div>
+    <div class="msg" id="saveMsg" role="status" style="margin:-4px 0 14px"></div>
     <div class="stockpanel" id="stockPanel"></div>
     <div id="unassigned"></div>
     <div id="boardList"><p class="empty">Boards show up here once trays and templates are loaded.</p></div>
@@ -336,6 +358,10 @@
   // ---------- logo ----------
   // The Jewelry Trays Direct logo from assets/, put in by build.js (null until a logo file is added).
   var LOGO = /*LOGO*/null;
+
+  // Filled in by the Windows program (desktop/main.go) when the app runs as the .exe;
+  // stays null when this file is opened straight in a browser (then files are downloaded).
+  var NATIVE = /*NATIVE*/null;
   function logoImg(cls) {
     return LOGO ? '<img class="' + cls + '" src="' + LOGO + '" alt="Jewelry Trays Direct">' : '';
   }
@@ -816,7 +842,7 @@
             '<header><div><h3>' + esc(b.fileName) + (b.rush ? ' <span class="rush-tag">RUSH &mdash; CUT FIRST</span>' : '') +
             '</h3><div class="sub">' + b.height + '&quot; tall &middot; ' +
             b.slots.length + ' of ' + b.template.slots + ' slots used &middot; from ' + esc(b.template.fileName) + '</div></div>' +
-            '<button type="button" class="small screen-only" data-dl="' + i + '">Download .mpr</button></header>' +
+            '<button type="button" class="small screen-only" data-dl="' + i + '">' + (NATIVE ? 'Save .mpr to folder' : 'Download .mpr') + '</button></header>' +
             '<p class="print-only" style="margin:0 0 6px">Printed ' + esc(new Date().toLocaleString()) +
             ' &middot; tray 1 is at the bottom of the sheet</p>' +
             fillBar(b) +
@@ -837,7 +863,7 @@
         }).join('') + '</tbody></table></div>'
       : '';
 
-    $('dlAll').disabled = !plan.boards.length && !S.bottoms.length;
+    $('dlAll').disabled = $('saveAll').disabled = !plan.boards.length && !S.bottoms.length;
     $('printBoards').disabled = !plan.boards.length;
     $('dlBottoms').disabled = $('printBottoms').disabled = !S.bottoms.length;
   }
@@ -879,6 +905,10 @@
     var btn = e.target.closest('[data-dl]');
     if (!btn) return;
     var b = S.plan.boards[+btn.dataset.dl];
+    if (NATIVE) {
+      saveToFolder('add', [{ name: b.fileName, data: btoa(J.fillTemplate(S.bins[b.height], b.slots)) }]);
+      return;
+    }
     save(b.fileName, boardBytes(b));
     rememberLastOrder();
   });
@@ -892,6 +922,85 @@
     save(folder + '.zip', J.makeZip(files), 'application/zip');
     rememberLastOrder();
   });
+
+  // ---------- save straight into a folder (Windows program only) ----------
+  function api(path, body) {
+    return fetch(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-JTD-Token': NATIVE.token },
+      body: JSON.stringify(body || {})
+    }).then(function (r) {
+      if (!r.ok) throw new Error('The app program stopped answering. Close this window and start the app again.');
+      return r.json();
+    }).then(function (out) {
+      if (out && out.error) throw new Error(out.error);
+      return out;
+    });
+  }
+
+  function showFolder(out) {
+    S.saveFolder = out.saveFolder || '';
+    $('saveFolder').textContent = S.saveFolder || 'No folder picked yet.';
+    $('openSaveFolder').hidden = !S.saveFolder;
+    if (out.problem) msg('folderMsg', 'This folder can\'t be used: ' + out.problem, 'bad');
+  }
+
+  function fileB64(text) { return btoa(J.bytesToBin(new TextEncoder().encode(text))); }
+
+  // mode "new": a new day folder (" (2)" added if the name is taken); "add": one board into the day folder.
+  function saveToFolder(mode, files) {
+    if (!S.saveFolder) {
+      msg('saveMsg', 'Pick a save folder first (step 1).', 'bad');
+      $('saveCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    msg('saveMsg', 'Saving\u2026', 'ok');
+    api('/api/save', { dayFolder: S.plan.folder, mode: mode, files: files }).then(function (out) {
+      S.lastSaved = out.dir;
+      $('saveMsg').className = 'msg show ok';
+      $('saveMsg').innerHTML = 'Saved ' + out.files.length + ' file' + (out.files.length === 1 ? '' : 's') + ' to <b>' + esc(out.dir) + '</b> ' +
+        '<button type="button" class="plain small" id="openSaved">Open folder</button>';
+      rememberLastOrder();
+    }).catch(function (err) { msg('saveMsg', err.message, 'bad'); });
+  }
+
+  if (NATIVE) {
+    $('saveCard').hidden = false;
+    $('saveAll').hidden = false;
+    $('dlAll').className = 'plain';
+    api('/api/settings').then(showFolder).catch(function (err) { msg('folderMsg', err.message, 'bad'); });
+    setInterval(function () { api('/api/ping').catch(function () {}); }, 15000);
+    api('/api/ping').catch(function () {});
+
+    $('pickFolder').addEventListener('click', function () {
+      msg('folderMsg', 'The Windows folder picker is open\u2026', 'ok');
+      api('/api/pick-folder').then(function (out) {
+        if (out.cancelled) { msg('folderMsg', ''); return; }
+        showFolder(out);
+        msg('folderMsg', 'Files will be saved in ' + out.saveFolder + '.', 'ok');
+      }).catch(function (err) { msg('folderMsg', err.message, 'bad'); });
+    });
+    $('useFolder').addEventListener('click', function () {
+      api('/api/set-folder', { path: $('folderPath').value }).then(function (out) {
+        showFolder(out);
+        $('folderPath').value = '';
+        msg('folderMsg', 'Files will be saved in ' + out.saveFolder + '.', 'ok');
+      }).catch(function (err) { msg('folderMsg', err.message, 'bad'); });
+    });
+    $('openSaveFolder').addEventListener('click', function () {
+      api('/api/open-folder', {}).catch(function (err) { msg('folderMsg', err.message, 'bad'); });
+    });
+    $('saveMsg').addEventListener('click', function (e) {
+      if (e.target.id === 'openSaved') api('/api/open-folder', { path: S.lastSaved }).catch(function (err) { msg('saveMsg', err.message, 'bad'); });
+    });
+    $('saveAll').addEventListener('click', function () {
+      var files = S.plan.boards.map(function (b) {
+        return { name: b.fileName, data: btoa(J.fillTemplate(S.bins[b.height], b.slots)) };
+      });
+      if (S.bottoms.length) files.push({ name: dateCode() + ' TRAY BOTTOMS.csv', data: fileB64(J.bottomsCsv(S.bottoms)) });
+      saveToFolder('new', files);
+    });
+  }
 
   $('dlBottoms').addEventListener('click', function () {
     save(dateCode() + ' TRAY BOTTOMS.csv', new TextEncoder().encode(J.bottomsCsv(S.bottoms)), 'text/csv');

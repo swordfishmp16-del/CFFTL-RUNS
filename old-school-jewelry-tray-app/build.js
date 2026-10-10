@@ -2,6 +2,8 @@
 //   OLD SCHOOL JEWELRY TRAY APP.html
 // = src/app.html + src/core.js + the WOODWOP templates in templates/ (listed in templates.json)
 //   + the Jewelry Trays Direct logo, if assets/logo.png (or .jpg/.svg/.webp) exists.
+// Then, if Go is installed, builds the stand-alone Windows program
+//   OLD SCHOOL JEWELRY TRAY APP.exe  (desktop/ + the same page).
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -37,3 +39,22 @@ const file = path.join(here, 'OLD SCHOOL JEWELRY TRAY APP.html');
 fs.writeFileSync(file, out);
 console.log('Wrote ' + path.relative(process.cwd(), file) + ' (' + Math.round(out.length / 1024) + ' KB, templates: ' +
   Object.keys(builtin).map(h => h + '"').join(', ') + ', logo: ' + (logoFile ? path.basename(logoFile) : 'none yet') + ')');
+
+// The stand-alone Windows program (desktop/) carries the same page inside it.
+fs.writeFileSync(path.join(here, 'desktop', 'app.html'), out);
+const { execFileSync } = require('child_process');
+let go = null;
+try { execFileSync('go', ['version'], { stdio: 'ignore' }); go = 'go'; } catch (e) { /* no Go here: skip the .exe */ }
+if (go) {
+  const pkg = JSON.parse(fs.readFileSync(path.join(here, 'package.json'), 'utf8'));
+  const ver = pkg.version + ' (' + new Date().toISOString().slice(0, 10) + ')';
+  const exe = path.join(here, 'OLD SCHOOL JEWELRY TRAY APP.exe');
+  execFileSync(go, ['build', '-trimpath', '-ldflags', '-H=windowsgui -s -w -X "main.version=' + ver + '"', '-o', exe, '.'], {
+    cwd: path.join(here, 'desktop'),
+    env: Object.assign({}, process.env, { GOOS: 'windows', GOARCH: 'amd64', CGO_ENABLED: '0' }),
+    stdio: 'inherit'
+  });
+  console.log('Wrote ' + path.relative(process.cwd(), exe) + ' (' + Math.round(fs.statSync(exe).size / 1024 / 1024 * 10) / 10 + ' MB, version ' + ver + ')');
+} else {
+  console.log('Go not found: skipped OLD SCHOOL JEWELRY TRAY APP.exe');
+}

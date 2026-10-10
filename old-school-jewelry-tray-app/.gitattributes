@@ -1,2 +1,5 @@
 # WOODWOP programs must keep their exact bytes (CRLF, Latin-1)
 *.mpr -text
+*.exe binary
+*.syso binary
+*.png binary
