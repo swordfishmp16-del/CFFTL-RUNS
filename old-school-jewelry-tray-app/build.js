@@ -49,7 +49,7 @@ if (go) {
   const pkg = JSON.parse(fs.readFileSync(path.join(here, 'package.json'), 'utf8'));
   const ver = pkg.version + ' (' + new Date().toISOString().slice(0, 10) + ')';
   const exe = path.join(here, 'OLD SCHOOL JEWELRY TRAY APP.exe');
-  execFileSync(go, ['build', '-trimpath', '-ldflags', '-H=windowsgui -s -w -X "main.version=' + ver + '"', '-o', exe, '.'], {
+  execFileSync(go, ['build', '-trimpath', '-ldflags', '-H=windowsgui -X "main.version=' + ver + '"', '-o', exe, '.'], {
     cwd: path.join(here, 'desktop'),
     env: Object.assign({}, process.env, { GOOS: 'windows', GOARCH: 'amd64', CGO_ENABLED: '0' }),
     stdio: 'inherit'

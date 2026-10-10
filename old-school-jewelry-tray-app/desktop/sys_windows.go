@@ -7,7 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"strings"
+	"runtime"
 	"syscall"
 	"unsafe"
 )
@@ -61,36 +61,95 @@ func inside(path, base string) bool {
 	return err1 == nil && err2 == nil && under(p, b)
 }
 
-const createNoWindow = 0x08000000
+const (
+	bifReturnOnlyFSDirs = 0x0001
+	bifEditBox          = 0x0010
+	bifNewDialogStyle   = 0x0040
+	bffmInitialized     = 1
+	bffmSetSelectionW   = 0x0467
+	coinitApartment     = 0x2
+)
 
-// pickFolder shows the normal Windows "Browse For Folder" box.
-func pickFolder(start string) (string, bool, error) {
-	script := `[Console]::OutputEncoding = [Text.Encoding]::UTF8
-Add-Type -AssemblyName System.Windows.Forms
-$owner = New-Object System.Windows.Forms.Form
-$owner.TopMost = $true; $owner.ShowInTaskbar = $false; $owner.Opacity = 0
-$owner.StartPosition = 'CenterScreen'; $owner.Show()
-$d = New-Object System.Windows.Forms.FolderBrowserDialog
-$d.Description = 'Pick where the app saves each day''s folder. Not the L: drive.'
-$d.ShowNewFolderButton = $true
-if ($env:JTD_START -and (Test-Path -LiteralPath $env:JTD_START)) { $d.SelectedPath = $env:JTD_START }
-if ($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK) { [Console]::Out.Write($d.SelectedPath) }
-$owner.Close()`
-	cmd := exec.Command("powershell.exe", "-NoProfile", "-NonInteractive", "-STA", "-ExecutionPolicy", "Bypass", "-Command", script)
-	cmd.Env = append(os.Environ(), "JTD_START="+start)
-	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true, CreationFlags: createNoWindow}
-	out, err := cmd.Output()
-	if err != nil {
-		return "", false, errors.New("the folder picker didn't open; type the folder path instead")
-	}
-	path := strings.TrimSpace(string(out))
-	if path == "" {
-		return "", true, nil
-	}
-	return path, false, nil
+var (
+	shell32                  = syscall.NewLazyDLL("shell32.dll")
+	procSHBrowseForFolderW   = shell32.NewProc("SHBrowseForFolderW")
+	procSHGetPathFromIDListW = shell32.NewProc("SHGetPathFromIDListW")
+	procShellExecuteW        = shell32.NewProc("ShellExecuteW")
+	ole32                    = syscall.NewLazyDLL("ole32.dll")
+	procCoInitializeEx       = ole32.NewProc("CoInitializeEx")
+	procCoUninitialize       = ole32.NewProc("CoUninitialize")
+	procCoTaskMemFree        = ole32.NewProc("CoTaskMemFree")
+	procGetForegroundWindow  = user32.NewProc("GetForegroundWindow")
+	procSendMessageW         = user32.NewProc("SendMessageW")
+)
+
+// BROWSEINFOW (shlobj_core.h); Go lays it out the same way as Windows does on 64-bit.
+type browseInfo struct {
+	hwndOwner      uintptr
+	pidlRoot       uintptr
+	pszDisplayName *uint16
+	lpszTitle      *uint16
+	ulFlags        uint32
+	lpfn           uintptr
+	lParam         uintptr
+	iImage         int32
 }
 
-func openFolder(p string) { _ = exec.Command("explorer.exe", p).Start() }
+// Starts the box on the current save folder.
+var browseCallback = syscall.NewCallback(func(hwnd, msg, lParam, data uintptr) uintptr {
+	if msg == bffmInitialized && data != 0 {
+		procSendMessageW.Call(hwnd, bffmSetSelectionW, 1, data)
+	}
+	return 0
+})
+
+// pickFolder shows the normal Windows "Browse For Folder" box, straight from Windows
+// (shell32), on top of the app window. Returns cancelled=true when the person cancels.
+func pickFolder(start string) (string, bool, error) {
+	runtime.LockOSThread()
+	defer runtime.UnlockOSThread()
+	if r, _, _ := procCoInitializeEx.Call(0, coinitApartment); int32(r) >= 0 {
+		defer procCoUninitialize.Call()
+	}
+	title, _ := syscall.UTF16PtrFromString("Pick where the app saves each day's folder. Not the L: drive.")
+	name := make([]uint16, syscall.MAX_PATH)
+	var startPtr *uint16
+	if start != "" {
+		if _, err := os.Stat(start); err == nil {
+			startPtr, _ = syscall.UTF16PtrFromString(start)
+		}
+	}
+	owner, _, _ := procGetForegroundWindow.Call()
+	bi := browseInfo{
+		hwndOwner:      owner,
+		pszDisplayName: &name[0],
+		lpszTitle:      title,
+		ulFlags:        bifReturnOnlyFSDirs | bifNewDialogStyle | bifEditBox,
+		lpfn:           browseCallback,
+		lParam:         uintptr(unsafe.Pointer(startPtr)),
+	}
+	pidl, _, _ := procSHBrowseForFolderW.Call(uintptr(unsafe.Pointer(&bi)))
+	runtime.KeepAlive(startPtr)
+	runtime.KeepAlive(title)
+	if pidl == 0 {
+		return "", true, nil
+	}
+	defer procCoTaskMemFree.Call(pidl)
+	buf := make([]uint16, 32768)
+	if ok, _, _ := procSHGetPathFromIDListW.Call(pidl, uintptr(unsafe.Pointer(&buf[0]))); ok == 0 {
+		return "", false, errors.New("that isn't a folder on disk; pick a normal folder or type the path instead")
+	}
+	return syscall.UTF16ToString(buf), false, nil
+}
+
+// shellOpen opens a file, folder or web address the way double-clicking it would.
+func shellOpen(target string) {
+	verb, _ := syscall.UTF16PtrFromString("open")
+	t, _ := syscall.UTF16PtrFromString(target)
+	procShellExecuteW.Call(0, uintptr(unsafe.Pointer(verb)), uintptr(unsafe.Pointer(t)), 0, 0, 1)
+}
+
+func openFolder(p string) { shellOpen(p) }
 
 // openWindow opens the app in its own window (Edge, or Chrome) with its own profile,
 // so it looks like a program and keeps its settings. Falls back to the default browser.
@@ -114,7 +173,7 @@ func openWindow(url, dir string) {
 			}
 		}
 	}
-	_ = exec.Command("rundll32", "url.dll,FileProtocolHandler", url).Start()
+	shellOpen(url)
 }
 
 func showError(msg string) {

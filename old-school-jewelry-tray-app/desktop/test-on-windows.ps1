@@ -96,9 +96,6 @@ try {
             "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe") | Where-Object { $_ -and (Test-Path $_) } | Select-Object -First 1
   Check 'Edge or Chrome found for the app window' ([bool]$edge) 'the app would open in the default browser instead'
   if ($edge) { Write-Output "Window browser: $edge" }
-  $ps = $true
-  try { Add-Type -AssemblyName System.Windows.Forms } catch { $ps = $false }
-  Check 'Windows folder picker is available (Choose folder...)' $ps 'people can still type the folder path'
 }
 finally {
   if ($proc -and -not $proc.HasExited) { $proc.Kill() }

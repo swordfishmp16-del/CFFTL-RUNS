@@ -20,6 +20,13 @@ Open the Shopify export and the app gives you:
 
 The first time Windows runs it, it may say "Windows protected your PC" because the program isn't signed by a publisher. Click **More info**, then **Run anyway**. If your company's IT blocks unsigned programs, use the single-file version below.
 
+**Windows Defender:** on 10/10/2026, Defender's machine-learning guess flagged the first downloaded build as `Trojan:Win32/Sabsik.FL.A!ml`. That's a known false alarm for unsigned Go programs. The program was changed so it no longer looks like one:
+- The **Choose folder…** box now comes straight from Windows (shell32), instead of a hidden PowerShell window.
+- Links and folders are opened through Windows' normal "open".
+- The file is no longer stripped.
+
+If Defender still objects on a computer, the lasting fixes are signing the program with a code-signing certificate, or reporting the false alarm to Microsoft at https://www.microsoft.com/wdsi/filesubmission.
+
 **Checking a computer:** `desktop\test-on-windows.ps1` tests the program on a real Windows computer without opening a window:
 - the page loads
 - the L: drive and the network share behind it are refused
