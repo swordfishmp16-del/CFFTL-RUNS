@@ -22,6 +22,11 @@
     ['measurement charge', 'Charge, not a tray']
   ];
 
+  // Standard (stock) trays: 13 3/8" deep, 21-34" wide (HANDOFF 4, STOCK 21IN-34IN boards).
+  var STOCK_SIZES = [21, 22, 27, 28, 33, 34].map(function (w) {
+    return { name: 'STOCK ' + w + 'IN', w: w, d: 13.375 };
+  });
+
   // ---------- sizes ----------
 
   // "21 5/16", "21-5/16", "24 7/8\"", "13.375", "28" -> inches as a number. Bad text -> null.
@@ -180,8 +185,7 @@
           t.kind = 'stock';
           t.widthText = inchesText(s.w);
           t.depthText = inchesText(s.d);
-          t.include = false;
-          t.reason = 'Stock size: pull from stock (tick to cut it today)';
+          t.reason = 'Standard size';
         } else {
           t.kind = 'nosize';
           t.include = false;
@@ -336,6 +340,7 @@
     var unassigned = [];
     var split = [];
     var queues = { 2: [], 3: [] };
+    var fillers = { 2: [], 3: [] };   // "Fill with stock" trays: only go into empty slots
 
     trays.forEach(function (t) {
       if (!t.include) return;
@@ -368,7 +373,7 @@
         split.push({ tray: t, note: 'Too long for one strip: split into 2 slots (widths, then depths)' });
       }
       var qty = Math.max(1, t.qty | 0);
-      for (var i = 0; i < qty; i++) queues[h].push({ slots: unit });
+      for (var i = 0; i < qty; i++) (t.filler ? fillers[h] : queues[h]).push({ tray: t, slots: unit });
     });
 
     var boards = [];
@@ -387,6 +392,29 @@
       });
     });
 
+    // Stock fill never starts a board; it only takes slots the orders left empty.
+    var fillerPlaced = {}, fillerUnused = {};
+    [2, 3].forEach(function (h) {
+      var left = fillers[h];
+      boards.forEach(function (b) {
+        if (b.height !== h) return;
+        var k = 0;
+        while (k < left.length && b.slots.length < b.template.slots) {
+          var u = left[k];
+          if (u.slots.length > b.template.slots - b.slots.length) { k++; continue; }
+          u.slots.forEach(function (s) {
+            s = Object.assign({}, s);
+            s.slot = b.slots.length + 1;
+            s.stock = true;
+            b.slots.push(s);
+          });
+          fillerPlaced[u.tray.id] = (fillerPlaced[u.tray.id] || 0) + 1;
+          left.splice(k, 1);
+        }
+      });
+      left.forEach(function (u) { fillerUnused[u.tray.id] = (fillerUnused[u.tray.id] || 0) + 1; });
+    });
+
     var orderNums = [];
     boards.forEach(function (b) {
       b.slots.forEach(function (s) {
@@ -398,7 +426,10 @@
     if (orderNums.length) {
       folder += ' #' + Math.min.apply(null, orderNums) + '-' + Math.max.apply(null, orderNums);
     }
-    return { boards: boards, unassigned: unassigned, split: split, folder: folder };
+    return {
+      boards: boards, unassigned: unassigned, split: split, folder: folder,
+      fillerPlaced: fillerPlaced, fillerUnused: fillerUnused
+    };
   }
 
   // ---------- tray bottoms (HANDOFF 7C) ----------
@@ -406,19 +437,25 @@
   var BOTTOM_COLUMNS = ['DESCRIPTION', 'PART TYPE', 'UNIT #', 'MATERIAL', 'QTY', 'WIDTH', 'DEPTH', 'GRAIN', 'COMPANY'];
 
   // One row per tray line. Every tray being made gets a bottom, even ones that
-  // could not go on a board (4"/5", too long).
-  function bottomRows(trays) {
+  // could not go on a board (4"/5", too long). Stock fill gets a bottom for each
+  // tray that actually landed on a board (plan.fillerPlaced), with UNIT # "STOCK".
+  function bottomRows(trays, plan) {
     var rows = [];
     trays.forEach(function (t) {
       if (!t.include) return;
       var wIn = parseInches(t.widthText), dIn = parseInches(t.depthText);
       if (!wIn || !dIn) return;
+      var qty = Math.max(1, t.qty | 0);
+      if (t.filler) {
+        qty = (plan && plan.fillerPlaced && plan.fillerPlaced[t.id]) || 0;
+        if (!qty) return;
+      }
       rows.push({
         description: t.label || t.orderNumber,
         partType: 'TRAY BOTTOM',
-        unit: t.orderNumber,
+        unit: t.filler ? 'STOCK' : t.orderNumber,
         material: '1/4 MELAMINE',
-        qty: Math.max(1, t.qty | 0),
+        qty: qty,
         widthMm: bottomMm(wIn),
         depthMm: bottomMm(dIn),
         grain: 'N',
@@ -522,6 +559,7 @@
     strip: strip,
     planBoards: planBoards,
     FIRST_STRIP_Y: FIRST_STRIP_Y,
+    STOCK_SIZES: STOCK_SIZES,
     BOTTOM_COLUMNS: BOTTOM_COLUMNS,
     bottomRows: bottomRows,
     bottomsCsv: bottomsCsv,

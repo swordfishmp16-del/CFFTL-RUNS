@@ -131,10 +131,18 @@
   svg .cut { stroke: var(--cut); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
   svg .groove { stroke: var(--cut); stroke-width: 1; stroke-dasharray: 6 4; vector-effect: non-scaling-stroke; }
   svg .tag { fill: #fff; }
+  svg .tag.stock { fill: #ffe7a3; }
   svg .label { fill: #111; font-family: Arial, sans-serif; font-weight: 800; }
   svg .slotno { fill: #4d6f86; font-family: Arial, sans-serif; font-weight: 600; }
   .slot-tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 0 18px; margin-top: 10px; align-items: start; }
   .slot-tables table { font-size: 13px; }
+  .fillbar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+    border: 1px dashed var(--accent); background: #f1f7f2; border-radius: 6px;
+    padding: 8px 12px; margin-bottom: 10px; font-size: 15px;
+  }
+  .fillbar select { min-height: 32px; padding: 3px 6px; }
+  .stock-tag { background: #ffe7a3; border-radius: 3px; padding: 0 4px; font-size: .92em; }
   .unassigned { border: 1px solid #e1c27a; background: var(--warn-bg); border-radius: 6px; padding: 12px 14px; margin-bottom: 18px; }
   .unassigned h3 { font-size: 17px; color: var(--warn); margin-bottom: 6px; }
   .unassigned ul { margin: 0; padding-left: 20px; }
@@ -163,7 +171,7 @@
     th, td { padding: 2px 6px; }
     th { position: static; }
     .table-scroll { overflow: visible; border: 0; }
-    svg .sheet, svg .tag { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    svg .sheet, svg .tag, .stock-tag { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   }
 </style>
 </head>
@@ -371,7 +379,7 @@
 
   // ---------- step 2: trays ----------
   function inRange(t) {
-    if (t.source === 'hand') return true;
+    if (t.source === 'hand' || t.filler) return true;
     var n = parseInt(t.orderNumber, 10);
     var from = parseInt($('from').value, 10), to = parseInt($('to').value, 10);
     if (isNaN(n)) return true;
@@ -385,7 +393,7 @@
     file.text().then(function (text) {
       try {
         var items = J.readShopifyCsv(text);
-        S.trays = J.traysFromItems(items).concat(S.trays.filter(function (t) { return t.source === 'hand'; }));
+        S.trays = J.traysFromItems(items).concat(S.trays.filter(function (t) { return t.source === 'hand' || t.filler; }));
         $('csvName').textContent = file.name + ' · ' + items.length + ' lines';
         var nums = S.trays.map(function (t) { return parseInt(t.orderNumber, 10); }).filter(function (n) { return !isNaN(n); });
         var lo = Math.min.apply(null, nums), hi = Math.max.apply(null, nums);
@@ -419,6 +427,11 @@
   function notesHtml(t, why, note) {
     if (!t.include) return '<span class="o">' + esc(t.reason || 'Not cutting today') + '</span>';
     var out = [];
+    if (t.filler && S.plan) {
+      var placed = S.plan.fillerPlaced[t.id] || 0, extra = S.plan.fillerUnused[t.id] || 0;
+      out.push('<span class="o">' + placed + ' on boards</span>');
+      if (extra) out.push('<span class="w">' + extra + ' not needed: the boards are full</span>');
+    }
     if (!sizeOk(t.widthText) || !sizeOk(t.depthText)) out.push('<span class="b">Size not readable</span>');
     else if (why) out.push('<span class="b">Not on a board: ' + esc(why) + '</span>');
     else if (note) out.push('<span class="w">' + esc(note) + '</span>');
@@ -436,10 +449,12 @@
       '<td><input type="checkbox" data-f="include" aria-label="Cut today"' + (t.include ? ' checked' : '') + '></td>' +
       '<td>' + (hand
         ? '<input type="text" class="order" data-f="orderNumber" value="' + esc(t.orderNumber) + '" aria-label="Order number">'
-        : esc(t.orderNumber)) + '</td>' +
+        : t.filler ? '<span class="stock-tag">STOCK</span>' : esc(t.orderNumber)) + '</td>' +
       '<td class="item-name">' + (hand
         ? '<span class="item-title">Added by hand</span> <button type="button" class="link" data-del="' + t.id + '">remove</button>'
-        : esc(t.name) + '<div class="item-title">' + esc(t.title) + '</div>') + '</td>' +
+        : t.filler
+          ? 'Stock fill <button type="button" class="link" data-del="' + t.id + '">remove</button><div class="item-title">Only goes into empty slots</div>'
+          : esc(t.name) + '<div class="item-title">' + esc(t.title) + '</div>') + '</td>' +
       '<td><input type="text" class="size' + (t.include && !sizeOk(t.widthText) ? ' bad' : '') + '" data-f="widthText" value="' + esc(t.widthText) + '" aria-label="Width in inches"></td>' +
       '<td><input type="text" class="size' + (t.include && !sizeOk(t.depthText) ? ' bad' : '') + '" data-f="depthText" value="' + esc(t.depthText) + '" aria-label="Depth in inches"></td>' +
       '<td><select data-f="height" aria-label="Height">' + hOpts + '</select></td>' +
@@ -451,7 +466,7 @@
 
   function renderTrays() {
     var showSkipped = $('showSkipped').checked;
-    var rows = visibleTrays().filter(function (t) { return showSkipped || t.include || t.source === 'hand'; });
+    var rows = visibleTrays().filter(function (t) { return showSkipped || t.include || t.source === 'hand' || t.filler; });
     var body = document.querySelector('#trayTable tbody');
     body.innerHTML = rows.length
       ? rows.map(rowHtml).join('')
@@ -532,7 +547,7 @@
       if (est > room) { fs = fs * room / est; est = room; }
       var tagH = fs * 1.2, padX = 8, x0 = 30;
       if (text) {
-        o.push('<rect class="tag" x="' + x0 + '" y="' + (top + (th - tagH) / 2) + '" width="' + (est + padX * 2) + '" height="' + tagH + '"/>');
+        o.push('<rect class="tag' + (s.stock ? ' stock' : '') + '" x="' + x0 + '" y="' + (top + (th - tagH) / 2) + '" width="' + (est + padX * 2) + '" height="' + tagH + '"/>');
         o.push('<text class="label" x="' + (x0 + padX) + '" y="' + (top + th / 2) + '" font-size="' + fs + '" dominant-baseline="central">' + esc(text) + '</text>');
       }
       if (len + 90 < L) {
@@ -549,10 +564,46 @@
   function slotTable(slots) {
     return '<table><thead><tr><th>Tray</th><th>Label</th><th class="n">W in</th><th class="n">D in</th><th class="n">W mm</th><th class="n">D mm</th></tr></thead><tbody>' +
       slots.map(function (s) {
-        return '<tr><td>' + s.slot + '</td><td>' + esc(s.label) + (s.part ? ' <i>(split: ' + PART_NAME[s.part] + ')</i>' : '') +
+        return '<tr><td>' + s.slot + '</td><td>' + (s.stock ? '<span class="stock-tag">' + esc(s.label) + '</span>' : esc(s.label)) +
+          (s.part ? ' <i>(split: ' + PART_NAME[s.part] + ')</i>' : '') +
           '</td><td class="n">' + esc(J.inchesText(s.wIn)) + '</td><td class="n">' + (s.part ? '&mdash;' : esc(J.inchesText(s.dIn))) +
           '</td><td class="n">' + J.mm2(s.wMm) + '</td><td class="n">' + (s.dRaw != null ? esc(s.dRaw) : J.mm2(s.dMm)) + '</td></tr>';
       }).join('') + '</tbody></table>';
+  }
+
+  // ---------- fill with stock ----------
+  S.stockSize = store.get('jtd.stockSize') || 'STOCK 22IN';
+
+  function freeSlots(h) {
+    return S.plan.boards.reduce(function (a, b) {
+      return a + (b.height === h ? b.template.slots - b.slots.length : 0);
+    }, 0);
+  }
+
+  function fillBar(b) {
+    var free = b.template.slots - b.slots.length;
+    if (!free) return '';
+    var opts = J.STOCK_SIZES.map(function (st) {
+      return '<option value="' + st.name + '"' + (st.name === S.stockSize ? ' selected' : '') + '>' +
+        st.name + ' (' + st.w + ' x ' + J.inchesText(st.d) + ')</option>';
+    }).join('');
+    return '<div class="fillbar screen-only"><span><b>' + free + '</b> empty slot' + (free === 1 ? '' : 's') + ' on this board.</span>' +
+      '<label>Stock size <select data-fill-size aria-label="Stock size">' + opts + '</select></label>' +
+      '<button type="button" class="small" data-fill="' + b.height + '">Fill with stock</button></div>';
+  }
+
+  // Adds one "Stock fill" row for every empty slot on this height's boards.
+  // Stock only ever goes into empty slots; it never starts a new board.
+  function addStockFill(h) {
+    var st = J.STOCK_SIZES.filter(function (x) { return x.name === S.stockSize; })[0] || J.STOCK_SIZES[1];
+    var free = freeSlots(h);
+    if (!free) return;
+    S.trays.push({
+      id: 'fill' + (++S.handCount), source: 'fill', filler: true, orderNumber: '', name: 'Stock fill', title: '',
+      qty: free, widthText: J.inchesText(st.w), depthText: J.inchesText(st.d), height: h, label: st.name,
+      include: true, kind: 'stock', reason: '', warnings: []
+    });
+    renderTrays();
   }
 
   function renderBoards() {
@@ -560,7 +611,7 @@
     var start = Math.max(1, parseInt($('startNumber').value, 10) || 1);
     var plan = J.planBoards(trays, S.templates, { date: dateCode(), startNumber: start });
     S.plan = plan;
-    S.bottoms = J.bottomRows(trays);
+    S.bottoms = J.bottomRows(trays, plan);
 
     // notes column: say why a ticked tray is not on a board
     var why = {}, note = {};
@@ -572,15 +623,17 @@
     });
 
     // summary chips
-    var onBoards = plan.boards.reduce(function (a, b) {
-      return a + b.slots.filter(function (s) { return s.part !== 'D'; }).length;
-    }, 0);
+    var onBoards = 0, stockOn = 0;
+    plan.boards.forEach(function (b) {
+      b.slots.forEach(function (s) { if (s.stock) stockOn++; else if (s.part !== 'D') onBoards++; });
+    });
     var skipped = trays.filter(function (t) { return !t.include; }).length;
     var warnCount = trays.filter(function (t) { return t.include && t.warnings.length; }).length;
     var chips = [];
     if (trays.length) {
       chips.push('<span class="chip"><b>' + onBoards + '</b> trays on boards</span>');
       chips.push('<span class="chip"><b>' + plan.boards.length + '</b> board' + (plan.boards.length === 1 ? '' : 's') + '</span>');
+      if (stockOn) chips.push('<span class="chip"><b>' + stockOn + '</b> stock fill</span>');
       if (plan.split.length) chips.push('<span class="chip"><b>' + plan.split.length + '</b> split in 2 slots</span>');
       if (plan.unassigned.length) chips.push('<span class="chip warn"><b>' + plan.unassigned.length + '</b> not on a board</span>');
       if (warnCount) chips.push('<span class="chip warn"><b>' + warnCount + '</b> to check</span>');
@@ -608,6 +661,7 @@
             b.slots.length + ' of ' + b.template.slots + ' slots used &middot; from ' + esc(b.template.fileName) + '</div></div>' +
             '<button type="button" class="small screen-only" data-dl="' + i + '">Download .mpr</button></header>' +
             '<p class="print-only">Printed ' + esc(new Date().toLocaleString()) + ' &middot; tray 1 is at the bottom of the sheet</p>' +
+            fillBar(b) +
             boardSvg(b) +
             '<div class="slot-tables">' + slotTable(b.slots.slice(0, half)) + (b.slots.length > half ? slotTable(b.slots.slice(half)) : '') + '</div>' +
             '</article>';
@@ -648,7 +702,13 @@
     $('lastRun').textContent = last ? 'Last boards made on this computer went up to order #' + last + '.' : '';
   }
 
+  $('boardList').addEventListener('change', function (e) {
+    if (e.target.matches('[data-fill-size]')) { S.stockSize = e.target.value; store.set('jtd.stockSize', S.stockSize); }
+  });
+
   $('boardList').addEventListener('click', function (e) {
+    var fill = e.target.closest('[data-fill]');
+    if (fill) { addStockFill(+fill.dataset.fill); return; }
     var btn = e.target.closest('[data-dl]');
     if (!btn) return;
     var b = S.plan.boards[+btn.dataset.dl];
