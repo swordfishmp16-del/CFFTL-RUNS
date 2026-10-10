@@ -2,20 +2,27 @@
 #
 #   powershell -ExecutionPolicy Bypass -File test-on-windows.ps1 [-Exe "path\to\OLD SCHOOL JEWELRY TRAY APP.exe"]
 #
+# Without -Exe it looks next to this script, then one folder up.
+#
 # Starts the program WITHOUT a window, using a throw-away settings folder and a test save
 # folder under %TEMP%, then checks: the page loads; the L: drive is refused (the letter, and
 # the network share behind it when L: is mapped, and any other letter mapped to that share);
 # a normal folder works; saving makes the day folder, never overwrites, and writes the
 # exact bytes. Nothing is written to L: or to the real app settings. Prints PASS/FAIL lines.
-param([string]$Exe = (Join-Path $PSScriptRoot "..\OLD SCHOOL JEWELRY TRAY APP.exe"))
+param([string]$Exe = '')
 
 $ErrorActionPreference = 'Stop'
+if (-not $Exe) {
+  $Exe = @((Join-Path $PSScriptRoot 'OLD SCHOOL JEWELRY TRAY APP.exe'), (Join-Path $PSScriptRoot '..\OLD SCHOOL JEWELRY TRAY APP.exe')) |
+    Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+  if (-not $Exe) { Write-Output 'Put this script next to OLD SCHOOL JEWELRY TRAY APP.exe, or give -Exe "path".'; exit 2 }
+}
 $fails = 0
 function Check($name, $ok, $detail = '') {
   if ($ok) { Write-Output "PASS  $name" } else { $script:fails++; Write-Output "FAIL  $name  $detail" }
 }
 
-$Exe = (Resolve-Path $Exe).Path
+$Exe = (Resolve-Path -LiteralPath $Exe).Path
 $work = Join-Path $env:TEMP ("JTD-SELFTEST-" + [guid]::NewGuid().ToString('N').Substring(0, 8))
 New-Item -ItemType Directory -Path (Join-Path $work 'home') | Out-Null
 Write-Output "Program: $Exe"
