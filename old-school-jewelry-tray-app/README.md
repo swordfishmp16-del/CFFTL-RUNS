@@ -47,7 +47,7 @@ Two more checks sit next to it:
 - One 4" and one 5" tray were flagged to do by hand.
 - Planned as a single day: 41 boards, and 20 trays split in two. Every board file is identical to its template outside the tray sizes, and no strip is longer than the board.
 
-**Tested on Windows (10/10/2026, Mike's laptop CFF1FTLLP-9A90EG, Windows with Chrome, no Edge):** all three scripts passed, along with the Go unit tests, against the program built on that laptop from this source.
+**Tested on Windows (10/10/2026, Mike's laptop CFF1FTLLP-9A90EG, Windows with Chrome, no Edge):** all three scripts passed, along with the Go unit tests, against the program built on that laptop from this source. They passed again against the `.exe` downloaded from this repo, the exact file people run (SHA-256 starting `3a024f35`). Defender raised nothing on that file when it was downloaded, copied and run.
 - The app opened in its own Chrome window.
 - The folder picker's OK set the folder, and Cancel changed nothing.
 - L:, the share behind it and a second letter on that share were all refused, and nothing was written to the test L:.

@@ -98,7 +98,7 @@ try {
   if ($edge) { Write-Output "Window browser: $edge" }
 }
 finally {
-  if ($proc -and -not $proc.HasExited) { $proc.Kill() }
+  if ($proc -and -not $proc.HasExited) { $proc.Kill(); [void]$proc.WaitForExit(5000) }   # let go of app.log before deleting
   Remove-Item -Recurse -Force $work -ErrorAction SilentlyContinue
 }
 if ($fails) { Write-Output "$fails check(s) FAILED"; exit 1 } else { Write-Output 'ALL CHECKS PASSED' }
