@@ -20,6 +20,14 @@ Open the Shopify export and the app gives you:
 
 The first time Windows runs it, it may say "Windows protected your PC" because the program isn't signed by a publisher. Click **More info**, then **Run anyway**. If your company's IT blocks unsigned programs, use the single-file version below.
 
+**Checking a computer:** `desktop\test-on-windows.ps1` tests the program on a real Windows computer without opening a window:
+- the page loads
+- the L: drive and the network share behind it are refused
+- a normal folder works
+- saving never overwrites and keeps every byte
+
+It uses a throw-away folder in `%TEMP%`, writes nothing to L: or the real settings, and prints PASS/FAIL. Close the app first, then run: `powershell -ExecutionPolicy Bypass -File desktop\test-on-windows.ps1`.
+
 **Single-file version (backup):** `OLD SCHOOL JEWELRY TRAY APP.html` does the same work in a browser tab, but files go to the Downloads folder (as a .zip) instead of a folder you pick.
 
 Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are inside both versions, so there's nothing to load. Neither version touches Shopify or the internet, and neither ever writes to the L: drive.

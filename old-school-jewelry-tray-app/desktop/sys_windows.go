@@ -15,6 +15,9 @@ import (
 const appFolder = "OldSchoolJewelryTrayApp"
 
 func settingsDir() string {
+	if d := os.Getenv("JTD_HOME"); d != "" { // used by test-on-windows.ps1 so a test never touches real settings
+		return d
+	}
 	if d := os.Getenv("LOCALAPPDATA"); d != "" {
 		return filepath.Join(d, appFolder)
 	}
