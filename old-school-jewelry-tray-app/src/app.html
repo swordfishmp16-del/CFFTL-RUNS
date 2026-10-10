@@ -142,6 +142,14 @@
     padding: 8px 12px; margin-bottom: 10px; font-size: 15px;
   }
   .fillbar select { min-height: 32px; padding: 3px 6px; }
+  .stockpanel { border: 1px solid var(--rule); border-radius: 6px; padding: 10px 14px 12px; margin-bottom: 16px; background: #fbf8f0; }
+  .stockpanel h3 { font-size: 17px; margin-bottom: 2px; }
+  .stockpanel .hint { margin: 0 0 8px; font-size: 14px; }
+  .stockrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 6px 0; border-top: 1px solid var(--rule); }
+  .stockrow:first-of-type { border-top: 0; }
+  .stockrow .which { font-weight: 700; min-width: 86px; }
+  .stockrow .free { color: var(--muted); min-width: 150px; font-size: 14px; }
+  .stockrow select { min-height: 34px; }
   .stock-tag { background: #ffe7a3; border-radius: 3px; padding: 0 4px; font-size: .92em; }
   .unassigned { border: 1px solid #e1c27a; background: var(--warn-bg); border-radius: 6px; padding: 12px 14px; margin-bottom: 18px; }
   .unassigned h3 { font-size: 17px; color: var(--warn); margin-bottom: 6px; }
@@ -153,7 +161,7 @@
   @media print {
     body { background: #fff; font-size: 12px; }
     .wrap { max-width: none; padding: 0; }
-    header.top, #stepTemplates, #stepOrders, .toolbar, .unassigned, button,
+    header.top, #stepTemplates, #stepOrders, .toolbar, .unassigned, .stockpanel, button,
     #stepBoards > h2, #stepBoards > .hint { display: none !important; }
     #stepBoards { border: 0; padding: 0; margin: 0; background: none; }
     body:not(.print-bottoms) #stepBoards { page: boards; }
@@ -258,6 +266,7 @@
       <button type="button" class="plain" id="dlBottoms" disabled>Download bottoms list (.csv)</button>
       <button type="button" class="plain" id="printBottoms" disabled>Print bottoms list</button>
     </div>
+    <div class="stockpanel" id="stockPanel"></div>
     <div id="unassigned"></div>
     <div id="boardList"><p class="empty">Boards show up here once trays and templates are loaded.</p></div>
     <div id="bottomsWrap"></div>
@@ -572,7 +581,37 @@
   }
 
   // ---------- fill with stock ----------
-  S.stockSize = store.get('jtd.stockSize') || 'STOCK 22IN';
+  // One stock size for 2" sheets and one for 3" sheets, remembered on this computer.
+  S.stockSize = {
+    2: store.get('jtd.stockSize.2') || 'STOCK 22IN',
+    3: store.get('jtd.stockSize.3') || 'STOCK 34IN'
+  };
+
+  function stockSelect(h) {
+    return '<select data-fill-size="' + h + '" aria-label="Stock size for ' + h + '&quot; sheets">' +
+      J.STOCK_SIZES.map(function (st) {
+        return '<option value="' + st.name + '"' + (st.name === S.stockSize[h] ? ' selected' : '') + '>' +
+          st.name + ' (' + st.w + ' x ' + J.inchesText(st.d) + ')</option>';
+      }).join('') + '</select>';
+  }
+
+  // The dropdowns at the top of step 3: pick the stock size for each sheet height.
+  function stockPanel() {
+    var rows = [2, 3].map(function (h) {
+      var boards = S.plan.boards.filter(function (b) { return b.height === h; }).length;
+      var free = freeSlots(h);
+      var status = !S.templates[h] ? 'No ' + h + '&quot; template'
+        : !boards ? 'No ' + h + '&quot; sheets today'
+        : free ? '<b>' + free + '</b> empty slot' + (free === 1 ? '' : 's')
+        : 'Sheets are full';
+      return '<div class="stockrow"><span class="which">' + h + '&quot; sheets</span>' +
+        '<label>Stock size ' + stockSelect(h) + '</label>' +
+        '<span class="free">' + status + '</span>' +
+        '<button type="button" class="small" data-fill="' + h + '"' + (free ? '' : ' disabled') + '>Fill with stock</button></div>';
+    }).join('');
+    return '<h3>Fill empty slots with stock</h3>' +
+      '<p class="hint">Pick the stock size for each sheet height, then click Fill. Stock only goes into empty slots.</p>' + rows;
+  }
 
   function freeSlots(h) {
     return S.plan.boards.reduce(function (a, b) {
@@ -583,19 +622,15 @@
   function fillBar(b) {
     var free = b.template.slots - b.slots.length;
     if (!free) return '';
-    var opts = J.STOCK_SIZES.map(function (st) {
-      return '<option value="' + st.name + '"' + (st.name === S.stockSize ? ' selected' : '') + '>' +
-        st.name + ' (' + st.w + ' x ' + J.inchesText(st.d) + ')</option>';
-    }).join('');
     return '<div class="fillbar screen-only"><span><b>' + free + '</b> empty slot' + (free === 1 ? '' : 's') + ' on this board.</span>' +
-      '<label>Stock size <select data-fill-size aria-label="Stock size">' + opts + '</select></label>' +
+      '<label>Stock size ' + stockSelect(b.height) + '</label>' +
       '<button type="button" class="small" data-fill="' + b.height + '">Fill with stock</button></div>';
   }
 
   // Adds one "Stock fill" row for every empty slot on this height's boards.
   // Stock only ever goes into empty slots; it never starts a new board.
   function addStockFill(h) {
-    var st = J.STOCK_SIZES.filter(function (x) { return x.name === S.stockSize; })[0] || J.STOCK_SIZES[1];
+    var st = J.STOCK_SIZES.filter(function (x) { return x.name === S.stockSize[h]; })[0] || J.STOCK_SIZES[1];
     var free = freeSlots(h);
     if (!free) return;
     S.trays.push({
@@ -640,6 +675,8 @@
       chips.push('<span class="chip"><b>' + skipped + '</b> skipped</span>');
     }
     $('chips').innerHTML = chips.join('');
+
+    $('stockPanel').innerHTML = stockPanel();
 
     // not on a board
     $('unassigned').innerHTML = plan.unassigned.length
@@ -702,8 +739,17 @@
     $('lastRun').textContent = last ? 'Last boards made on this computer went up to order #' + last + '.' : '';
   }
 
-  $('boardList').addEventListener('change', function (e) {
-    if (e.target.matches('[data-fill-size]')) { S.stockSize = e.target.value; store.set('jtd.stockSize', S.stockSize); }
+  $('stepBoards').addEventListener('change', function (e) {
+    if (!e.target.matches('[data-fill-size]')) return;
+    var h = +e.target.dataset.fillSize;
+    S.stockSize[h] = e.target.value;
+    store.set('jtd.stockSize.' + h, S.stockSize[h]);
+    document.querySelectorAll('[data-fill-size="' + h + '"]').forEach(function (sel) { sel.value = S.stockSize[h]; });
+  });
+
+  $('stockPanel').addEventListener('click', function (e) {
+    var fill = e.target.closest('[data-fill]');
+    if (fill && !fill.disabled) addStockFill(+fill.dataset.fill);
   });
 
   $('boardList').addEventListener('click', function (e) {
