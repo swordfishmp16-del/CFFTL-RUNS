@@ -482,9 +482,10 @@
     });
   }
 
-  // 'Small 22"W x 13 3/8"D' -> {w: 22, d: 13.375}
+  // 'Small 22"W x 13 3/8"D' -> {w: 22, d: 13.375}. Shopify's item names use curly inch
+  // marks (22\u201dW x 13 3/8\u201dD), so any inch mark (or none) is accepted.
   function sizeFromName(name) {
-    var m = String(name).match(/(\d+(?:\.\d+)?(?:\s+\d+\/\d+)?)\s*"?\s*W\s*x\s*(\d+(?:\.\d+)?(?:\s+\d+\/\d+)?)\s*"?\s*D/i);
+    var m = String(name).match(/(\d+(?:\.\d+)?(?:\s+\d+\/\d+)?)\s*["\u201c\u201d\u2033]?\s*W\s*x\s*(\d+(?:\.\d+)?(?:\s+\d+\/\d+)?)\s*["\u201c\u201d\u2033]?\s*D/i);
     if (!m) return null;
     var w = parseInches(m[1]), d = parseInches(m[2]);
     return w && d ? { w: w, d: d } : null;

@@ -162,6 +162,16 @@ test('a blank order number on a later line of the same order is filled in', () =
   assert.deepEqual(J.readShopifyCsv(csv).map(i => i.orderNumber), ['5001', '5001', '']);
 });
 
+test('standard sizes with Shopify\'s curly inch marks go through (real 10/9 export)', () => {
+  assert.deepEqual(J.sizeFromName('Standard Jewelry Tray - Black / Small 22\u201dW x 13 3/8\u201dD'), { w: 22, d: 13.375 });
+  assert.deepEqual(J.sizeFromName('Standard Jewelry Tray - Silver / Medium 28\u2033W x 13 3/8\u2033D'), { w: 28, d: 13.375 });
+  assert.deepEqual(J.sizeFromName('Small 22W x 13 3/8D'), { w: 22, d: 13.375 });
+  const csv = 'Order ID,Order Number,Lineitem Name,Lineitem Quantity,Lineitem Title,Width,Height,Depth\n' +
+    '"7493170102577","4100","Standard Jewelry Tray - Champagne / Small 22\u201dW x 13 3/8\u201dD","1","Standard Jewelry Tray","","",""\n';
+  const t = J.traysFromItems(J.readShopifyCsv(csv))[0];
+  assert.deepEqual([t.kind, t.include, t.widthText, t.depthText, t.height], ['stock', true, '22', '13 3/8', 2]);
+});
+
 test('extra-height charge warns when the tray still says 2"', () => {
   const csv = [
     'Order ID,Order Number,Lineitem Name,Lineitem Quantity,Lineitem Title,Width,Height,Depth',
