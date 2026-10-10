@@ -74,7 +74,7 @@ Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are inside b
 
 ## Logo
 
-The printouts carry the Jewelry Trays Direct logo from `assets/logo.png`. The current file is a redraw made from the picture Mike sent 10/10/2026 (`assets/logo-redraw.svg`). Replace `assets/logo.png` with the real logo file and run `node build.js` to use the exact one.
+The printouts and the program icon use the real Jewelry Trays Direct logo. `assets/logo.png` is `JT-logo-wide-black.svg` from jewelrytraysdirect.com, drawn at 2400 × 274 with a see-through background (10/10/2026). `assets/icon.png` is the diamond-and-tray mark cut from it. To change the logo, replace `assets/logo.png` and run `node build.js`.
 
 ## Rules it follows
 

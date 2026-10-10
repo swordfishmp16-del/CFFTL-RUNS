@@ -39,7 +39,8 @@
   }
   h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; margin: 0; }
   h1 { font-size: 30px; letter-spacing: .06em; text-transform: uppercase; }
-  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .brand .logo + h1 { padding-left: 18px; border-left: 2px solid var(--rule); }
   .logo { height: 56px; width: auto; display: block; }
   .print-logo { height: 40px; width: auto; display: block; margin-bottom: 4px; }
   .paste { width: min(560px, 100%); display: grid; gap: 6px; justify-items: center; }
