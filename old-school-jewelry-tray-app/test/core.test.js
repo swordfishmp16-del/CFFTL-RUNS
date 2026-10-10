@@ -129,7 +129,27 @@ test('Shopify export becomes tray rows with the right defaults', () => {
   assert.equal(blankHeight.widthText, '24 7/8"');
   assert.match(blankHeight.warnings[0], /blank/);
 
-  assert.throws(() => J.readShopifyCsv('a,b\n1,2'), /Missing column/);
+  assert.throws(() => J.readShopifyCsv('Order Number,b\n1,2'), /Missing column/);
+  assert.throws(() => J.readShopifyCsv('a,b\n1,2'), /8 columns/);
+});
+
+test('pasted lines: rows copied out of Excel, no header row', () => {
+  const tsv = [
+    '9001\t4354\tStandard Jewelry Tray - Champagne / Custom Small\t3\tStandard Jewelry Tray\t21 5/16\t2\t14 1/8',
+    '9002\t4357\t"Standard Jewelry Tray - Blush / Small 22""W x 13 3/8""D"\t2\tStandard Jewelry Tray\t\t\t'
+  ].join('\r\n');
+  const items = J.readShopifyLines(tsv);
+  assert.deepEqual(items.map(i => [i.orderNumber, i.qty, i.rawW, i.rawD]), [['4354', 3, '21 5/16', '14 1/8'], ['4357', 2, '', '']]);
+  assert.equal(items[1].name, 'Standard Jewelry Tray - Blush / Small 22"W x 13 3/8"D');
+  const trays = J.traysFromItems(items, 'p1-');
+  assert.deepEqual(trays.map(t => [t.id, t.include, t.widthText]), [['p1-0', true, '21 5/16'], ['p1-1', true, '22']]);
+});
+
+test('pasted lines: comma lines from a text editor, with header, inch marks unquoted', () => {
+  const items = J.readShopifyLines('Order Number,Lineitem Name,Width,Depth\n4400,Plain Tray 22"W,20,12\n');
+  assert.deepEqual(items.map(i => [i.orderNumber, i.name, i.rawW]), [['4400', 'Plain Tray 22"W', '20']]);
+  assert.throws(() => J.readShopifyLines('  \n'), /Nothing to read/);
+  assert.throws(() => J.readShopifyLines('4354\t21 5/16\t14 1/8'), /8 columns/);
 });
 
 test('a blank order number on a later line of the same order is filled in', () => {

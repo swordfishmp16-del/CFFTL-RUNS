@@ -38,6 +38,11 @@
   }
   h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; margin: 0; }
   h1 { font-size: 30px; letter-spacing: .06em; text-transform: uppercase; }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .logo { height: 56px; width: auto; display: block; }
+  .print-logo { height: 40px; width: auto; display: block; margin-bottom: 4px; }
+  .paste { width: min(560px, 100%); display: grid; gap: 6px; justify-items: center; }
+  .paste textarea { width: 100%; min-height: 54px; font: 13px/1.35 Consolas, monospace; border: 1px solid #b9ad97; border-radius: 4px; padding: 6px 8px; resize: vertical; }
   .tagline { color: var(--muted); font-style: italic; font-family: Georgia, serif; }
   section.step {
     background: var(--card);
@@ -189,7 +194,7 @@
 <body>
 <div class="wrap">
   <header class="top">
-    <h1>Old School Jewelry Tray App</h1>
+    <div class="brand"><span id="logoTop"></span><h1>Old School Jewelry Tray App</h1></div>
     <span class="tagline">Jewelry Trays Direct &middot; daily WOODWOP board builder</span>
   </header>
 
@@ -224,6 +229,11 @@
     <div class="drop" id="drop">
       <button type="button" id="openCsv">Open Shopify export (.csv)</button>
       <span class="file" id="csvName">or drag the file here</span>
+      <div class="paste">
+        <span class="file">Or copy lines from the export (in Excel or a text editor) and paste or drag them here. The header row is optional.</span>
+        <textarea id="pasteBox" placeholder="Paste lines here (Ctrl+V)" aria-label="Paste lines from the Shopify export"></textarea>
+        <button type="button" class="plain small" id="addPasted">Add these lines</button>
+      </div>
     </div>
     <input type="file" id="csvFile" accept=".csv,text/csv" hidden>
     <div class="row">
@@ -323,6 +333,13 @@
   }
   function dateCode() { return J.mmddyy($('date').value) || J.mmddyy(todayIso()); }
 
+  // ---------- logo ----------
+  // The Jewelry Trays Direct logo from assets/, put in by build.js (null until a logo file is added).
+  var LOGO = /*LOGO*/null;
+  function logoImg(cls) {
+    return LOGO ? '<img class="' + cls + '" src="' + LOGO + '" alt="Jewelry Trays Direct">' : '';
+  }
+
   // ---------- step 1: templates ----------
   // Your _2 TALL / _3 TALL templates, put in by build.js (null when src/app.html is opened directly).
   var BUILTIN = /*BUILTIN_TEMPLATES*/null;
@@ -395,7 +412,7 @@
 
   // ---------- step 2: trays ----------
   function inRange(t) {
-    if (t.source === 'hand' || t.filler || t.rush) return true;
+    if (t.source === 'hand' || t.source === 'paste' || t.filler || t.rush) return true;
     var n = parseInt(t.orderNumber, 10);
     var from = parseInt($('from').value, 10), to = parseInt($('to').value, 10);
     if (isNaN(n)) return true;
@@ -409,7 +426,11 @@
     file.text().then(function (text) {
       try {
         var items = J.readShopifyCsv(text);
-        S.trays = J.traysFromItems(items).concat(S.trays.filter(function (t) { return t.source === 'hand' || t.filler; }));
+        // A line you pasted on purpose stays (and stays in, whatever the range); the file's copy of it is dropped.
+        var pasted = S.trays.filter(function (t) { return t.source === 'paste'; }), have = {};
+        pasted.forEach(function (t) { have[lineKey(t)] = true; });
+        var fresh = J.traysFromItems(items).filter(function (t) { return !have[lineKey(t)]; });
+        S.trays = sortTrays(fresh.concat(pasted, S.trays.filter(function (t) { return t.source === 'hand' || t.filler; })));
         $('csvName').textContent = file.name + ' · ' + items.length + ' lines';
         var nums = S.trays.map(function (t) { return parseInt(t.orderNumber, 10); }).filter(function (n) { return !isNaN(n); });
         var lo = Math.min.apply(null, nums), hi = Math.max.apply(null, nums);
@@ -424,6 +445,51 @@
     });
   }
 
+  // ---------- pasted lines ----------
+  // Same line twice (pasted again, or also in the loaded file) is only listed once.
+  function lineKey(t) {
+    return [t.orderNumber, t.name, t.title, t.widthText, t.depthText, t.qty].join('|');
+  }
+
+  // Lowest order number first; hand-added rows and stock fill stay at the end.
+  function sortTrays(list) {
+    var main = list.filter(function (t) { return t.source !== 'hand' && !t.filler; });
+    var rest = list.filter(function (t) { return t.source === 'hand' || t.filler; });
+    main = main.map(function (t, i) { return { t: t, i: i }; }).sort(function (a, b) {
+      var na = parseInt(a.t.orderNumber, 10), nb = parseInt(b.t.orderNumber, 10);
+      if (isNaN(na) || isNaN(nb) || na === nb) return a.i - b.i;
+      return na - nb;
+    }).map(function (x) { return x.t; });
+    return main.concat(rest);
+  }
+
+  // Adds lines copied out of the Shopify export. Pasted lines are always used,
+  // whatever the from/to range says.
+  function addLines(text) {
+    try {
+      var items = J.readShopifyLines(text);
+      S.pasteCount = (S.pasteCount || 0) + 1;
+      var have = {};
+      S.trays.forEach(function (t) { have[lineKey(t)] = true; });
+      var added = 0, dup = 0;
+      J.traysFromItems(items, 'p' + S.pasteCount + '-').forEach(function (t) {
+        if (have[lineKey(t)]) { dup++; return; }
+        t.source = 'paste';
+        have[lineKey(t)] = true;
+        S.trays.push(t);
+        added++;
+      });
+      S.trays = sortTrays(S.trays);
+      msg('csvMsg', 'Added ' + added + ' pasted line' + (added === 1 ? '' : 's') +
+        (dup ? ' (' + dup + ' already in the list)' : '') + '. Pasted lines are used whatever the order range says.', 'ok');
+      renderTrays();
+      return true;
+    } catch (err) {
+      msg('csvMsg', err.message, 'bad');
+      return false;
+    }
+  }
+
   $('openCsv').addEventListener('click', function () { $('csvFile').value = ''; $('csvFile').click(); });
   $('csvFile').addEventListener('change', function () { if (this.files[0]) loadCsv(this.files[0]); });
   var drop = $('drop');
@@ -435,7 +501,21 @@
   });
   drop.addEventListener('drop', function (e) {
     var f = e.dataTransfer.files[0];
-    if (f) loadCsv(f);
+    if (f) { loadCsv(f); return; }
+    var text = e.dataTransfer.getData('text/plain');
+    if (text) addLines(text);
+  });
+
+  $('addPasted').addEventListener('click', function () {
+    if (addLines($('pasteBox').value)) $('pasteBox').value = '';
+  });
+
+  // Ctrl+V anywhere on the page (outside a box you are typing in) adds the lines too.
+  document.addEventListener('paste', function (e) {
+    var el = e.target;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.isContentEditable)) return;
+    var text = e.clipboardData && e.clipboardData.getData('text/plain');
+    if (text) { e.preventDefault(); addLines(text); }
   });
 
   // ---------- rush orders ----------
@@ -732,11 +812,13 @@
       ? plan.boards.map(function (b, i) {
           var half = Math.ceil(b.slots.length / 2);
           return '<article class="board">' +
+            '<div class="print-only">' + logoImg('print-logo') + '</div>' +
             '<header><div><h3>' + esc(b.fileName) + (b.rush ? ' <span class="rush-tag">RUSH &mdash; CUT FIRST</span>' : '') +
             '</h3><div class="sub">' + b.height + '&quot; tall &middot; ' +
             b.slots.length + ' of ' + b.template.slots + ' slots used &middot; from ' + esc(b.template.fileName) + '</div></div>' +
             '<button type="button" class="small screen-only" data-dl="' + i + '">Download .mpr</button></header>' +
-            '<p class="print-only">Printed ' + esc(new Date().toLocaleString()) + ' &middot; tray 1 is at the bottom of the sheet</p>' +
+            '<p class="print-only" style="margin:0 0 6px">Printed ' + esc(new Date().toLocaleString()) +
+            ' &middot; tray 1 is at the bottom of the sheet</p>' +
             fillBar(b) +
             boardSvg(b) +
             '<div class="slot-tables">' + slotTable(b.slots.slice(0, half)) + (b.slots.length > half ? slotTable(b.slots.slice(half)) : '') + '</div>' +
@@ -746,7 +828,7 @@
 
     // bottoms
     $('bottomsWrap').innerHTML = S.bottoms.length
-      ? '<h3>' + esc(dateCode()) + ' tray bottoms &middot; 1/4 melamine (size minus 9/16&quot;)</h3><div class="table-scroll"><table><thead><tr>' +
+      ? '<div class="print-only">' + logoImg('print-logo') + '</div><h3>' + esc(dateCode()) + ' tray bottoms &middot; 1/4 melamine (size minus 9/16&quot;)</h3><div class="table-scroll"><table><thead><tr>' +
         J.BOTTOM_COLUMNS.map(function (c) { return '<th' + (/QTY|WIDTH|DEPTH/.test(c) ? ' class="n"' : '') + '>' + c + '</th>'; }).join('') +
         '</tr></thead><tbody>' + S.bottoms.map(function (r) {
           return '<tr><td>' + esc(r.description) + '</td><td>' + r.partType + '</td><td>' + esc(r.unit) + '</td><td>' + r.material +
@@ -824,6 +906,7 @@
   $('printBottoms').addEventListener('click', function () { printMode('print-bottoms'); });
 
   // ---------- start ----------
+  $('logoTop').innerHTML = logoImg('logo');
   $('date').value = todayIso();
   [2, 3].forEach(function (h) {
     var raw = store.get('jtd.tpl.' + h);

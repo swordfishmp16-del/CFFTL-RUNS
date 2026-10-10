@@ -19,7 +19,7 @@ Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are already 
 ## Every day
 
 1. Export the orders from Shopify (`shopify_export_MMDDYY.csv`).
-2. Open the app and drag the CSV onto step 2.
+2. Open the app and drag the CSV onto step 2. **Or** copy just the lines you want from the export (in Excel or a text editor) and paste them into the box in step 2, press Ctrl+V anywhere on the page, or drag the selected lines onto step 2. The header row is optional. Pasted lines are always used, whatever the order range says, and a line pasted twice only counts once.
 3. Set **Orders from # / to #** for today. The app suggests starting right after the last order it made boards for on that computer.
 4. **Rush orders:** type the order numbers in **Rush orders** (e.g. `4360, 4372`). They go on the first sheet, even if they're outside the from/to range.
 5. Untick anything you are not cutting. Fix any size, height, qty or label.
@@ -29,6 +29,16 @@ Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are already 
    - `100226 DAILY TRAYS 3 3IN.mpr` … (3" boards)
    - `100226 TRAY BOTTOMS.csv`
 8. Click **Print boards with labels** for the shop copy.
+
+## Sharing with the team
+
+- Every computer runs its own copy of the same file. Put the file in a shared folder and everyone opens the same copy, so an update only has to be dropped in once.
+- Nothing goes over the internet. The app never sends anything anywhere, never touches Shopify, and never writes to the L: drive.
+- What each computer remembers is kept only on that computer: the last order number boards were made for, the stock sizes picked, and any template loaded by hand. Two people building boards on two computers won't see each other's work, so agree on who runs the boards each day.
+
+## Logo
+
+The printouts carry the Jewelry Trays Direct logo from `assets/logo.png`. The current file is a redraw made from the picture Mike sent 10/10/2026 (`assets/logo-redraw.svg`). Replace `assets/logo.png` with the real logo file and run `node build.js` to use the exact one.
 
 ## Rules it follows
 

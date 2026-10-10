@@ -75,8 +75,10 @@
 
   // ---------- Shopify CSV ----------
 
-  function parseCsv(text) {
-    var rows = [], row = [], field = '', i = 0, q = false, c;
+  // delim: ',' for the CSV file, '\t' for rows copied out of Excel.
+  function parseCsv(text, delim) {
+    delim = delim || ',';
+    var rows = [], row = [], field = '', i = 0, q = false, c, quoted = false;
     text = String(text).replace(/^﻿/, '');
     while (i < text.length) {
       c = text[i];
@@ -87,20 +89,49 @@
         }
         field += c; i++; continue;
       }
-      if (c === '"') { q = true; i++; continue; }
-      if (c === ',') { row.push(field); field = ''; i++; continue; }
+      // A quote only opens a quoted field at the very start of the field; elsewhere it is
+      // a plain inch mark (22"W pasted from a text editor).
+      if (c === '"' && field === '' && !quoted) { q = true; quoted = true; i++; continue; }
+      if (c === delim) { row.push(field); field = ''; quoted = false; i++; continue; }
       if (c === '\r') { i++; continue; }
-      if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; i++; continue; }
+      if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; quoted = false; i++; continue; }
       field += c; i++;
     }
     if (field !== '' || row.length) { row.push(field); rows.push(row); }
     return rows.filter(function (r) { return r.some(function (f) { return f.trim() !== ''; }); });
   }
 
+  // The export's own column order, used when pasted lines come without the header row.
+  var EXPORT_COLUMNS = ['Order ID', 'Order Number', 'Lineitem Name', 'Lineitem Quantity', 'Lineitem Title', 'Width', 'Height', 'Depth'];
+
+  // Lines copied from the export: the whole file, or some rows copied out of Excel
+  // (tab-separated) or a text editor (comma-separated), with or without the header row.
+  function readShopifyLines(text) {
+    text = String(text || '').replace(/^\uFEFF/, '');
+    var first = (text.split(/\r?\n/).filter(function (l) { return l.trim(); })[0]) || '';
+    if (!first) throw new Error('Nothing to read: no lines were pasted.');
+    var delim = first.indexOf('\t') >= 0 ? '\t' : ',';
+    var rows = parseCsv(text, delim);
+    var head = rows[0].map(function (h) { return h.trim().toLowerCase(); });
+    var hasHeader = ['order id', 'order number', 'lineitem name', 'width', 'depth'].some(function (h) { return head.indexOf(h) >= 0; });
+    if (!hasHeader) {
+      var n = rows[0].length;
+      var cols = n >= 8 ? EXPORT_COLUMNS : n === 7 ? EXPORT_COLUMNS.slice(1) : null;
+      if (!cols) {
+        throw new Error('Copy whole rows from the Shopify export: Order ID through Depth (8 columns). These lines have ' + n + '.');
+      }
+      rows = [cols].concat(rows);
+    }
+    return itemsFromRows(rows);
+  }
+
   // Shopify export header (HANDOFF 10.10):
   // Order ID,Order Number,Lineitem Name,Lineitem Quantity,Lineitem Title,Width,Height,Depth
   function readShopifyCsv(text) {
-    var rows = parseCsv(text);
+    return readShopifyLines(text);
+  }
+
+  function itemsFromRows(rows) {
     if (!rows.length) throw new Error('The file is empty.');
     var head = rows[0].map(function (h) { return h.trim().toLowerCase(); });
     function col(name) { return head.indexOf(name); }
@@ -146,7 +177,7 @@
 
   // Turns Shopify line items into tray rows the screen can edit.
   // include=false rows stay visible with a reason so nothing disappears silently.
-  function traysFromItems(items) {
+  function traysFromItems(items, idPrefix) {
     var extraHeight = {};
     items.forEach(function (it) {
       if (/measurement charge/i.test(it.title) && /height/i.test(it.name)) {
@@ -157,7 +188,7 @@
 
     var trays = items.map(function (it, idx) {
       var t = {
-        id: 'csv' + idx,
+        id: (idPrefix || 'csv') + idx,
         source: 'csv',
         orderNumber: it.orderNumber,
         name: it.name,
@@ -569,6 +600,7 @@
     inchesText: inchesText,
     parseCsv: parseCsv,
     readShopifyCsv: readShopifyCsv,
+    readShopifyLines: readShopifyLines,
     sizeFromName: sizeFromName,
     traysFromItems: traysFromItems,
     bytesToBin: bytesToBin,
