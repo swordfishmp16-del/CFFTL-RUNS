@@ -28,6 +28,16 @@ The first time Windows runs it, it may say "Windows protected your PC" because t
 
 It uses a throw-away folder in `%TEMP%`, writes nothing to L: or the real settings, and prints PASS/FAIL. Close the app first, then run: `powershell -ExecutionPolicy Bypass -File desktop\test-on-windows.ps1`.
 
+Two more checks sit next to it:
+- `test-window-on-windows.ps1` opens the real app window and the **Choose folder…** picker, presses OK and Cancel, and checks the result. A window flashes on screen for a few seconds.
+- `test-l-share-on-windows.ps1` is for a computer with no L: drive. It briefly maps a test L: and N: to the same throw-away folder, so the network-share checks really run, then removes both.
+
+**Tested on Windows (10/10/2026, Mike's laptop CFF1FTLLP-9A90EG, Windows with Chrome, no Edge):** all three scripts passed, along with the Go unit tests, against the program built on that laptop from this source.
+- The app opened in its own Chrome window.
+- The folder picker's OK set the folder, and Cancel changed nothing.
+- L:, the share behind it and a second letter on that share were all refused, and nothing was written to the test L:.
+- Saving made the day folder and "(2)" copies, never overwrote a file, and kept every byte.
+
 **Single-file version (backup):** `OLD SCHOOL JEWELRY TRAY APP.html` does the same work in a browser tab, but files go to the Downloads folder (as a .zip) instead of a folder you pick.
 
 Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are inside both versions, so there's nothing to load. Neither version touches Shopify or the internet, and neither ever writes to the L: drive.
