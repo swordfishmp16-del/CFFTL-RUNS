@@ -274,6 +274,40 @@ test('fill with stock: 3" stock only goes on 3" boards', () => {
   assert.equal(plan.fillerUnused['fill-STOCK 34IN'], 4);
 });
 
+test('rush order box reads order numbers any way they are typed', () => {
+  assert.deepEqual(J.parseOrderList('4360, #4372  4380\n4360'), ['4360', '4372', '4380']);
+  assert.deepEqual(J.parseOrderList(''), []);
+});
+
+test('rush orders go on the first sheet, and that sheet is board 1', () => {
+  const trays = [];
+  for (let i = 0; i < 20; i++) trays.push(tray(4400 + i, '20', '12', 2));
+  trays.push(tray(4420, '22', '13 3/8', 2, 2, { rush: true }));
+  trays.push(tray(4421, '24', '14', 3, 1, { rush: true }));
+  trays.push(tray(4422, '24', '14', 3, 1));
+  const plan = J.planBoards(trays, { 2: T2(), 3: T3() }, { date: '101026' });
+  assert.deepEqual(plan.boards.map(b => [b.fileName, b.rush, b.slots.length]), [
+    ['101026 DAILY TRAYS 1.mpr', true, 16],
+    ['101026 DAILY TRAYS 2 3IN.mpr', true, 2],
+    ['101026 DAILY TRAYS 3.mpr', false, 6]
+  ]);
+  const first = plan.boards[0].slots;
+  assert.deepEqual(first.slice(0, 3).map(s => [s.slot, s.tray.orderNumber, !!s.rush]),
+    [[1, '4420', true], [2, '4420', true], [3, '4400', false]]);
+  assert.deepEqual(plan.boards[1].slots.map(s => s.tray.orderNumber), ['4421', '4422']);
+
+  const bottoms = J.bottomRows(trays, plan);
+  assert.deepEqual(bottoms.slice(0, 2).map(r => r.description), ['4420 RUSH', '4421 RUSH']);
+  assert.equal(bottoms[2].description, '4400');
+});
+
+test('rush split tray keeps its two slots together on the first sheet', () => {
+  const trays = [tray(1, '20', '12', 2), tray(2, '31 5/16', '19 3/4', 2, 1, { rush: true })];
+  const plan = J.planBoards(trays, { 2: T2() }, { date: '101026' });
+  assert.deepEqual(plan.boards[0].slots.map(s => [s.tray.orderNumber, s.part || '', !!s.rush]),
+    [['2', 'W', true], ['2', 'D', true], ['1', '', false]]);
+});
+
 test('boards: missing template and unreadable size are reported, not dropped', () => {
   const plan = J.planBoards([tray(1, '20', '12', 3), tray(2, 'abc', '12', 2)], { 2: T2(), 3: null }, { date: '100226' });
   assert.equal(plan.boards.length, 0);

@@ -340,6 +340,7 @@
     var unassigned = [];
     var split = [];
     var queues = { 2: [], 3: [] };
+    var rushQueues = { 2: [], 3: [] }; // rush orders: packed first, their boards cut first
     var fillers = { 2: [], 3: [] };   // "Fill with stock" trays: only go into empty slots
 
     trays.forEach(function (t) {
@@ -372,24 +373,32 @@
         ];
         split.push({ tray: t, note: 'Too long for one strip: split into 2 slots (widths, then depths)' });
       }
+      if (t.rush && !t.filler) unit.forEach(function (s) { s.rush = true; });
       var qty = Math.max(1, t.qty | 0);
-      for (var i = 0; i < qty; i++) (t.filler ? fillers[h] : queues[h]).push({ tray: t, slots: unit });
+      var q = t.filler ? fillers[h] : t.rush ? rushQueues[h] : queues[h];
+      for (var i = 0; i < qty; i++) q.push({ tray: t, slots: unit });
     });
 
     var boards = [];
     [2, 3].forEach(function (h) {
-      if (!queues[h].length) return;
+      var all = rushQueues[h].concat(queues[h]);
+      if (!all.length) return;
       var tpl = templates[h];
-      packSlots(queues[h], tpl.slots).forEach(function (slots) {
+      packSlots(all, tpl.slots).forEach(function (slots) {
         boards.push({
-          number: n,
           height: h,
           template: tpl,
-          fileName: date + ' DAILY TRAYS ' + n + (h === 3 ? ' 3IN' : '') + '.mpr',
+          rush: slots.some(function (s) { return s.rush; }),
           slots: slots
         });
-        n++;
       });
+    });
+    // Boards holding rush orders are numbered first so they get cut first (2" before 3").
+    boards = boards.filter(function (b) { return b.rush; }).concat(boards.filter(function (b) { return !b.rush; }));
+    boards.forEach(function (b) {
+      b.number = n;
+      b.fileName = date + ' DAILY TRAYS ' + n + (b.height === 3 ? ' 3IN' : '') + '.mpr';
+      n++;
     });
 
     // Stock fill never starts a board; it only takes slots the orders left empty.
@@ -440,7 +449,7 @@
   // could not go on a board (4"/5", too long). Stock fill gets a bottom for each
   // tray that actually landed on a board (plan.fillerPlaced), with UNIT # "STOCK".
   function bottomRows(trays, plan) {
-    var rows = [];
+    var rows = [], rush = [];
     trays.forEach(function (t) {
       if (!t.include) return;
       var wIn = parseInches(t.widthText), dIn = parseInches(t.depthText);
@@ -450,8 +459,8 @@
         qty = (plan && plan.fillerPlaced && plan.fillerPlaced[t.id]) || 0;
         if (!qty) return;
       }
-      rows.push({
-        description: t.label || t.orderNumber,
+      (t.rush && !t.filler ? rush : rows).push({
+        description: (t.label || t.orderNumber) + (t.rush && !t.filler ? ' RUSH' : ''),
         partType: 'TRAY BOTTOM',
         unit: t.filler ? 'STOCK' : t.orderNumber,
         material: '1/4 MELAMINE',
@@ -462,7 +471,17 @@
         company: 'JEWELRY TRAYS DIRECT'
       });
     });
-    return rows;
+    return rush.concat(rows);   // rush bottoms first
+  }
+
+  // "4360, #4372 4380" -> ["4360", "4372", "4380"] (the rush order box)
+  function parseOrderList(text) {
+    var seen = {}, out = [];
+    (String(text || '').match(/\d+/g) || []).forEach(function (n) {
+      n = String(parseInt(n, 10));
+      if (!seen[n]) { seen[n] = true; out.push(n); }
+    });
+    return out;
   }
 
   function csvField(v) {
@@ -562,6 +581,7 @@
     STOCK_SIZES: STOCK_SIZES,
     BOTTOM_COLUMNS: BOTTOM_COLUMNS,
     bottomRows: bottomRows,
+    parseOrderList: parseOrderList,
     bottomsCsv: bottomsCsv,
     crc32: crc32,
     makeZip: makeZip,

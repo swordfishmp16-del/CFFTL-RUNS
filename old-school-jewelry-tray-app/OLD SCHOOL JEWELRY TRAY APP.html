@@ -100,7 +100,7 @@
   .table-scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; }
   table { border-collapse: collapse; width: 100%; font-size: 14px; }
   th, td { border-bottom: 1px solid var(--rule); padding: 5px 8px; text-align: left; vertical-align: middle; }
-  th { background: #efe8d8; font-weight: 600; white-space: nowrap; position: sticky; top: 0; }
+  th { background: #efe8d8; font-weight: 600; white-space: nowrap; }
   td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
   #trayTable input[type=text] { width: 100%; min-width: 80px; }
   #trayTable input.size { width: 96px; min-width: 0; }
@@ -132,6 +132,7 @@
   svg .groove { stroke: var(--cut); stroke-width: 1; stroke-dasharray: 6 4; vector-effect: non-scaling-stroke; }
   svg .tag { fill: #fff; }
   svg .tag.stock { fill: #ffe7a3; }
+  svg .tag.rush { fill: #ffd2cc; }
   svg .label { fill: #111; font-family: Arial, sans-serif; font-weight: 800; }
   svg .slotno { fill: #4d6f86; font-family: Arial, sans-serif; font-weight: 600; }
   .slot-tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 0 18px; margin-top: 10px; align-items: start; }
@@ -151,6 +152,9 @@
   .stockrow .free { color: var(--muted); min-width: 150px; font-size: 14px; }
   .stockrow select { min-height: 34px; }
   .stock-tag { background: #ffe7a3; border-radius: 3px; padding: 0 4px; font-size: .92em; }
+  .rush-tag { background: #c0261c; color: #fff; border-radius: 3px; padding: 0 5px; font-size: .8em; font-weight: 700; letter-spacing: .04em; }
+  tr.rush td { background: #fff1ef; }
+  #rush { width: 230px; }
   .unassigned { border: 1px solid #e1c27a; background: var(--warn-bg); border-radius: 6px; padding: 12px 14px; margin-bottom: 18px; }
   .unassigned h3 { font-size: 17px; color: var(--warn); margin-bottom: 6px; }
   .unassigned ul { margin: 0; padding-left: 20px; }
@@ -177,9 +181,8 @@
     .slot-tables { grid-template-columns: 1fr 1fr; }
     .slot-tables table, #bottomsWrap table { font-size: 10px; }
     th, td { padding: 2px 6px; }
-    th { position: static; }
     .table-scroll { overflow: visible; border: 0; }
-    svg .sheet, svg .tag, .stock-tag { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    svg .sheet, svg .tag, .stock-tag, .rush-tag { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   }
 </style>
 </head>
@@ -236,7 +239,11 @@
       <label class="field">First board number
         <input type="number" id="startNumber" min="1" step="1" value="1" style="width:110px">
       </label>
+      <label class="field">Rush orders (go on the first sheet)
+        <input type="text" id="rush" placeholder="e.g. 4360, 4372" autocomplete="off">
+      </label>
     </div>
+    <div class="hint" id="rushMsg" style="margin-top:8px"></div>
     <div class="hint" id="lastRun" style="margin-top:8px"></div>
     <div class="msg" id="csvMsg" role="status"></div>
     <div class="chips" id="chips"></div>
@@ -616,6 +623,7 @@
     var unassigned = [];
     var split = [];
     var queues = { 2: [], 3: [] };
+    var rushQueues = { 2: [], 3: [] }; // rush orders: packed first, their boards cut first
     var fillers = { 2: [], 3: [] };   // "Fill with stock" trays: only go into empty slots
 
     trays.forEach(function (t) {
@@ -648,24 +656,32 @@
         ];
         split.push({ tray: t, note: 'Too long for one strip: split into 2 slots (widths, then depths)' });
       }
+      if (t.rush && !t.filler) unit.forEach(function (s) { s.rush = true; });
       var qty = Math.max(1, t.qty | 0);
-      for (var i = 0; i < qty; i++) (t.filler ? fillers[h] : queues[h]).push({ tray: t, slots: unit });
+      var q = t.filler ? fillers[h] : t.rush ? rushQueues[h] : queues[h];
+      for (var i = 0; i < qty; i++) q.push({ tray: t, slots: unit });
     });
 
     var boards = [];
     [2, 3].forEach(function (h) {
-      if (!queues[h].length) return;
+      var all = rushQueues[h].concat(queues[h]);
+      if (!all.length) return;
       var tpl = templates[h];
-      packSlots(queues[h], tpl.slots).forEach(function (slots) {
+      packSlots(all, tpl.slots).forEach(function (slots) {
         boards.push({
-          number: n,
           height: h,
           template: tpl,
-          fileName: date + ' DAILY TRAYS ' + n + (h === 3 ? ' 3IN' : '') + '.mpr',
+          rush: slots.some(function (s) { return s.rush; }),
           slots: slots
         });
-        n++;
       });
+    });
+    // Boards holding rush orders are numbered first so they get cut first (2" before 3").
+    boards = boards.filter(function (b) { return b.rush; }).concat(boards.filter(function (b) { return !b.rush; }));
+    boards.forEach(function (b) {
+      b.number = n;
+      b.fileName = date + ' DAILY TRAYS ' + n + (b.height === 3 ? ' 3IN' : '') + '.mpr';
+      n++;
     });
 
     // Stock fill never starts a board; it only takes slots the orders left empty.
@@ -716,7 +732,7 @@
   // could not go on a board (4"/5", too long). Stock fill gets a bottom for each
   // tray that actually landed on a board (plan.fillerPlaced), with UNIT # "STOCK".
   function bottomRows(trays, plan) {
-    var rows = [];
+    var rows = [], rush = [];
     trays.forEach(function (t) {
       if (!t.include) return;
       var wIn = parseInches(t.widthText), dIn = parseInches(t.depthText);
@@ -726,8 +742,8 @@
         qty = (plan && plan.fillerPlaced && plan.fillerPlaced[t.id]) || 0;
         if (!qty) return;
       }
-      rows.push({
-        description: t.label || t.orderNumber,
+      (t.rush && !t.filler ? rush : rows).push({
+        description: (t.label || t.orderNumber) + (t.rush && !t.filler ? ' RUSH' : ''),
         partType: 'TRAY BOTTOM',
         unit: t.filler ? 'STOCK' : t.orderNumber,
         material: '1/4 MELAMINE',
@@ -738,7 +754,17 @@
         company: 'JEWELRY TRAYS DIRECT'
       });
     });
-    return rows;
+    return rush.concat(rows);   // rush bottoms first
+  }
+
+  // "4360, #4372 4380" -> ["4360", "4372", "4380"] (the rush order box)
+  function parseOrderList(text) {
+    var seen = {}, out = [];
+    (String(text || '').match(/\d+/g) || []).forEach(function (n) {
+      n = String(parseInt(n, 10));
+      if (!seen[n]) { seen[n] = true; out.push(n); }
+    });
+    return out;
   }
 
   function csvField(v) {
@@ -838,6 +864,7 @@
     STOCK_SIZES: STOCK_SIZES,
     BOTTOM_COLUMNS: BOTTOM_COLUMNS,
     bottomRows: bottomRows,
+    parseOrderList: parseOrderList,
     bottomsCsv: bottomsCsv,
     crc32: crc32,
     makeZip: makeZip,
@@ -959,7 +986,7 @@
 
   // ---------- step 2: trays ----------
   function inRange(t) {
-    if (t.source === 'hand' || t.filler) return true;
+    if (t.source === 'hand' || t.filler || t.rush) return true;
     var n = parseInt(t.orderNumber, 10);
     var from = parseInt($('from').value, 10), to = parseInt($('to').value, 10);
     if (isNaN(n)) return true;
@@ -1002,6 +1029,27 @@
     if (f) loadCsv(f);
   });
 
+  // ---------- rush orders ----------
+  // Marks every tray of the typed order numbers as rush and says which numbers
+  // are not in the export or have nothing to cut.
+  function applyRush() {
+    var list = J.parseOrderList($('rush').value), want = {}, found = {}, cut = {};
+    list.forEach(function (n) { want[n] = true; });
+    S.trays.forEach(function (t) {
+      var n = String(parseInt(t.orderNumber, 10));
+      t.rush = !t.filler && !!want[n];
+      if (t.rush) { found[n] = true; if (t.include) cut[n] = true; }
+    });
+    var missing = list.filter(function (n) { return !found[n]; });
+    var empty = list.filter(function (n) { return found[n] && !cut[n]; });
+    var parts = [];
+    if (list.length) parts.push('Rush: ' + list.map(function (n) { return '#' + n; }).join(', ') + ' go on the first sheet.');
+    if (missing.length && S.trays.length) parts.push('Not in this export: ' + missing.map(function (n) { return '#' + n; }).join(', ') + '.');
+    if (empty.length) parts.push('Nothing ticked to cut for ' + empty.map(function (n) { return '#' + n; }).join(', ') + '.');
+    $('rushMsg').innerHTML = esc(parts.join(' '));
+    $('rushMsg').style.color = missing.length || empty.length ? 'var(--bad)' : '';
+  }
+
   function sizeOk(text) { return !!J.parseInches(text); }
 
   function notesHtml(t, why, note) {
@@ -1029,7 +1077,8 @@
       '<td><input type="checkbox" data-f="include" aria-label="Cut today"' + (t.include ? ' checked' : '') + '></td>' +
       '<td>' + (hand
         ? '<input type="text" class="order" data-f="orderNumber" value="' + esc(t.orderNumber) + '" aria-label="Order number">'
-        : t.filler ? '<span class="stock-tag">STOCK</span>' : esc(t.orderNumber)) + '</td>' +
+        : t.filler ? '<span class="stock-tag">STOCK</span>' : esc(t.orderNumber)) +
+        (t.rush ? ' <span class="rush-tag">RUSH</span>' : '') + '</td>' +
       '<td class="item-name">' + (hand
         ? '<span class="item-title">Added by hand</span> <button type="button" class="link" data-del="' + t.id + '">remove</button>'
         : t.filler
@@ -1045,8 +1094,10 @@
   }
 
   function renderTrays() {
+    applyRush();
     var showSkipped = $('showSkipped').checked;
     var rows = visibleTrays().filter(function (t) { return showSkipped || t.include || t.source === 'hand' || t.filler; });
+    rows = rows.filter(function (t) { return t.rush; }).concat(rows.filter(function (t) { return !t.rush; }));
     var body = document.querySelector('#trayTable tbody');
     body.innerHTML = rows.length
       ? rows.map(rowHtml).join('')
@@ -1099,7 +1150,7 @@
     if (input) input.focus();
   });
 
-  ['from', 'to'].forEach(function (id) { $(id).addEventListener('input', renderTrays); });
+  ['from', 'to', 'rush'].forEach(function (id) { $(id).addEventListener('input', renderTrays); });
   $('showSkipped').addEventListener('change', renderTrays);
   $('date').addEventListener('input', scheduleBoards);
   $('startNumber').addEventListener('input', scheduleBoards);
@@ -1121,13 +1172,14 @@
       s.strip.cuts.forEach(function (x) {
         o.push('<line class="cut" x1="' + x + '" x2="' + x + '" y1="' + (W - y0 + 2) + '" y2="' + (W - y0 - th - 18) + '"/>');
       });
-      var text = String(s.label || '') + (s.part ? ' ' + PART_NAME[s.part].toUpperCase() : ''), fs = Math.min(th * 0.72, 46);
+      var text = String(s.label || '') + (s.part ? ' ' + PART_NAME[s.part].toUpperCase() : '') + (s.rush ? ' RUSH' : ''),
+        fs = Math.min(th * 0.72, 46);
       var room = Math.max(40, s.wMm - v - 40);
       var est = text.length * fs * 0.62;
       if (est > room) { fs = fs * room / est; est = room; }
       var tagH = fs * 1.2, padX = 8, x0 = 30;
       if (text) {
-        o.push('<rect class="tag' + (s.stock ? ' stock' : '') + '" x="' + x0 + '" y="' + (top + (th - tagH) / 2) + '" width="' + (est + padX * 2) + '" height="' + tagH + '"/>');
+        o.push('<rect class="tag' + (s.stock ? ' stock' : s.rush ? ' rush' : '') + '" x="' + x0 + '" y="' + (top + (th - tagH) / 2) + '" width="' + (est + padX * 2) + '" height="' + tagH + '"/>');
         o.push('<text class="label" x="' + (x0 + padX) + '" y="' + (top + th / 2) + '" font-size="' + fs + '" dominant-baseline="central">' + esc(text) + '</text>');
       }
       if (len + 90 < L) {
@@ -1145,6 +1197,7 @@
     return '<table><thead><tr><th>Tray</th><th>Label</th><th class="n">W in</th><th class="n">D in</th><th class="n">W mm</th><th class="n">D mm</th></tr></thead><tbody>' +
       slots.map(function (s) {
         return '<tr><td>' + s.slot + '</td><td>' + (s.stock ? '<span class="stock-tag">' + esc(s.label) + '</span>' : esc(s.label)) +
+          (s.rush ? ' <span class="rush-tag">RUSH</span>' : '') +
           (s.part ? ' <i>(split: ' + PART_NAME[s.part] + ')</i>' : '') +
           '</td><td class="n">' + esc(J.inchesText(s.wIn)) + '</td><td class="n">' + (s.part ? '&mdash;' : esc(J.inchesText(s.dIn))) +
           '</td><td class="n">' + J.mm2(s.wMm) + '</td><td class="n">' + (s.dRaw != null ? esc(s.dRaw) : J.mm2(s.dMm)) + '</td></tr>';
@@ -1213,6 +1266,7 @@
   }
 
   function renderBoards() {
+    applyRush();
     var trays = visibleTrays();
     var start = Math.max(1, parseInt($('startNumber').value, 10) || 1);
     var plan = J.planBoards(trays, S.templates, { date: dateCode(), startNumber: start });
@@ -1229,9 +1283,12 @@
     });
 
     // summary chips
-    var onBoards = 0, stockOn = 0;
+    var onBoards = 0, stockOn = 0, rushOn = 0;
     plan.boards.forEach(function (b) {
-      b.slots.forEach(function (s) { if (s.stock) stockOn++; else if (s.part !== 'D') onBoards++; });
+      b.slots.forEach(function (s) {
+        if (s.stock) stockOn++;
+        else if (s.part !== 'D') { onBoards++; if (s.rush) rushOn++; }
+      });
     });
     var skipped = trays.filter(function (t) { return !t.include; }).length;
     var warnCount = trays.filter(function (t) { return t.include && t.warnings.length; }).length;
@@ -1239,6 +1296,7 @@
     if (trays.length) {
       chips.push('<span class="chip"><b>' + onBoards + '</b> trays on boards</span>');
       chips.push('<span class="chip"><b>' + plan.boards.length + '</b> board' + (plan.boards.length === 1 ? '' : 's') + '</span>');
+      if (rushOn) chips.push('<span class="chip"><b>' + rushOn + '</b> rush</span>');
       if (stockOn) chips.push('<span class="chip"><b>' + stockOn + '</b> stock fill</span>');
       if (plan.split.length) chips.push('<span class="chip"><b>' + plan.split.length + '</b> split in 2 slots</span>');
       if (plan.unassigned.length) chips.push('<span class="chip warn"><b>' + plan.unassigned.length + '</b> not on a board</span>');
@@ -1265,7 +1323,8 @@
       ? plan.boards.map(function (b, i) {
           var half = Math.ceil(b.slots.length / 2);
           return '<article class="board">' +
-            '<header><div><h3>' + esc(b.fileName) + '</h3><div class="sub">' + b.height + '&quot; tall &middot; ' +
+            '<header><div><h3>' + esc(b.fileName) + (b.rush ? ' <span class="rush-tag">RUSH &mdash; CUT FIRST</span>' : '') +
+            '</h3><div class="sub">' + b.height + '&quot; tall &middot; ' +
             b.slots.length + ' of ' + b.template.slots + ' slots used &middot; from ' + esc(b.template.fileName) + '</div></div>' +
             '<button type="button" class="small screen-only" data-dl="' + i + '">Download .mpr</button></header>' +
             '<p class="print-only">Printed ' + esc(new Date().toLocaleString()) + ' &middot; tray 1 is at the bottom of the sheet</p>' +
