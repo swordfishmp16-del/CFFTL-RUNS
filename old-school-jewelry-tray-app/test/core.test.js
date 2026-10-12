@@ -114,8 +114,9 @@ test('Shopify export becomes tray rows with the right defaults', () => {
   assert.equal(custom.qty, 3);
 
   const stock = byOrder('4357');
-  assert.equal(stock.include, false);
+  assert.equal(stock.include, true, 'standard sizes from orders go through (Mike, 10/10)');
   assert.equal(stock.kind, 'stock');
+  assert.equal(stock.label, '4357');
   assert.equal(stock.widthText, '22');
   assert.equal(stock.depthText, '13 3/8');
 
@@ -128,7 +129,27 @@ test('Shopify export becomes tray rows with the right defaults', () => {
   assert.equal(blankHeight.widthText, '24 7/8"');
   assert.match(blankHeight.warnings[0], /blank/);
 
-  assert.throws(() => J.readShopifyCsv('a,b\n1,2'), /Missing column/);
+  assert.throws(() => J.readShopifyCsv('Order Number,b\n1,2'), /Missing column/);
+  assert.throws(() => J.readShopifyCsv('a,b\n1,2'), /8 columns/);
+});
+
+test('pasted lines: rows copied out of Excel, no header row', () => {
+  const tsv = [
+    '9001\t4354\tStandard Jewelry Tray - Champagne / Custom Small\t3\tStandard Jewelry Tray\t21 5/16\t2\t14 1/8',
+    '9002\t4357\t"Standard Jewelry Tray - Blush / Small 22""W x 13 3/8""D"\t2\tStandard Jewelry Tray\t\t\t'
+  ].join('\r\n');
+  const items = J.readShopifyLines(tsv);
+  assert.deepEqual(items.map(i => [i.orderNumber, i.qty, i.rawW, i.rawD]), [['4354', 3, '21 5/16', '14 1/8'], ['4357', 2, '', '']]);
+  assert.equal(items[1].name, 'Standard Jewelry Tray - Blush / Small 22"W x 13 3/8"D');
+  const trays = J.traysFromItems(items, 'p1-');
+  assert.deepEqual(trays.map(t => [t.id, t.include, t.widthText]), [['p1-0', true, '21 5/16'], ['p1-1', true, '22']]);
+});
+
+test('pasted lines: comma lines from a text editor, with header, inch marks unquoted', () => {
+  const items = J.readShopifyLines('Order Number,Lineitem Name,Width,Depth\n4400,Plain Tray 22"W,20,12\n');
+  assert.deepEqual(items.map(i => [i.orderNumber, i.name, i.rawW]), [['4400', 'Plain Tray 22"W', '20']]);
+  assert.throws(() => J.readShopifyLines('  \n'), /Nothing to read/);
+  assert.throws(() => J.readShopifyLines('4354\t21 5/16\t14 1/8'), /8 columns/);
 });
 
 test('a blank order number on a later line of the same order is filled in', () => {
@@ -139,6 +160,16 @@ test('a blank order number on a later line of the same order is filled in', () =
     '78,,Plain Tray,1,Plain Tray,16,2,12'
   ].join('\n');
   assert.deepEqual(J.readShopifyCsv(csv).map(i => i.orderNumber), ['5001', '5001', '']);
+});
+
+test('standard sizes with Shopify\'s curly inch marks go through (real 10/9 export)', () => {
+  assert.deepEqual(J.sizeFromName('Standard Jewelry Tray - Black / Small 22\u201dW x 13 3/8\u201dD'), { w: 22, d: 13.375 });
+  assert.deepEqual(J.sizeFromName('Standard Jewelry Tray - Silver / Medium 28\u2033W x 13 3/8\u2033D'), { w: 28, d: 13.375 });
+  assert.deepEqual(J.sizeFromName('Small 22W x 13 3/8D'), { w: 22, d: 13.375 });
+  const csv = 'Order ID,Order Number,Lineitem Name,Lineitem Quantity,Lineitem Title,Width,Height,Depth\n' +
+    '"7493170102577","4100","Standard Jewelry Tray - Champagne / Small 22\u201dW x 13 3/8\u201dD","1","Standard Jewelry Tray","","",""\n';
+  const t = J.traysFromItems(J.readShopifyCsv(csv))[0];
+  assert.deepEqual([t.kind, t.include, t.widthText, t.depthText, t.height], ['stock', true, '22', '13 3/8', 2]);
 });
 
 test('extra-height charge warns when the tray still says 2"', () => {
@@ -217,6 +248,94 @@ test('qty 2 of a split tray uses 4 slots', () => {
   const plan = J.planBoards([tray(6000, '31 5/16', '19 3/4', 3, 2)], { 2: T2(), 3: T3() }, { date: '100226' });
   assert.deepEqual(plan.boards[0].slots.map(s => s.part), ['W', 'D', 'W', 'D']);
   assert.equal(plan.boards[0].fileName, '100226 DAILY TRAYS 1 3IN.mpr');
+});
+
+function stockFill(h, size, qty, id) {
+  const st = J.STOCK_SIZES.find(x => x.name === size);
+  return tray('', J.inchesText(st.w), J.inchesText(st.d), h, qty,
+    { id: id || 'fill-' + size, source: 'fill', filler: true, label: size });
+}
+
+test('stock sizes list: 21-34IN, all 13 3/8 deep', () => {
+  assert.deepEqual(J.STOCK_SIZES.map(s => s.name), ['STOCK 21IN', 'STOCK 22IN', 'STOCK 27IN', 'STOCK 28IN', 'STOCK 33IN', 'STOCK 34IN']);
+  assert.ok(J.STOCK_SIZES.every(s => s.d === 13.375));
+});
+
+test('fill with stock: fills only the empty slots and labels them', () => {
+  const trays = [];
+  for (let i = 0; i < 11; i++) trays.push(tray(4400 + i, '20', '12', 2));
+  trays.push(stockFill(2, 'STOCK 22IN', 9));
+  const plan = J.planBoards(trays, { 2: T2(), 3: T3() }, { date: '101026' });
+  assert.equal(plan.boards.length, 1, 'stock never starts a new board');
+  const s = plan.boards[0].slots;
+  assert.equal(s.length, 16);
+  assert.deepEqual(s.slice(11).map(x => [x.slot, x.label, x.wMm, x.dMm, x.stock]),
+    [12, 13, 14, 15, 16].map(n => [n, 'STOCK 22IN', 558.8, 339.73, true]));
+  assert.equal(plan.fillerPlaced['fill-STOCK 22IN'], 5);
+  assert.equal(plan.fillerUnused['fill-STOCK 22IN'], 4);
+  assert.equal(plan.folder, '101026 DAILY TRAYS #4400-4410', 'stock does not change the order range');
+
+  const out = J.fillTemplate(makeTemplate(16, 49.21), s);
+  assert.match(out, /\r\ntr16w="558.80"\r\nKM="tray 16 width"\r\ntr16d="339.73"\r\n/);
+
+  const bottoms = J.bottomRows(trays, plan);
+  const stockRow = bottoms.find(r => r.unit === 'STOCK');
+  assert.deepEqual([stockRow.description, stockRow.qty, J.mm2(stockRow.widthMm), J.mm2(stockRow.depthMm)],
+    ['STOCK 22IN', 5, '544.51', '325.44']);
+});
+
+test('fill with stock: two sizes share the empty slots, stock fills a split-pair gap', () => {
+  const trays = [];
+  for (let i = 0; i < 15; i++) trays.push(tray(5000 + i, '20', '12', 2));
+  trays.push(tray(5100, '31 5/16', '19 3/4', 2));   // split pair goes to board 2, slot 16 of board 1 left empty
+  trays.push(stockFill(2, 'STOCK 28IN', 1));
+  trays.push(stockFill(2, 'STOCK 22IN', 20));
+  const plan = J.planBoards(trays, { 2: T2() }, { date: '101026' });
+  assert.deepEqual(plan.boards.map(b => b.slots.length), [16, 16]);
+  assert.equal(plan.boards[0].slots[15].label, 'STOCK 28IN');
+  assert.deepEqual(plan.boards[1].slots.slice(0, 3).map(s => s.part || s.label), ['W', 'D', 'STOCK 22IN']);
+  assert.equal(plan.fillerPlaced['fill-STOCK 22IN'], 14);
+  assert.equal(plan.fillerUnused['fill-STOCK 22IN'], 6);
+});
+
+test('fill with stock: 3" stock only goes on 3" boards', () => {
+  const plan = J.planBoards([tray(1, '20', '12', 2), stockFill(3, 'STOCK 34IN', 4)], { 2: T2(), 3: T3() }, { date: '101026' });
+  assert.deepEqual(plan.boards.map(b => [b.height, b.slots.length]), [[2, 1]]);
+  assert.equal(plan.fillerUnused['fill-STOCK 34IN'], 4);
+});
+
+test('rush order box reads order numbers any way they are typed', () => {
+  assert.deepEqual(J.parseOrderList('4360, #4372  4380\n4360'), ['4360', '4372', '4380']);
+  assert.deepEqual(J.parseOrderList(''), []);
+});
+
+test('rush orders go on the first sheet, and that sheet is board 1', () => {
+  const trays = [];
+  for (let i = 0; i < 20; i++) trays.push(tray(4400 + i, '20', '12', 2));
+  trays.push(tray(4420, '22', '13 3/8', 2, 2, { rush: true }));
+  trays.push(tray(4421, '24', '14', 3, 1, { rush: true }));
+  trays.push(tray(4422, '24', '14', 3, 1));
+  const plan = J.planBoards(trays, { 2: T2(), 3: T3() }, { date: '101026' });
+  assert.deepEqual(plan.boards.map(b => [b.fileName, b.rush, b.slots.length]), [
+    ['101026 DAILY TRAYS 1.mpr', true, 16],
+    ['101026 DAILY TRAYS 2 3IN.mpr', true, 2],
+    ['101026 DAILY TRAYS 3.mpr', false, 6]
+  ]);
+  const first = plan.boards[0].slots;
+  assert.deepEqual(first.slice(0, 3).map(s => [s.slot, s.tray.orderNumber, !!s.rush]),
+    [[1, '4420', true], [2, '4420', true], [3, '4400', false]]);
+  assert.deepEqual(plan.boards[1].slots.map(s => s.tray.orderNumber), ['4421', '4422']);
+
+  const bottoms = J.bottomRows(trays, plan);
+  assert.deepEqual(bottoms.slice(0, 2).map(r => r.description), ['4420 RUSH', '4421 RUSH']);
+  assert.equal(bottoms[2].description, '4400');
+});
+
+test('rush split tray keeps its two slots together on the first sheet', () => {
+  const trays = [tray(1, '20', '12', 2), tray(2, '31 5/16', '19 3/4', 2, 1, { rush: true })];
+  const plan = J.planBoards(trays, { 2: T2() }, { date: '101026' });
+  assert.deepEqual(plan.boards[0].slots.map(s => [s.tray.orderNumber, s.part || '', !!s.rush]),
+    [['2', 'W', true], ['2', 'D', true], ['1', '', false]]);
 });
 
 test('boards: missing template and unreadable size are reported, not dropped', () => {

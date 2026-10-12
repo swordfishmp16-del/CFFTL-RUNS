@@ -23,6 +23,7 @@
     --cut: #d0201a;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html, body { margin: 0; }
   body {
     background: var(--paper);
@@ -38,7 +39,17 @@
   }
   h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; margin: 0; }
   h1 { font-size: 30px; letter-spacing: .06em; text-transform: uppercase; }
+  .brand { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .brand .logo + h1 { padding-left: 18px; border-left: 2px solid var(--rule); }
+  .logo { height: 56px; width: auto; display: block; }
+  .print-logo { height: 40px; width: auto; display: block; margin-bottom: 4px; }
+  .paste { width: min(560px, 100%); display: grid; gap: 6px; justify-items: center; }
+  .paste textarea { width: 100%; min-height: 54px; font: 13px/1.35 Consolas, monospace; border: 1px solid #b9ad97; border-radius: 4px; padding: 6px 8px; resize: vertical; }
   .tagline { color: var(--muted); font-style: italic; font-family: Georgia, serif; }
+  .revtag { font: 700 15px/1 Arial, sans-serif; letter-spacing: .06em; background: var(--accent); color: var(--accent-ink); border-radius: 4px; padding: 6px 10px; white-space: nowrap; }
+  .revtag small { font-weight: 400; letter-spacing: 0; opacity: .85; margin-left: 6px; }
+  .lost { position: sticky; top: 0; z-index: 5; margin: 12px 0 0; padding: 12px 16px; border-radius: 6px; background: var(--bad); color: #fff; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,.25); }
+  .rev-stamp { display: none; }
   section.step {
     background: var(--card);
     border: 1px solid var(--rule);
@@ -100,7 +111,7 @@
   .table-scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; }
   table { border-collapse: collapse; width: 100%; font-size: 14px; }
   th, td { border-bottom: 1px solid var(--rule); padding: 5px 8px; text-align: left; vertical-align: middle; }
-  th { background: #efe8d8; font-weight: 600; white-space: nowrap; position: sticky; top: 0; }
+  th { background: #efe8d8; font-weight: 600; white-space: nowrap; }
   td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
   #trayTable input[type=text] { width: 100%; min-width: 80px; }
   #trayTable input.size { width: 96px; min-width: 0; }
@@ -131,48 +142,76 @@
   svg .cut { stroke: var(--cut); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
   svg .groove { stroke: var(--cut); stroke-width: 1; stroke-dasharray: 6 4; vector-effect: non-scaling-stroke; }
   svg .tag { fill: #fff; }
+  svg .tag.stock { fill: #ffe7a3; }
+  svg .tag.rush { fill: #ffd2cc; }
   svg .label { fill: #111; font-family: Arial, sans-serif; font-weight: 800; }
   svg .slotno { fill: #4d6f86; font-family: Arial, sans-serif; font-weight: 600; }
   .slot-tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 0 18px; margin-top: 10px; align-items: start; }
   .slot-tables table { font-size: 13px; }
+  .fillbar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+    border: 1px dashed var(--accent); background: #f1f7f2; border-radius: 6px;
+    padding: 8px 12px; margin-bottom: 10px; font-size: 15px;
+  }
+  .fillbar select { min-height: 32px; padding: 3px 6px; }
+  .savecard { margin-top: 16px; border: 1px solid var(--accent); border-radius: 6px; padding: 14px; background: #f1f7f2; display: grid; gap: 8px; }
+  .savecard h3 { font-size: 17px; }
+  .savecard .folder { font: 600 15px/1.3 Consolas, monospace; overflow-wrap: anywhere; }
+  .savecard .row { align-items: center; gap: 8px 12px; }
+  .savecard input[type=text] { flex: 1 1 320px; min-width: 0; }
+  .stockpanel { border: 1px solid var(--rule); border-radius: 6px; padding: 10px 14px 12px; margin-bottom: 16px; background: #fbf8f0; }
+  .stockpanel h3 { font-size: 17px; margin-bottom: 2px; }
+  .stockpanel .hint { margin: 0 0 8px; font-size: 14px; }
+  .stockrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 6px 0; border-top: 1px solid var(--rule); }
+  .stockrow:first-of-type { border-top: 0; }
+  .stockrow .which { font-weight: 700; min-width: 86px; }
+  .stockrow .free { color: var(--muted); min-width: 150px; font-size: 14px; }
+  .stockrow select { min-height: 34px; }
+  .stock-tag { background: #ffe7a3; border-radius: 3px; padding: 0 4px; font-size: .92em; }
+  .rush-tag { background: #c0261c; color: #fff; border-radius: 3px; padding: 0 5px; font-size: .8em; font-weight: 700; letter-spacing: .04em; }
+  tr.rush td { background: #fff1ef; }
+  #rush { width: 230px; }
   .unassigned { border: 1px solid #e1c27a; background: var(--warn-bg); border-radius: 6px; padding: 12px 14px; margin-bottom: 18px; }
   .unassigned h3 { font-size: 17px; color: var(--warn); margin-bottom: 6px; }
   .unassigned ul { margin: 0; padding-left: 20px; }
   #bottomsWrap h3 { font-size: 18px; margin: 6px 0 8px; }
 
   @page { margin: 0.4in; }
-  @page boards { size: letter landscape; margin: 0.35in; }
+  @page boards { size: letter landscape; margin: 0.3in; }
   @media print {
     body { background: #fff; font-size: 12px; }
     .wrap { max-width: none; padding: 0; }
-    header.top, #stepTemplates, #stepOrders, .toolbar, .unassigned, button,
+    header.top, #stepTemplates, #stepOrders, .toolbar, .unassigned, .stockpanel, button,
     #stepBoards > h2, #stepBoards > .hint { display: none !important; }
     #stepBoards { border: 0; padding: 0; margin: 0; background: none; }
     body:not(.print-bottoms) #stepBoards { page: boards; }
     body:not(.print-bottoms) #bottomsWrap { display: none; }
     body.print-bottoms #boardList { display: none; }
-    .board { page: boards; break-after: page; break-inside: avoid; border: 0; padding: 0; margin: 0; }
+    /* shop sheet: centered logo, big centered board name, then the board as big as the page allows */
+    .board { page: boards; break-after: page; break-inside: avoid; border: 0; padding: 0; margin: 0; text-align: center; }
     .board:last-child { break-after: auto; }
-    .board header { margin-bottom: 2px; }
-    .board .print-only { margin: 0 0 6px; }
-    svg.nest { display: inline-block; vertical-align: top; height: 4.4in; width: auto; max-width: 100%; }
-    .board .screen-only { display: none; }
+    .board .print-logo { height: 0.6in; margin: 0 auto; }
+    .board header { display: block; margin: 0.08in 0 0; }
+    .board h3 { font-size: 30pt; line-height: 1.15; }
+    svg.nest { display: inline-block; vertical-align: top; height: 5.2in; width: auto; max-width: 100%; margin-top: 0.14in; }
+    .board .screen-only { display: none !important; }
     .print-only { display: block; }
-    .slot-tables { grid-template-columns: 1fr 1fr; }
-    .slot-tables table, #bottomsWrap table { font-size: 10px; }
+    #bottomsWrap table { font-size: 10px; }
+    .rev-stamp { display: block; font: 8pt Arial, sans-serif; color: #777; text-align: right; margin-top: 0.06in; }
+    .lost { display: none !important; }
     th, td { padding: 2px 6px; }
-    th { position: static; }
     .table-scroll { overflow: visible; border: 0; }
-    svg .sheet, svg .tag { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    svg .sheet, svg .tag, .stock-tag, .rush-tag { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <h1>Old School Jewelry Tray App</h1>
+    <div class="brand"><span id="logoTop"></span><h1>Old School Jewelry Tray App</h1><span class="revtag" id="revTag" hidden></span></div>
     <span class="tagline">Jewelry Trays Direct &middot; daily WOODWOP board builder</span>
   </header>
+  <div class="lost" id="lostBanner" role="alert" hidden></div>
 
   <section class="step" id="stepTemplates">
     <h2><span class="num">1</span> WOODWOP templates</h2>
@@ -197,6 +236,20 @@
     </div>
     <input type="file" id="tplFile" accept=".mpr" hidden>
     <div class="msg" id="tplMsg" role="status"></div>
+    <div class="savecard" id="saveCard" hidden>
+      <h3>Save folder on this computer</h3>
+      <div class="hint" style="margin:0">Each day's boards and bottoms list are saved in their own folder inside this one. It can be anywhere on this computer except the L: drive; move the finished folders to L: yourself.</div>
+      <div class="folder" id="saveFolder">No folder picked yet.</div>
+      <div class="row">
+        <button type="button" id="pickFolder">Choose folder&hellip;</button>
+        <button type="button" class="plain" id="openSaveFolder" hidden>Open folder</button>
+      </div>
+      <div class="row">
+        <input type="text" id="folderPath" placeholder="or type a path, e.g. C:\Jewelry Trays\Boards" aria-label="Save folder path">
+        <button type="button" class="plain" id="useFolder">Use this folder</button>
+      </div>
+      <div class="msg" id="folderMsg" role="status"></div>
+    </div>
   </section>
 
   <section class="step" id="stepOrders">
@@ -205,6 +258,11 @@
     <div class="drop" id="drop">
       <button type="button" id="openCsv">Open Shopify export (.csv)</button>
       <span class="file" id="csvName">or drag the file here</span>
+      <div class="paste">
+        <span class="file">Or copy lines from the export (in Excel or a text editor) and paste or drag them here. The header row is optional.</span>
+        <textarea id="pasteBox" placeholder="Paste lines here (Ctrl+V)" aria-label="Paste lines from the Shopify export"></textarea>
+        <button type="button" class="plain small" id="addPasted">Add these lines</button>
+      </div>
     </div>
     <input type="file" id="csvFile" accept=".csv,text/csv" hidden>
     <div class="row">
@@ -220,7 +278,11 @@
       <label class="field">First board number
         <input type="number" id="startNumber" min="1" step="1" value="1" style="width:110px">
       </label>
+      <label class="field">Rush orders (go on the first sheet)
+        <input type="text" id="rush" placeholder="e.g. 4360, 4372" autocomplete="off">
+      </label>
     </div>
+    <div class="hint" id="rushMsg" style="margin-top:8px"></div>
     <div class="hint" id="lastRun" style="margin-top:8px"></div>
     <div class="msg" id="csvMsg" role="status"></div>
     <div class="chips" id="chips"></div>
@@ -243,13 +305,16 @@
 
   <section class="step" id="stepBoards">
     <h2><span class="num">3</span> Boards and bottoms</h2>
-    <p class="hint">2&quot; and 3&quot; trays never share a board. Tray 1 is at the bottom of the sheet, like WOODWOP. Move the downloaded files to the cut folder yourself.</p>
+    <p class="hint">2&quot; and 3&quot; trays never share a board. Tray 1 is at the bottom of the sheet, like WOODWOP. Move the saved (or downloaded) day folder to the L: drive yourself.</p>
     <div class="toolbar">
+      <button type="button" id="saveAll" hidden disabled>Save everything to folder</button>
       <button type="button" id="dlAll" disabled>Download everything (.zip)</button>
       <button type="button" class="plain" id="printBoards" disabled>Print boards with labels</button>
       <button type="button" class="plain" id="dlBottoms" disabled>Download bottoms list (.csv)</button>
       <button type="button" class="plain" id="printBottoms" disabled>Print bottoms list</button>
     </div>
+    <div class="msg" id="saveMsg" role="status" style="margin:-4px 0 14px"></div>
+    <div class="stockpanel" id="stockPanel"></div>
     <div id="unassigned"></div>
     <div id="boardList"><p class="empty">Boards show up here once trays and templates are loaded.</p></div>
     <div id="bottomsWrap"></div>
@@ -298,6 +363,24 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
   }
   function dateCode() { return J.mmddyy($('date').value) || J.mmddyy(todayIso()); }
+
+  // ---------- logo ----------
+  // The Jewelry Trays Direct logo from assets/, put in by build.js (null until a logo file is added).
+  var LOGO = /*LOGO*/null;
+
+  // This build's revision, put in by build.js: {rev: 3, date: "10/12/2026"}. Shown at the top
+  // of the app and in the corner of every printout, so everyone can see which one they have.
+  var REV = /*REV*/null;
+  function revStamp() {
+    return REV ? '<div class="rev-stamp">Old School Jewelry Tray App REV ' + REV.rev + '</div>' : '';
+  }
+
+  // Filled in by the Windows program (desktop/main.go) when the app runs as the .exe;
+  // stays null when this file is opened straight in a browser (then files are downloaded).
+  var NATIVE = /*NATIVE*/null;
+  function logoImg(cls) {
+    return LOGO ? '<img class="' + cls + '" src="' + LOGO + '" alt="Jewelry Trays Direct">' : '';
+  }
 
   // ---------- step 1: templates ----------
   // Your _2 TALL / _3 TALL templates, put in by build.js (null when src/app.html is opened directly).
@@ -371,7 +454,7 @@
 
   // ---------- step 2: trays ----------
   function inRange(t) {
-    if (t.source === 'hand') return true;
+    if (t.source === 'hand' || t.source === 'paste' || t.filler || t.rush) return true;
     var n = parseInt(t.orderNumber, 10);
     var from = parseInt($('from').value, 10), to = parseInt($('to').value, 10);
     if (isNaN(n)) return true;
@@ -385,7 +468,11 @@
     file.text().then(function (text) {
       try {
         var items = J.readShopifyCsv(text);
-        S.trays = J.traysFromItems(items).concat(S.trays.filter(function (t) { return t.source === 'hand'; }));
+        // A line you pasted on purpose stays (and stays in, whatever the range); the file's copy of it is dropped.
+        var pasted = S.trays.filter(function (t) { return t.source === 'paste'; }), have = {};
+        pasted.forEach(function (t) { have[lineKey(t)] = true; });
+        var fresh = J.traysFromItems(items).filter(function (t) { return !have[lineKey(t)]; });
+        S.trays = sortTrays(fresh.concat(pasted, S.trays.filter(function (t) { return t.source === 'hand' || t.filler; })));
         $('csvName').textContent = file.name + ' · ' + items.length + ' lines';
         var nums = S.trays.map(function (t) { return parseInt(t.orderNumber, 10); }).filter(function (n) { return !isNaN(n); });
         var lo = Math.min.apply(null, nums), hi = Math.max.apply(null, nums);
@@ -400,6 +487,51 @@
     });
   }
 
+  // ---------- pasted lines ----------
+  // Same line twice (pasted again, or also in the loaded file) is only listed once.
+  function lineKey(t) {
+    return [t.orderNumber, t.name, t.title, t.widthText, t.depthText, t.qty].join('|');
+  }
+
+  // Lowest order number first; hand-added rows and stock fill stay at the end.
+  function sortTrays(list) {
+    var main = list.filter(function (t) { return t.source !== 'hand' && !t.filler; });
+    var rest = list.filter(function (t) { return t.source === 'hand' || t.filler; });
+    main = main.map(function (t, i) { return { t: t, i: i }; }).sort(function (a, b) {
+      var na = parseInt(a.t.orderNumber, 10), nb = parseInt(b.t.orderNumber, 10);
+      if (isNaN(na) || isNaN(nb) || na === nb) return a.i - b.i;
+      return na - nb;
+    }).map(function (x) { return x.t; });
+    return main.concat(rest);
+  }
+
+  // Adds lines copied out of the Shopify export. Pasted lines are always used,
+  // whatever the from/to range says.
+  function addLines(text) {
+    try {
+      var items = J.readShopifyLines(text);
+      S.pasteCount = (S.pasteCount || 0) + 1;
+      var have = {};
+      S.trays.forEach(function (t) { have[lineKey(t)] = true; });
+      var added = 0, dup = 0;
+      J.traysFromItems(items, 'p' + S.pasteCount + '-').forEach(function (t) {
+        if (have[lineKey(t)]) { dup++; return; }
+        t.source = 'paste';
+        have[lineKey(t)] = true;
+        S.trays.push(t);
+        added++;
+      });
+      S.trays = sortTrays(S.trays);
+      msg('csvMsg', 'Added ' + added + ' pasted line' + (added === 1 ? '' : 's') +
+        (dup ? ' (' + dup + ' already in the list)' : '') + '. Pasted lines are used whatever the order range says.', 'ok');
+      renderTrays();
+      return true;
+    } catch (err) {
+      msg('csvMsg', err.message, 'bad');
+      return false;
+    }
+  }
+
   $('openCsv').addEventListener('click', function () { $('csvFile').value = ''; $('csvFile').click(); });
   $('csvFile').addEventListener('change', function () { if (this.files[0]) loadCsv(this.files[0]); });
   var drop = $('drop');
@@ -411,14 +543,54 @@
   });
   drop.addEventListener('drop', function (e) {
     var f = e.dataTransfer.files[0];
-    if (f) loadCsv(f);
+    if (f) { loadCsv(f); return; }
+    var text = e.dataTransfer.getData('text/plain');
+    if (text) addLines(text);
   });
+
+  $('addPasted').addEventListener('click', function () {
+    if (addLines($('pasteBox').value)) $('pasteBox').value = '';
+  });
+
+  // Ctrl+V anywhere on the page (outside a box you are typing in) adds the lines too.
+  document.addEventListener('paste', function (e) {
+    var el = e.target;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.isContentEditable)) return;
+    var text = e.clipboardData && e.clipboardData.getData('text/plain');
+    if (text) { e.preventDefault(); addLines(text); }
+  });
+
+  // ---------- rush orders ----------
+  // Marks every tray of the typed order numbers as rush and says which numbers
+  // are not in the export or have nothing to cut.
+  function applyRush() {
+    var list = J.parseOrderList($('rush').value), want = {}, found = {}, cut = {};
+    list.forEach(function (n) { want[n] = true; });
+    S.trays.forEach(function (t) {
+      var n = String(parseInt(t.orderNumber, 10));
+      t.rush = !t.filler && !!want[n];
+      if (t.rush) { found[n] = true; if (t.include) cut[n] = true; }
+    });
+    var missing = list.filter(function (n) { return !found[n]; });
+    var empty = list.filter(function (n) { return found[n] && !cut[n]; });
+    var parts = [];
+    if (list.length) parts.push('Rush: ' + list.map(function (n) { return '#' + n; }).join(', ') + ' go on the first sheet.');
+    if (missing.length && S.trays.length) parts.push('Not in this export: ' + missing.map(function (n) { return '#' + n; }).join(', ') + '.');
+    if (empty.length) parts.push('Nothing ticked to cut for ' + empty.map(function (n) { return '#' + n; }).join(', ') + '.');
+    $('rushMsg').innerHTML = esc(parts.join(' '));
+    $('rushMsg').style.color = missing.length || empty.length ? 'var(--bad)' : '';
+  }
 
   function sizeOk(text) { return !!J.parseInches(text); }
 
   function notesHtml(t, why, note) {
     if (!t.include) return '<span class="o">' + esc(t.reason || 'Not cutting today') + '</span>';
     var out = [];
+    if (t.filler && S.plan) {
+      var placed = S.plan.fillerPlaced[t.id] || 0, extra = S.plan.fillerUnused[t.id] || 0;
+      out.push('<span class="o">' + placed + ' on boards</span>');
+      if (extra) out.push('<span class="w">' + extra + ' not needed: the boards are full</span>');
+    }
     if (!sizeOk(t.widthText) || !sizeOk(t.depthText)) out.push('<span class="b">Size not readable</span>');
     else if (why) out.push('<span class="b">Not on a board: ' + esc(why) + '</span>');
     else if (note) out.push('<span class="w">' + esc(note) + '</span>');
@@ -436,10 +608,13 @@
       '<td><input type="checkbox" data-f="include" aria-label="Cut today"' + (t.include ? ' checked' : '') + '></td>' +
       '<td>' + (hand
         ? '<input type="text" class="order" data-f="orderNumber" value="' + esc(t.orderNumber) + '" aria-label="Order number">'
-        : esc(t.orderNumber)) + '</td>' +
+        : t.filler ? '<span class="stock-tag">STOCK</span>' : esc(t.orderNumber)) +
+        (t.rush ? ' <span class="rush-tag">RUSH</span>' : '') + '</td>' +
       '<td class="item-name">' + (hand
         ? '<span class="item-title">Added by hand</span> <button type="button" class="link" data-del="' + t.id + '">remove</button>'
-        : esc(t.name) + '<div class="item-title">' + esc(t.title) + '</div>') + '</td>' +
+        : t.filler
+          ? 'Stock fill <button type="button" class="link" data-del="' + t.id + '">remove</button><div class="item-title">Only goes into empty slots</div>'
+          : esc(t.name) + '<div class="item-title">' + esc(t.title) + '</div>') + '</td>' +
       '<td><input type="text" class="size' + (t.include && !sizeOk(t.widthText) ? ' bad' : '') + '" data-f="widthText" value="' + esc(t.widthText) + '" aria-label="Width in inches"></td>' +
       '<td><input type="text" class="size' + (t.include && !sizeOk(t.depthText) ? ' bad' : '') + '" data-f="depthText" value="' + esc(t.depthText) + '" aria-label="Depth in inches"></td>' +
       '<td><select data-f="height" aria-label="Height">' + hOpts + '</select></td>' +
@@ -450,8 +625,10 @@
   }
 
   function renderTrays() {
+    applyRush();
     var showSkipped = $('showSkipped').checked;
-    var rows = visibleTrays().filter(function (t) { return showSkipped || t.include || t.source === 'hand'; });
+    var rows = visibleTrays().filter(function (t) { return showSkipped || t.include || t.source === 'hand' || t.filler; });
+    rows = rows.filter(function (t) { return t.rush; }).concat(rows.filter(function (t) { return !t.rush; }));
     var body = document.querySelector('#trayTable tbody');
     body.innerHTML = rows.length
       ? rows.map(rowHtml).join('')
@@ -504,7 +681,7 @@
     if (input) input.focus();
   });
 
-  ['from', 'to'].forEach(function (id) { $(id).addEventListener('input', renderTrays); });
+  ['from', 'to', 'rush'].forEach(function (id) { $(id).addEventListener('input', renderTrays); });
   $('showSkipped').addEventListener('change', renderTrays);
   $('date').addEventListener('input', scheduleBoards);
   $('startNumber').addEventListener('input', scheduleBoards);
@@ -526,13 +703,14 @@
       s.strip.cuts.forEach(function (x) {
         o.push('<line class="cut" x1="' + x + '" x2="' + x + '" y1="' + (W - y0 + 2) + '" y2="' + (W - y0 - th - 18) + '"/>');
       });
-      var text = String(s.label || '') + (s.part ? ' ' + PART_NAME[s.part].toUpperCase() : ''), fs = Math.min(th * 0.72, 46);
+      var text = String(s.label || '') + (s.part ? ' ' + PART_NAME[s.part].toUpperCase() : '') + (s.rush ? ' RUSH' : ''),
+        fs = Math.min(th * 0.72, 46);
       var room = Math.max(40, s.wMm - v - 40);
       var est = text.length * fs * 0.62;
       if (est > room) { fs = fs * room / est; est = room; }
       var tagH = fs * 1.2, padX = 8, x0 = 30;
       if (text) {
-        o.push('<rect class="tag" x="' + x0 + '" y="' + (top + (th - tagH) / 2) + '" width="' + (est + padX * 2) + '" height="' + tagH + '"/>');
+        o.push('<rect class="tag' + (s.stock ? ' stock' : s.rush ? ' rush' : '') + '" x="' + x0 + '" y="' + (top + (th - tagH) / 2) + '" width="' + (est + padX * 2) + '" height="' + tagH + '"/>');
         o.push('<text class="label" x="' + (x0 + padX) + '" y="' + (top + th / 2) + '" font-size="' + fs + '" dominant-baseline="central">' + esc(text) + '</text>');
       }
       if (len + 90 < L) {
@@ -549,18 +727,82 @@
   function slotTable(slots) {
     return '<table><thead><tr><th>Tray</th><th>Label</th><th class="n">W in</th><th class="n">D in</th><th class="n">W mm</th><th class="n">D mm</th></tr></thead><tbody>' +
       slots.map(function (s) {
-        return '<tr><td>' + s.slot + '</td><td>' + esc(s.label) + (s.part ? ' <i>(split: ' + PART_NAME[s.part] + ')</i>' : '') +
+        return '<tr><td>' + s.slot + '</td><td>' + (s.stock ? '<span class="stock-tag">' + esc(s.label) + '</span>' : esc(s.label)) +
+          (s.rush ? ' <span class="rush-tag">RUSH</span>' : '') +
+          (s.part ? ' <i>(split: ' + PART_NAME[s.part] + ')</i>' : '') +
           '</td><td class="n">' + esc(J.inchesText(s.wIn)) + '</td><td class="n">' + (s.part ? '&mdash;' : esc(J.inchesText(s.dIn))) +
           '</td><td class="n">' + J.mm2(s.wMm) + '</td><td class="n">' + (s.dRaw != null ? esc(s.dRaw) : J.mm2(s.dMm)) + '</td></tr>';
       }).join('') + '</tbody></table>';
   }
 
+  // ---------- fill with stock ----------
+  // One stock size for 2" sheets and one for 3" sheets, remembered on this computer.
+  S.stockSize = {
+    2: store.get('jtd.stockSize.2') || 'STOCK 22IN',
+    3: store.get('jtd.stockSize.3') || 'STOCK 34IN'
+  };
+
+  function stockSelect(h) {
+    return '<select data-fill-size="' + h + '" aria-label="Stock size for ' + h + '&quot; sheets">' +
+      J.STOCK_SIZES.map(function (st) {
+        return '<option value="' + st.name + '"' + (st.name === S.stockSize[h] ? ' selected' : '') + '>' +
+          st.name + ' (' + st.w + ' x ' + J.inchesText(st.d) + ')</option>';
+      }).join('') + '</select>';
+  }
+
+  // The dropdowns at the top of step 3: pick the stock size for each sheet height.
+  function stockPanel() {
+    var rows = [2, 3].map(function (h) {
+      var boards = S.plan.boards.filter(function (b) { return b.height === h; }).length;
+      var free = freeSlots(h);
+      var status = !S.templates[h] ? 'No ' + h + '&quot; template'
+        : !boards ? 'No ' + h + '&quot; sheets today'
+        : free ? '<b>' + free + '</b> empty slot' + (free === 1 ? '' : 's')
+        : 'Sheets are full';
+      return '<div class="stockrow"><span class="which">' + h + '&quot; sheets</span>' +
+        '<label>Stock size ' + stockSelect(h) + '</label>' +
+        '<span class="free">' + status + '</span>' +
+        '<button type="button" class="small" data-fill="' + h + '"' + (free ? '' : ' disabled') + '>Fill with stock</button></div>';
+    }).join('');
+    return '<h3>Fill empty slots with stock</h3>' +
+      '<p class="hint">Pick the stock size for each sheet height, then click Fill. Stock only goes into empty slots.</p>' + rows;
+  }
+
+  function freeSlots(h) {
+    return S.plan.boards.reduce(function (a, b) {
+      return a + (b.height === h ? b.template.slots - b.slots.length : 0);
+    }, 0);
+  }
+
+  function fillBar(b) {
+    var free = b.template.slots - b.slots.length;
+    if (!free) return '';
+    return '<div class="fillbar screen-only"><span><b>' + free + '</b> empty slot' + (free === 1 ? '' : 's') + ' on this board.</span>' +
+      '<label>Stock size ' + stockSelect(b.height) + '</label>' +
+      '<button type="button" class="small" data-fill="' + b.height + '">Fill with stock</button></div>';
+  }
+
+  // Adds one "Stock fill" row for every empty slot on this height's boards.
+  // Stock only ever goes into empty slots; it never starts a new board.
+  function addStockFill(h) {
+    var st = J.STOCK_SIZES.filter(function (x) { return x.name === S.stockSize[h]; })[0] || J.STOCK_SIZES[1];
+    var free = freeSlots(h);
+    if (!free) return;
+    S.trays.push({
+      id: 'fill' + (++S.handCount), source: 'fill', filler: true, orderNumber: '', name: 'Stock fill', title: '',
+      qty: free, widthText: J.inchesText(st.w), depthText: J.inchesText(st.d), height: h, label: st.name,
+      include: true, kind: 'stock', reason: '', warnings: []
+    });
+    renderTrays();
+  }
+
   function renderBoards() {
+    applyRush();
     var trays = visibleTrays();
     var start = Math.max(1, parseInt($('startNumber').value, 10) || 1);
     var plan = J.planBoards(trays, S.templates, { date: dateCode(), startNumber: start });
     S.plan = plan;
-    S.bottoms = J.bottomRows(trays);
+    S.bottoms = J.bottomRows(trays, plan);
 
     // notes column: say why a ticked tray is not on a board
     var why = {}, note = {};
@@ -572,21 +814,29 @@
     });
 
     // summary chips
-    var onBoards = plan.boards.reduce(function (a, b) {
-      return a + b.slots.filter(function (s) { return s.part !== 'D'; }).length;
-    }, 0);
+    var onBoards = 0, stockOn = 0, rushOn = 0;
+    plan.boards.forEach(function (b) {
+      b.slots.forEach(function (s) {
+        if (s.stock) stockOn++;
+        else if (s.part !== 'D') { onBoards++; if (s.rush) rushOn++; }
+      });
+    });
     var skipped = trays.filter(function (t) { return !t.include; }).length;
     var warnCount = trays.filter(function (t) { return t.include && t.warnings.length; }).length;
     var chips = [];
     if (trays.length) {
       chips.push('<span class="chip"><b>' + onBoards + '</b> trays on boards</span>');
       chips.push('<span class="chip"><b>' + plan.boards.length + '</b> board' + (plan.boards.length === 1 ? '' : 's') + '</span>');
+      if (rushOn) chips.push('<span class="chip"><b>' + rushOn + '</b> rush</span>');
+      if (stockOn) chips.push('<span class="chip"><b>' + stockOn + '</b> stock fill</span>');
       if (plan.split.length) chips.push('<span class="chip"><b>' + plan.split.length + '</b> split in 2 slots</span>');
       if (plan.unassigned.length) chips.push('<span class="chip warn"><b>' + plan.unassigned.length + '</b> not on a board</span>');
       if (warnCount) chips.push('<span class="chip warn"><b>' + warnCount + '</b> to check</span>');
       chips.push('<span class="chip"><b>' + skipped + '</b> skipped</span>');
     }
     $('chips').innerHTML = chips.join('');
+
+    $('stockPanel').innerHTML = stockPanel();
 
     // not on a board
     $('unassigned').innerHTML = plan.unassigned.length
@@ -604,28 +854,31 @@
       ? plan.boards.map(function (b, i) {
           var half = Math.ceil(b.slots.length / 2);
           return '<article class="board">' +
-            '<header><div><h3>' + esc(b.fileName) + '</h3><div class="sub">' + b.height + '&quot; tall &middot; ' +
+            '<div class="print-only">' + logoImg('print-logo') + '</div>' +
+            '<header><div><h3>' + esc(b.fileName) + (b.rush ? ' <span class="rush-tag screen-only">RUSH &mdash; CUT FIRST</span>' : '') +
+            '</h3><div class="sub screen-only">' + b.height + '&quot; tall &middot; ' +
             b.slots.length + ' of ' + b.template.slots + ' slots used &middot; from ' + esc(b.template.fileName) + '</div></div>' +
-            '<button type="button" class="small screen-only" data-dl="' + i + '">Download .mpr</button></header>' +
-            '<p class="print-only">Printed ' + esc(new Date().toLocaleString()) + ' &middot; tray 1 is at the bottom of the sheet</p>' +
-            boardSvg(b) +
-            '<div class="slot-tables">' + slotTable(b.slots.slice(0, half)) + (b.slots.length > half ? slotTable(b.slots.slice(half)) : '') + '</div>' +
+            '<button type="button" class="small screen-only" data-dl="' + i + '">' + (NATIVE ? 'Save .mpr to folder' : 'Download .mpr') + '</button></header>' +
+            fillBar(b) +
+            boardSvg(b) + revStamp() +
+            // the size tables are for checking on screen; the shop sheet is just the board
+            '<div class="slot-tables screen-only">' + slotTable(b.slots.slice(0, half)) + (b.slots.length > half ? slotTable(b.slots.slice(half)) : '') + '</div>' +
             '</article>';
         }).join('')
       : '<p class="empty">' + (needTpl ? 'Load your WOODWOP templates in step 1 to see boards.' : 'Boards show up here once trays are ticked.') + '</p>';
 
     // bottoms
     $('bottomsWrap').innerHTML = S.bottoms.length
-      ? '<h3>' + esc(dateCode()) + ' tray bottoms &middot; 1/4 melamine (size minus 9/16&quot;)</h3><div class="table-scroll"><table><thead><tr>' +
+      ? '<div class="print-only">' + logoImg('print-logo') + '</div><h3>' + esc(dateCode()) + ' tray bottoms &middot; 1/4 melamine (size minus 9/16&quot;)</h3><div class="table-scroll"><table><thead><tr>' +
         J.BOTTOM_COLUMNS.map(function (c) { return '<th' + (/QTY|WIDTH|DEPTH/.test(c) ? ' class="n"' : '') + '>' + c + '</th>'; }).join('') +
         '</tr></thead><tbody>' + S.bottoms.map(function (r) {
           return '<tr><td>' + esc(r.description) + '</td><td>' + r.partType + '</td><td>' + esc(r.unit) + '</td><td>' + r.material +
             '</td><td class="n">' + r.qty + '</td><td class="n">' + J.mm2(r.widthMm) + '</td><td class="n">' + J.mm2(r.depthMm) +
             '</td><td>' + r.grain + '</td><td>' + r.company + '</td></tr>';
-        }).join('') + '</tbody></table></div>'
+        }).join('') + '</tbody></table></div>' + revStamp()
       : '';
 
-    $('dlAll').disabled = !plan.boards.length && !S.bottoms.length;
+    $('dlAll').disabled = $('saveAll').disabled = !plan.boards.length && !S.bottoms.length;
     $('printBoards').disabled = !plan.boards.length;
     $('dlBottoms').disabled = $('printBottoms').disabled = !S.bottoms.length;
   }
@@ -648,10 +901,29 @@
     $('lastRun').textContent = last ? 'Last boards made on this computer went up to order #' + last + '.' : '';
   }
 
+  $('stepBoards').addEventListener('change', function (e) {
+    if (!e.target.matches('[data-fill-size]')) return;
+    var h = +e.target.dataset.fillSize;
+    S.stockSize[h] = e.target.value;
+    store.set('jtd.stockSize.' + h, S.stockSize[h]);
+    document.querySelectorAll('[data-fill-size="' + h + '"]').forEach(function (sel) { sel.value = S.stockSize[h]; });
+  });
+
+  $('stockPanel').addEventListener('click', function (e) {
+    var fill = e.target.closest('[data-fill]');
+    if (fill && !fill.disabled) addStockFill(+fill.dataset.fill);
+  });
+
   $('boardList').addEventListener('click', function (e) {
+    var fill = e.target.closest('[data-fill]');
+    if (fill) { addStockFill(+fill.dataset.fill); return; }
     var btn = e.target.closest('[data-dl]');
     if (!btn) return;
     var b = S.plan.boards[+btn.dataset.dl];
+    if (NATIVE) {
+      saveToFolder('add', [{ name: b.fileName, data: btoa(J.fillTemplate(S.bins[b.height], b.slots)) }]);
+      return;
+    }
     save(b.fileName, boardBytes(b));
     rememberLastOrder();
   });
@@ -666,6 +938,97 @@
     rememberLastOrder();
   });
 
+  // ---------- save straight into a folder (Windows program only) ----------
+  function api(path, body) {
+    return fetch(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-JTD-Token': NATIVE.token },
+      body: JSON.stringify(body || {})
+    }).then(function (r) {
+      if (!r.ok) throw new Error('The app program stopped answering. Close this window and start the app again.');
+      return r.json();
+    }).then(function (out) {
+      if (out && out.error) throw new Error(out.error);
+      return out;
+    });
+  }
+
+  function showFolder(out) {
+    S.saveFolder = out.saveFolder || '';
+    $('saveFolder').textContent = S.saveFolder || 'No folder picked yet.';
+    $('openSaveFolder').hidden = !S.saveFolder;
+    if (out.problem) msg('folderMsg', 'This folder can\'t be used: ' + out.problem, 'bad');
+  }
+
+  function fileB64(text) { return btoa(J.bytesToBin(new TextEncoder().encode(text))); }
+
+  // mode "new": a new day folder (" (2)" added if the name is taken); "add": one board into the day folder.
+  function saveToFolder(mode, files) {
+    if (!S.saveFolder) {
+      msg('saveMsg', 'Pick a save folder first (step 1).', 'bad');
+      $('saveCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    msg('saveMsg', 'Saving\u2026', 'ok');
+    api('/api/save', { dayFolder: S.plan.folder, mode: mode, files: files }).then(function (out) {
+      S.lastSaved = out.dir;
+      $('saveMsg').className = 'msg show ok';
+      $('saveMsg').innerHTML = 'Saved ' + out.files.length + ' file' + (out.files.length === 1 ? '' : 's') + ' to <b>' + esc(out.dir) + '</b> ' +
+        '<button type="button" class="plain small" id="openSaved">Open folder</button>';
+      rememberLastOrder();
+    }).catch(function (err) { msg('saveMsg', err.message, 'bad'); });
+  }
+
+  if (NATIVE) {
+    $('saveCard').hidden = false;
+    $('saveAll').hidden = false;
+    $('dlAll').className = 'plain';
+    api('/api/settings').then(showFolder).catch(function (err) { msg('folderMsg', err.message, 'bad'); });
+    // If the program behind this window stops (or a newer copy replaces it), say so: the
+    // window can't save any more, and printing from it is how an old layout got used.
+    var missed = 0;
+    var checkProgram = function () {
+      api('/api/ping').then(function () { missed = 0; $('lostBanner').hidden = true; }).catch(function () {
+        if (++missed < 2) return;
+        $('lostBanner').textContent = 'This window has lost its program, so it can\u2019t save and may be out of date. ' +
+          'Close this window, then open OLD SCHOOL JEWELRY TRAY APP' + (REV ? ' REV ' + REV.rev : '') + ' again.';
+        $('lostBanner').hidden = false;
+      });
+    };
+    setInterval(checkProgram, 15000);
+    checkProgram();
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) { missed = Math.max(missed, 1); checkProgram(); } });
+
+    $('pickFolder').addEventListener('click', function () {
+      msg('folderMsg', 'The Windows folder picker is open\u2026', 'ok');
+      api('/api/pick-folder').then(function (out) {
+        if (out.cancelled) { msg('folderMsg', ''); return; }
+        showFolder(out);
+        msg('folderMsg', 'Files will be saved in ' + out.saveFolder + '.', 'ok');
+      }).catch(function (err) { msg('folderMsg', err.message, 'bad'); });
+    });
+    $('useFolder').addEventListener('click', function () {
+      api('/api/set-folder', { path: $('folderPath').value }).then(function (out) {
+        showFolder(out);
+        $('folderPath').value = '';
+        msg('folderMsg', 'Files will be saved in ' + out.saveFolder + '.', 'ok');
+      }).catch(function (err) { msg('folderMsg', err.message, 'bad'); });
+    });
+    $('openSaveFolder').addEventListener('click', function () {
+      api('/api/open-folder', {}).catch(function (err) { msg('folderMsg', err.message, 'bad'); });
+    });
+    $('saveMsg').addEventListener('click', function (e) {
+      if (e.target.id === 'openSaved') api('/api/open-folder', { path: S.lastSaved }).catch(function (err) { msg('saveMsg', err.message, 'bad'); });
+    });
+    $('saveAll').addEventListener('click', function () {
+      var files = S.plan.boards.map(function (b) {
+        return { name: b.fileName, data: btoa(J.fillTemplate(S.bins[b.height], b.slots)) };
+      });
+      if (S.bottoms.length) files.push({ name: dateCode() + ' TRAY BOTTOMS.csv', data: fileB64(J.bottomsCsv(S.bottoms)) });
+      saveToFolder('new', files);
+    });
+  }
+
   $('dlBottoms').addEventListener('click', function () {
     save(dateCode() + ' TRAY BOTTOMS.csv', new TextEncoder().encode(J.bottomsCsv(S.bottoms)), 'text/csv');
   });
@@ -679,6 +1042,12 @@
   $('printBottoms').addEventListener('click', function () { printMode('print-bottoms'); });
 
   // ---------- start ----------
+  $('logoTop').innerHTML = logoImg('logo');
+  if (REV) {
+    $('revTag').innerHTML = 'REV ' + REV.rev + '<small>' + esc(REV.date) + '</small>';
+    $('revTag').hidden = false;
+    document.title = 'Old School Jewelry Tray App REV ' + REV.rev;
+  }
   $('date').value = todayIso();
   [2, 3].forEach(function (h) {
     var raw = store.get('jtd.tpl.' + h);

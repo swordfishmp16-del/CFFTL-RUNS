@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "deny": [
+      "mcp__Shopify__graphql_mutation",
+      "mcp__Shopify__create-product",
+      "mcp__Shopify__update-product",
+      "mcp__Shopify__bulk-update-product-status",
+      "mcp__Shopify__set-inventory",
+      "mcp__Shopify__create-collection",
+      "mcp__Shopify__update-collection",
+      "mcp__Shopify__add-to-collection",
+      "mcp__Shopify__create-discount",
+      "mcp__Shopify__create-digital-product",
+      "mcp__Shopify__create-digital-product-from-link",
+      "mcp__Shopify__upload-digital-product-file",
+      "mcp__Shopify__upload-digital-product-media",
+      "mcp__Shopify__publish-digital-product",
+      "mcp__Shopify__open-digital-products-install",
+      "mcp__Shopify__import-mock-shop-catalog",
+      "mcp__Shopify__find-sample-product",
+      "mcp__Shopify__show-collective-products",
+      "mcp__Shopify__search-collective-product-candidates"
+    ],
+    "ask": [
+      "mcp__Shopify__switch-shop"
+    ]
+  }
+}

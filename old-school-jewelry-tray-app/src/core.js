@@ -22,6 +22,11 @@
     ['measurement charge', 'Charge, not a tray']
   ];
 
+  // Standard (stock) trays: 13 3/8" deep, 21-34" wide (HANDOFF 4, STOCK 21IN-34IN boards).
+  var STOCK_SIZES = [21, 22, 27, 28, 33, 34].map(function (w) {
+    return { name: 'STOCK ' + w + 'IN', w: w, d: 13.375 };
+  });
+
   // ---------- sizes ----------
 
   // "21 5/16", "21-5/16", "24 7/8\"", "13.375", "28" -> inches as a number. Bad text -> null.
@@ -70,8 +75,10 @@
 
   // ---------- Shopify CSV ----------
 
-  function parseCsv(text) {
-    var rows = [], row = [], field = '', i = 0, q = false, c;
+  // delim: ',' for the CSV file, '\t' for rows copied out of Excel.
+  function parseCsv(text, delim) {
+    delim = delim || ',';
+    var rows = [], row = [], field = '', i = 0, q = false, c, quoted = false;
     text = String(text).replace(/^﻿/, '');
     while (i < text.length) {
       c = text[i];
@@ -82,20 +89,49 @@
         }
         field += c; i++; continue;
       }
-      if (c === '"') { q = true; i++; continue; }
-      if (c === ',') { row.push(field); field = ''; i++; continue; }
+      // A quote only opens a quoted field at the very start of the field; elsewhere it is
+      // a plain inch mark (22"W pasted from a text editor).
+      if (c === '"' && field === '' && !quoted) { q = true; quoted = true; i++; continue; }
+      if (c === delim) { row.push(field); field = ''; quoted = false; i++; continue; }
       if (c === '\r') { i++; continue; }
-      if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; i++; continue; }
+      if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; quoted = false; i++; continue; }
       field += c; i++;
     }
     if (field !== '' || row.length) { row.push(field); rows.push(row); }
     return rows.filter(function (r) { return r.some(function (f) { return f.trim() !== ''; }); });
   }
 
+  // The export's own column order, used when pasted lines come without the header row.
+  var EXPORT_COLUMNS = ['Order ID', 'Order Number', 'Lineitem Name', 'Lineitem Quantity', 'Lineitem Title', 'Width', 'Height', 'Depth'];
+
+  // Lines copied from the export: the whole file, or some rows copied out of Excel
+  // (tab-separated) or a text editor (comma-separated), with or without the header row.
+  function readShopifyLines(text) {
+    text = String(text || '').replace(/^\uFEFF/, '');
+    var first = (text.split(/\r?\n/).filter(function (l) { return l.trim(); })[0]) || '';
+    if (!first) throw new Error('Nothing to read: no lines were pasted.');
+    var delim = first.indexOf('\t') >= 0 ? '\t' : ',';
+    var rows = parseCsv(text, delim);
+    var head = rows[0].map(function (h) { return h.trim().toLowerCase(); });
+    var hasHeader = ['order id', 'order number', 'lineitem name', 'width', 'depth'].some(function (h) { return head.indexOf(h) >= 0; });
+    if (!hasHeader) {
+      var n = rows[0].length;
+      var cols = n >= 8 ? EXPORT_COLUMNS : n === 7 ? EXPORT_COLUMNS.slice(1) : null;
+      if (!cols) {
+        throw new Error('Copy whole rows from the Shopify export: Order ID through Depth (8 columns). These lines have ' + n + '.');
+      }
+      rows = [cols].concat(rows);
+    }
+    return itemsFromRows(rows);
+  }
+
   // Shopify export header (HANDOFF 10.10):
   // Order ID,Order Number,Lineitem Name,Lineitem Quantity,Lineitem Title,Width,Height,Depth
   function readShopifyCsv(text) {
-    var rows = parseCsv(text);
+    return readShopifyLines(text);
+  }
+
+  function itemsFromRows(rows) {
     if (!rows.length) throw new Error('The file is empty.');
     var head = rows[0].map(function (h) { return h.trim().toLowerCase(); });
     function col(name) { return head.indexOf(name); }
@@ -131,9 +167,10 @@
     });
   }
 
-  // 'Small 22"W x 13 3/8"D' -> {w: 22, d: 13.375}
+  // 'Small 22"W x 13 3/8"D' -> {w: 22, d: 13.375}. Shopify's item names use curly inch
+  // marks (22\u201dW x 13 3/8\u201dD), so any inch mark (or none) is accepted.
   function sizeFromName(name) {
-    var m = String(name).match(/(\d+(?:\.\d+)?(?:\s+\d+\/\d+)?)\s*"?\s*W\s*x\s*(\d+(?:\.\d+)?(?:\s+\d+\/\d+)?)\s*"?\s*D/i);
+    var m = String(name).match(/(\d+(?:\.\d+)?(?:\s+\d+\/\d+)?)\s*["\u201c\u201d\u2033]?\s*W\s*x\s*(\d+(?:\.\d+)?(?:\s+\d+\/\d+)?)\s*["\u201c\u201d\u2033]?\s*D/i);
     if (!m) return null;
     var w = parseInches(m[1]), d = parseInches(m[2]);
     return w && d ? { w: w, d: d } : null;
@@ -141,7 +178,7 @@
 
   // Turns Shopify line items into tray rows the screen can edit.
   // include=false rows stay visible with a reason so nothing disappears silently.
-  function traysFromItems(items) {
+  function traysFromItems(items, idPrefix) {
     var extraHeight = {};
     items.forEach(function (it) {
       if (/measurement charge/i.test(it.title) && /height/i.test(it.name)) {
@@ -152,7 +189,7 @@
 
     var trays = items.map(function (it, idx) {
       var t = {
-        id: 'csv' + idx,
+        id: (idPrefix || 'csv') + idx,
         source: 'csv',
         orderNumber: it.orderNumber,
         name: it.name,
@@ -180,8 +217,7 @@
           t.kind = 'stock';
           t.widthText = inchesText(s.w);
           t.depthText = inchesText(s.d);
-          t.include = false;
-          t.reason = 'Stock size: pull from stock (tick to cut it today)';
+          t.reason = 'Standard size';
         } else {
           t.kind = 'nosize';
           t.include = false;
@@ -336,6 +372,8 @@
     var unassigned = [];
     var split = [];
     var queues = { 2: [], 3: [] };
+    var rushQueues = { 2: [], 3: [] }; // rush orders: packed first, their boards cut first
+    var fillers = { 2: [], 3: [] };   // "Fill with stock" trays: only go into empty slots
 
     trays.forEach(function (t) {
       if (!t.include) return;
@@ -367,24 +405,55 @@
         ];
         split.push({ tray: t, note: 'Too long for one strip: split into 2 slots (widths, then depths)' });
       }
+      if (t.rush && !t.filler) unit.forEach(function (s) { s.rush = true; });
       var qty = Math.max(1, t.qty | 0);
-      for (var i = 0; i < qty; i++) queues[h].push({ slots: unit });
+      var q = t.filler ? fillers[h] : t.rush ? rushQueues[h] : queues[h];
+      for (var i = 0; i < qty; i++) q.push({ tray: t, slots: unit });
     });
 
     var boards = [];
     [2, 3].forEach(function (h) {
-      if (!queues[h].length) return;
+      var all = rushQueues[h].concat(queues[h]);
+      if (!all.length) return;
       var tpl = templates[h];
-      packSlots(queues[h], tpl.slots).forEach(function (slots) {
+      packSlots(all, tpl.slots).forEach(function (slots) {
         boards.push({
-          number: n,
           height: h,
           template: tpl,
-          fileName: date + ' DAILY TRAYS ' + n + (h === 3 ? ' 3IN' : '') + '.mpr',
+          rush: slots.some(function (s) { return s.rush; }),
           slots: slots
         });
-        n++;
       });
+    });
+    // Boards holding rush orders are numbered first so they get cut first (2" before 3").
+    boards = boards.filter(function (b) { return b.rush; }).concat(boards.filter(function (b) { return !b.rush; }));
+    boards.forEach(function (b) {
+      b.number = n;
+      b.fileName = date + ' DAILY TRAYS ' + n + (b.height === 3 ? ' 3IN' : '') + '.mpr';
+      n++;
+    });
+
+    // Stock fill never starts a board; it only takes slots the orders left empty.
+    var fillerPlaced = {}, fillerUnused = {};
+    [2, 3].forEach(function (h) {
+      var left = fillers[h];
+      boards.forEach(function (b) {
+        if (b.height !== h) return;
+        var k = 0;
+        while (k < left.length && b.slots.length < b.template.slots) {
+          var u = left[k];
+          if (u.slots.length > b.template.slots - b.slots.length) { k++; continue; }
+          u.slots.forEach(function (s) {
+            s = Object.assign({}, s);
+            s.slot = b.slots.length + 1;
+            s.stock = true;
+            b.slots.push(s);
+          });
+          fillerPlaced[u.tray.id] = (fillerPlaced[u.tray.id] || 0) + 1;
+          left.splice(k, 1);
+        }
+      });
+      left.forEach(function (u) { fillerUnused[u.tray.id] = (fillerUnused[u.tray.id] || 0) + 1; });
     });
 
     var orderNums = [];
@@ -398,7 +467,10 @@
     if (orderNums.length) {
       folder += ' #' + Math.min.apply(null, orderNums) + '-' + Math.max.apply(null, orderNums);
     }
-    return { boards: boards, unassigned: unassigned, split: split, folder: folder };
+    return {
+      boards: boards, unassigned: unassigned, split: split, folder: folder,
+      fillerPlaced: fillerPlaced, fillerUnused: fillerUnused
+    };
   }
 
   // ---------- tray bottoms (HANDOFF 7C) ----------
@@ -406,26 +478,42 @@
   var BOTTOM_COLUMNS = ['DESCRIPTION', 'PART TYPE', 'UNIT #', 'MATERIAL', 'QTY', 'WIDTH', 'DEPTH', 'GRAIN', 'COMPANY'];
 
   // One row per tray line. Every tray being made gets a bottom, even ones that
-  // could not go on a board (4"/5", too long).
-  function bottomRows(trays) {
-    var rows = [];
+  // could not go on a board (4"/5", too long). Stock fill gets a bottom for each
+  // tray that actually landed on a board (plan.fillerPlaced), with UNIT # "STOCK".
+  function bottomRows(trays, plan) {
+    var rows = [], rush = [];
     trays.forEach(function (t) {
       if (!t.include) return;
       var wIn = parseInches(t.widthText), dIn = parseInches(t.depthText);
       if (!wIn || !dIn) return;
-      rows.push({
-        description: t.label || t.orderNumber,
+      var qty = Math.max(1, t.qty | 0);
+      if (t.filler) {
+        qty = (plan && plan.fillerPlaced && plan.fillerPlaced[t.id]) || 0;
+        if (!qty) return;
+      }
+      (t.rush && !t.filler ? rush : rows).push({
+        description: (t.label || t.orderNumber) + (t.rush && !t.filler ? ' RUSH' : ''),
         partType: 'TRAY BOTTOM',
-        unit: t.orderNumber,
+        unit: t.filler ? 'STOCK' : t.orderNumber,
         material: '1/4 MELAMINE',
-        qty: Math.max(1, t.qty | 0),
+        qty: qty,
         widthMm: bottomMm(wIn),
         depthMm: bottomMm(dIn),
         grain: 'N',
         company: 'JEWELRY TRAYS DIRECT'
       });
     });
-    return rows;
+    return rush.concat(rows);   // rush bottoms first
+  }
+
+  // "4360, #4372 4380" -> ["4360", "4372", "4380"] (the rush order box)
+  function parseOrderList(text) {
+    var seen = {}, out = [];
+    (String(text || '').match(/\d+/g) || []).forEach(function (n) {
+      n = String(parseInt(n, 10));
+      if (!seen[n]) { seen[n] = true; out.push(n); }
+    });
+    return out;
   }
 
   function csvField(v) {
@@ -513,6 +601,7 @@
     inchesText: inchesText,
     parseCsv: parseCsv,
     readShopifyCsv: readShopifyCsv,
+    readShopifyLines: readShopifyLines,
     sizeFromName: sizeFromName,
     traysFromItems: traysFromItems,
     bytesToBin: bytesToBin,
@@ -522,8 +611,10 @@
     strip: strip,
     planBoards: planBoards,
     FIRST_STRIP_Y: FIRST_STRIP_Y,
+    STOCK_SIZES: STOCK_SIZES,
     BOTTOM_COLUMNS: BOTTOM_COLUMNS,
     bottomRows: bottomRows,
+    parseOrderList: parseOrderList,
     bottomsCsv: bottomsCsv,
     crc32: crc32,
     makeZip: makeZip,
