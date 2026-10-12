@@ -173,7 +173,7 @@
   #bottomsWrap h3 { font-size: 18px; margin: 6px 0 8px; }
 
   @page { margin: 0.4in; }
-  @page boards { size: letter landscape; margin: 0.35in; }
+  @page boards { size: letter landscape; margin: 0.3in; }
   @media print {
     body { background: #fff; font-size: 12px; }
     .wrap { max-width: none; padding: 0; }
@@ -183,15 +183,16 @@
     body:not(.print-bottoms) #stepBoards { page: boards; }
     body:not(.print-bottoms) #bottomsWrap { display: none; }
     body.print-bottoms #boardList { display: none; }
-    .board { page: boards; break-after: page; break-inside: avoid; border: 0; padding: 0; margin: 0; }
+    /* shop sheet: centered logo, big centered board name, then the board as big as the page allows */
+    .board { page: boards; break-after: page; break-inside: avoid; border: 0; padding: 0; margin: 0; text-align: center; }
     .board:last-child { break-after: auto; }
-    .board header { margin-bottom: 2px; }
-    .board .print-only { margin: 0 0 6px; }
-    svg.nest { display: inline-block; vertical-align: top; height: 4.4in; width: auto; max-width: 100%; }
-    .board .screen-only { display: none; }
+    .board .print-logo { height: 0.6in; margin: 0 auto; }
+    .board header { display: block; margin: 0.08in 0 0; }
+    .board h3 { font-size: 30pt; line-height: 1.15; }
+    svg.nest { display: inline-block; vertical-align: top; height: 5.2in; width: auto; max-width: 100%; margin-top: 0.14in; }
+    .board .screen-only { display: none !important; }
     .print-only { display: block; }
-    .slot-tables { grid-template-columns: 1fr 1fr; }
-    .slot-tables table, #bottomsWrap table { font-size: 10px; }
+    #bottomsWrap table { font-size: 10px; }
     th, td { padding: 2px 6px; }
     .table-scroll { overflow: visible; border: 0; }
     svg .sheet, svg .tag, .stock-tag, .rush-tag { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
@@ -1464,15 +1465,14 @@
           var half = Math.ceil(b.slots.length / 2);
           return '<article class="board">' +
             '<div class="print-only">' + logoImg('print-logo') + '</div>' +
-            '<header><div><h3>' + esc(b.fileName) + (b.rush ? ' <span class="rush-tag">RUSH &mdash; CUT FIRST</span>' : '') +
-            '</h3><div class="sub">' + b.height + '&quot; tall &middot; ' +
+            '<header><div><h3>' + esc(b.fileName) + (b.rush ? ' <span class="rush-tag screen-only">RUSH &mdash; CUT FIRST</span>' : '') +
+            '</h3><div class="sub screen-only">' + b.height + '&quot; tall &middot; ' +
             b.slots.length + ' of ' + b.template.slots + ' slots used &middot; from ' + esc(b.template.fileName) + '</div></div>' +
             '<button type="button" class="small screen-only" data-dl="' + i + '">' + (NATIVE ? 'Save .mpr to folder' : 'Download .mpr') + '</button></header>' +
-            '<p class="print-only" style="margin:0 0 6px">Printed ' + esc(new Date().toLocaleString()) +
-            ' &middot; tray 1 is at the bottom of the sheet</p>' +
             fillBar(b) +
             boardSvg(b) +
-            '<div class="slot-tables">' + slotTable(b.slots.slice(0, half)) + (b.slots.length > half ? slotTable(b.slots.slice(half)) : '') + '</div>' +
+            // the size tables are for checking on screen; the shop sheet is just the board
+            '<div class="slot-tables screen-only">' + slotTable(b.slots.slice(0, half)) + (b.slots.length > half ? slotTable(b.slots.slice(half)) : '') + '</div>' +
             '</article>';
         }).join('')
       : '<p class="empty">' + (needTpl ? 'Load your WOODWOP templates in step 1 to see boards.' : 'Boards show up here once trays are ticked.') + '</p>';

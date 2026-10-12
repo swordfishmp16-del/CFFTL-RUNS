@@ -47,7 +47,7 @@ Two more checks sit next to it:
 - One 4" and one 5" tray were flagged to do by hand.
 - Planned as a single day: 41 boards, and 20 trays split in two. Every board file is identical to its template outside the tray sizes, and no strip is longer than the board.
 
-**Tested on Windows (10/10/2026, Mike's laptop CFF1FTLLP-9A90EG, Windows with Chrome, no Edge):** all three scripts passed, along with the Go unit tests, against the program built on that laptop from this source. They passed again against the `.exe` downloaded from this repo, the exact file people run (SHA-256 starting `3a024f35`). Defender raised nothing on that file when it was downloaded, copied and run.
+**Tested on Windows (10/10/2026, Mike's laptop CFF1FTLLP-9A90EG, Windows with Chrome, no Edge):** all three scripts passed, along with the Go unit tests, against the program built on that laptop from this source. They passed again against version 1.0.0 of the `.exe` as downloaded from this repo (SHA-256 starting `3a024f35`). Defender raised nothing on that file when it was downloaded, copied and run.
 - The app opened in its own Chrome window.
 - The folder picker's OK set the folder, and Cancel changed nothing.
 - L:, the share behind it and a second letter on that share were all refused, and nothing was written to the test L:.
@@ -71,7 +71,7 @@ Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are inside b
    - `100226 DAILY TRAYS 1.mpr`, `2.mpr` … (2" boards)
    - `100226 DAILY TRAYS 3 3IN.mpr` … (3" boards)
    - `100226 TRAY BOTTOMS.csv`
-8. Click **Print boards with labels** for the shop copy.
+8. Click **Print boards with labels** for the shop copy. Each board prints on its own landscape page: the JTD logo centered at the top, the board name (e.g. `100226 DAILY TRAYS 1.mpr`) big and centered under it, then the board drawing as big as the page allows, with the order number on each strip. The size tables stay on the screen for checking; they are not printed. (Mike, 10/12/2026)
 
 ## Sharing with the team
 
@@ -98,7 +98,7 @@ Mike decided these on 10/8/2026. Rules marked HANDOFF come from `docs/HANDOFF.md
 | Tray 1 | At the bottom of the sheet, same as WOODWOP. |
 | Labels | Default to the order number. You can type over a label, e.g. `2391 - 3IN`. |
 | Standard sizes on orders | Go through like any other tray. The size comes from the item name, e.g. `Small 22”W x 13 3/8”D`; Shopify uses curly inch marks, and straight ones work too. Label is the order number. (Mike, 10/10/2026) |
-| Rush orders | Type one or more order numbers in **Rush orders**. Their trays go into the first slots, starting at tray 1, and the sheet they're on becomes board 1 (a 3" rush sheet comes right after the 2" one) so it gets cut first. A rush order is included even if it's outside the from/to range. Rush trays are marked **RUSH**: a red tag in the list, `4360 RUSH` on the printout, and the board header says **RUSH — CUT FIRST**. Rush bottoms are listed first and described `4360 RUSH`. If a number isn't in the export, or the order has nothing ticked, the app says so under the box. (Mike, 10/10/2026) |
+| Rush orders | Type one or more order numbers in **Rush orders**. Their trays go into the first slots, starting at tray 1, and the sheet they're on becomes board 1 (a 3" rush sheet comes right after the 2" one) so it gets cut first. A rush order is included even if it's outside the from/to range. Rush trays are marked **RUSH**: a red tag in the list, `4360 RUSH` on its strip on the printout, and on screen the board header says **RUSH — CUT FIRST**. Rush bottoms are listed first and described `4360 RUSH`. If a number isn't in the export, or the order has nothing ticked, the app says so under the box. (Mike, 10/10/2026) |
 | Fill with stock | At the top of step 3, one stock-size dropdown for **2" sheets** and one for **3" sheets**, each with its own **Fill with stock** button. Every board with empty slots also has the same dropdown. Sizes: STOCK 21IN, 22IN, 27IN, 28IN, 33IN, 34IN, all 13 3/8 deep. Defaults are 22IN for 2" and 34IN for 3", and each computer remembers the last pick for each height. Stock fills only the empty slots and never starts a new board. Two sizes can share the slots: fill some, change the qty on the stock row, then fill again. Stock trays are labeled `STOCK 28IN` on a yellow tag, and the bottoms list gets them with UNIT # `STOCK`. (Mike, 10/10/2026) |
 | Too long for one strip | Split into 2 side-by-side slots, the way order 4356 was done on 10/2. The first slot holds the tray width and the next holds the tray depth, with `102` in the depth spot of both. The first strip gives the 2 width sides and the second gives the 2 depth sides. The printout labels them `4356 WIDTHS` and `4356 DEPTHS`. A pair is never split across two boards. If only 1 slot is left, the next single tray fills it. The tray still gets just one bottom. (Mike approved this 10/8/2026.) |
 
