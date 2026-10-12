@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"syscall"
+	"time"
 	"unsafe"
 )
 
@@ -174,6 +175,67 @@ func openWindow(url, dir string) {
 		}
 	}
 	shellOpen(url)
+}
+
+var (
+	procEnumWindows     = user32.NewProc("EnumWindows")
+	procGetWindowTextW  = user32.NewProc("GetWindowTextW")
+	procGetClassNameW   = user32.NewProc("GetClassNameW")
+	procIsWindowVisible = user32.NewProc("IsWindowVisible")
+	procPostMessageW    = user32.NewProc("PostMessageW")
+	procIsWindow        = user32.NewProc("IsWindow")
+)
+
+const wmClose = 0x0010
+
+var staleWindows []uintptr
+
+// One callback for the life of the program (Windows allows only so many).
+var collectAppWindow = syscall.NewCallback(func(hwnd, _ uintptr) uintptr {
+	if v, _, _ := procIsWindowVisible.Call(hwnd); v == 0 {
+		return 1
+	}
+	cls := make([]uint16, 64)
+	procGetClassNameW.Call(hwnd, uintptr(unsafe.Pointer(&cls[0])), uintptr(len(cls)))
+	if syscall.UTF16ToString(cls) != "Chrome_WidgetWin_1" { // Edge and Chrome windows
+		return 1
+	}
+	title := make([]uint16, 256)
+	procGetWindowTextW.Call(hwnd, uintptr(unsafe.Pointer(&title[0])), uintptr(len(title)))
+	if isAppWindowTitle(syscall.UTF16ToString(title)) {
+		staleWindows = append(staleWindows, hwnd)
+	}
+	return 1
+})
+
+// closeStaleWindows closes the app's own Edge/Chrome windows that are still open, the
+// same as clicking their X. It is only called when no copy of the program is running,
+// so those windows have nothing behind them. It waits for them to go, and a moment more
+// for the browser behind them to finish, so the new window isn't handed to a browser
+// that is shutting down.
+func closeStaleWindows() int {
+	staleWindows = nil
+	procEnumWindows.Call(collectAppWindow, 0)
+	if len(staleWindows) == 0 {
+		return 0
+	}
+	for _, h := range staleWindows {
+		procPostMessageW.Call(h, wmClose, 0, 0)
+	}
+	for i := 0; i < 50; i++ {
+		open := 0
+		for _, h := range staleWindows {
+			if r, _, _ := procIsWindow.Call(h); r != 0 {
+				open++
+			}
+		}
+		if open == 0 {
+			break
+		}
+		time.Sleep(100 * time.Millisecond)
+	}
+	time.Sleep(1500 * time.Millisecond)
+	return len(staleWindows)
 }
 
 func showError(msg string) {

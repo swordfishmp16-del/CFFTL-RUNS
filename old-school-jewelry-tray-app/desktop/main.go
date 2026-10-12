@@ -61,12 +61,12 @@ func main() {
 
 	ln, err := net.Listen("tcp", "127.0.0.1:"+strconv.Itoa(port))
 	if err != nil {
-		// Already running? Just open another window on it.
-		if alreadyRunning(port) {
-			openWindow(fmt.Sprintf("http://127.0.0.1:%d/", port), dir)
-			return
-		}
-		if ln, err = net.Listen("tcp", "127.0.0.1:0"); err != nil {
+		// Another copy is already running (see instance.go): the newer revision wins.
+		if other, ok := runningVersion(port); ok {
+			if ln = handOver(dir, other); ln == nil {
+				return
+			}
+		} else if ln, err = net.Listen("tcp", "127.0.0.1:0"); err != nil {
 			fail("Can't start: " + err.Error())
 		}
 	}
@@ -75,14 +75,19 @@ func main() {
 		fmt.Sprintf("127.0.0.1:%d", p): true, fmt.Sprintf("localhost:%d", p): true,
 	}}
 	s.load()
+	s.writeInstance(p)
 	url := fmt.Sprintf("http://127.0.0.1:%d/", p)
 	log.Printf("version %s listening on %s", version, url)
 	go s.watchdog()
 	if os.Getenv("JTD_NO_WINDOW") == "" {
-		openWindow(url, dir)
-	} else {
-		fmt.Println(url)
+		// Any app window still open now has no program behind it (left from before the
+		// computer slept, or from an older revision); an old one would still print the old
+		// layout, so close them before opening this copy's window.
+		if n := closeStaleWindows(); n > 0 {
+			log.Printf("closed %d old app window(s)", n)
+		}
 	}
+	show(url, dir)
 	if err := http.Serve(ln, s.routes()); err != nil {
 		fail(err.Error())
 	}
@@ -90,7 +95,11 @@ func main() {
 
 func fail(msg string) {
 	log.Print(msg)
-	showError(msg)
+	if os.Getenv("JTD_NO_WINDOW") != "" { // tests: no message box to click
+		fmt.Fprintln(os.Stderr, msg)
+	} else {
+		showError(msg)
+	}
 	os.Exit(1)
 }
 
@@ -102,28 +111,24 @@ func newToken() string {
 	return hex.EncodeToString(b)
 }
 
-func alreadyRunning(p int) bool {
-	c := http.Client{Timeout: 2 * time.Second}
-	r, err := c.Get(fmt.Sprintf("http://127.0.0.1:%d/api/info", p))
-	if err != nil {
-		return false
-	}
-	defer r.Body.Close()
-	var info map[string]string
-	return json.NewDecoder(r.Body).Decode(&info) == nil && info["app"] == "jtd"
-}
-
 // The window pings every 15 seconds. Once it has been closed for 10 minutes the program
 // exits, so nothing is left running in the background. (Generous, because Windows slows
 // timers in a minimized window.)
 func (s *server) watchdog() {
+	prev := time.Now()
 	for range time.Tick(15 * time.Second) {
+		now := time.Now()
 		s.mu.Lock()
-		last, start := s.lastPing, s.started
+		if now.Sub(prev) > 2*time.Minute {
+			// The computer was asleep, so the window couldn't ping. Give it time to ping
+			// again instead of quitting under a window that is still open (10/11/2026).
+			s.lastPing = now
+		}
+		prev = now
+		stop := shouldStop(now, s.lastPing, s.started)
 		s.mu.Unlock()
-		if (!last.IsZero() && time.Since(last) > 10*time.Minute) || (last.IsZero() && time.Since(start) > 10*time.Minute) {
-			log.Print("window closed, exiting")
-			os.Exit(0)
+		if stop {
+			s.exit("window closed, exiting")
 		}
 	}
 }
@@ -153,6 +158,7 @@ func (s *server) routes() http.Handler {
 		"/api/set-folder":  s.setFolder,
 		"/api/save":        s.saveFiles,
 		"/api/open-folder": s.openFolder,
+		"/api/quit":        s.quit,
 	}
 	for path, fn := range api {
 		fn := fn
@@ -221,6 +227,15 @@ func (s *server) ping(*http.Request) (any, error) {
 	s.mu.Lock()
 	s.lastPing = time.Now()
 	s.mu.Unlock()
+	return map[string]any{"ok": true, "version": version}, nil
+}
+
+// quit is how a newer revision takes over (see askToQuit). It needs this copy's token.
+func (s *server) quit(*http.Request) (any, error) {
+	go func() {
+		time.Sleep(200 * time.Millisecond) // let the answer go out first
+		s.exit("a newer copy took over, exiting")
+	}()
 	return map[string]bool{"ok": true}, nil
 }
 

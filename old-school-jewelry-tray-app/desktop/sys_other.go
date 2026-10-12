@@ -56,3 +56,5 @@ func openFolder(p string) { fmt.Println("open folder:", p) }
 func openWindow(url, dir string) { fmt.Println("open:", url) }
 
 func showError(msg string) { fmt.Fprintln(os.Stderr, msg) }
+
+func closeStaleWindows() int { return 0 }

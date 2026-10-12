@@ -46,6 +46,10 @@
   .paste { width: min(560px, 100%); display: grid; gap: 6px; justify-items: center; }
   .paste textarea { width: 100%; min-height: 54px; font: 13px/1.35 Consolas, monospace; border: 1px solid #b9ad97; border-radius: 4px; padding: 6px 8px; resize: vertical; }
   .tagline { color: var(--muted); font-style: italic; font-family: Georgia, serif; }
+  .revtag { font: 700 15px/1 Arial, sans-serif; letter-spacing: .06em; background: var(--accent); color: var(--accent-ink); border-radius: 4px; padding: 6px 10px; white-space: nowrap; }
+  .revtag small { font-weight: 400; letter-spacing: 0; opacity: .85; margin-left: 6px; }
+  .lost { position: sticky; top: 0; z-index: 5; margin: 12px 0 0; padding: 12px 16px; border-radius: 6px; background: var(--bad); color: #fff; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,.25); }
+  .rev-stamp { display: none; }
   section.step {
     background: var(--card);
     border: 1px solid var(--rule);
@@ -193,6 +197,8 @@
     .board .screen-only { display: none !important; }
     .print-only { display: block; }
     #bottomsWrap table { font-size: 10px; }
+    .rev-stamp { display: block; font: 8pt Arial, sans-serif; color: #777; text-align: right; margin-top: 0.06in; }
+    .lost { display: none !important; }
     th, td { padding: 2px 6px; }
     .table-scroll { overflow: visible; border: 0; }
     svg .sheet, svg .tag, .stock-tag, .rush-tag { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
@@ -202,9 +208,10 @@
 <body>
 <div class="wrap">
   <header class="top">
-    <div class="brand"><span id="logoTop"></span><h1>Old School Jewelry Tray App</h1></div>
+    <div class="brand"><span id="logoTop"></span><h1>Old School Jewelry Tray App</h1><span class="revtag" id="revTag" hidden></span></div>
     <span class="tagline">Jewelry Trays Direct &middot; daily WOODWOP board builder</span>
   </header>
+  <div class="lost" id="lostBanner" role="alert" hidden></div>
 
   <section class="step" id="stepTemplates">
     <h2><span class="num">1</span> WOODWOP templates</h2>
@@ -360,6 +367,13 @@
   // ---------- logo ----------
   // The Jewelry Trays Direct logo from assets/, put in by build.js (null until a logo file is added).
   var LOGO = /*LOGO*/null;
+
+  // This build's revision, put in by build.js: {rev: 3, date: "10/12/2026"}. Shown at the top
+  // of the app and in the corner of every printout, so everyone can see which one they have.
+  var REV = /*REV*/null;
+  function revStamp() {
+    return REV ? '<div class="rev-stamp">Old School Jewelry Tray App REV ' + REV.rev + '</div>' : '';
+  }
 
   // Filled in by the Windows program (desktop/main.go) when the app runs as the .exe;
   // stays null when this file is opened straight in a browser (then files are downloaded).
@@ -846,7 +860,7 @@
             b.slots.length + ' of ' + b.template.slots + ' slots used &middot; from ' + esc(b.template.fileName) + '</div></div>' +
             '<button type="button" class="small screen-only" data-dl="' + i + '">' + (NATIVE ? 'Save .mpr to folder' : 'Download .mpr') + '</button></header>' +
             fillBar(b) +
-            boardSvg(b) +
+            boardSvg(b) + revStamp() +
             // the size tables are for checking on screen; the shop sheet is just the board
             '<div class="slot-tables screen-only">' + slotTable(b.slots.slice(0, half)) + (b.slots.length > half ? slotTable(b.slots.slice(half)) : '') + '</div>' +
             '</article>';
@@ -861,7 +875,7 @@
           return '<tr><td>' + esc(r.description) + '</td><td>' + r.partType + '</td><td>' + esc(r.unit) + '</td><td>' + r.material +
             '</td><td class="n">' + r.qty + '</td><td class="n">' + J.mm2(r.widthMm) + '</td><td class="n">' + J.mm2(r.depthMm) +
             '</td><td>' + r.grain + '</td><td>' + r.company + '</td></tr>';
-        }).join('') + '</tbody></table></div>'
+        }).join('') + '</tbody></table></div>' + revStamp()
       : '';
 
     $('dlAll').disabled = $('saveAll').disabled = !plan.boards.length && !S.bottoms.length;
@@ -970,8 +984,20 @@
     $('saveAll').hidden = false;
     $('dlAll').className = 'plain';
     api('/api/settings').then(showFolder).catch(function (err) { msg('folderMsg', err.message, 'bad'); });
-    setInterval(function () { api('/api/ping').catch(function () {}); }, 15000);
-    api('/api/ping').catch(function () {});
+    // If the program behind this window stops (or a newer copy replaces it), say so: the
+    // window can't save any more, and printing from it is how an old layout got used.
+    var missed = 0;
+    var checkProgram = function () {
+      api('/api/ping').then(function () { missed = 0; $('lostBanner').hidden = true; }).catch(function () {
+        if (++missed < 2) return;
+        $('lostBanner').textContent = 'This window has lost its program, so it can\u2019t save and may be out of date. ' +
+          'Close this window, then open OLD SCHOOL JEWELRY TRAY APP' + (REV ? ' REV ' + REV.rev : '') + ' again.';
+        $('lostBanner').hidden = false;
+      });
+    };
+    setInterval(checkProgram, 15000);
+    checkProgram();
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) { missed = Math.max(missed, 1); checkProgram(); } });
 
     $('pickFolder').addEventListener('click', function () {
       msg('folderMsg', 'The Windows folder picker is open\u2026', 'ok');
@@ -1017,6 +1043,11 @@
 
   // ---------- start ----------
   $('logoTop').innerHTML = logoImg('logo');
+  if (REV) {
+    $('revTag').innerHTML = 'REV ' + REV.rev + '<small>' + esc(REV.date) + '</small>';
+    $('revTag').hidden = false;
+    document.title = 'Old School Jewelry Tray App REV ' + REV.rev;
+  }
   $('date').value = todayIso();
   [2, 3].forEach(function (h) {
     var raw = store.get('jtd.tpl.' + h);

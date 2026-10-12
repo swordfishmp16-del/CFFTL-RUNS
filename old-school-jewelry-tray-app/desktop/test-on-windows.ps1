@@ -1,8 +1,8 @@
-# Self-test for OLD SCHOOL JEWELRY TRAY APP.exe on a real Windows computer.
+# Self-test for OLD SCHOOL JEWELRY TRAY APP REV <n>.exe on a real Windows computer.
 #
-#   powershell -ExecutionPolicy Bypass -File test-on-windows.ps1 [-Exe "path\to\OLD SCHOOL JEWELRY TRAY APP.exe"]
+#   powershell -ExecutionPolicy Bypass -File test-on-windows.ps1 [-Exe "path\to\OLD SCHOOL JEWELRY TRAY APP REV <n>.exe"]
 #
-# Without -Exe it looks next to this script, then one folder up.
+# Without -Exe it takes the highest REV next to this script, or one folder up.
 #
 # Starts the program WITHOUT a window, using a throw-away settings folder and a test save
 # folder under %TEMP%, then checks: the page loads; the L: drive is refused (the letter, and
@@ -13,9 +13,10 @@ param([string]$Exe = '')
 
 $ErrorActionPreference = 'Stop'
 if (-not $Exe) {
-  $Exe = @((Join-Path $PSScriptRoot 'OLD SCHOOL JEWELRY TRAY APP.exe'), (Join-Path $PSScriptRoot '..\OLD SCHOOL JEWELRY TRAY APP.exe')) |
-    Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
-  if (-not $Exe) { Write-Output 'Put this script next to OLD SCHOOL JEWELRY TRAY APP.exe, or give -Exe "path".'; exit 2 }
+  # the highest REV next to this script, or one folder up
+  $Exe = @($PSScriptRoot, (Join-Path $PSScriptRoot '..')) | ForEach-Object { Get-ChildItem -LiteralPath $_ -Filter 'OLD SCHOOL JEWELRY TRAY APP*.exe' -ErrorAction SilentlyContinue } |
+    Sort-Object { if ($_.BaseName -match 'REV (\d+)$') { [int]$Matches[1] } else { 0 } } -Descending | Select-Object -First 1 -ExpandProperty FullName
+  if (-not $Exe) { Write-Output 'Put this script next to OLD SCHOOL JEWELRY TRAY APP REV <n>.exe, or give -Exe "path".'; exit 2 }
 }
 $fails = 0
 function Check($name, $ok, $detail = '') {
@@ -43,6 +44,9 @@ try {
   Check 'program starts and serves the app page' ($page -and $page.Content -match 'OLD SCHOOL JEWELRY TRAY APP|Old School Jewelry Tray App')
   $token = [regex]::Match($page.Content, 'var NATIVE = \{"token":"([0-9a-f]+)"').Groups[1].Value
   Check 'page carries the save token' ($token.Length -eq 48)
+  $rev = [regex]::Match($page.Content, 'var REV = \{"rev":(\d+)').Groups[1].Value
+  Check 'page shows its revision number' ([bool]$rev)
+  if ($rev) { Write-Output "Revision: REV $rev" }
   $h = @{ 'X-JTD-Token' = $token }
   function Api($path, $body) { Invoke-RestMethod "$base$path" -Method Post -Headers $h -ContentType 'application/json' -Body ($body | ConvertTo-Json -Depth 5) }
 

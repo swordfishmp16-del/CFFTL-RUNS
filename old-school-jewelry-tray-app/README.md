@@ -7,16 +7,36 @@ Open the Shopify export and the app gives you:
 - a printout of each board with the order number on each tray
 - the tray bottoms list for CutRite
 
+## Revisions
+
+Every new build gets the next REV number. You can always tell which one you have:
+- in the file name, e.g. `OLD SCHOOL JEWELRY TRAY APP REV 3.exe`;
+- in the green tag at the top of the app;
+- in small print in the corner of every printout.
+
+When a new REV comes out, delete the old file on each computer and use the new one.
+
+| REV | Date | What changed |
+|---|---|---|
+| REV 1 | 10/10/2026 | First stand-alone program. It was called version 1.0.0, and its file name had no REV. |
+| REV 2 | 10/12/2026 | New shop sheet: the logo centered, the board name big and centered, a bigger board, and no size tables. It was called version 1.1.0. |
+| REV 3 | 10/12/2026 | REV numbers on the file, the app and the printouts. When REV 3 opens, it closes old app windows left on screen and takes over from an older copy still running (or says how to close it). A window that has lost its program now says so in red. The program also keeps running when the computer sleeps with the app open. Same shop sheet as REV 2. |
+
+Why REV 3: on 10/12 the shop sheet still printed the old way. The REV 1 program had stopped on 10/11 while the laptop slept, but its window stayed open on screen, still showing the old page, and that window printed the old sheet.
+
 ## Putting it on a computer
 
 **Stand-alone program (use this one):**
-1. Copy **`OLD SCHOOL JEWELRY TRAY APP.exe`** to the computer, on the desktop or in a folder of your choice. There's nothing to install.
+1. Copy the newest **`OLD SCHOOL JEWELRY TRAY APP REV 3.exe`** to the computer, on the desktop or in a folder of your choice. There's nothing to install. Delete any older REV, and any `OLD SCHOOL JEWELRY TRAY APP.exe` with no REV in its name (that's REV 1 or 2).
 2. Double-click it. The app opens in its own window. It uses Microsoft Edge (or Chrome) to draw the screen but has no address bar and needs no internet.
 3. The first time, in step 1 under **Save folder on this computer**, click **Choose folder…** and pick where each day's folder should go, e.g. `C:\Jewelry Trays\Boards`. You can also type the path. **The L: drive is refused**, including another drive letter or a `\\server\share` path that leads to the same place as L:. Each person can pick their own folder, and each computer remembers its own choice.
 4. Each day, click **Save everything to folder**. The app makes a folder like `101026 DAILY TRAYS #4354-4377` in your save folder, with the board files and bottoms list inside. Click **Open folder** to see it, then move that folder to the L: drive when it's needed.
    - Nothing is ever overwritten. Saving the same day again makes `… (2)`, and a single board saved twice becomes `… 1 (2).mpr`.
    - **Save .mpr to folder** on a board saves just that board into the day's folder.
 5. Closing the window closes the app. The program stops by itself about 10 minutes later. Opening it again while it's still running just opens a new window.
+6. Opening a newer REV while an older one is still open:
+   - REV 3 and later hand over by themselves. The old windows close, and the new REV opens.
+   - A REV 1 or 2 copy still running can't be asked to stop. The new REV says so: close the old window and wait about 10 minutes, or end **OLD SCHOOL JEWELRY TRAY APP** in Task Manager, then open the new REV again.
 
 The first time Windows runs it, it may say "Windows protected your PC" because the program isn't signed by a publisher. Click **More info**, then **Run anyway**. If your company's IT blocks unsigned programs, use the single-file version below.
 
@@ -53,7 +73,7 @@ Two more checks sit next to it:
 - L:, the share behind it and a second letter on that share were all refused, and nothing was written to the test L:.
 - Saving made the day folder and "(2)" copies, never overwrote a file, and kept every byte.
 
-**Single-file version (backup):** `OLD SCHOOL JEWELRY TRAY APP.html` does the same work in a browser tab, but files go to the Downloads folder (as a .zip) instead of a folder you pick.
+**Single-file version (backup):** `OLD SCHOOL JEWELRY TRAY APP REV 3.html` does the same work in a browser tab, but files go to the Downloads folder (as a .zip) instead of a folder you pick.
 
 Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are inside both versions, so there's nothing to load. Neither version touches Shopify or the internet, and neither ever writes to the L: drive.
 
@@ -71,7 +91,7 @@ Your `_2 TALL` and `_3 TALL` templates (copies Mike sent 10/8/2026) are inside b
    - `100226 DAILY TRAYS 1.mpr`, `2.mpr` … (2" boards)
    - `100226 DAILY TRAYS 3 3IN.mpr` … (3" boards)
    - `100226 TRAY BOTTOMS.csv`
-8. Click **Print boards with labels** for the shop copy. Each board prints on its own landscape page: the JTD logo centered at the top, the board name (e.g. `100226 DAILY TRAYS 1.mpr`) big and centered under it, then the board drawing as big as the page allows, with the order number on each strip. The size tables stay on the screen for checking; they are not printed. (Mike, 10/12/2026)
+8. Click **Print boards with labels** for the shop copy. Each board prints on its own landscape page: the JTD logo centered at the top, the board name (e.g. `100226 DAILY TRAYS 1.mpr`) big and centered under it, then the board drawing as big as the page allows, with the order number on each strip, and the REV in small print in the corner. The size tables stay on the screen for checking; they are not printed. (Mike, 10/12/2026)
 
 ## Sharing with the team
 
@@ -124,6 +144,8 @@ Mike decided these on 10/8/2026. Rules marked HANDOFF come from `docs/HANDOFF.md
 - `src/core.js` holds the tray rules, and `src/app.html` is the screen.
 - `templates/` holds Mike's real `_2 TALL` / `_3 TALL` templates, and `templates/templates.json` lists them.
 - `desktop/` is the stand-alone Windows program (Go, standard library only). It shows the same page in its own Edge/Chrome window, saves files into the picked folder, and refuses L: (`desktop/folders.go`). The icon and version info are in `desktop/rsrc_windows_amd64.syso`, made from `assets/icon.png` with go-winres.
-- `node build.js` combines the code and the templates into `OLD SCHOOL JEWELRY TRAY APP.html` and, if Go is installed, builds `OLD SCHOOL JEWELRY TRAY APP.exe` (Windows 64-bit). Rebuild after every change.
+- `node build.js` combines the code and the templates into `OLD SCHOOL JEWELRY TRAY APP REV <n>.html` and, if Go is installed, builds `OLD SCHOOL JEWELRY TRAY APP REV <n>.exe` (Windows 64-bit). It removes the older REV files, so only the current one is in the folder. Rebuild after every change.
+- **New REV:** for every build people get, add 1 to `"revision"` in `package.json`, add a row under **Revisions** above, then run `node build.js`. The REV goes into the file names, the app's tag, the printouts and the program's Windows file details.
+- `desktop/instance.go` decides what happens when a copy is already running: the newer REV wins. A REV 3+ copy leaves its token in `instance.json` in the settings folder, so a newer copy can ask it to quit (`/api/quit`).
 - `cd desktop && go test ./...` checks the L: drive rules, the no-overwrite saving and the day-folder naming.
 - `node --test test/core.test.js` checks the rules against the worked examples in `docs/HANDOFF.md` and the real templates. Each filled board must match the template byte for byte outside the tray sizes.
