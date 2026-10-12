@@ -38,10 +38,10 @@ VB.NET-style binary:
 | view block | Bytes 0..51 are the current room's camera (copied from that room record's first 52 bytes). Int32 at +60 is the note count. |
 | rooms | Int16 n, 2 bytes, Int32 current room, then n records: 62 bytes (camera etc.), STR name, 14 bytes, 10 STR (edge/door profile names). |
 | handles | (n+1) sets × 9 × (STR, 28 bytes, STR). Set 0 is the default; set k belongs to room k. |
-| settings | STR + 9 STR, Int16 nc + (nc+1)×6, Int16 nlo + nlo×(STR, Int16 k, k×6), Int16 npair + npair×(Int16 unit id, Int16 code). |
+| settings | STR handle group + 9 STR door-style names, Int16 nc + (nc+1)×6 (colour table), Int16 nlo + nlo×(STR library, Int16 k, k×6 shop-standard sizes as Int16 item + Int32 value), Int16 npair + npair×(Int16 unit id, Int16 option code). Option number = code + 1 in the library's `options.dat`. |
 | walls | nwalls × (205 bytes + STR texture + 5 bytes). Wall id: Int32 at 125 (Int16 copies at 117/119/121/123). Room: Int32 at 129. Neighbour wall ids: Int32 at 36 and 40. |
 | postwall | 16 bytes + STR (KCD user serial). |
-| units (cabinets) | nunits × [1806-byte prefix][body][27-byte suffix]. Body: 9 STR (cat, cab, lib, prt, pcb, name, edge, shp, profile), 86-byte block, 8 STR materials, 7 STR, 10 bytes, 2 STR (unw, unwname). In the 86-byte block: Int16 at 0 is the wall id (0 = deleted), Int16 at 2 is a flag, 16..39 is placement plus price-like values. Suffix: Int32 group at +4, unit id Int16 at +12/+14/+16. |
+| units (cabinets) | nunits × [1806-byte prefix][body][27-byte suffix]. The prefix is 301 six-byte size slots (slot N at byte 6N: Int32 value in 0.1 mm, state byte, 0), labelled by the unit's `.cab` file; see `kcd-deep-dive-notes.md`. Body: 9 STR (cat, cab, lib, prt, pcb, name, edge, shp, profile), 86-byte block, 8 STR materials, 7 STR, 10 bytes, 2 STR (unw, unwname). In the 86-byte block: Int16 at 0 is the wall id (0 = deleted), Int16 at 2 is a flag, Int16 at 10 = number of size items in the `.cab`, Int32 at 12 = width, 16..39 are geometry counts (not prices), 40..63 two centre points, Int16 at 64 = unit type code. The 8 + 7 STR are Set Unit Info texts 1..15 (text 1 = material name and price multiplier). Suffix: Int32 group at +4, unit id Int16 at +12/+14/+16. |
 | mesh | 3D cache: Int32 n1 + 4·n1, (L2−1)×12 vertices, index ints, (L4−1)×66-byte faces, ending exactly at `** Notes **`. |
 | notes | STR `** Notes **`, Int16 count, records: 30 bytes, STR text, STR font, STR size, 36-byte trailer (Int32 room at trailer+4; 0 = job-wide). Header Int16 at +24 = wall id when nonzero. Empty-text notes are dimensions. |
 | roomshapes | Int16 + (n+1) slots × [Int32 cnt; cnt × (Int32 npts + npts×24 + 16 bbox + 16 bytes with Int32 tag first + Int32 m + m×4)]. Only slot 0 seen in practice; tag = room number. |
@@ -61,7 +61,7 @@ VB.NET-style binary:
     - 86-block offsets 0–3, 16–39 and 66 are zeroed, the 10 bytes are zeroed, and suffix[0:8] is zeroed.
   - Kept rooms are renumbered 1..k in walls, notes and room shapes. Notes of deleted rooms are removed, and settings pairs of deleted cabinets are dropped.
   - Handles become set 0 plus the kept sets; defaults become the kept sets. The view block gets the first kept room's camera and the new note count, and the current room is set to 1.
-- **What KCD recalculates when it saves** (so it is safe to leave stale): mesh, header blob and `L` counts, price-like unit fields 16..39, scroll bytes in wall 1, the postwall serial, and pictemp padding.
+- **What KCD recalculates when it saves** (so it is safe to leave stale): mesh, header blob and `L` counts, unit block bytes 16..39 (geometry counts), scroll bytes in wall 1, the postwall serial, and pictemp padding.
 - **Save As** sets the header rtf to `<new job name>.RTF`.
 - **Not readable yet:**
   - BARNARD SANDY (a note variant);
@@ -81,12 +81,26 @@ VB.NET-style binary:
 - Job files are in Downloads, OneDrive and Outlook attachments. Work scripts are in `%TEMP%\kcdsplit`; the build venv is in `%TEMP%\kcdbuild`.
 - Quirks:
   - PowerShell commands lose `$_`, so run small Python scripts instead.
+  - `python -c "..."` with inner double quotes breaks under PowerShell. Write a script file and run it.
+  - `start_process` waits at most 3 s; read the rest with `read_process_output`. Big outputs are saved to a local tool-results file, which also works as a file-transfer channel.
+  - Only one Desktop Commander copy should run on the laptop; other sessions' servers make the relay flaky.
   - `edit_block` turns `\uXXXX` text into real characters, so edit those lines with a Python script.
   - Check uploaded code with md5 after writing (normalize CRLF).
 - **Getting files to the user:** the chat cannot take a 10 MB file from the laptop, and the Microsoft 365 upload tool is capped at 1 MB. Copy into `C:\Users\sword\OneDrive - Closet Factory (Fort Lauderdale)\...`, wait for sync, then get the web link with Microsoft 365 `read_resource` on `file:///<driveId>/<path>`.
+
+## Deep dive into pricing data (Oct 12, 2026)
+
+Read `kcd-deep-dive-notes.md` before working on pricing, door orders or the engineering workbook. Short version:
+
+- Every unit size (width, height, depth, panels, shelves, door and drawer heights, rod heights, options) can be read from the `.job`: the 1806-byte prefix is a table of size slots whose labels come from the unit's `.cab` file in `C:\KCD23\NEW CFFL UNIT LIBRARY`.
+- Options are the (unit id, code) pairs at the end of `settings`; option number = code + 1.
+- KCD prices from text scripts in `C:\KCD23-STDPLIST\<date> CFFL PRICING` (`Z<unit>.pcb` per unit type, shared grids in `B-Side Cost.Pcb` and `C-Shelf Cost.Pcb`, fee 199 in `H-Discounts and Fees.pcb`). Prices change by swapping that folder, so read it at run time.
+- Decoded sizes matched the engineering price reviews line by line on six jobs.
+- The decoder used is `experiments/report_laptop.py` (laptop layout only).
 
 ## Ideas not done yet
 
 - Fill in the KCD job heading (job number, last name, room) in each room file.
 - Read the three job layouts above.
 - Use the sidebar text (material, edge banding, rods, handles) for checks or reports.
+- Build the "read the job, fill the workbook and forms" app once the owner answers the phase-2 questions (see the notes file).
