@@ -894,8 +894,10 @@ class Engine:
         self.setvar('#UnitFileName', u.cab)
         self.setvar('#UnitLibrary', u.lib.strip('\\'))
         self.setvar('#PartFileName', u.prt)
+        # KCD's #Name is the record's first string (u.cat in the reader), #Code its sixth (u.name); see
+        # kcdunits.Unit.kcd_name. Accessory units ('Valet CR', '12in Elite Valet Rack MG') print #Name.
         self.setvar('#Name', self.unit_display_name(u))
-        self.setvar('#Code', u.cat)
+        self.setvar('#Code', u.kcd_code(self.catalog) if hasattr(u, 'kcd_code') else u.name.strip())
         self.setvar('#Roomnum', str(u.room))
         self.setvar('#RoomNum', str(u.room))
         texts = u.set_unit_info
@@ -908,9 +910,14 @@ class Engine:
         self.setvar('#Comma', ',')
 
     def unit_display_name(self, u):
-        n = u.name.strip()
-        if not n or re.match(r'^=#\d+#=$', n):
-            return u.cat.strip()
+        """KCD's unit Name: the record's first string. (Earlier versions used the sixth string, which is the
+        Code, whenever it was not an '=#n#=' reference; that printed codes such as 'Accessory' or
+        '310.3020.12.MG(808.71.001)' instead of 'Valet CR' or '12in Elite Valet Rack MG'.)"""
+        n = u.cat.strip()
+        if not n:
+            n = u.name.strip()
+            if re.match(r'^=#\d+#=$', n):
+                n = ''
         return n
 
     def faces_from_unit(self, u, b):

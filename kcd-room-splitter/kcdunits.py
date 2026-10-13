@@ -123,6 +123,7 @@ class Catalog:
         self.source = ''
         self.raw = {}           # lower-case file name -> full .cab text (for kcdcab face geometry)
         self.fulls = {}         # lower-case file name -> parsed full cab (kcdcab.parse_cab_full)
+        self.codes = {}         # Code.dat: entry number -> (code formula such as 'B[w@1]', description)
 
     @classmethod
     def from_library_root(cls, root):
@@ -150,6 +151,9 @@ class Catalog:
         for p in prefer_main(glob.glob(os.path.join(root, '**', 'Sizes.Lst'), recursive=True) +
                              glob.glob(os.path.join(root, '**', 'Sizes.lst'), recursive=True))[:1]:
             cat.load_sizes_lst_text(open(p, 'rb').read().decode('cp1252', 'replace'))
+        for p in prefer_main(glob.glob(os.path.join(root, '**', 'Code.dat'), recursive=True) +
+                             glob.glob(os.path.join(root, '**', 'code.dat'), recursive=True))[:1]:
+            cat.load_code_dat_text(open(p, 'rb').read().decode('cp1252', 'replace'))
         return cat
 
     @classmethod
@@ -189,6 +193,8 @@ class Catalog:
                 self.load_sizes_lst_text(text)
             elif base.lower() == 'options.dat' and not self.options:
                 self.load_options_text(text)
+            elif base.lower() == 'code.dat' and not self.codes:
+                self.load_code_dat_text(text)
 
     def full(self, cabname):
         """The fully parsed .cab (points and faces) or None when the raw text is not loaded."""
@@ -212,6 +218,14 @@ class Catalog:
                 except Exception:
                     cost = None
                 self.options[int(parts[0])] = (parts[1], cost, parts[3].upper() == 'TRUE')
+
+    def load_code_dat_text(self, text):
+        """Code.dat: 'n, code formula, description' per unit code. A unit whose code string is '=#n#=' takes
+        entry n; '[w@1]' in the formula means the unit width rounded to 1 inch ('B[w@1]' prints as B24)."""
+        for ln in text.splitlines():
+            parts = [x.strip() for x in ln.split(',')]
+            if len(parts) >= 2 and parts[0].isdigit():
+                self.codes[int(parts[0])] = (parts[1], parts[2] if len(parts) > 2 else '')
 
     def load_sizes_lst_text(self, text):
         """Sizes.Lst: 'item, value, n) label' per shop-standard size."""
@@ -285,6 +299,32 @@ class Unit:
                 self.slots[n] = (struct.unpack_from('<i', rec, 0)[0], rec[4])
         self.cabdef = catalog.get(self.cab) if catalog else None
         self.options = []                               # option numbers from the settings pairs (code + 1)
+
+    # -- KCD's own Name and Code ----------------------------------------------------------------
+    # The nine strings of the record are, in order: Name, cab file, library, prt, pcb, Code, edge, shape,
+    # profile. The reader's attribute names (cat, name) date from before this was understood: `cat` IS
+    # KCD's unit Name ('96 Tall 5 Drawer', '12in Elite Valet Rack MG', 'Valet CR') and `name` is KCD's
+    # Code (' =#56#=' = entry 56 of the library's Code.dat, or a literal such as 'CLO-SH', 'Accessory',
+    # '310.3020.12.MG(808.71.001)'). The price scripts see them as #Name and #Code.
+    @property
+    def kcd_name(self):
+        return self.cat.strip()
+
+    def kcd_code(self, catalog=None):
+        c = self.name.strip()
+        m = re.match(r'^=#(\d+)#=$', c)
+        if m:
+            ent = (catalog.codes if catalog else {}).get(int(m.group(1)))
+            if not ent:
+                return c
+            c = ent[0]
+        def sub(mm):
+            dim = mm.group(1).lower()
+            step = float(mm.group(2) or 1)
+            v = {'w': self.inch(2), 'h': self.inch(3), 'd': self.inch(4)}.get(dim, 0.0)
+            r = round(v / step) * step if step else v
+            return ('%d' % r) if abs(r - round(r)) < 1e-9 else ('%g' % r)
+        return re.sub(r'\[([WwHhDd])@([\d.]+)?\]', sub, c)
 
     # -- values ---------------------------------------------------------------------------------
     def raw(self, item):

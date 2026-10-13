@@ -84,6 +84,11 @@ drawer box height = door/drawer front heights (I42..), drawer front width = W âˆ
 `cab` = unit file (`773-96.cab`), `lib` = library folder, `prt` = parts script name (`Z773.prt`),
 `pcb` = **pricing script name (`ZC773.pcb`)**, `name` = code template or resolved code (`=#106#=` or
 `T-Double-Hg91`), `edge`, `shp`, `profile` = edge profile.
+In KCD's own words `cat` is the unit **Name** (`#Name` in the price scripts) and `name` is the unit **Code**
+(`#Code`): `=#n#=` is entry n of the library's `Code.dat` (`n, formula, description`, where `[w@1]` in the
+formula is the width rounded to 1"), and accessories carry literal codes (`Accessory`, `CLO-SH`,
+`310.3020.12.MG(808.71.001)`). The reader keeps the old attribute names; use `Unit.kcd_name` and
+`Unit.kcd_code(catalog)`. Found on Oct 13, 2026 when accessory units printed their code instead of their name.
 
 **86-byte block (mostly confirmed):**
 
