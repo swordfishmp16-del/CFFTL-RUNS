@@ -257,6 +257,15 @@ garage platforms and obstructions added; wall notes added; material multiplier s
   opaque blob does not track doors either. Where KCD stores "this opening has a door of style N" is unknown;
   the mesh (drawing cache) does contain the door faces, so a fallback could detect doors from the unit's mesh
   slice. Best next step: have the owner save a tiny job twice, before and after adding one door, and diff.
+- **Update Oct 13 (kcdcab.py):** the door and drawer faces, their sizes and whether a door is a pair now come
+  from the `.cab` points and face rules (section 11). What is still unknown is the designer's **"no door"
+  choice**: drawer towers (CSE304/305), tall shelving towers (CSE300-96, preset `Shelves 96.UNW`) and
+  entertainment units (773-96) carry a top-door face in the `.cab`, the engineers' reviews show no door on
+  them, and two CSE300-96 units of one job (BURNS HERS 9 with a mirror door, 12 without) differ only in
+  width, shelf count, the mesh slice and the Int16 at byte 6 of the 86-byte block (1 on unit 9, 2 on unit
+  12). That Int16 is 1 on every single-door unit and 2 on every pair, but also 2 on the door-less towers,
+  so it is not the answer by itself. Until the A/B save experiment settles it, every door line the engine
+  prints is flagged VERIFY.
 - (earlier wording) **Door presence and door style per unit are not in any decoded field.** Non-zero I41..I46 do not mean a
   door; doored units exist whose cab has no door-height slot. Door count comes from the cab (`UIQ,36,...`
   rules, face rules such as `(I51=0)&(I254=0)`); the per-unit style name (for example `flatCFMirror`,
@@ -334,14 +343,45 @@ dimension in sixteenths; `Price` emits a line and option lines come from `option
 Checked with the **Sept 2024** scripts (the only list in the sandbox) against ten rooms priced in 2026, names
 and sizes only (`experiments/compare_keys.py`): about 69 % of the pasted lines come out identical in name,
 size and count. The rest, in order of size:
-- doors are not produced (storage unknown, see section 7); drawer fronts are modelled from the slots whose
-  `.cab` label says drawer front, with the bottom front still off by the script formula;
+- (superseded by section 11) doors and drawer fronts now come from the `.cab` face geometry;
 - 2026 script changes: `Drawer Box-10"-…` name order, `Add to DrFrt` printed with height only, pullout tray
   names, accessory names (`RM1 1 Shelf Strip LED`), kick and filler printed with one dimension;
 - accessory libraries (TAG racks, lighting) missing from the sandbox;
 - which review column (depth / height / length) a script dimension lands in is not derivable from the 2024
   scripts; the live scripts and one real UNIT PRICE REVIEW printout will settle it.
 Run: `python kcdprice.py --lib C:\KCD23 --pricelist "C:\KCD23-STDPLIST\_26-08-03 AUG CFFL PRICING" JOB.job`.
+
+## 11. Face geometry `kcdcab.py` (Oct 13, 2026)
+
+The `.cab` file holds more than the size table: after `#Sizes` come `#Extra Variables` (`E,n,formula` extra
+values, `U/UI/UIQ,n,formula` rules that rewrite a size), `#Pts` (numbered points whose X, Y, Z are formulas of
+W H D LS RS MS TR MR BR K LF RF FW, the `I<n>` sizes, `E<n>` and shop sizes such as `SBDG`), `#Faces` (one
+line per drawn face: `[(cond):]type, draw-order, colour, npts, p1..pn, name`) and load statements for
+`.cld` includes. Doors and drawer fronts are faces whose 8-digit type starts with 1 or 2 (door), 3
+(drawer front) or 0 (open face); digits 4-5 are the face number n that the price scripts see as `Dn`
+(`D1W`, `D1H`, `D1T`, `D1DR`, `D1HG`, `Set,#Door=D1`). A face line can be conditional (`(I20>0)&(ms=0):`,
+`(I254=0)&(I152<>1)`), which is how `.cab` files turn doors into openings.
+
+`kcdcab.py` parses the whole file (`parse_cab_full`), evaluates the formula language (`ExprEval`: arithmetic
+with `\` `%` `^`, comparisons, `&` `|`, `(cond):a:b`, `abs int sqrt round`) and builds the faces of a unit
+from its stored sizes (`UnitFaces`): width = X extent, height = Z extent of the face's points. Checked
+against the engineers' reviews: every door and drawer front the reviews show comes out to the sixteenth
+(GARAGE: six door units, HIS, TILLIS HIS, OFFICE drawer fronts, the bottom drawer front that the slot got
+wrong by 1/8). Two rules learned from the reviews: a door face wider than about 27" is printed as a pair,
+each door exactly half the face width (the pair gap is not subtracted); the Int16 at byte 6 of the unit's
+86-byte block is 1 on single-door units and 2 on pairs and is used as the hint, the width only as fallback.
+The price engine uses this when the full library text is loaded (`Catalog.from_library_root`, or
+`Catalog.load_rawlib_json` for the bundle made by `rawlib.py` on the laptop); otherwise it falls back to
+the old slot-based drawer-front model.
+
+Result with the Sept 2024 scripts on twelve rooms: 614 of 856 pasted lines identical (71.7 %), up from 69 %.
+What remains, by size: doors the designer removed (section 7, 27 lines); CO rooms whose paste holds only the
+changed units; accessory names from libraries not in the sandbox (`CFClosetAccessory.pcb` prints
+`RM1 <name>` from a per-file table, the 2026 lists print the unit's category); 2026 script wording (pullout
+trays, `Add to DrFrt` dims); the review column question (section 10).
+
+Also learned: KCD trims the result of `Left`/`Right` (the contrast-material mark-up prints as `1.00`, not
+` 1.00`); `Set Unit Info` text 12 is `<name>  1 <multiplier>` and text 15 the door insert type.
 
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
@@ -352,4 +392,8 @@ Run: `python kcdprice.py --lib C:\KCD23 --pricelist "C:\KCD23-STDPLIST\_26-08-03
   also writes `out\catalog_cabs.tsv` and `out\catalog_slots.txt` from the extracted library.
 - `libprobe.py`, `libprobe2.py`: first look at the library and pricing files.
 - `bundle.py`: packs the catalog and raw unit records as gzip+base64 text chunks.
+- `rawlib.py`: bundles every text file of the unit library (`.cab .cld .mld .lst .dat`) into
+  `out\rawlib.b64` (json, gzip, base64) for `Catalog.load_rawlib_json` in the sandbox.
+- `engine\` holds copies of `kcdjob.py`, `kcdunits.py`, `kcdprice.py`, `compare_keys.py` (md5-checked);
+  `runcmp.py` runs the comparison with the June 2025 list, `runprice.py` prices jobs into `out\eng\`.
 - Library copies used: `%TEMP%\kcdlib` (ENG UPDATE 25-03-06), `%TEMP%\kcdprice` (JUN 25-06-05 pricing).

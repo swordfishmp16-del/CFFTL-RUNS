@@ -21,6 +21,7 @@ import kcdunits
 
 MAX_DEPTH = 40          # recursion guard for lazy variable resolution
 MAX_LOAD_DEPTH = 60
+PAIR_WIDTH = 27.0       # fallback only: a door face wider than this is a pair when the unit record gives no hint
 
 
 class PriceLine:
@@ -652,7 +653,8 @@ class Engine:
                 src = self.resolve(f[2])
                 n = int(n) if n is not None else 0
                 n = max(0, min(n, len(src)))
-                self.setvar(f[0], src[:n] if k == 'left' else (src[len(src) - n:] if n else ''))
+                # KCD trims the result: Right,#x,5,"Cashmere  1 1.00" prints as "1.00" (checked on the reviews)
+                self.setvar(f[0], (src[:n] if k == 'left' else (src[len(src) - n:] if n else '')).strip())
         elif k == 'readcsvfile':
             self._csv = f[0].strip() if f else ''
         elif k == 'readcsvvalue':
@@ -718,8 +720,35 @@ class Engine:
             self.setvar(target, value)
 
     def select_door_slot(self, n):
-        """Set, #Door=Dn: KCD exposes the slot's width, type and kind. Provisional: drawer fronts (DnT=3, DnDR>0)
-        set #DoorDR; single doors (DnT>0, not a drawer front) set #DoorSD; pairs are not modelled yet."""
+        """Set, #Door=Dn: KCD exposes face n to the script as #DoorW/#DoorH/#doorT and marks it as a single door
+        (#DoorSD), a pair (#DoorLD and #DoorRD, #DoorW = half width) or a drawer front (#DoorDR)."""
+        uf = getattr(self, 'unit_faces', None)
+        if uf is not None:
+            f = uf.by_n.get(n)
+            self.setvar('#DoorSD', 0.0)
+            self.setvar('#DoorLD', 0.0)
+            self.setvar('#DoorRD', 0.0)
+            self.setvar('#DoorDR', 0.0)
+            if not f or f['kind'] == 'open':
+                self.setvar('#DoorW', 0.0)
+                self.setvar('#DoorH', 0.0)
+                self.setvar('#doorT', 0.0)
+                self.setvar('#DoorT', 0.0)
+                return
+            self.setvar('#DoorH', f['h'])
+            self.setvar('#doorT', float(f['t']))
+            self.setvar('#DoorT', float(f['t']))
+            if f['kind'] == 'drawer':
+                self.setvar('#DoorW', f['w'])
+                self.setvar('#DoorDR', float(n))
+            elif f['pair']:
+                self.setvar('#DoorW', f['each_w'])
+                self.setvar('#DoorLD', float(n))
+                self.setvar('#DoorRD', float(n))
+            else:
+                self.setvar('#DoorW', f['w'])
+                self.setvar('#DoorSD', float(n))
+            return
         b = self.builtins
         w = b.get('d%dw' % n, 0.0); t = b.get('d%dt' % n, 0.0); dr = b.get('d%ddr' % n, 0.0)
         self.setvar('#DoorW', w)
@@ -844,11 +873,22 @@ class Engine:
         # every I<n> slot as a builtin too
         for n, (raw, state) in u.slots.items():
             b['i%d' % n] = float(u.value(n))
-        # door / drawer-front slots (provisional: drawer fronts from labelled slots; doors not yet)
+        # door / drawer-front faces D1..D12: from the .cab face rules when the full library is loaded,
+        # otherwise the provisional slot-based model (drawer fronts only)
         for n in range(1, 13):
             for suf in ('', 'h', 'w', 't', 'hg', 'dr', 'hl', 'hk', 'hkn'):
                 b['d%d%s' % (n, suf)] = 0.0
-        self.faces_from_unit(u, b)
+        self.unit_faces = None
+        full = self.catalog.full(u.cab) if (self.catalog is not None and hasattr(self.catalog, 'full')) else None
+        if full and full.get('faces') and full.get('pts'):
+            import kcdcab
+            uf = kcdcab.UnitFaces(full, u, job, self.catalog, pair_width=PAIR_WIDTH)
+            b.update(uf.builtins())
+            self.unit_faces = uf
+            for fl in uf.flags:
+                self.flag(fl)
+        else:
+            self.faces_from_unit(u, b)
         self.builtins = b
         # KCD-supplied #-variables
         self.setvar('#UnitFileName', u.cab)
@@ -958,12 +998,15 @@ if __name__ == '__main__':
     ap.add_argument('job')
     ap.add_argument('--pricelist', required=True, help='price list folder (for example C:\\KCD23-STDPLIST\\_26-08-03 AUG CFFL PRICING)')
     ap.add_argument('--lib', required=True, help='KCD library root or compact catalog .json')
+    ap.add_argument('--raw', help='rawlib.json with the full .cab texts (needed for doors when --lib is a compact catalog)')
     ap.add_argument('--room', type=int, help='only this room number')
     ap.add_argument('--afterprice', action='store_true', help='also run XXAfterPrice.PCB after every line (slow, totals only)')
     ap.add_argument('--trace', action='store_true')
     ap.add_argument('--unknown', action='store_true', help='list unknown identifiers and variables')
     a = ap.parse_args()
     cat = kcdunits.Catalog.from_json(a.lib) if a.lib.lower().endswith('.json') else kcdunits.Catalog.from_library_root(a.lib)
+    if a.raw:
+        cat.load_rawlib_json(a.raw)
     job = kcdunits.read_job(a.job, cat)
     eng = Engine(a.pricelist, cat, afterprice=a.afterprice, trace=a.trace)
     eng.price_job(job, rooms=[a.room] if a.room else None)

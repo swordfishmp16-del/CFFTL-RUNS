@@ -121,6 +121,8 @@ class Catalog:
         self.options = {}       # option number -> (name, cost, enabled)
         self.sizes_lst = {}     # shop size item -> (value raw, label)
         self.source = ''
+        self.raw = {}           # lower-case file name -> full .cab text (for kcdcab face geometry)
+        self.fulls = {}         # lower-case file name -> parsed full cab (kcdcab.parse_cab_full)
 
     @classmethod
     def from_library_root(cls, root):
@@ -133,7 +135,9 @@ class Catalog:
             if k in cat.cabs:
                 continue
             try:
-                cat.cabs[k] = parse_cab_text(open(p, 'rb').read().decode('cp1252', 'replace'), os.path.basename(p))
+                text = open(p, 'rb').read().decode('cp1252', 'replace')
+                cat.raw[k] = text
+                cat.cabs[k] = parse_cab_text(text, os.path.basename(p))
             except Exception as e:
                 cat.cabs[k] = {'file': os.path.basename(p), 'error': str(e), 'sizes': {}, 'order': [], 'prt': '', 'pcb': '', 'T': '', 'code': '', 'head': []}
         for p in glob.glob(os.path.join(root, '**', 'options.dat'), recursive=True):
@@ -169,6 +173,30 @@ class Catalog:
         if 'Sizes.Lst' in files:
             cat.load_sizes_lst_text(files['Sizes.Lst'])
         return cat
+
+    def load_rawlib_json(self, path):
+        """Load the full library texts bundled by the laptop script rawlib.py ({relative path: text})."""
+        files = json.load(open(path, encoding='utf-8'))
+        for rel, text in files.items():
+            base = rel.replace('\\', '/').rsplit('/', 1)[-1]
+            if base.lower().endswith('.cab') and base.lower() not in self.raw:
+                self.raw[base.lower()] = text
+            elif base.lower() == 'sizes.lst' and not self.sizes_lst:
+                self.load_sizes_lst_text(text)
+            elif base.lower() == 'options.dat' and not self.options:
+                self.load_options_text(text)
+
+    def full(self, cabname):
+        """The fully parsed .cab (points and faces) or None when the raw text is not loaded."""
+        k = txt(cabname).strip().lower()
+        if k in self.fulls:
+            return self.fulls[k]
+        text = self.raw.get(k)
+        if text is None:
+            return None
+        import kcdcab
+        self.fulls[k] = kcdcab.parse_cab_full(text, k)
+        return self.fulls[k]
 
     def load_options_text(self, text):
         """options.dat: header lines, then 'number, name, cost, TRUE/FALSE' per option."""

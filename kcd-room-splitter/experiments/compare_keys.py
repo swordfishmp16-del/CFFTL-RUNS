@@ -6,6 +6,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import kcdunits, kcdprice
 cat = kcdunits.Catalog.from_json(sys.argv[1]) if sys.argv[1].lower().endswith('.json') else kcdunits.Catalog.from_library_root(sys.argv[1]); pdir = sys.argv[2]; keys = open(sys.argv[3], encoding='utf-8').read().split('\n')
+if os.environ.get('KCD_RAWLIB'):
+    cat.load_rawlib_json(os.environ['KCD_RAWLIB'])      # full .cab texts -> door and drawer faces
 
 def key_lines(section):
     out = []; on = False; inblock = False

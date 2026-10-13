@@ -98,6 +98,7 @@ Read `kcd-deep-dive-notes.md` before working on pricing, door orders or the engi
 - Decoded sizes matched the engineering price reviews line by line on six jobs.
 - `kcdprice.py` runs a KCD price-list folder against a job (the interpreter for the `.pcb` scripts); first version checked on ten rooms with the Sept 2024 list, see notes section 10. `experiments/compare_keys.py` compares its lines with workbook pastes.
 - `kcdunits.py` reads a job into a room sheet (units with labelled sizes, materials, options, quantity, notes, sidebar). Checked against twelve engineered rooms: see notes section 9. `experiments/report_laptop.py` is the older laptop-only decoder.
+- `kcdcab.py` reads the whole `.cab` (points, face rules, extra variables) and computes a unit's doors and drawer fronts with their sizes (notes section 11). The engine needs the full library text for this: a library folder, or the `rawlib.json` bundle from the laptop.
 
 ## Ideas not done yet
 
