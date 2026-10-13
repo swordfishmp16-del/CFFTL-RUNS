@@ -969,8 +969,15 @@ class Engine:
                 self.run_file('XXAfter.PCB')
                 continue
             elif pcb.lower() not in self.files:
-                self.flag('unit %d: price script %s not in the price list; Eachunit.pcb used' % (u.seq, pcb))
-                pcb = 'Eachunit.pcb'
+                # the job record keeps the script name from the day the unit was placed; a newer list may have
+                # renamed it (CFClosetAccessory.pcb -> ClosetAccessories.pcb in 2026), so try the library's current name
+                alt = (u.cabdef or {}).get('pcb', '') if getattr(u, 'cabdef', None) else ''
+                if alt and alt.strip().lower() != 'none' and alt.strip().lower() in self.files:
+                    self.flag('unit %d: price script %s not in the price list; the library now names %s, used that' % (u.seq, pcb, alt.strip()))
+                    pcb = alt.strip()
+                else:
+                    self.flag('unit %d: price script %s not in the price list; Eachunit.pcb used' % (u.seq, pcb))
+                    pcb = 'Eachunit.pcb'
             self.run_file(pcb)
             self.run_file('XXAfter.PCB')
         self.run_file('Xxend.pcb')
