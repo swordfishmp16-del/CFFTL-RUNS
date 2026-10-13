@@ -356,6 +356,13 @@ size and count. The rest, in order of size:
   scripts; the live scripts and one real UNIT PRICE REVIEW printout will settle it.
 Run: `python kcdprice.py --lib C:\KCD23 --pricelist "C:\KCD23-STDPLIST\_26-08-03 AUG CFFL PRICING" JOB.job`.
 
+**Layered price lists and the price check (Oct 13, 2026, late).** `kcdprice.Engine` now takes one folder or a
+list of folders; a later folder's file replaces an earlier one with the same name (`--pricelist` can be repeated
+on the command line), so a monthly update pack can be laid over the last full list. `experiments/compare_keys.py`
+pairs every matched line with its engine line and compares the pasted price with the engine's cost (half a
+dollar of slack for whole-dollar pastes, one cent when the paste shows cents), printing `PRICES:` per room and a
+`TOTAL PRICES:` line. Results of the runs over the monthly folders: see section 12.
+
 ## 11. Face geometry `kcdcab.py` (Oct 13, 2026)
 
 The `.cab` file holds more than the size table: after `#Sizes` come `#Extra Variables` (`E,n,formula` extra
@@ -532,7 +539,14 @@ has to say which folder the shop's KCD points at. Full lists on hand: `_26-03-18
   `runcmp.py` runs the comparison with the June 2025 list, `runprice.py` prices jobs into `out\eng\`;
   `runcmp2.py OUTNAME [LIBROOT] [PRICEDIR] [NAME...]` and `runprice2.py OUTSUB [LIBROOT] [PRICEDIR] [NAME...]`
   take any library root and price list (defaults: the OneDrive KCD23 copy and the May 2026 list).
-- `odstatus.py` counts cloud-only placeholders per OneDrive folder; `survey_kcd23.py` lists the KCD23 tree.
+- `runcmp3.py OUTNAME LIBROOT "DIR1;DIR2;..." [NAME...]` runs `compare_keys.py` with several price-list folders
+  layered in order (the full list first, then the update packs) and reports the price check too.
+- `odstatus.py` counts cloud-only placeholders per OneDrive folder; `survey_kcd23.py` lists the KCD23 tree;
+  `a3scan.py`, `dumpunit.py`, `dumpunit2.py` dump unit records (the byte-6 survey of section 12);
+  `check4.ps1`, `acc_check*.ps1`, `pinroot.cmd`, `pinlists.cmd`, `robopacks.cmd`, `robolists.cmd` pin and copy
+  OneDrive folders.
+- Price-list copies: `%TEMP%\kcdprice\{SEP25,OCT25,DEC25,JAN26,FEB26,MAR26,APR26,MAY26,MAY22,JUL26,AUG26}`
+  (every `STDPLIST` CFFL pricing folder from Sept 2025 on).
 - Library copies used: `%TEMP%\kcdlib` (ENG UPDATE 25-03-06), `%TEMP%\kcdprice` (JUN 25-06-05 pricing),
   `%TEMP%\kcdlibod` (the shop's seven unit libraries from OneDrive, text files only) and
   `%TEMP%\kcdprice\MAY26` (the `_26-05-03 MAY CFFL PRICING` list).

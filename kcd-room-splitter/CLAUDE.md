@@ -100,7 +100,8 @@ Read `kcd-deep-dive-notes.md` before working on pricing, door orders or the engi
 - `kcdprice.py` runs a KCD price-list folder against a job (the interpreter for the `.pcb` scripts); first version checked on ten rooms with the Sept 2024 list, see notes section 10. `experiments/compare_keys.py` compares its lines with workbook pastes.
 - `kcdunits.py` reads a job into a room sheet (units with labelled sizes, materials, options, quantity, notes, sidebar). Checked against twelve engineered rooms: see notes section 9. `experiments/report_laptop.py` is the older laptop-only decoder.
 - `kcdcab.py` reads the whole `.cab` (points, face rules, extra variables) and computes a unit's doors and drawer fronts with their sizes (notes section 11). The engine needs the full library text for this: a library folder, or the `rawlib.json` bundle from the laptop.
-- Run with the shop's own libraries and the May 2026 price list (notes section 12): 765 of 1067 pasted workbook lines identical across 19 rooms. The open differences are listed there; door lines stay VERIFY until the "no door" question is settled.
+- Run with the shop's own libraries and the May 2026 price list (notes section 12): 769 of 1067 pasted workbook lines identical across 19 rooms. The open differences are listed there; door lines stay VERIFY until the "no door" question is settled.
+- The monthly `STDPLIST` folders are not all full lists; some hold only the changed scripts. `kcdprice.Engine` takes a list of folders layered in order (`--pricelist` repeated), and `compare_keys.py` also checks prices against the pastes (notes section 12).
 
 ## Ideas not done yet
 
