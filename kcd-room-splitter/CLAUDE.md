@@ -77,8 +77,9 @@ VB.NET-style binary:
 
 ## Test laptop (via Desktop Commander)
 
-- Device **CFF1FTLLP-9A90EG**, Windows 11. Python 3.12 with tkinter, pip, Git, internet. **KCD is not installed on it.**
-- Job files are in Downloads, OneDrive and Outlook attachments. Work scripts are in `%TEMP%\kcdsplit`; the build venv is in `%TEMP%\kcdbuild`.
+- Device **CFF1FTLLP-9A90EG**, Windows 11. Python 3.12 with tkinter, pip, Git, internet. **KCD is not installed on it.** The device id changes when Desktop Commander is reinstalled (`npx @wonderwhy-er/desktop-commander@latest remote`); take it from `list_devices`, never from old notes.
+- Job files are in Downloads, OneDrive and Outlook attachments. Work scripts are in `%TEMP%\kcdsplit`; the build venv is in `%TEMP%\kcdbuild`. The laptop is read-only for us except our own temp folders (`%TEMP%\kcdsplit`, `%TEMP%\kcdlibod`, `%TEMP%\kcdprice`, `%TEMP%\kcd23x`).
+- **The shop's KCD23 copy** lives in OneDrive, folder `me and claude\KCD23` (unit libraries and `STDPLIST` price lists). OneDrive files are placeholders until pinned: `attrib +P -U "<folder>\*" /S /D` makes OneDrive download a folder, then robocopy the text files to `%TEMP%\kcdlibod` and `%TEMP%\kcdprice\<LIST>` before running anything over them (reading straight from OneDrive stalls). Details in `kcd-deep-dive-notes.md` section 12.
 - Quirks:
   - PowerShell commands lose `$_`, so run small Python scripts instead.
   - `python -c "..."` with inner double quotes breaks under PowerShell. Write a script file and run it.
@@ -99,6 +100,7 @@ Read `kcd-deep-dive-notes.md` before working on pricing, door orders or the engi
 - `kcdprice.py` runs a KCD price-list folder against a job (the interpreter for the `.pcb` scripts); first version checked on ten rooms with the Sept 2024 list, see notes section 10. `experiments/compare_keys.py` compares its lines with workbook pastes.
 - `kcdunits.py` reads a job into a room sheet (units with labelled sizes, materials, options, quantity, notes, sidebar). Checked against twelve engineered rooms: see notes section 9. `experiments/report_laptop.py` is the older laptop-only decoder.
 - `kcdcab.py` reads the whole `.cab` (points, face rules, extra variables) and computes a unit's doors and drawer fronts with their sizes (notes section 11). The engine needs the full library text for this: a library folder, or the `rawlib.json` bundle from the laptop.
+- Run with the shop's own libraries and the May 2026 price list (notes section 12): 765 of 1067 pasted workbook lines identical across 19 rooms. The open differences are listed there; door lines stay VERIFY until the "no door" question is settled.
 
 ## Ideas not done yet
 

@@ -383,6 +383,54 @@ trays, `Add to DrFrt` dims); the review column question (section 10).
 Also learned: KCD trims the result of `Left`/`Right` (the contrast-material mark-up prints as `1.00`, not
 ` 1.00`); `Set Unit Info` text 12 is `<name>  1 <multiplier>` and text 15 the door insert type.
 
+## 12. Run with the shop's library and the May 2026 list (Oct 13, 2026)
+
+The owner copied the shop's `C:\KCD23` (with `STDPLIST`) to the OneDrive folder `me and claude`. The
+Microsoft 365 connector lists the folders but refuses to open `.pcb` and `.cab` files (binary type), so the
+files were read on the test laptop, where OneDrive syncs them.
+
+OneDrive on the laptop:
+- Synced files start as placeholders (Files On Demand, attribute `O`). Python `open()`/`os.stat` fail with
+  `[Errno 22] Invalid argument`, Desktop Commander `read_file` fails, `Copy-Item` says "The cloud operation
+  was unsuccessful".
+- `attrib +P -U "<folder>\*" /S /D` marks a folder "Always keep on this device" and OneDrive downloads it
+  (a few minutes per thousand files). `attrib -P +U` on the image masks (`*.bmp *.jpg ...`) frees them again.
+- Globbing the whole tree on OneDrive stalls. Robocopy the text files to a local folder first: unit
+  libraries to `%TEMP%\kcdlibod\<folder>` (masks `*.cab *.cld *.mld *.lst *.dat *.unw *.csv *.txt *.prt
+  *.plt`), the price list to `%TEMP%\kcdprice\MAY26`.
+
+Price lists in `STDPLIST`: `_26-03-03 MAR`, `_26-04-03 APR` and `_26-05-03 MAY CFFL PRICING` are the same
+size (1033 files, 5,753,907 bytes, with a `ZTag FILES\` subfolder). `_26-08-03 AUG CFFL PRICING` is the
+current list, but only 203 of its files had synced when this was written; rerun with it when the upload is
+complete. Changes since 2024/2025: the 4249-line `CFClosetAccessory.pcb` table is gone; accessories are
+priced by `ClosetAccessories.pcb` (a 199-byte stub) with `CF Accessories.csv`, `CF Lighting.csv`,
+`New Closet Accessories.csv` and the TAG csv files.
+
+Unit libraries beside `NEW CFFL UNIT LIBRARY` (2271 text files): `CF Accessories` (433), `TAG Hardware
+Closet Accessories` (890), `Lighting Accessories` (435), `Closet Accessories` (488), `Room Accessories`
+(181), `TAG Closet Accessories - NEW PALETTE 2026` (441). `Catalog.from_library_root` reads them all and
+takes `options.dat` and `Sizes.Lst` from the main library.
+
+Result (`runcmp2.py cmp_may26`, 19 rooms, 1067 pasted lines): **765 identical (71.7 %)**; the Sept 2024
+list on 12 of those rooms gave 614 of 856. Rooms: GARAGE 58/83 (every door now to the sixteenth except one
+17 9/16 against 17 1/2), GARAGE CO 9/9, TILLIS HIS 88/106, BURNS 98/127, HIS 118/160, OFFICE 45/98,
+PANTRY 53/82, HER CO 23/30, WIC CO 33/60.
+
+What still differs, by size:
+- door lines the engine prints and the paste lacks (drawer towers `CSE304/305`, shelving towers
+  `CSE300-96`, entertainment units `773-96` and `772`, `CSE101stacked`): the designer's "no door" choice
+  is still not found in the record (section 7), so every engine door line stays VERIFY;
+- accessory units print `call for quote`: the record's pcb (`CFClosetAccessory.pcb`,
+  `Z12inEliteValetRackMG.pcb`, `Zkcd3003144BLK.pcb`) is not in the 2026 list and the library fallback found
+  no replacement; being checked;
+- L-shaped cabs (`C271`, `C272`, `C171`, `CSE101stacked`): the "3rd panel" and back dimensions come out
+  swapped against the paste and four adj shelves are missing (their points use the shop size `sctovlp` and
+  extra values `e5`/`e6` that live in `.cld` load blocks, both unmapped);
+- PANTRY pullout tray wording (`...included 6 1/4"-lino cancun grain16` pasted, `...grain` from the
+  engine) and the OFFICE unit 5 drawer-front count;
+- kick, filler, leg-leveler and mirror-back column placement (section 10), and the CO rooms whose pastes
+  the engineers edited by hand.
+
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
 - `kcdunits.py` (in this folder) is the reader to use from now on: `python kcdunits.py --lib C:\KCD23 JOB.job`
@@ -394,6 +442,13 @@ Also learned: KCD trims the result of `Left`/`Right` (the contrast-material mark
 - `bundle.py`: packs the catalog and raw unit records as gzip+base64 text chunks.
 - `rawlib.py`: bundles every text file of the unit library (`.cab .cld .mld .lst .dat`) into
   `out\rawlib.b64` (json, gzip, base64) for `Catalog.load_rawlib_json` in the sandbox.
-- `engine\` holds copies of `kcdjob.py`, `kcdunits.py`, `kcdprice.py`, `compare_keys.py` (md5-checked);
-  `runcmp.py` runs the comparison with the June 2025 list, `runprice.py` prices jobs into `out\eng\`.
-- Library copies used: `%TEMP%\kcdlib` (ENG UPDATE 25-03-06), `%TEMP%\kcdprice` (JUN 25-06-05 pricing).
+- `engine\` holds copies of `kcdjob.py`, `kcdunits.py`, `kcdprice.py`, `kcdcab.py`, `compare_keys.py`
+  (md5-checked with `md5check.py`; `blockmd5.py` finds which 50-line block differs, `fixnl.py` restores a
+  lost blank line; `patch_engine.py`, `patch_engine2.py` apply exact-text patches instead of re-uploading);
+  `runcmp.py` runs the comparison with the June 2025 list, `runprice.py` prices jobs into `out\eng\`;
+  `runcmp2.py OUTNAME [LIBROOT] [PRICEDIR] [NAME...]` and `runprice2.py OUTSUB [LIBROOT] [PRICEDIR] [NAME...]`
+  take any library root and price list (defaults: the OneDrive KCD23 copy and the May 2026 list).
+- `odstatus.py` counts cloud-only placeholders per OneDrive folder; `survey_kcd23.py` lists the KCD23 tree.
+- Library copies used: `%TEMP%\kcdlib` (ENG UPDATE 25-03-06), `%TEMP%\kcdprice` (JUN 25-06-05 pricing),
+  `%TEMP%\kcdlibod` (the shop's seven unit libraries from OneDrive, text files only) and
+  `%TEMP%\kcdprice\MAY26` (the `_26-05-03 MAY CFFL PRICING` list).
