@@ -41,7 +41,7 @@ VB.NET-style binary:
 | settings | STR handle group + 9 STR door-style names, Int16 nc + (nc+1)×6 (colour table), Int16 nlo + nlo×(STR library, Int16 k, k×6 shop-standard sizes as Int16 item + Int32 value), Int16 npair + npair×(Int16 unit id, Int16 option code). Option number = code + 1 in the library's `options.dat`. |
 | walls | nwalls × (205 bytes + STR texture + 5 bytes). Wall id: Int32 at 125 (Int16 copies at 117/119/121/123). Room: Int32 at 129. Neighbour wall ids: Int32 at 36 and 40. |
 | postwall | 16 bytes + STR (KCD user serial). |
-| units (cabinets) | nunits × [1806-byte prefix][body][27-byte suffix]. The prefix is 301 six-byte size slots (slot N at byte 6N: Int32 value in 0.1 mm, state byte, 0), labelled by the unit's `.cab` file; see `kcd-deep-dive-notes.md`. Body: 9 STR (cat, cab, lib, prt, pcb, name, edge, shp, profile), 86-byte block, 8 STR materials, 7 STR, 10 bytes, 2 STR (unw, unwname). In the 86-byte block: Int16 at 0 is the wall id (0 = deleted), Int16 at 2 is a flag, Int16 at 10 = number of size items in the `.cab`, Int32 at 12 = width, 16..39 are geometry counts (not prices), 40..63 two centre points, Int16 at 64 = unit type code. The 8 + 7 STR are Set Unit Info texts 1..15 (text 1 = material name and price multiplier). Suffix: Int32 group at +4, unit id Int16 at +12/+14/+16. |
+| units (cabinets) | nunits × [1806-byte prefix][body][27-byte suffix]. The prefix is 301 six-byte size slots (slot N at byte 6N: Int32 value in 0.1 mm, state byte, 0), labelled by the unit's `.cab` file; see `kcd-deep-dive-notes.md`. Body: 9 STR (cat, cab, lib, prt, pcb, name, edge, shp, profile), 86-byte block, 8 STR materials, 7 STR, 10 bytes, 2 STR (unw, unwname). In the 86-byte block: Int16 at 0 is the wall id (0 = deleted), Int16 at 2 is a flag, Int16 at 10 = number of size items in the `.cab`, Int32 at 12 = width, 16..39 are geometry counts (not prices), 40..63 two centre points, Int16 at 64 = unit type code, Int16 at 66 = unit quantity. The 8 + 7 STR are Set Unit Info texts 1..15 (text 1 = material name and price multiplier). Suffix: Int32 group at +4, unit id Int16 at +12/+14/+16. |
 | mesh | 3D cache: Int32 n1 + 4·n1, (L2−1)×12 vertices, index ints, (L4−1)×66-byte faces, ending exactly at `** Notes **`. |
 | notes | STR `** Notes **`, Int16 count, records: 30 bytes, STR text, STR font, STR size, 36-byte trailer (Int32 room at trailer+4; 0 = job-wide). Header Int16 at +24 = wall id when nonzero. Empty-text notes are dimensions. |
 | roomshapes | Int16 + (n+1) slots × [Int32 cnt; cnt × (Int32 npts + npts×24 + 16 bbox + 16 bytes with Int32 tag first + Int32 m + m×4)]. Only slot 0 seen in practice; tag = room number. |
@@ -96,7 +96,7 @@ Read `kcd-deep-dive-notes.md` before working on pricing, door orders or the engi
 - Options are the (unit id, code) pairs at the end of `settings`; option number = code + 1.
 - KCD prices from text scripts in `C:\KCD23-STDPLIST\<date> CFFL PRICING` (`Z<unit>.pcb` per unit type, shared grids in `B-Side Cost.Pcb` and `C-Shelf Cost.Pcb`, fee 199 in `H-Discounts and Fees.pcb`). Prices change by swapping that folder, so read it at run time.
 - Decoded sizes matched the engineering price reviews line by line on six jobs.
-- The decoder used is `experiments/report_laptop.py` (laptop layout only).
+- `kcdunits.py` reads a job into a room sheet (units with labelled sizes, materials, options, quantity, notes, sidebar). Checked against twelve engineered rooms: see notes section 9. `experiments/report_laptop.py` is the older laptop-only decoder.
 
 ## Ideas not done yet
 

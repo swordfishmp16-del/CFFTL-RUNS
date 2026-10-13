@@ -26,6 +26,20 @@ def txt(b):
     return b.decode('cp1252', 'replace') if isinstance(b, (bytes, bytearray)) else (b or '')
 
 
+def sixteenths(x):
+    """Inches to the nearest 1/16 as KCD prints them: 29.811 -> '29 13/16', 16.0 -> '16', 0.748 -> '3/4'.
+    Use round(x*16)/16, not Fraction.limit_denominator, which gives thirds and sevenths."""
+    n = int(round(x * 16))
+    whole, r = divmod(abs(n), 16)
+    sign = '-' if n < 0 else ''
+    if r == 0:
+        return '%s%d' % (sign, whole)
+    from math import gcd
+    g = gcd(r, 16)
+    frac = '%d/%d' % (r // g, 16 // g)
+    return ('%s%d %s' % (sign, whole, frac)) if whole else sign + frac
+
+
 # --------------------------------------------------------------------------- unit library (.cab)
 
 def parse_cab_text(text, name=''):
@@ -55,6 +69,7 @@ def parse_cab_text(text, name=''):
     k = find('#code')
     if k >= 0 and ',' in lines[k]:
         c['code'] = lines[k].split(',', 1)[1].strip()
+    c['extra_items'] = parse_extra_items(c['extra'])
     i = find('#sizes')
     if i >= 0:
         try:
@@ -75,6 +90,27 @@ def parse_cab_text(text, name=''):
             if j + off < len(lines):
                 c[key] = lines[j + off].strip()
     return c
+
+
+def parse_extra_items(extra_lines):
+    """'#Extra Variables' lines: kind, item, formula, label. Kinds U / UI / UIQ / I set size slot <item>
+    (UIQ = integer item); E sets an E-variable, not a slot. Returns {item: (kind, formula, label)}."""
+    out = {}
+    for ln in extra_lines:
+        parts = [p.strip() for p in ln.split(',')]
+        if len(parts) < 3:
+            continue
+        kind = parts[0].upper()
+        if kind not in ('U', 'UI', 'UIQ', 'I'):
+            continue
+        try:
+            item = int(parts[1])
+        except Exception:
+            continue
+        label = parts[3] if len(parts) > 3 else ''
+        if item not in out or (label and not out[item][2]):
+            out[item] = (kind, parts[2], label)
+    return out
 
 
 class Catalog:
@@ -125,7 +161,8 @@ class Catalog:
                 order.append(int(item))
             cat.cabs[name.lower()] = {'file': name, 'head': c.get('head', []), 'sizes': sizes, 'order': order, 'prt': c.get('prt', ''),
                                       'pcb': c.get('pcb', ''), 'T': c.get('T', ''), 'code': c.get('code', ''), 'choose': c.get('choose', []),
-                                      'extra': c.get('extra', []), 'option': c.get('option', []), 'faces': c.get('faces', [])}
+                                      'extra': c.get('extra', []), 'option': c.get('option', []), 'faces': c.get('faces', []),
+                                      'extra_items': parse_extra_items(c.get('extra', []))}
         files = d.get('files', {})
         if 'options.dat' in files:
             cat.load_options_text(files['options.dat'])
@@ -172,9 +209,11 @@ SLOT = {'X': 1, 'W': 2, 'H': 3, 'D': 4, 'LS': 5, 'MS': 6, 'RS': 7, 'TR': 8, 'MR'
         'NO_KICK_NOTCH': 119, 'SHOW_BACKS': 121, 'ROD1': 251, 'ROD2': 252, 'ROD3': 253, 'FULL_DOORS': 254}
 
 # Unit type codes seen so far (byte 64 of the 86-byte block). Others exist; report the number when unknown.
-TYPE_NAMES = {10: 'window', 20: 'door', 100: 'upper with doors', 170: 'upper L corner', 200: 'base',
+TYPE_NAMES = {10: 'window', 20: 'door', 53: 'appliance', 100: 'upper with doors', 170: 'upper L corner', 200: 'base',
               230: 'filler', 300: 'tall 1 opening', 320: 'tall 3 openings', 500: 'backing', 550: 'custom or finish panel',
-              641: 'shelf', 651: 'single hang', 652: 'double hang', 670: 'L-shape', 880: 'leg leveler', 1000: 'accessory or obstruction'}
+              640: 'top and bottom connecting shelves', 641: 'shelf', 645: 'top connecting shelf', 651: 'single hang',
+              652: 'double hang', 670: 'L-shape', 770: 'slatwall', 880: 'leg leveler', 899: 'TAG rack accessory',
+              1000: 'accessory or obstruction', 1101: 'light'}
 
 SET_UNIT_INFO = ['material', 'door type', 'edgeband', 'rod type', 'base', 'crown', 'backing', 'drawer box',
                  'notch 1', 'notch 2', 'handles', 'contrast', 'countertop', 'finishing', 'insert']
@@ -203,6 +242,7 @@ class Unit:
         f86 = raw['f86']
         self.f86 = f86
         self.T = struct.unpack_from('<h', f86, 64)[0]
+        self.qty = struct.unpack_from('<h', f86, 66)[0]           # unit quantity: KCD prints the unit's lines qty times
         self.nsizes = struct.unpack_from('<h', f86, 10)[0]
         self.width_raw = struct.unpack_from('<i', f86, 12)[0]
         pre = d[raw['start']:raw['start'] + kcdjob.UNIT_PREFIX]
@@ -230,12 +270,37 @@ class Unit:
     def label(self, item):
         if self.cabdef and item in self.cabdef['sizes']:
             return self.cabdef['sizes'][item][1]
+        if self.cabdef and item in self.cabdef.get('extra_items', {}):
+            kind, formula, lab = self.cabdef['extra_items'][item]
+            return lab or ('%s %s' % (kind, formula))
         return ''
+
+    def defined(self, item):
+        """True when the unit's .cab defines this slot (in #Sizes or as a U/UI/UIQ/I extra variable).
+        Undefined slots can still hold leftovers from another cab and must not be read as sizes."""
+        if not self.cabdef:
+            return None
+        return item in self.cabdef['sizes'] or item in self.cabdef.get('extra_items', {})
 
     def is_integer_item(self, item):
         if self.cabdef and item in self.cabdef['sizes']:
             return self.cabdef['sizes'][item][2] == '1'
+        if self.cabdef and item in self.cabdef.get('extra_items', {}):
+            return self.cabdef['extra_items'][item][0] == 'UIQ' or self.state(item) == 1
         return self.state(item) == 1
+
+    def default_formula(self, item):
+        """The .cab default for the slot ('' when unknown). A non-numeric default means the stored value is a
+        result KCD computed; it can lag behind values the user typed later."""
+        if self.cabdef and item in self.cabdef['sizes']:
+            return self.cabdef['sizes'][item][0]
+        if self.cabdef and item in self.cabdef.get('extra_items', {}):
+            return self.cabdef['extra_items'][item][1]
+        return ''
+
+    def is_computed(self, item):
+        f = self.default_formula(item)
+        return bool(f) and self.state(item) == 0 and not re.match(r'^[-+]?[\d.]+(mm|in)?$', f.replace(' ', ''))
 
     def value(self, item):
         """Inches for size items, plain number for count/yes-no items (cab flag 1)."""
@@ -268,7 +333,22 @@ class Unit:
         return [self.inch(n) for n in (251, 252, 253) if self.raw(n) > 0]
     @property
     def door_heights(self):
+        """Door, drawer-front and opening heights in slots I41..I46 and I147..I149. A value here does not mean
+        the unit has a door: door presence comes from the .cab face rules and the price script."""
         return [self.inch(n) for n in (41, 42, 43, 44, 45, 46, 147, 148, 149) if self.raw(n) > 0]
+    def shelf_counts(self):
+        """{item: count} for the count slots whose .cab label speaks of shelves (I19, I31, I32, I33, I160, I161...)."""
+        out = {}
+        for n in (19, 31, 32, 33, 122, 160, 161):
+            lab = self.label(n).lower()
+            if n in self.slots and self.is_integer_item(n) and ('shel' in lab or 'shelves' in lab):
+                out[n] = self.count(n)
+        return out
+    def side(self, item):
+        """Inches for a side/rail slot, or None when the .cab does not define it (fillers, custom panels)."""
+        if self.defined(item) is False:
+            return None
+        return self.inch(item)
     @property
     def type_name(self):
         return TYPE_NAMES.get(self.T, 'type %d' % self.T)
@@ -299,6 +379,9 @@ class Unit:
             out.append((n, lab, self.value(n), self.raw(n), self.state(n)))
         return out
 
+    def computed_slots(self):
+        return [n for n in sorted(self.slots) if self.is_computed(n)]
+
     def missing_cab_items(self):
         """Items the .cab lists that are all-zero in the job (zero is a real value for many of them)."""
         if not self.cabdef:
@@ -306,13 +389,13 @@ class Unit:
         return [n for n in self.cabdef['order'] if n not in self.slots]
 
     def to_dict(self):
-        return {'seq': self.seq, 'id': self.id, 'wall': self.wall, 'room': self.room, 'cab': self.cab, 'cat': self.cat,
+        return {'seq': self.seq, 'id': self.id, 'wall': self.wall, 'room': self.room, 'cab': self.cab, 'cat': self.cat, 'qty': self.qty,
                 'name': self.name, 'lib': self.lib, 'prt': self.prt, 'pcb': self.pcb, 'T': self.T, 'type': self.type_name,
                 'nsizes': self.nsizes, 'X': self.X, 'W': self.W, 'H': self.H, 'D': self.D, 'LS': self.LS, 'MS': self.MS,
                 'RS': self.RS, 'TR': self.TR, 'MR': self.MR, 'BR': self.BR, 'K': self.K, 'rods': self.rods,
                 'door_heights': self.door_heights, 'material': self.material, 'material_multiplier': self.material_multiplier,
                 'set_unit_info': self.set_unit_info, 'edge': self.edge, 'options': self.options,
-                'slots': {n: {'label': lab, 'value': v, 'raw': r, 'state': s} for n, lab, v, r, s in self.labelled_slots()},
+                'slots': {n: {'label': lab, 'value': v, 'raw': r, 'state': s, 'computed': self.is_computed(n)} for n, lab, v, r, s in self.labelled_slots()},
                 'cab_known': self.cabdef is not None}
 
 
@@ -438,23 +521,27 @@ class Job:
             if n['text'].strip() and not n['text'].lstrip().upper().startswith('ROOM DETAILS'):
                 P.append('note room %d wall %d: %r' % (n['room'], n['wall'], n['text'][:300]))
         P.append('')
-        P.append('seq\tid\troom\ttype\tcab\tpcb\tname\tX\tW\tH\tD\tLS\tMS\tRS\tTR\tMR\tBR\tK\tshelves19/31/33/32\trods\tdoor hts\toptions\tmaterial')
+        P.append('seq\tid\troom\tqty\ttype\tcab\tpcb\tname\tX\tW\tH\tD\tLS\tMS\tRS\tTR\tMR\tBR\tK\tshelf counts\trods\tI41-46 heights (doors, fronts or openings)\toptions\tmaterial')
+        def sd(u, item):
+            v = u.side(item)
+            return '-' if v is None else '%.2f' % v
         for u in self.units:
-            P.append('\t'.join(str(x) for x in [u.seq, u.id, u.room, u.type_name, u.cab, u.pcb, u.name,
-                      '%.3f' % u.X, '%.3f' % u.W, '%.3f' % u.H, '%.3f' % u.D, '%.2f' % u.LS, '%.2f' % u.MS, '%.2f' % u.RS,
-                      '%.2f' % u.TR, '%.2f' % u.MR, '%.2f' % u.BR, '%.2f' % u.K,
-                      '%d/%d/%d/%d' % (u.count(19), u.count(31), u.count(33), u.count(32)),
+            P.append('\t'.join(str(x) for x in [u.seq, u.id, u.room, u.qty, u.type_name, u.cab, u.pcb, u.name,
+                      '%.3f' % u.X, '%.3f' % u.W, '%.3f' % u.H, '%.3f' % u.D, sd(u, 5), sd(u, 6), sd(u, 7),
+                      sd(u, 8), sd(u, 9), sd(u, 10), sd(u, 11),
+                      ' '.join('I%d=%d' % (n, c) for n, c in u.shelf_counts().items()),
                       '/'.join('%.2f' % r for r in u.rods), '/'.join('%.2f' % h for h in u.door_heights),
                       ' '.join('%d:%s' % (o, self.option_name(o)) for o in u.options), u.mats[0]]))
         if slots:
             for u in self.units:
                 P.append('')
-                P.append('--- unit %d (id %d) %s  cab=%s  cat=%r name=%r prt=%r pcb=%r  T=%d nsizes=%d  cab %s' % (
-                    u.seq, u.id, u.type_name, u.cab, u.cat, u.name, u.prt, u.pcb, u.T, u.nsizes, 'known' if u.cabdef else 'NOT IN CATALOG'))
+                P.append('--- unit %d (id %d) %s  qty=%d  cab=%s  cat=%r name=%r prt=%r pcb=%r  T=%d nsizes=%d  cab %s' % (
+                    u.seq, u.id, u.type_name, u.qty, u.cab, u.cat, u.name, u.prt, u.pcb, u.T, u.nsizes, 'known' if u.cabdef else 'NOT IN CATALOG'))
                 P.append('    set unit info: %s' % ['%s=%s' % (SET_UNIT_INFO[j], t) for j, t in enumerate(u.set_unit_info) if t])
                 P.append('    edge=%r shp=%r profile=%r unw=%r' % (u.edge, u.shp, u.profile, u.unw))
                 for n, lab, v, raw, st in u.labelled_slots():
-                    P.append('    I%-3d %-40s %10s  (raw %d, state %d)' % (n, lab, ('%d' % v) if isinstance(v, int) else ('%.4f' % v), raw, st))
+                    tag = '  computed from %s' % u.default_formula(n) if u.is_computed(n) else ''
+                    P.append('    I%-3d %-40s %10s  (raw %d, state %d)%s' % (n, lab, ('%d' % v) if isinstance(v, int) else ('%.4f' % v), raw, st, tag))
                 miss = u.missing_cab_items()
                 if miss:
                     P.append('    cab items with no record (zero): %s' % miss)

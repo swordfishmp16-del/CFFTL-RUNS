@@ -97,7 +97,7 @@ drawer box height = door/drawer front heights (I42..), drawer front width = W �
 | 16..39 | six Int32 – likely geometry/mesh counts (differ between a job and the same unit saved as .UNW), not prices |
 | 40..63 | two 3D centre points (X+W/2, from-wall + D×k, H/2) in wall coordinates – confirmed |
 | 64..65 | **unit type code T** from the `.cab` (230 filler, 300 tall, 320 tall 3-opening, 100 upper w doors, 170 upper L corner, 200 base, 500 backing, 550 custom/finish panel, 641 shelf, 651 single hang, 652 double hang, 670 L-shape, 880 leg leveler, 1000 accessory/obstruction, 20 door, 10 window) – confirmed |
-| 66..67 | 1 |
+| 66..67 | unit quantity (1 in almost every unit; 2 or 10 seen on LED strips and a filler). KCD prints the unit's price lines quantity times |
 | 72..73 | 190 (0.75" material thickness) |
 
 The earlier guess that bytes 16..39 are "price-like values" was wrong; KCD does not store prices in the job.
@@ -246,16 +246,80 @@ garage platforms and obstructions added; wall notes added; material multiplier s
 
 ## 7. Open points
 
-- Bottom drawer-front height in a review (14 13/16) was 2.5" more than stored I45 (12.22): derived slots
-  can be stale or the current library formula differs. Recompute derived sizes from the `.cab` formulas
-  when they matter.
-- Bytes 6..9 and 16..39 of the 86-byte block, suffix Int16 at +4, the 28-byte handle floats: unknown.
+- **Bottom drawer front of a drawer stack.** The stored slot (I45 on CSE304-96, I44 on CSE264) is the
+  `.cab` default formula's result. The review prints something else: on one unit the face-fill remainder with
+  three lower gaps (H-K-I53-I55-I41-I52-I42-I43-I44-3*I54 = 12 1/2 versus stored 12 3/8); on a unit with
+  `No Kick Notch = 1` it was 2 5/8 more than stored (I45 + K + I52, as if the front covers the kick). The
+  face height must come from the price script / `#Faces` geometry, not from the slot.
+- **Door presence and door style per unit are not in any decoded field.** Non-zero I41..I46 do not mean a
+  door; doored units exist whose cab has no door-height slot. Door count comes from the cab (`UIQ,36,...`
+  rules, face rules such as `(I51=0)&(I254=0)`); the per-unit style name (for example `flatCFMirror`,
+  entry 8 of the job's 9 door styles) was not found in the 86-byte block, the 10 bytes or the suffix.
+- **Stale derived slots.** Slots whose cab default is a formula and whose state byte is 0 are results
+  KCD computed; they can lag behind values typed later (seen: a typed reveal changed I44 after the review
+  was printed). `kcdunits.Unit.is_computed()` marks them.
+- L-shape scripts (ZC672 for C272-2opdoor; c271/772 neighbours in 2025/26 lists): back width W - 0.748,
+  kick 32 13/16 on a 30 9/16 unit, shared panel printed under the L unit with the neighbour's panel
+  omitted, neighbour kick W - 0.75. Needs the live scripts.
+- Drawer-box depth looks capped at 24 (D = 36 printed as 24; 16 and 20 print as D). One data point.
+- `DrFrt-...` lines appear only when the door type is `Melamine 2nd Material`; plain Melamine faces print
+  only `Add to DrFrt`. Inferred from five rooms, not from a script.
+- Quantity field: confirmed as a line multiplier on accessories and a filler; untested on multi-part units.
+- Bytes 4..9 and 16..39 of the 86-byte block (byte 4 takes 0/30/60/90/120, 6 takes 0..2, 8 takes 0..6;
+  neither is the door or drawer count), suffix Int16 at +4, the 28-byte handle floats: unknown.
 - `.prt` part scripts are missing from the update zips; ask whether `C:\KCD23` on an engineering PC has them.
 - Three jobs still do not parse (BARNARD SANDY note variant; LANGNAS GARAGE and SHOWRM PB "string past EOF").
 - Newest library is `KCD23_Update_CFFL_ENGINEER_26-09-08.exe` on the Engineering SharePoint; not obtained.
 
+## 9. Reader check against twelve engineered rooms (Oct 13, 2026)
+
+`kcdunits.py` (the room-sheet reader) was run on twelve room files that also had the engineer's filled
+workbook, and every pasted KCD price line (856 lines) was derived from the reader's values by independent
+checkers. 800 lines (93.5 %) derive exactly. No line was traced to a wrong value, wrong unit or wrong label.
+The misses: 14 lines from the unit quantity field (now read), 2 from door presence/style (not decodable yet),
+14 from a job saved after its review was printed, 3 from accessory-library text, 1 engineer edit, 22 from
+price-script formulas not known yet (section 7). Rules confirmed, usable as test oracles for the price engine:
+
+- **Unit number** in the review = 1-based position among live units in file order (`Unit.seq`). Units whose
+  pcb is `none` (obstructions, outlets, switches, lights, appliances, door openings) print nothing but keep
+  their number. The review paste is sorted by unit number, then part name.
+- **Rounding**: every printed size is the inch value rounded to the nearest 1/16 (`round(x*16)/16`, see
+  `kcdunits.sixteenths`). Per-area prices (backs 9.00/sq ft) are computed on the rounded sizes.
+- **Names**: material = Set Unit Info text 1 without the trailing multiplier; door type = text 2; edgeband =
+  text 3; rod = text 4; kick = text 5; backing = text 7 with `#unitmaterialName` substituted; drawer box =
+  text 8; contrast = text 12. Panels and shelves print as `<Part> - <material>-3/4"-<edgeband>`. Line cost =
+  base price x material multiplier (text 1's last number).
+- **Panels**: `Left Panel` D x H when LS > 0, `Right Panel` when RS > 0 (RS = 0 typed = shared with the
+  neighbour, no line). L-corner cabs (271/272/172/c271/171) use I28/I29 (left/right side depth) as the
+  panel depth. L-shapes with Show Backs print a `3rd Panel` H high (width W-RS or D-RS by variant). Custom
+  panel units (T = 550) print exactly one panel, D x H; their I5/I7..I10 = 0.748 are not sides.
+- **Euro shelves**: Top when TR > 0, Bottom when BR > 0, one Middle per non-zero I9/I21; D x (W-LS-RS).
+  Drawer-stack cabs (ZC304/ZC305) print the middle shelf twice (`#addmidshelf=1` in the script).
+  L-corner shelves are two pieces (I29 x (W-RS) and I28 x (D-LS) or mirrored).
+- **Adjustable shelves**: count = I19 where the cab stores it, else I31; D x (W-LS-RS). Stand-alone shelf
+  cabs (Csetsh, garageplatform) use D x W. Option 5 (stiffeners 1 side) adds one 30 line per adj shelf.
+- **Rods**: one `Closet Rod <text 4>` per I251..I253 > 0, length W-LS-RS-0.25.
+- **Kick**: `Kick <text 5>` when K > 0, length W, price 0 (bases are priced per room on the sheet).
+  L-corner base kick = back width + 3.
+- **Backs**: only when I121 Show Backs = 1; (W-LS-RS) x (H-TR-BR-K). ZC101 (stacked uppers) uses
+  W-LS-RS-0.25 (the rod width left over in `#ShelfWidth`). Drawer stacks and the hamper use the top opening
+  height I20 as the back height. L-corner backs: (D-LS-0.75) or (W-LS-0.75) by variant.
+- **Doors and drawer fronts**: width (W - I56 - I57) / number of doors; full-height door H-K-I53-I55;
+  drawer fronts from I42.. (CSE304), I41.. (CSE263/264), I42..I46 (CSE305); the bottom front is the
+  unresolved case in section 7. Drawer boxes: `Drawer Box-<front height>"-<text 8>`, D x (W-LS-RS).
+- **Fillers**: `Filler-<material>`, W only, 17 x multiplier. **Options**: one `Opt-<name>` per settings pair,
+  name from options.dat (code + 1). **Accessories** (T = 1000): `RM1 <category>`, once per quantity.
+- **Sidebar counts are not reliable** (rod and base quantities disagreed with the file in several rooms).
+- **Totals**: in a full room the pasted prices sum to the Final Price Sheet subtotal; plus the accessory
+  rows (BASE/CROWN quantity x price) they give the Standard Price. Change-order rooms do not reconcile.
+- **Test-data lesson**: a change-order room keeps only the remade parts, and a job saved after the review
+  (unit numbers or typed reveals changed) cannot be matched. Verification rooms must be full rooms with the
+  review printed from the same save.
+
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
+- `kcdunits.py` (in this folder) is the reader to use from now on: `python kcdunits.py --lib C:\KCD23 JOB.job`
+  prints the room sheet; `Catalog.from_json` takes the compact catalog made by `experiments/catjson.py`.
 - `report.py` (copy in `experiments/report_laptop.py`): for the given jobs, decodes every unit with the
   `.cab` slot labels, the settings pairs, room defaults, handles and notes into `out\sizes_<job>.txt`;
   also writes `out\catalog_cabs.tsv` and `out\catalog_slots.txt` from the extracted library.
