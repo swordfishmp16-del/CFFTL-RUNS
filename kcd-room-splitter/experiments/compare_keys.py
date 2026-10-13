@@ -1,9 +1,11 @@
 """Compare engine output with the workbook paste blocks (keys_all.txt). Prices are ignored (different list
 versions); names are normalised; dims compared as sixteenths. usage: compare_keys.py CAT PRICEDIR KEYS JOB=KEYNAME ..."""
 import sys, re, collections
-sys.path.insert(0, '/home/user/CFFTL-WORKING-/kcd-room-splitter')
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import kcdunits, kcdprice
-cat = kcdunits.Catalog.from_json(sys.argv[1]); pdir = sys.argv[2]; keys = open(sys.argv[3], encoding='utf-8').read().split('\n')
+cat = kcdunits.Catalog.from_json(sys.argv[1]) if sys.argv[1].lower().endswith('.json') else kcdunits.Catalog.from_library_root(sys.argv[1]); pdir = sys.argv[2]; keys = open(sys.argv[3], encoding='utf-8').read().split('\n')
 
 def key_lines(section):
     out = []; on = False; inblock = False
