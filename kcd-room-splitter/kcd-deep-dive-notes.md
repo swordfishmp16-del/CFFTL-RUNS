@@ -464,6 +464,33 @@ cost, D, W, order`: the engine prints `Under Mt Pullout Tray w Lino Cancun Grain
 end of the name and only 23 3/4 in the dimension columns. Treat it as a paste quirk until a real printout
 shows where the depth lands.
 
+**What the KCD23 root holds (Oct 13, 2026, from the OneDrive copy of the shop PC).** `Start.Dat` is KCD's
+start-up data: the nine door-style slots of a job are `1 Top Door, 2 Base Door, 3 Drawer Front, 4..9 Extra Door
+4..9` (shop defaults flat-VG, flat-VG, flat-HG, flat-VG, SFP, SGP, SMP, BEVEL, SRP); a job's own list can
+differ (`FLAT, FLAT, FLAT, FLAT, Sgp, Smp, Bevel, Mirror|flatCFMirror, Sfp`), so a mirror door is "Extra Door 8"
+of the room. Which door number a unit's face uses is still not found in the record. The pricing-list
+descriptors live in the root, one `.Pbs` per `STDPLIST` folder (`_26-08-03 AUG CFFL PRICING.Pbs` and the
+others are identical: `Pricing Library V8.2 June 11, 2025 release`, `PlistType=Closet`, `REPORTID=W`), with a
+`.Plt` materials list and a `.pcs` countertop list per month; `PlistChoice.Dat` names the materials list in
+use (`CFFL MATERIALS`), not the price list; `KCD.log` does not log the price list either. The report
+definitions are there too: `_ENGINEERING PRICING.Rpr` (Oct 2024), `_ENGINEERING PRICING V9.Rpr`,
+`Unit Price Review.Rpr`, `NEW Unit Price Review.Rpr`, plus the stock KCD reports. `_ENGINEERING PRICING.Rpr`
+prints the UNIT PRICE REVIEW with one group: `Sort (-Unit)(-name)`, `Print Group (Cost @ 0)(Unit @ 8)
+(Name @ 13)(Width @ 90)(Length @ -110)`, header `Unit # | Name | Depth/Width | Height/Length | Cost`. So KCD
+prints exactly two dimension columns, dim1 under Depth/Width and dim2 under Height/Length, for every line; the
+pastes that show one dimension for kicks (`w, K`), fillers (`w, h`), leg levelers (`w, H`), mirror backs (`w, h`)
+and `Add to DrFrt` (`#DrawerFrontHeight, #DrawerFrontWidth`) keep dim1 and drop dim2, which the report itself
+does not do; a real printout or export will show whether that is KCD or the engineers' hand. `System\
+Maintenance\MaintenanceList.dat` is the KCD program updater, not the price-list updater.
+
+**Monthly price folders are not all full.** Files per `STDPLIST` folder: `_25-09-02 SEP` 1228 (5.3 MB),
+`_25-10-02 OCT` 738 (1.4 MB), `_25-12-11 DEC` 347, `_26-01-08 JAN` 349, `_26-02-02 FEB` 713 (5.3 MB),
+`_26-03-18 MAR` 1025, `_26-04-02 APR` 1024, `_26-05-03 MAY` 1033, `_26-05-22 MAY` 288 (0.2 MB), `_26-07-07 JUL`
+197 (46 KB: `cfcountoptionsroom11`, `GetDrawerBoxCost`, `Z171`, `Z564`, `Zc601-ld` + `ZTag FILES`), `_26-08-03
+AUG` 203 (43 KB: 11 scripts + `ZTag FILES`). The owner confirmed the shop PC uses this same KCD23 tree and that
+updates land in it. Whether KCD fills a short folder from an earlier list is unknown; the engine now accepts
+several folders layered in date order so both readings can be tested against the pasted prices.
+
 **How accessories are priced in 2025/2026 lists (confirmed from the May 2026 `Eachunit.pcb`,
 `Eachunit2.pcb` and csv files).** A unit whose pcb file is missing from the list runs `Eachunit.pcb`. When the
 unit library name matches `Tag *`, `*Access*` or `*Light*` it loads `Eachunit2.pcb`, which picks a csv by
