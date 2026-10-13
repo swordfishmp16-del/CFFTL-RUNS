@@ -3,6 +3,9 @@
 Runs a price-list folder (for example C:\\KCD23-STDPLIST\\_26-08-03 AUG CFFL PRICING) against the units of
 a room read by kcdunits.py, and returns the price lines the way KCD would print them. Everything the
 engine is unsure about is written to its `flags` list so an engineer can verify instead of trusting it.
+The price list can also be several folders layered in order (the full base list first, then each small
+update pack that holds only the changed scripts); a later folder's file replaces an earlier one with the
+same name.
 
 The language is documented in scratchpad notes/pricing/pcb-language-spec.md (Oct 2026). Short version:
 one statement per line, comma-separated fields, a leading comma is a comment, `(cond):` may prefix a
@@ -11,7 +14,7 @@ dimension, `Do/Skip {}` blocks, `Load` includes another file in the same variabl
 current file, `Price` emits a line.
 
 Usage:
-    eng = Engine(pricelist_dir, catalog)
+    eng = Engine(pricelist_dir, catalog)   # or Engine([base_dir, pack1_dir, pack2_dir], catalog) to layer folders
     lines = eng.price_job(job)            # job from kcdunits.read_job
     for ln in lines: print(ln.unit, ln.qty, ln.name, ln.cost, ln.dim1, ln.dim2, ln.order)
 """
@@ -234,22 +237,48 @@ def fmt_num(v):
 
 class Engine:
     def __init__(self, pricelist_dir, catalog=None, afterprice=False, trace=False):
-        self.dir = pricelist_dir
+        # pricelist_dir is one folder, or a list of folders layered in order: the full base list first, then
+        # each small update pack (those hold only the scripts that changed). A later folder's file replaces an
+        # earlier one with the same name, so the newest copy of every script is the one used.
+        if isinstance(pricelist_dir, (list, tuple)):
+            self.pricelist_dirs = list(pricelist_dir)
+        else:
+            self.pricelist_dirs = [pricelist_dir]
+        self.dir = self.pricelist_dirs[0] if self.pricelist_dirs else None    # the base folder, as before
         self.catalog = catalog
         self.afterprice = afterprice
         self.trace = trace
-        self.files = {}                 # lower name -> path (root first, then subfolders)
-        for root, dirs, fs in os.walk(pricelist_dir):
-            for f in fs:
-                k = f.lower()
-                if k not in self.files:
-                    self.files[k] = os.path.join(root, f)
+        self.log = []
+        self.flags = []
+        self.files = {}                 # lower name -> path (root first, then subfolders; a later folder wins)
+        self.file_sources = {}          # lower name -> the folder that copy came from
+        for n, folder in enumerate(self.pricelist_dirs):
+            found = {}                  # this folder's files; inside one folder the root beats its subfolders
+            for root, dirs, fs in os.walk(folder):
+                for f in fs:
+                    k = f.lower()
+                    if k not in found:
+                        found[k] = os.path.join(root, f)
+            # os.walk says nothing when a folder is missing, so say it here: a misspelled update-pack name
+            # would otherwise be skipped quietly and the run would look fine while using the old prices
+            if not os.path.isdir(folder):
+                self.flag('price list folder not found: %s' % folder)
+            elif not found:
+                self.flag('price list folder holds no files: %s' % folder)
+            replaced = sum(1 for k in found if k in self.files)
+            self.files.update(found)
+            for k in found:
+                self.file_sources[k] = folder
+            if len(self.pricelist_dirs) > 1:
+                if n == 0:
+                    self.log.append('price list base %s: %d file(s)' % (folder, len(found)))
+                else:
+                    self.log.append('price list overlay %s: replaced %d file(s), added %d new'
+                                    % (folder, replaced, len(found) - replaced))
         self.scripts = {}               # lower name -> parsed statements
         self.vars = {}                  # lower #name -> text or float
         self.builtins = {}              # lower name -> float or list (opt)
         self.lines = []
-        self.flags = []
-        self.log = []
         self.loadstack = []
         self.unit = None
         self.job = None
@@ -1008,9 +1037,13 @@ class Engine:
 
 if __name__ == '__main__':
     import argparse
-    ap = argparse.ArgumentParser(description='Price a KCD .job with a KCD price-list folder.')
+    ap = argparse.ArgumentParser(description='Price a KCD .job with a KCD price-list folder, or with a base folder plus update packs.')
     ap.add_argument('job')
-    ap.add_argument('--pricelist', required=True, help='price list folder (for example C:\\KCD23-STDPLIST\\_26-08-03 AUG CFFL PRICING)')
+    ap.add_argument('--pricelist', required=True, action='append', metavar='FOLDER',
+                    help='price list folder (for example C:\\KCD23-STDPLIST\\_26-05-03 MAY CFFL PRICING). Repeat it to layer '
+                         'folders in order, the full base list first and then each update pack (for example '
+                         '--pricelist "...\\_26-05-03 MAY CFFL PRICING" --pricelist "...\\_26-05-22 MAY"); a later folder\'s '
+                         'file replaces an earlier one with the same name')
     ap.add_argument('--lib', required=True, help='KCD library root or compact catalog .json')
     ap.add_argument('--raw', help='rawlib.json with the full .cab texts (needed for doors when --lib is a compact catalog)')
     ap.add_argument('--room', type=int, help='only this room number')
@@ -1029,6 +1062,13 @@ if __name__ == '__main__':
     print('FLAGS (%d):' % len(eng.flags))
     for fl in eng.flags:
         print('  VERIFY', fl)
+    if len(a.pricelist) > 1:
+        # show which folders were layered and how many scripts each update pack changed
+        print()
+        print('PRICE LIST FOLDERS (%d, later ones win):' % len(a.pricelist))
+        for ln in eng.log:
+            if ln.startswith('price list '):
+                print('  ' + ln)
     if a.unknown:
         print('unknown identifiers:', sorted(eng.unknown_idents.items(), key=lambda x: -x[1])[:60])
     if a.trace:
