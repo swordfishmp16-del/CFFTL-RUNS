@@ -416,8 +416,8 @@ Closet Accessories` (890), `Lighting Accessories` (435), `Closet Accessories` (4
 (181), `TAG Closet Accessories - NEW PALETTE 2026` (441). `Catalog.from_library_root` reads them all and
 takes `options.dat` and `Sizes.Lst` from the main library.
 
-Result (`runcmp2.py cmp_may26`, 19 rooms, 1067 pasted lines): **765 identical (71.7 %)**; the Sept 2024
-list on 12 of those rooms gave 614 of 856. Rooms: GARAGE 58/83 (every door now to the sixteenth except one
+Result (`runcmp2.py cmp_may26`, 19 rooms, 1067 pasted lines): **765 identical (71.7 %)**, and **769 (72.1 %)**
+after the Name/Code fix below (`cmp_may26b`); the Sept 2024 list on 12 of those rooms gave 614 of 856. Rooms: GARAGE 58/83 (every door now to the sixteenth except one
 17 9/16 against 17 1/2), GARAGE CO 9/9, TILLIS HIS 88/106, BURNS 98/127, HIS 118/160, OFFICE 45/98,
 PANTRY 53/82, HER CO 23/30, WIC CO 33/60.
 
@@ -425,9 +425,20 @@ What still differs, by size:
 - door lines the engine prints and the paste lacks (drawer towers `CSE304/305`, shelving towers
   `CSE300-96`, entertainment units `773-96` and `772`, `CSE101stacked`): the designer's "no door" choice
   is still not found in the record (section 7), so every engine door line stays VERIFY;
-- accessory units print `call for quote`: the record's pcb (`CFClosetAccessory.pcb`,
-  `Z12inEliteValetRackMG.pcb`, `Zkcd3003144BLK.pcb`) is not in the 2026 list and the library fallback found
-  no replacement; being checked;
+- accessory units printed `call for quote` because the engine had KCD's Name and Code swapped (section 2.1);
+  fixed the same evening (see "How accessories are priced" below): valet and belt racks, jewelry trays, LED
+  strips, hampers now print with KCD's wording, part number and cost (`RM1 14in Elite Valet Rack BLK
+  808.71.503` 105, `RM1 1 Shelf Strip LED` 130, `RM1 Valet CR` 65, `RM1 18in Tilt Out 1 Lg Bag 547.43.311` 186);
+- door style names: KCD prints `flatCFMirror Door-...` (BURNS 9) and `Framed Door-Melamine-...-Mirror-...`
+  (HIS 21) where the engine prints a plain `Door-Melamine-...`, and `Framed Door-...-Clear Glass-...` for the
+  glass pair HIS 11. In the 2026 list `#Codedoor` (the door style name) and `#IncludeInsert` are KCD built-ins
+  that the scripts never set (`A-SetUp` only zeroes `#IncludeInsert`; `AA-User` sets `#DoorDrawerType` from
+  text 2 and `#DoorDrawerInsertType` from text 15). Where the unit stores its style is still unknown: the
+  mirror-door unit BURNS 9 and the plain-door unit BURNS 12 (same `.cab`, same texts, no options) differ only
+  in width, shelf count, mesh and the Int16 at byte 6 of the 86-byte block; the 10-byte block and the suffix
+  are identical; the `.cab` face codes are `10101000`/`10102000` for every door, so the style is not in the
+  library either. The room's nine door-style names (settings) hold the candidates (`Mirror` or `flatCFMirror`
+  in slot 8). Until this is found, every door line stays VERIFY and style/insert words are not printed;
 - L-shaped cabs (`C271`, `C272`, `C171`, `CSE101stacked`): the "3rd panel" and back dimensions come out
   swapped against the paste and four adj shelves are missing (their points use the shop size `sctovlp` and
   extra values `e5`/`e6` that live in `.cld` load blocks, both unmapped);
@@ -435,6 +446,47 @@ What still differs, by size:
   engine) and the OFFICE unit 5 drawer-front count;
 - kick, filler, leg-leveler and mirror-back column placement (section 10), and the CO rooms whose pastes
   the engineers edited by hand.
+
+**The Int16 at byte 6 of the 86-byte block (`a3`), surveyed on six rooms (Oct 13, 2026).** 0 on units without
+door faces (fillers, shelves, accessories, single hang, backing); 1 on single-door units (BURNS 9 and HIS 21
+mirror doors, GARAGE 15/17 plain uppers, HIS 6 23" tall 2-opening, PANTRY 772-96 at 25", the L-corner units
+271/272/172) and also on every `Hangdbls` double hang (no doors); 2 on wide units whose reviews show pairs
+(GARAGE 4/5/8 at 35", upper hutch 760-1 at 37.5", HIS 11 at 34") and on every drawer tower (CSE305/CSE304/
+CSE265, 28" to 37.5"), but also on narrow towers whose reviews show no door at all (ELLA 3 and BURNS 12 at
+18", HIS 25 773-96 at 20.5") and on HIS 3 (CSE301, 23", review shows one door 22 7/8 x 25 1/8 = the drawer
+opening turned into a hamper door, no door on the top opening). So `a3 = 2` is "pair" where a door exists,
+but it does not say whether the door exists; the A/B save experiment (section 7) is still the way to settle
+"no door" and the door style.
+
+**Pullout trays (`ZC260-Pullout.Pcb`).** `Price,...,RM#Roomnum #showponame #showpofacename #H"-#unitmaterialname,
+cost, D, W, order`: the engine prints `Under Mt Pullout Tray w Lino Cancun Grain Melamine Drawer Face included
+6 1/4"-Lino Cancun Grain` with dims 16 x 23 3/4; the pasted review has the same words with `16` glued to the
+end of the name and only 23 3/4 in the dimension columns. Treat it as a paste quirk until a real printout
+shows where the depth lands.
+
+**How accessories are priced in 2025/2026 lists (confirmed from the May 2026 `Eachunit.pcb`,
+`Eachunit2.pcb` and csv files).** A unit whose pcb file is missing from the list runs `Eachunit.pcb`. When the
+unit library name matches `Tag *`, `*Access*` or `*Light*` it loads `Eachunit2.pcb`, which picks a csv by
+library (`Tag Hardware Closet Accessories.csv`, `Tag Hardware Engage Collection.csv`, ... , `CF Accessories.csv`
+for `CF Accessories` and `Closet Accessories`, `CF Lighting.csv` for `CF Lighting` and `Lighting Accessories`),
+looks the unit's `#Name` up in column 1 (`ReadCsvValue,<csv>,#Name,#tagcode,#TemptotalunitCost`) and prints
+`Price,1, RM#roomnum #Name #tagcodeoutput, cost × #universalupcharge, w, h, d` (the part number is blank when
+the csv says `NA` or `Skip`; `d` lands in the print-order field, so the review shows width and height only).
+A name not in the csv leaves `#tagcode` at `Does Not Exist` and `Eachunit.pcb` prints `RM<n> <name> -
+!*!*!*CALL FOR QUOTE*!*!*!` at print order 261. Example rows: `Valet CR,NA,65`, `JT Valet,NA,175`,
+`1 Shelf Strip LED,NA,130`, `12in Elite Valet Rack MG,808.71.001,95`. The `ZTag FILES\Zkcd<code>.pcb` stubs
+(200 in the May list) only `load` a cost script (`K-Pant Racks Costs.PCB`, `L-Laundry Costs.PCB`, `P-Elite Hooks
+and Holders.pcb`); `ZRoundPoleMNL.pcb` loads `TAG-USES SET UNIT INFO.pcb`, which prints `#Name #Code See Unit
+for Toestop pricing` at 0.
+
+**The `_26-08-03 AUG CFFL PRICING` folder is not a full list.** It holds 203 files (42 KB): 11 top-level
+scripts (`cfcountoptionsroom11.pcb`, `GetContrastMaterialCostGroup.pcb`, `N-TAG Trackwall System.pcb`,
+`Z1118.pcb`, `Z409-dr.PCB`, `Z492.pcb`, `Z599.pcb`, `Z775.pcb`, `ZC304hd.Pcb`, `Zcse-300c.pcb`,
+`ZRoundPoleMNL.pcb`) and a `ZTag FILES\` set; no `A-SetUp.Pcb`. `_26-05-22 MAY` (288 files) and `_26-07-07 JUL`
+(197 files, 46 KB) look the same. They are update packs laid over a full list, or incomplete copies; the owner
+has to say which folder the shop's KCD points at. Full lists on hand: `_26-03-18 MAR` (1025 files),
+`_26-04-02 APR` (1024), `_26-05-03 MAY` (1033); older full lists back to `_25-09-02 SEP` are in the same
+`STDPLIST` copy. No `.Pbs` file sits in the May folder or the `STDPLIST` root.
 
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
