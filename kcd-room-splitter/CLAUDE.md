@@ -96,6 +96,7 @@ Read `kcd-deep-dive-notes.md` before working on pricing, door orders or the engi
 - Options are the (unit id, code) pairs at the end of `settings`; option number = code + 1.
 - KCD prices from text scripts in `C:\KCD23-STDPLIST\<date> CFFL PRICING` (`Z<unit>.pcb` per unit type, shared grids in `B-Side Cost.Pcb` and `C-Shelf Cost.Pcb`, fee 199 in `H-Discounts and Fees.pcb`). Prices change by swapping that folder, so read it at run time.
 - Decoded sizes matched the engineering price reviews line by line on six jobs.
+- `kcdprice.py` runs a KCD price-list folder against a job (the interpreter for the `.pcb` scripts); first version checked on ten rooms with the Sept 2024 list, see notes section 10. `experiments/compare_keys.py` compares its lines with workbook pastes.
 - `kcdunits.py` reads a job into a room sheet (units with labelled sizes, materials, options, quantity, notes, sidebar). Checked against twelve engineered rooms: see notes section 9. `experiments/report_laptop.py` is the older laptop-only decoder.
 
 ## Ideas not done yet

@@ -94,7 +94,7 @@ drawer box height = door/drawer front heights (I42..), drawer front width = W �
 | 6..7, 8..9 | small counts (2/1 on door units, 0/0 on fillers) – unknown meaning |
 | 10..11 | number of size items in the unit's `.cab` (15 for 234.cab, 44 for CSE304-96.cab) – confirmed |
 | 12..15 | Width W (Int32, 0.1 mm) – confirmed |
-| 16..39 | six Int32 – likely geometry/mesh counts (differ between a job and the same unit saved as .UNW), not prices |
+| 16..39 | six Int32: the unit's slice of the `mesh` section – vertex count, vertex offset, face offset, face count, index offset, index count (counts sum to the mesh totals and the offsets tile; confirmed on a 23-unit job). Not prices |
 | 40..63 | two 3D centre points (X+W/2, from-wall + D×k, H/2) in wall coordinates – confirmed |
 | 64..65 | **unit type code T** from the `.cab` (230 filler, 300 tall, 320 tall 3-opening, 100 upper w doors, 170 upper L corner, 200 base, 500 backing, 550 custom/finish panel, 641 shelf, 651 single hang, 652 double hang, 670 L-shape, 880 leg leveler, 1000 accessory/obstruction, 20 door, 10 window) – confirmed |
 | 66..67 | unit quantity (1 in almost every unit; 2 or 10 seen on LED strips and a filler). KCD prints the unit's price lines quantity times |
@@ -251,7 +251,13 @@ garage platforms and obstructions added; wall notes added; material multiplier s
   three lower gaps (H-K-I53-I55-I41-I52-I42-I43-I44-3*I54 = 12 1/2 versus stored 12 3/8); on a unit with
   `No Kick Notch = 1` it was 2 5/8 more than stored (I45 + K + I52, as if the front covers the kick). The
   face height must come from the price script / `#Faces` geometry, not from the slot.
-- **Door presence and door style per unit are not in any decoded field.** Non-zero I41..I46 do not mean a
+- **Door presence and door style per unit are not in the unit record at all.** Two CSE300-96 units in one job,
+  one with a flatCFMirror door and one without, have byte-identical records apart from width, shelf count and
+  the mesh slice. The style text appears only in the room's 9-slot style list and in `settings`. The header's
+  opaque blob does not track doors either. Where KCD stores "this opening has a door of style N" is unknown;
+  the mesh (drawing cache) does contain the door faces, so a fallback could detect doors from the unit's mesh
+  slice. Best next step: have the owner save a tiny job twice, before and after adding one door, and diff.
+- (earlier wording) **Door presence and door style per unit are not in any decoded field.** Non-zero I41..I46 do not mean a
   door; doored units exist whose cab has no door-height slot. Door count comes from the cab (`UIQ,36,...`
   rules, face rules such as `(I51=0)&(I254=0)`); the per-unit style name (for example `flatCFMirror`,
   entry 8 of the job's 9 door styles) was not found in the 86-byte block, the 10 bytes or the suffix.
@@ -315,6 +321,27 @@ price-script formulas not known yet (section 7). Rules confirmed, usable as test
 - **Test-data lesson**: a change-order room keeps only the remade parts, and a job saved after the review
   (unit numbers or typed reveals changed) cannot be matched. Verification rooms must be full rooms with the
   review printed from the same save.
+
+## 10. Price engine `kcdprice.py` (Oct 13, 2026, first version)
+
+An interpreter for the price-list scripts, written from the language spec that ten readers built from the
+Sept 2024 CFFL list (827 files) and then had checked. It runs `A-SetUp.Pcb` once, then per unit
+`xxbefore.pcb`, the unit's own script (from the job record's pcb field) and `XXAfter.PCB`, then `Xxend.pcb`
+and `XXFinal.PCB`. Values are stored as text and resolved when used; `[ ]` evaluates at once; `{ }` prints a
+dimension in sixteenths; `Price` emits a line and option lines come from `options.dat` through
+`PriceOptions`. Units whose pcb is `none` print nothing. Everything doubtful goes to `Engine.flags`.
+
+Checked with the **Sept 2024** scripts (the only list in the sandbox) against ten rooms priced in 2026, names
+and sizes only (`experiments/compare_keys.py`): about 69 % of the pasted lines come out identical in name,
+size and count. The rest, in order of size:
+- doors are not produced (storage unknown, see section 7); drawer fronts are modelled from the slots whose
+  `.cab` label says drawer front, with the bottom front still off by the script formula;
+- 2026 script changes: `Drawer Box-10"-…` name order, `Add to DrFrt` printed with height only, pullout tray
+  names, accessory names (`RM1 1 Shelf Strip LED`), kick and filler printed with one dimension;
+- accessory libraries (TAG racks, lighting) missing from the sandbox;
+- which review column (depth / height / length) a script dimension lands in is not derivable from the 2024
+  scripts; the live scripts and one real UNIT PRICE REVIEW printout will settle it.
+Run: `python kcdprice.py --lib C:\KCD23 --pricelist "C:\KCD23-STDPLIST\_26-08-03 AUG CFFL PRICING" JOB.job`.
 
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
