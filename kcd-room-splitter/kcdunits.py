@@ -129,8 +129,9 @@ class Catalog:
         """Scan every *.cab under root (for example C:\\KCD23). First hit wins for duplicate names."""
         cat = cls()
         cat.source = root
-        for p in sorted(glob.glob(os.path.join(root, '**', '*.cab'), recursive=True) +
-                        glob.glob(os.path.join(root, '**', '*.CAB'), recursive=True)):
+        for p in sorted(set(glob.glob(os.path.join(root, '**', '*.cab'), recursive=True) +
+                            glob.glob(os.path.join(root, '**', '*.CAB'), recursive=True) +
+                            glob.glob(os.path.join(root, '**', '*.Cab'), recursive=True))):
             k = os.path.basename(p).lower()
             if k in cat.cabs:
                 continue
@@ -140,12 +141,15 @@ class Catalog:
                 cat.cabs[k] = parse_cab_text(text, os.path.basename(p))
             except Exception as e:
                 cat.cabs[k] = {'file': os.path.basename(p), 'error': str(e), 'sizes': {}, 'order': [], 'prt': '', 'pcb': '', 'T': '', 'code': '', 'head': []}
-        for p in glob.glob(os.path.join(root, '**', 'options.dat'), recursive=True):
+        # options.dat and Sizes.Lst: the main unit library's copy first, then any other
+        def prefer_main(paths):
+            return sorted(paths, key=lambda q: (0 if 'new cffl unit library' in q.lower() else 1, q.lower()))
+        for p in prefer_main(glob.glob(os.path.join(root, '**', 'options.dat'), recursive=True) +
+                             glob.glob(os.path.join(root, '**', 'Options.dat'), recursive=True))[:1]:
             cat.load_options_text(open(p, 'rb').read().decode('cp1252', 'replace'))
-            break
-        for p in glob.glob(os.path.join(root, '**', 'Sizes.Lst'), recursive=True):
+        for p in prefer_main(glob.glob(os.path.join(root, '**', 'Sizes.Lst'), recursive=True) +
+                             glob.glob(os.path.join(root, '**', 'Sizes.lst'), recursive=True))[:1]:
             cat.load_sizes_lst_text(open(p, 'rb').read().decode('cp1252', 'replace'))
-            break
         return cat
 
     @classmethod
