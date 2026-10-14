@@ -556,6 +556,149 @@ has to say which folder the shop's KCD points at. Full lists on hand: `_26-03-18
 `_26-04-02 APR` (1024), `_26-05-03 MAY` (1033); older full lists back to `_25-09-02 SEP` are in the same
 `STDPLIST` copy. No `.Pbs` file sits in the May folder or the `STDPLIST` root.
 
+## 13. The ten job sets (Oct 14, 2026)
+
+The owner put ten complete job sets in `me and claude` (GODDARD, PRIEM, POLONSKA, SFERRA, BINDLER, MIRANDA,
+HUMPHREY, PARINI, ROBERTS, LONG). Copies on the laptop: `%TEMP%\kcdjobs10\<job>` (92 files, all pinned and
+downloaded); the pasted workbook lines are in `out\keys10.txt` (1175 lines over 12 rooms), the file survey in
+`out\survey10.txt`.
+
+### 13.1 What a set holds
+
+| Prefix | File | What it is |
+|---|---|---|
+| `[1 DESIGN]` | `<designer's name>.job` | the designer's job as sold (every room; heading often empty) |
+| `[2 CO]` | `... Change Order*.pdf` | scan: the change-order contract page (reason, price change, items added/removed, notes) plus the revised KCD printouts |
+| `[3 REM]` | `REM-<job>-<NAME>.pdf` | scan of the remeasure (see 13.4) |
+| `[4 CSV]` | `<job> <ROOM>.csv` | the cut-list part export of the engineered room (File Name, Part Name, Width, Length, Thickness, Material name, Unit Number, Quantity, allow to rotate, Part Mirrored ... 23 columns, mm) |
+| `[4 ENG ROOM]` | `<job> <ROOM>.job` | the engineered room file (one room, heading filled in, engineer's name in line 5) |
+| `[4 ENG]` | `ENG <job>.pdf` | scans of the engineering forms (see 13.5) |
+| `[4 NEST]` | `<job> <ROOM>.pdf` | Cut Rite Modular nesting patterns (text, one page per board) |
+| `[5-6 WORKBOOK+UPR]` | `<job> <ROOM>.xlsm` | the filled workbook with the UNIT PRICE REVIEW paste in K..P |
+
+The REM, CO and ENG pdfs are images (Genius Scan); they were rendered to `out\rem\*.jpg` (`rempng.py`, `rem2jpg.py`)
+and read through Desktop Commander `read_file`, which returns images.
+
+### 13.2 Engine against the twelve pasted rooms (May 2026 list + May 22, July and August packs)
+
+After the 1/16" rounding of 13.3 (`runcmp4.py cmp10_r16 ...`, output `out\cmp10_r16.txt`):
+
+| Room | pasted lines | exact name+size | prices same / matched |
+|---|---|---|---|
+| GODDARD MASTER | 201 | 133 | 133 / 133 |
+| PRIEM OFFICE | 47 | 28 | 28 / 28 |
+| POLONSKA WIC | 297 | 203 | 199 / 203 (4 backs off by 2 to 5 cents) |
+| SFERRA GARAGE | 181 | 125 | 125 / 125 |
+| BINDLER PANTRY | 72 | 35 | 35 / 35 |
+| MIRANDA OFFICE | 101 | 69 | 67 / 69 (1 back off by 4 cents; unit 29 panel 294 vs 311, see below) |
+| HUMPHREY WIC | 72 | 8 | 8 / 8 (paste from another version, see below) |
+| PARINI WALLBED | 6 | 1 | 1 / 1 (wall bed: doors not priced yet) |
+| ROBERTS RIC | 30 | 18 | 18 / 18 |
+| ROBERTS WIC | 48 | 33 | 33 / 33 |
+| LONG AUSTIN | 60 | 42 | 42 / 42 (was 40: the two connecting shelves of 13.3) |
+| LONG DANI | 60 | 42 | 42 / 42 |
+| **total** | **1175** | **737 (62.7%)** | **731 / 737** |
+
+The 19 older rooms (NOTIK, TILLIS, BURNS) with the same engine: 768 of 1067 exact (unchanged), every NOTIK line
+prices the same except the GARAGE platform shelf (142.26 against 142.24); TILLIS and BURNS still carry the
+2025 prices (section 12). `out\cmp19_r16.txt`.
+
+**Which file the paste comes from.** In eleven rooms the paste's unit numbers are the engineered room file's,
+so the engineers paste the UNIT PRICE REVIEW of the engineered file (or of the version just before it). HUMPHREY
+is the exception: the paste has 9 units with 34 5/8" openings, the design file and the engineered file both have
+8 units with 33 13/16" / 33 7/8" / 39" openings and are identical, so that paste was made from a version that is
+not in the set. The design files are not what was pasted: GODDARD's design holds 59 units (accessories and
+all), the engineered room 42; POLONSKA 87 (two rooms) against 61; the engineers add fillers, backing, outlets
+and panels. For the app: price the engineered room file, and when a workbook paste exists compare and flag.
+
+**MIRANDA unit 29** (`Custom Panel Left-stacked.cab`, a 1 1/2" panel the engineer added at the right end of wall
+1, X + W = wall length, wall 3 meets that end): the engine adds the 17 wall-contact charge (311), the paste has
+294. The design file has no such unit. Either KCD's `ur` is stricter than "ends at the wall length with a wall
+meeting that end" (the filler next to it, unit 30, overlaps it by 3/4") or the file was changed after the paste.
+Ask the engineer; keep the rule.
+
+### 13.3 KCD rounds sizes to 1/16" before the scripts see them (fixed)
+
+LONG AUSTIN units 1 and 3 (`Csetbot.cab`, bottom connecting shelf 16 x 20) priced 140.60 instead of 46.55. The
+trace (`traceunit.py ENG AUSTIN 1 ...`) showed `#CostOfHorizontal = #ShelfCost1BB`: the double-thick shelf grid
+(`C-Shelf Cost Double Thick shelves.pcb`, loaded by `C-Shelf Cost.Pcb:950` when `#shelfTH > #ShelfThickA`).
+The shelf's thickness slot holds 195 (19.5 mm = 0.768"), which is more than .75, but KCD priced it as a 3/4"
+shelf: KCD hands the scripts sizes rounded to the nearest 1/16" (the fraction it displays everywhere). The engine
+now rounds every size builtin and every I-slot size that way (`round16` in `kcdprice.set_unit`) and the face
+sizes from `kcdcab` too. That also removed the cent-level back differences of section 12 (backs are priced by
+area): NOTIK went from 4 cent-level differences to 1, the new rooms from 36 price differences to 6.
+
+### 13.4 The remeasure (format of the scans)
+
+- Page 1: the Salesforce order printout (order number, client, address, phone, sale date, total job, designer),
+  with the appointment window, date and rem tech written on top, the "RE-MEASURE REQUEST" box (scheduled, done
+  by, needs re-design yes/no, new signature yes/no), "ONE SPACE", a "completed" stamp and notes ("waiting on
+  windows to dry in for drywall 2 weeks", "LED form signature").
+- Page 2 (GODDARD): the CF "REMEASURE CHECKLIST" form: rem tech (Drew / Kevin / Keyan / Gary / Brian), width of
+  all walls (on plans), ceiling height lowest point, slanted ceiling, soffit (height, depth), baseboard
+  (wood/tile/other, size), door type (bifold/bipass/swing in/out, quantity), door width/height incl. trim, bifold
+  size, closet header (height), floor type, window, outlet/switches/lights, attic/AC vent, plumbing fixtures,
+  other obstructions.
+- Then the designer's KCD floor plan and elevations with the measured wall lengths written in circles next to the
+  drawn ones (GODDARD: #5 163 9/16 -> 162 5/8, #6 90 3/4 -> 88 7/8, #7 90 3/4 -> 89 1/8, #8 163 9/16 -> 162 1/8;
+  HUMPHREY: #1 145 -> 144 3/8, #4 39 -> 38 3/4, #5 35 -> 34 3/16; PRIEM: 166 -> 165 3/4, 57 1/4 -> 57 1/8),
+  outlet positions on the elevation, and a short legend: CH (ceiling height), BB (baseboard, e.g. "5 1/2 W" =
+  wood), Fl (floor: tile, carpet), DH (door height), crown, header.
+- For the app: handwriting; an OCR will not be reliable. Build a remeasure entry screen pre-filled with the KCD
+  wall lengths and heights so the tech or engineer only types the measured numbers and the checklist answers.
+
+### 13.5 The engineering forms (ENG pdf of PRIEM)
+
+- The pricing summary sheet: client, designer, standard price 7,175.27, sold at 6,963.00, 97% of standard;
+  common accessories (BASE: TH DECORATIVE 2 x 145, CROWN: TH DECORATIVE 2 x 185, CTOP: ARCTIC WHITE 14 9/16 x 88);
+  subtotal 5,034.77, accessories 1,941.50, processing fee 199. (These are the workbook's own numbers.)
+- The **Doormark Inc. door order form** (thermofoil doors): company code CFJ, customer 7474, PO = job + name +
+  room, door design PAL (Palm Beach), color FWM, match back, door lines (style, qty, width, height, hinge side
+  L/R: PAL 2 10.8125 x 25.1250), drawer fronts (style slab/RR, qty 4, 33.5000 x 12.5000), mullion doors, slab
+  fillers, laminate/foil, molding (REN 2, BAS 2). The sizes on the form are not the KCD door sizes (the paste
+  has `Door-Palm Beach TH 10 1/2` and `DrFrt 33 7/8`): the engineers apply the vendor's sizing rules; ask.
+- The **purchase order**: room, qty, item, description, vendor (OFFICE 2 DOOR 110.93.461 HAFELE; OFFICE 4 DRAWER
+  110.93.461 HAFELE), engineer's name, install date.
+
+### 13.6 Name and size misses, by cause (438 of 1175 lines)
+
+1. **Door style and insert.** The paste names doors `Framed Door-Melamine-Roble Aurora Grain-Clear Glass-...`,
+   `Door-B CF 5-Piece Dering Forest Grain w Dering Forest Grain Insert-...`, `Door-Palm Beach TH-White 1 mm`,
+   plus `Lift-Up Door Hinge` lines; the engine prints the plain `Door-Melamine-...` or `No Color Selected or
+   Invalid Size - call for quote`. The style sits in the unit's Set Unit Info texts: text 2 = door type
+   (`#DoorDrawerType`), text 14 = finishing (`#DoorDrawerFinishingType`), text 15 = insert
+   (`#DoorDrawerInsertType`, "Clear Glass" on GODDARD unit 14, "None" elsewhere). The engine runs
+   `GetDoorStyleCost.pcb` (finishing and insert cost files) but the framed / 5-piece / thermofoil branches are not
+   validated yet. Most of POLONSKA's 71 and MIRANDA's 23 key-only lines are these.
+2. **Drawer or door on the 774 tall units** (LONG AUSTIN 2, LONG DANI 9, ROBERTS WIC 7): the engine prints four
+   doors, the paste two doors plus two `Drawer Box-8 3/4"` and `Add to DrFrt` lines (and the engine's extra middle
+   shelf goes with it: `Pricefixedshelves.pcb:172` prints spanner shelves between drawers). `774.cab`
+   ("ENTERTAINMENT 4 VERT OP") defines every face as a door (`10101000`, `2020n000`); the drawer choice is not in
+   any field we parse: not in the 86-byte block (bytes 68..85 are 0 and 190 on every unit), the 10 bytes, the
+   27-byte suffix, the 15 texts or the prefix slots. The unit was placed from the saved unit
+   `NEW CFFL UNIT LIBRARY\Shelves 2 Drawer 96.UNW` (the record's `unw` string); a `.UNW` is one unit record in the
+   job layout ([Version] 10.090, [Loc Size], [Walls], [Units] with the 1806-byte prefix, strings, 86 bytes, texts,
+   [Notes], [Use Shop Stds], [Custom Units]). Needs the save experiment (section 7): the same 774 saved with
+   openings 3 and 4 as drawers, as doors, and as open.
+3. **Doors the engine prints where the paste has none** (SFERRA 12/29/32, BINDLER 2/11/14/16, ROBERTS RIC 2/4/5,
+   ROBERTS WIC 5, PRIEM 4/5/7): the "is there a door" question of section 12. Byte 6 of the block does not settle
+   it (ROBERTS WIC 5 has 1 and no door in the paste).
+4. **One-dimension lines** (kicks `w, K`, fillers, leg levelers, add-to-drfrt): counted as "same name, other
+   dims", 280 lines; not a pricing problem.
+5. **Engineer edits after the paste**: left/right panel swapped (POLONSKA 22/23 and 43/44), MIRANDA 2 (drawer
+   box in the paste, `Opt-Top Drawer Box to Shelf` + pullout shelf in the file), MIRANDA 3 back material (paste
+   designer white, file roble aurora), GODDARD 1 and 8 `Shoe Shelf ... x10` (the engine prints none for
+   `shoeshelf-d-match.cab`: unknown i20/i52/i58), PARINI wall-bed doors.
+6. Small naming: `14in Elite Tie Rack MNL 807.67.603` (paste) against `... 310.3000.14.mnl(807.67.603)` (engine);
+   PRIEM `Opt-3 Hole Adjustable Custom` printed by the engine on 772 units but not in the paste.
+
+### 13.7 Open asks for the owner (added to section 7's list)
+
+- The 774 save experiment above (drawers / doors / open), and one unit saved with and without a door.
+- Which rules turn KCD door sizes into Doormark order sizes (10 1/2 -> 10.8125, 33 7/8 -> 33.5 x 12.5).
+- Why MIRANDA's end panel (unit 29) was not charged the wall contact.
+- The HUMPHREY file the paste was made from (to confirm the "paste = engineered file" rule).
+
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
 - `kcdunits.py` (in this folder) is the reader to use from now on: `python kcdunits.py --lib C:\KCD23 JOB.job`
@@ -575,6 +718,15 @@ has to say which folder the shop's KCD points at. Full lists on hand: `_26-03-18
   take any library root and price list (defaults: the OneDrive KCD23 copy and the May 2026 list).
 - `runcmp3.py OUTNAME LIBROOT "DIR1;DIR2;..." [NAME...]` runs `compare_keys.py` with several price-list folders
   layered in order (the full list first, then the update packs) and reports the price check too.
+- Ten-set tools (section 13): `pinjobs.cmd` / `robojobs.cmd` pin and copy the sets to `%TEMP%\kcdjobs10`;
+  `survey10.py` -> `out\survey10.txt`; `keys10.py` -> `out\keys10.txt`; `runcmp4.py OUTNAME LIBROOT PRICEDIRS [NAME...]`
+  compares the engineered room files with their pastes; `runcmp5.py` does the same with the designer's job
+  (`DESIGNSUBSTR=SECTION`); `rempng.py` / `rem2jpg.py` render the scans; `trace1.py` and `traceunit.py KIND SUBSTR
+  SEQ [PATTERN...]` trace the engine on one job or one unit; `pcbline.py LIST FILE A B` and `grepprice.py LIST
+  REGEX` read the price scripts; `cabfaces.py NAME.cab [all]` prints a library unit; `wallpos.py` shows unit
+  positions and wall contact; `dumpraw.py` dumps a unit record; `hexdump.py` any file; `patch_engine6.py` applied
+  the 1/16" rounding to the laptop engine copy (md5s equal the repo).
+- Laptop venv `%TEMP%\kcdvenv` (openpyxl, pypdf, PyMuPDF); the system Python has PIL and pypdf but no openpyxl.
 - `odstatus.py` counts cloud-only placeholders per OneDrive folder; `survey_kcd23.py` lists the KCD23 tree;
   `a3scan.py`, `dumpunit.py`, `dumpunit2.py` dump unit records (the byte-6 survey of section 12);
   `check4.ps1`, `acc_check*.ps1`, `pinroot.cmd`, `pinlists.cmd`, `robopacks.cmd`, `robolists.cmd` pin and copy

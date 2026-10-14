@@ -39,6 +39,11 @@ class PriceLine:
             self.unit, self.qty, self.name, self.cost, self.dim1, self.dim2, self.order, self.script, self.lineno)
 
 
+def round16(v):
+    """Inches to the nearest 1/16, the precision KCD gives the price scripts (and prints)."""
+    return round(v * 16) / 16.0
+
+
 class EndFile(Exception):
     pass
 
@@ -872,7 +877,11 @@ class Engine:
     def set_unit(self, u, job):
         self.unit = u
         b = {}
-        inch = u.inch
+        # KCD hands the scripts sizes rounded to the nearest 1/16" (the fraction it displays). The job stores
+        # 0.1 mm, so a 19.5 mm shelf reads 0.768" raw but prices as 3/4": with the raw value the "double thick"
+        # shelf grid fired on LONG AUSTIN's connecting shelves (140.60 instead of 46.55).
+        def inch(item):
+            return round16(u.inch(item))
         def defined_inch(item):
             return inch(item) if (u.defined(item) is not False) else 0.0
         b.update({'w': inch(2), 'h': inch(3), 'd': inch(4), 'ls': defined_inch(5), 'ms': defined_inch(6), 'rs': defined_inch(7),
@@ -901,7 +910,7 @@ class Engine:
         b.update({'sh': float(total), 'sh1': float(sh1), 'sh2': float(sh2), 'sh3': float(sh3), 'sh4': 0.0, 'sh5': float(counts.get(160, 0)), 'sh6': float(counts.get(161, 0))})
         # every I<n> slot as a builtin too
         for n, (raw, state) in u.slots.items():
-            b['i%d' % n] = float(u.value(n))
+            b['i%d' % n] = float(u.value(n)) if u.is_integer_item(n) else round16(u.value(n))
         # door / drawer-front faces D1..D12: from the .cab face rules when the full library is loaded,
         # otherwise the provisional slot-based model (drawer fronts only)
         for n in range(1, 13):

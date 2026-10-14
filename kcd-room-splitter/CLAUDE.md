@@ -78,7 +78,8 @@ VB.NET-style binary:
 ## Test laptop (via Desktop Commander)
 
 - Device **CFF1FTLLP-9A90EG**, Windows 11. Python 3.12 with tkinter, pip, Git, internet. **KCD is not installed on it.** The device id changes when Desktop Commander is reinstalled (`npx @wonderwhy-er/desktop-commander@latest remote`); take it from `list_devices`, never from old notes.
-- Job files are in Downloads, OneDrive and Outlook attachments. Work scripts are in `%TEMP%\kcdsplit`; the build venv is in `%TEMP%\kcdbuild`. The laptop is read-only for us except our own temp folders (`%TEMP%\kcdsplit`, `%TEMP%\kcdlibod`, `%TEMP%\kcdprice`, `%TEMP%\kcd23x`).
+- Job files are in Downloads, OneDrive and Outlook attachments. Work scripts are in `%TEMP%\kcdsplit`; the build venv is in `%TEMP%\kcdbuild`. The laptop is read-only for us except our own temp folders (`%TEMP%\kcdsplit`, `%TEMP%\kcdlibod`, `%TEMP%\kcdprice`, `%TEMP%\kcd23x`, `%TEMP%\kcdjobs10`, `%TEMP%\kcdvenv`).
+- The ten job sets of `me and claude` are copied to `%TEMP%\kcdjobs10\<job>` (notes section 13). Desktop Commander `read_file` returns images (jpg/png), which is how the scanned remeasures were read; PDFs with image pages have to be rendered first (`rem2jpg.py`, system Python with PIL).
 - **The shop's KCD23 copy** lives in OneDrive, folder `me and claude\KCD23` (unit libraries and `STDPLIST` price lists). OneDrive files are placeholders until pinned: `attrib +P -U "<folder>\*" /S /D` makes OneDrive download a folder, then robocopy the text files to `%TEMP%\kcdlibod` and `%TEMP%\kcdprice\<LIST>` before running anything over them (reading straight from OneDrive stalls). Details in `kcd-deep-dive-notes.md` section 12.
 - Quirks:
   - PowerShell commands lose `$_`, so run small Python scripts instead.
@@ -102,7 +103,9 @@ Read `kcd-deep-dive-notes.md` before working on pricing, door orders or the engi
 - `kcdcab.py` reads the whole `.cab` (points, face rules, extra variables) and computes a unit's doors and drawer fronts with their sizes (notes section 11). The engine needs the full library text for this: a library folder, or the `rawlib.json` bundle from the laptop.
 - Run with the shop's own libraries and the May 2026 price list (notes section 12): 769 of 1067 pasted workbook lines identical across 19 rooms. The open differences are listed there; door lines stay VERIFY until the "no door" question is settled.
 - The monthly `STDPLIST` folders are not all full lists; some hold only the changed scripts. `kcdprice.Engine` takes a list of folders layered in order (`--pricelist` repeated), and `compare_keys.py` also checks prices against the pastes (notes section 12).
-- Prices: with the May 2026 list every matched line of the thirteen NOTIK rooms prices the same as the engineers' paste (four lines differ by a few cents). The TILLIS and BURNS pastes were priced on a list we do not have; ask before comparing a job's prices which list it was sold on.
+- Prices: with the May 2026 list every matched line of the thirteen NOTIK rooms prices the same as the engineers' paste (one platform shelf is two cents off). The TILLIS and BURNS pastes were priced on a list we do not have; ask before comparing a job's prices which list it was sold on.
+- KCD rounds every size to the nearest 1/16" before the price scripts see it (`round16` in `kcdprice.py` and `kcdcab.py`). Without it a 19.5 mm shelf fell into the double-thick price grid. With it, the twelve rooms of the ten job sets price the same on 731 of 737 matched lines (notes section 13).
+- The ten job sets (notes section 13): what each set holds, which file the engineers paste from (the engineered room file), the remeasure and change-order scan formats, the Doormark door order and purchase order forms, and the open door/drawer question on the 774 tall units.
 
 ## Ideas not done yet
 

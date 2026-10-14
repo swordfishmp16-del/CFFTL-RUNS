@@ -1,6 +1,6 @@
 """Compare engine output with the workbook paste blocks (keys_all.txt). Names are normalised; dims compared as
 sixteenths; for the lines that match, the pasted price is compared with the engine's cost (see PRICE_TOL and
-PRICE_TOL_CENTS). usage: compare_keys.py CAT PRICEDIR[;PACKDIR;...] KEYS JOB=KEYNAME ..."""
+PRICE_TOL_CENTS). usage: compare_keys.py CAT PRICEDIR[;PACKDIR;...] KEYS JOB=KEYNAME[@ROOM] ..."""
 import sys, re, collections, math
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -165,9 +165,11 @@ def main(argv):
     T = dict(matched=0, same=0, diff=0, unpriced=0, sum_paste=0.0, sum_engine=0.0)
     for arg in argv[4:]:
         job_path, section = arg.split('=', 1)
+        # "JOB=SECTION@3" prices only room 3 of the job (a designer's job holds every room; the paste is one room)
+        section, _, room = section.partition('@')
         job = kcdunits.read_job(job_path, cat)
         eng = kcdprice.Engine(pdir, cat)
-        eng.price_job(job)
+        eng.price_job(job, rooms=[int(room)] if room.strip() else None)
         K = key_lines(keys, section)
         R = compare_room(K, eng.lines)
         print_room(section, R, eng.flags)

@@ -485,8 +485,8 @@ class UnitFaces:
             if not f or f['kind'] == 'open':
                 continue
             b['d%d' % n] = float(n)
-            b['d%dw' % n] = f['w']
-            b['d%dh' % n] = f['h']
+            b['d%dw' % n] = round(f['w'] * 16) / 16.0         # KCD gives the scripts sizes to 1/16"
+            b['d%dh' % n] = round(f['h'] * 16) / 16.0
             b['d%dt' % n] = float(f['t'])
             b['d%ddr' % n] = 1.0 if f['kind'] == 'drawer' else 0.0
             b['d%dhg' % n] = 1.0 if f['kind'] == 'door' else 0.0
