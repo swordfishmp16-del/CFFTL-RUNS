@@ -102,6 +102,7 @@ Read `kcd-deep-dive-notes.md` before working on pricing, door orders or the engi
 - `kcdcab.py` reads the whole `.cab` (points, face rules, extra variables) and computes a unit's doors and drawer fronts with their sizes (notes section 11). The engine needs the full library text for this: a library folder, or the `rawlib.json` bundle from the laptop.
 - Run with the shop's own libraries and the May 2026 price list (notes section 12): 769 of 1067 pasted workbook lines identical across 19 rooms. The open differences are listed there; door lines stay VERIFY until the "no door" question is settled.
 - The monthly `STDPLIST` folders are not all full lists; some hold only the changed scripts. `kcdprice.Engine` takes a list of folders layered in order (`--pricelist` repeated), and `compare_keys.py` also checks prices against the pastes (notes section 12).
+- Prices: with the May 2026 list every matched line of the thirteen NOTIK rooms prices the same as the engineers' paste (four lines differ by a few cents). The TILLIS and BURNS pastes were priced on a list we do not have; ask before comparing a job's prices which list it was sold on.
 
 ## Ideas not done yet
 

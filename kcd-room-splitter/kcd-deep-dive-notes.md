@@ -519,10 +519,18 @@ What the differences are:
   meeting that end, touches it); and (b) a few 2 to 4 cent rounding differences on backs and platform shelves
   (`back-melamine match` 221.92 vs 221.95, 306.54 vs 306.58, 210.94 vs 210.96; `adj shelf ... platform` 71.76
   vs 71.74): KCD rounds somewhere in the area formula where the engine does not; still open.
-- the TILLIS rooms and BURNS HERS carry **2025 prices**: shelves 46 and 50 where the 2026 lists give 45 and 49,
-  panels 185 and 229 against 183 and 227, corner shelves 75/71/108/488 against 74/70/106/486. BURNS was
-  engineered in August 2026, so this fits the owner's rule that a job is priced on the list in force when it was
-  sold, not when it was engineered. Checking them against the June 2025 copy is the next run.
+- the TILLIS rooms and BURNS HERS were priced on a list we do not have a copy of: shelves 46 and 50 where
+  every list on hand gives 45 and 49, panels 185 and 229 against 183/227 (March to August 2026), 180/224
+  (February 2026) and 179/222 (June 2025 to January 2026); corner-unit shelves 75/71/108/488 against
+  74/70/106/486. Tested: June 2025 alone, June 2025 with the September, October, December, January and February
+  packs on top, March alone, May alone, May with its packs. The 2026 lists all have `#panelpricemultiplier`,
+  `#shelfpricemultiplier` and `#Universalupcharge` at 1.00 and `#PanelTouchingWallCost` 17, and no single
+  multiplier turns the engine's numbers into the pasted ones. BURNS was engineered in August 2026 and TILLIS
+  rooms are change orders, so the owner's rule (a job is priced on the list in force when it was sold) is the
+  likely reason; the owner has to say which list those two jobs were priced on, or hand over that folder.
+- the materials list `.Plt` has two blocks: regular (`White Coast Oak Grain  1 1.35`, `Lino Cancun Grain  1
+  1.35`, `Black Matte  1 2.50`) and `PROMO` (the same names at `1 1.00`); a unit's text 1 stores the entry the
+  designer picked, which is why these jobs price at multiplier 1.00 (promo) or 2.50 (Black Matte).
 
 **How accessories are priced in 2025/2026 lists (confirmed from the May 2026 `Eachunit.pcb`,
 `Eachunit2.pcb` and csv files).** A unit whose pcb file is missing from the list runs `Eachunit.pcb`. When the
