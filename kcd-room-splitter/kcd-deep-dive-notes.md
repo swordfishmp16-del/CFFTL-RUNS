@@ -498,6 +498,31 @@ AUG` 203 (43 KB: 11 scripts + `ZTag FILES`). The owner confirmed the shop PC use
 updates land in it. Whether KCD fills a short folder from an earlier list is unknown; the engine now accepts
 several folders layered in date order so both readings can be tested against the pasted prices.
 
+**Prices, not just names (Oct 14, 2026).** The first price comparison (`compare_keys.py` PRICES lines) over the
+same 19 rooms, 769 matched lines:
+
+| price folders | lines with the same price | note |
+|---|---|---|
+| `_26-05-03 MAY` alone | 561 of 769 | NOTIK rooms 553 of 561 lines; TILLIS and BURNS rooms mostly off by 1 or 2 |
+| MAY + `_26-05-22 MAY` + JUL + AUG packs | 560 of 768 | same prices as MAY alone; the packs change nothing these rooms use (one HIS name changes) |
+| SEP 2025 to AUG 2026, all eleven folders layered | 560 of 768 | identical to the line above |
+| `_26-03-18 MAR` alone | 489 of 769 | March prices are lower: NOTIK was not priced on March |
+| `_25-09-02 SEP` alone | 65 of 162 | the September 2025 folder is itself partial (762 root files), many costs come out 0 |
+
+What the differences are:
+- the thirteen NOTIK rooms (engineered May to August 2026) match the May 2026 list to the cent except (a)
+  **17 dollars** missing from a left or right panel whose unit stands against a wall (`#PanelTouchingWallCost`,
+  KCD's built-ins `ul`/`ur`): 2ND LIN unit 2, ARI 7, CABANA 2, ELLA 3 and 4, GUEST 3, MST LIN 2; the engine
+  had `ul = ur = 0`. Fixed the same night from the wall record (wall length = Int32 at byte 20 of the 205-byte
+  wall record, neighbouring wall ids at 36 and 40; a unit at X = 0, or ending at the wall length, with a wall
+  meeting that end, touches it); and (b) a few 2 to 4 cent rounding differences on backs and platform shelves
+  (`back-melamine match` 221.92 vs 221.95, 306.54 vs 306.58, 210.94 vs 210.96; `adj shelf ... platform` 71.76
+  vs 71.74): KCD rounds somewhere in the area formula where the engine does not; still open.
+- the TILLIS rooms and BURNS HERS carry **2025 prices**: shelves 46 and 50 where the 2026 lists give 45 and 49,
+  panels 185 and 229 against 183 and 227, corner shelves 75/71/108/488 against 74/70/106/486. BURNS was
+  engineered in August 2026, so this fits the owner's rule that a job is priced on the list in force when it was
+  sold, not when it was engineered. Checking them against the June 2025 copy is the next run.
+
 **How accessories are priced in 2025/2026 lists (confirmed from the May 2026 `Eachunit.pcb`,
 `Eachunit2.pcb` and csv files).** A unit whose pcb file is missing from the list runs `Eachunit.pcb`. When the
 unit library name matches `Tag *`, `*Access*` or `*Light*` it loads `Eachunit2.pcb`, which picks a csv by
