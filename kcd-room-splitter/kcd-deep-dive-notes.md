@@ -508,6 +508,7 @@ same 19 rooms, 769 matched lines:
 | SEP 2025 to AUG 2026, all eleven folders layered | 560 of 768 | identical to the line above |
 | `_26-03-18 MAR` alone | 489 of 769 | March prices are lower: NOTIK was not priced on March |
 | `_25-09-02 SEP` alone | 65 of 162 | the September 2025 folder is itself partial (762 root files), many costs come out 0 |
+| `_26-05-03 MAY` alone, after the wall-contact fix below | 568 of 769 | **every NOTIK line now has the pasted price except four cent-level roundings** |
 
 What the differences are:
 - the thirteen NOTIK rooms (engineered May to August 2026) match the May 2026 list to the cent except (a)
