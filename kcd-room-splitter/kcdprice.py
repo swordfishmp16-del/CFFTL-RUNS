@@ -884,7 +884,7 @@ class Engine:
                   'dh1': inch(20), 'dh2': inch(22), 'dh3': inch(23), 'dh4': inch(24), 'dh5': inch(25), 'dh6': inch(26),
                   'dh7': inch(135), 'dh8': inch(136), 'dh9': inch(137), 'dh10': 0.0,
                   't': float(u.T), 'num': float(u.qty or 1), 'opt': [float(o) for o in u.options],
-                  'bkyn': float(u.count(121)), 'nkhyn': float(u.count(119)), 'ul': 0.0, 'ur': 0.0, 'ult': 0.0, 'urt': 0.0,
+                  'bkyn': float(u.count(121)), 'nkhyn': float(u.count(119)), 'ul': 1.0 if u.touches_left(job) else 0.0, 'ur': 1.0 if u.touches_right(job) else 0.0, 'ult': 0.0, 'urt': 0.0,
                   'uld': 0.0, 'urd': 0.0, 'ulz': 0.0, 'urz': 0.0, 'ulk': 0.0, 'urk': 0.0, 'ulfl': 0.0, 'urfr': 0.0, 'fl': 0.0, 'fr': 0.0,
                   'bbl': 0.0, 'bbr': 0.0, 'ct': 1.0 if inch(12) > 0 and u.defined(12) else 0.0, 'ctl': 0.0, 'ctr': 0.0, 'ctf': 0.0, 'ctb': 0.0,
                   'npo': float(u.count(38)) if u.defined(38) else 0.0, 'ndiv': float(u.count(60)) if u.defined(60) and u.is_integer_item(60) else 1.0,

@@ -326,6 +326,24 @@ class Unit:
             return ('%d' % r) if abs(r - round(r)) < 1e-9 else ('%g' % r)
         return re.sub(r'\[([WwHhDd])@([\d.]+)?\]', sub, c)
 
+    # -- wall contact (KCD's ul / ur) -------------------------------------------------------------
+    # KCD adds #PanelTouchingWallCost (17 in 2026) to a side panel that stands against a wall. The pastes show it
+    # on panels whose unit starts at X = 0 or ends at the wall's length, when another wall meets that end.
+    # Checked on NOTIK 2ND LIN unit 2 (right), ELLA unit 3 (right) and ELLA unit 4 (left); units in the middle of
+    # a wall and units that stop short of the end (ELLA unit 1 at X = 5 3/8) get nothing.
+    WALL_TOUCH_TOL = 254 // 16                      # 1/16" in 0.1 mm
+
+    def _wall(self, job):
+        return getattr(job, 'wall_by_id', {}).get(self.wall)
+
+    def touches_left(self, job):
+        w = self._wall(job)
+        return bool(w and w.get('left') and abs(self.raw(1)) <= self.WALL_TOUCH_TOL)
+
+    def touches_right(self, job):
+        w = self._wall(job)
+        return bool(w and w.get('right') and w.get('length') and abs(self.raw(1) + self.raw(2) - w['length']) <= self.WALL_TOUCH_TOL)
+
     # -- values ---------------------------------------------------------------------------------
     def raw(self, item):
         return self.slots.get(item, (0, 0))[0]
@@ -491,6 +509,7 @@ class Job:
         self.current_room = info['rooms']['cur']
         self.walls = info['walls']['list']
         self.wall_room = {w['id']: w['room'] for w in self.walls}
+        self.wall_by_id = {w['id']: w for w in self.walls}
         # settings: handle group, 9 door styles, colour table, library shop sizes, option pairs
         r = kcdjob.R(data, span['settings'][0])
         self.handle_group = txt(r.str())

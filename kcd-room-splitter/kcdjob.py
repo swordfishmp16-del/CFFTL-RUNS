@@ -152,7 +152,12 @@ def parse(d):
         r.raw(5)
         walls.append({'start': a, 'end': r.p,
                       'id': struct.unpack_from('<i', d, a + 125)[0],
-                      'room': struct.unpack_from('<i', d, a + 129)[0]})
+                      'room': struct.unpack_from('<i', d, a + 129)[0],
+                      # wall length in 0.1 mm (checked on NOTIK 2ND LIN and ELLA: equals the last unit's X + W when
+                      # that unit ends at the wall), and the ids of the walls meeting its left and right end (0 = none)
+                      'length': struct.unpack_from('<i', d, a + 20)[0],
+                      'left': struct.unpack_from('<i', d, a + 36)[0],
+                      'right': struct.unpack_from('<i', d, a + 40)[0]})
     sec('walls', st, {'list': walls})
 
     # ---- post-wall block -----------------------------------------------------
