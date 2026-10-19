@@ -944,10 +944,19 @@ The owner opened test 3, fixed what looked wrong, saved, and sent four pictures:
   points moved; sections unchanged in size; the price run differs from the original only on the four resized
   units (Linen tall now shelves 22 1/8, kick 23 5/8, doors 11 3/4). Sent to the owner with the request to open
   it without touching any wall. **Owner, Oct 19: "everything looks good on test 4", opened in KCD with no wall or
-  unit touched; the units sit on their walls.** Still open: the byte compare of the file KCD saves back (does it
-  keep the moved cache entries; do the per-face sizes Int32 at 16/20, left as they were on stretched units, and
-  the n1 block matter); what the two dimension strings on Guest wall 10 and one on Primary wall 16 show;
-  Primary wall 15 (readers disagreed).
+  unit touched; the units sit on their walls.**
+- **The round trip of test 4** (`jobs/Cathy Coyne - TEST4 saved by KCD try4.job`): KCD kept the file as written.
+  Linen and Guest walls byte-identical; every unit record unchanged (one Code string lost its leading space);
+  all 14,897 cached vertices identical and the face records equal as multisets on 29 of 30 units, the stretched
+  Double Hang differing on 52 faces by 1 raw of rounding in the centre (dW/2 = -71.5) and a few hanger centres;
+  the per-unit slice fields (block 16..39) identical, the index slices re-serialised, n1 36 -> 45, header blob
+  smaller. The Primary room was moved as a whole by (0, 5715) with its room-level notes (KCD re-places that room
+  on every save: (2318, ~3464) in test 1, (2461, 5334) in try 3, (0, 5715) here; Linen and Guest never move;
+  harmless, links intact). So: wall record + unit slots + room points + cache entry is the complete set of
+  things to write for a wall or width change, and the per-face sizes (Int32 at 16/20) and the n1 block can stay.
+  COYNE is the first job to go from remeasure sheet to a KCD file nobody had to touch. Still open: what the two
+  dimension strings on Guest wall 10 and one on Primary wall 16 show; Primary wall 15 (readers disagreed); a
+  second job through the same path (a closed room, a longer change, a start-moving wall with cabinets).
 
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
