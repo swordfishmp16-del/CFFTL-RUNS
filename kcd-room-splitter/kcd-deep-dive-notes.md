@@ -1129,6 +1129,127 @@ The owner opened test 3, fixed what looked wrong, saved, and sent four pictures:
   v1 only the shelf, kick and rod sizes of the sections that now share the wall change differ. The reports end with where
   each answer came from, what was left blank and what the remeasure changed, for the engineer.
 
+## 16. Fillers at both ends, the purchase order and the special-order forms (Oct 19, 2026; owner's ask)
+
+Owner: "is it also possible to do more: when units go between 2 walls there needs to be fillers on both sides; also use the
+information from the side bar to fill out the PO and any special order items like CF5 doors, Doormark doors, velvet jewelry
+trays, as much as we can get done so it's just a review by the engineer vs them doing the work". Five studies ran in
+parallel (full reports in the session scratchpad `walls/po/A_sidebar.md` .. `F_critic.md`; the prototypes are kept in
+`experiments/po/`). What they found:
+
+### 16.1 The sidebar (`experiments/po/sidebar.py`, prototype parser)
+
+- One KCD note per room, text starting `ROOM DETAILS <name>`: labels at column 0 (`HEIGHT-`, `GARMENT LENGTH-`,
+  `MATERIAL/COLOR-`, `EDGE BANDING-`, `BACKING-`, `CLOSET RODS-`, `HANDLES/KNOBS`, `DOOR/DRAWER STYLE-`, `DRAWER BOX-`,
+  `CROWN-`, `BASE-`, `COUNTERTOP TYPE-` / `COUNTER TOP-`, `ROOM OPTIONS and ACCESSORIES-as listed`, `DESIGN NOTES`,
+  `ROOM INFORMATION`), tab-indented detail lines (`Color-`, `Finish-`, `Area-35 1/8-sqft`, `24" deep`, `Opt-Set Holes
+  Custom - Qty 6.00`, `RM1 JT Standard`) and typed extras (`*promo color*`, `Richleui bp8160160-140 chrome`). One `RM` line
+  per accessory unit and one `Opt` line per option; those counts and the rod counts matched the unit records in all 8 local
+  rooms. Verified on 7 raw sidebars; the 24 sidebars of the ten sets (laptop) carry forms the parser has not seen yet
+  (multi-handle lines with face assignments, "TWO PER DRAWER", `Insert-Clear Glass`, `B CF 5-Piece ... w Biscuit insert`,
+  `Lift-up Door Hinge`, LED lines). The old `kcdunits.sidebar_fields` keeps only first-line values of the dashed labels.
+- WERNER: the designer's and the engineer's sidebar are byte-identical; the designer's cabinets carried `Abacoa Shaker TH`
+  while the sidebar said `SARASOTA Shaker TH`, and the engineer ordered Sarasota (Doormark SHS): the sidebar won.
+- Checks the parser raises: COYNE Primary/Linen sidebar `White Coast Oak Grain` against every cabinet `Lino Esteiro Grain`
+  (KCD prices Lino Esteiro); NEDDIE hamper `547.43.315` against the unit code `547.43.305`; NEDDIE `*promo color*` with
+  multiplier 1.10 (the PROMO list is 1.00); sidebar depths 12/16 against 14" and 17" units; handle counts below the drawn
+  fronts (NEDDIE hers 6 vs 7, COYNE Primary 2 vs 4, Guest 1 vs 4).
+- Certain from the sidebar: F5/F7/F9 when the name is in the template's dropdown (Mysterious, Designer White Grain, Wheat
+  Tabby Grain are; White Coast Oak Grain and Lino Esteiro Grain are not), F11 Melamine, F21/F23 from the BASE/CROWN lines,
+  the Doormark design code (all 34 names of the workbook's own table resolve), the door colour name, handle part number and
+  count, accessory part numbers and counts, jewelry colour and insert styles. Inferred only: the vendor from the number's
+  shape (`###.##.###` Hafele, `BP#####-XX` Amerock, `BP#######-###` Richelieu), whether a TH door goes to Doormark or the
+  CF Thermo form. Not in the sidebar: door sizes, which units really have doors, hinge side, insert, Doormark colour codes
+  beyond the 17 in the workbook, install date / job number / designer / sold price (the Salesforce page).
+
+### 16.2 The forms are tabs of the pricing workbook (all ten ENG packets read on the laptop, 178 pages)
+
+- Every printed form is a tab of `wb/template.xltm`: Final Price Sheet, Purchase Order, Job Cart Cover Sheet (= the CNC
+  cover sheet), CF5 Order, VJT Order (velvet jewelry trays), Doormark A1/B1, CF Stone, CF Thermo, Ladder, BCCD A1. Their
+  headers (client, room, designer, engineer, install date, PO date, price) are formulas from Data Entry; only the line items
+  are typed, and macro buttons PDF and email them (CF5/VJT to Diego, PO to Carrie). Only Elements is an outside paper form.
+  So "fill the PO and the forms" = write those typed cells the way `kcdbook.py` writes Data Entry (only `Holes` has a
+  Worksheet_Change macro, so XML writes to the order tabs are safe). Data Conversions holds 34 Doormark designs, 18 colour
+  names / 17 codes, the CF5 adjustments (butt joint -1/16, cut width -6, insert -5 9/16) and the Work Required Grid offsets
+  (21/30/45/65-day types -> 7/14/28/40-day rows; job cart check = install - 2, matched on all 13 cover sheets).
+- In the ten packets: price sheet 12, PO 9, CNC cover 13, Closet Poles 7, CF5 on GODDARD / POLONSKA / MIRANDA, VJT on
+  GODDARD, Doormark on PRIEM, CF Thinscape on POLONSKA, Marble & Granite on PRIEM, client-supplied hardware on BINDLER; no
+  Elements, caddy, CF Thermo, ladder or BCCD form.
+- Door sizes on the forms are the DOOR-DIMENSIONED elevation, not the price-engine sizes: PRIEM Doormark 10.8125 x 25.125
+  and 33.5 x 12.5 against the engine's 10 1/2 and 33 7/8 (closes the 13.5 question). CF5: the engineer types the elevation
+  size and the sheet prints -1/16 for a butt joint (GODDARD 15 5/8 x 91 7/8 -> 15 9/16 x 91 13/16); held on 23 of 26 lines
+  (POLONSKA flip-ups typed 1/2 under KCD's size, drawer faces per a "FULL OVERLAY 37 3/8" note). `kcdcab` has not been
+  tested against those elevation sizes (section 11 proved it against the price review, where a pair is half the face
+  without the 1/8 gap); until it is, no door size can be written on a Doormark / CF5 / Elements form, only CHECKed.
+- VJT math (the sheet's formulas): single or bottom tray = euro-shelf width - 2, double top tray = - 3 (its hint text says
+  -3 1/16), depth = drawer-box depth (12/15/18/21) - 1 5/8; insert names STANDARD, STANDARD W/ EARRINGS, EARRINGS; colours
+  Aquamarine, Black, Blush, Champagne, Navy Blue, Silver. GODDARD: layout 2, shelf width 28 1/2, depth 15 -> 26 1/2 x 13 3/8
+  and 25 1/2 x 13 3/8. NEDDIE hers: JT Standard + JT Standard Earring on unit 16 (96 Tall 6 Drawer, W 31 1/2, D 16, shelf
+  width 30), champagne, wall note "top drawer is double jewelry drawer".
+- PO rules seen: handles split DOOR / DRAWER with part number and vendor, counts = the drawn faces (WERNER `6 DOOR BP36559CZ
+  AMEROCK`; PRIEM `2 DOOR` + `4 DRAWER 110.93.461 HAFELE`); chrome stock rods never appear, Square Matte Nickel / Syn Matte
+  Gold poles do (by the stick: GODDARD 7 for 14 poles); sidebar part numbers (tie rack, shoe fence, slatwall, murphy
+  hardware); sheet goods the engineer computes (1/4" CF5 insert sheets, mica, thinscape, stiffeners); never doors, slides,
+  base/crown, cleats, levelers. The vendor is not in the job (`BP...` is both Amerock and Richelieu). CNC price = pricing
+  subtotal + 199 on the main room (11 rooms). Pricing-sheet accessories are typed from the sidebar at workbook prices (MELA
+  base 30 / crown 95, DES WHT 39 / 123.50, TH DECORATIVE 145 / 185, mica 57/sqft, quartz 88/sqft) with the engineer's
+  quantities (POLONSKA base 11 / crown 13 against sidebar 9 / 14).
+
+### 16.3 Fillers at both ends (`experiments/po/fillers.py`, report only)
+
+- Definition used: a wall end is closed when another live wall continues from it (`free_end`), open when the wall simply
+  stops; a run is between two walls when it reaches (within 1/8) a closed start AND a closed end. Each closed end is classed
+  by the neighbour wall: `wall` (bare within 30"), `zone` (the neighbour's run set back 23-26" with a connecting shelf in
+  the corner: the designers' corner convention), `side` (an L-corner unit), `casing` (an opening at the corner), `angled`.
+- Data: designer files (14 jobs), 51 closed ends a run touches: wall 20 with a filler / 7 without, zone 9 / 7, side 1 / 0,
+  casing 0 / 1, angled 0 / 6. Single wall-to-wall runs always had both fillers (COYNE Linen, Guest, Primary; DRUBEL;
+  BINDLER; GODDARD; POLONSKA). The 7 bare ends without: HUMPHREY walls 1 and 4 starts, ROBERTS guest wall 6 end, NEDDIE his
+  wall 8 end, COYNE Primary 15 start (a 2 3/8 jog), POLONSKA walls 1 and 4 (L-corner units). Designer against engineer on
+  31 ends: the engineers added no end filler (0 of 11), kept 18 of 20, dropped 2 (GODDARD, a copied unit set), changed
+  widths ROBERTS 1" -> 3/4, MIRANDA 1 1/2 -> 3/4, POLONSKA 3/4 -> 7/8, WERNER 3/4 -> 1 1/2 at a door casing. So the rule is
+  new practice at L back corners and on three reach-ins. FIX candidates: NEDDIE his wall 8 end (Mid Hang 27 5/8 -> 26 7/8,
+  filler at 141 1/4 under the old one-unit rule), HUMPHREY walls 1 and 4, ROBERTS guest wall 6 end; zone and angled corners,
+  drawer units, catalog units (hutch, L corners, wall bed), stacks and connecting shelves across the end stay CHECK.
+
+### 16.4 Adding a filler record to a job (`experiments/po/addfiller.py`, `reserve.py`; TEST3)
+
+- Unit ids = position in the file (all 7 files, deleted records included); only `nunits` and L[2]/L[3]/L[4] depend on the
+  unit count; nothing per room counts units; a filler has no settings pairs. The fillers of a job are identical except
+  wall id, slice and room points; suffix +12/+14/+16 = id x3, +4 a copy/paste batch number (0 written). On all 8 designer
+  fillers: H = the neighbour cabinet's H, From Wall = neighbour D - 3 (9 by 12" hangs, 13 by 16" talls). A plain filler's
+  cache entry is 230 vertices, 26 faces, 103 index ints, a library constant (the same bytes in NEDDIE and COYNE). New: the
+  index block is 16 (designer builds) or 20 (the owner's KCD) ints shorter than the slices claim: one early unit's chunk is
+  written short and every later unit's data sits 16 ints before its slice offset; the prototype keeps that constant and
+  only clones a source proven complete (known chunk or identical twin).
+- Recipe: the source filler's bytes with the X / H / From Wall slots, the wall id, a new slice, room points recomputed on the
+  target wall, the same room's Set Unit Info, id n+1, appended last; its vertices, index ints and faces cloned, rotated and
+  translated onto the wall, appended at the ends of the three arrays; header counts bumped; everything else byte-identical.
+  Verified by re-parsing (sections, slices tile, kcdwalls lists it, kcdcompare shows only the growth). Only KCD can prove it
+  opens: this is the first time the unit count grows (header blob and n1 block are opaque).
+- `reserve.py` makes the room: `unit_step` with a pseudo wall 3/4 shorter at the end, so the hanging sections share the
+  3/4 (14.3 rule) and the rest slides, then the room points and the cache like `set_wall_lengths`.
+- TEST3 (`out/Lynn Neddie - REM 1090111 applied + his wall 8 end filler - TEST3.job`, md5 82ce2821...): TEST2 plus his
+  wall 8: the four hanging sections 27 5/8, 27 5/8, 27 11/16, 27 11/16 -> 27 7/16, 27 7/16, 27 1/2, 27 1/2 (interiors
+  26 11/16, 26 11/16, 26 3/4, 26 3/4), the 96 Tall 5 Drawer 56 -> 55 5/8, 897 face width values redone, a cloned filler
+  (unit 53, X 142 1/8, H 95 1/4, From Wall 9) appended; 862,295 -> 869,489 bytes; no CHECK. Sent to the owner to open
+  without touching anything and save back. His walls 11 and 12 (one unit each filling a 30" wall between two walls) were
+  left for his answer.
+
+### 16.5 Open with the owner (the short list)
+
+- Fillers: the back corner of an L/U where the other wall's run starts 24" out with a connecting shelf, filler or not;
+  angled corners; one unit filling a wall between two walls (his 11 Long Hang, his 12 drawer tall): two fillers and the
+  unit gives up 1 1/2, even a drawer unit; who gives up the 3/4 when there are no hanging sections (the end unit, the next
+  one past a drawer tower); a door casing 3/4 or 1 1/2 (WERNER); designer fillers of 1" / 1 1/2" made 3/4.
+- Forms: fill the order tabs inside the same `.xlsm` (yes/no); PO counts from the drawn faces or the sidebar; hamper fronts
+  and flip-ups counted as faces and handles; when a TH door goes to Doormark against the CF Thermo form; MYBL or MYST for
+  Mysterious Blue and the full Doormark colour list; the part-number -> vendor list and numbers (or "stock") for Valet CR /
+  Belt CR / Tie CR / Lock Magnetic / Socket PU / Mirror Back; which rods are stock; the VJT double top tray -3 or -3 1/16;
+  the 4" slab-filler height; is B13 `Special Order` for every velvet tray.
+- Files: the TEST3 save from KCD; WERNER's ENG packet (its door-size elevation); `options.dat`; a filled Elements and a
+  filled CF Thermo form with their jobs; the Doormark quick reference; the A/B save (one unit with and without a door) so
+  the file tells which units have doors; MIRANDA's PO.
+
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
 In the repo, `experiments/design/apply-remeasure-plan.md` and `apply-remeasure-critic.md` are the Oct 19 design plan for the
