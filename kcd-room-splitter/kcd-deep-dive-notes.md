@@ -804,6 +804,20 @@ with the splitter's files).
   wall ends after the edit and compared within 1/8. Lines written against a room name that are not walls or facts
   (obstruction boxes, wire heights) are listed as facts instead of "not used".
 
+- **Sections of a changed wall come out the same size (Oct 19, owner: "if we make units the same sizes it's better, so
+  that is a step we can avoid").** When the changed wall carries two or more hanging sections (types 651/652; failing
+  that, open talls), they share the change so their interiors come out equal on the 1/16 grid (the odd sixteenths go to
+  the sections nearest the moved end, each new width = interior + its two side thicknesses, snapped); every other unit on
+  the wall keeps its width and slides with the run; shelves and accessories drawn in a section move with it (racks stay on
+  their panel, a centred one is flagged); the designer's gaps are kept and the run still ends where it did against the
+  wall end (CHECK if not). It is the default (`spread=True`; `--one-unit` turns it off and the single-cabinet rule above
+  applies, which is also the fallback when the wall has fewer than two such sections, when the change is not on the 1/16
+  grid, or when a section has units other than shelves inside it). NEDDIE: hers wall 1 (-3/16) 33 1/8, 32 3/8, 32 7/16,
+  32 3/8 -> 33 1/16, 32 5/16, 32 3/8, 32 3/8 (interiors 31 9/16, 31 9/16, 31 5/8, 31 5/8); his wall 8 (+7/8) 26 7/8,
+  27 5/8, 27 5/8, 27 5/8 -> 27 5/8, 27 5/8, 27 11/16, 27 11/16 (interiors 26 7/8, 26 7/8, 26 15/16, 26 15/16) with the
+  96 Tall 5 Drawer sliding 55 1/4 -> 56. The resized units also get their per-face width values redone in the drawing
+  cache (14.8), or KCD draws them at the old width until they are opened.
+
 ### 14.4 How the engineers absorbed remeasured lengths (ten sets, before and after; `scratchpad walls/rules/absorb.py`)
 
 Rules with evidence (R1-R11 in the study; the short form):
@@ -975,6 +989,20 @@ The owner opened test 3, fixed what looked wrong, saved, and sent four pictures:
   COYNE is the first job to go from remeasure sheet to a KCD file nobody had to touch. Still open: what the two
   dimension strings on Guest wall 10 and one on Primary wall 16 show; Primary wall 15 (readers disagreed); a
   second job through the same path (a closed room, a longer change, a start-moving wall with cabinets).
+- **The per-face width values (Oct 19, from the NEDDIE TEST1 save, `jobs/Lynn Neddie - TEST1 saved by KCD try1.job`).**
+  The owner: "how is it that the his master back wall grew by 7/8 and all the units are still the same size", then "when I
+  double click and open then close it changes to the new size". The width was in the file; the drawing was not. KCD had
+  rebuilt only the two units he opened (3 and 14). Against ours, their vertices matched (the hanger symbols apart, +-dW/4),
+  but the Int32 at byte 20 of every face had moved with the width: in KCD's entries it is k*W + b (k in 1, 2, 5, 1/2, 1/4,
+  5/8, 5/4, 3/2, 7/4, 5/2 ...; b in 0, -190, -254) or a constant (D, H, 190, 254, 635, the shelf heights), and KCD sizes
+  the drawn panels from it, so a stretch of the vertex list alone shows the old width until the unit is rebuilt.
+  `kcdmesh.face_width_value` now rewrites those values (fractions n/8 and n/3 with offsets 0, +-190, +-254, -380/-381;
+  a value equal to a fixed size H or D is left alone unless it is a plain multiple of W, after a false "ambiguous" on
+  NEDDIE unit 8 where D = 3048 also read as 3/8 W + 190); on units 3 and 14 the result equals KCD's rebuild value for value.
+  Also seen in the rebuilt entries: the slice offsets re-packed, A.x/B.x re-rounded, a name string's leading space toggled,
+  the hers room shifted by -1 raw, n1 down by 4, the stored face centre is not the mean or the box centre of the corners (a
+  per-part centre), the tails (bytes 36..65) of rebuilt faces all zero. The DRUBEL regression file changed only in the face
+  width values of its five shelves. TEST2 of NEDDIE (14.10) is the first file written with these values.
 
 ### 14.9 DRUBEL (order 1091400, `Bayle DCL - Daughters Room.job`, remeasure `Rem_1091400_drubel.pdf`; Oct 19, waiting for Grok)
 
@@ -1037,6 +1065,19 @@ The owner opened test 3, fixed what looked wrong, saved, and sent four pictures:
   (`applypatch.py`: gzip+base64 JSON of the changed byte runs, 60 KB in 837 lines instead of the 862 KB file); the
   appends glued two lines at the chunk joins (`fix76.py` re-splits at 76 characters) and one 50-line block arrived
   altered and was re-sent (`splice2.py`); md5 of the result checked.
+- TEST1 in KCD (owner, Oct 19): the his back wall "grew by 7/8 and all the units are still the same size" until a unit was
+  double-clicked: the per-face width values of the drawing cache (14.8, now written). He also set the second rule: units
+  of a changed wall should come out the same size (14.3).
+- TEST2 (`out/Lynn Neddie - REM 1090111 applied - TEST2.job`, md5 8d60935a...): the same walls and heights; hers wall 1
+  and his wall 8 now share the change over their four hanging sections (sizes in 14.3) and the 96 Tall 5 Drawer slides
+  55 1/4 -> 56; 32 room points moved, 30 cache entries moved, 11 units stretched with 1504 face width values redone;
+  11 CHECKs (as TEST1 less the Double Hang). Sent with the ask to look at both back walls without double-clicking anything.
+- Pricing TEST2 on the laptop: the 1237-line patch went over in four chunks; the third lost its last 100 lines and five
+  50-line blocks arrived altered (`fixpatch.py FILE START COUNT FIX` on the laptop replaces or inserts lines and prints the
+  block md5s; `applypatch.py` checks the source and result md5s, 8d60935a... matched). `price_job.py JOB TAG` prices each
+  room: hers 104 lines 11,029.80, his 79 lines 6,923.40, the same money as TEST1 and (hers) as the designer's file; only
+  the shared sections' shelf, kick and rod sizes moved (hers interiors 31 9/16, 31 9/16, 31 5/8, 31 5/8; his 26 15/16,
+  26 15/16, 26 7/8, 26 7/8). Workbooks v2 in section 15.
 
 ## 15. The pricing workbook filler `kcdbook.py` (Oct 19, 2026; first job DRUBEL)
 
@@ -1083,6 +1124,10 @@ The owner opened test 3, fixed what looked wrong, saved, and sent four pictures:
   his 6,940.40 -> 6,923.40 because the unchanged (flagged) 84 Tall 1 Drawer on wall 12 no longer reaches the wall end and
   its right panel drops from 266.70 to 249.70: the price scripts look at whether a panel is at the wall end. B25/B27 left
   blank (the sheet gives one total for both rooms); B13 blank although hers has two jewelry trays.
+- NEDDIE v2 (`out/1090111 NEDDIE PRIMARY HERS v2.xlsm`, `... HIS v2.xlsm`, Oct 19): the same answers and drops rebuilt from
+  TEST2's prices (the same-size rule, 14.3): hers 131 lines 9,973.80 after the four door lines, his 87 lines 6,923.40; against
+  v1 only the shelf, kick and rod sizes of the sections that now share the wall change differ. The reports end with where
+  each answer came from, what was left blank and what the remeasure changed, for the engineer.
 
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
