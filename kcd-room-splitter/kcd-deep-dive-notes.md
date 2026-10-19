@@ -754,18 +754,35 @@ with the splitter's files).
 
 ### 14.3 `kcdwalls.py`
 
-- `--list JOB`: every live wall with length, angle, height, neighbours and the units on it (X, W, where they end).
+- `--list JOB`: every live wall with length, angle, height, neighbours and the units on it (X, W, where they end,
+  unit id and type code).
 - `--rem REM.json --out NEW.job`: match each agreed wall by number, room name and printed length (within
-  1/32", else CHECK), apply the measured length, never apply `needs_review`, list the unit on each changed wall
-  that ends at the old wall end with the amount it must change; `--heights-from-rem` sets every wall of a room
-  to the measured `H`; `--fit` lets a lone 3/4 filler at the end of a changed wall grow or shrink with it
-  (result must stay between 1/2 and 1 1/2; writes unit slot 2 and the width copy at byte 12 of the 86-byte
-  block); `--set 7="25 1/8"`, `--height 1=90.25` for manual edits; `--anchor end` moves the START instead.
-- COYNE test files sent to the owner Oct 19: TEST (walls only) and TEST2 (walls + heights + two fillers:
-  Linen #7 filler 3/4 -> 5/8, Guest #11 filler 3/4 -> 1 1/16). Primary #14's filler would go to 3/16 and was
-  left for the engineer (two Double Hang 35 15/16 and 35 1/4 must give 9/16), Guest #10's hutch ends at the old
-  wall end (+3/16, not a filler). Waiting for the KCD round trip: open, check the plans, Save As, send back,
-  byte-compare with `kcdcompare.py`.
+  1/32", else CHECK), apply the measured length, never apply `needs_review`; `--heights-from-rem` sets every
+  wall of a room to the measured `H`; `--set 7="25 1/8"`, `--height 1=90.25` for manual edits.
+- Which end of a wall moves (`--anchor`, default `auto`, the engineers' way, see 14.7): the room's main wall
+  (the 0-degree wall that starts at the origin) keeps its START; walls upstream of it (reached along left_id)
+  move their START; the main wall and everything downstream move their END. `--anchor start|end` forces one
+  end on every wall. The edited wall gets P1 = P0 + L*d exactly (KCD drops a designer's skew the same way,
+  MIRANDA eng wall 3), so the self-test's +1/-1 round trip is byte-exact only on skew-free walls (192 of 240;
+  the other 48 come back without their old skew, counted apart).
+- The unit step (owner's rule, Oct 19, after test 1 in KCD; `--walls-only` turns it off): fillers keep their
+  width; the cabinet that reaches the end filler (or stands against the wall end itself) changes width by the
+  wall's change (slot 2 and the width copy at byte 12 of the 86-byte block); the end fillers slide so they still
+  end at the wall; then the units must run from 0 to the new wall length (reported, CHECK when they do not).
+  Left alone and flagged: two cabinets ending at the wall end, a drawer unit at the end (engineers keep drawer
+  widths), a cabinet with units nested inside it (a shelf spanning its interior), a wall whose units stop short
+  of the end (reported, nothing to do), a filler that no cabinet reaches, a start-moving wall's accessories
+  (outlets keep their X and move with the start, as KCD does). No stored size slot of the cabs looked at
+  (CSE300, Hangdbl, 760-1, 234) depends on W; shelf, kick, door and rod sizes are computed from W by the price
+  scripts, and the price run on test 3 shows them following the new widths.
+- The two room points of every unit on a moved wall or with a new X/W are rewritten (14.6), so KCD draws the
+  units on the wall when it opens the file. Notes are not moved; dimension strings on a changed wall are CHECK,
+  text notes are listed.
+- The file keeps its size; a final guard refuses the write if any byte outside the wall records and the touched
+  unit fields (slot 1, slot 2, block bytes 12..15 and 40..63) changed.
+- COYNE test files: TEST (walls only, Oct 19 01:36) went through KCD, see 14.6; TEST2 (walls + heights + two
+  fillers resized) was withdrawn: the owner's rule is that fillers stay 3/4 and the units change. TEST3
+  (14.7) is the one to round-trip next.
 
 ### 14.4 How the engineers absorbed remeasured lengths (ten sets, before and after; `scratchpad walls/rules/absorb.py`)
 
@@ -833,7 +850,64 @@ other pairs mix the wall change with re-layouts; remeasure values are only known
   app can carry out and check (equal interiors, shared panels, re-fitted backings and pullouts, reveals, qty
   fillers, the price-review unit numbers that change when a room is rebuilt).
 
+### 14.6 What KCD did with test 1 (the owner opened TEST, double-clicked each wall, saved; `jobs/Cathy Coyne - TEST1 saved by KCD.job`)
+
+The owner reported: the file opened, the units were drawn off their walls until he opened and closed each wall
+in KCD, and then KCD placed them. The saved file (7,507,246 bytes, 77 more than ours) compared with
+`kcdcompare.py` and a per-record diff:
+
+- Every wall length we set survived (12 walls). KCD recomputed the wall points: Linen (walls 7-9) came back
+  byte-identical to ours; Guest (10-13) was moved back so the main wall 10 starts at (0,0) again, which is
+  exactly what the `auto` anchor now produces (test 3's Guest walls equal KCD's save byte for byte); Primary
+  came back with wall 14 detached (left_id/right_id 15/16 -> 0/0, wall 15 right_id -> 0, wall 16 left_id -> 0)
+  and moved to (2318,0)-(20638,0) while walls 15-19 moved about 3464 raw in y: that is a drag in KCD, not a
+  recomputation, and the reason to ask the owner what he did in that room. Wall 15's f64 colour went to 0 and
+  the first record's Int32@8 save counter changed (156 -> 234).
+- Units: KCD rewrote the geometry counts (block bytes 16..39) and the two room points (40..63) of the
+  cabinets, snapped two accessory X values to the 1/16 grid (4111 -> 4112, 6143 -> 6144), cleared the unwname
+  'Closet Shelf Inventory' on two shoe units and put a leading space on some Code strings (' =#36#='). No unit
+  width changed. Header 1477 -> 1573 bytes, mesh n1 36 -> 45, pictemp +1 byte, units section -40 bytes.
+- The two room points (A at block byte 40, B at 52, three Int32 each) are room coordinates: along the wall
+  both sit at X + W/2 from the wall's START on all 30 units; across the wall at a fixed distance (B: D/2 on
+  cabinets, From Wall + D/2 on fillers; A: 3/4 D on talls, 7/8 D on uppers, 0.92 D on shelves, D/2 on
+  accessories); z is a fixed height. KCD recomputed them for the cabinets but left the fillers and accessories
+  where they were (units 10, 11, 15, 17, 29, 98 off by the old translation), so a moved wall needs them
+  rewritten by us. `moved_unit_points()` keeps each unit's fraction along its width, its distance from the wall
+  and its height, and reproduces KCD's own values exactly on the Guest room of the test-1 save (door, 4-drawer
+  tower, shelf, outlet: zero difference; the fillers differ by exactly KCD's stale offset).
+
+### 14.7 Test 3 (Oct 19, `out/Cathy Coyne - REM 1093610 applied - TEST3.job`, md5 0060bbe1...)
+
+Built from the original job with `--rem --heights-from-rem` and the new defaults. What changed:
+
+| Wall | Length | Unit step |
+|---|---|---|
+| Linen 7 | 25 1/4 -> 25 1/8 (end moved, wall 9 followed) | Tall 1 Opening 24 -> 23 7/8; filler 74 16 slid to X 24 3/8 (its 1/4 overlap with the tall unit is the designer's) |
+| Linen 8 / 9 | 32 5/16 -> 32 1/8 (start moved) / 38 -> 34 7/8 | no units |
+| Guest 10 | 65 1/16 -> 65 1/4 (end moved, wall 12 followed) | Upper Hutch 37 1/16 -> 37 1/4 (the hutch stands against the wall end; the wall is empty before 28) |
+| Guest 11 | 66 3/16 -> 66 1/2 (start moved, wall 13 followed) | Tall 1 Opening 33 3/16 -> 33 1/2; end filler slid to X 65 3/4; units 0 to 66 1/2 |
+| Guest 13 | 36 1/2 -> 32 3/4 (start moved) | Electrical Outlet keeps X 6 (CHECK its place) |
+| Primary 14 | 72 11/16 -> 72 1/8 (end moved, walls 16, 19 followed) | second Double Hang 35 1/4 -> 34 11/16; end filler slid to X 71 3/8; units 0 to 72 1/8 |
+| Primary 16 | 91 1/2 -> 91 1/4 | units stop at 76, nothing to do |
+| Primary 18 / 19 | 62 9/16 -> 62 3/8 (start moved) / 33 3/16 -> 33 1/8 | no cabinets |
+| Primary 15 | not applied (readers disagree 57 7/8 / 57 3/8) | |
+| heights | Linen 90 1/4, Guest 95, Primary 90 1/8 on every wall | |
+
+Checks on the file: section sizes unchanged, only wall records and the unit fields differ (`kcdcompare.py`);
+Guest walls equal KCD's own test-1 save; the relative room points of all 30 units are unchanged and the
+absolute ones match KCD's recomputation where the walls coincide; 16 units had their room points moved. Price
+run (Sep 2024 list, the only full list here): only the four changed units' lines differ, and every dependent
+part follows the width (unit 4 shelves 22 1/2 -> 22 3/8, kick 24 -> 23 7/8, doors 11 15/16 -> 11 7/8; unit 10
+shelves 32 7/16 -> 32 3/4; unit 12 back 35 9/16 -> 35 3/4 (55.56 -> 55.86), rod 35 5/16 -> 35 1/2; unit 21
+shelves 34 1/2 -> 33 15/16, rods 34 1/4 -> 33 11/16). The design plan and the critic that led to the anchor
+rule are in `experiments/design/`. Open: the KCD round trip of test 3 (do the units sit on the walls without the
+double-click; what KCD does to the two dimension strings on Guest wall 10); which unit the engineer would have
+chosen on wall 11 (the tool takes the cabinet next to the end filler, the open tall, not the drawer tower).
+
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
+
+In the repo, `experiments/design/apply-remeasure-plan.md` and `apply-remeasure-critic.md` are the Oct 19 design plan for the
+remeasure tool and its adversarial review (the critic found the anchor rule and the stale unit points).
 
 - `kcdunits.py` (in this folder) is the reader to use from now on: `python kcdunits.py --lib C:\KCD23 JOB.job`
   prints the room sheet; `Catalog.from_json` takes the compact catalog made by `experiments/catjson.py`.

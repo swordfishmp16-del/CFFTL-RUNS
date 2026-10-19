@@ -148,7 +148,7 @@ def self_test(path):
     print(f"  {ok2}/{tot} live walls reproduced within 2 raw; exceptions (job, id, max dev): {bad}")
 
     print("\n[5] resize_wall(): +1 in then -1 in round trip on every live wall (anchor start and end)")
-    n_ok = n_rt = n_raise = 0; raised = []
+    n_ok = n_rt = n_raise = n_skew = 0; raised = []
     for jn, w in live:
         room = [x['bytes'] for x in jobs[jn]['walls'] if x['room'] == w['room'] and x['id'] != w['id']]
         for anchor in ('start', 'end'):
@@ -164,8 +164,13 @@ def self_test(path):
             r2 = resize_wall(new_room[w['id']], w['length'], others, anchor=anchor, absorb_id=r1['absorbed_by'])
             back = {x['id']: r2['updated'].get(x['id'], new_room[x['id']]) for x in jobs[jn]['walls'] if x['room'] == w['room']}
             if all(back[x['id']] == x['bytes'] for x in jobs[jn]['walls'] if x['room'] == w['room']): n_rt += 1
-            else: print(f"  job {jn} wall {w['id']} {anchor}: round trip NOT byte-exact")
-    print(f"  {n_ok} resizes succeeded, {n_rt} round-tripped byte-exact, {n_raise} raised: {raised}")
+            else:
+                # the edited wall gets P1 = P0 + L*d exactly (KCD does the same, MIRANDA eng wall 3), so a wall that
+                # carried a designer's skew comes back without it: expected, counted apart
+                pw = parse_wall(w['bytes'])
+                if max(abs(pw['vec_error'][0]), abs(pw['vec_error'][1])) > 0.5: n_skew += 1
+                else: print(f"  job {jn} wall {w['id']} {anchor}: round trip NOT byte-exact")
+    print(f"  {n_ok} resizes succeeded, {n_rt} round-tripped byte-exact, {n_skew} came back without their old skew (expected), {n_raise} raised: {raised}")
 
     print("\n[6] worked examples")
     def show(jn, wid, nl, anchor='start', **kw):

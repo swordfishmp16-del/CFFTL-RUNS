@@ -398,13 +398,21 @@ def resize_wall(rec, new_length, room_records, anchor='start', absorb_id=None, a
         raise ResizeError("room is inconsistent before the edit:\n  " + "\n  ".join(hard))
     dL = new_length - k['length_raw']
     d, n = unit_vectors(k['angle_deg'])
-    v = (int(round(dL * d[0])), int(round(dL * d[1])))          # displacement of the moving END
+    Ld = (int(round(new_length * d[0])), int(round(new_length * d[1])))
+    if anchor == 'start':                                        # the edited wall gets P1 = P0 + L*d exactly (KCD drops an old skew)
+        P1n = (k['P0'][0] + Ld[0], k['P0'][1] + Ld[1])
+        v = (P1n[0] - k['P1'][0], P1n[1] - k['P1'][1])          # displacement of the moving END
+    else:
+        P0n = (k['P1'][0] - Ld[0], k['P1'][1] - Ld[1])
+        v = (k['P0'][0] - P0n[0], k['P0'][1] - P0n[1])          # minus the displacement of the moving START
     warnings = []
     if abs(dL * d[0] - v[0]) > 1e-9 or abs(dL * d[1] - v[1]) > 1e-9:
-        warnings.append(f"non-axis wall ({k['angle_deg']:.1f} deg): displacement rounded to {v}; |P1-P0| will differ from L by <= 0.71 raw")
+        warnings.append(f"non-axis wall ({k['angle_deg']:.1f} deg) or old skew: displacement {v} differs from dL*d")
     updated = {}
     unit_shift = {}
     absorbed = None
+    if anchor not in ('start', 'end'):
+        raise ResizeError("anchor must be 'start' or 'end'")
     if dL == 0:
         return {'updated': {}, 'translation': (0, 0), 'absorbed_by': None, 'unit_x_shift': {}, 'warnings': ['length unchanged']}
 
@@ -438,7 +446,7 @@ def resize_wall(rec, new_length, room_records, anchor='start', absorb_id=None, a
             for i in down:
                 updated[i] = _translate(idx[i], v)
         updated[k['id']] = pack_wall(k['_raw'], length=new_length,
-                                     P1=(k['P1'][0] + v[0], k['P1'][1] + v[1]), P2=(k['P2'][0] + v[0], k['P2'][1] + v[1]))
+                                     P1=P1n, P2=(k['P2'][0] + v[0], k['P2'][1] + v[1]))
     elif anchor == 'end':
         chain, closed = chain_from(idx, k['id'], 'left')
         up = chain[1:]
@@ -467,7 +475,7 @@ def resize_wall(rec, new_length, room_records, anchor='start', absorb_id=None, a
             for i in up:
                 updated[i] = _translate(idx[i], w)
         updated[k['id']] = pack_wall(k['_raw'], length=new_length,
-                                     P0=(k['P0'][0] + w[0], k['P0'][1] + w[1]), P3=(k['P3'][0] + w[0], k['P3'][1] + w[1]))
+                                     P0=P0n, P3=(k['P3'][0] + w[0], k['P3'][1] + w[1]))
         unit_shift[k['id']] = dL
     else:
         raise ResizeError("anchor must be 'start' or 'end'")
@@ -490,7 +498,7 @@ def resize_wall(rec, new_length, room_records, anchor='start', absorb_id=None, a
             if x < 0:
                 warnings.append(f"unit {u.get('name', '?')!r} on wall {wid}: X = {x} < 0")
     if unit_shift:
-        warnings.append("units on walls " + str(sorted(unit_shift)) + " need X += dL (" + ", ".join(f"{i}:{s:+d}" for i, s in unit_shift.items()) + ") to stay physically in place; unit records are not rewritten here")
+        warnings.append("the START of walls " + str(sorted(unit_shift)) + " moved (" + ", ".join(f"{i}:{s:+d}" for i, s in unit_shift.items()) + "); units there keep their X, so they move with the start, as KCD does")
     return {'updated': updated, 'translation': v, 'absorbed_by': absorbed, 'unit_x_shift': unit_shift, 'warnings': warnings}
 
 
@@ -543,14 +551,19 @@ def units_by_wall(job_path):
         return out, 'unit reader failed: %s' % e
     for u in job.units:
         out[u.wall].append({'wall': u.wall, 'seq': u.seq, 'id': u.id, 'name': u.kcd_name or u.cab, 'cab': u.cab,
-                            'x_raw': u.raw(1), 'w_raw': u.raw(2), 'd_raw': u.raw(4)})
+                            'type': u.T, 'x_raw': u.raw(1), 'w_raw': u.raw(2), 'd_raw': u.raw(4)})
     for lst in out.values():
         lst.sort(key=lambda d: d['x_raw'])
     return out, None
 
 
-FILLER_MIN = IN // 2                      # a filler the fit step may leave: 1/2" ..
-FILLER_MAX = IN + IN // 2                 # .. 1 1/2"
+# ----------------------------------------------------------------------------- units on the walls
+# Owner's rule for the unit step (Oct 19, 2026, after the first COYNE test in KCD): fillers stay 3/4" wide;
+# the cabinet against the end of the wall changes width; the units on the wall must add up to the wall length.
+ACCESSORY_TYPES = {1000, 20}             # unit type code (Int16 at byte 64 of the 86-byte block): accessories,
+                                         # obstructions, outlets (1000) and door/window openings (20) are not cabinets
+TOL_END = IN // 16                       # a unit "ends at the wall end" within 1/16"
+REACH = IN // 4                          # a cabinet "reaches" the end filler when it ends within 1/4" of the filler's start
 
 
 def unit_index(data):
@@ -566,25 +579,218 @@ def is_filler(u):
     return 'filler' in name or cab.startswith(('234', '231', '131'))
 
 
-def set_unit_width(data, uinfo, new_w):
-    """Write a unit's width in place: size slot 2 of the prefix (Int32 0.1 mm, state byte kept) and the copy
-    at byte 12 of the 86-byte block. The 3-D cache stays stale; KCD rebuilds it. TEST path: not yet round-tripped."""
-    struct.pack_into('<i', data, uinfo['start'] + 6 * 2, int(new_w))
-    struct.pack_into('<i', data, uinfo['f86_at'] + 12, int(new_w))
+def is_cabinet(u):
+    return u.get('type') not in ACCESSORY_TYPES
 
 
-def set_wall_lengths(job_path, changes, out_path, anchor='start', heights=None, allow_absorb=True, fit=False):
+def snap16(raw):
+    """Raw 0.1 mm to the nearest 1/16" (KCD keeps positions and sizes on that grid; 3/4" is 190, not 191)."""
+    return int(round(round(raw / IN * 16) / 16.0 * IN))
+
+
+def unit_xw(data, uinfo):
+    return struct.unpack_from('<i', data, uinfo['start'] + 6)[0], struct.unpack_from('<i', data, uinfo['start'] + 12)[0]
+
+
+def set_unit_xw(data, uinfo, x=None, w=None):
+    """Write a unit's X (size slot 1) and/or W (slot 2 and the copy at byte 12 of the 86-byte block) in place.
+    Only the Int32 values change; the state bytes stay. No stored size slot of the cabs seen so far depends on W
+    (shelf and drawer widths are computed from W by KCD and by the price scripts), so nothing else is touched."""
+    if x is not None:
+        struct.pack_into('<i', data, uinfo['start'] + 6 * 1, int(x))
+    if w is not None:
+        struct.pack_into('<i', data, uinfo['start'] + 6 * 2, int(w))
+        struct.pack_into('<i', data, uinfo['f86_at'] + 12, int(w))
+
+
+def unit_points(data, uinfo):
+    """The two room-coordinate points of the unit in its 86-byte block: A at byte 40, B at byte 52 (3 x Int32)."""
+    f = uinfo['f86_at']
+    return struct.unpack_from('<3i', data, f + 40), struct.unpack_from('<3i', data, f + 52)
+
+
+def set_unit_points(data, uinfo, A, B):
+    struct.pack_into('<3i', data, uinfo['f86_at'] + 40, *A)
+    struct.pack_into('<3i', data, uinfo['f86_at'] + 52, *B)
+
+
+def _along_depth(P, wall):
+    d, n = unit_vectors(wall['angle_deg'])
+    vx, vy = P[0] - wall['P0'][0], P[1] - wall['P0'][1]
+    return vx * d[0] + vy * d[1], vx * n[0] + vy * n[1]
+
+
+def moved_unit_points(A, B, wall_old, wall_new, x_old, w_old, x_new, w_new):
+    """Where the unit's two room points go when its wall moved and/or its X or W changed.
+    Measured on 30 COYNE units and KCD's own re-save: both points sit at X + W/2 along the wall (B also on the
+    WERNER units), at a fixed distance from the wall (D/2, 3/4 D, From Wall + D/2 on fillers) and a fixed height.
+    The distance from the wall and the height are kept; the place along the wall keeps the unit's own fraction
+    of its width (1/2 on every unit seen). KCD recomputes these for cabinets when it opens the job but left
+    fillers and accessories stale in the test-1 re-save, which is why units looked off the wall until each wall
+    was opened and closed in KCD."""
+    d, n = unit_vectors(wall_new['angle_deg'])
+    out = []
+    for P in (A, B):
+        along, depth = _along_depth(P, wall_old)
+        f = (along - x_old) / w_old if w_old else 0.5
+        along_new = x_new + f * w_new
+        out.append((int(round(wall_new['P0'][0] + along_new * d[0] + depth * n[0])),
+                    int(round(wall_new['P0'][1] + along_new * d[1] + depth * n[1])), P[2]))
+    return out[0], out[1]
+
+
+def notes_on_walls(data):
+    """{wall id: [(kind, text)]} for the notes attached to a wall (Int16 at byte 24 of the 30-byte note header;
+    kind at byte 28: 4 text, 5 dimension string, 6 leader, 2 arrow). Dimension strings carry a measured length."""
+    out = collections.defaultdict(list)
+    for name, start, end, info in kcdjob.parse(data):
+        if name == 'notes':
+            for n in info['list']:
+                wall = struct.unpack_from('<h', data, n['start'] + 24)[0]
+                kind = struct.unpack_from('<h', data, n['start'] + 28)[0]
+                if wall:
+                    out[wall].append((kind, n['text'].decode('cp1252', 'replace') if isinstance(n['text'], bytes) else str(n['text'])))
+    return out
+
+
+def room_main_wall(records):
+    """The wall KCD treats as the room's origin: the 0-degree wall that starts at (0,0) when there is one, else the
+    lowest-numbered 0-degree wall, else the first wall of the first chain. In the ten engineered jobs this wall's
+    START never moved when the engineers changed lengths (audit over 8 design/engineered pairs, Oct 2026)."""
+    idx = {i: p for i, p in _room_index(records).items() if p['is_live']}
+    zero = [i for i, p in sorted(idx.items()) if abs(wrap180(p['angle_deg'])) < 1e-6]
+    at_origin = [i for i in zero if tuple(idx[i]['P0']) == (0, 0)]
+    if at_origin:
+        return at_origin[0]
+    if zero:
+        return zero[0]
+    chains = room_chains(records)
+    return chains[0][0][0] if chains else None
+
+
+def auto_anchor(records, wid):
+    """How the engineers (and KCD's wall dialog) change a wall: a wall upstream of the room's main wall (reached from it
+    along left_id) moves its START ('end' anchor); the main wall and the walls downstream move their END ('start')."""
+    idx = {i: p for i, p in _room_index(records).items() if p['is_live']}
+    m = room_main_wall(records)
+    if m is None or m == wid or wid not in idx:
+        return 'start'
+    up, closed = chain_from(idx, m, 'left')
+    if closed:
+        return 'start'
+    return 'end' if wid in up[1:] else 'start'
+
+
+def unit_step(data, wid, rn, wall_old, wall_new, ulist, uidx, lines, checks, touched):
+    """Apply the owner's unit rule to one changed wall. Fillers keep their width; the cabinet that reaches the end
+    filler (or stands against the wall end itself) changes width by the wall's change; the end fillers slide to the
+    new wall end. Anything unclear is flagged and left alone. Records are patched in `data`; `touched` collects
+    {unit id: (x_old, w_old, x_new, w_new)} for the room-point update."""
+    L_old, L_new = wall_old['length_raw'], wall_new['length_raw']
+    dL = L_new - L_old
+    if not ulist:
+        return                                          # the caller says 'no units on this wall'
+    cabs = sorted([u for u in ulist if is_cabinet(u)], key=lambda u: u['x_raw'])
+    if not cabs:
+        lines.append('   no cabinets on this wall (accessories only); none changed')
+        return
+    end_units = [u for u in cabs if abs(u['x_raw'] + u['w_raw'] - L_old) <= TOL_END]
+    max_end = max(u['x_raw'] + u['w_raw'] for u in cabs)
+    if not end_units:
+        if max_end > L_new + TOL_END:
+            checks.append('CHECK wall %d (%s): the units end at %s, past the new wall end %s; nothing was changed on them'
+                          % (wid, rn, frac_inches(max_end), frac_inches(L_new)))
+        else:
+            lines.append('   units stop at %s, %s short of the new wall end; none changed' % (frac_inches(max_end), frac_inches(L_new - max_end)))
+        return
+    fill_end = [u for u in end_units if is_filler(u)]
+    cab_end = [u for u in end_units if not is_filler(u)]
+    sliders = fill_end
+    if cab_end:
+        if len(cab_end) > 1:
+            checks.append('CHECK wall %d (%s): %d cabinets end at the wall end (%s); the engineer picks which one changes by %s%s'
+                          % (wid, rn, len(cab_end), ', '.join(repr(u['name']) for u in cab_end), '+' if dL > 0 else '-', frac_inches(abs(dL))))
+            return
+        target = cab_end[0]
+    else:
+        fill_x = min(u['x_raw'] for u in fill_end)
+        cands = [u for u in cabs if not is_filler(u) and u['x_raw'] < fill_x and u['x_raw'] + u['w_raw'] >= fill_x - REACH]
+        if not cands:
+            checks.append('CHECK wall %d (%s): only the filler %r ends at the wall; no cabinet reaches it, so nothing was changed (the filler still ends at the old wall end %s)'
+                          % (wid, rn, fill_end[0]['name'], frac_inches(L_old)))
+            return
+        best = max(u['x_raw'] + u['w_raw'] for u in cands)
+        top = [u for u in cands if abs(u['x_raw'] + u['w_raw'] - best) <= TOL_END]
+        if len(top) > 1:
+            checks.append('CHECK wall %d (%s): %d units reach the end filler (%s); the engineer picks which one changes by %s%s'
+                          % (wid, rn, len(top), ', '.join(repr(u['name']) for u in top), '+' if dL > 0 else '-', frac_inches(abs(dL))))
+            return
+        target = top[0]
+    if 'drawer' in (target['name'] or '').lower():
+        checks.append('CHECK wall %d (%s): the cabinet at the wall end is %r; drawer units keep their width (engineers\' rule), so the engineer decides how the wall change of %s%s is taken up'
+                      % (wid, rn, target['name'], '+' if dL > 0 else '-', frac_inches(abs(dL))))
+        return
+    t0, t1 = target['x_raw'], target['x_raw'] + target['w_raw']
+    inside = [u for u in cabs if u is not target and u not in sliders and u['x_raw'] >= t0 - TOL_END and u['x_raw'] + u['w_raw'] <= t1 + TOL_END]
+    if inside:
+        checks.append('CHECK wall %d (%s): %r has units inside it (%s) that would have to change with it; nothing was changed on this wall'
+                      % (wid, rn, target['name'], ', '.join(repr(u['name']) for u in inside)))
+        return
+    new_w = snap16(target['w_raw'] + dL)
+    if new_w <= IN:
+        checks.append('CHECK wall %d (%s): %r would become %s wide; nothing was changed on this wall' % (wid, rn, target['name'], frac_inches(new_w)))
+        return
+    if target['id'] not in uidx or any(u['id'] not in uidx for u in sliders):
+        checks.append('CHECK wall %d (%s): unit records could not be located; nothing was changed on the units' % (wid, rn))
+        return
+    set_unit_xw(data, uidx[target['id']], w=new_w)
+    touched[target['id']] = (target['x_raw'], target['w_raw'], target['x_raw'], new_w)
+    lines.append('   %r (unit %d): %s -> %s wide' % (target['name'], target['id'], frac_inches(target['w_raw']), frac_inches(new_w)))
+    target['w_raw'] = new_w
+    for u in sliders:
+        new_x = L_new - (L_old - u['x_raw'])                 # keeps its distance from the wall end
+        set_unit_xw(data, uidx[u['id']], x=new_x)
+        touched[u['id']] = (u['x_raw'], u['w_raw'], new_x, u['w_raw'])
+        lines.append('   %r (unit %d): moved from X %s to X %s, still %s wide' % (u['name'], u['id'], frac_inches(u['x_raw']), frac_inches(new_x), frac_inches(u['w_raw'])))
+        u['x_raw'] = new_x
+    # the owner's check: the units must add up to the wall length
+    tops = [u for u in cabs if not any(v is not u and v['x_raw'] - TOL_END <= u['x_raw'] and u['x_raw'] + u['w_raw'] <= v['x_raw'] + v['w_raw'] + TOL_END for v in cabs)]
+    tops.sort(key=lambda u: u['x_raw'])
+    first, last = tops[0]['x_raw'], max(u['x_raw'] + u['w_raw'] for u in tops)
+    total = sum(u['w_raw'] for u in tops)
+    gaps = []
+    for a, b in zip(tops, tops[1:]):
+        g = b['x_raw'] - (a['x_raw'] + a['w_raw'])
+        if abs(g) > 2:
+            gaps.append('%s %s between %r and %r' % (frac_inches(abs(g)), 'gap' if g > 0 else 'overlap', a['name'], b['name']))
+    span = last - first
+    if abs(last - L_new) <= 2:
+        if first <= TOL_END:
+            s = '   units now run from 0 to %s = the wall length; widths add up to %s' % (frac_inches(last), frac_inches(total))
+        else:
+            s = '   units now run from %s to %s = the wall end (the wall is empty before %s); widths add up to %s' % (
+                frac_inches(first), frac_inches(last), frac_inches(first), frac_inches(total))
+        s += '' if abs(total - span) <= 2 else ' (%s)' % '; '.join(gaps)
+        lines.append(s)
+    else:
+        checks.append('CHECK wall %d (%s): after the change the units run from %s to %s but the wall is %s' % (wid, rn, frac_inches(first), frac_inches(last), frac_inches(L_new)))
+
+
+def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, allow_absorb=True, units_step=True):
     """Change wall lengths (and optionally wall heights) in a .job and write out_path.
 
-    changes   {wall id: new length in raw 0.1 mm}  (use round(inches * 254))
-    heights   {room number: new wall height raw} applied to every live wall of that room, or
-              {('wall', id): raw} for one wall
-    fit       True: when exactly one unit ends at the old wall end and it is a filler that stays between
-              1/2" and 1 1/2", its width is changed by the same amount (the unit record is patched in place);
-              every other case is left for the engineer and listed under TO CHECK
+    changes     {wall id: new length in raw 0.1 mm}  (use round(inches * 254))
+    heights     {room number: new wall height raw} applied to every live wall of that room, or
+                {('wall', id): raw} for one wall
+    anchor      'auto' (the engineers' way: the room's main wall keeps its start; walls upstream of it move their
+                start, every other wall moves its end), or 'start' / 'end' for every wall
+    units_step  True: on each changed wall, fillers keep their width, the cabinet at the wall end changes width and
+                the end fillers slide to the new end (owner's rule); the units' room points are updated so KCD
+                draws them on the wall. False: wall records only.
     Returns a dict: 'lines' (plain-English report lines), 'checks' (things the engineer must look at),
-    'changed_walls' (ids whose record changed), 'written' (out_path or None).
-    The edit is in place: the file keeps its size, every other section is byte for byte the original.
+    'changed_walls', 'changed_units', 'written' (out_path or None).
+    The edit is in place: the file keeps its size; outside the wall records and the touched unit fields every
+    byte is the original.
     """
     data = bytearray(open(job_path, 'rb').read())
     original = bytes(data)
@@ -592,13 +798,19 @@ def set_wall_lengths(job_path, changes, out_path, anchor='start', heights=None, 
     units, uerr = units_by_wall(job_path)
     lines, checks, changed = [], [], set()
     if uerr:
-        checks.append('CHECK units could not be read (%s): no overhang check was done' % uerr)
+        checks.append('CHECK units could not be read (%s): no unit was changed or checked' % uerr)
+        units_step = False
     recs = job_walls(data)
     by_id = {r.parsed['id']: r for r in recs}
-    uidx = unit_index(original) if fit else {}
-    patched_units = set()
+    walls_before = {i: dict(r.parsed) for i, r in by_id.items()}
+    uidx = unit_index(original)
+    touched = {}                                     # unit id -> (x_old, w_old, x_new, w_new)
+    try:
+        wall_notes = notes_on_walls(original)
+    except Exception:
+        wall_notes = {}
 
-    def room_records(room, exclude_id):
+    def room_records(room, exclude_id=None):
         return [r.raw for r in job_walls(data) if r.parsed['room'] == room and r.parsed['id'] != exclude_id]
 
     for wid, new_len in sorted(changes.items()):
@@ -611,9 +823,9 @@ def set_wall_lengths(job_path, changes, out_path, anchor='start', heights=None, 
         rn = names.get(p['room'], '')
         if new_len == p['length_raw']:
             lines.append('wall %d (%s): already %s, no change' % (wid, rn, frac_inches(new_len))); continue
-        ulist = [u for lst in units.values() for u in lst if u['wall'] in {w.parsed['id'] for w in recs if w.parsed['room'] == p['room']}]
+        anc = auto_anchor(room_records(p['room']), wid) if anchor == 'auto' else anchor
         try:
-            res = resize_wall(r.raw, new_len, room_records(p['room'], wid), anchor=anchor, allow_absorb=allow_absorb, units=ulist)
+            res = resize_wall(r.raw, new_len, room_records(p['room'], wid), anchor=anc, allow_absorb=allow_absorb)
         except ResizeError as e:
             checks.append('CHECK wall %d (%s) %s -> %s was NOT changed: %s' % (wid, rn, frac_inches(p['length_raw']), frac_inches(new_len), e))
             continue
@@ -624,46 +836,38 @@ def set_wall_lengths(job_path, changes, out_path, anchor='start', heights=None, 
         recs = job_walls(data); by_id = {x.parsed['id']: x for x in recs}
         moved = sorted(i for i in res['updated'] if i != wid)
         dL = new_len - p['length_raw']
-        lines.append('wall %d (%s): %s -> %s (%s%s)%s' % (
+        lines.append('wall %d (%s): %s -> %s (%s%s), its %s moved%s' % (
             wid, rn, frac_inches(p['length_raw']), frac_inches(new_len), '+' if dL > 0 else '-', frac_inches(abs(dL)),
-            ('; walls %s moved with it' % moved) if moved else ''))
+            'start' if anc == 'end' else 'end', ('; walls %s moved with it' % moved) if moved else ''))
         if res['absorbed_by']:
             lines.append('   closed room: wall %d changed by the same amount so the room stays closed' % res['absorbed_by'])
         for w in res['warnings']:
-            if w.startswith('unit '):
-                m = re.match(r"unit (.+?) on wall (\d+): (.*)$", w)
-                c = 'CHECK wall %s: %s %s' % (m.group(2), m.group(1), m.group(3)) if m else 'CHECK ' + w
-                if c not in checks:                     # the same unit is seen again when a later wall of the room moves
-                    checks.append(c)
-            elif w != 'length unchanged':
+            if w.startswith('non-axis'):
                 lines.append('   note: ' + w)
-        # units that end exactly at the old wall end are the sections the engineer will shrink or grow
-        ends = [u for u in units.get(wid, []) if abs(u['x_raw'] + u['w_raw'] - p['length_raw']) <= IN // 16]
-        fitted = False
-        if fit and len(ends) == 1 and is_filler(ends[0]) and anchor == 'start':
-            u = ends[0]; neww = u['w_raw'] + dL
-            if FILLER_MIN <= neww <= FILLER_MAX and u['id'] in uidx:
-                set_unit_width(data, uidx[u['id']], neww)
-                u['w_raw'] = neww
-                lines.append('   fit: %r at the end of the wall %s -> %s wide (unit %d; TEST: unit width written in place)'
-                             % (u['name'], frac_inches(u['w_raw'] - dL), frac_inches(neww), u['id']))
-                checks[:] = [x for x in checks if not x.startswith('CHECK wall %d: %r X+W' % (wid, u['name']))]
-                fitted = True
-        if not fitted:
+        if anc == 'end' and units.get(wid):
+            lines.append('   the start of this wall moved; its %d unit(s) keep their distance from the start, as KCD does' % len(units[wid]))
+            for u in units[wid]:
+                if not is_cabinet(u):
+                    checks.append('CHECK wall %d (%s): %r sits %s from the start of the wall, which moved %s%s; check its place against the remeasure'
+                                  % (wid, rn, u['name'], frac_inches(u['x_raw']), '+' if dL > 0 else '-', frac_inches(abs(dL))))
+        if units_step:
+            unit_step(data, wid, rn, p, by_id[wid].parsed, units.get(wid, []), uidx, lines, checks, touched)
+        elif units.get(wid):
+            ends = [u for u in units[wid] if abs(u['x_raw'] + u['w_raw'] - p['length_raw']) <= TOL_END]
             for u in ends:
-                why = ''
-                if fit and is_filler(u) and len(ends) == 1:
-                    why = ' (a %s filler is outside the 1/2 to 1 1/2 range, so it was not changed)' % frac_inches(u['w_raw'] + dL)
-                elif fit and len(ends) > 1:
-                    why = ' (%d units end there; the engineer picks which one changes)' % len(ends)
-                c = ('CHECK wall %d: %r ends at the old wall end (X %s, W %s); it needs %s%s to fit the new length%s'
-                     % (wid, u['name'], frac_inches(u['x_raw']), frac_inches(u['w_raw']), '+' if dL > 0 else '-', frac_inches(abs(dL)), why))
-                checks[:] = [x for x in checks if not (x.startswith('CHECK wall %d: %r X+W' % (wid, u['name'])))] + [c]
+                checks.append('CHECK wall %d (%s): %r ends at the old wall end (X %s, W %s); it needs %s%s to fit the new length'
+                              % (wid, rn, u['name'], frac_inches(u['x_raw']), frac_inches(u['w_raw']), '+' if dL > 0 else '-', frac_inches(abs(dL))))
         if not units.get(wid):
             lines.append('   no units on this wall')
+        dims = [t for k, t in wall_notes.get(wid, []) if k == 5]
+        texts = [t for k, t in wall_notes.get(wid, []) if k == 4 and t.strip()]
+        if dims:
+            checks.append('CHECK wall %d (%s): %d dimension string(s) are drawn on this wall; they were not changed and may show the old size'
+                          % (wid, rn, len(dims)))
+        if texts:
+            lines.append('   notes on this wall were left where they are: %s' % '; '.join(repr(' '.join(t.split()))[:40] for t in texts))
     # heights
     for key, h in (heights or {}).items():
-        targets = []
         if isinstance(key, tuple) and key[0] == 'wall':
             targets = [key[1]]
         else:
@@ -678,7 +882,29 @@ def set_wall_lengths(job_path, changes, out_path, anchor='start', heights=None, 
             changed.add(wid)
             lines.append('wall %d (%s): height %s -> %s' % (wid, names.get(r.parsed['room'], ''), frac_inches(r.parsed['height_raw']), frac_inches(h)))
         recs = job_walls(data); by_id = {x.parsed['id']: x for x in recs}
-    # final checks: every room still consistent, nothing but wall records changed
+    # room points of the units on walls that moved or whose own X/W changed
+    repointed = 0
+    if units_step:
+        for wid, r in by_id.items():
+            before, after = walls_before[wid], r.parsed
+            wall_moved = before['P0'] != after['P0'] or abs(before['angle_deg'] - after['angle_deg']) > 1e-9
+            for u in units.get(wid, []):
+                if u['id'] not in uidx:
+                    continue
+                if not wall_moved and u['id'] not in touched:
+                    continue
+                x_old, w_old, x_new, w_new = touched.get(u['id'], (u['x_raw'], u['w_raw'], u['x_raw'], u['w_raw']))
+                if u['id'] not in touched:
+                    x_old = x_new = struct.unpack_from('<i', original, uidx[u['id']]['start'] + 6)[0]
+                    w_old = w_new = struct.unpack_from('<i', original, uidx[u['id']]['start'] + 12)[0]
+                A, Bp = unit_points(original, uidx[u['id']])
+                An, Bn = moved_unit_points(A, Bp, before, after, x_old, w_old, x_new, w_new)
+                if (An, Bn) != (A, Bp):
+                    set_unit_points(data, uidx[u['id']], An, Bn)
+                    repointed += 1
+        if repointed:
+            lines.append('drawing: the room position of %d unit(s) was moved with their walls so KCD draws them on the wall' % repointed)
+    # final checks: every room still consistent, nothing but wall records and the touched unit fields changed
     for room in sorted({x.parsed['room'] for x in recs if x.parsed['is_live']}):
         issues = check_room([x.raw for x in recs if x.parsed['room'] == room])
         hard = [s for s in issues if 'does not point back' in s or '!= P' in s]
@@ -686,22 +912,22 @@ def set_wall_lengths(job_path, changes, out_path, anchor='start', heights=None, 
             checks.append('CHECK room %d after the edit: %s' % (room, s))
     allowed = [(r.offset, r.offset + RECORD_SIZE) for r in recs]
     for ui in uidx.values():
-        allowed.append((ui['start'] + 12, ui['start'] + 16)); allowed.append((ui['f86_at'] + 12, ui['f86_at'] + 16))
+        allowed += [(ui['start'] + 6, ui['start'] + 10), (ui['start'] + 12, ui['start'] + 16),
+                    (ui['f86_at'] + 12, ui['f86_at'] + 16), (ui['f86_at'] + 40, ui['f86_at'] + 64)]
     diff_outside = [i for i in range(len(data)) if data[i] != original[i] and not any(a <= i < b for a, b in allowed)]
     if diff_outside:
-        raise RuntimeError('internal error: bytes outside the wall records and the fitted unit widths changed')
+        raise RuntimeError('internal error: bytes outside the wall records and the unit fields changed (first at %d)' % diff_outside[0])
     written = None
-    if changed and out_path:
+    if (changed or touched) and out_path:
         if os.path.abspath(out_path) == os.path.abspath(job_path):
             raise ValueError('refusing to overwrite the input job; give another output name')
         os.makedirs(os.path.dirname(os.path.abspath(out_path)), exist_ok=True)
         open(out_path, 'wb').write(bytes(data))
         written = out_path
-        # read back
         back = open(out_path, 'rb').read()
         if back != bytes(data) or len(back) != len(original):
             raise RuntimeError('internal error: the written file does not read back')
-    return {'lines': lines, 'checks': checks, 'changed_walls': sorted(changed), 'written': written,
+    return {'lines': lines, 'checks': checks, 'changed_walls': sorted(changed), 'changed_units': sorted(touched), 'written': written,
             'mesh_note': 'The 3-D cache and the print pages in the file are not rebuilt; KCD redraws them when it opens the job.'}
 
 
@@ -750,7 +976,7 @@ def read_rem_json(path):
     return {'job': d.get('job'), 'walls': walls, 'walls_review': review, 'facts': facts, 'skipped': skipped}
 
 
-def apply_rem(job_path, rem_path, out_path, anchor='start', allow_absorb=True, fit=False, heights_from_rem=False):
+def apply_rem(job_path, rem_path, out_path, anchor='auto', allow_absorb=True, units_step=True, heights_from_rem=False):
     """Set the agreed wall lengths of a remeasure read-out in the job. Each agreed wall must exist, must sit in
     the room the label names, and (when the label carries the printed length) the printed length must equal
     the file's length within 1/32"; otherwise it is flagged and left alone. Review items are never applied."""
@@ -795,8 +1021,8 @@ def apply_rem(job_path, rem_path, out_path, anchor='start', allow_absorb=True, f
                     checks.append('CHECK %s H = %s: could not be matched to a room or is not a height' % (f['room'], f['value'])); continue
                 heights[rn] = int(round(v * IN))
                 pre.append('room %s: wall heights set to the measured ceiling %s' % (f['room'], frac_inches(heights[rn])))
-    rep = set_wall_lengths(job_path, changes, out_path, anchor=anchor, allow_absorb=allow_absorb, heights=heights, fit=fit) if (changes or heights) else {
-        'lines': [], 'checks': [], 'changed_walls': [], 'written': None, 'mesh_note': ''}
+    rep = set_wall_lengths(job_path, changes, out_path, anchor=anchor, allow_absorb=allow_absorb, heights=heights, units_step=units_step) if (changes or heights) else {
+        'lines': [], 'checks': [], 'changed_walls': [], 'changed_units': [], 'written': None, 'mesh_note': ''}
     rep['lines'] = pre + rep['lines']
     rep['checks'] = checks + rep['checks']
     rep['facts'] = ['%s %s = %s' % (f['room'], f['key'], f['value']) for f in rem['facts']]
@@ -833,7 +1059,7 @@ def list_job(job_path):
         for u in units.get(p['id'], []):
             end = u['x_raw'] + u['w_raw']
             flag = '  <- ends at the wall end' if abs(end - p['length_raw']) <= IN // 16 else ('  <- past the wall end' if end > p['length_raw'] + IN // 16 else '')
-            out.append('        %-28s X %-9s W %-9s ends %-9s%s' % (u['name'][:28], frac_inches(u['x_raw']), frac_inches(u['w_raw']), frac_inches(end), flag))
+            out.append('        %-28s X %-9s W %-9s ends %-9s unit %-3d type %-4d%s' % (u['name'][:28], frac_inches(u['x_raw']), frac_inches(u['w_raw']), frac_inches(end), u['id'], u.get('type', 0), flag))
     if uerr:
         out.append('(units not listed: %s)' % uerr)
     return '\n'.join(out)
@@ -848,15 +1074,16 @@ def main(argv=None):
     ap.add_argument('--height', action='append', default=[], metavar='ROOM=INCHES', help='wall height for every wall of a room')
     ap.add_argument('--rem', help='remeasure read-out JSON (the Grok pipeline format)')
     ap.add_argument('--out', help='output .job (never the input)')
-    ap.add_argument('--anchor', default='start', choices=['start', 'end'])
+    ap.add_argument('--anchor', default='auto', choices=['auto', 'start', 'end'],
+                    help="auto (default): the engineers' way, the room's main wall keeps its start; start/end: that end stays on every wall")
     ap.add_argument('--no-absorb', action='store_true', help='refuse to change a second wall of a closed room')
-    ap.add_argument('--fit', action='store_true', help='let a 3/4 filler at the end of a changed wall grow or shrink with it (1/2 to 1 1/2 only)')
+    ap.add_argument('--walls-only', action='store_true', help='change the wall records only; leave every unit alone and just flag the ones at the wall ends')
     ap.add_argument('--heights-from-rem', action='store_true', help='with --rem: set every wall of a room to the measured ceiling height H')
     a = ap.parse_args(argv)
     if a.list or not (a.set or a.height or a.rem):
         print(list_job(a.job)); return 0
     if a.rem:
-        rep = apply_rem(a.job, a.rem, a.out, anchor=a.anchor, allow_absorb=not a.no_absorb, fit=a.fit, heights_from_rem=a.heights_from_rem)
+        rep = apply_rem(a.job, a.rem, a.out, anchor=a.anchor, allow_absorb=not a.no_absorb, units_step=not a.walls_only, heights_from_rem=a.heights_from_rem)
         print(format_report(rep, 'Remeasure %s applied to %s' % (rep.get('rem_job'), os.path.basename(a.job))))
         return 0
     changes = {}
@@ -870,7 +1097,7 @@ def main(argv=None):
     for s in a.height:
         k, v = s.split('=', 1)
         heights[int(k)] = int(round(parse_inches(v) * IN))
-    rep = set_wall_lengths(a.job, changes, a.out, anchor=a.anchor, heights=heights, allow_absorb=not a.no_absorb, fit=a.fit)
+    rep = set_wall_lengths(a.job, changes, a.out, anchor=a.anchor, heights=heights, allow_absorb=not a.no_absorb, units_step=not a.walls_only)
     print(format_report(rep, 'Wall changes in %s' % os.path.basename(a.job)))
     return 0
 
