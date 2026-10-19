@@ -770,8 +770,10 @@ with the splitter's files).
   the cabinet that reaches the end filler (or stands against the wall end itself) is sized to fill exactly from
   its own X to the filler (slot 2 and the width copy at byte 12 of the 86-byte block), which also removes a
   designer's gap or overlap there (COYNE Linen: the owner took the tall down the extra 1/4 himself in try 3);
-  then the units must run from 0 to the new wall length (reported, CHECK when they do not).
-  Left alone and flagged: two cabinets ending at the wall end, a drawer unit at the end (engineers keep drawer
+  then the units must run from 0 to the new wall length (reported, CHECK when they do not). Shelves drawn in the
+  cabinet's opening (types 640/641, running from the inside of its left panel to the inside of its right panel)
+  change by the same amount; a show-only item (type 890, the no-price baseboard) that runs the whole wall is set
+  to the new wall length. Left alone and flagged: two cabinets ending at the wall end, a drawer unit at the end (engineers keep drawer
   widths), a cabinet with units nested inside it (a shelf spanning its interior), a wall whose units stop short
   of the end (reported, nothing to do), a filler that no cabinet reaches, a start-moving wall's accessories
   (outlets keep their X and move with the start, as KCD does). No stored size slot of the cabs looked at
@@ -957,6 +959,23 @@ The owner opened test 3, fixed what looked wrong, saved, and sent four pictures:
   COYNE is the first job to go from remeasure sheet to a KCD file nobody had to touch. Still open: what the two
   dimension strings on Guest wall 10 and one on Primary wall 16 show; Primary wall 15 (readers disagreed); a
   second job through the same path (a closed room, a longer change, a start-moving wall with cabinets).
+
+### 14.9 DRUBEL (order 1091400, `Bayle DCL - Daughters Room.job`, remeasure `Rem_1091400_drubel.pdf`; Oct 19, waiting for Grok)
+
+- The job: one room "Library Thick", walls 10 (95 7/8, main), 11 (48 3/16, downstream return) and 12 (28 3/16,
+  upstream return), heights 144 5/16; walls 1-9 dead. Wall 10 holds three 96 Tall 1 Opening units (RS 1 1/2 on
+  the first two, 3/4 on the last), each with five CLO-SH shelves drawn in its opening, 3/4 fillers at both ends
+  and a no-price show baseboard (type 890) the length of the wall. No sidebar note; empty job heading.
+- The sheet, read by eye: wall 10 "95 7/8" circled with no correction (confirmed); wall 12 "27 7/8" handwritten
+  (from 28 3/16); wall 11 carries two handwritten numbers, "12 1/2" and "26 1/4", against the printed 48 3/16
+  (a split wall or an obstruction: Grok's read-out and the numbered scan have to settle it, else CHECK); room
+  facts "CH 100" (the photo shows a soffit over the cabinets; the file has 144 5/16), "BB 7 1/4 W", "Fl wood";
+  wall 10 elevation: "Soffit" drawn with "100" and arrows. So the test here is heights to a soffit, a start-moving
+  wall with no units, and an uncertain return wall; not the closed-room case.
+- Prepared for it: the unit step now carries the shelves inside the end cabinet and resizes the show baseboard
+  (above); a hypothetical `--set 10="95 1/2"` dry run changed the end tall 30 15/16 -> 30 9/16 with its five
+  shelves 30 3/16 -> 29 13/16, slid the filler, set the baseboard to 95 1/2, and the cache shapes end exactly at
+  the new unit ends. COYNE test 4 rebuilds byte-identical with the new code (md5 d78b4524).
 
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 

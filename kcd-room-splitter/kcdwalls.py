@@ -553,7 +553,8 @@ def units_by_wall(job_path):
         return out, 'unit reader failed: %s' % e
     for u in job.units:
         out[u.wall].append({'wall': u.wall, 'seq': u.seq, 'id': u.id, 'name': u.kcd_name or u.cab, 'cab': u.cab,
-                            'type': u.T, 'x_raw': u.raw(1), 'w_raw': u.raw(2), 'd_raw': u.raw(4)})
+                            'type': u.T, 'x_raw': u.raw(1), 'w_raw': u.raw(2), 'd_raw': u.raw(4),
+                            'ls_raw': u.raw(5), 'rs_raw': u.raw(7)})
     for lst in out.values():
         lst.sort(key=lambda d: d['x_raw'])
     return out, None
@@ -564,6 +565,8 @@ def units_by_wall(job_path):
 # the cabinet against the end of the wall changes width; the units on the wall must add up to the wall length.
 ACCESSORY_TYPES = {1000, 20}             # unit type code (Int16 at byte 64 of the 86-byte block): accessories,
                                          # obstructions, outlets (1000) and door/window openings (20) are not cabinets
+DECOR_TYPES = {890}                      # show-only items (890nc baseboards): no price, the engineers remove them
+SHELF_TYPES = {640, 641}                 # connecting shelves drawn inside a cabinet's opening (CLO-SH, Csetsh/CSTopandBottom)
 TOL_END = IN // 16                       # a unit "ends at the wall end" within 1/16"
 REACH = IN // 4                          # a cabinet "reaches" the end filler when it ends within 1/4" of the filler's start
 
@@ -582,7 +585,11 @@ def is_filler(u):
 
 
 def is_cabinet(u):
-    return u.get('type') not in ACCESSORY_TYPES
+    return u.get('type') not in ACCESSORY_TYPES and u.get('type') not in DECOR_TYPES
+
+
+def is_decor(u):
+    return u.get('type') in DECOR_TYPES
 
 
 def snap16(raw):
@@ -692,6 +699,15 @@ def unit_step(data, wid, rn, wall_old, wall_new, ulist, uidx, lines, checks, tou
     dL = L_new - L_old
     if not ulist:
         return                                          # the caller says 'no units on this wall'
+    for u in ulist:
+        if is_decor(u) and u['id'] in uidx:
+            if abs(u['x_raw']) <= TOL_END and abs(u['x_raw'] + u['w_raw'] - L_old) <= TOL_END:
+                set_unit_xw(data, uidx[u['id']], w=L_new)
+                touched[u['id']] = (u['x_raw'], u['w_raw'], u['x_raw'], L_new)
+                lines.append('   %r (unit %d, show-only item along the whole wall): %s -> %s wide' % (u['name'], u['id'], frac_inches(u['w_raw']), frac_inches(L_new)))
+                u['w_raw'] = L_new
+            else:
+                lines.append('   %r (unit %d) is a show-only item; left as it is' % (u['name'], u['id']))
     cabs = sorted([u for u in ulist if is_cabinet(u)], key=lambda u: u['x_raw'])
     if not cabs:
         lines.append('   no cabinets on this wall (accessories only); none changed')
@@ -734,9 +750,14 @@ def unit_step(data, wid, rn, wall_old, wall_new, ulist, uidx, lines, checks, tou
         return
     t0, t1 = target['x_raw'], target['x_raw'] + target['w_raw']
     inside = [u for u in cabs if u is not target and u not in sliders and u['x_raw'] >= t0 - TOL_END and u['x_raw'] + u['w_raw'] <= t1 + TOL_END]
-    if inside:
+    # shelves drawn in the cabinet's opening: they run from the inside of its left panel to the inside of its right
+    # panel, so they change by the same amount; any other unit inside the cabinet is the engineer's call
+    rs = target.get('rs_raw', 0)
+    followers = [u for u in inside if u['type'] in SHELF_TYPES and abs((u['x_raw'] + u['w_raw']) - (t1 - rs)) <= TOL_END and u['x_raw'] >= t0 - TOL_END]
+    others = [u for u in inside if u not in followers]
+    if others:
         checks.append('CHECK wall %d (%s): %r has units inside it (%s) that would have to change with it; nothing was changed on this wall'
-                      % (wid, rn, target['name'], ', '.join(repr(u['name']) for u in inside)))
+                      % (wid, rn, target['name'], ', '.join(repr(u['name']) for u in others)))
         return
     # the end fillers keep their distance from the wall end (snapped to the 1/16 grid, as KCD stores positions);
     # the cabinet then fills exactly from its own X to the first end filler (or to the wall end when it is the end unit)
@@ -750,13 +771,23 @@ def unit_step(data, wid, rn, wall_old, wall_new, ulist, uidx, lines, checks, tou
     if target['id'] not in uidx or any(u['id'] not in uidx for u in sliders):
         checks.append('CHECK wall %d (%s): unit records could not be located; nothing was changed on the units' % (wid, rn))
         return
+    dW = new_w - target['w_raw']
     set_unit_xw(data, uidx[target['id']], w=new_w)
     touched[target['id']] = (target['x_raw'], target['w_raw'], target['x_raw'], new_w)
+    for u in followers:
+        if u['id'] not in uidx:
+            checks.append('CHECK wall %d (%s): shelf %r (unit %d) inside %r could not be located; it still has the old width' % (wid, rn, u['name'], u['id'], target['name'])); continue
+        set_unit_xw(data, uidx[u['id']], w=u['w_raw'] + dW)
+        touched[u['id']] = (u['x_raw'], u['w_raw'], u['x_raw'], u['w_raw'] + dW)
+        u['w_raw'] += dW
     why = ''
     if abs(old_gap) > 2:
         why = ' (it now meets the %s exactly; the designer\'s file had a %s %s there)' % (
             'filler' if sliders else 'wall end', frac_inches(abs(old_gap)), 'gap' if old_gap > 0 else 'overlap')
     lines.append('   %r (unit %d): %s -> %s wide%s' % (target['name'], target['id'], frac_inches(target['w_raw']), frac_inches(new_w), why))
+    if followers:
+        lines.append('   %d shelf/shelves inside it (units %s): %s -> %s wide' % (len(followers), ', '.join(str(u['id']) for u in followers),
+                     frac_inches(followers[0]['w_raw'] - dW), frac_inches(followers[0]['w_raw'])))
     target['w_raw'] = new_w
     for u in sliders:
         new_x = new_xs[u['id']]                               # keeps its distance from the wall end
