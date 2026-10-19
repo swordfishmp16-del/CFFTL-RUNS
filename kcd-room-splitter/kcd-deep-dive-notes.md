@@ -803,11 +803,35 @@ Caveats: only GODDARD, LONG and ROBERTS WIC show clean absorption on walls with 
 other pairs mix the wall change with re-layouts; remeasure values are only known for GODDARD, PRIEM, HUMPHREY
 (and now COYNE, WERNER).
 
-WERNER (designer's job, engineer's final, workbook received Oct 19): wall 1 198 -> 205 1/8 (the measured),
-height 120 -> 138 3/4 (the tech's "H = 13?3/4" is 138 3/4), two side walls added from the sketch (26 at the
-left with an obstruction and outlet, 142 7/8 at the right with the window 120 3/8 wide at 10 7/8), the five
-bases re-spaced 48 / 33 15/16 / 33 15/16 / 34 5/8 / 48 -> 45 3/8 / 34 3/8 / 34 3/8 / 35 1/8 / 45 3/8 with a
-1 1/2 filler at the left; a separate study of this pair is in `scratchpad walls/werner/`.
+### 14.5 WERNER, one remeasure end to end (designer's job, engineer's final, workbook; study in `scratchpad walls/werner/werner_findings.md`)
+
+- Walls: wall 1 198 -> 205 1/8 (the measured); height 120 -> 138 3/4 on all walls (the read-out's "13 3/4"
+  had lost a digit); two side walls added from the tech's sketch: wall 2 (left, 26, angle 270, its END at the
+  corner) with an Obstruction 3 3/8 x 96 at 22 5/8..26 from the corner and an outlet 12 3/4 from the corner,
+  12 1/4 off the floor; wall 3 (right, 142 7/8 = 10 7/8 + 120 3/8 + 11 5/8 exactly) with the window 120 3/8
+  wide at 10 7/8 from the corner, sill 15 1/4, height 80, and an outlet at 8. Site items become library units
+  (`010.cab` Window, `Outlet.cab`, `Obstruction.cab`); distances on a side wall are measured from the corner
+  (X = dist on the wall that starts at the corner, X = L - dist - W on the one that ends there).
+- Not used from the sketch: the two boxed 0s, the circled 2 5/8 (most likely 22 5/8: the door casing the 1 1/2
+  filler is set against, 19 5/8 + 3 from the wall), the hatched fraction, BB, F, Molding; the engineer's 26,
+  window height 80, outlet positions and the 9" open end have no source in the read-out.
+- Units on wall 1: the room was rebuilt (ids reassigned in creation order; only the TV and the two pop-up
+  sockets kept their ids and their absolute X). Bases 48 / 33 15/16 / 33 15/16 / 34 5/8 / 48 (198 1/2 drawn on
+  198, overlapping) -> 1 1/2 filler + 45 3/8 / 34 3/8 / 34 3/8 / 35 1/8 / 45 3/8 = 196 1/8, flush, one shared
+  3/4 panel per joint (8 panels -> 6), 9" left open at the right ("THERE SHOULD BE AN 8" GAP ... " with the
+  countertop overhanging 1). The three door cabinets got equal 33 5/8 interiors; the two knee holes took the
+  remainder equally ((194 5/8 - 103 7/8) / 2 = 45 3/8). H, D, kicks, materials, cab files unchanged.
+  Backings and the sliding shelf were re-fitted to their host (X = host X + LS, W = interior); the four 3/4
+  spacer fillers became one unit with qty 4 parked 10" past the wall end. Typed reveals at the shared-panel
+  joints (-5/16 / +7/16) give 17 5/16, 17 1/8, 17 5/16 x 25 1/8 doors; the Doormark order has 17 1/4 and
+  17 1/16 x 25 1/8 (1/16 under KCD).
+- Workbook: the 50 pasted lines carry the engineered unit IDS as unit numbers; every dimension line agrees with
+  the engineered slots after 1/16 rounding and every option line sits on its unit. The wood countertop is
+  priced on the designer's 35.12 sqft, not recomputed (engineered run is about 34.9).
+- For the app: everything in "walls" above is mechanical given the sketch; the unit step is a human layout
+  (where the open end goes and why, the casing filler, the target interior) with mechanical consequences the
+  app can carry out and check (equal interiors, shared panels, re-fitted backings and pullouts, reveals, qty
+  fillers, the price-review unit numbers that change when a room is rebuilt).
 
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
