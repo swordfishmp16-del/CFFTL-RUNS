@@ -106,6 +106,7 @@ Read `kcd-deep-dive-notes.md` before working on pricing, door orders or the engi
 - Prices: with the May 2026 list every matched line of the thirteen NOTIK rooms prices the same as the engineers' paste (one platform shelf is two cents off). The TILLIS and BURNS pastes were priced on a list we do not have; ask before comparing a job's prices which list it was sold on.
 - KCD rounds every size to the nearest 1/16" before the price scripts see it (`round16` in `kcdprice.py` and `kcdcab.py`). Without it a 19.5 mm shelf fell into the double-thick price grid. With it, the twelve rooms of the ten job sets price the same on 731 of 737 matched lines (notes section 13).
 - The ten job sets (notes section 13): what each set holds, which file the engineers paste from (the engineered room file), the remeasure and change-order scan formats, the Doormark door order and purchase order forms, and the open door/drawer question on the 774 tall units.
+- `kcdwalls.py` decodes the 205-byte wall record (length, angle, height, neighbours, the four corner points; notes section 14) and sets wall lengths in a job from a remeasure read-out JSON (`python kcdwalls.py JOB --rem REM.json --out NEW.job`, or `--set 7="25 1/8"`); `--list` shows every wall with the units on it. Its output is a TEST file until KCD has opened it and saved it back; `experiments/walls_selftest.py` re-runs the byte-layout checks over the wall dump of the ten sets.
 
 ## Ideas not done yet
 
