@@ -818,7 +818,46 @@ def unit_step(data, wid, rn, wall_old, wall_new, ulist, uidx, lines, checks, tou
         checks.append('CHECK wall %d (%s): after the change the units run from %s to %s but the wall is %s' % (wid, rn, frac_inches(first), frac_inches(last), frac_inches(L_new)))
 
 
-def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, allow_absorb=True, units_step=True):
+def shelf_fit(data, ulist, uidx, rn, wid, lines, checks, touched):
+    """Owner's rule (Oct 19, 2026): the shelves drawn inside a cabinet (their own unit numbers) must match the
+    cabinet's opening width and its depth. For every cabinet on the wall, each shelf (type 640/641) lying inside
+    its span is checked: X must be the inside of the left panel, X + W the inside of the right panel, D the
+    cabinet's depth. A shelf that is off by more than 1/16 is set to the opening (slot 1, 2 and 4 plus the width
+    copy); a shelf that straddles two cabinets or sits in no cabinet is flagged. Returns the number changed."""
+    cabs = [u for u in ulist if is_cabinet(u) and u['type'] not in SHELF_TYPES and not is_filler(u)]
+    shelves = [u for u in ulist if u['type'] in SHELF_TYPES]
+    n = 0
+    for sh in shelves:
+        hosts = [c for c in cabs if c['x_raw'] - TOL_END <= sh['x_raw'] and sh['x_raw'] + sh['w_raw'] <= c['x_raw'] + c['w_raw'] + TOL_END]
+        if not hosts:
+            continue                                    # a connecting shelf between cabinets, not an interior shelf
+        if len(hosts) > 1:
+            hosts.sort(key=lambda c: c['w_raw'])        # the smallest cabinet that contains it
+        c = hosts[0]
+        x_want = c['x_raw'] + c.get('ls_raw', 0)
+        w_want = c['w_raw'] - c.get('ls_raw', 0) - c.get('rs_raw', 0)
+        d_want = c['d_raw']
+        dx, dw, dd = x_want - sh['x_raw'], w_want - sh['w_raw'], d_want - sh['d_raw']
+        if abs(dx) <= 2 and abs(dw) <= 2 and abs(dd) <= 2:
+            continue
+        if sh['id'] not in uidx:
+            checks.append('CHECK wall %d (%s): shelf %r (unit %d) inside %r is off its opening but could not be located' % (wid, rn, sh['name'], sh['id'], c['name'])); continue
+        if abs(dd) > 2:
+            checks.append('CHECK wall %d (%s): shelf %r (unit %d) is %s deep inside %r which is %s deep; depth left for the engineer'
+                          % (wid, rn, sh['name'], sh['id'], frac_inches(sh['d_raw']), c['name'], frac_inches(d_want)))
+        if abs(dx) > 2 or abs(dw) > 2:
+            set_unit_xw(data, uidx[sh['id']], x=x_want, w=w_want)
+            touched[sh['id']] = (sh['x_raw'], sh['w_raw'], x_want, w_want)
+            what = []
+            if abs(dx) > 2: what.append('X %s -> %s' % (frac_inches(sh['x_raw']), frac_inches(x_want)))
+            if abs(dw) > 2: what.append('%s -> %s wide' % (frac_inches(sh['w_raw']), frac_inches(w_want)))
+            lines.append('   shelf %r (unit %d) inside %r (unit %d): %s, to match the opening' % (sh['name'], sh['id'], c['name'], c['id'], ', '.join(what)))
+            sh['x_raw'], sh['w_raw'] = x_want, w_want
+            n += 1
+    return n
+
+
+def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, allow_absorb=True, units_step=True, shelves=True):
     """Change wall lengths (and optionally wall heights) in a .job and write out_path.
 
     changes     {wall id: new length in raw 0.1 mm}  (use round(inches * 254))
@@ -829,6 +868,8 @@ def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, a
     units_step  True: on each changed wall, fillers keep their width, the cabinet at the wall end changes width and
                 the end fillers slide to the new end (owner's rule); the units' room points are updated so KCD
                 draws them on the wall. False: wall records only.
+    shelves     True: on every wall, the shelves drawn inside a cabinet are set to its opening width (owner's rule);
+                a depth that differs is flagged.
     Returns a dict: 'lines' (plain-English report lines), 'checks' (things the engineer must look at),
     'changed_walls', 'changed_units', 'written' (out_path or None).
     The edit is in place: the file keeps its size; outside the wall records and the touched unit fields every
@@ -909,6 +950,19 @@ def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, a
                           % (wid, rn, len(dims)))
         if texts:
             lines.append('   notes on this wall were left where they are: %s' % '; '.join(repr(' '.join(t.split()))[:40] for t in texts))
+    # interior shelves on every wall (not only the changed ones)
+    if units_step and shelves:
+        fitted = 0
+        for wid, lst in sorted(units.items()):
+            r = by_id.get(wid)
+            if not r or not r.parsed['is_live']:
+                continue
+            before = len(lines)
+            fitted += shelf_fit(data, lst, uidx, names.get(r.parsed['room'], ''), wid, lines, checks, touched)
+            if len(lines) > before:
+                lines.insert(before, 'wall %d (%s): interior shelves' % (wid, names.get(r.parsed['room'], '')))
+        if fitted:
+            lines.append('shelves: %d interior shelf/shelves set to the opening of the cabinet they sit in' % fitted)
     # heights
     for key, h in (heights or {}).items():
         if isinstance(key, tuple) and key[0] == 'wall':
@@ -1074,7 +1128,7 @@ def read_rem_json(path):
     return {'job': d.get('job'), 'walls': walls, 'walls_review': review, 'facts': facts, 'skipped': skipped}
 
 
-def apply_rem(job_path, rem_path, out_path, anchor='auto', allow_absorb=True, units_step=True, heights_from_rem=False):
+def apply_rem(job_path, rem_path, out_path, anchor='auto', allow_absorb=True, units_step=True, heights_from_rem=False, shelves=True):
     """Set the agreed wall lengths of a remeasure read-out in the job. Each agreed wall must exist, must sit in
     the room the label names, and (when the label carries the printed length) the printed length must equal
     the file's length within 1/32"; otherwise it is flagged and left alone. Review items are never applied."""
@@ -1119,7 +1173,7 @@ def apply_rem(job_path, rem_path, out_path, anchor='auto', allow_absorb=True, un
                     checks.append('CHECK %s H = %s: could not be matched to a room or is not a height' % (f['room'], f['value'])); continue
                 heights[rn] = int(round(v * IN))
                 pre.append('room %s: wall heights set to the measured ceiling %s' % (f['room'], frac_inches(heights[rn])))
-    rep = set_wall_lengths(job_path, changes, out_path, anchor=anchor, allow_absorb=allow_absorb, heights=heights, units_step=units_step) if (changes or heights) else {
+    rep = set_wall_lengths(job_path, changes, out_path, anchor=anchor, allow_absorb=allow_absorb, heights=heights, units_step=units_step, shelves=shelves) if (changes or heights or shelves) else {
         'lines': [], 'checks': [], 'changed_walls': [], 'changed_units': [], 'written': None, 'mesh_note': ''}
     rep['lines'] = pre + rep['lines']
     rep['checks'] = checks + rep['checks']
@@ -1176,12 +1230,13 @@ def main(argv=None):
                     help="auto (default): the engineers' way, the room's main wall keeps its start; start/end: that end stays on every wall")
     ap.add_argument('--no-absorb', action='store_true', help='refuse to change a second wall of a closed room')
     ap.add_argument('--walls-only', action='store_true', help='change the wall records only; leave every unit alone and just flag the ones at the wall ends')
+    ap.add_argument('--no-shelf-fit', action='store_true', help='do not set the shelves drawn inside a cabinet to its opening width')
     ap.add_argument('--heights-from-rem', action='store_true', help='with --rem: set every wall of a room to the measured ceiling height H')
     a = ap.parse_args(argv)
     if a.list or not (a.set or a.height or a.rem):
         print(list_job(a.job)); return 0
     if a.rem:
-        rep = apply_rem(a.job, a.rem, a.out, anchor=a.anchor, allow_absorb=not a.no_absorb, units_step=not a.walls_only, heights_from_rem=a.heights_from_rem)
+        rep = apply_rem(a.job, a.rem, a.out, anchor=a.anchor, allow_absorb=not a.no_absorb, units_step=not a.walls_only, heights_from_rem=a.heights_from_rem, shelves=not a.no_shelf_fit)
         print(format_report(rep, 'Remeasure %s applied to %s' % (rep.get('rem_job'), os.path.basename(a.job))))
         return 0
     changes = {}
@@ -1195,7 +1250,7 @@ def main(argv=None):
     for s in a.height:
         k, v = s.split('=', 1)
         heights[int(k)] = int(round(parse_inches(v) * IN))
-    rep = set_wall_lengths(a.job, changes, a.out, anchor=a.anchor, heights=heights, allow_absorb=not a.no_absorb, units_step=not a.walls_only)
+    rep = set_wall_lengths(a.job, changes, a.out, anchor=a.anchor, heights=heights, allow_absorb=not a.no_absorb, units_step=not a.walls_only, shelves=not a.no_shelf_fit)
     print(format_report(rep, 'Wall changes in %s' % os.path.basename(a.job)))
     return 0
 

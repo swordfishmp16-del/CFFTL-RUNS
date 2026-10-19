@@ -976,6 +976,49 @@ The owner opened test 3, fixed what looked wrong, saved, and sent four pictures:
   (above); a hypothetical `--set 10="95 1/2"` dry run changed the end tall 30 15/16 -> 30 9/16 with its five
   shelves 30 3/16 -> 29 13/16, slid the filler, set the baseboard to 95 1/2, and the cache shapes end exactly at
   the new unit ends. COYNE test 4 rebuilds byte-identical with the new code (md5 d78b4524).
+- Owner (Oct 19): "the interior shelves that are numbered individually need to match the unit widths and depth of the
+  ones they are in". `shelf_fit()` now runs on every wall: each shelf (type 640/641) inside a cabinet is set to the
+  cabinet's opening (X = X + LS, W = W - LS - RS) when off by more than 1/16; a depth that differs is flagged. DRUBEL:
+  the middle tall's five shelves were 29 7/16 against a 29 1/2 opening and were fixed; the other ten matched.
+- Sent to the owner Oct 19 from my own reading of the sheet (Grok's read-out still pending): TEST1 (wall 12 27 7/8,
+  heights 100, wall 11 flagged) and TEST2 (TEST1 + the five shelves), md5 323c7ff5..., plus the pricing workbook
+  (section 15).
+
+## 15. The pricing workbook filler `kcdbook.py` (Oct 19, 2026; first job DRUBEL)
+
+- What it does: copies the `mike_p_for_services` template (`.xltm`, 238 parts) part for part into a `.xlsm` and changes
+  four parts only: `[Content_Types].xml` (template -> macro-enabled workbook, the one difference Excel itself makes),
+  `xl/workbook.xml` (`fullCalcOnLoad="1"` on `calcPr`, so Excel recomputes every sheet on open), `xl/sharedStrings.xml`
+  (new texts appended, count/uniqueCount kept right) and the Data Entry sheet (answer cells and the paste block K..P from
+  row 2, existing cell styles kept, rows 3+ styles 379/100/183/377, new rows as Excel wrote WERNER's rows 43+). Never
+  re-save the workbook with openpyxl: it drops the two external links, the ActiveX controls and the comments.
+- Data Entry answers (dropdown lists live on the Data Conversions sheet; exact text only): B1 install date (serial),
+  B3 day type (I20:I23), B5 client number, B7 name, B9 room, B11 Costco, B13 jewelry tray (I29:I31), B15 hinge
+  (I69:I71), B17 V9/V23, B19/B21/B23/B25 YES/NO, B27 sold-at price, F1 designer (G1:G69), F3 cutlist by, F5 unit
+  material (B1:B83), F7 banding type (I37:I41: .5mm 1mm 2mm Upgraded Woodtape), F9 banding colour (the materials
+  list), F11 face type (I7:I16), F13 faces material, F19 construction type, F21 molding (None Melamine Thermo Foil CF
+  Thermo Foil Wood Combination Mica), F23 molding location (None, Base Only, Crown Only, Base & Crown, Recessed Base),
+  F25 notch. F15/F17/C1/D26/D27/A27 are formulas: never written.
+- Paste block (checked against the WERNER workbook): K price, L unit number (KCD's position among live units), M part,
+  N first size, P second size; a part with one size goes in P; kicks, fillers, leg levelers and mirror backs show the
+  width only in P (the engineer types the height in R). Modify Here's 3,082 formulas read J..Q ('Data Entry'!J2>0
+  means the paste landed one column left); R is not read by any formula. Quantity > 1 repeats the line.
+- Checks built in: every other part byte-identical to the template; the four edited parts parse; openpyxl opens the
+  result; the formula count of the sheet is unchanged. LibreOffice does not recalculate on load (the preview shows the
+  template's cached zeros); `recalc.py --force` on a COPY does, and shows the Final Price Sheet computed. The blank
+  template itself recalculates with 21 errors (20 #N/A on Data Conversions T/V, one #VALUE! on BCCD A1!AM1): they are
+  the template's, not the fill's.
+- Parity: rebuilding WERNER from its own Data Entry answers and 50 paste rows reproduces its Data Entry sheet on 274 cells;
+  the 14 differences are all in Q and R (the engineer's hand entries: filler and kick heights, a date, two overflow
+  sizes) and the template's R2/R3 = 48 that the engineer cleared.
+- DRUBEL (`out/1091400 DRUBEL LIBRARY.xlsm`): priced on the laptop with the May 2026 list + May 22, July and August packs
+  (`kcdprice.py` there is byte-identical to the repo's); 31 lines pasted, 6 door lines left out (the room says No
+  Door/Drawer Faces; the scripts print two doors on every 96 Tall 1 Opening, the open "no door" question of section 7),
+  subtotal 4010 + 199 fee = 4209 standard against 4000 sold (Salesforce). Answers filled from the job's room details and
+  the Salesforce page; B3, B13, B15, B19, B21, B23, F13 left blank and listed. Kicks price 0 on the 2026 list; the 15
+  numbered shelves are 1 1/2" thick (148 each). Waiting for the owner to open it in Excel.
+- Transfer note: the laptop received the 278 KB job as gzip+base64 (25 KB) through Desktop Commander `write_file`; one
+  50-line block arrived altered and was re-sent (`splice.py` on the laptop compares per-block md5s).
 
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
