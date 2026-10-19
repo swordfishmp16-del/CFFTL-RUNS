@@ -943,9 +943,11 @@ The owner opened test 3, fixed what looked wrong, saved, and sent four pictures:
   original with the fill-to-filler rule and the cache moved: 14 cache entries translated, 4 stretched, 17 room
   points moved; sections unchanged in size; the price run differs from the original only on the four resized
   units (Linen tall now shelves 22 1/8, kick 23 5/8, doors 11 3/4). Sent to the owner with the request to open
-  it without touching any wall. Still open: whether KCD also needs the per-face sizes (Int32 at 16/20, left as
-  they were on stretched units) and the n1 block (kept) to be right; what the two dimension strings on Guest
-  wall 10 and one on Primary wall 16 show; Primary wall 15 (readers disagreed).
+  it without touching any wall. **Owner, Oct 19: "everything looks good on test 4", opened in KCD with no wall or
+  unit touched; the units sit on their walls.** Still open: the byte compare of the file KCD saves back (does it
+  keep the moved cache entries; do the per-face sizes Int32 at 16/20, left as they were on stretched units, and
+  the n1 block matter); what the two dimension strings on Guest wall 10 and one on Primary wall 16 show;
+  Primary wall 15 (readers disagreed).
 
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
