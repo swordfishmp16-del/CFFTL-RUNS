@@ -549,12 +549,39 @@ def units_by_wall(job_path):
     return out, None
 
 
-def set_wall_lengths(job_path, changes, out_path, anchor='start', heights=None, allow_absorb=True):
+FILLER_MIN = IN // 2                      # a filler the fit step may leave: 1/2" ..
+FILLER_MAX = IN + IN // 2                 # .. 1 1/2"
+
+
+def unit_index(data):
+    """{unit id: {'start', 'f86_at', 'wall'}} for every live unit record (from kcdjob.parse)."""
+    for name, start, end, info in kcdjob.parse(data):
+        if name == 'units':
+            return {u['id']: {'start': u['start'], 'f86_at': u['f86_at'], 'wall': u['wall']} for u in info['list'] if u['wall']}
+    return {}
+
+
+def is_filler(u):
+    cab = (u.get('cab') or '').lower(); name = (u.get('name') or '').lower()
+    return 'filler' in name or cab.startswith(('234', '231', '131'))
+
+
+def set_unit_width(data, uinfo, new_w):
+    """Write a unit's width in place: size slot 2 of the prefix (Int32 0.1 mm, state byte kept) and the copy
+    at byte 12 of the 86-byte block. The 3-D cache stays stale; KCD rebuilds it. TEST path: not yet round-tripped."""
+    struct.pack_into('<i', data, uinfo['start'] + 6 * 2, int(new_w))
+    struct.pack_into('<i', data, uinfo['f86_at'] + 12, int(new_w))
+
+
+def set_wall_lengths(job_path, changes, out_path, anchor='start', heights=None, allow_absorb=True, fit=False):
     """Change wall lengths (and optionally wall heights) in a .job and write out_path.
 
     changes   {wall id: new length in raw 0.1 mm}  (use round(inches * 254))
     heights   {room number: new wall height raw} applied to every live wall of that room, or
               {('wall', id): raw} for one wall
+    fit       True: when exactly one unit ends at the old wall end and it is a filler that stays between
+              1/2" and 1 1/2", its width is changed by the same amount (the unit record is patched in place);
+              every other case is left for the engineer and listed under TO CHECK
     Returns a dict: 'lines' (plain-English report lines), 'checks' (things the engineer must look at),
     'changed_walls' (ids whose record changed), 'written' (out_path or None).
     The edit is in place: the file keeps its size, every other section is byte for byte the original.
@@ -568,6 +595,8 @@ def set_wall_lengths(job_path, changes, out_path, anchor='start', heights=None, 
         checks.append('CHECK units could not be read (%s): no overhang check was done' % uerr)
     recs = job_walls(data)
     by_id = {r.parsed['id']: r for r in recs}
+    uidx = unit_index(original) if fit else {}
+    patched_units = set()
 
     def room_records(room, exclude_id):
         return [r.raw for r in job_walls(data) if r.parsed['room'] == room and r.parsed['id'] != exclude_id]
@@ -610,10 +639,26 @@ def set_wall_lengths(job_path, changes, out_path, anchor='start', heights=None, 
                 lines.append('   note: ' + w)
         # units that end exactly at the old wall end are the sections the engineer will shrink or grow
         ends = [u for u in units.get(wid, []) if abs(u['x_raw'] + u['w_raw'] - p['length_raw']) <= IN // 16]
-        for u in ends:
-            c = ('CHECK wall %d: %r ends at the old wall end (X %s, W %s); it needs %s%s to fit the new length'
-                 % (wid, u['name'], frac_inches(u['x_raw']), frac_inches(u['w_raw']), '+' if dL > 0 else '-', frac_inches(abs(dL))))
-            checks[:] = [x for x in checks if not (x.startswith('CHECK wall %d: %r X+W' % (wid, u['name'])))] + [c]
+        fitted = False
+        if fit and len(ends) == 1 and is_filler(ends[0]) and anchor == 'start':
+            u = ends[0]; neww = u['w_raw'] + dL
+            if FILLER_MIN <= neww <= FILLER_MAX and u['id'] in uidx:
+                set_unit_width(data, uidx[u['id']], neww)
+                u['w_raw'] = neww
+                lines.append('   fit: %r at the end of the wall %s -> %s wide (unit %d; TEST: unit width written in place)'
+                             % (u['name'], frac_inches(u['w_raw'] - dL), frac_inches(neww), u['id']))
+                checks[:] = [x for x in checks if not x.startswith('CHECK wall %d: %r X+W' % (wid, u['name']))]
+                fitted = True
+        if not fitted:
+            for u in ends:
+                why = ''
+                if fit and is_filler(u) and len(ends) == 1:
+                    why = ' (a %s filler is outside the 1/2 to 1 1/2 range, so it was not changed)' % frac_inches(u['w_raw'] + dL)
+                elif fit and len(ends) > 1:
+                    why = ' (%d units end there; the engineer picks which one changes)' % len(ends)
+                c = ('CHECK wall %d: %r ends at the old wall end (X %s, W %s); it needs %s%s to fit the new length%s'
+                     % (wid, u['name'], frac_inches(u['x_raw']), frac_inches(u['w_raw']), '+' if dL > 0 else '-', frac_inches(abs(dL)), why))
+                checks[:] = [x for x in checks if not (x.startswith('CHECK wall %d: %r X+W' % (wid, u['name'])))] + [c]
         if not units.get(wid):
             lines.append('   no units on this wall')
     # heights
@@ -639,9 +684,12 @@ def set_wall_lengths(job_path, changes, out_path, anchor='start', heights=None, 
         hard = [s for s in issues if 'does not point back' in s or '!= P' in s]
         for s in hard:
             checks.append('CHECK room %d after the edit: %s' % (room, s))
-    diff_outside = [i for i in range(len(data)) if data[i] != original[i] and not any(r.offset <= i < r.offset + RECORD_SIZE for r in recs)]
+    allowed = [(r.offset, r.offset + RECORD_SIZE) for r in recs]
+    for ui in uidx.values():
+        allowed.append((ui['start'] + 12, ui['start'] + 16)); allowed.append((ui['f86_at'] + 12, ui['f86_at'] + 16))
+    diff_outside = [i for i in range(len(data)) if data[i] != original[i] and not any(a <= i < b for a, b in allowed)]
     if diff_outside:
-        raise RuntimeError('internal error: bytes outside the wall records changed')
+        raise RuntimeError('internal error: bytes outside the wall records and the fitted unit widths changed')
     written = None
     if changed and out_path:
         if os.path.abspath(out_path) == os.path.abspath(job_path):
@@ -702,7 +750,7 @@ def read_rem_json(path):
     return {'job': d.get('job'), 'walls': walls, 'walls_review': review, 'facts': facts, 'skipped': skipped}
 
 
-def apply_rem(job_path, rem_path, out_path, anchor='start', allow_absorb=True):
+def apply_rem(job_path, rem_path, out_path, anchor='start', allow_absorb=True, fit=False, heights_from_rem=False):
     """Set the agreed wall lengths of a remeasure read-out in the job. Each agreed wall must exist, must sit in
     the room the label names, and (when the label carries the printed length) the printed length must equal
     the file's length within 1/32"; otherwise it is flagged and left alone. Review items are never applied."""
@@ -729,7 +777,25 @@ def apply_rem(job_path, rem_path, out_path, anchor='start', allow_absorb=True):
         p = by_id.get(w['wall'])
         checks.append('CHECK %s #%d: NOT applied, the readers did not agree: %s (%s); the job has %s'
                       % (w['room'], w['wall'], ' or '.join(w['possible']), w['reason'], p['length_frac'] if p else 'no such wall'))
-    rep = set_wall_lengths(job_path, changes, out_path, anchor=anchor, allow_absorb=allow_absorb) if changes else {
+    # a length written next to a room name but no wall number (WERNER: "HOME OFFICE 205 1/8")
+    rooms_by_name = {v: k for k, v in names.items()}
+    for sk in list(rem['skipped']):
+        lab, _, val = sk.partition(' = ')
+        v = parse_inches(val.split(' (')[0]) if val else None
+        if v is not None and lab.strip().lower() in rooms_by_name:
+            checks.append('CHECK %s: the sheet has a length %s for the room but no wall number; which wall is it? (walls in that room: %s)'
+                          % (lab.strip(), frac_inches(round(v * IN)), ', '.join('%d = %s' % (i, p['length_frac']) for i, p in sorted(by_id.items()) if p['is_live'] and p['room'] == rooms_by_name[lab.strip().lower()])))
+    heights = {}
+    if heights_from_rem:
+        for f in rem['facts']:
+            if f['key'] == 'H':
+                v = parse_inches(f['value'])
+                rn = rooms_by_name.get(f['room'].lower())
+                if v is None or rn is None:
+                    checks.append('CHECK %s H = %s: could not be matched to a room or is not a height' % (f['room'], f['value'])); continue
+                heights[rn] = int(round(v * IN))
+                pre.append('room %s: wall heights set to the measured ceiling %s' % (f['room'], frac_inches(heights[rn])))
+    rep = set_wall_lengths(job_path, changes, out_path, anchor=anchor, allow_absorb=allow_absorb, heights=heights, fit=fit) if (changes or heights) else {
         'lines': [], 'checks': [], 'changed_walls': [], 'written': None, 'mesh_note': ''}
     rep['lines'] = pre + rep['lines']
     rep['checks'] = checks + rep['checks']
@@ -784,11 +850,13 @@ def main(argv=None):
     ap.add_argument('--out', help='output .job (never the input)')
     ap.add_argument('--anchor', default='start', choices=['start', 'end'])
     ap.add_argument('--no-absorb', action='store_true', help='refuse to change a second wall of a closed room')
+    ap.add_argument('--fit', action='store_true', help='let a 3/4 filler at the end of a changed wall grow or shrink with it (1/2 to 1 1/2 only)')
+    ap.add_argument('--heights-from-rem', action='store_true', help='with --rem: set every wall of a room to the measured ceiling height H')
     a = ap.parse_args(argv)
     if a.list or not (a.set or a.height or a.rem):
         print(list_job(a.job)); return 0
     if a.rem:
-        rep = apply_rem(a.job, a.rem, a.out, anchor=a.anchor, allow_absorb=not a.no_absorb)
+        rep = apply_rem(a.job, a.rem, a.out, anchor=a.anchor, allow_absorb=not a.no_absorb, fit=a.fit, heights_from_rem=a.heights_from_rem)
         print(format_report(rep, 'Remeasure %s applied to %s' % (rep.get('rem_job'), os.path.basename(a.job))))
         return 0
     changes = {}
@@ -802,7 +870,7 @@ def main(argv=None):
     for s in a.height:
         k, v = s.split('=', 1)
         heights[int(k)] = int(round(parse_inches(v) * IN))
-    rep = set_wall_lengths(a.job, changes, a.out, anchor=a.anchor, heights=heights, allow_absorb=not a.no_absorb)
+    rep = set_wall_lengths(a.job, changes, a.out, anchor=a.anchor, heights=heights, allow_absorb=not a.no_absorb, fit=a.fit)
     print(format_report(rep, 'Wall changes in %s' % os.path.basename(a.job)))
     return 0
 
