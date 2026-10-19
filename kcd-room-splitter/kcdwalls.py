@@ -514,10 +514,12 @@ import collections
 try:
     import kcdjob
     import kcdunits
+    import kcdmesh
 except ImportError:                       # imported from another folder
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import kcdjob
     import kcdunits
+    import kcdmesh
 
 TOL_PRINTED = IN // 32                    # 1/32": the printed length on the remeasure must match the file this closely
 
@@ -736,7 +738,12 @@ def unit_step(data, wid, rn, wall_old, wall_new, ulist, uidx, lines, checks, tou
         checks.append('CHECK wall %d (%s): %r has units inside it (%s) that would have to change with it; nothing was changed on this wall'
                       % (wid, rn, target['name'], ', '.join(repr(u['name']) for u in inside)))
         return
-    new_w = snap16(target['w_raw'] + dL)
+    # the end fillers keep their distance from the wall end (snapped to the 1/16 grid, as KCD stores positions);
+    # the cabinet then fills exactly from its own X to the first end filler (or to the wall end when it is the end unit)
+    new_xs = {u['id']: snap16(L_new - (L_old - u['x_raw'])) for u in sliders}
+    fill_to = min(new_xs.values()) if sliders else L_new
+    new_w = snap16(fill_to - target['x_raw'])
+    old_gap = (min(u['x_raw'] for u in sliders) if sliders else L_old) - (target['x_raw'] + target['w_raw'])
     if new_w <= IN:
         checks.append('CHECK wall %d (%s): %r would become %s wide; nothing was changed on this wall' % (wid, rn, target['name'], frac_inches(new_w)))
         return
@@ -745,10 +752,14 @@ def unit_step(data, wid, rn, wall_old, wall_new, ulist, uidx, lines, checks, tou
         return
     set_unit_xw(data, uidx[target['id']], w=new_w)
     touched[target['id']] = (target['x_raw'], target['w_raw'], target['x_raw'], new_w)
-    lines.append('   %r (unit %d): %s -> %s wide' % (target['name'], target['id'], frac_inches(target['w_raw']), frac_inches(new_w)))
+    why = ''
+    if abs(old_gap) > 2:
+        why = ' (it now meets the %s exactly; the designer\'s file had a %s %s there)' % (
+            'filler' if sliders else 'wall end', frac_inches(abs(old_gap)), 'gap' if old_gap > 0 else 'overlap')
+    lines.append('   %r (unit %d): %s -> %s wide%s' % (target['name'], target['id'], frac_inches(target['w_raw']), frac_inches(new_w), why))
     target['w_raw'] = new_w
     for u in sliders:
-        new_x = L_new - (L_old - u['x_raw'])                 # keeps its distance from the wall end
+        new_x = new_xs[u['id']]                               # keeps its distance from the wall end
         set_unit_xw(data, uidx[u['id']], x=new_x)
         touched[u['id']] = (u['x_raw'], u['w_raw'], new_x, u['w_raw'])
         lines.append('   %r (unit %d): moved from X %s to X %s, still %s wide' % (u['name'], u['id'], frac_inches(u['x_raw']), frac_inches(new_x), frac_inches(u['w_raw'])))
@@ -805,6 +816,7 @@ def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, a
     walls_before = {i: dict(r.parsed) for i, r in by_id.items()}
     uidx = unit_index(original)
     touched = {}                                     # unit id -> (x_old, w_old, x_new, w_new)
+    mesh_ranges = []                                 # byte ranges of the 3-D cache entries that were moved
     try:
         wall_notes = notes_on_walls(original)
     except Exception:
@@ -904,6 +916,49 @@ def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, a
                     repointed += 1
         if repointed:
             lines.append('drawing: the room position of %d unit(s) was moved with their walls so KCD draws them on the wall' % repointed)
+    # the cached 3-D shape of every unit that moved or changed width (KCD draws from this cache and does not rebuild
+    # it when the job opens; see kcdmesh.py)
+    if units_step:
+        try:
+            mesh = kcdmesh.Mesh(original)
+        except Exception as e:
+            mesh = None
+            checks.append('CHECK the 3-D cache could not be read (%s); units on moved walls will show at their old place until each wall is opened in KCD' % e)
+        moved_shapes = stretched = 0
+        for wid, r in by_id.items():
+            before, after = walls_before[wid], r.parsed
+            wall_moved = before['P0'] != after['P0'] or abs(before['angle_deg'] - after['angle_deg']) > 1e-9
+            for u in units.get(wid, []):
+                if mesh is None or u['id'] not in uidx or (not wall_moved and u['id'] not in touched):
+                    continue
+                sl = kcdmesh.Mesh.unit_slice(original, uidx[u['id']]['f86_at'])
+                if not mesh.check_slice(sl):
+                    checks.append('CHECK unit %d %r: its 3-D cache entry is out of range; its drawing was not moved' % (u['id'], u['name'])); continue
+                if abs(before['angle_deg'] - after['angle_deg']) > 1e-9:
+                    checks.append('CHECK unit %d %r: its wall turned; its drawing was not moved' % (u['id'], u['name'])); continue
+                x_old, w_old, x_new, w_new = touched.get(u['id'], (None, None, None, None))
+                if x_old is None:
+                    x_old = x_new = struct.unpack_from('<i', original, uidx[u['id']]['start'] + 6)[0]
+                    w_old = w_new = struct.unpack_from('<i', original, uidx[u['id']]['start'] + 12)[0]
+                d, n = unit_vectors(after['angle_deg'])
+                o_old = (before['P0'][0] + x_old * d[0], before['P0'][1] + x_old * d[1])
+                o_new = (after['P0'][0] + x_new * d[0], after['P0'][1] + x_new * d[1])
+                v = (int(round(o_new[0] - o_old[0])), int(round(o_new[1] - o_old[1])))
+                ext0 = mesh.extent(original, sl, o_old, d, n)
+                if v != (0, 0):
+                    mesh.translate_unit(data, sl, v); moved_shapes += 1
+                if w_new != w_old:
+                    mesh.stretch_unit(data, sl, o_new, d, w_old, w_new); stretched += 1
+                mesh_ranges += mesh.ranges(sl)
+                ext = mesh.extent(data, sl, o_new, d, n)
+                # the shape must sit where it sat before, relative to its own X corner, plus the width change at its far end
+                if ext and ext0 and (abs(ext[0] - ext0[0]) > 1 or abs(ext[1] - (ext0[1] + (w_new - w_old))) > 1
+                                     or abs(ext[2] - ext0[2]) > 1 or abs(ext[3] - ext0[3]) > 1):
+                    checks.append('CHECK unit %d %r: its drawing did not move cleanly (along the wall %s..%s before, %s..%s after, width %s -> %s); open it in KCD'
+                                  % (u['id'], u['name'], frac_inches(ext0[0]), frac_inches(ext0[1]), frac_inches(ext[0]), frac_inches(ext[1]), frac_inches(w_old), frac_inches(w_new)))
+        if moved_shapes or stretched:
+            lines.append('drawing: the cached 3-D shape of %d unit(s) was moved with its wall%s, so KCD shows them in place when the job opens'
+                         % (moved_shapes, (' and %d resized unit(s) stretched to the new width (handles and hanger symbols are approximate until the unit is opened in KCD)' % stretched) if stretched else ''))
     # final checks: every room still consistent, nothing but wall records and the touched unit fields changed
     for room in sorted({x.parsed['room'] for x in recs if x.parsed['is_live']}):
         issues = check_room([x.raw for x in recs if x.parsed['room'] == room])
@@ -914,7 +969,19 @@ def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, a
     for ui in uidx.values():
         allowed += [(ui['start'] + 6, ui['start'] + 10), (ui['start'] + 12, ui['start'] + 16),
                     (ui['f86_at'] + 12, ui['f86_at'] + 16), (ui['f86_at'] + 40, ui['f86_at'] + 64)]
-    diff_outside = [i for i in range(len(data)) if data[i] != original[i] and not any(a <= i < b for a, b in allowed)]
+    allowed += mesh_ranges
+    allowed.sort()
+    diff_outside = []
+    k = 0
+    for i in range(len(data)):
+        if data[i] == original[i]:
+            continue
+        while k < len(allowed) and allowed[k][1] <= i:
+            k += 1
+        if not (k < len(allowed) and allowed[k][0] <= i < allowed[k][1]):
+            diff_outside.append(i)
+            if len(diff_outside) > 5:
+                break
     if diff_outside:
         raise RuntimeError('internal error: bytes outside the wall records and the unit fields changed (first at %d)' % diff_outside[0])
     written = None
@@ -928,7 +995,7 @@ def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, a
         if back != bytes(data) or len(back) != len(original):
             raise RuntimeError('internal error: the written file does not read back')
     return {'lines': lines, 'checks': checks, 'changed_walls': sorted(changed), 'changed_units': sorted(touched), 'written': written,
-            'mesh_note': 'The 3-D cache and the print pages in the file are not rebuilt; KCD redraws them when it opens the job.'}
+            'mesh_note': 'The print pages in the file are not rebuilt; KCD redraws them when it prints.'}
 
 
 # --------------------------------------------------------------------------- remeasure read-out JSON

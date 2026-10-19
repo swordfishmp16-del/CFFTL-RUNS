@@ -765,24 +765,26 @@ with the splitter's files).
   end on every wall. The edited wall gets P1 = P0 + L*d exactly (KCD drops a designer's skew the same way,
   MIRANDA eng wall 3), so the self-test's +1/-1 round trip is byte-exact only on skew-free walls (192 of 240;
   the other 48 come back without their old skew, counted apart).
-- The unit step (owner's rule, Oct 19, after test 1 in KCD; `--walls-only` turns it off): fillers keep their
-  width; the cabinet that reaches the end filler (or stands against the wall end itself) changes width by the
-  wall's change (slot 2 and the width copy at byte 12 of the 86-byte block); the end fillers slide so they still
-  end at the wall; then the units must run from 0 to the new wall length (reported, CHECK when they do not).
+- The unit step (owner's rule, Oct 19, after tests 1 and 3 in KCD; `--walls-only` turns it off): fillers keep
+  their width; the end fillers slide so they still end at the wall (X snapped to the 1/16 grid as KCD stores it);
+  the cabinet that reaches the end filler (or stands against the wall end itself) is sized to fill exactly from
+  its own X to the filler (slot 2 and the width copy at byte 12 of the 86-byte block), which also removes a
+  designer's gap or overlap there (COYNE Linen: the owner took the tall down the extra 1/4 himself in try 3);
+  then the units must run from 0 to the new wall length (reported, CHECK when they do not).
   Left alone and flagged: two cabinets ending at the wall end, a drawer unit at the end (engineers keep drawer
   widths), a cabinet with units nested inside it (a shelf spanning its interior), a wall whose units stop short
   of the end (reported, nothing to do), a filler that no cabinet reaches, a start-moving wall's accessories
   (outlets keep their X and move with the start, as KCD does). No stored size slot of the cabs looked at
   (CSE300, Hangdbl, 760-1, 234) depends on W; shelf, kick, door and rod sizes are computed from W by the price
   scripts, and the price run on test 3 shows them following the new widths.
-- The two room points of every unit on a moved wall or with a new X/W are rewritten (14.6), so KCD draws the
-  units on the wall when it opens the file. Notes are not moved; dimension strings on a changed wall are CHECK,
-  text notes are listed.
-- The file keeps its size; a final guard refuses the write if any byte outside the wall records and the touched
-  unit fields (slot 1, slot 2, block bytes 12..15 and 40..63) changed.
+- The two room points of every unit on a moved wall or with a new X/W are rewritten (14.6) and so is the unit's
+  entry in the 3-D drawing cache (`kcdmesh.py`, 14.8), so KCD shows the units in place when the file opens.
+  Notes are not moved; dimension strings on a changed wall are CHECK, text notes are listed.
+- The file keeps its size; a final guard refuses the write if any byte outside the wall records, the touched
+  unit fields (slot 1, slot 2, block bytes 12..15 and 40..63) and the moved cache entries changed.
 - COYNE test files: TEST (walls only, Oct 19 01:36) went through KCD, see 14.6; TEST2 (walls + heights + two
-  fillers resized) was withdrawn: the owner's rule is that fillers stay 3/4 and the units change. TEST3
-  (14.7) is the one to round-trip next.
+  fillers resized) was withdrawn: the owner's rule is that fillers stay 3/4 and the units change. TEST3 (14.7)
+  went through KCD (14.8); TEST4 (14.8) adds the drawing cache and is the one to round-trip next.
 
 ### 14.4 How the engineers absorbed remeasured lengths (ten sets, before and after; `scratchpad walls/rules/absorb.py`)
 
@@ -904,10 +906,52 @@ rule are in `experiments/design/`. Open: the KCD round trip of test 3 (do the un
 double-click; what KCD does to the two dimension strings on Guest wall 10); which unit the engineer would have
 chosen on wall 11 (the tool takes the cabinet next to the end filler, the open tall, not the drawer tower).
 
+### 14.8 What KCD did with test 3, and the drawing cache (`kcdmesh.py`; Oct 19, `jobs/Cathy Coyne - TEST3 saved by KCD try3.job`)
+
+The owner opened test 3, fixed what looked wrong, saved, and sent four pictures: units sitting into their walls
+"again but not as much", and fillers overlapping panels. His saved file against ours:
+
+- Linen and Guest walls came back byte for byte; the Primary room was moved as a whole by (2461, 5334) raw with
+  every link intact (a drag of the room, harmless). Wall 1's save counter changed again.
+- His own edits: the Linen tall (unit 12) 23 7/8 -> 23 5/8, so it ends exactly where the 3/4 filler starts
+  (the designer's file had the filler overlapping the tall's side panel by 1/4; the rule is now "the cabinet
+  fills exactly to the filler"); the filler's X 6192 -> 6191 (KCD keeps positions on the 1/16 grid: 24 3/8 x
+  254 = 6191.25). Nothing else was changed by hand; the Guest hutch and tall and the Primary hang kept our
+  widths. The Double Hang's I252 state byte changed because he opened that unit.
+- Why the units looked wrong: KCD draws the plan, the elevations and the 3-D view from the cache in the `mesh`
+  section and does not rebuild it when a job opens; it regenerates a unit's entry only when that unit or its wall
+  is edited. Test 3 moved walls and resized units but left the cache, so the wall-16 units showed 9/16 off
+  their wall (wall 16 had moved 9/16), the Primary end filler still sat at its old X overlapping the wall
+  (picture: "(-9/16)" on the filler), and the resized Double Hang still read 34 1/2 inside until he opened it.
+  The two room points of 14.6 are not what KCD draws from; they are secondary (and KCD moved them by the wall
+  delta again when he touched wall 16, so they came back 143 raw off: it adjusts them by delta, not from X/W).
+- The cache, decoded (`kcdmesh.py` docstring has the layout): float32 x, y, z vertices in room coordinates,
+  1-based per-unit slices from bytes 16..39 of the 86-byte block (vcount, voffset, foffset, fcount, ioffset,
+  icount; the vertex and face slices tile the arrays exactly), Int32 indices local to the unit, 66-byte faces
+  whose only position-dependent field is the face centre (float32 at 24..35). KCD re-serialises the faces in a
+  new order on every save, so faces compare as multisets.
+- Proof against KCD's own work. Translating a unit (vertices and face centres + v) reproduces KCD's moves
+  exactly: the owner's room drag (every untouched Primary unit, 1692 + 621 + 527 + ... vertices and 3358 + ...
+  faces, equal), KCD's re-anchoring of the Guest room in the test-1 save (door +48, tower and shelf +79, equal),
+  and the wall-16 units it re-placed (equal). A width change as a stretch about the unit's middle (points past
+  the middle + dW, points at the middle + dW/2) against KCD's own regeneration: the Linen tall differs on 17 of
+  451 vertices (the handles), the Double Hang on 178 of 621 (the centred hanger symbols move dW/2 in KCD);
+  panels, shelves, rods, kicks and door bodies match. KCD leaves fillers and accessories stale when it
+  re-anchors a room (test 1: fillers 15/17 and the obstruction; try 3: the utility cover on wall 19), so where
+  our positions differ from KCD's for those, ours are the ones on the wall.
+- TEST4 (`out/Cathy Coyne - REM 1093610 applied - TEST4.job`, md5 d78b4524...) = test 3 rebuilt from the
+  original with the fill-to-filler rule and the cache moved: 14 cache entries translated, 4 stretched, 17 room
+  points moved; sections unchanged in size; the price run differs from the original only on the four resized
+  units (Linen tall now shelves 22 1/8, kick 23 5/8, doors 11 3/4). Sent to the owner with the request to open
+  it without touching any wall. Still open: whether KCD also needs the per-face sizes (Int32 at 16/20, left as
+  they were on stretched units) and the n1 block (kept) to be right; what the two dimension strings on Guest
+  wall 10 and one on Primary wall 16 show; Primary wall 15 (readers disagreed).
+
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
 In the repo, `experiments/design/apply-remeasure-plan.md` and `apply-remeasure-critic.md` are the Oct 19 design plan for the
-remeasure tool and its adversarial review (the critic found the anchor rule and the stale unit points).
+remeasure tool and its adversarial review (the critic found the anchor rule and the stale unit points). `kcdmesh.py` moves a
+unit's entry in the 3-D drawing cache (notes 14.8).
 
 - `kcdunits.py` (in this folder) is the reader to use from now on: `python kcdunits.py --lib C:\KCD23 JOB.job`
   prints the room sheet; `Catalog.from_json` takes the compact catalog made by `experiments/catjson.py`.
