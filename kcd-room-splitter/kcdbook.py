@@ -221,8 +221,9 @@ def paste_rows(lines, drop=None):
     """Turn engine lines into paste rows (K price, L unit, M part, N, O, P); a dropped line is listed with its reason."""
     rows, dropped = [], []
     for l in lines:
-        if drop and drop[0].search(l['part']):
-            dropped.append((l, drop[1])); continue
+        hit = [why for rx, why in (drop or []) if rx.search('unit %d %s' % (l['unit'], l['part']))]
+        if hit:
+            dropped.append((l, hit[0])); continue
         d1, d2 = l['dim1'].strip(), l['dim2'].strip()
         if d1 and d2 and not ONE_SIZE.search(l['part']):
             n, p = d1, d2
@@ -332,7 +333,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description='Fill the engineering pricing workbook from a kcdprice run without re-saving it.')
     ap.add_argument('template'); ap.add_argument('out')
     ap.add_argument('--lines', help='kcdprice.py output (TSV)')
-    ap.add_argument('--drop', action='append', default=[], metavar='REGEX=REASON', help='leave out price lines whose part matches REGEX')
+    ap.add_argument('--drop', action='append', default=[], metavar='REGEX=REASON', help='leave out price lines where "unit N part" matches REGEX (repeatable), e.g. --drop "^unit (17|22) Door=no door on these units"')
     ap.add_argument('--entry', action='append', default=[], metavar='CELL=VALUE', help='Data Entry answer, e.g. B5=1091400, B1=2026-10-24, F5="Designer White Grain"')
     ap.add_argument('--entries', help='JSON file {cell: value}')
     ap.add_argument('--report', help='write the plain-English report here')
@@ -347,10 +348,10 @@ def main(argv=None):
     rows, dropped, flags = [], [], []
     if a.lines:
         lines, flags = read_price_lines(a.lines)
-        drop = None
-        if a.drop:
-            rx, _, why = a.drop[0].partition('=')
-            drop = (re.compile(rx, re.I), why or 'dropped')
+        drop = []
+        for d in a.drop:
+            rx, _, why = d.partition('=')
+            drop.append((re.compile(rx, re.I), why or 'dropped'))
         rows, dropped = paste_rows(lines, drop)
     rep = fill(a.template, a.out, entries, rows)
     findings = verify(a.template, a.out, rep['sheet_part'])

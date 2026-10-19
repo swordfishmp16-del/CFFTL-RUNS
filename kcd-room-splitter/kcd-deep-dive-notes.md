@@ -788,6 +788,22 @@ with the splitter's files).
   fillers resized) was withdrawn: the owner's rule is that fillers stay 3/4 and the units change. TEST3 (14.7)
   went through KCD (14.8); TEST4 (14.8) adds the drawing cache and is the one to round-trip next.
 
+- **Which cabinet takes the change (Oct 19, NEDDIE run).** `unit_step` now works from the wall end that moved: the
+  cabinet against that end changes width (a connecting shelf drawn across the end, into a corner, counts and keeps
+  its overhang), the fillers at that end stay against it, and every other unit keeps its place in the room (X + dL
+  when the start moved, X unchanged when the end moved). When that cabinet cannot change (a drawer unit, two
+  candidates, other units inside it) the cabinet against the OTHER end takes the change and the run slides with the
+  moved end instead; that is exactly what COYNE test 4 did on Guest wall 11 (start moved, '84 Tall 4 Drawer' at the
+  start kept its width, 'Tall 1 Opening' at the end grew) and the owner approved it, so test 4 still rebuilds the
+  same except the Guest wall 13 outlet (now kept in place in the room, 6 -> 2 1/4 from the moved start, flagged).
+  Obstructions, outlets, switches and openings always keep their place in the room (`is_feature`). Accessories drawn
+  in the changed cabinet stay with the panel they sit on (left or right); one centred in the opening (a hamper) is
+  flagged for a re-fit. Interior shelves snap to the 1/16 grid. The read-out can also carry corner angles
+  ("<room> corner #a/#b angle", degrees) and doorway openings ("<room> opening between #a and #b"): a corner more
+  than 1 degree off the drawing is a CHECK (the tool never turns a wall), an opening is recomputed from the open
+  wall ends after the edit and compared within 1/8. Lines written against a room name that are not walls or facts
+  (obstruction boxes, wire heights) are listed as facts instead of "not used".
+
 ### 14.4 How the engineers absorbed remeasured lengths (ten sets, before and after; `scratchpad walls/rules/absorb.py`)
 
 Rules with evidence (R1-R11 in the study; the short form):
@@ -984,6 +1000,44 @@ The owner opened test 3, fixed what looked wrong, saved, and sent four pictures:
   heights 100, wall 11 flagged) and TEST2 (TEST1 + the five shelves), md5 323c7ff5..., plus the pricing workbook
   (section 15).
 
+### 14.10 NEDDIE (order 1090111, `Lynn Neddie.job`, remeasure `REM-1090111-LYNN.pdf`; Oct 19, read by Claude, no Grok)
+
+- The owner's ask: run one job complete with no other AI reading the sheet, to see how close to stand-alone this
+  can be. The sheet (12 pages: Salesforce page, hers plan on two pages, photos, his plan, his wall 13 elevation,
+  photos) was read by eye from the scan and written as the same read-out JSON Grok produces
+  (`scratchpad walls/grok/REM-1090111-NEDDIE.json`): 13 wall lengths, his #9 held for review (nothing written next
+  to it), four corner angles per room, the doorway opening per room, H/HD/BB/F/Door/Molding per room, the wall 13
+  obstruction box. Remeasure 10-12-26 by Gary; sold 9/11/2026, install 11/4/2026, designer Jessica Philbrook,
+  15,155 for the two spaces.
+- The job: two rooms, "Primary hers" (walls 1-7) and "Primary his" (walls 8-14), both U-shaped with two angled
+  corner walls and two short door-wall stubs, heights 135. Main walls 1 and 8 (0 degrees); anchors hers
+  {1 end moves, 2 start, 3 end, 4 start, 5 end, 6 start, 7 end}, his the same pattern. Units: hers wall 1 filler +
+  Long/Mid/Double/Double Hang to 131 1/16; wall 2 a corner Top Connecting Shelf at X 0, 84 Tall 1 Drawer at 7 1/2
+  with a Shelf, tilt-out and two racks, Connecting Top and Bottom Shelves to 51; wall 3 Connecting shelves at 12,
+  96 Tall 6 Drawer at 24 with jewelry trays, lock and mirror backing, a corner Top Connecting Shelf drawn 10 1/2
+  past the wall end; walls 4 and 5 a 96 Tall 1 Opening each; his wall 8 filler + Double Hangs, 96 Tall 5 Drawer,
+  Double, Mid Hang to 142; wall 11 Long Hang the length of the wall with a belt rack; wall 12 84 Tall 1 Drawer
+  the length of the wall with a tilt-out and two racks; wall 13 an obstruction at 15.
+- What the sheet says: every wall changed (hers -3/16 to +3 3/8, his +5/16 to +1 7/8, his #14 confirmed), ceilings
+  135 3/4, and all eight corners measured 133.6-135.9 degrees where hers is drawn 130/140 and his 135/135.
+- The run (`kcdwalls.py "Lynn Neddie.job" --rem REM-1090111-NEDDIE.json --heights-from-rem`,
+  `out/Lynn Neddie - REM 1090111 applied - TEST1.job`, md5 30555aa5...): 13 walls and 14 heights set; hers wall 1
+  Double Hang 32 3/8 -> 32 3/16; wall 2 (start moved +2 3/4) corner shelf 12 -> 14 3/4 and the six other units
+  X + 2 3/4 so they stay put (the Shelf then re-fitted to the tall's opening); wall 3 (end +2 3/8) the corner shelf
+  at the end 12 -> 14 3/8 keeping its 10 1/2 overhang; wall 4 (start -1/2) 96 Tall 1 Opening 20 1/2 -> 20; wall 5
+  (end +2) 96 Tall 1 Opening 20 5/8 -> 22 5/8; his wall 8 Mid Hang 27 5/8 -> 28 1/2; wall 11 (start +1 7/8) Long
+  Hang 30 -> 31 7/8 with the belt rack kept on its left panel; wall 12 flagged (the only cabinet is a drawer unit,
+  nothing changed); wall 13 obstruction kept in place (15 -> 15 5/8 from the moved start, flagged). 25 units
+  re-pointed, 23 cache entries moved, 8 stretched; sections and mesh counts unchanged. CHECKs (12): his #9 held;
+  the four hers corners 3.6-5.6 degrees off the drawing (the engineer redraws them in KCD); the hers doorway works
+  out 34 15/16 against 30 1/2 measured (the corners again; his comes out 30 3/16 against 30 1/4); the two corner
+  shelves; the belt rack; wall 12; the obstruction. So for hers the file is a starting point and the corners are
+  the engineer's; his is complete except wall 12.
+- Transfer to the laptop: the original job was already there (Downloads), so only a byte patch went over
+  (`applypatch.py`: gzip+base64 JSON of the changed byte runs, 60 KB in 837 lines instead of the 862 KB file); the
+  appends glued two lines at the chunk joins (`fix76.py` re-splits at 76 characters) and one 50-line block arrived
+  altered and was re-sent (`splice2.py`); md5 of the result checked.
+
 ## 15. The pricing workbook filler `kcdbook.py` (Oct 19, 2026; first job DRUBEL)
 
 - What it does: copies the `mike_p_for_services` template (`.xltm`, 238 parts) part for part into a `.xlsm` and changes
@@ -1019,6 +1073,16 @@ The owner opened test 3, fixed what looked wrong, saved, and sent four pictures:
   numbered shelves are 1 1/2" thick (148 each). Waiting for the owner to open it in Excel.
 - Transfer note: the laptop received the 278 KB job as gzip+base64 (25 KB) through Desktop Commander `write_file`; one
   50-line block arrived altered and was re-sent (`splice.py` on the laptop compares per-block md5s).
+
+- NEDDIE (Oct 19, two rooms, two workbooks `out/1090111 NEDDIE PRIMARY HERS.xlsm` and `... HIS.xlsm`): priced on the
+  laptop per room (`price_neddie.py`, `kcdprice --room`) from the remeasure test file; hers 131 lines 9,973.80 after the
+  four door lines of the two 96 Tall 1 Opening units were left out (the scripts print two doors 2 15/16 to 5 3/4 wide on
+  them, which cannot be real, and the units have no door-height slot; the open "no door" question), his 87 lines 6,923.40;
+  with the 199 fee each that is 17,295 standard against 15,155 sold for the two spaces. `--drop` now matches "unit N part"
+  and repeats, so a drop can name units. The remeasure moved sizes but no money in hers (shelf and kick widths), and in
+  his 6,940.40 -> 6,923.40 because the unchanged (flagged) 84 Tall 1 Drawer on wall 12 no longer reaches the wall end and
+  its right panel drops from 266.70 to 249.70: the price scripts look at whether a panel is at the wall end. B25/B27 left
+  blank (the sheet gives one total for both rooms); B13 blank although hers has two jewelry trays.
 
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 

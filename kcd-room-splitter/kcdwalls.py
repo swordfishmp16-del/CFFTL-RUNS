@@ -406,8 +406,10 @@ def resize_wall(rec, new_length, room_records, anchor='start', absorb_id=None, a
         P0n = (k['P1'][0] - Ld[0], k['P1'][1] - Ld[1])
         v = (k['P0'][0] - P0n[0], k['P0'][1] - P0n[1])          # minus the displacement of the moving START
     warnings = []
-    if abs(dL * d[0] - v[0]) > 1e-9 or abs(dL * d[1] - v[1]) > 1e-9:
-        warnings.append(f"non-axis wall ({k['angle_deg']:.1f} deg) or old skew: displacement {v} differs from dL*d")
+    skew = math.hypot(dL * d[0] - v[0], dL * d[1] - v[1])        # raw 0.1 mm: rounding, or an old skew in the drawing
+    if skew > 10:
+        warnings.append("skew: the designer's drawing had the %s of this wall %.1f mm off its length; it is now exactly on the length"
+                        % ('end' if anchor == 'start' else 'start', skew / 10.0))
     updated = {}
     unit_shift = {}
     absorbed = None
@@ -522,6 +524,8 @@ except ImportError:                       # imported from another folder
     import kcdmesh
 
 TOL_PRINTED = IN // 32                    # 1/32": the printed length on the remeasure must match the file this closely
+ANGLE_TOL_DEG = 1.0                     # a corner measured within this of the drawing is left as drawn
+OPENING_TOL = IN // 8                   # a doorway opening that works out within 1/8" of the measured one is fine
 
 WallRec = collections.namedtuple('WallRec', 'offset raw parsed')
 
@@ -690,15 +694,37 @@ def auto_anchor(records, wid):
     return 'end' if wid in up[1:] else 'start'
 
 
-def unit_step(data, wid, rn, wall_old, wall_new, ulist, uidx, lines, checks, touched):
-    """Apply the owner's unit rule to one changed wall. Fillers keep their width; the cabinet that reaches the end
-    filler (or stands against the wall end itself) changes width by the wall's change; the end fillers slide to the
-    new wall end. Anything unclear is flagged and left alone. Records are patched in `data`; `touched` collects
-    {unit id: (x_old, w_old, x_new, w_new)} for the room-point update."""
+WALL_FEATURE = re.compile(r'obstruction|outlet|switch|sprinkler|panel|vent|window|door|pipe|column|beam|soffit|thermostat|register', re.I)
+
+
+def is_feature(u):
+    """A thing of the room drawn on the wall (obstruction, outlet, switch, opening): it keeps its place in the room
+    whatever the units do."""
+    return u.get('type') == 20 or (not is_cabinet(u) and bool(WALL_FEATURE.search(u.get('name') or '')))
+
+
+def unit_step(data, wid, rn, wall_old, wall_new, ulist, uidx, lines, checks, touched, anchor='start'):
+    """Apply the owner's unit rule to one changed wall (Oct 19, 2026, after the COYNE tests): fillers keep their
+    width; the cabinet against the wall end that moved changes width by the wall's change; the fillers at that
+    end stay against it; every other unit stays where it is in the room. When that cabinet cannot change (a
+    drawer unit, or it is unclear which unit it is) the cabinet against the OTHER end takes up the change and the
+    whole run slides with the moved end instead (COYNE test 4, Guest wall 11, approved by the owner).
+      anchor 'start': the END of the wall moved.   anchor 'end': the START moved.
+    Units keep their X from the wall start, so "stays where it is in the room" means X + dL on a wall whose start
+    moved and X unchanged on a wall whose end moved. A connecting shelf drawn across the moved end (into a corner)
+    counts as the unit against that end and keeps its overhang. Obstructions, outlets and openings always keep
+    their place in the room. Anything unclear is flagged and left alone. Records are patched in `data`; `touched`
+    collects {unit id: (x_old, w_old, x_new, w_new)} for the room-point and 3-D cache update."""
     L_old, L_new = wall_old['length_raw'], wall_new['length_raw']
     dL = L_new - L_old
     if not ulist:
         return                                          # the caller says 'no units on this wall'
+    M = 'start' if anchor == 'end' else 'end'           # the wall end that moved
+    O = 'end' if M == 'start' else 'start'
+    sdL = '%s%s' % ('+' if dL > 0 else '-', frac_inches(abs(dL)))
+    keep = set()                                        # unit ids that never shift
+    features = [u for u in ulist if is_feature(u)]
+    keep.update(u['id'] for u in features)
     for u in ulist:
         if is_decor(u) and u['id'] in uidx:
             if abs(u['x_raw']) <= TOL_END and abs(u['x_raw'] + u['w_raw'] - L_old) <= TOL_END:
@@ -706,116 +732,242 @@ def unit_step(data, wid, rn, wall_old, wall_new, ulist, uidx, lines, checks, tou
                 touched[u['id']] = (u['x_raw'], u['w_raw'], u['x_raw'], L_new)
                 lines.append('   %r (unit %d, show-only item along the whole wall): %s -> %s wide' % (u['name'], u['id'], frac_inches(u['w_raw']), frac_inches(L_new)))
                 u['w_raw'] = L_new
-            else:
-                lines.append('   %r (unit %d) is a show-only item; left as it is' % (u['name'], u['id']))
+                keep.add(u['id'])
     cabs = sorted([u for u in ulist if is_cabinet(u)], key=lambda u: u['x_raw'])
+    max_end = max((u['x_raw'] + u['w_raw'] for u in cabs), default=0)
+    min_x = min((u['x_raw'] for u in cabs), default=0)
+
+    def shift(units, why):
+        """X + dL on these units (they keep their place in the room when the start moved, or slide with the end)."""
+        for u in units:
+            nx = u['x_raw'] + dL
+            set_unit_xw(data, uidx[u['id']], x=nx)
+            touched[u['id']] = (u['x_raw'], u['w_raw'], nx, u['w_raw'])
+            u['x_raw'] = nx
+        if units:
+            lines.append('   %d unit(s) got X %s %s (%s)' % (len(units), sdL, why, ', '.join('%r X %s' % (u['name'], frac_inches(u['x_raw'])) for u in units)))
+
+    def cannot_shift(units):
+        bad = [u for u in units if u['x_raw'] + dL < -TOL_END]
+        if bad:
+            return '%s would land before the wall start' % ', '.join('%r (X %s)' % (u['name'], frac_inches(u['x_raw'])) for u in bad)
+        missing = [u for u in units if u['id'] not in uidx]
+        if missing:
+            return 'the record of %s could not be located' % ', '.join(repr(u['name']) for u in missing)
+        return None
+
+    def edge_units(side):
+        if side == 'start':
+            return [u for u in cabs if u['x_raw'] <= TOL_END and u['x_raw'] + u['w_raw'] > TOL_END]
+        return [u for u in cabs if u['x_raw'] < L_old - TOL_END and u['x_raw'] + u['w_raw'] >= L_old - TOL_END]
+
+    def plan(S):
+        """How the cabinet against wall end S takes up the change. Returns a dict, or a string saying why it cannot."""
+        edge = edge_units(S)
+        fill = [u for u in edge if is_filler(u)]
+        cabe = [u for u in edge if not is_filler(u)]
+        if cabe:
+            if len(cabe) > 1:
+                return '%d cabinets stand against the wall %s (%s)' % (len(cabe), S, ', '.join(repr(u['name']) for u in cabe))
+            target = cabe[0]
+        else:
+            if S == 'start':
+                fe = max(u['x_raw'] + u['w_raw'] for u in fill)
+                cands = [u for u in cabs if not is_filler(u) and u['x_raw'] + u['w_raw'] > fe and u['x_raw'] <= fe + REACH]
+                best = min((u['x_raw'] for u in cands), default=0)
+                top = [u for u in cands if abs(u['x_raw'] - best) <= TOL_END]
+            else:
+                fx = min(u['x_raw'] for u in fill)
+                cands = [u for u in cabs if not is_filler(u) and u['x_raw'] < fx and u['x_raw'] + u['w_raw'] >= fx - REACH]
+                best = max((u['x_raw'] + u['w_raw'] for u in cands), default=0)
+                top = [u for u in cands if abs(u['x_raw'] + u['w_raw'] - best) <= TOL_END]
+            if not cands:
+                return 'only the filler %r stands against the wall %s and no cabinet reaches it' % (fill[0]['name'], S)
+            if len(top) > 1:
+                return '%d units reach the %s filler (%s)' % (len(top), S, ', '.join(repr(u['name']) for u in top))
+            target = top[0]
+        if 'drawer' in (target['name'] or '').lower():
+            return 'the cabinet at the wall %s is %r and drawer units keep their width (engineers\' rule)' % (S, target['name'])
+        t0, t1 = target['x_raw'], target['x_raw'] + target['w_raw']
+        inside = [u for u in cabs if u is not target and u not in fill and u['x_raw'] >= t0 - TOL_END and u['x_raw'] + u['w_raw'] <= t1 + TOL_END]
+        # shelves drawn in the cabinet's opening run from the inside of its left panel to the inside of its right
+        # panel, so they change with it; any other unit inside the cabinet is the engineer's call
+        rs = target.get('rs_raw', 0)
+        followers = [u for u in inside if u['type'] in SHELF_TYPES and abs((u['x_raw'] + u['w_raw']) - (t1 - rs)) <= TOL_END]
+        others = [u for u in inside if u not in followers]
+        if others:
+            return '%r has units inside it (%s) that would have to change with it' % (target['name'], ', '.join(repr(u['name']) for u in others))
+        # the cabinet fills exactly from the filler stack at end S (or the wall end) to its far side, which keeps
+        # its place relative to the other end O; positions snap to the 1/16 grid as KCD stores them
+        new_fill = {}
+        if S == 'start':
+            new_x = snap16(max(u['x_raw'] + u['w_raw'] for u in fill)) if fill else (0 if abs(t0) <= TOL_END else t0)
+            new_end = t1 + dL                           # the far side keeps its distance from the wall END
+            old_gap = 0 if (not fill and t0 < -TOL_END) else t0 - (new_x if fill else 0)
+        else:
+            new_fill = {u['id']: snap16(L_new - (L_old - u['x_raw'])) for u in fill}
+            new_x = t0                                  # the far side keeps its distance from the wall START
+            new_end = min(new_fill.values()) if fill else (L_new if abs(t1 - L_old) <= TOL_END else t1 + dL)
+            old_gap = 0 if (not fill and t1 > L_old + TOL_END) else (min(u['x_raw'] for u in fill) if fill else L_old) - t1
+        new_w = snap16(new_end - new_x)
+        if new_w <= IN:
+            return '%r would become %s wide' % (target['name'], frac_inches(new_w))
+        attached = [u for u in ulist if not is_cabinet(u) and u['id'] not in keep and u['x_raw'] >= t0 - TOL_END and u['x_raw'] + u['w_raw'] <= t1 + TOL_END]
+        kept = keep | {target['id']} | {u['id'] for u in fill} | {u['id'] for u in followers} | {u['id'] for u in attached}
+        movers = [u for u in ulist if u['id'] not in kept] if S == 'start' else []
+        bad = cannot_shift(movers) if movers else None
+        if bad:
+            return bad
+        if any(u['id'] not in uidx for u in [target] + fill + followers + attached):
+            return 'unit records could not be located'
+        return dict(S=S, target=target, fill=fill, followers=followers, movers=movers, attached=attached,
+                    new_x=new_x, new_w=new_w, new_end=new_end, new_fill=new_fill, old_gap=old_gap, t0=t0, t1=t1)
+
+    def apply(pl):
+        S, target, t0, t1 = pl['S'], pl['target'], pl['t0'], pl['t1']
+        new_x, new_w, new_end = pl['new_x'], pl['new_w'], pl['new_end']
+        dx, dW = new_x - t0, new_w - target['w_raw']
+        set_unit_xw(data, uidx[target['id']], x=new_x if dx else None, w=new_w)
+        touched[target['id']] = (t0, target['w_raw'], new_x, new_w)
+        for u in pl['followers']:
+            fx = u['x_raw'] + dx
+            fw = (u['x_raw'] + u['w_raw'] + (new_end - t1)) - fx
+            set_unit_xw(data, uidx[u['id']], x=fx if dx else None, w=fw)
+            touched[u['id']] = (u['x_raw'], u['w_raw'], fx, fw)
+            u['x_raw'], u['w_raw'] = fx, fw
+        why = ''
+        if abs(pl['old_gap']) > 2:
+            why = ' (it now meets the %s exactly; the designer\'s file had a %s %s there)' % (
+                'filler' if pl['fill'] else 'wall ' + S, frac_inches(abs(pl['old_gap'])), 'gap' if pl['old_gap'] > 0 else 'overlap')
+        lines.append('   %r (unit %d, against the wall %s): %s -> %s wide%s%s' % (target['name'], target['id'], S, frac_inches(target['w_raw']), frac_inches(new_w),
+                     (', X %s -> %s' % (frac_inches(t0), frac_inches(new_x))) if dx else '', why))
+        if target['type'] in SHELF_TYPES or target['type'] == 645:
+            checks.append('CHECK wall %d (%s): the unit against the wall %s is the connecting shelf %r; it was made %s wide so it still reaches the unit around the corner; look at that corner in KCD'
+                          % (wid, rn, S, target['name'], frac_inches(new_w)))
+        if pl['followers']:
+            lines.append('   %d shelf/shelves inside it (units %s): %s -> %s wide' % (len(pl['followers']), ', '.join(str(u['id']) for u in pl['followers']),
+                         frac_inches(pl['followers'][0]['w_raw'] - (new_end - t1) + dx), frac_inches(pl['followers'][0]['w_raw'])))
+        # accessories drawn in the cabinet (rods, racks, hampers, trays): a rack on the left panel stays with that
+        # panel, one on the right panel moves with it; something centred in the opening must be re-fitted by the engineer
+        placed = []
+        for u in pl['attached']:
+            ld, rd = u['x_raw'] - t0, t1 - (u['x_raw'] + u['w_raw'])
+            if abs(ld - rd) <= IN // 2:
+                nx, how = u['x_raw'] + dx, 'fills or is centred in the opening: re-fit it in KCD'
+            elif ld < rd:
+                nx, how = u['x_raw'] + dx, 'kept on the left panel'
+            else:
+                nx, how = u['x_raw'] + (new_end - t1), 'kept on the right panel'
+            if nx != u['x_raw']:
+                set_unit_xw(data, uidx[u['id']], x=nx)
+                touched[u['id']] = (u['x_raw'], u['w_raw'], nx, u['w_raw'])
+                u['x_raw'] = nx
+            placed.append('%r X %s (%s)' % (u['name'], frac_inches(nx), how))
+        if placed and (dW or dx):
+            checks.append('CHECK wall %d (%s): drawn in %r, which changed width: %s' % (wid, rn, target['name'], '; '.join(placed)))
+        target['x_raw'], target['w_raw'] = new_x, new_w
+        for u in pl['fill']:
+            if S == 'start':
+                continue                                    # start fillers stay at X 0
+            nx = pl['new_fill'][u['id']]                    # end fillers keep their distance from the wall end
+            set_unit_xw(data, uidx[u['id']], x=nx)
+            touched[u['id']] = (u['x_raw'], u['w_raw'], nx, u['w_raw'])
+            lines.append('   %r (unit %d): moved from X %s to X %s, still %s wide' % (u['name'], u['id'], frac_inches(u['x_raw']), frac_inches(nx), frac_inches(u['w_raw'])))
+            u['x_raw'] = nx
+        if S == 'start' and pl['fill']:
+            lines.append('   %s stay(s) at the wall start, still %s wide' % (', '.join('%r (unit %d)' % (u['name'], u['id']) for u in pl['fill']), frac_inches(pl['fill'][0]['w_raw'])))
+        shift(pl['movers'], 'so they stay where they are in the room' if M == 'start' else 'and slide with the moved wall end')
+
+    def coverage():
+        tops = [u for u in cabs if not any(v is not u and v['x_raw'] - TOL_END <= u['x_raw'] and u['x_raw'] + u['w_raw'] <= v['x_raw'] + v['w_raw'] + TOL_END for v in cabs)]
+        tops.sort(key=lambda u: u['x_raw'])
+        first, last = tops[0]['x_raw'], max(u['x_raw'] + u['w_raw'] for u in tops)
+        total = sum(u['w_raw'] for u in tops)
+        gaps = []
+        for a, b in zip(tops, tops[1:]):
+            g = b['x_raw'] - (a['x_raw'] + a['w_raw'])
+            if abs(g) > 2:
+                gaps.append('%s of %s between %r and %r' % ('gap' if g > 0 else 'overlap', frac_inches(abs(g)), a['name'], b['name']))
+        span = last - first
+        over_end, over_start = last - L_new, -first
+        ends_ok = abs(over_end) <= 2 or (over_end > 2 and abs(over_end - (max_end - L_old)) <= 2) or last < L_new - 2
+        starts_ok = abs(over_start) <= 2 or first > 2 or (over_start > 2 and abs(over_start + min_x) <= 2)
+        if not (ends_ok and starts_ok):
+            checks.append('CHECK wall %d (%s): after the change the units run from %s to %s but the wall is %s' % (wid, rn, frac_inches(first), frac_inches(last), frac_inches(L_new)))
+            return
+        s = '   units now run from %s to %s' % (frac_inches(first), frac_inches(last))
+        if abs(over_end) <= 2 and abs(first) <= 2:
+            s += ' = the wall length'
+        else:
+            bits = []
+            if first > 2: bits.append('the wall is empty before %s' % frac_inches(first))
+            if over_start > 2: bits.append('the first unit reaches %s past the wall start into the corner, as drawn' % frac_inches(over_start))
+            if abs(over_end) <= 2: bits.append('the last unit ends at the wall end')
+            elif over_end > 2: bits.append('the last unit reaches %s past the wall end into the corner, as drawn' % frac_inches(over_end))
+            else: bits.append('the wall is empty after %s' % frac_inches(last))
+            s += ' (%s)' % '; '.join(bits)
+        s += '; widths add up to %s' % frac_inches(total)
+        s += '' if abs(total - span) <= 2 else ' (%s)' % '; '.join(gaps)
+        lines.append(s)
+
+    def place_features():
+        """Obstructions, outlets and openings keep their place in the room: X + dL when the start moved."""
+        if M != 'start' or not features:
+            return
+        bad = cannot_shift(features)
+        if bad:
+            checks.append('CHECK wall %d (%s): the start moved %s and %s; left where it/they are' % (wid, rn, sdL, bad)); return
+        shift(features, 'so they stay where they are in the room')
+        checks.append('CHECK wall %d (%s): %s now sit(s) at %s from the moved start of the wall; check the place against the remeasure sheet'
+                      % (wid, rn, ', '.join(repr(u['name']) for u in features), ', '.join(frac_inches(u['x_raw']) for u in features)))
+
     if not cabs:
-        lines.append('   no cabinets on this wall (accessories only); none changed')
+        rest = [u for u in ulist if u['id'] not in keep]
+        if M == 'start' and rest:
+            bad = cannot_shift(rest)
+            if bad:
+                checks.append('CHECK wall %d (%s): the start moved %s and %s; nothing was changed on the units' % (wid, rn, sdL, bad))
+            else:
+                shift(rest, 'so they stay where they are in the room (no cabinets on this wall)')
+        elif not features:
+            lines.append('   no cabinets on this wall (accessories only); none changed')
+        place_features()
         return
-    end_units = [u for u in cabs if abs(u['x_raw'] + u['w_raw'] - L_old) <= TOL_END]
-    max_end = max(u['x_raw'] + u['w_raw'] for u in cabs)
-    if not end_units:
-        if max_end > L_new + TOL_END:
+    if not edge_units(M):
+        # nothing stands against the moved end: no cabinet changes; the units keep their place in the room
+        if M == 'start':
+            rest = [u for u in ulist if u['id'] not in keep]
+            bad = cannot_shift(rest)
+            if bad:
+                checks.append('CHECK wall %d (%s): nothing stands against the start of the wall, which moved %s, but %s; nothing was changed on the units' % (wid, rn, sdL, bad))
+            else:
+                lines.append('   nothing stands against the start of this wall (the first unit was at X %s)' % frac_inches(min_x))
+                shift(rest, 'so they stay where they are in the room')
+        elif max_end > L_new + TOL_END:
             checks.append('CHECK wall %d (%s): the units end at %s, past the new wall end %s; nothing was changed on them'
                           % (wid, rn, frac_inches(max_end), frac_inches(L_new)))
         else:
             lines.append('   units stop at %s, %s short of the new wall end; none changed' % (frac_inches(max_end), frac_inches(L_new - max_end)))
+        place_features()
         return
-    fill_end = [u for u in end_units if is_filler(u)]
-    cab_end = [u for u in end_units if not is_filler(u)]
-    sliders = fill_end
-    if cab_end:
-        if len(cab_end) > 1:
-            checks.append('CHECK wall %d (%s): %d cabinets end at the wall end (%s); the engineer picks which one changes by %s%s'
-                          % (wid, rn, len(cab_end), ', '.join(repr(u['name']) for u in cab_end), '+' if dL > 0 else '-', frac_inches(abs(dL))))
-            return
-        target = cab_end[0]
+    first_try = plan(M)
+    if isinstance(first_try, dict):
+        apply(first_try)
+        coverage()
     else:
-        fill_x = min(u['x_raw'] for u in fill_end)
-        cands = [u for u in cabs if not is_filler(u) and u['x_raw'] < fill_x and u['x_raw'] + u['w_raw'] >= fill_x - REACH]
-        if not cands:
-            checks.append('CHECK wall %d (%s): only the filler %r ends at the wall; no cabinet reaches it, so nothing was changed (the filler still ends at the old wall end %s)'
-                          % (wid, rn, fill_end[0]['name'], frac_inches(L_old)))
-            return
-        best = max(u['x_raw'] + u['w_raw'] for u in cands)
-        top = [u for u in cands if abs(u['x_raw'] + u['w_raw'] - best) <= TOL_END]
-        if len(top) > 1:
-            checks.append('CHECK wall %d (%s): %d units reach the end filler (%s); the engineer picks which one changes by %s%s'
-                          % (wid, rn, len(top), ', '.join(repr(u['name']) for u in top), '+' if dL > 0 else '-', frac_inches(abs(dL))))
-            return
-        target = top[0]
-    if 'drawer' in (target['name'] or '').lower():
-        checks.append('CHECK wall %d (%s): the cabinet at the wall end is %r; drawer units keep their width (engineers\' rule), so the engineer decides how the wall change of %s%s is taken up'
-                      % (wid, rn, target['name'], '+' if dL > 0 else '-', frac_inches(abs(dL))))
-        return
-    t0, t1 = target['x_raw'], target['x_raw'] + target['w_raw']
-    inside = [u for u in cabs if u is not target and u not in sliders and u['x_raw'] >= t0 - TOL_END and u['x_raw'] + u['w_raw'] <= t1 + TOL_END]
-    # shelves drawn in the cabinet's opening: they run from the inside of its left panel to the inside of its right
-    # panel, so they change by the same amount; any other unit inside the cabinet is the engineer's call
-    rs = target.get('rs_raw', 0)
-    followers = [u for u in inside if u['type'] in SHELF_TYPES and abs((u['x_raw'] + u['w_raw']) - (t1 - rs)) <= TOL_END and u['x_raw'] >= t0 - TOL_END]
-    others = [u for u in inside if u not in followers]
-    if others:
-        checks.append('CHECK wall %d (%s): %r has units inside it (%s) that would have to change with it; nothing was changed on this wall'
-                      % (wid, rn, target['name'], ', '.join(repr(u['name']) for u in others)))
-        return
-    # the end fillers keep their distance from the wall end (snapped to the 1/16 grid, as KCD stores positions);
-    # the cabinet then fills exactly from its own X to the first end filler (or to the wall end when it is the end unit)
-    new_xs = {u['id']: snap16(L_new - (L_old - u['x_raw'])) for u in sliders}
-    fill_to = min(new_xs.values()) if sliders else L_new
-    new_w = snap16(fill_to - target['x_raw'])
-    old_gap = (min(u['x_raw'] for u in sliders) if sliders else L_old) - (target['x_raw'] + target['w_raw'])
-    if new_w <= IN:
-        checks.append('CHECK wall %d (%s): %r would become %s wide; nothing was changed on this wall' % (wid, rn, target['name'], frac_inches(new_w)))
-        return
-    if target['id'] not in uidx or any(u['id'] not in uidx for u in sliders):
-        checks.append('CHECK wall %d (%s): unit records could not be located; nothing was changed on the units' % (wid, rn))
-        return
-    dW = new_w - target['w_raw']
-    set_unit_xw(data, uidx[target['id']], w=new_w)
-    touched[target['id']] = (target['x_raw'], target['w_raw'], target['x_raw'], new_w)
-    for u in followers:
-        if u['id'] not in uidx:
-            checks.append('CHECK wall %d (%s): shelf %r (unit %d) inside %r could not be located; it still has the old width' % (wid, rn, u['name'], u['id'], target['name'])); continue
-        set_unit_xw(data, uidx[u['id']], w=u['w_raw'] + dW)
-        touched[u['id']] = (u['x_raw'], u['w_raw'], u['x_raw'], u['w_raw'] + dW)
-        u['w_raw'] += dW
-    why = ''
-    if abs(old_gap) > 2:
-        why = ' (it now meets the %s exactly; the designer\'s file had a %s %s there)' % (
-            'filler' if sliders else 'wall end', frac_inches(abs(old_gap)), 'gap' if old_gap > 0 else 'overlap')
-    lines.append('   %r (unit %d): %s -> %s wide%s' % (target['name'], target['id'], frac_inches(target['w_raw']), frac_inches(new_w), why))
-    if followers:
-        lines.append('   %d shelf/shelves inside it (units %s): %s -> %s wide' % (len(followers), ', '.join(str(u['id']) for u in followers),
-                     frac_inches(followers[0]['w_raw'] - dW), frac_inches(followers[0]['w_raw'])))
-    target['w_raw'] = new_w
-    for u in sliders:
-        new_x = new_xs[u['id']]                               # keeps its distance from the wall end
-        set_unit_xw(data, uidx[u['id']], x=new_x)
-        touched[u['id']] = (u['x_raw'], u['w_raw'], new_x, u['w_raw'])
-        lines.append('   %r (unit %d): moved from X %s to X %s, still %s wide' % (u['name'], u['id'], frac_inches(u['x_raw']), frac_inches(new_x), frac_inches(u['w_raw'])))
-        u['x_raw'] = new_x
-    # the owner's check: the units must add up to the wall length
-    tops = [u for u in cabs if not any(v is not u and v['x_raw'] - TOL_END <= u['x_raw'] and u['x_raw'] + u['w_raw'] <= v['x_raw'] + v['w_raw'] + TOL_END for v in cabs)]
-    tops.sort(key=lambda u: u['x_raw'])
-    first, last = tops[0]['x_raw'], max(u['x_raw'] + u['w_raw'] for u in tops)
-    total = sum(u['w_raw'] for u in tops)
-    gaps = []
-    for a, b in zip(tops, tops[1:]):
-        g = b['x_raw'] - (a['x_raw'] + a['w_raw'])
-        if abs(g) > 2:
-            gaps.append('%s %s between %r and %r' % (frac_inches(abs(g)), 'gap' if g > 0 else 'overlap', a['name'], b['name']))
-    span = last - first
-    if abs(last - L_new) <= 2:
-        if first <= TOL_END:
-            s = '   units now run from 0 to %s = the wall length; widths add up to %s' % (frac_inches(last), frac_inches(total))
+        second = plan(O) if edge_units(O) else 'nothing stands against the wall %s' % O
+        if isinstance(second, str) and second.replace('wall ' + O, 'wall ' + M) == first_try:
+            second = 'it is the only cabinet on the wall'
+        if isinstance(second, dict):
+            lines.append('   note: %s; so the units %s and %r at the wall %s takes up the change'
+                         % (first_try, 'keep their distance from the moved start, as KCD does' if M == 'start' else 'slide with the moved end',
+                            second['target']['name'], O))
+            apply(second)
+            coverage()
         else:
-            s = '   units now run from %s to %s = the wall end (the wall is empty before %s); widths add up to %s' % (
-                frac_inches(first), frac_inches(last), frac_inches(first), frac_inches(total))
-        s += '' if abs(total - span) <= 2 else ' (%s)' % '; '.join(gaps)
-        lines.append(s)
-    else:
-        checks.append('CHECK wall %d (%s): after the change the units run from %s to %s but the wall is %s' % (wid, rn, frac_inches(first), frac_inches(last), frac_inches(L_new)))
+            checks.append('CHECK wall %d (%s): %s; and at the other end: %s; the engineer decides how the wall change of %s is taken up (nothing was changed on the units%s)'
+                          % (wid, rn, first_try, second, sdL, '; they moved with the wall start, as KCD does' if M == 'start' else ''))
+    place_features()
 
 
 def shelf_fit(data, ulist, uidx, rn, wid, lines, checks, touched):
@@ -834,8 +986,8 @@ def shelf_fit(data, ulist, uidx, rn, wid, lines, checks, touched):
         if len(hosts) > 1:
             hosts.sort(key=lambda c: c['w_raw'])        # the smallest cabinet that contains it
         c = hosts[0]
-        x_want = c['x_raw'] + c.get('ls_raw', 0)
-        w_want = c['w_raw'] - c.get('ls_raw', 0) - c.get('rs_raw', 0)
+        x_want = snap16(c['x_raw'] + c.get('ls_raw', 0))                       # on KCD's 1/16 grid
+        w_want = snap16(c['w_raw'] - c.get('ls_raw', 0) - c.get('rs_raw', 0))
         d_want = c['d_raw']
         dx, dw, dd = x_want - sh['x_raw'], w_want - sh['w_raw'], d_want - sh['d_raw']
         if abs(dx) <= 2 and abs(dw) <= 2 and abs(dd) <= 2:
@@ -846,7 +998,9 @@ def shelf_fit(data, ulist, uidx, rn, wid, lines, checks, touched):
             checks.append('CHECK wall %d (%s): shelf %r (unit %d) is %s deep inside %r which is %s deep; depth left for the engineer'
                           % (wid, rn, sh['name'], sh['id'], frac_inches(sh['d_raw']), c['name'], frac_inches(d_want)))
         if abs(dx) > 2 or abs(dw) > 2:
-            set_unit_xw(data, uidx[sh['id']], x=x_want, w=w_want)
+            set_unit_xw(data, uidx[sh['id']], x=x_want if abs(dx) > 2 else None, w=w_want if abs(dw) > 2 else None)
+            x_want = x_want if abs(dx) > 2 else sh['x_raw']
+            w_want = w_want if abs(dw) > 2 else sh['w_raw']
             touched[sh['id']] = (sh['x_raw'], sh['w_raw'], x_want, w_want)
             what = []
             if abs(dx) > 2: what.append('X %s -> %s' % (frac_inches(sh['x_raw']), frac_inches(x_want)))
@@ -926,16 +1080,16 @@ def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, a
         if res['absorbed_by']:
             lines.append('   closed room: wall %d changed by the same amount so the room stays closed' % res['absorbed_by'])
         for w in res['warnings']:
-            if w.startswith('non-axis'):
-                lines.append('   note: ' + w)
-        if anc == 'end' and units.get(wid):
+            if w.startswith('skew'):
+                lines.append('   note: ' + w[6:])
+        if anc == 'end' and units.get(wid) and not units_step:
             lines.append('   the start of this wall moved; its %d unit(s) keep their distance from the start, as KCD does' % len(units[wid]))
             for u in units[wid]:
                 if not is_cabinet(u):
                     checks.append('CHECK wall %d (%s): %r sits %s from the start of the wall, which moved %s%s; check its place against the remeasure'
                                   % (wid, rn, u['name'], frac_inches(u['x_raw']), '+' if dL > 0 else '-', frac_inches(abs(dL))))
         if units_step:
-            unit_step(data, wid, rn, p, by_id[wid].parsed, units.get(wid, []), uidx, lines, checks, touched)
+            unit_step(data, wid, rn, p, by_id[wid].parsed, units.get(wid, []), uidx, lines, checks, touched, anchor=anc)
         elif units.get(wid):
             ends = [u for u in units[wid] if abs(u['x_raw'] + u['w_raw'] - p['length_raw']) <= TOL_END]
             for u in ends:
@@ -1084,8 +1238,10 @@ def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, a
 
 
 # --------------------------------------------------------------------------- remeasure read-out JSON
-WALL_LABEL = re.compile(r'^(?P<room>.+?)\s+#\s*(?P<wall>\d+)\s*(?:\(printed\s+(?P<printed>[^)]+)\))?\s*$', re.I)
+WALL_LABEL = re.compile(r'^(?P<room>[^#]+?)\s+#\s*(?P<wall>\d+)\s*(?:\(printed\s+(?P<printed>[^)]+)\))?\s*$', re.I)
 FACT_LABEL = re.compile(r'^(?P<room>.+?)\s+(?P<key>H|HO|HD|BB|F|Door|Molding|HOLES)\s*$', re.I)
+ANGLE_LABEL = re.compile(r'^(?P<room>[^#]+?)\s+corner\s+#\s*(?P<a>\d+)\s*/\s*#\s*(?P<b>\d+)\s+angle\s*$', re.I)
+OPENING_LABEL = re.compile(r'^(?P<room>[^#]+?)\s+opening\s+between\s+#\s*(?P<a>\d+)\s+and\s+#\s*(?P<b>\d+)\s*$', re.I)
 
 
 def parse_inches(text):
@@ -1101,9 +1257,11 @@ def parse_inches(text):
 
 
 def read_rem_json(path):
-    """The Grok read-out: agreed wall lengths, walls held for review, room facts, and lines it could not use."""
+    """The remeasure read-out (Grok's format, or one written by hand/by Claude from the scan): agreed wall lengths,
+    walls held for review, corner angles ("<room> corner #a/#b angle" in degrees), doorway openings ("<room> opening
+    between #a and #b"), room facts (H, HD, BB, F, Door, Molding ...) and the lines it could not use."""
     d = json.load(open(path, encoding='utf-8'))
-    walls, review, facts, skipped = [], [], [], []
+    walls, review, facts, skipped, angles, openings = [], [], [], [], [], []
     for item in d.get('consensus', []):
         lab, val = item.get('label', ''), item.get('value', '')
         m = WALL_LABEL.match(lab)
@@ -1115,6 +1273,21 @@ def read_rem_json(path):
                           'printed_in': parse_inches(m.group('printed')) if m.group('printed') else None,
                           'measured_in': v, 'label': lab})
             continue
+        a = ANGLE_LABEL.match(lab)
+        if a:
+            try:
+                deg = float(str(val).replace('°', '').strip())
+            except ValueError:
+                skipped.append('%s = %s (value is not an angle)' % (lab, val)); continue
+            angles.append({'room': a.group('room').strip(), 'a': int(a.group('a')), 'b': int(a.group('b')), 'deg': deg, 'label': lab})
+            continue
+        o = OPENING_LABEL.match(lab)
+        if o:
+            v = parse_inches(val)
+            if v is None:
+                skipped.append('%s = %s (value is not a length)' % (lab, val)); continue
+            openings.append({'room': o.group('room').strip(), 'a': int(o.group('a')), 'b': int(o.group('b')), 'measured_in': v, 'label': lab})
+            continue
         f = FACT_LABEL.match(lab)
         if f:
             facts.append({'room': f.group('room').strip(), 'key': f.group('key').upper(), 'value': val, 'label': lab})
@@ -1125,7 +1298,42 @@ def read_rem_json(path):
         if m:
             review.append({'room': m.group('room').strip(), 'wall': int(m.group('wall')),
                            'possible': item.get('possible_values', []), 'reason': item.get('reason', ''), 'label': item['label']})
-    return {'job': d.get('job'), 'walls': walls, 'walls_review': review, 'facts': facts, 'skipped': skipped}
+    return {'job': d.get('job'), 'walls': walls, 'walls_review': review, 'facts': facts, 'skipped': skipped,
+            'angles': angles, 'openings': openings, 'notes': d.get('notes', ''), 'reader': d.get('reader', '')}
+
+
+def corner_angle(by_id, a, b):
+    """The inside angle drawn at the corner where walls a and b meet (degrees), or None when they do not meet."""
+    pa, pb = by_id.get(a), by_id.get(b)
+    if not pa or not pb:
+        return None
+    if pa['right_id'] == b:
+        prev, nxt = pa, pb
+    elif pb['right_id'] == a:
+        prev, nxt = pb, pa
+    else:
+        return None
+    return 180.0 - abs(wrap180(nxt['angle_deg'] - prev['angle_deg']))
+
+
+def free_end(p):
+    """The room point of a wall's open end (a doorway side), or None when both ends meet other walls."""
+    if p['left_id'] == 0:
+        return p['P0']
+    if p['right_id'] == 0:
+        return p['P1']
+    return None
+
+
+def opening_between(by_id, a, b):
+    """Distance between the open ends of walls a and b (raw), or None."""
+    pa, pb = by_id.get(a), by_id.get(b)
+    if not pa or not pb:
+        return None
+    A, B = free_end(pa), free_end(pb)
+    if A is None or B is None:
+        return None
+    return math.hypot(A[0] - B[0], A[1] - B[1])
 
 
 def apply_rem(job_path, rem_path, out_path, anchor='auto', allow_absorb=True, units_step=True, heights_from_rem=False, shelves=True):
@@ -1175,16 +1383,55 @@ def apply_rem(job_path, rem_path, out_path, anchor='auto', allow_absorb=True, un
                 pre.append('room %s: wall heights set to the measured ceiling %s' % (f['room'], frac_inches(heights[rn])))
     rep = set_wall_lengths(job_path, changes, out_path, anchor=anchor, allow_absorb=allow_absorb, heights=heights, units_step=units_step, shelves=shelves) if (changes or heights or shelves) else {
         'lines': [], 'checks': [], 'changed_walls': [], 'changed_units': [], 'written': None, 'mesh_note': ''}
-    rep['lines'] = pre + rep['lines']
+    # corner angles: the tool never turns a wall, so a corner measured off the drawing is the engineer's
+    post = []
+    for a in rem['angles']:
+        drawn = corner_angle(by_id, a['a'], a['b'])
+        if drawn is None:
+            checks.append('CHECK %s corner #%d/#%d: measured %.1f degrees, but walls %d and %d do not meet in the job' % (a['room'], a['a'], a['b'], a['deg'], a['a'], a['b'])); continue
+        if abs(drawn - a['deg']) <= ANGLE_TOL_DEG:
+            post.append('corner %d/%d (%s): drawn %g degrees, measured %.1f; within %g degree(s), left as drawn' % (a['a'], a['b'], a['room'], round(drawn, 2), a['deg'], ANGLE_TOL_DEG))
+        else:
+            checks.append('CHECK %s corner #%d/#%d: drawn %g degrees, measured %.1f (%+.1f); the tool does not turn walls, so the engineer redraws this corner in KCD'
+                          % (a['room'], a['a'], a['b'], round(drawn, 2), a['deg'], a['deg'] - drawn))
+    # doorway openings: compared on the file as written (the wall ends have moved)
+    if rem['openings']:
+        geo = open(rep['written'], 'rb').read() if rep.get('written') else data
+        after = {r.parsed['id']: r.parsed for r in job_walls(geo)}
+        for o in rem['openings']:
+            was, now = opening_between(by_id, o['a'], o['b']), opening_between(after, o['a'], o['b'])
+            meas = int(round(o['measured_in'] * IN))
+            if now is None:
+                checks.append('CHECK %s opening between #%d and #%d: measured %s, but in the job those walls do not both have an open end' % (o['room'], o['a'], o['b'], frac_inches(meas))); continue
+            if abs(now - meas) <= OPENING_TOL:
+                post.append('opening between walls %d and %d (%s): measured %s; the file has %s after the change (was %s)' % (o['a'], o['b'], o['room'], frac_inches(meas), frac_inches(int(round(now))), frac_inches(int(round(was)))))
+            else:
+                checks.append('CHECK %s opening between #%d and #%d: measured %s, but the file has %s after the change (was %s before); the open ends of walls %d and %d (or the corner angles) need the engineer'
+                              % (o['room'], o['a'], o['b'], frac_inches(meas), frac_inches(int(round(now))), frac_inches(int(round(was))), o['a'], o['b']))
+    rep['lines'] = pre + rep['lines'] + post
     rep['checks'] = checks + rep['checks']
     rep['facts'] = ['%s %s = %s' % (f['room'], f['key'], f['value']) for f in rem['facts']]
-    rep['skipped'] = rem['skipped']
+    # other lines written against a room name (obstructions, boxes drawn on an elevation ...) are listed as facts
+    rest = []
+    for sk in rem['skipped']:
+        lab = sk.partition(' = ')[0].strip().lower()
+        if any(lab.startswith(n) and lab != n for n in names.values() if n):
+            rep['facts'].append(sk)
+        else:
+            rest.append(sk)
+    rep['skipped'] = rest
     rep['rem_job'] = rem['job']
+    rep['rem_notes'] = rem.get('notes', '')
+    rep['rem_reader'] = rem.get('reader', '')
     return rep
 
 
 def format_report(rep, title):
     out = [title, '']
+    if rep.get('rem_reader'):
+        out += ['Read-out: ' + rep['rem_reader'], '']
+    if rep.get('rem_notes'):
+        out += ['Sheet notes: ' + rep['rem_notes'], '']
     out += rep['lines'] or ['(no wall changed)']
     if rep.get('checks'):
         out += ['', 'TO CHECK (%d):' % len(rep['checks'])] + ['  ' + c for c in rep['checks']]
