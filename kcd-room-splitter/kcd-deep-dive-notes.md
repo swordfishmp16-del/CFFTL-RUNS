@@ -699,6 +699,116 @@ area): NOTIK went from 4 cent-level differences to 1, the new rooms from 36 pric
 - Why MIRANDA's end panel (unit 29) was not charged the wall contact.
 - The HUMPHREY file the paste was made from (to confirm the "paste = engineered file" rule).
 
+## 14. Walls and the remeasure (Oct 19, 2026)
+
+The owner's question: can the handwritten remeasure, once read by his Grok pipeline, be applied to the
+designer's job (wall lengths first, then grow or shrink the sections)? Short answer: the wall part is built
+(`kcdwalls.py`), the first test files went to the owner for a KCD round trip, and the section part is a set of
+rules with evidence plus one safe automatic step (end fillers).
+
+### 14.1 The Grok read-out
+
+`C:\GROK REM COMPLETED\<job>.json` (pipeline rules in `PASS_RULES.md` and
+`Documents\CF_QC\remeasure-multiagent\START_HERE.md`): three Grok readers read crops of the scanned pages; a
+value is `consensus` only when all three agree, otherwise `needs_review`. Labels for walls carry KCD's own
+wall number and the printed length: `"Linen #7 (printed 25 1/4)" -> "25 1/8"`. Room facts: `H` ceiling height,
+`HO`/`HD` header or door height, `BB` baseboard (`5 3/4 x 3/4 W`), `F` floor, `Door`, `Molding`, `HOLES`.
+COYNE (1093610): 12 agreed walls over Linen/Guest/Primary, wall #15 in review, 17 facts. WERNER (1089471): the
+designer drew one wall (#1 198) and the tech sketched two side walls ("wall A", "wall B") that are not in
+the job, and the 205 1/8 is labelled by the room name, not `#1`: that read-out needs an engineer; the tool
+flags "a length for the room without a wall number". Ask the pipeline owner to always label a wall value by
+its printed `#n` when one is next to it.
+
+### 14.2 The 205-byte wall record (decoded; `kcdwalls.py`, self-test `experiments/walls_selftest.py`)
+
+Checked on all 178 wall records of the ten sets (120 live, 58 dead). Units 0.1 mm (254 = 1"), T = 1143 =
+4 1/2" wall thickness.
+
+| Offset | Field |
+|---|---|
+| 0-15 | preamble: first record of a file carries a list header (38494, 102/119/136, a per-save number, 7646); other records 0 except byte 11 = 1 and a byte-15 flag (unknown, follows the record slot) |
+| 16 | float32 direction angle of START->END in degrees x 254 (0, 90, 180, 220, 270, 360 seen) |
+| 20 | Int32 L length (copies at 100 and 108) |
+| 24 | Int32 -1143: thickness, wall body to the right of START->END (room on the left) |
+| 28 | Int32 H wall height (copies at 96 and 104); per wall, not per room |
+| 32 | colour bytes R,G,B,0 (e1e1e1 grey, fcfcfc white) |
+| 36 / 40 | Int32 ids of the walls meeting the START / the END (0 = open end) |
+| 46 / 48 | Int16 3048 (12") and 6096 (24"), constant, meaning unknown; they push the points off 4-byte alignment |
+| 50 / 58 | P0 = START and P1 = END of the inner (room-side) face, x,y Int32; P1 = P0 + L x direction (KCD's own files drift 1-16 raw) |
+| 66 / 74 | P2 = outer corner at END, P3 = outer corner at START: inner point + T x normal, extended by T x tan(turn/2) along the wall so neighbours' outer faces meet in one point |
+| 82 | Int32 4 = number of outline points |
+| 117-123 | four Int16 copies of the id; 125 Int32 id; 129 Int32 room (0 = deleted) |
+| 133 | three float64 colour (R/255 ...), not always kept in sync; 157-204 six constant doubles |
+
+Topology: `right` of wall k starts where k ends, `left` ends where k starts; 2 closed loops, 20 open chains
+and 7 standalone walls in the data; all corners 90 degrees except BINDLER (one reentrant) and ROBERTS WIC
+(220-degree wall). Units sit on a wall by id with X from P0 along the direction; X < 0 and X + W > L occur in
+designers' files (KCD tolerates both).
+
+Changing a wall's length (anchor = START): set L (3 places), move P1 and P2 by dL x direction, translate all
+four points of every wall downstream along `right` until an open end. A closed loop needs the opposite
+(antiparallel) wall to change by the same amount, or the room opened (what the GODDARD engineer did with two
+63" stubs); `resize_wall` refuses otherwise. Height: bytes 28/96/104 only. All edits are in place (same record
+size), so nothing else in the file moves; the 3-D cache and print pages stay stale and KCD rebuilds them (as
+with the splitter's files).
+
+### 14.3 `kcdwalls.py`
+
+- `--list JOB`: every live wall with length, angle, height, neighbours and the units on it (X, W, where they end).
+- `--rem REM.json --out NEW.job`: match each agreed wall by number, room name and printed length (within
+  1/32", else CHECK), apply the measured length, never apply `needs_review`, list the unit on each changed wall
+  that ends at the old wall end with the amount it must change; `--heights-from-rem` sets every wall of a room
+  to the measured `H`; `--fit` lets a lone 3/4 filler at the end of a changed wall grow or shrink with it
+  (result must stay between 1/2 and 1 1/2; writes unit slot 2 and the width copy at byte 12 of the 86-byte
+  block); `--set 7="25 1/8"`, `--height 1=90.25` for manual edits; `--anchor end` moves the START instead.
+- COYNE test files sent to the owner Oct 19: TEST (walls only) and TEST2 (walls + heights + two fillers:
+  Linen #7 filler 3/4 -> 5/8, Guest #11 filler 3/4 -> 1 1/16). Primary #14's filler would go to 3/16 and was
+  left for the engineer (two Double Hang 35 15/16 and 35 1/4 must give 9/16), Guest #10's hutch ends at the old
+  wall end (+3/16, not a filler). Waiting for the KCD round trip: open, check the plans, Save As, send back,
+  byte-compare with `kcdcompare.py`.
+
+### 14.4 How the engineers absorbed remeasured lengths (ten sets, before and after; `scratchpad walls/rules/absorb.py`)
+
+Rules with evidence (R1-R11 in the study; the short form):
+- They apply a remeasure only sometimes: GODDARD yes (walls 163 9/16 -> 162 5/8, 90 3/4 -> 88 7/8 and 89 1/8,
+  door wall replaced by two 63" stubs, ceiling 114 -> 115 1/4); PRIEM (166 -> 165 3/4) and HUMPHREY
+  (145 -> 144 3/8) were NOT applied, the engineered files keep the design lengths and units.
+- Catalog products never change width (drawer towers 29 1/4 with one panel, wall beds, shoe units 31 1/2, 774
+  talls, hutches 35, refrigerators 32, L corners); only their X moves.
+- Hanging sections and open talls are what gets resized, and when a wall is rebuilt the units of one type in a
+  run get EQUAL interiors on the 1/16 grid (GODDARD side walls 3 x 27 3/4 interior; ROBERTS WIC 38 13/16,
+  38 13/16, 39 9/16; SFERRA 2 x 34 5/16). Walls the engineer did not rebuild keep the designer's unequal widths.
+- Mirrored side walls get the SAME unit set sized to the shorter wall (GODDARD 87" of boxes on 88 7/8 and
+  89 1/8, slack 1.6 to 1.9 left at the back corner); how much slack to leave is a human choice.
+- Residue goes to the inside corner that the perpendicular wall's connecting shelf covers; the 3/4 filler
+  stays flush at the exposed end. Residue under about 1/4 is parked at a corner; larger residue is a human call
+  (gap, equal fillers, or resize). POLONSKA split 1 3/4 into two 7/8 fillers.
+- Fillers: 3/4 (cab 234) at the exposed end, X = 0 or ending at the wall length; designers' 1" and 1 1/2"
+  fillers became 3/4; filler height = adjacent unit height. Two drawing conventions: designer W = 3/4 and D =
+  face width; engineer W = face width and D = 3/4.
+- Corners: designers draw [side-wall depth] + a connecting shelf of the real span; engineers draw Csetbot +
+  Csettop at the nominal W = 20 with X = cabinet edge - 20 plus a 16" Backing, and centre the back-wall run with
+  EQUAL corner zones; when the back wall shrinks the corner zones absorb it equally (GODDARD -0.559 each) while
+  hanging interiors round UP to 24 3/4 and towers stay nominal.
+- Design-only items are stripped (890nc baseboards, LED strip lights, pictures, platforms); accessories become
+  1/8-wide markers with quantities parked at the wall end; loose panels become 3/4 Custom Holes Panel units
+  and the boxes between them get LS = RS = 0.
+- Wall heights are set to the remeasured ceiling in 7 of 10 customers; unit heights are not changed by it.
+- Doors and windows are redrawn from the remeasure by hand, or deleted with the wall cut back to the opening.
+- Rebuilt files renumber walls in chain order: match walls by chain position and length, never by id.
+- Decisions that need a human: whether to apply at all; which unit gives way when the only trimmable part is a
+  3/4 filler; product substitutions; opening positions; the interior to pick and the slack on rebuilt side
+  walls; gap versus fillers for residue over 1/4; corner-unit depth changes.
+Caveats: only GODDARD, LONG and ROBERTS WIC show clean absorption on walls with cabinets (about 8 walls); the
+other pairs mix the wall change with re-layouts; remeasure values are only known for GODDARD, PRIEM, HUMPHREY
+(and now COYNE, WERNER).
+
+WERNER (designer's job, engineer's final, workbook received Oct 19): wall 1 198 -> 205 1/8 (the measured),
+height 120 -> 138 3/4 (the tech's "H = 13?3/4" is 138 3/4), two side walls added from the sketch (26 at the
+left with an obstruction and outlet, 142 7/8 at the right with the window 120 3/8 wide at 10 7/8), the five
+bases re-spaced 48 / 33 15/16 / 33 15/16 / 34 5/8 / 48 -> 45 3/8 / 34 3/8 / 34 3/8 / 35 1/8 / 45 3/8 with a
+1 1/2 filler at the left; a separate study of this pair is in `scratchpad walls/werner/`.
+
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
 - `kcdunits.py` (in this folder) is the reader to use from now on: `python kcdunits.py --lib C:\KCD23 JOB.job`
