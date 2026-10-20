@@ -1254,6 +1254,15 @@ parallel (full reports in the session scratchpad `walls/po/A_sidebar.md` .. `F_c
 
 ### 16.5 Open with the owner (the short list)
 
+**Answered by the owner (Oct 20):** the order tabs are filled INSIDE each room's own workbook (one `.xlsm` per room with its
+Purchase Order, Doormark, CF5, VJT ... tabs filled); hamper fronts and flip-up fronts COUNT AS DOORS (faces on the forms and
+handles on the PO); the sidebar says when a thermofoil door is CF Thermo, and CF Thermo is no longer sold (a few sold jobs
+remain to be engineered), everything else thermofoil is Doormark; Mysterious Blue is MYBL (Funder sheet), WERNER's MYST was
+a typo. TEST3 (his wall 8 filler) opened in KCD and was saved back unchanged on wall 8: adding a unit record works (the save
+shows only KCD's usual re-save changes: header blob, n1 36 -> 45, the index block 16 -> 20 ints short, the hers room
+re-placed). The owner also noted the filler was added in one room only (hers wall 1 end is a `zone` corner, held as CHECK)
+and asked for "another one" with everything learned today.
+
 - Fillers: the back corner of an L/U where the other wall's run starts 24" out with a connecting shelf, filler or not;
   angled corners; one unit filling a wall between two walls (his 11 Long Hang, his 12 drawer tall): two fillers and the
   unit gives up 1 1/2, even a drawer unit; who gives up the 3/4 when there are no hanging sections (the end unit, the next

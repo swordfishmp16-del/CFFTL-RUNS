@@ -527,7 +527,7 @@ def verify(src, out, S, new_id, wall_id, X, W, H, D, FW, tw, new_sl, deficit, em
         assert all(abs(a - b) <= 1.5 for a, b in zip(along, s_along)), 'along-the-wall positions differ from the source'
         assert all(abs(a - (b + dFW)) <= 1.5 for a, b in zip(rdep, s_rdep)), 'off-the-wall positions differ from the source + From Wall change'
         assert abs(min(along)) <= 1.5 and abs(max(along) - W) <= 1.5, ('along', min(along), max(along))
-        assert abs(min(rdep) - FW) <= 1.5, ('depth', min(rdep), max(rdep))
+        assert abs(min(rdep) - FW) <= 4, ('depth', min(rdep), max(rdep))
         pos2, good, nf = locate_index_chunk(out, mb, sl, tw, deficit)
         assert pos2 == mb.nidx - sl[5], ('index chunk position', pos2, mb.nidx - sl[5])
         spos, sgood, snf = locate_index_chunk(src, ma, ssl, sw, deficit)

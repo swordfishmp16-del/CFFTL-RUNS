@@ -1,12 +1,14 @@
 """kcdbook.py - fill the engineering pricing workbook (the `mike_p_for_services` template family) from a price
 run, WITHOUT re-saving the workbook.
 
-The template .xltm (or a filled .xlsm) is copied part for part. Only four parts change:
+The template .xltm (or a filled .xlsm) is copied part for part. Only these parts change:
   [Content_Types].xml      the main part becomes a macro-enabled workbook instead of a template
   xl/workbook.xml          calcPr gets fullCalcOnLoad="1" so Excel recomputes every sheet when the file opens
   xl/sharedStrings.xml     the new texts are appended (count/uniqueCount updated)
   the Data Entry sheet     the answer cells (B1 date, B5 client number, B7 name, B9 room, F1 designer, F5 material,
                            ...) and the paste block from row 2: K price, L unit #, M part, N first size, O, P second size
+  the order tabs           only when asked (--cell / --cells): the typed line items of Purchase Order, Doormark A1
+                           and B1, VJT Order, CF5 Order, CF Thermo, CF Stone, Job Cart Cover Sheet, Final Price Sheet
 VBA, ActiveX controls, the two external links, comments, drawings, printer settings and every other sheet stay
 byte for byte (verify() proves it). Never re-save this workbook with openpyxl: it drops the links and controls.
 
@@ -15,6 +17,21 @@ sizes puts the first in N and the second in P (panels and shelves: depth, length
 width, height); a part with one size puts it in P; kicks, fillers, leg levelers and mirror backs show one size (the
 width) in P although the price scripts know two. Column J (a shifted paste) and Q (an overflow of P) are read by
 the Modify Here formulas; R is the engineer's own column. Nothing is written to J, Q or R.
+
+Order tabs (checked on the WERNER workbook): their headers (PO date, client, room, engineer, install date, the
+Doormark design and colour codes) are formulas that read Data Entry and are never written; only the line items
+are typed cells. Rules for a typed cell on any tab:
+  - a cell that holds a formula in the template is refused (the form computes it);
+  - a cell inside a merged block is written at the block's top-left cell only (Doormark's boxes are merged blocks:
+    design EM31, colour EM41, door rows R/Y/AR 55, 61, 67 ..., slab fillers CS/CZ/DT 166 ...);
+  - the cell keeps the template's style; numbers go in as numbers, text through the shared-string table (the
+    template has no inline strings), dates as serials and only into a cell whose format is a date;
+  - a tick on the forms is the letter X in a cell (Doormark DN35 Match Back is preset; CO167 All Edges Square,
+    the drawer styles, hinge sides are typed X's; no checkbox controls are involved); yes/no booleans are only
+    accepted on a cell that already is a yes/no cell (there are none on the order tabs);
+  - the Holes sheet is refused: it is the one sheet with a macro that runs when a cell changes.
+Dropdown cells (Doormark design and colour, CF5 colour / insert / joint, VJT insert and colour, CF Thermo design)
+are plain cells with a validation list; the exact list text has to be written (lists on Data Conversions).
 """
 import re
 import os
@@ -32,6 +49,8 @@ WORKBOOK_CT = 'application/vnd.ms-excel.sheet.macroEnabled.main+xml'
 ONE_SIZE = re.compile(r'^(kick|filler|leg leveler|mirror back)\b', re.I)   # parts whose review line shows one size
 NEW_ROW_STYLES = {'K': '380', 'L': '169', 'M': '169', 'N': '377', 'O': '377', 'P': '377'}   # as Excel wrote WERNER rows 43+
 COL_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+MACRO_SHEETS = {'Holes': 'the Holes sheet runs a macro whenever one of its cells changes, so it has to be filled in Excel'}
+DATE_FORMAT_IDS = set(range(14, 23)) | set(range(27, 37)) | set(range(45, 48)) | set(range(50, 59))   # Excel's built-in date/time formats
 
 
 def col_index(col):
@@ -43,10 +62,26 @@ def col_index(col):
 
 def split_ref(ref):
     m = re.match(r'^([A-Z]+)(\d+)$', ref)
+    if not m:
+        raise ValueError('%r is not a cell address like B5 or AR55' % ref)
     return m.group(1), int(m.group(2))
 
 
+def in_range(ref, first, last):
+    """True when the cell is inside the block first:last."""
+    c, r = split_ref(ref); c1, r1 = split_ref(first); c2, r2 = split_ref(last)
+    return col_index(c1) <= col_index(c) <= col_index(c2) and r1 <= r <= r2
+
+
+def is_date_format(code):
+    """True when a number format shows a date or time: d, m, y, h or s outside quotes, brackets and escapes."""
+    bare = re.sub(r'"[^"]*"|\[[^\]]*\]|\\.', '', code)
+    return bool(re.search(r'[dmyhs]', bare, re.I))
+
+
 def excel_serial(d):
+    if isinstance(d, datetime.datetime):
+        d = d.date()
     return (d - datetime.date(1899, 12, 30)).days
 
 
@@ -85,6 +120,22 @@ class Package:
                 target = re.search(r'Target="([^"]+)"', rel).group(1)
                 return 'xl/' + target.lstrip('/').replace('xl/', '', 1) if not target.startswith('/xl/') else target.lstrip('/')
         raise KeyError('sheet %r has no relationship' % sheet_name)
+
+    def sheet_names(self):
+        return [html.unescape(n) for n in re.findall(r'<sheet [^>]*name="([^"]*)"', self.text('xl/workbook.xml'))]
+
+    def date_styles(self):
+        """The cell style numbers (cellXfs index) whose number format is a date or time."""
+        st = self.text('xl/styles.xml')
+        custom = {int(i): html.unescape(c) for i, c in re.findall(r'<numFmt numFmtId="(\d+)" formatCode="([^"]*)"', st)}
+        xfs = re.search(r'<cellXfs[^>]*>(.*?)</cellXfs>', st, re.S).group(1)
+        out = set()
+        for i, xf in enumerate(re.findall(r'<xf [^>]*>', xfs)):
+            m = re.search(r'numFmtId="(\d+)"', xf)
+            fid = int(m.group(1)) if m else 0
+            if fid in DATE_FORMAT_IDS or (fid in custom and is_date_format(custom[fid])):
+                out.add(str(i))
+        return out
 
     def write(self, out_path):
         with zipfile.ZipFile(out_path, 'w') as z:
@@ -129,8 +180,10 @@ class SharedStrings:
 class Sheet:
     """The cells of one worksheet part, edited in place; everything outside <sheetData> is kept verbatim."""
 
-    def __init__(self, pkg, part):
-        self.pkg, self.part = pkg, part
+    def __init__(self, pkg, part, name='', new_styles=None, new_row_attrs=''):
+        self.pkg, self.part, self.name = pkg, part, name
+        self.new_styles = new_styles or {}               # style per column for a cell the template does not have (the paste rows)
+        self.new_row_attrs = new_row_attrs
         self.xml = pkg.text(part)
         m = re.search(r'<sheetData>(.*?)</sheetData>|<sheetData/>', self.xml, re.S)
         if not m:
@@ -144,36 +197,77 @@ class Sheet:
                 cells[cm.group(1)] = (cm.group(2) or '', cm.group(3) or '')
             self.rows[r] = {'attrs': rm.group(2) or '', 'cells': cells}
         self.formulas_before = len(re.findall(r'<f[ >/]', body))
+        self.merges = re.findall(r'<mergeCell ref="([A-Z]+\d+):([A-Z]+\d+)"', self.post)
+        self.col_styles = []                             # (first column, last column, style) from <cols>
+        for ctag in re.findall(r'<col [^>]*/>', self.pre):
+            a = dict(re.findall(r'(\w+)="([^"]*)"', ctag))
+            if 'style' in a:
+                self.col_styles.append((int(a['min']), int(a['max']), a['style']))
+        self.date_styles = pkg.date_styles()
         self.written = []
 
     def style_for(self, col, row):
-        """The style of the cell itself, else the nearest cell above in the same column, else the column default."""
-        if row in self.rows and col in self.rows[row]['cells']:
-            m = re.search(r's="(\d+)"', self.rows[row]['cells'][col][0])
+        """The cell's own style. For a cell the template does not have: the column's paste style (Data Entry K..P),
+        else the row's own style, else the nearest styled cell above in the same column, else the column's style."""
+        cur = self.rows.get(row, {}).get('cells', {}).get(col)
+        if cur:
+            m = re.search(r'\bs="(\d+)"', cur[0])
             if m:
                 return m.group(1)
-        return NEW_ROW_STYLES.get(col)
+        if col in self.new_styles:
+            return self.new_styles[col]
+        if cur is not None:
+            return None
+        attrs = self.rows.get(row, {}).get('attrs', '')
+        m = re.search(r'\bs="(\d+)"', attrs)
+        if m and 'customFormat="1"' in attrs:
+            return m.group(1)
+        for r in range(row - 1, max(0, row - 200), -1):
+            c = self.rows.get(r, {}).get('cells', {}).get(col)
+            if c:
+                m = re.search(r'\bs="(\d+)"', c[0])
+                if m:
+                    return m.group(1)
+        n = col_index(col)
+        for lo, hi, s in self.col_styles:
+            if lo <= n <= hi:
+                return s
+        return None
 
     def set(self, ref, value, sst):
+        """Write one typed cell. Refuses a formula cell, a cell inside a merged block that is not its top-left cell,
+        a yes/no value on a cell that is not a yes/no cell, and a date on a cell whose format is not a date."""
+        ref = ref.replace('$', '').upper()
         col, row = split_ref(ref)
-        cur = self.rows.get(row, {}).get('cells', {}).get(col)
-        if cur and '<f' in cur[1]:
-            raise ValueError('%s holds a formula; refusing to overwrite it' % ref)
-        style = self.style_for(col, row)
-        attrs = ' s="%s"' % style if style else ''
+        where = '%s!%s' % (self.name, ref) if self.name else ref
         if value is None or value == '':
             return
+        cur = self.rows.get(row, {}).get('cells', {}).get(col)
+        if cur and '<f' in cur[1]:
+            f = re.search(r'<f[^>]*>([^<]*)</f>', cur[1])
+            shown = ' (=%s)' % html.unescape(f.group(1))[:70] if f and f.group(1) else ''
+            raise ValueError('%s holds a formula%s; the form computes that cell, so it is not written' % (where, shown))
+        for first, last in self.merges:
+            if first != ref and first != last and in_range(ref, first, last):
+                raise ValueError("%s is inside the merged block %s:%s; write %s, the block's top-left cell" % (where, first, last, first))
+        style = self.style_for(col, row)
+        attrs = ' s="%s"' % style if style else ''
         if isinstance(value, bool):
-            xml = '<c r="%s"%s t="b"><v>%d</v></c>' % (ref, attrs, 1 if value else 0)
+            if not (cur and 't="b"' in cur[0]):
+                raise ValueError('%s is not a yes/no cell; a tick on the order forms is the letter X' % where)
+            attrs += ' t="b"'; inner = '<v>%d</v>' % (1 if value else 0)
         elif isinstance(value, datetime.date):
-            xml = '<c r="%s"%s><v>%d</v></c>' % (ref, attrs, excel_serial(value))
+            if style not in self.date_styles:
+                raise ValueError('%s is not a date cell (its number format is not a date), so %s would show as the number %d; '
+                                 'write it as text or pick a date cell' % (where, value, excel_serial(value)))
+            inner = '<v>%d</v>' % excel_serial(value)
         elif isinstance(value, (int, float)):
             v = ('%d' % value) if float(value).is_integer() else repr(float(value))
-            xml = '<c r="%s"%s><v>%s</v></c>' % (ref, attrs, v)
+            inner = '<v>%s</v>' % v
         else:
-            xml = '<c r="%s"%s t="s"><v>%d</v></c>' % (ref, attrs, sst.index(str(value)))
-        self.rows.setdefault(row, {'attrs': ' spans="11:16"', 'cells': {}})
-        self.rows[row]['cells'][col] = ('__new__', xml)
+            attrs += ' t="s"'; inner = '<v>%d</v>' % sst.index(str(value))
+        self.rows.setdefault(row, {'attrs': self.new_row_attrs, 'cells': {}})
+        self.rows[row]['cells'][col] = (attrs, inner)
         self.written.append((ref, value))
 
     def save(self):
@@ -183,9 +277,7 @@ class Sheet:
             parts = []
             for col in sorted(cells, key=col_index):
                 attrs, body = cells[col]
-                if attrs == '__new__':
-                    parts.append(body)
-                elif body:
+                if body:
                     parts.append('<c r="%s%d"%s>%s</c>' % (col, r, attrs, body))
                 else:
                     parts.append('<c r="%s%d"%s/>' % (col, r, attrs))
@@ -241,7 +333,13 @@ def paste_rows(lines, drop=None):
 
 
 # ----------------------------------------------------------------------------- fill and verify
-def fill(template, out_path, entries, rows, sheet_name='Data Entry', first_row=2):
+def fill(template, out_path, entries, rows, sheet_name='Data Entry', first_row=2, cells=None, skip_bad=False):
+    """Copy the template to out_path with the Data Entry answers and paste rows, plus `cells` = {tab: {cell: value}}
+    typed on any other tab. A cell that cannot be written (formula, merged block, bad tab, macro sheet, date on a
+    non-date cell) stops the fill before anything is written, with every problem listed; with skip_bad the rest
+    is written and the problems come back under 'refused'."""
+    if os.path.abspath(out_path) == os.path.abspath(template):
+        raise ValueError('refusing to overwrite the template')
     pkg = Package(template)
     ct = pkg.text('[Content_Types].xml')
     if TEMPLATE_CT in ct:
@@ -251,30 +349,60 @@ def fill(template, out_path, entries, rows, sheet_name='Data Entry', first_row=2
         wb = re.sub(r'<calcPr ', '<calcPr fullCalcOnLoad="1" ', wb, count=1)
         pkg.set_text('xl/workbook.xml', wb)
     sst = SharedStrings(pkg)
-    sh = Sheet(pkg, pkg.sheet_part(sheet_name))
+    sheets, refused = {}, []
+
+    def sheet(name):
+        if name not in sheets:
+            if name in MACRO_SHEETS:
+                raise ValueError(MACRO_SHEETS[name])
+            try:
+                part = pkg.sheet_part(name)
+            except KeyError:
+                raise ValueError('there is no tab named "%s"; the tabs are: %s' % (name, ', '.join(pkg.sheet_names())))
+            is_main = name == sheet_name
+            sheets[name] = Sheet(pkg, part, name, NEW_ROW_STYLES if is_main else None, ' spans="11:16"' if is_main else '')
+        return sheets[name]
+
+    def put(name, ref, val):
+        try:
+            sheet(name).set(ref, val, sst)
+        except ValueError as e:
+            refused.append(str(e))
+
     for ref, val in entries.items():
-        sh.set(ref, val, sst)
+        put(sheet_name, ref, val)
     for i, row in enumerate(rows):
         r = first_row + i
         for col in 'KLMNOP':
             if row.get(col) not in (None, ''):
-                sh.set('%s%d' % (col, r), row[col], sst)
-    sh.save(); sst.save()
-    if os.path.abspath(out_path) == os.path.abspath(template):
-        raise ValueError('refusing to overwrite the template')
+                put(sheet_name, '%s%d' % (col, r), row[col])
+    for name, d in (cells or {}).items():
+        for ref, val in d.items():
+            put(name, ref, val)
+    if refused and not skip_bad:
+        raise ValueError('\n'.join(refused))
+    for sh in sheets.values():
+        sh.save()
+    sst.save()
     pkg.write(out_path)
-    return {'cells': sh.written, 'rows': len(rows), 'strings_added': sst.added, 'sheet_part': sh.part}
+    main_sheet = sheets.get(sheet_name)
+    return {'cells': main_sheet.written if main_sheet else [], 'rows': len(rows), 'strings_added': sst.added,
+            'sheet_part': pkg.sheet_part(sheet_name), 'sheet_parts': [sh.part for sh in sheets.values()],
+            'written': {name: sh.written for name, sh in sheets.items()}, 'refused': refused}
 
 
-def verify(template, out_path, sheet_part):
-    """Every part byte-identical to the template except the four edited ones; the edited XML well-formed; the
-    workbook loadable. Returns a list of findings (empty = clean)."""
+def verify(template, out_path, sheet_parts):
+    """Every part byte-identical to the template except content types, workbook.xml, the string table and the edited
+    sheets; those parse; the string table only grew; every edited sheet keeps its formula count; the workbook loads.
+    Returns a list of findings (empty = clean)."""
     import xml.dom.minidom
+    if isinstance(sheet_parts, str):
+        sheet_parts = [sheet_parts]
     a, b = Package(template), Package(out_path)
     findings = []
     if a.order != b.order:
         findings.append('part order differs')
-    allowed = {'[Content_Types].xml', 'xl/workbook.xml', 'xl/sharedStrings.xml', sheet_part}
+    allowed = {'[Content_Types].xml', 'xl/workbook.xml', 'xl/sharedStrings.xml'} | set(sheet_parts)
     for n in a.order:
         if a.parts[n] != b.parts.get(n) and n not in allowed:
             findings.append('part changed: ' + n)
@@ -283,6 +411,14 @@ def verify(template, out_path, sheet_part):
             xml.dom.minidom.parseString(b.parts[n])
         except Exception as e:
             findings.append('%s not well-formed: %s' % (n, e))
+    old = re.findall(rb'<si>.*?</si>', a.parts['xl/sharedStrings.xml'], re.S)
+    new = re.findall(rb'<si>.*?</si>', b.parts['xl/sharedStrings.xml'], re.S)
+    if new[:len(old)] != old:
+        findings.append('the string table lost or changed an existing text')
+    for n in sheet_parts:
+        fa, fb = len(re.findall(rb'<f[ >/]', a.parts[n])), len(re.findall(rb'<f[ >/]', b.parts[n]))
+        if fa != fb:
+            findings.append('%s: formula count changed %d -> %d' % (n, fa, fb))
     try:
         import openpyxl
         wbk = openpyxl.load_workbook(out_path, read_only=True, keep_vba=True)
@@ -336,6 +472,8 @@ def main(argv=None):
     ap.add_argument('--drop', action='append', default=[], metavar='REGEX=REASON', help='leave out price lines where "unit N part" matches REGEX (repeatable), e.g. --drop "^unit (17|22) Door=no door on these units"')
     ap.add_argument('--entry', action='append', default=[], metavar='CELL=VALUE', help='Data Entry answer, e.g. B5=1091400, B1=2026-10-24, F5="Designer White Grain"')
     ap.add_argument('--entries', help='JSON file {cell: value}')
+    ap.add_argument('--cell', action='append', default=[], metavar='TAB!CELL=VALUE', help='a typed cell on any tab (repeatable), e.g. "Purchase Order!C19=6", "Doormark A1!EM31=SARASOTA SHAKER"; a tick is X')
+    ap.add_argument('--cells', help='JSON file {tab: {cell: value}} of typed cells on any tab')
     ap.add_argument('--report', help='write the plain-English report here')
     ap.add_argument('--preview', action='store_true', help='show the Final Price Sheet as LibreOffice computes it')
     a = ap.parse_args(argv)
@@ -345,6 +483,17 @@ def main(argv=None):
             entries[k] = parse_entry_value(v) if isinstance(v, str) else v
     for s in a.entry:
         k, v = s.split('=', 1); entries[k.strip()] = parse_entry_value(v)
+    cells = {}
+    if a.cells:
+        for tab, d in json.load(open(a.cells)).items():
+            for k, v in d.items():
+                cells.setdefault(tab, {})[k.strip()] = parse_entry_value(v) if isinstance(v, str) else v
+    for s in a.cell:
+        left, _, v = s.partition('=')
+        tab, _, ref = left.rpartition('!')
+        if not tab.strip() or not ref.strip():
+            print('--cell needs TAB!CELL=VALUE, for example "Purchase Order!C19=6"; got: %s' % s); return 2
+        cells.setdefault(tab.strip().strip("'"), {})[ref.strip()] = parse_entry_value(v)
     rows, dropped, flags = [], [], []
     if a.lines:
         lines, flags = read_price_lines(a.lines)
@@ -353,13 +502,23 @@ def main(argv=None):
             rx, _, why = d.partition('=')
             drop.append((re.compile(rx, re.I), why or 'dropped'))
         rows, dropped = paste_rows(lines, drop)
-    rep = fill(a.template, a.out, entries, rows)
-    findings = verify(a.template, a.out, rep['sheet_part'])
+    try:
+        rep = fill(a.template, a.out, entries, rows, cells=cells)
+    except ValueError as e:
+        text = 'Nothing was written. Fix these and run again:\n  ' + str(e).replace('\n', '\n  ')
+        print(text)
+        if a.report:
+            open(a.report, 'w', encoding='utf-8').write(text + '\n')
+        return 2
+    findings = verify(a.template, a.out, rep['sheet_parts'])
     out = ['Workbook %s from %s' % (os.path.basename(a.out), os.path.basename(a.template)), '']
     out += ['Data Entry answers written:'] + ['  %s = %s' % (k, v) for k, v in entries.items() if v not in (None, '')]
     out += ['', 'Price lines pasted in K..P from row 2: %d (%d new texts in the string table)' % (rep['rows'], rep['strings_added'])]
     tot = sum(r['K'] for r in rows if isinstance(r['K'], (int, float)))
     out += ['  the pasted prices add up to %.2f' % tot]
+    for tab, written in rep['written'].items():
+        if tab != 'Data Entry' and written:
+            out += ['', 'Typed on the %s tab (%d cells):' % (tab, len(written))] + ['  %s = %s' % (ref, val) for ref, val in written]
     if dropped:
         out += ['', 'Price lines left out (%d):' % len(dropped)] + ['  %s unit %d %s %s %s: %s' % (l['price'], l['unit'], l['part'], l['dim1'], l['dim2'], why) for l, why in dropped]
     if flags:
