@@ -35,7 +35,7 @@ import struct
 import sys
 import contextlib
 
-sys.path.insert(0, '/home/user/CFFTL-WORKING-/kcd-room-splitter')
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))   # the repo's kcd-room-splitter, wherever it is checked out
 import kcdjob      # noqa: E402
 import kcdmesh     # noqa: E402
 import kcdwalls    # noqa: E402

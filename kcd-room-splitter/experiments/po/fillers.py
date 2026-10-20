@@ -38,7 +38,7 @@ import os
 import re
 import sys
 
-sys.path.insert(0, '/home/user/CFFTL-WORKING-/kcd-room-splitter')
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))   # the repo's kcd-room-splitter, wherever it is checked out
 import kcdjob, kcdunits, kcdwalls                                     # noqa: E402
 from kcdwalls import IN, frac_inches, wrap180, snap16, parse_wall    # noqa: E402
 

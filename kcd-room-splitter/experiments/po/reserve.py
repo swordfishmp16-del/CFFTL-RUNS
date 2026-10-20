@@ -7,7 +7,7 @@ The wall record itself is not changed. Writes OUT.job (same size as the input).
     python3 reserve.py JOB.job WALLID OUT.job [--width 0.75]
 """
 import os, struct, sys, argparse
-sys.path.insert(0, '/home/user/CFFTL-WORKING-/kcd-room-splitter')
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))   # the repo's kcd-room-splitter, wherever it is checked out
 import kcdwalls as W
 import kcdmesh
 

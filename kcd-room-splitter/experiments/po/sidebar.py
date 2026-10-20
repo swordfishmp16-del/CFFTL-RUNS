@@ -27,7 +27,7 @@ Usage: python3 sidebar.py JOB.job [MORE.job ...] [--out DIR]
 """
 import sys, os, re, json, collections
 
-sys.path.insert(0, '/home/user/CFFTL-WORKING-/kcd-room-splitter')
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))   # the repo's kcd-room-splitter, wherever it is checked out
 import kcdunits
 
 # ------------------------------------------------------------------------------------------------

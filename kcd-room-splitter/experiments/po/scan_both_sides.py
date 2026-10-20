@@ -1,7 +1,8 @@
 """Where would the owner's rule 'units between two walls need fillers on both sides' fire? For every live wall that
 meets another wall at BOTH ends and carries cabinets: is there a 3/4 filler at the start and at the end?"""
 import sys
-sys.path.insert(0, '/home/user/CFFTL-WORKING-/kcd-room-splitter')
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))   # the repo's kcd-room-splitter, wherever it is checked out
 import kcdwalls
 IN = 254; TOL = IN // 16
 for path in sys.argv[1:]:
