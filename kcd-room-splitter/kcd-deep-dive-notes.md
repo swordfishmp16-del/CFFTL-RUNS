@@ -1276,6 +1276,51 @@ and asked for "another one" with everything learned today.
   filled CF Thermo form with their jobs; the Doormark quick reference; the A/B save (one unit with and without a door) so
   the file tells which units have doors; MIRANDA's PO.
 
+### 16.6 Wired into the main run; the one-command chain; the production project (Oct 20, 2026)
+
+What changed today, and what was proven:
+
+- **The filler rule runs inside `kcdwalls.py`** (`kcdfill.py`, on by default whenever a file is written; `--no-fillers`
+  turns it off; `kcdwalls.py JOB --fillers --out OUT` runs it alone). Per FIX finding: pick a 3/4 source filler (same
+  wall, then same room, then anywhere; engineer-style face-wide fillers are not usable), make the room by the same-size
+  rule (`reserve.reserve_end`; new `reserve_start` mirrors it for the START of a wall: unit_step on a pseudo wall 3/4
+  shorter with anchor 'end', then every X back to the real wall by +3/4, features put back where they were), clone the
+  filler (`addfiller.add_filler`), re-run the rule. A failure on one finding is a CHECK; the output is written once.
+  Proof: the NEDDIE designer job + its read-out now gives TEST3 (`82ce2821...`) byte for byte, i.e. apply + reserve +
+  addfiller in one command; the KCD-saved TEST3 comes back unchanged with no FIX.
+- **ROBERTS md5 explained**: the earlier "+ fillers" file (`fca0af81...`) was TEST1 + a hand `adjust.py` step on the
+  three wall-14 Door units (the sheet's "door opening 24 3/16 at 68 11/16") + reserve + addfiller. The chain without
+  the door step gives `956a19d0...`; adjust.py on that file gives `fca0af81...` byte for byte. The door-opening step
+  stays a hand step (run book step 5): mapping the sheet's opening to the casing units is a judgment.
+- **START case**: no job of ours has a START FIX (HUMPHREY walls 1 and 4 would, on the laptop). Synthetic cases (the
+  start filler of NEDDIE his wall 8 removed or moved, the run slid to X 0) give the exact mirror of the END case:
+  sections 27 1/2, 27 1/2, 27 7/16, 27 7/16 (extra sixteenths nearest the START), the tower keeps its width, the new
+  filler at X 0..3/4; 191 invariant checks pass. Not yet through KCD.
+- **`kcdrun.py`**: apply (+fillers) -> `kcdsplit.split_job` -> per room `sidebar.py` + `soitems.py` + `kcdbook.fill` ->
+  RUN REPORT. Cell map used: Data Entry B5 order, B7 last name in capitals, B9 room (the room file's name; engineers
+  shorten it: OFFICE, RIC, WIC), F1/B1/B27/B25 only when given, F5/F7/F9/F11/F21/F23 only as exact entries of the
+  Data Conversions lists; Purchase Order row 19+ B room, C qty, D item, E part number (dashes removed), K vendor (only
+  when the sidebar names it); Doormark A1 EM31 design (exact X3:X36 text), EM41 colour (exact X41:X58 text; MYSTERIOUS
+  BLUE is not in the list, so blank + CHECK with the Funder code MYBL). Never written: door rows and sizes, slab
+  fillers, CA31, VJT/CF5/CF Thermo/Cover Sheet cells, B15/B19/B21/B23/B13, vendors guessed from a part number's shape.
+  WERNER answer key: every cell we write equals the engineer's (18 of 18 with designer/install/sold given); the
+  engineer's other typed cells are the price paste (213), Q/R hand sizes (14), door rows, slab fillers, B15/B19/B21/B23,
+  K19 AMEROCK (inferred), CA31 MYST (the owner's typo), Final Price Sheet accessory lines (countertop 35 1/8 sqft at 66,
+  base thermofoil x3 at 145, the handle under Items That Need Pricing) and Cover Sheet N2 N/A, C11 7.
+- **Policy decisions from the checks**: a value two sources disagree on is not written (sidebar BASE line vs the
+  sheet's "Molding None" -> F21/F23 blank + CHECK); the sidebar wins over the unit texts for the door style (EM31
+  SARASOTA SHAKER on WERNER while the units say Abacoa) but a CHECK names the disagreement; a light strip
+  ('Invisible Light', type 1101, 4 wide) is an accessory, not a cabinet, for the filler rule; other customers' names
+  never appear in a customer's report; the RUN REPORT carries the TEST number and is never overwritten.
+- **`data/`**: the template and the library bundles live in the repo (not customer files) so a fresh checkout runs;
+  the price list does not (laptop only), so pricing stays with the engineers unless a price TSV is given.
+- **Production**: branch `production` = the tools as proven; `jobs/<order> <NAME>/` holds the dropped files (ignored by
+  git); `run <order>` is the run book's step 0 and `kcdrun.py <order>` finds the files itself.
+- Pre-existing bugs found by the checks and fixed: `apply_spread` crashed (KeyError) when a hanging section came out
+  exactly unchanged (a 1/8 remeasure change did it); `shelf_fit` used a shelf's already-moved X as the old X for the
+  cache update when unit_step had shifted it in the same run; `read_rem_json` dropped needs_review items that were not
+  wall lengths (COYNE 5, WERNER 9) -> now CHECK lines.
+
 ## 8. Scripts (on the test laptop, `%TEMP%\kcdsplit`)
 
 In the repo, `experiments/design/apply-remeasure-plan.md` and `apply-remeasure-critic.md` are the Oct 19 design plan for the

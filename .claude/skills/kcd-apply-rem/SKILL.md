@@ -38,8 +38,10 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
 1. Render the scan (`pdftoppm -r 150 -png`, and `-r 260` crops for the handwritten numbers) and READ it yourself.
    A printed wall number circled or ticked without a new number beside it is CONFIRMED as drawn. A wall measured in
    pieces (door wall: left part, door opening, right part) is the sum, and the pieces go in a fact line. Write the
-   facts H, HD, BB, F, Door, Molding, HOLES per room and every angle written at a corner. Note the order number,
-   client name, designer, install date and sold price from the sale page.
+   facts H, HD, BB, F, Door, Molding, HOLES per room and every angle written at a corner. From the sale page take the
+   order number, client name, designer, install date, sold price and the main closet: pass them to the run
+   (`--designer --install --sold --main`), because only values given this way are typed into the workbook; a value
+   read from the handwriting alone stays a suggestion in the report.
 2. Write the read-out JSON (`walls/grok/REM-<order>-<NAME>.json` style): `consensus` lines
    `{"label": "<KCD room name> #<n> (printed <old>)", "value": "<new>", "confidence": "high|medium"}`, facts as
    `"<room> H"`, corners as `"<room> corner #a/#b angle"`, plus `reader` and `notes` telling how it was read.
@@ -53,7 +55,8 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
    and its REPORT, splits that file into `DIR/<order> <NAME>/<order> <NAME> <ROOM>.job` with the splitter's own SPLIT
    REPORT, fills `<order> <NAME> <ROOM>.xlsm` per room from `data/template.xltm` (Data Entry answers from the sale page
    and the sidebar, the Purchase Order lines and the Doormark design and colour that are certain) with a WORKBOOK
-   REPORT each, and writes `DIR/<order> <NAME> RUN REPORT.txt` with every CHECK in one place.
+   REPORT each, and writes `DIR/<order> <NAME> RUN REPORT - TESTn.txt` with every CHECK in one place. Without `--rem`
+   the first file is `<Client> - fillers checked - TESTn.job` (only when a filler was added).
    `--price "<ROOM>=PRICE.tsv"` pastes a price run; `--entry CELL=VALUE` or `"TAB!CELL=VALUE"` types a cell you are
    sure of; `--replace` overwrites room files from an earlier run; `--no-rem` is simply leaving `--rem` out (filler
    check, split and workbooks only).
