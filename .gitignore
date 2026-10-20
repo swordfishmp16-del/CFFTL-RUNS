@@ -1,3 +1,14 @@
 # customer job files dropped in for a run: never committed
 jobs/*
 !jobs/README.md
+# prototype outputs that could carry customer data: never committed
+kcd-room-splitter/*.json
+kcd-room-splitter/*.txt
+kcd-room-splitter/experiments/po/out/
+kcd-room-splitter/experiments/po/*.json
+kcd-room-splitter/experiments/po/*.txt
+*.job
+*.xlsm
+*.xlsx
+*.pdf
+!kcd-room-splitter/experiments/po/doormark_ref.json
