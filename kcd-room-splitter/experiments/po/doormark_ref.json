@@ -1,0 +1,915 @@
+{
+ "source": "Doormark quick reference 1-15-25; Doormark/Funder cross-reference 2-03-2025; Krono Select sell sheet 2-26",
+ "designs": [
+  {
+   "type": "SLAB",
+   "design": "BAL HARBOR",
+   "code": "BAL",
+   "door_styles": [
+    "BAL"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "BAL"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 4.0
+  },
+  {
+   "type": "SLAB",
+   "design": "BIMINI",
+   "code": "BIM",
+   "door_styles": [
+    "SLB"
+   ],
+   "drawer_styles": [
+    "SLB"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 2.0
+  },
+  {
+   "type": "SLAB",
+   "design": "BISCAYNE",
+   "code": "BIS",
+   "door_styles": [
+    "BIS"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "BIS"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 4.0
+  },
+  {
+   "type": "SLAB",
+   "design": "CAPRIS",
+   "code": "CPR",
+   "door_styles": [
+    "SLB"
+   ],
+   "drawer_styles": [
+    "SLB"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 2.0
+  },
+  {
+   "type": "SLAB",
+   "design": "FAIRWAY",
+   "code": "FRW",
+   "door_styles": [
+    "FRW"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "FRW"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 4.5
+  },
+  {
+   "type": "SLAB",
+   "design": "GULFSTREAM",
+   "code": "GUL",
+   "door_styles": [
+    "SLB"
+   ],
+   "drawer_styles": [
+    "SLB"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 2.0
+  },
+  {
+   "type": "SLAB",
+   "design": "ISLAMORADA",
+   "code": "ISL",
+   "door_styles": [
+    "SLB"
+   ],
+   "drawer_styles": [
+    "SLB"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 3.0
+  },
+  {
+   "type": "SLAB",
+   "design": "SEBRING",
+   "code": "SEB",
+   "door_styles": [
+    "SLB"
+   ],
+   "drawer_styles": [
+    "SLB"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 2.0
+  },
+  {
+   "type": "SLAB",
+   "design": "SOUTH BEACH",
+   "code": "SOU",
+   "door_styles": [
+    "SLB"
+   ],
+   "drawer_styles": [
+    "SLB"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 2.0
+  },
+  {
+   "type": "SLAB",
+   "design": "SUNRISE",
+   "code": "SUN",
+   "door_styles": [
+    "SLB"
+   ],
+   "drawer_styles": [
+    "SLB"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 2.0
+  },
+  {
+   "type": "SLAB",
+   "design": "VENICE",
+   "code": "VEN",
+   "door_styles": [
+    "SLB"
+   ],
+   "drawer_styles": [
+    "SLB"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 2.0
+  },
+  {
+   "type": "ROUND",
+   "design": "DORAL",
+   "code": "DOR",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.75,
+   "min_drawer_height_in": 5.75
+  },
+  {
+   "type": "ROUND",
+   "design": "MARTINIQUE",
+   "code": "MAR",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.5,
+   "min_drawer_height_in": 5.25
+  },
+  {
+   "type": "ROUND",
+   "design": "MONTEGO",
+   "code": "MON",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 8.0,
+   "min_drawer_height_in": 6.0
+  },
+  {
+   "type": "ROUND",
+   "design": "ORLANDO",
+   "code": "ORL",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.5,
+   "min_drawer_height_in": 5.75
+  },
+  {
+   "type": "ROUND",
+   "design": "POMPANO",
+   "code": "POM",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.5,
+   "min_drawer_height_in": 5.375
+  },
+  {
+   "type": "ROUND",
+   "design": "WESTON",
+   "code": "WES",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.625,
+   "min_drawer_height_in": 5.5
+  },
+  {
+   "type": "SQUARE",
+   "design": "CAPTIVA",
+   "code": "CAP",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.375,
+   "min_drawer_height_in": 5.375
+  },
+  {
+   "type": "SQUARE",
+   "design": "DAYTONA",
+   "code": "DAY",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.375,
+   "min_drawer_height_in": 5.375
+  },
+  {
+   "type": "SQUARE",
+   "design": "ENGLEWOOD",
+   "code": "ENG",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.375,
+   "min_drawer_height_in": 5.375
+  },
+  {
+   "type": "SQUARE",
+   "design": "HOLLYWOOD",
+   "code": "HOL",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.0,
+   "min_drawer_height_in": 5.0
+  },
+  {
+   "type": "SQUARE",
+   "design": "KEY LARGO",
+   "code": "KEY",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.5,
+   "min_drawer_height_in": 5.5
+  },
+  {
+   "type": "SQUARE",
+   "design": "LAS OLAS",
+   "code": "LAS",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 8.0,
+   "min_drawer_height_in": 5.5
+  },
+  {
+   "type": "SQUARE",
+   "design": "PORT CHARLOTTE",
+   "code": "POR",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.5,
+   "min_drawer_height_in": 5.5
+  },
+  {
+   "type": "SQUARE",
+   "design": "SAN MARCO",
+   "code": "SAN",
+   "door_styles": [
+    "SLB",
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 8.125,
+   "min_drawer_height_in": 5.875
+  },
+  {
+   "type": "SHAKER",
+   "design": "SHAKER ABACOA",
+   "code": "SHA",
+   "door_styles": [
+    "SHA"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 4.5
+  },
+  {
+   "type": "SHAKER",
+   "design": "SHAKER BAHAMA",
+   "code": "SHB",
+   "door_styles": [
+    "SHB"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 4.5
+  },
+  {
+   "type": "SHAKER",
+   "design": "SHAKER DULUTH",
+   "code": "SHD",
+   "door_styles": [
+    "SHD"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 4.5
+  },
+  {
+   "type": "SHAKER",
+   "design": "EURO SHAKER",
+   "code": "EUSH",
+   "door_styles": [
+    "EUSH"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 4.5
+  },
+  {
+   "type": "SHAKER",
+   "design": "SHAKER FREEPORT",
+   "code": "SHF",
+   "door_styles": [
+    "SHF"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 4.5
+  },
+  {
+   "type": "SHAKER",
+   "design": "HOLLY HILL",
+   "code": "HHI",
+   "door_styles": [
+    "HHI"
+   ],
+   "drawer_styles": [],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": null
+  },
+  {
+   "type": "SHAKER",
+   "design": "SHAKER MARATHON",
+   "code": "SHM",
+   "door_styles": [
+    "SHM"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 4.5
+  },
+  {
+   "type": "SHAKER",
+   "design": "SHAKER NAPLES",
+   "code": "SHN",
+   "door_styles": [
+    "SHN"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 4.5
+  },
+  {
+   "type": "SHAKER",
+   "design": "SHAKER PANAMA",
+   "code": "SHP",
+   "door_styles": [
+    "SHP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 8.0,
+   "min_drawer_height_in": 4.5
+  },
+  {
+   "type": "SHAKER",
+   "design": "SHAKER SARASOTA",
+   "code": "SHS",
+   "door_styles": [
+    "SHS"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 6.0,
+   "min_drawer_height_in": 4.5
+  },
+  {
+   "type": "SHAKER",
+   "design": "SHAKER TORTUGA",
+   "code": "SHR",
+   "door_styles": [
+    "SRP",
+    "ARP",
+    "CRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.0,
+   "min_drawer_height_in": 5.0
+  },
+  {
+   "type": "APPLIED",
+   "design": "PALM BEACH",
+   "code": "PAL",
+   "door_styles": [
+    "SLB",
+    "SRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 8.0,
+   "min_drawer_height_in": 5.875
+  },
+  {
+   "type": "APPLIED",
+   "design": "VIZCAYA",
+   "code": "VIZ",
+   "door_styles": [
+    "SLB",
+    "SRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 8.0,
+   "min_drawer_height_in": 5.75
+  },
+  {
+   "type": "APPLIED",
+   "design": "WELLINGTON",
+   "code": "WEL",
+   "door_styles": [
+    "SLB",
+    "SRP"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 8.0,
+   "min_drawer_height_in": 5.75
+  },
+  {
+   "type": "INFINITE",
+   "design": "SHAKER JUPITER",
+   "code": "SHJ",
+   "door_styles": [
+    "SHJ"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.25,
+   "min_drawer_height_in": 5.0
+  },
+  {
+   "type": "INFINITE",
+   "design": "SHAKER LARGO",
+   "code": "SHL",
+   "door_styles": [
+    "SHL"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.25,
+   "min_drawer_height_in": 5.0
+  },
+  {
+   "type": "INFINITE",
+   "design": "SHAKER VERO",
+   "code": "SHV",
+   "door_styles": [
+    "SHV"
+   ],
+   "drawer_styles": [
+    "SLB",
+    "RR"
+   ],
+   "min_door_width_in": 7.25,
+   "min_drawer_height_in": 5.0
+  }
+ ],
+ "colours": [
+  {
+   "group": "Matte",
+   "name": "949 White Matte",
+   "code": "949M",
+   "match_back": "no",
+   "melamine_match": "941 - Nova White",
+   "laminate": "Formica 949 White Matte"
+  },
+  {
+   "group": "Matte",
+   "name": "Fog Grey",
+   "code": "FOGG",
+   "match_back": "Yes",
+   "melamine_match": "128 - Fog Grey",
+   "laminate": "Formica 961 Fog Grey"
+  },
+  {
+   "group": "Matte",
+   "name": "Folkstone Gray",
+   "code": "FOST",
+   "match_back": "Yes",
+   "melamine_match": "955 - Folkstone",
+   "laminate": "Formica 927 Folkstone"
+  },
+  {
+   "group": "Matte",
+   "name": "Frosty White Matte",
+   "code": "FWM",
+   "match_back": "no",
+   "melamine_match": "",
+   "laminate": "Wilson Art 1573-60 Frosty White"
+  },
+  {
+   "group": "Matte",
+   "name": "Ontario White Matte",
+   "code": "ONWH",
+   "match_back": "no",
+   "melamine_match": "971 - McKinley White",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Matte",
+   "name": "Oyster White Matte",
+   "code": "OWM",
+   "match_back": "Yes",
+   "melamine_match": "607 - Bisque",
+   "laminate": "Wilson Art 1572-60 Antique White"
+  },
+  {
+   "group": "Textured",
+   "name": "Carolina Oak",
+   "code": "CAOA",
+   "match_back": "YES",
+   "melamine_match": "545 - Carolina Oak",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Textured",
+   "name": "Charleston Oak",
+   "code": "CHOA",
+   "match_back": "YES",
+   "melamine_match": "549 - Charleston Oak",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Textured",
+   "name": "Highlands Oak",
+   "code": "HIOA",
+   "match_back": "YES",
+   "melamine_match": "548 - Highlands Oak",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Textured",
+   "name": "Marseille",
+   "code": "MARS",
+   "match_back": "YES",
+   "melamine_match": "439 - Marseille",
+   "laminate": "Doormark - Marseille (HPL)"
+  },
+  {
+   "group": "Textured",
+   "name": "Monaco",
+   "code": "MONA",
+   "match_back": "YES",
+   "melamine_match": "481 - Monaco",
+   "laminate": "Doormark - Monaco (HPL)"
+  },
+  {
+   "group": "Textured",
+   "name": "Moscotto Elme",
+   "code": "MOEL",
+   "match_back": "YES",
+   "melamine_match": "C096 - Moscotto Elme",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Textured",
+   "name": "Naples",
+   "code": "NAPL",
+   "match_back": "YES",
+   "melamine_match": "S843 - Naples",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Textured",
+   "name": "Nebbiolo Elme",
+   "code": "NEEL",
+   "match_back": "YES",
+   "melamine_match": "440 - Nebbiolo Elme",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Textured",
+   "name": "Niagara Elme",
+   "code": "NIEL",
+   "match_back": "YES",
+   "melamine_match": "444 - Miagara Elme",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Textured",
+   "name": "Sultana Elme",
+   "code": "SUEL",
+   "match_back": "YES",
+   "melamine_match": "436 - Sultana Elme",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Woodgrain",
+   "name": "Black Woodgrain",
+   "code": "BLWG",
+   "match_back": "Mix",
+   "melamine_match": "Black Matte",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Woodgrain",
+   "name": "Blanca Elme",
+   "code": "BLEL",
+   "match_back": "Yes",
+   "melamine_match": "793 - Blanca Elme",
+   "laminate": "Doormark - Blanca Elme (HPL)"
+  },
+  {
+   "group": "Woodgrain",
+   "name": "Campania Elme",
+   "code": "CAEL",
+   "match_back": "Yes",
+   "melamine_match": "669 - Campania Elme",
+   "laminate": "Doormark - Campania Elme (HPL)"
+  },
+  {
+   "group": "Woodgrain",
+   "name": "Chocolate Pear",
+   "code": "CHPE",
+   "match_back": "Yes",
+   "melamine_match": "363 - Apple Cocoa",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Woodgrain",
+   "name": "Dixie Sycamore",
+   "code": "DISA",
+   "match_back": "Yes",
+   "melamine_match": "573 - Dixie Sycamore",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Woodgrain",
+   "name": "Expresso",
+   "code": "EXPR",
+   "match_back": "Yes",
+   "melamine_match": "498 - Espresso",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Woodgrain",
+   "name": "Fusion Maple",
+   "code": "FM",
+   "match_back": "Yes",
+   "melamine_match": "610 - Hardrock Maple",
+   "laminate": "Wilson Art \u201310776 Kensington Maple"
+  },
+  {
+   "group": "Woodgrain",
+   "name": "Hudson",
+   "code": "HUDS",
+   "match_back": "Yes",
+   "melamine_match": "222 - Hudson Maple",
+   "laminate": "Doormark - Hudson (HPL)"
+  },
+  {
+   "group": "Woodgrain",
+   "name": "Umbria Elme",
+   "code": "UMEL",
+   "match_back": "Yes",
+   "melamine_match": "710 - Umbria Elme",
+   "laminate": "Doormark - Umbria Elme (HPL)"
+  },
+  {
+   "group": "Satin",
+   "name": "Canadian Grey SM",
+   "code": "CAGR",
+   "match_back": "Yes",
+   "melamine_match": "128 - Fog",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Satin",
+   "name": "Celedon Green SM",
+   "code": "CEGR",
+   "match_back": "Yes",
+   "melamine_match": "758 - Sage Sanctuary",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Satin",
+   "name": "Light Grey SM",
+   "code": "LIGR",
+   "match_back": "Yes",
+   "melamine_match": "955 - Folkstone",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Satin",
+   "name": "Mysterious Blue SM",
+   "code": "MYBL",
+   "match_back": "Yes",
+   "melamine_match": "751 - Midnight Mirage",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Satin",
+   "name": "Onyx SM",
+   "code": "ONYX",
+   "match_back": "Yes",
+   "melamine_match": "107 - Black",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Satin",
+   "name": "Platinum White",
+   "code": "PLWH",
+   "match_back": "White",
+   "melamine_match": "971 - McKinley White",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Satin",
+   "name": "Smokey Blue SM",
+   "code": "SMBL",
+   "match_back": "Yes",
+   "melamine_match": "748 - Soothing Blue",
+   "laminate": "Doormark - Foil on Phenolic"
+  },
+  {
+   "group": "Satin",
+   "name": "Stone Grey SM",
+   "code": "SGSM",
+   "match_back": "Yes",
+   "melamine_match": "759 - Taupe Retreat",
+   "laminate": "Doormark - Foil on Phenolic"
+  }
+ ],
+ "krono_select_finishes_no_code": [
+  "Brushed Aluminum",
+  "Amber Urban Oak",
+  "Brandy Castello Oak",
+  "Cashmere",
+  "Clay Grey",
+  "Grey Nordic Wood",
+  "Iron Surfside Ash",
+  "Light Select Walnut",
+  "Pure Surfside Ash",
+  "Ristretto Baroque Oak",
+  "Snow White",
+  "Stone Beige",
+  "White Coastland Oak"
+ ],
+ "notes": [
+  "ARP and CRP doors need 2 inches or more over the SRP minimum width, depending on the design",
+  "SLB = slab (matching door edge unless square edges are requested); SRP square / ARP arched / CRP cathedral raised panel; RR = reduced rail raised panel",
+  "all foil colours can be ordered with a white back; match back is a per-square-foot up-charge; glaze colours Black, Dark Walnut, Eggshell, Umber Brown"
+ ]
+}

@@ -1194,6 +1194,23 @@ parallel (full reports in the session scratchpad `walls/po/A_sidebar.md` .. `F_c
   subtotal + 199 on the main room (11 rooms). Pricing-sheet accessories are typed from the sidebar at workbook prices (MELA
   base 30 / crown 95, DES WHT 39 / 123.50, TH DECORATIVE 145 / 185, mica 57/sqft, quartz 88/sqft) with the engineer's
   quantities (POLONSKA base 11 / crown 13 against sidebar 9 / 14).
+- **Doormark reference sheets (owner, Oct 20; `experiments/po/doormark_ref.py` -> `doormark_ref.json`).** The quick
+  reference (1-15-25) lists 42 door designs with ordering code, door styles, drawer styles and minimum door width / drawer
+  height (slab designs 6" / 2"-4.5"; round and square raised-panel 7"-8 1/8" / 5"-6", SRP only, ARP/CRP need 2" more;
+  shakers 6" / 4.5", Panama 8", Tortuga 7" / 5"; applied Palm Beach / Vizcaya / Wellington 8" / 5 3/4-5 7/8; the Infinite
+  shakers Jupiter / Largo / Vero 7 1/4" / 5"). The Funder cross-reference (2-03-2025) lists 33 foil colours with code,
+  match-back availability and the melamine board colour each matches (so the sidebar's MATERIAL/COLOR maps to a foil: 363
+  Apple Cocoa -> CHPE Chocolate Pear, 607 Bisque -> OWM, 955 Folkstone -> FOST or LIGR, 751 Midnight Mirage -> MYBL
+  Mysterious Blue SM, 128 Fog -> FOGG or CAGR); no match back on 949M, FWM and ONWH (the so-door card's question).
+  The Krono Select sell sheet (2-26) names 13 finishes (Brushed Aluminum, Amber Urban Oak, Brandy Castello Oak, Cashmere,
+  Clay Grey, Grey Nordic Wood, Iron Surfside Ash, Light Select Walnut, Pure Surfside Ash, Ristretto Baroque Oak, Snow White,
+  Stone Beige, White Coastland Oak) with NO ordering codes. Against the workbook's own tables: its 34 designs all resolve,
+  but it lacks Capris, Fairway, Shaker Duluth, Holly Hill, Shaker Panama, Shaker Tortuga, Shaker Jupiter / Largo / Vero and
+  still carries NASSAU (NAS), which the quick reference no longer lists; of its 18 colour names 11 match the Funder sheet
+  and 7 do not (Almond AM, Black BLMA, Black Gloss BLGL, Fog as FOG where Funder says FOGG, Hudson Cherry with no code where
+  Funder has HUDS, Lewis LEWI, Tenino Grey TEGR), and 22 Funder colours are missing from it, Mysterious Blue MYBL among
+  them: the MYST typed on WERNER's Doormark form is not a code on either sheet. The fill will use the sheets' codes and
+  flag a colour or design that is only in the workbook's table.
 
 ### 16.3 Fillers at both ends (`experiments/po/fillers.py`, report only)
 
