@@ -15,3 +15,4 @@ Standing rule from the owner (Oct 10, 2026). It applies in every session.
 - `kcd-room-splitter/` holds the KCD tools (KCD ROOM SPLITTER and the KCD `.job` reader). Read `kcd-room-splitter/CLAUDE.md` before working on anything KCD-related; it holds the file-format knowledge, team conventions and test-laptop setup.
 - `old-school-jewelry-tray-app/` is a separate project.
 - `.claude/skills/kcd-apply-rem/SKILL.md` is the run book for applying one remeasure end to end (one command, `kcd-room-splitter/kcdrun.py`). Sessions that only run jobs start from the `production` branch; the tools are developed on the work branch here and merged into `production` when proven.
+- `PRODUCTION.md` says how the run project (GitHub `CFFTL-RUNS`) and this learning project relate. In the run project nothing is developed: only `run <order>` jobs.
