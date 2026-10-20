@@ -1286,8 +1286,9 @@ What changed today, and what was proven:
   rule (`reserve.reserve_end`; new `reserve_start` mirrors it for the START of a wall: unit_step on a pseudo wall 3/4
   shorter with anchor 'end', then every X back to the real wall by +3/4, features put back where they were), clone the
   filler (`addfiller.add_filler`), re-run the rule. A failure on one finding is a CHECK; the output is written once.
-  Proof: the NEDDIE designer job + its read-out now gives TEST3 (`82ce2821...`) byte for byte, i.e. apply + reserve +
-  addfiller in one command; the KCD-saved TEST3 comes back unchanged with no FIX.
+  Proof: the NEDDIE designer job + its read-out gave TEST3 (`82ce2821...`) byte for byte before the shelf fix below, i.e.
+  apply + reserve + addfiller in one command; after the fix the output (`f3176347...`) differs from TEST3 only in unit 21's
+  room points and cache entry (the shelf TEST3 had 2 3/4 off). The KCD-saved TEST3 comes back unchanged with no FIX.
 - **ROBERTS md5 explained**: the earlier "+ fillers" file (`fca0af81...`) was TEST1 + a hand `adjust.py` step on the
   three wall-14 Door units (the sheet's "door opening 24 3/16 at 68 11/16") + reserve + addfiller. The chain without
   the door step gives `956a19d0...`; adjust.py on that file gives `fca0af81...` byte for byte. The door-opening step

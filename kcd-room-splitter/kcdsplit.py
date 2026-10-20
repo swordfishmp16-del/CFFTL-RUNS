@@ -753,8 +753,8 @@ def write_report(result):
     tn = sum(f['notes'] for f in files)
     lines += ['%-*s %-6d %-9d %-6d' % (w, 'TOTAL', tw, tc, tn), '',
               'DOUBLE CHECK',
-              '  Every room file was read back and compared with the original job: each holds its own',
-              '  room(s) unchanged, and every other room is deleted the same way KCD deletes a room.',
+              '  Every room file was read back and compared with the original job.',
+              '  Each holds its own room unchanged; every other room is deleted the way KCD deletes a room.',
               '  The job has %d walls, %d cabinets and %d room notes. Every one of them is in exactly'
               % (len(job.live_wall_ids()), len(job.live_unit_ids()),
                  sum(1 for x in job.notes if 1 <= x['room'] <= job.n)),

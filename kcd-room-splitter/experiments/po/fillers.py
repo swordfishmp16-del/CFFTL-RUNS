@@ -61,6 +61,9 @@ FEATURE_RE = re.compile(r'obstruction|outlet|switch|sprinkler|vent|pipe|column|b
                         r'soda can|utility|mantel|cutout|wiring hole|obstruction cut', re.I)   # not 'door'/'window': 'Upper w Doors' is a cabinet; openings come by type/cab
 ACC_RE = re.compile(r'led|light|rack|valet|belt|tie\b|hook|jt |earring|lock|hamper|tilt|shoes|mens|strip|power|remote|file|'
                     r'stiffener|slatwall frame|sw\d|cleat|bracket', re.I)
+ACC_TYPE_MIN = 1000                # type codes from 1000 up are accessories (1000 racks/lights/trays, 1101 'Invisible Light');
+                                   # cabinets, fillers, shelves and openings all sit below (ref/cab_types_walls10.json)
+ACC_MAX_W = 6 * IN                 # narrower than any cabinet can be: a 4" light bar is an accessory whatever its type says
 CATALOG_RE = re.compile(r'wall ?bed|murphy|cielo|shoe|hutch|refri|l[- ]shape|l shv|corner|slat ?wall|laundry|drawer', re.I)
 
 
@@ -97,7 +100,7 @@ def classify(u):
         return 'feature' if FEATURE_RE.search(name) or FEATURE_RE.search(cab) else 'acc'
     if FEATURE_RE.search(name) or FEATURE_RE.search(cab):
         return 'feature'
-    if ACC_RE.search(name) and t == 0:
+    if ACC_RE.search(name) and (t == 0 or t >= ACC_TYPE_MIN or u.get('w_raw', 0) <= ACC_MAX_W):
         return 'acc'
     return 'cab'
 
@@ -339,29 +342,54 @@ def corner_class(st, our_depth_raw):
     return 'wall'
 
 
-def _hold_reason(st, w, S):
-    """Why the fix step must NOT touch this end on its own (the engineer decides)."""
+def hold_code(st, w, S):
+    """Why the fix step must NOT touch this end on its own, as a code the owner-facing formatter (kcdfill) words
+    itself: (code, info). Codes: 'none' (no cabinet), 'panel', 'drawer', 'catalog', 'under12', 'not_reaching',
+    'inside', 'stack', or '' when the cabinet may give up the 3/4. info holds the units involved."""
     c = st['cabinet']
     if c is None:
-        return 'only fillers/panels stand on this wall'
+        return 'none', {}
     nm = (c['name'] or '').lower(); t = unit_type(c)
     if c['kind'] in ('panel', 'endpanel'):
-        return 'the unit at the wall end is a %s (%r): the designer chose a panel there' % (c['kind'].replace('endpanel', 'finished end panel'), c['name'])
+        return 'panel', {'cabinet': c, 'what': 'finished end panel' if c['kind'] == 'endpanel' else 'panel'}
     if 'drawer' in nm:
-        return 'the cabinet at the wall end is a drawer unit (%r): engineers keep drawer widths' % c['name']
+        return 'drawer', {'cabinet': c}
     if CATALOG_RE.search(nm) or t in (670, 270, 630, 770):
-        return 'the cabinet at the wall end is a catalog product (%r): its width does not change' % c['name']
+        return 'catalog', {'cabinet': c}
     if c['w_raw'] - FILLER_W < 12 * IN:
-        return '%r would come out under 12 inches' % c['name']
+        return 'under12', {'cabinet': c}
     L = w['length_raw']
     if (S == 'start' and c['x_raw'] - st['bound'] > REACH_TOL) or (S == 'end' and L - st['bound'] - c['end'] > REACH_TOL):
-        return 'the cabinet does not itself reach the wall end (%s away)' % frac_inches(abs(st['cab_gap']))
+        return 'not_reaching', {'cabinet': c, 'gap': abs(st['cab_gap'])}
     inside = [u for u in st['tops'] if u is not c and u['kind'] != 'filler' and u['x_raw'] >= c['x_raw'] - END_TOL and u['end'] <= c['end'] + END_TOL]
     if inside:
-        return '%r has other units drawn inside it (%s)' % (c['name'], ', '.join(repr(u['name']) for u in inside))
+        return 'inside', {'cabinet': c, 'units': inside}
     at_end = [u for u in st['tops'] if u['kind'] != 'filler' and ((S == 'start' and u['x_raw'] <= st['bound'] + REACH_TOL) or (S == 'end' and u['end'] >= L - st['bound'] - REACH_TOL))]
     if len(at_end) > 1:
-        return 'a stack of units stands against this wall end (%s): all of them would have to give up the 3/4' % ', '.join('%r %s' % (u['name'], frac_inches(u['w_raw'])) for u in at_end)
+        return 'stack', {'cabinet': c, 'units': at_end}
+    return '', {'cabinet': c}
+
+
+def _hold_reason(st, w, S):
+    """The study's wording of hold_code (for this file's own CLI)."""
+    code, info = hold_code(st, w, S)
+    c = info.get('cabinet')
+    if code == 'none':
+        return 'only fillers/panels stand on this wall'
+    if code == 'panel':
+        return 'the unit at the wall end is a %s (%r): the designer chose a panel there' % (info['what'], c['name'])
+    if code == 'drawer':
+        return 'the cabinet at the wall end is a drawer unit (%r): engineers keep drawer widths' % c['name']
+    if code == 'catalog':
+        return 'the cabinet at the wall end is a catalog product (%r): its width does not change' % c['name']
+    if code == 'under12':
+        return '%r would come out under 12 inches' % c['name']
+    if code == 'not_reaching':
+        return 'the cabinet does not itself reach the wall end (%s away)' % frac_inches(info['gap'])
+    if code == 'inside':
+        return '%r has other units drawn inside it (%s)' % (c['name'], ', '.join(repr(u['name']) for u in info['units']))
+    if code == 'stack':
+        return 'a stack of units stands against this wall end (%s): all of them would have to give up the 3/4' % ', '.join('%r %s' % (u['name'], frac_inches(u['w_raw'])) for u in info['units'])
     return ''
 
 

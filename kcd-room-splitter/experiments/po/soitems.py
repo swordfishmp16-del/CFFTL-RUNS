@@ -257,7 +257,7 @@ def handle_lines(lines):
             if v in s.lower():
                 vendor = v.upper().replace('RICHELUIO', 'RICHELIEU').replace('RICHLEUI', 'RICHELIEU')
         if not vendor and re.match(r'^\d{3}\.\d{2}\.\d{3}', part):
-            vendor = 'HAFELE? (number pattern 000.00.000, verify)'
+            vendor = 'HAFELE? (the number has the Hafele shape 000.00.000; verify)'
         out.append({'text': s, 'part': part, 'qty': qty, 'vendor': vendor, 'flags': []})
     merged = []
     for h in out:
@@ -414,7 +414,7 @@ def build_sheet(job, cat, price_lines, room_filter=None):
                             continue
                         w2 = r16(f2['each_w'] if (f2['kind'] == 'door' and f2['pair']) else f2['w']); h2 = r16(f2['h'])
                         if not any(abs((x['w'] or 0) - w2) < 0.07 and abs((x['h'] or 0) - h2) < 0.07 for x in unit_faces):
-                            R['flags'].append('unit %d (id %d, %s): the .cab also draws a %s face D%d %s x %s that the price lines do not have (hamper front? vanity opening?) - verify' % (
+                            R['flags'].append('unit %d (id %d, %s): the drawing also has a %s face D%d %s x %s that the price lines do not have (hamper front? vanity opening?) - verify' % (
                                 u.seq, u.id, u.cab, f2['kind'], f2['n'], frac(w2), frac(h2)))
                 except Exception:
                     pass
@@ -423,15 +423,15 @@ def build_sheet(job, cat, price_lines, room_filter=None):
             fflags = []
             unw = (u.unw or '').lower()
             if 'shelves' in unw.rsplit('\\', 1)[-1] and 'drawer' not in unw and 'door' not in unw:
-                fflags.append('VERIFY: unit placed from the open-shelving preset %r; doors unlikely' % u.unw.rsplit('\\', 1)[-1])
+                fflags.append('VERIFY: placed as open shelving, so doors are unlikely')
             if 'hamper' in unw:
-                fflags.append('VERIFY: unit placed from a hamper preset %r; doors above a tilt-out hamper?' % u.unw.rsplit('\\', 1)[-1])
+                fflags.append('VERIFY: placed as a hamper unit; a door above a tilt-out hamper?')
             if src.startswith('cab geometry'):
-                fflags.append('VERIFY: from the .cab geometry; the designer\'s "no door" choice is not in the file (notes 7)')
+                fflags.append('VERIFY: sizes read from the drawing; a unit drawn without doors still shows its door sizes')
             if form == 'NONE' and unit_faces:
-                fflags.append('VERIFY: sidebar says No Door/Drawer Faces but faces were found')
+                fflags.append('VERIFY: the sidebar says no doors or drawer fronts, but the drawing hints at some')
             if utype and R['door_style'] and classify_style(utype)[0] != form and uform != 'ASK':
-                fflags.append('unit door type %r differs from sidebar style %r' % (utype, R['door_style']))
+                fflags.append('the unit says %s, the sidebar says %s; the sidebar wins' % (utype, R['door_style']))
             for f in unit_faces:
                 entry = {'unit_seq': u.seq, 'unit_id': u.id, 'unit_name': u.kcd_name, 'cab': u.cab, 'wall': u.wall, 'kind': f['kind'],
                          'qty': f['qty'], 'width': f['w'], 'height': f['h'], 'width_txt': frac(f['w']), 'height_txt': frac(f['h']),
@@ -440,12 +440,12 @@ def build_sheet(job, cat, price_lines, room_filter=None):
                          'source': f['src'], 'source_line': f['line'], 'flags': list(fflags)}
                 if f.get('pair'):
                     entry['pair_gap_guess_each'] = frac(r16((f['face_w'] - 0.125) / 2.0))
-                    entry['flags'].append('pair: KCD prints half the face (%s); true door with the 1/8 pair gap = %s (GUESS, WERNER only)' % (
+                    entry['flags'].append('a pair: KCD gives each door as half the opening (%s); with the 1/8 gap each door is about %s (not settled)' % (
                         frac(f['w']), entry['pair_gap_guess_each']))
                 if f['w'] is not None and f['w'] < 9.5 and f['kind'] == 'door':
-                    entry['flags'].append('door narrower than the CF5 minimum 9 1/2: not a real door?')
+                    entry['flags'].append('narrower than the CF5 minimum 9 1/2, so maybe not a real door')
                 if f['h'] is not None and f['kind'] == 'drawer front' and f['h'] < 7.5:
-                    entry['flags'].append('drawer front under the CF5 minimum 7 1/2')
+                    entry['flags'].append('under the CF5 minimum 7 1/2 for a drawer front')
                 R['faces'].append(entry)
         # -- order form rows: certain faces grouped by form / kind / size
         rows = {}
@@ -462,7 +462,7 @@ def build_sheet(job, cat, price_lines, room_filter=None):
             if fm == 'DOORMARK':
                 row['doormark_width_werner_rule'] = dec(r16(w - 0.0625)) if w else ''
                 row['doormark_height_werner_rule'] = dec(h) if h else ''
-                row['note'] = 'WERNER rule (one job): width = KCD pair half-width - 1/16, height = KCD. PRIEM differed. GUESS until the owner confirms.'
+                row['note'] = 'seen once: width = KCD pair half-width - 1/16, height = KCD; another job differed. Not settled: the size to order is the size on the door elevation.'
             if fm == 'CF5':
                 row['note'] = 'type the KCD size in the two left columns; the sheet computes butt/miter, cut and insert sizes'
             R['form_rows'].append(row)

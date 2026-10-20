@@ -34,6 +34,7 @@ import os
 import struct
 import sys
 import contextlib
+import tempfile
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))   # the repo's kcd-room-splitter, wherever it is checked out
 import kcdjob      # noqa: E402
@@ -436,7 +437,7 @@ def add_filler(job_path, source_id, wall_id, x_text, out_path, from_wall=None, h
         len(src), len(out), len(out) - len(src), len(rec), len(new_verts), len(new_idx), len(new_faces)))
 
     # ---- verify ------------------------------------------------------------------------------------------------
-    v_lines = verify(src, out, S, new_id, wall_id, X, W, H, D, FW, tw, new_sl, deficit, empty_drawing, job_path, source_id, sw)
+    v_lines = verify(src, out, S, new_id, wall_id, X, W, H, D, FW, tw, new_sl, deficit, empty_drawing, job_path, source_id, sw, out_path)
     lines += v_lines
     if out_path:
         os.makedirs(os.path.dirname(os.path.abspath(out_path)), exist_ok=True)
@@ -447,8 +448,10 @@ def add_filler(job_path, source_id, wall_id, x_text, out_path, from_wall=None, h
     return lines, checks, out
 
 
-def verify(src, out, S, new_id, wall_id, X, W, H, D, FW, tw, new_sl, deficit, empty_drawing, job_path, source_id=None, sw=None):
-    """Re-parse the new file and check everything that can be checked without KCD. Raises AssertionError on a miss."""
+def verify(src, out, S, new_id, wall_id, X, W, H, D, FW, tw, new_sl, deficit, empty_drawing, job_path, source_id=None, sw=None, out_path=None):
+    """Re-parse the new file and check everything that can be checked without KCD. Raises AssertionError on a miss.
+    The readers that need a path get a temporary copy next to out_path (or in the system temp folder), never under the
+    repo; it is removed in every case."""
     L = []
     T = kcdjob.parse(out)
     A = {n: (a, b, i) for n, a, b, i in S}
@@ -536,16 +539,24 @@ def verify(src, out, S, new_id, wall_id, X, W, H, D, FW, tw, new_sl, deficit, em
         L.append('check: the new drawing is the source drawing moved onto wall %d (every vertex at the same place along and off the wall, within 1 raw): X %s to %s, %s to %s off the wall, %s to %s high; %d faces'
                  % (wall_id, fr(round(min(along))), fr(round(max(along))), fr(round(min(rdep))), fr(round(max(rdep))), fr(round(min(zs))), fr(round(max(zs))), nf))
         L.append('check: the new entry\'s %d index ints sit at the end of the index block (position %d = logical %d - %d), equal the source chunk byte for byte, and %d of %d faces pass the strict corner test on the new wall (source: %d of %d)' % (sl[5], pos2, sl[4] - 1, sl[4] - 1 - pos2, good, nf, sgood, snf))
-    # kcdunits and kcdwalls read it
-    tmp = out_path_tmp = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out', '_verify_tmp.job')
-    os.makedirs(os.path.dirname(tmp), exist_ok=True)
-    open(tmp, 'wb').write(out)
-    job = kcdunits.read_job(tmp)
-    u = [x for x in job.units if x.id == new_id][0]
-    assert u.wall == wall_id and u.raw(1) == X and u.raw(2) == W and u.raw(3) == H and u.raw(14) == FW
-    L.append('check: kcdunits reads %d live units; the new one is #%d %r in room %d %r, X %s W %s H %s D %s, material %r' % (
-        len(job.units), u.seq, u.kcd_name, u.room, job.room_name(u.room), fr(u.raw(1)), fr(u.raw(2)), fr(u.raw(3)), fr(u.raw(4)), u.mats[0]))
-    listing = kcdwalls.list_job(tmp)
+    # kcdunits and kcdwalls read it (from a temporary copy next to the output, removed below)
+    folder = os.path.dirname(os.path.abspath(out_path)) if out_path else tempfile.gettempdir()
+    os.makedirs(folder, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(prefix='~verify_', suffix='.job', dir=folder)
+    try:
+        with os.fdopen(fd, 'wb') as fh:
+            fh.write(out)
+        job = kcdunits.read_job(tmp)
+        u = [x for x in job.units if x.id == new_id][0]
+        assert u.wall == wall_id and u.raw(1) == X and u.raw(2) == W and u.raw(3) == H and u.raw(14) == FW
+        L.append('check: kcdunits reads %d live units; the new one is #%d %r in room %d %r, X %s W %s H %s D %s, material %r' % (
+            len(job.units), u.seq, u.kcd_name, u.room, job.room_name(u.room), fr(u.raw(1)), fr(u.raw(2)), fr(u.raw(3)), fr(u.raw(4)), u.mats[0]))
+        listing = kcdwalls.list_job(tmp)
+    finally:
+        try:
+            os.remove(tmp)
+        except OSError:
+            pass
     want = [ln for ln in listing.splitlines() if ' unit %-3d' % new_id in ln or 'unit %d ' % new_id in ln]
     assert want, 'kcdwalls --list does not show the new unit'
     L.append('check: kcdwalls --list shows it: %s' % want[0].strip())
@@ -562,7 +573,6 @@ def verify(src, out, S, new_id, wall_id, X, W, H, D, FW, tw, new_sl, deficit, em
             keep.append(ln); keep.append(cl[k + 1])
     L.append('kcdcompare input -> output:')
     L += ['   ' + k.strip() for k in keep]
-    os.remove(tmp)
     return L
 
 
@@ -579,8 +589,8 @@ def main(argv=None):
     ap.add_argument('--empty-drawing', action='store_true')
     ap.add_argument('--report')
     a = ap.parse_args(argv)
-    if os.path.abspath(a.out) == os.path.abspath(a.job):
-        raise SystemExit('refusing to overwrite the input')
+    if kcdwalls.same_file(a.out, a.job):
+        raise SystemExit('Stopped: the output must not be the input job; give another name')
     lines, checks, _ = add_filler(a.job, a.source, a.wall, a.x, a.out, a.from_wall, a.height, a.keep_batch, a.empty_drawing)
     rep = ['addfiller.py: %s' % os.path.basename(a.job), ''] + lines + ['', 'CHECKS (%d)' % len(checks)] + ['   ' + c for c in checks] + [
         '', 'This file has not been through KCD. Open it in KCD, look at wall %d, then save it back for comparison.' % a.wall]

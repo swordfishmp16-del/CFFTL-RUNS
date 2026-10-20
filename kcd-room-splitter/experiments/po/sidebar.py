@@ -24,6 +24,7 @@ Rule: nothing uncertain is written as certain. Every form value carries "certain
 sidebar or the unit records), "inferred" (a rule we believe but have not had confirmed) or "unknown".
 
 Usage: python3 sidebar.py JOB.job [MORE.job ...] [--out DIR]
+       (--out defaults to the folder of the first job file, never the current folder; the files written are listed)
 """
 import sys, os, re, json, collections
 
@@ -118,15 +119,26 @@ VENDOR_WORDS = [('hafele', 'HAFELE'), ('häfele', 'HAFELE'), ('amerock', 'AMEROC
 
 
 def vendor_word(text):
+    """(vendor, the word as the sidebar wrote it) or (None, None)."""
     low = text.lower()
     for w, v in VENDOR_WORDS:
-        if w in low:
-            return v, w
+        i = low.find(w)
+        if i >= 0:
+            return v, text[i:i + len(w)]
     # Richelieu is misspelled every time in the samples (Richleui, Richeluio): accept rich...u/i spellings
     m = re.search(r'\brich[a-z]{3,6}\b', low)
     if m and set('eliu') & set(m.group(0)[4:]):
-        return 'RICHELIEU', m.group(0)
+        return 'RICHELIEU', text[m.start():m.end()]
     return None, None
+
+
+def spelling_note(vend, word):
+    """'the sidebar wrote Richleui' when the vendor word on the sidebar is not the vendor's own spelling, else ''."""
+    if not vend or not word:
+        return ''
+    if word.lower().replace('ä', 'a') == vend.lower().replace('-', ' ').replace(' ', '') or word.lower() == vend.lower() or word.lower().replace(' ', '-') == vend.lower():
+        return ''
+    return 'spelling corrected from %s' % word
 
 
 def find_part(text):
@@ -134,27 +146,28 @@ def find_part(text):
     basis says how the vendor was decided: 'named' (the vendor's name is in the text) or 'number format'
     (guessed from the shape of the number; the engineer should confirm)."""
     vend, word = vendor_word(text)
+    named = 'named' + ((', ' + spelling_note(vend, word)) if spelling_note(vend, word) else '')
     rest = text
     if word:
         rest = re.sub(re.escape(word), '', rest, flags=re.I)
     # Hafele catalogue numbers 547.43.315 / 155.00.092 / 808.71.001
     m = re.search(r'\b(\d{3}\.\d{2}\.\d{3})\b', rest)
     if m:
-        return m.group(1), vend or 'HAFELE', 'named' if vend else 'number format (###.##.### is a Hafele number)', (rest[:m.start()] + rest[m.end():]).strip(' -')
+        return m.group(1), vend or 'HAFELE', named if vend else 'number format (###.##.### is a Hafele number)', (rest[:m.start()] + rest[m.end():]).strip(' -')
     # Richelieu: BP + 7 digits + 3-digit finish (bp8160160-140 = BP8160160140 chrome)
     m = re.search(r'\b(bp\s?\d{7,}[-\s]?\d{2,3})\b', rest, re.I)
     if m:
         part = re.sub(r'[\s-]', '', m.group(1)).upper()
-        return part, vend or 'RICHELIEU', 'named' if vend else 'number format (BP+7 digits+finish is a Richelieu number)', (rest[:m.start()] + rest[m.end():]).strip(' -')
+        return part, vend or 'RICHELIEU', named if vend else 'number format (BP+7 digits+finish is a Richelieu number)', (rest[:m.start()] + rest[m.end():]).strip(' -')
     # Amerock: BP + 4..6 digits + finish letters (BP36559-CZ)
     m = re.search(r'\b(bp\s?\d{4,6}(?:-?[a-z0-9]{1,4})?)\b', rest, re.I)
     if m:
-        return m.group(1).replace(' ', '').upper(), vend or 'AMEROCK', 'named' if vend else 'number format (BP+5 digits+finish is an Amerock number)', (rest[:m.start()] + rest[m.end():]).strip(' -')
+        return m.group(1).replace(' ', '').upper(), vend or 'AMEROCK', named if vend else 'number format (BP+5 digits+finish is an Amerock number)', (rest[:m.start()] + rest[m.end():]).strip(' -')
     # a generic catalogue number: letters/digits with dots or dashes and at least 4 digits
     m = re.search(r'\b([A-Z]{0,4}\d[\w.]*[-.]\w*\d\w*)\b', rest)
     if m and sum(c.isdigit() for c in m.group(1)) >= 4:
-        return m.group(1), vend, 'named' if vend else None, (rest[:m.start()] + rest[m.end():]).strip(' -')
-    return None, vend, 'named' if vend else None, rest.strip(' -')
+        return m.group(1), vend, named if vend else None, (rest[:m.start()] + rest[m.end():]).strip(' -')
+    return None, vend, named if vend else None, rest.strip(' -')
 
 
 def classify_door(style):
@@ -630,44 +643,45 @@ class RoomSidebar:
         # F5 unit material
         mat = S['material']['name']
         if S['material']['in_workbook_list']:
-            wb('F5', S['material']['in_workbook_list'], 'certain', 'MATERIAL/COLOR, exact dropdown value')
+            wb('F5', S['material']['in_workbook_list'], 'certain', "MATERIAL/COLOR, one of the workbook's list entries")
         else:
-            wb('F5', mat, 'inferred', 'MATERIAL/COLOR; NOT in the template dropdown list (B1:B83) as written')
-            fl.append('CHECK F5: material %r is not in the workbook dropdown list; the engineer picks the list entry' % mat)
+            wb('F5', mat, 'inferred', "The sidebar says material %s, which is not one of the workbook's list entries; pick the closest list entry." % mat)
+            fl.append("CHECK F5 material: the sidebar says %s, which is not one of the workbook's list entries, so it was left blank; pick the closest list entry in Excel" % mat)
         # F7 / F9 banding
         if S['edge_banding']['thickness'] in BANDING_TYPES:
             wb('F7', S['edge_banding']['thickness'], 'certain', 'EDGE BANDING thickness')
         else:
             wb('F7', None, 'unknown', 'EDGE BANDING has no thickness (%r)' % S['edge_banding']['text'])
-            fl.append('CHECK F7: no banding thickness on the EDGE BANDING line (%r)' % S['edge_banding']['text'])
+            fl.append("CHECK F7 banding type: the sidebar's EDGE BANDING line (%s) gives no thickness, so it was left blank; pick .5mm, 1mm or 2mm in Excel" % S['edge_banding']['text'])
         bc = S['edge_banding']['colour']
         bc_list = MATERIALS_UP.get(bc.upper()) or MATERIALS_UP.get((bc + ' Grain').upper())
-        wb('F9', bc_list or bc, 'certain' if bc_list else 'inferred', 'EDGE BANDING colour' + ('' if bc_list else '; not an exact dropdown value'))
+        wb('F9', bc_list or bc, 'certain' if bc_list else 'inferred', 'EDGE BANDING colour' if bc_list else
+           "The sidebar says banding colour %s, which is not one of the workbook's list entries; pick the closest list entry." % bc)
         if base_name(bc) != base_name(mat):
-            fl.append('NOTE two-tone: edge banding %r is not the unit colour %r (skill card: flag a banding whose base colour differs)' % (bc, mat))
+            fl.append('NOTE two-tone: the edge banding (%s) is not the unit colour (%s)' % (bc, mat))
         # F11 face type / F13 faces material
         d = S['door_drawer_style']
         if d['kind'] == 'melamine':
             if '2nd material' in d['style'].lower():
-                wb('F11', 'Melamine', 'inferred', 'DOOR/DRAWER STYLE "Melamine 2nd Material"; F13 is then the contrast colour (unit text 12 %r)' % self.unit_texts['contrast_text12'])
-                wb('F13', d['colour'] or None, 'unknown', 'contrast face colour: sidebar Color- line %r / unit text 12 %r' % (d['colour'], self.unit_texts['contrast_text12']))
-                fl.append('CHECK F13: second-material faces; confirm the face colour')
+                wb('F11', 'Melamine', 'inferred', 'The sidebar says Melamine 2nd Material; Melamine is the usual answer, and F13 then takes the second colour (the units say %s); type both if that is right.' % (self.unit_texts['contrast_text12'] or 'nothing'))
+                wb('F13', d['colour'] or None, 'unknown', 'the second face colour: sidebar Color- line %r / unit text %r' % (d['colour'], self.unit_texts['contrast_text12']))
+                fl.append('CHECK F13 face colour: the faces are a second material; confirm the face colour and type it')
             else:
                 wb('F11', 'Melamine', 'certain', 'DOOR/DRAWER STYLE Melamine')
         elif d['kind'] == 'none':
-            wb('F11', 'Melamine', 'inferred', 'no door or drawer faces in the room; DRUBEL was filled Melamine')
+            wb('F11', 'Melamine', 'inferred', 'The sidebar says no doors or drawer fronts; Melamine is the usual answer here, type it if that is right.')
         elif d['kind'] == 'thermofoil':
             # owner, Oct 20 (notes 16.5): the sidebar says when a thermofoil door is CF Thermo; everything else thermofoil is Doormark
             if re.search(r'cf\s*thermo', d['style'], re.I):
-                wb('F11', 'CF Thermo Foil', 'certain', 'DOOR/DRAWER STYLE names CF Thermo (owner: the sidebar says when a door is CF Thermo)')
-                fl.append('NOTE F11 CF Thermo Foil: CF Thermo is no longer sold (owner, Oct 20); confirm this is one of the sold jobs still to engineer')
+                wb('F11', 'CF Thermo Foil', 'certain', 'DOOR/DRAWER STYLE names CF Thermo (the sidebar says when a door is CF Thermo)')
+                fl.append('NOTE F11 CF Thermo Foil: CF Thermo is no longer sold; confirm this is one of the sold jobs still to engineer')
             else:
-                wb('F11', 'Thermo Foil', 'certain', 'TH door style -> Doormark (owner, Oct 20: every thermofoil door that the sidebar does not call CF Thermo is Doormark; WERNER\'s engineer picked "Thermo Foil")')
+                wb('F11', 'Thermo Foil', 'certain', 'DOOR/DRAWER STYLE is a TH (thermofoil) door, which goes to Doormark unless the sidebar says CF Thermo')
         elif d['kind'] == 'cf5':
-            wb('F11', 'CF5', 'inferred', 'DOOR/DRAWER STYLE names CF 5')
+            wb('F11', 'CF5', 'inferred', 'The sidebar says CF 5 doors (%s); CF5 is the usual answer here, type it if that is right.' % d['style'])
         else:
             wb('F11', None, 'unknown', 'DOOR/DRAWER STYLE %r not classified' % d['style'])
-            fl.append('CHECK F11: door style %r not recognised' % d['style'])
+            fl.append('CHECK F11 door/drawer type: the door style on the sidebar (%s) is not one the tool knows, so it was left blank; pick it in Excel' % d['style'])
         # F21 / F23 molding
         base, crown = S['base'], S['crown']
         has_base = bool(base.get('present') and (base.get('qty') or 0) > 0)
@@ -689,16 +703,19 @@ class RoomSidebar:
             mold = 'Mica'
         else:
             mold = None
-        wb('F21', mold, 'certain' if mold in ('None', 'Melamine', 'Thermo Foil', 'CF Thermo Foil') else 'inferred', 'BASE %r / CROWN %r' % (base.get('text'), crown.get('text')))
+        if mold in ('None', 'Melamine', 'Thermo Foil', 'CF Thermo Foil'):
+            wb('F21', mold, 'certain', 'BASE %r / CROWN %r' % (base.get('text'), crown.get('text')))
+        else:
+            wb('F21', mold, 'inferred', 'The sidebar says BASE %s / CROWN %s; the molding type %s is read from that, type it if that is right.'
+               % (base.get('text') or 'none', crown.get('text') or 'none', mold or 'unknown'))
         wb('F23', loc, 'certain', 'BASE qty %s, CROWN qty %s' % (base.get('qty'), crown.get('qty')))
         if mold == 'Thermo Foil':
-            fl.append('NOTE F21 Thermo Foil from base type %r (WERNER: TH Square -> Thermo Foil, Base Only)' % mold_src)
-        fl.append('NOTE base/crown quantities on the sidebar are not a check (skill card); the remeasure may say no molding (NEDDIE)')
+            fl.append('NOTE F21 Thermo Foil: read from the base type %s (TH = thermofoil, which goes to Doormark)' % mold_src)
         # B13 jewelry tray
         jt_lines = [a for a in self.accessories if re.match(r'JT\b', a['name'])]
         if jt_lines:
             wb('B13', None, 'unknown', '%d jewelry tray lines (%s); Special Order / Cut From Stock / Combination is not on the sidebar' % (len(jt_lines), ', '.join(a['name'] for a in jt_lines)))
-            fl.append('CHECK B13: the room has jewelry trays (%s); answer Special Order / Cut From Stock / Combination' % ', '.join(a['name'] for a in jt_lines))
+            fl.append('CHECK B13 jewelry trays: the room has jewelry trays (%s); answer Special Order, Cut From Stock or Combination in Excel' % ', '.join(a['name'] for a in jt_lines))
         else:
             wb('B13', None, 'unknown', 'no jewelry tray line on the sidebar (the template default is blank)')
         # B15 hinge type
@@ -709,15 +726,27 @@ class RoomSidebar:
             so.append('special-order doors (%s)' % d['style'])
         if any(h['special_order'] or h['enter_pn_placeholder'] for h in self.handles):
             so.append('special-order handle')
-        wb('B19', 'YES' if so else None, 'inferred' if so else 'unknown', '; '.join(so) if so else 'nothing on the sidebar says special order (what counts is the owner\'s rule)')
+        wb('B19', 'YES' if so else None, 'inferred' if so else 'unknown',
+           ('The sidebar shows %s, so YES is the likely answer; type it if that is right.' % ' and '.join(so)) if so else 'nothing on the sidebar says special order')
         # B21 finishing
         ct = S['countertop']
-        if ct.get('text') and re.search(r'wood', ct.get('type') or '', re.I) and re.search(r'stain|paint|glaze', (ct.get('colour') or '') + ' ' + (ct.get('type') or ''), re.I):
-            wb('B21', 'YES', 'inferred', 'wood countertop with a stain/paint colour (%r); WERNER was YES' % ct.get('colour'))
+        stained_top = bool(ct.get('text') and re.search(r'wood', ct.get('type') or '', re.I) and re.search(r'stain|paint|glaze', (ct.get('colour') or '') + ' ' + (ct.get('type') or ''), re.I))
+        if stained_top:
+            wb('B21', 'YES', 'inferred', 'The sidebar shows a wood countertop with a stain or paint colour (%s), so YES is the likely answer; type it if that is right.' % ct.get('colour'))
         elif re.search(r'wood', (mat or '') + ' ' + (d['style'] or ''), re.I):
-            wb('B21', 'YES', 'inferred', 'wood material or wood doors')
+            wb('B21', 'YES', 'inferred', 'The sidebar shows wood material or wood doors, so YES is the likely answer; type it if that is right.')
         else:
             wb('B21', None, 'unknown', 'nothing on the sidebar needs finishing')
+        # B23 specialty work: special-order doors, a stained countertop or thermofoil molding
+        sp = []
+        if d['kind'] in ('thermofoil', 'cf5', 'elements', 'framed'):
+            sp.append('special-order doors (%s)' % d['style'])
+        if stained_top:
+            sp.append('a stained countertop')
+        if mold in ('Thermo Foil', 'CF Thermo Foil'):
+            sp.append('thermofoil molding')
+        wb('B23', 'YES' if sp else None, 'inferred' if sp else 'unknown',
+           ('The sidebar shows %s, so YES is the likely answer; type it if that is right.' % ', '.join(sp)) if sp else 'nothing on the sidebar points to specialty work')
         # purchase order lines: handles and accessories with a part number
         rn = self.kcd_room_name
         for h in self.handles:
@@ -729,7 +758,7 @@ class RoomSidebar:
             else:
                 forms['po'].append({'room': rn, 'qty': h['qty'], 'item': 'HANDLE', 'description': h['name'], 'vendor': None, 'certainty': 'unknown',
                                     'source': h['text'], 'note': 'no part number on the sidebar'})
-                fl.append('CHECK PO: handle line %r has no part number' % h['text'])
+                fl.append('CHECK PO: handle line %r has no part number' % h['text'])      # kcdrun writes its own sentence for this
         acc_groups = collections.OrderedDict()
         for a in self.accessories:
             acc_groups.setdefault((a['name'], a['part']), []).append(a)
@@ -752,11 +781,11 @@ class RoomSidebar:
                               'insert': {'value': self.unit_texts['insert_text15'] or None, 'certainty': 'certain' if self.unit_texts['insert_text15'] else 'unknown', 'source': 'unit Set Unit Info text 15 (not on the sidebar)'},
                               'joint': {'value': d['joint'], 'certainty': 'certain' if d['joint'] else 'unknown', 'source': 'CF M / CF B on the sidebar; blank = engineer\'s choice, usually butt (skill card)'},
                               'match_back': {'value': 'X', 'certainty': 'inferred', 'source': 'skill card: ticked for every colour'},
-                              'door_sizes': {'value': None, 'certainty': 'unknown', 'source': 'NOT on the sidebar: from the unit records + .cab face rules (kcdcab) and the door-size elevation; Doormark sizes run 1/16 under KCD on WERNER'}}
+                              'door_sizes': {'value': None, 'certainty': 'unknown', 'source': 'NOT on the sidebar: the size to order is the size on the door elevation, not the KCD face size'}}
             if d['kind'] == 'thermofoil' and not d.get('doormark_code'):
                 fl.append('CHECK door form: design %r not in the Doormark design table' % d['style'])
             if d['kind'] == 'thermofoil' and not d.get('doormark_colour_code'):
-                fl.append('CHECK door form: colour %r has no code in the workbook colour table (WERNER: engineer typed MYST for MYSTERIOUS BLUE)' % d['colour'])
+                fl.append('CHECK door form: colour %r has no code in the workbook colour table; the engineer types the vendor code' % d['colour'])
         # jewelry tray inputs
         if self.jt_hosts:
             by_host = collections.OrderedDict()
@@ -785,24 +814,34 @@ class RoomSidebar:
                        'colour': {'value': S['design_notes']['jewelry_colour'], 'certainty': 'certain' if S['design_notes']['jewelry_colour'] else 'unknown', 'source': 'DESIGN NOTES Jewelry Color-'},
                        'drawer_number': {'value': S['design_notes']['drawer_number'], 'certainty': 'certain' if S['design_notes']['drawer_number'] else 'unknown', 'source': 'DESIGN NOTES Dr#'}}
                 forms['vjt'].append(ent)
-                fl.append('CHECK VJT: trays %s on unit %s; layout, top/bottom order and drawer number need the engineer (wall notes: %s)' %
-                          (names, hid, [n['text'] for n in self.wall_notes if re.search(r'jewel|JT|tray', n['text'], re.I)]))
+                wn = [re.sub(r'\s*[\r\n]+\s*', ' / ', n['text']).strip() for n in self.wall_notes if re.search(r'jewel|JT|tray', n['text'], re.I)]
+                fl.append('CHECK VJT jewelry trays: %s in the %s; the layout, which tray is top and bottom and the drawer number are for the engineer to type on the VJT Order tab%s' %
+                          (' and '.join(names), (host['name'] if host else 'room'), (' (the drawing notes say: %s)' % '; '.join(wn)) if wn else ''))
         # general flags from the checks
+        def plain(v):
+            if isinstance(v, float):
+                return str(int(v)) if v.is_integer() else ('%g' % v)
+            if isinstance(v, (list, tuple)):
+                return ', '.join(plain(x) for x in v) or 'nothing'
+            if isinstance(v, dict):
+                return ', '.join('%s %s' % (plain(a), plain(b)) for a, b in v.items()) or 'nothing'
+            return str(v) if v not in (None, '') else 'nothing'
         for c in self.checks:
             if c['agree'] is False:
-                fl.append('CHECK %s: sidebar %r, job %r (%s)' % (c['what'], c['sidebar'], c['job'], c['note']))
+                fl.append('CHECK %s: the sidebar says %s, the drawing says %s; look at which is right' % (c['what'], re.sub(r'\s+', ' ', plain(c['sidebar'])), re.sub(r'\s+', ' ', plain(c['job']))))
         for h in self.handles:
             if h['enter_pn_placeholder']:
-                fl.append('NOTE handle line has the "Enter PN" placeholder; the typed part number is %r (%s)' % (h['part'], h.get('typed_line')))
+                fl.append('NOTE the handle line says Enter PN; the part number typed under it is %s (%s)' % (h['part'] or 'missing', h.get('typed_line') or 'no line'))
             if h['stock_mark']:
-                fl.append('NOTE handle %r carries the "-Stock-" mark; WERNER still put its stock handle on the PO (AMEROCK), ROBERTS wrote N/A' % (h['part'] or h['name']))
+                fl.append('NOTE handle %s is marked Stock on the sidebar; some engineers still put a stock handle on the Purchase Order, others write N/A' % (h['part'] or h['name']))
         if S['handles']['kcd_notes']:
             fl.append('NOTE KCD wrote %r on the sidebar' % S['handles']['kcd_notes'])
         for a in self.accessories:
             if a['special_mark']:
-                fl.append('NOTE accessory %r is marked ** on the sidebar' % a['text'])
+                fl.append('NOTE the accessory line %s is marked ** on the sidebar' % a['text'])
         if S['material']['promo']:
-            fl.append('NOTE material is a promo colour (%r); the unit multiplier is %s' % (S['material'].get('promo_text'), [u.material_multiplier for u in self.job.units if u.room == self.room][:1]))
+            mult = [u.material_multiplier for u in self.job.units if u.room == self.room][:1]
+            fl.append('NOTE the material is a promo colour (%s); the units carry the price multiplier %s' % (S['material'].get('promo_text') or 'promo', mult[0] if mult else 'unknown'))
         if self.free_text:
             fl.append('NOTE free text before any label: %r' % self.free_text)
 
@@ -876,9 +915,11 @@ def main(argv):
             paths.append(argv[i]); i += 1
     if not paths:
         print(__doc__); return 2
-    out_dir = out_dir or os.getcwd()
+    # never the current folder (that could be the repo): default to the folder of the first job file given
+    out_dir = os.path.abspath(out_dir or os.path.dirname(os.path.abspath(paths[0])))
     os.makedirs(out_dir, exist_ok=True)
     everything = []
+    written = []
     for p in paths:
         job, rooms, missing = parse_job(p)
         stem = os.path.splitext(os.path.basename(p))[0]
@@ -887,13 +928,21 @@ def main(argv):
             fn = os.path.join(out_dir, '%s - room %d %s.json' % (stem, r.room, safe))
             with open(fn, 'w') as f:
                 json.dump(r.to_dict(), f, indent=1, default=str)
+            written.append(fn)
             everything.append(r.to_dict())
         txt = summary(job, rooms, missing)
         print(txt)
-        with open(os.path.join(out_dir, '%s - sidebar summary.txt' % stem), 'w') as f:
+        fn = os.path.join(out_dir, '%s - sidebar summary.txt' % stem)
+        with open(fn, 'w') as f:
             f.write(txt + '\n')
-    with open(os.path.join(out_dir, 'all_rooms.json'), 'w') as f:
+        written.append(fn)
+    fn = os.path.join(out_dir, 'all_rooms.json')
+    with open(fn, 'w') as f:
         json.dump(everything, f, indent=1, default=str)
+    written.append(fn)
+    print('\nWritten to %s:' % out_dir)
+    for fn in written:
+        print('  ' + os.path.basename(fn))
     return 0
 
 

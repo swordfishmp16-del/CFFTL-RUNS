@@ -15,6 +15,12 @@ import kcdwalls as W
 import kcdmesh
 
 
+def fr(raw):
+    """Inches as the owner writes them: 3/4, not 0 3/4."""
+    s = W.frac_inches(raw)
+    return s[2:] if s.startswith('0 ') and len(s) > 2 else s
+
+
 def load(job_path, wid):
     """Read a job for a reserve step on wall `wid`: (data, original, names, units, by_id, uidx, p, rn).
     data = bytearray to edit, original = the bytes as read, names = room names, units = kcdwalls.units_by_wall,
@@ -43,7 +49,7 @@ def finish(data, original, p, ulist, uidx, touched, lines, checks, out_path):
         if (An, Bn) != (A, B): W.set_unit_points(data, uidx[u['id']], An, Bn)
         sl = kcdmesh.Mesh.unit_slice(original, uidx[u['id']]['f86_at'])
         if not mesh.check_slice(sl):
-            checks.append('CHECK unit %d %r: 3-D cache entry out of range; not moved' % (u['id'], u['name'])); continue
+            checks.append('CHECK the %s (unit %d): its drawing could not be located in the file and was not moved; open its wall once in KCD so it redraws' % (u['name'], u['id'])); continue
         d, n = W.unit_vectors(p['angle_deg'])
         o_old = (p['P0'][0] + x_old * d[0], p['P0'][1] + x_old * d[1]); o_new = (p['P0'][0] + x_new * d[0], p['P0'][1] + x_new * d[1])
         v = (int(round(o_new[0] - o_old[0])), int(round(o_new[1] - o_old[1])))
@@ -52,11 +58,12 @@ def finish(data, original, p, ulist, uidx, touched, lines, checks, out_path):
         if w_new != w_old:
             H = struct.unpack_from('<i', original, uidx[u['id']]['start'] + 18)[0]; D = struct.unpack_from('<i', original, uidx[u['id']]['start'] + 24)[0]
             _, nf, amb = mesh.stretch_unit(data, sl, o_new, d, w_old, w_new, fixed=(H, D)); stretched += 1; fv += nf
-            if amb: checks.append('CHECK unit %d %r: %d ambiguous drawing value(s) left alone' % (u['id'], u['name'], amb))
+            if amb: checks.append('CHECK the %s was made %s %s; open it once in KCD so it redraws (%d number%s in its drawing could not be told apart)'
+                                 % (u['name'], fr(abs(w_new - w_old)), 'narrower' if w_new < w_old else 'wider', amb, '' if amb == 1 else 's'))
         ranges += mesh.ranges(sl)
         ext = mesh.extent(data, sl, o_new, d, n)
         if ext and ext0 and (abs(ext[0] - ext0[0]) > 1 or abs(ext[1] - (ext0[1] + (w_new - w_old))) > 1 or abs(ext[2] - ext0[2]) > 1 or abs(ext[3] - ext0[3]) > 1):
-            checks.append('CHECK unit %d %r: drawing did not move cleanly' % (u['id'], u['name']))
+            checks.append('CHECK the %s (unit %d): its drawing did not move cleanly; open it once in KCD so it redraws' % (u['name'], u['id']))
     lines.append('drawing: %d unit shape(s) moved, %d stretched with %d face width values redone' % (moved, stretched, fv))
     # guard: only unit fields and the moved cache entries changed
     allowed = []
@@ -77,7 +84,7 @@ def reserve_end(job_path, wid, out_path, width_in=0.75):
     fw = W.snap16(int(round(width_in * W.IN)))
     pseudo = dict(p); pseudo['length_raw'] = p['length_raw'] - fw
     lines, checks, touched = [], [], {}
-    lines.append('wall %d (%s): %s long, unchanged; its units make room for a %s filler at the END' % (wid, rn, W.frac_inches(p['length_raw']), W.frac_inches(fw)))
+    lines.append('wall %d (%s): %s long, unchanged; its units make room for a %s filler at the END' % (wid, rn, W.frac_inches(p['length_raw']), fr(fw)))
     W.unit_step(data, wid, rn, p, pseudo, units.get(wid, []), uidx, lines, checks, touched, anchor='start', spread=True)
     # room points and 3-D cache of the touched units (the wall did not move), guard, write
     finish(data, original, p, units.get(wid, []), uidx, touched, lines, checks, out_path)
@@ -86,5 +93,10 @@ def reserve_end(job_path, wid, out_path, width_in=0.75):
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(); ap.add_argument('job'); ap.add_argument('wall', type=int); ap.add_argument('out'); ap.add_argument('--width', type=float, default=0.75)
     a = ap.parse_args()
-    lines, checks, touched = reserve_end(a.job, a.wall, a.out, a.width)
+    if W.same_file(a.out, a.job):
+        raise SystemExit('Stopped: the output must not be the input job; give another name')
+    try:
+        lines, checks, touched = reserve_end(a.job, a.wall, a.out, a.width)
+    except ValueError as e:
+        raise SystemExit('Stopped: %s' % e)
     print('\n'.join(lines)); print('CHECKS (%d)' % len(checks)); print('\n'.join('   ' + c for c in checks)); print('touched', touched)
