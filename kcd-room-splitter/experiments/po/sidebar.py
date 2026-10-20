@@ -657,8 +657,12 @@ class RoomSidebar:
         elif d['kind'] == 'none':
             wb('F11', 'Melamine', 'inferred', 'no door or drawer faces in the room; DRUBEL was filled Melamine')
         elif d['kind'] == 'thermofoil':
-            wb('F11', 'Thermo Foil', 'inferred', 'TH door style; WERNER\'s engineer picked "Thermo Foil" (Doormark). "CF Thermo Foil" is the other list entry: which one depends on who makes the door')
-            fl.append('CHECK F11: thermofoil doors: Doormark ("Thermo Foil") or in-house CF Thermo ("CF Thermo Foil")?')
+            # owner, Oct 20 (notes 16.5): the sidebar says when a thermofoil door is CF Thermo; everything else thermofoil is Doormark
+            if re.search(r'cf\s*thermo', d['style'], re.I):
+                wb('F11', 'CF Thermo Foil', 'certain', 'DOOR/DRAWER STYLE names CF Thermo (owner: the sidebar says when a door is CF Thermo)')
+                fl.append('NOTE F11 CF Thermo Foil: CF Thermo is no longer sold (owner, Oct 20); confirm this is one of the sold jobs still to engineer')
+            else:
+                wb('F11', 'Thermo Foil', 'certain', 'TH door style -> Doormark (owner, Oct 20: every thermofoil door that the sidebar does not call CF Thermo is Doormark; WERNER\'s engineer picked "Thermo Foil")')
         elif d['kind'] == 'cf5':
             wb('F11', 'CF5', 'inferred', 'DOOR/DRAWER STYLE names CF 5')
         else:
@@ -673,8 +677,10 @@ class RoomSidebar:
         ml = mold_src.lower()
         if not (has_base or has_crown):
             mold = 'None'
-        elif ml.startswith('th'):
-            mold = 'Thermo Foil'
+        elif re.search(r'cf\s*thermo', ml):
+            mold = 'CF Thermo Foil'            # owner, Oct 20: the sidebar says when it is CF Thermo
+        elif ml.startswith('th') or 'thermo' in ml:
+            mold = 'Thermo Foil'               # owner, Oct 20: every other thermofoil is Doormark (WERNER: TH Square -> Thermo Foil)
         elif 'melamine' in ml:
             mold = 'Melamine'
         elif 'wood' in ml:
@@ -683,7 +689,7 @@ class RoomSidebar:
             mold = 'Mica'
         else:
             mold = None
-        wb('F21', mold, 'certain' if mold in ('None', 'Melamine') else 'inferred', 'BASE %r / CROWN %r' % (base.get('text'), crown.get('text')))
+        wb('F21', mold, 'certain' if mold in ('None', 'Melamine', 'Thermo Foil', 'CF Thermo Foil') else 'inferred', 'BASE %r / CROWN %r' % (base.get('text'), crown.get('text')))
         wb('F23', loc, 'certain', 'BASE qty %s, CROWN qty %s' % (base.get('qty'), crown.get('qty')))
         if mold == 'Thermo Foil':
             fl.append('NOTE F21 Thermo Foil from base type %r (WERNER: TH Square -> Thermo Foil, Base Only)' % mold_src)
@@ -789,7 +795,7 @@ class RoomSidebar:
             if h['enter_pn_placeholder']:
                 fl.append('NOTE handle line has the "Enter PN" placeholder; the typed part number is %r (%s)' % (h['part'], h.get('typed_line')))
             if h['stock_mark']:
-                fl.append('NOTE handle %r carries the "-Stock-" mark; WERNER still put it on the PO (AMEROCK)' % h['part'])
+                fl.append('NOTE handle %r carries the "-Stock-" mark; WERNER still put its stock handle on the PO (AMEROCK), ROBERTS wrote N/A' % (h['part'] or h['name']))
         if S['handles']['kcd_notes']:
             fl.append('NOTE KCD wrote %r on the sidebar' % S['handles']['kcd_notes'])
         for a in self.accessories:

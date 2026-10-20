@@ -51,6 +51,7 @@ NEW_ROW_STYLES = {'K': '380', 'L': '169', 'M': '169', 'N': '377', 'O': '377', 'P
 COL_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 MACRO_SHEETS = {'Holes': 'the Holes sheet runs a macro whenever one of its cells changes, so it has to be filled in Excel'}
 DATE_FORMAT_IDS = set(range(14, 23)) | set(range(27, 37)) | set(range(45, 48)) | set(range(50, 59))   # Excel's built-in date/time formats
+DEFAULT_TEMPLATE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'template.xltm')   # the engineers' template, bundled (data/README.md)
 
 
 def col_index(col):
@@ -467,7 +468,8 @@ def parse_entry_value(text):
 def main(argv=None):
     import argparse
     ap = argparse.ArgumentParser(description='Fill the engineering pricing workbook from a kcdprice run without re-saving it.')
-    ap.add_argument('template'); ap.add_argument('out')
+    ap.add_argument('template', help="the pricing workbook template (.xltm) or a filled .xlsm; '-' or 'default' means the template bundled with the tools (data/template.xltm)")
+    ap.add_argument('out', help='the workbook to write (.xlsm)')
     ap.add_argument('--lines', help='kcdprice.py output (TSV)')
     ap.add_argument('--drop', action='append', default=[], metavar='REGEX=REASON', help='leave out price lines where "unit N part" matches REGEX (repeatable), e.g. --drop "^unit (17|22) Door=no door on these units"')
     ap.add_argument('--entry', action='append', default=[], metavar='CELL=VALUE', help='Data Entry answer, e.g. B5=1091400, B1=2026-10-24, F5="Designer White Grain"')
@@ -477,6 +479,8 @@ def main(argv=None):
     ap.add_argument('--report', help='write the plain-English report here')
     ap.add_argument('--preview', action='store_true', help='show the Final Price Sheet as LibreOffice computes it')
     a = ap.parse_args(argv)
+    if a.template in ('-', 'default'):
+        a.template = DEFAULT_TEMPLATE
     entries = {}
     if a.entries:
         for k, v in json.load(open(a.entries)).items():

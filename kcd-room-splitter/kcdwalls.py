@@ -1127,7 +1127,7 @@ def shelf_fit(data, ulist, uidx, rn, wid, lines, checks, touched):
     return n
 
 
-def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, allow_absorb=True, units_step=True, shelves=True, spread=True):
+def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, allow_absorb=True, units_step=True, shelves=True, spread=True, fillers=True):
     """Change wall lengths (and optionally wall heights) in a .job and write out_path.
 
     changes     {wall id: new length in raw 0.1 mm}  (use round(inches * 254))
@@ -1140,8 +1140,10 @@ def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, a
                 draws them on the wall. False: wall records only.
     shelves     True: on every wall, the shelves drawn inside a cabinet are set to its opening width (owner's rule);
                 a depth that differs is flagged.
+    fillers     True: when a file was written, the owner's filler rule runs on it (kcdfill.apply_fillers: a run between
+                two walls gets a 3/4 filler at each end; the units make the room) and the report carries its lines.
     Returns a dict: 'lines' (plain-English report lines), 'checks' (things the engineer must look at),
-    'changed_walls', 'changed_units', 'written' (out_path or None).
+    'changed_walls', 'changed_units', 'written' (out_path or None), 'fillers' (the filler step's dict, when it ran).
     The edit is in place: the file keeps its size; outside the wall records and the touched unit fields every
     byte is the original.
     """
@@ -1353,8 +1355,13 @@ def set_wall_lengths(job_path, changes, out_path, anchor='auto', heights=None, a
         back = open(out_path, 'rb').read()
         if back != bytes(data) or len(back) != len(original):
             raise RuntimeError('internal error: the written file does not read back')
-    return {'lines': lines, 'checks': checks, 'changed_walls': sorted(changed), 'changed_units': sorted(touched), 'written': written,
-            'mesh_note': 'The print pages in the file are not rebuilt; KCD redraws them when it prints.'}
+    rep = {'lines': lines, 'checks': checks, 'changed_walls': sorted(changed), 'changed_units': sorted(touched), 'written': written,
+           'mesh_note': 'The print pages in the file are not rebuilt; KCD redraws them when it prints.'}
+    if written and fillers:
+        _filler_step(rep, written)
+    elif fillers and out_path:
+        lines.append('fillers: not checked, because no file was written (run with --fillers --out to check them alone)')
+    return rep
 
 
 # --------------------------------------------------------------------------- remeasure read-out JSON
@@ -1456,7 +1463,7 @@ def opening_between(by_id, a, b):
     return math.hypot(A[0] - B[0], A[1] - B[1])
 
 
-def apply_rem(job_path, rem_path, out_path, anchor='auto', allow_absorb=True, units_step=True, heights_from_rem=False, shelves=True, spread=True):
+def apply_rem(job_path, rem_path, out_path, anchor='auto', allow_absorb=True, units_step=True, heights_from_rem=False, shelves=True, spread=True, fillers=True):
     """Set the agreed wall lengths of a remeasure read-out in the job. Each agreed wall must exist, must sit in
     the room the label names, and (when the label carries the printed length) the printed length must equal
     the file's length within 1/32"; otherwise it is flagged and left alone. Review items are never applied."""
@@ -1501,7 +1508,7 @@ def apply_rem(job_path, rem_path, out_path, anchor='auto', allow_absorb=True, un
                     checks.append('CHECK %s H = %s: could not be matched to a room or is not a height' % (f['room'], f['value'])); continue
                 heights[rn] = int(round(v * IN))
                 pre.append('room %s: wall heights set to the measured ceiling %s' % (f['room'], frac_inches(heights[rn])))
-    rep = set_wall_lengths(job_path, changes, out_path, anchor=anchor, allow_absorb=allow_absorb, heights=heights, units_step=units_step, shelves=shelves, spread=spread) if (changes or heights or shelves) else {
+    rep = set_wall_lengths(job_path, changes, out_path, anchor=anchor, allow_absorb=allow_absorb, heights=heights, units_step=units_step, shelves=shelves, spread=spread, fillers=fillers) if (changes or heights or shelves) else {
         'lines': [], 'checks': [], 'changed_walls': [], 'changed_units': [], 'written': None, 'mesh_note': ''}
     # corner angles: the tool never turns a wall, so a corner measured off the drawing is the engineer's
     post = []
@@ -1544,6 +1551,41 @@ def apply_rem(job_path, rem_path, out_path, anchor='auto', allow_absorb=True, un
     rep['rem_notes'] = rem.get('notes', '')
     rep['rem_reader'] = rem.get('reader', '')
     return rep
+
+
+def _filler_step(rep, out_path):
+    """Run the owner's filler rule (kcdfill.apply_fillers) on the file just written, put the result in its place and
+    merge the filler report into rep. When the step fails the file stays as written and a CHECK says so."""
+    import kcdfill
+    folder = os.path.dirname(os.path.abspath(out_path))
+    tmp = os.path.join(folder, '~%s.fillers.job' % os.path.splitext(os.path.basename(out_path))[0])
+    try:
+        fr = kcdfill.apply_fillers(out_path, tmp)
+        os.replace(tmp, out_path)
+    except Exception as e:
+        if os.path.exists(tmp):
+            os.remove(tmp)
+        rep['checks'].append('CHECK fillers: the filler step did not run (%s); the file has the wall changes only, no filler was added' % e)
+        return
+    fr['written'] = out_path
+    rep['lines'] += [''] + fr['lines']
+    rep['checks'] += fr['checks']
+    rep['fillers'] = fr
+    rep['written'] = out_path
+    rep['changed_units'] = sorted(set(rep.get('changed_units', [])) | {a['unit_id'] for a in fr['added']})
+
+
+def fillers_only(job_path, out_path=None):
+    """Only the owner's filler rule on a job (no wall change): check every wall end, add the missing 3/4 fillers and
+    write out_path (None: report only, nothing written). Returns a report dict in the shape of set_wall_lengths, so
+    format_report(rep, 'Fillers checked on <job>') works on it."""
+    import kcdfill
+    if out_path and os.path.abspath(out_path) == os.path.abspath(job_path):
+        raise ValueError('refusing to overwrite the input job; give another output name')
+    fr = kcdfill.apply_fillers(job_path, out_path)
+    return {'lines': fr['lines'], 'checks': fr['checks'], 'changed_walls': [], 'changed_units': [a['unit_id'] for a in fr['added']],
+            'written': fr['written'], 'fillers': fr,
+            'mesh_note': 'The print pages in the file are not rebuilt; KCD redraws them when it prints.' if fr['written'] else ''}
 
 
 def format_report(rep, title):
@@ -1600,11 +1642,23 @@ def main(argv=None):
     ap.add_argument('--no-shelf-fit', action='store_true', help='do not set the shelves drawn inside a cabinet to its opening width')
     ap.add_argument('--one-unit', action='store_true', help='the unit against the moved wall end takes the whole change (instead of the hanging sections sharing it so they come out the same size)')
     ap.add_argument('--heights-from-rem', action='store_true', help='with --rem: set every wall of a room to the measured ceiling height H')
+    ap.add_argument('--fillers', action='store_true', help="add the owner's end fillers: a run of units between two walls gets a 3/4 filler at each end, and the units make the room. "
+                                                           "This is on whenever a file is written; alone with --out it does only the fillers")
+    ap.add_argument('--no-fillers', action='store_true', help='do not add fillers; change only the walls and their units')
     a = ap.parse_args(argv)
-    if a.list or not (a.set or a.height or a.rem):
+    if a.fillers and a.no_fillers:
+        ap.error('--fillers and --no-fillers cannot both be given')
+    if a.list or not (a.set or a.height or a.rem or a.fillers):
         print(list_job(a.job)); return 0
+    if a.out and os.path.abspath(a.out) == os.path.abspath(a.job):
+        print('Stopped: the output must not be the input job; give another name with --out'); return 2
+    if a.fillers and not (a.set or a.height or a.rem):
+        rep = fillers_only(a.job, a.out)
+        print(format_report(rep, 'Fillers checked on %s' % os.path.basename(a.job)))
+        return 0
+    fillers = not a.no_fillers
     if a.rem:
-        rep = apply_rem(a.job, a.rem, a.out, anchor=a.anchor, allow_absorb=not a.no_absorb, units_step=not a.walls_only, heights_from_rem=a.heights_from_rem, shelves=not a.no_shelf_fit, spread=not a.one_unit)
+        rep = apply_rem(a.job, a.rem, a.out, anchor=a.anchor, allow_absorb=not a.no_absorb, units_step=not a.walls_only, heights_from_rem=a.heights_from_rem, shelves=not a.no_shelf_fit, spread=not a.one_unit, fillers=fillers)
         print(format_report(rep, 'Remeasure %s applied to %s' % (rep.get('rem_job'), os.path.basename(a.job))))
         return 0
     changes = {}
@@ -1618,7 +1672,7 @@ def main(argv=None):
     for s in a.height:
         k, v = s.split('=', 1)
         heights[int(k)] = int(round(parse_inches(v) * IN))
-    rep = set_wall_lengths(a.job, changes, a.out, anchor=a.anchor, heights=heights, allow_absorb=not a.no_absorb, units_step=not a.walls_only, shelves=not a.no_shelf_fit, spread=not a.one_unit)
+    rep = set_wall_lengths(a.job, changes, a.out, anchor=a.anchor, heights=heights, allow_absorb=not a.no_absorb, units_step=not a.walls_only, shelves=not a.no_shelf_fit, spread=not a.one_unit, fillers=fillers)
     print(format_report(rep, 'Wall changes in %s' % os.path.basename(a.job)))
     return 0
 

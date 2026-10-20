@@ -16,7 +16,8 @@ Sizes come, in this order of preference, from
 Nothing is invented: a field the job does not hold is printed as ASK / blank and listed under flags.
 
 Usage:
-  python3 soitems.py JOB.job [--lib cat_compact.json --raw rawlib.json] [--price TSV ...] [--paste XLSM]
+  python3 soitems.py JOB.job [--lib cat_compact.json(.gz) --raw rawlib.json(.gz)] [--price TSV ...] [--paste XLSM]
+                     (without --lib / --raw the bundles in the repo's data/ folder are used)
                      [--room N] [--json OUT.json] [--txt OUT.txt]
 """
 import os, re, sys, json, struct, argparse
@@ -644,19 +645,15 @@ def print_sheet(job, rooms, out=sys.stdout):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('job')
-    ap.add_argument('--lib', default='/tmp/claude-0/-home-user-CFFTL-WORKING-/bef348d8-06f1-5cee-a359-256568af5804/scratchpad/lib/cat_compact.json')
-    ap.add_argument('--raw', default='/tmp/claude-0/-home-user-CFFTL-WORKING-/bef348d8-06f1-5cee-a359-256568af5804/scratchpad/lib/rawlib.json')
+    ap.add_argument('--lib', help='library root, or compact catalog .json / .json.gz; default: the one in the repo\'s data folder')
+    ap.add_argument('--raw', help='rawlib bundle (.json / .json.gz) with the full .cab texts; default: data/rawlib.json.gz')
     ap.add_argument('--price', action='append', default=[], help='kcdprice.py TSV (unit = position among live units)')
     ap.add_argument('--paste', help='filled workbook .xlsm: Data Entry paste K..P (unit = KCD id)')
     ap.add_argument('--room', type=int)
     ap.add_argument('--json')
     ap.add_argument('--txt')
     a = ap.parse_args()
-    cat = None
-    if a.lib and os.path.exists(a.lib):
-        cat = kcdunits.Catalog.from_json(a.lib)
-        if a.raw and os.path.exists(a.raw):
-            cat.load_rawlib_json(a.raw)
+    cat = kcdunits.load_catalog(a.lib, a.raw)
     job = kcdunits.read_job(a.job, cat)
     lines = []
     for p in a.price:

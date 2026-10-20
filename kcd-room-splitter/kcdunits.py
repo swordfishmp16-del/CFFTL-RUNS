@@ -8,18 +8,43 @@ unit type code. Nothing is guessed: a value that cannot be labelled is reported 
 Layout facts come from kcd-deep-dive-notes.md. Depends on kcdjob.py (section reader) only.
 
 Usage:
-    cat = Catalog.from_library_root(r'C:\\KCD23')            # scans every *.cab under the root
-    cat = Catalog.from_json('cat_compact.json')             # or the compact catalog made by catjson.py
+    cat = default_catalog()                                 # the bundles in this repo's data/ folder (cached)
+    cat = Catalog.from_library_root(r'C:\\KCD23')            # or scan every *.cab under a library root
+    cat = Catalog.from_json('cat_compact.json.gz')          # or a compact catalog made by catjson.py (.json or .json.gz)
     job = read_job('1087543 TILLIS HER CO.job', cat)
     for u in job.units: print(u.seq, u.cab, u.W, u.H, u.D, u.material)
     print(job.text_report())
 """
-import os, sys, glob, json, struct, re
+import os, sys, glob, gzip, json, struct, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))   # so python -I finds kcdjob next to this file
 import kcdjob
 
 INCH = 254.0            # size slots are stored in 0.1 mm; 254 of them make one inch
 NSLOTS = 301            # 301 six-byte slots in the 1806-byte unit prefix
+
+# The library bundles that ship with the tools (see data/README.md). A fresh checkout runs from these alone.
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+DEFAULT_CATALOG = os.path.join(DATA_DIR, 'cat_compact.json.gz')     # the compact unit catalog (sizes, labels, options)
+DEFAULT_RAWLIB = os.path.join(DATA_DIR, 'rawlib.json.gz')           # the full library texts (needed for door faces)
+
+
+def read_text(path, encoding='utf-8'):
+    """The whole text of a file. A file whose name ends in .gz is unpacked on the fly."""
+    if path.lower().endswith('.gz'):
+        with gzip.open(path, 'rt', encoding=encoding) as f:
+            return f.read()
+    with open(path, encoding=encoding) as f:
+        return f.read()
+
+
+def load_json(path):
+    """json.load for a .json or a .json.gz file."""
+    return json.loads(read_text(path))
+
+
+def is_json_path(path):
+    """True for a compact catalog file (.json or .json.gz) as against a library folder."""
+    return bool(path) and path.lower().endswith(('.json', '.json.gz'))
 
 
 def txt(b):
@@ -124,6 +149,7 @@ class Catalog:
         self.raw = {}           # lower-case file name -> full .cab text (for kcdcab face geometry)
         self.fulls = {}         # lower-case file name -> parsed full cab (kcdcab.parse_cab_full)
         self.codes = {}         # Code.dat: entry number -> (code formula such as 'B[w@1]', description)
+        self.raw_source = ''    # the rawlib bundle loaded by load_rawlib_json, if any
 
     @classmethod
     def from_library_root(cls, root):
@@ -158,8 +184,8 @@ class Catalog:
 
     @classmethod
     def from_json(cls, path):
-        """Load the compact catalog written by experiments/catjson.py (laptop)."""
-        d = json.load(open(path, encoding='utf-8'))
+        """Load the compact catalog written by experiments/catjson.py (laptop); .json or .json.gz."""
+        d = load_json(path)
         cat = cls()
         cat.source = path
         for name, c in d['cabs'].items():
@@ -183,8 +209,9 @@ class Catalog:
         return cat
 
     def load_rawlib_json(self, path):
-        """Load the full library texts bundled by the laptop script rawlib.py ({relative path: text})."""
-        files = json.load(open(path, encoding='utf-8'))
+        """Load the full library texts bundled by the laptop script rawlib.py ({relative path: text}); .json or .json.gz."""
+        files = load_json(path)
+        self.raw_source = path
         for rel, text in files.items():
             base = rel.replace('\\', '/').rsplit('/', 1)[-1]
             if base.lower().endswith('.cab') and base.lower() not in self.raw:
@@ -263,6 +290,50 @@ TYPE_NAMES = {10: 'window', 20: 'door', 53: 'appliance', 100: 'upper with doors'
 
 SET_UNIT_INFO = ['material', 'door type', 'edgeband', 'rod type', 'base', 'crown', 'backing', 'drawer box',
                  'notch 1', 'notch 2', 'handles', 'contrast', 'countertop', 'finishing', 'insert']
+
+
+_DEFAULT_CATALOG_CACHE = {'cat': None}
+
+
+def default_catalog(need_raw=True):
+    """The Catalog built from the bundles in data/: DEFAULT_CATALOG, plus DEFAULT_RAWLIB when need_raw is true.
+
+    The Catalog is kept in a module global, so a second call is free (and a later call with need_raw=True adds
+    the full texts to the same object). Raises FileNotFoundError with a plain message when a bundle is missing."""
+    cat = _DEFAULT_CATALOG_CACHE['cat']
+    if cat is None:
+        if not os.path.exists(DEFAULT_CATALOG):
+            raise FileNotFoundError('the unit catalog %s is missing; see data/README.md' % DEFAULT_CATALOG)
+        cat = Catalog.from_json(DEFAULT_CATALOG)
+        _DEFAULT_CATALOG_CACHE['cat'] = cat
+    if need_raw and not cat.raw_source:
+        if not os.path.exists(DEFAULT_RAWLIB):
+            raise FileNotFoundError('the library bundle %s is missing; see data/README.md' % DEFAULT_RAWLIB)
+        cat.load_rawlib_json(DEFAULT_RAWLIB)
+    return cat
+
+
+def load_catalog(lib=None, raw=None, need_raw=True):
+    """The Catalog for a command line's --lib / --raw pair.
+
+    lib: a KCD library root folder, or a compact catalog (.json / .json.gz); None = DEFAULT_CATALOG.
+    raw: a rawlib bundle (.json / .json.gz) with the full .cab texts; None = DEFAULT_RAWLIB, added only when the
+    catalog is a compact one (a library folder already holds the texts) and need_raw is true."""
+    if not lib and not raw:
+        return default_catalog(need_raw)
+    if not lib:
+        cat = Catalog.from_json(DEFAULT_CATALOG)
+    elif is_json_path(lib):
+        cat = Catalog.from_json(lib)
+    else:
+        cat = Catalog.from_library_root(lib)
+    if raw:
+        cat.load_rawlib_json(raw)
+    elif need_raw and (not lib or is_json_path(lib)):
+        if not os.path.exists(DEFAULT_RAWLIB):
+            raise FileNotFoundError('the library bundle %s is missing; see data/README.md' % DEFAULT_RAWLIB)
+        cat.load_rawlib_json(DEFAULT_RAWLIB)
+    return cat
 
 
 class Unit:
@@ -648,13 +719,13 @@ if __name__ == '__main__':
     import sys, argparse
     ap = argparse.ArgumentParser(description='Print the room sheet of KCD .job files.')
     ap.add_argument('jobs', nargs='+')
-    ap.add_argument('--lib', help='KCD library root (for example C:\\KCD23) or a compact catalog .json')
+    ap.add_argument('--lib', help='KCD library root (for example C:\\KCD23) or a compact catalog .json / .json.gz; '
+                                  'default: the catalog in this repo\'s data folder')
+    ap.add_argument('--raw', help='rawlib bundle (.json / .json.gz) with the full .cab texts; default: the one in data/')
     ap.add_argument('--json', action='store_true', help='print JSON instead of text')
     ap.add_argument('--no-slots', action='store_true', help='summary table only')
     a = ap.parse_args()
-    cat = None
-    if a.lib:
-        cat = Catalog.from_json(a.lib) if a.lib.lower().endswith('.json') else Catalog.from_library_root(a.lib)
+    cat = load_catalog(a.lib, a.raw, need_raw=bool(a.raw))    # the room sheet needs no face geometry
     for p in a.jobs:
         job = read_job(p, cat)
         if a.json:

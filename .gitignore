@@ -1,0 +1,3 @@
+# customer job files dropped in for a run: never committed
+jobs/*
+!jobs/README.md

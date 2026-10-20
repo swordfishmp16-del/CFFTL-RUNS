@@ -5,28 +5,37 @@ everything else keeps its width and slides), then update the units' room points 
 The wall record itself is not changed. Writes OUT.job (same size as the input).
 
     python3 reserve.py JOB.job WALLID OUT.job [--width 0.75]
+
+Shared with kcdfill.reserve_start (the mirror step at the START): load() reads the job for one wall, finish() does the
+room points, the 3-D cache, the byte guard and the write. reserve_end() = load + unit_step(anchor='start') + finish.
 """
 import os, struct, sys, argparse
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))   # the repo's kcd-room-splitter, wherever it is checked out
 import kcdwalls as W
 import kcdmesh
 
-def reserve_end(job_path, wid, out_path, width_in=0.75):
+
+def load(job_path, wid):
+    """Read a job for a reserve step on wall `wid`: (data, original, names, units, by_id, uidx, p, rn).
+    data = bytearray to edit, original = the bytes as read, names = room names, units = kcdwalls.units_by_wall,
+    by_id = the wall records by id, uidx = the live unit records, p = the parsed wall, rn = its room name."""
     data = bytearray(open(job_path, 'rb').read()); original = bytes(data)
     names = W.room_names(original)
     units, uerr = W.units_by_wall(job_path)
     if uerr: raise SystemExit('units could not be read: %s' % uerr)
     recs = W.job_walls(data); by_id = {r.parsed['id']: r for r in recs}
+    if wid not in by_id or not by_id[wid].parsed['is_live']:
+        raise ValueError('wall %d is not a live wall of this job' % wid)
     uidx = W.unit_index(original)
     p = by_id[wid].parsed; rn = names.get(p['room'], '')
-    fw = W.snap16(int(round(width_in * W.IN)))
-    pseudo = dict(p); pseudo['length_raw'] = p['length_raw'] - fw
-    lines, checks, touched = [], [], {}
-    lines.append('wall %d (%s): %s long, unchanged; its units make room for a %s filler at the END' % (wid, rn, W.frac_inches(p['length_raw']), W.frac_inches(fw)))
-    W.unit_step(data, wid, rn, p, pseudo, units.get(wid, []), uidx, lines, checks, touched, anchor='start', spread=True)
-    # room points and 3-D cache of the touched units (the wall did not move)
+    return data, original, names, units, by_id, uidx, p, rn
+
+
+def finish(data, original, p, ulist, uidx, touched, lines, checks, out_path):
+    """Room points and 3-D cache of the touched units of wall p (the wall did not move), then the byte guard (only
+    unit fields and the moved cache entries may differ from `original`) and the write of out_path."""
     mesh = kcdmesh.Mesh(original); ranges = []; moved = stretched = fv = 0
-    for u in units.get(wid, []):
+    for u in ulist:
         if u['id'] not in touched or u['id'] not in uidx: continue
         x_old, w_old, x_new, w_new = touched[u['id']]
         A, B = W.unit_points(original, uidx[u['id']])
@@ -60,6 +69,18 @@ def reserve_end(job_path, wid, out_path, width_in=0.75):
         while k < len(allowed) and allowed[k][1] <= i: k += 1
         if not (k < len(allowed) and allowed[k][0] <= i < allowed[k][1]): raise RuntimeError('byte %d outside the allowed fields changed' % i)
     open(out_path, 'wb').write(bytes(data))
+    return ranges
+
+
+def reserve_end(job_path, wid, out_path, width_in=0.75):
+    data, original, names, units, by_id, uidx, p, rn = load(job_path, wid)
+    fw = W.snap16(int(round(width_in * W.IN)))
+    pseudo = dict(p); pseudo['length_raw'] = p['length_raw'] - fw
+    lines, checks, touched = [], [], {}
+    lines.append('wall %d (%s): %s long, unchanged; its units make room for a %s filler at the END' % (wid, rn, W.frac_inches(p['length_raw']), W.frac_inches(fw)))
+    W.unit_step(data, wid, rn, p, pseudo, units.get(wid, []), uidx, lines, checks, touched, anchor='start', spread=True)
+    # room points and 3-D cache of the touched units (the wall did not move), guard, write
+    finish(data, original, p, units.get(wid, []), uidx, touched, lines, checks, out_path)
     return lines, checks, touched
 
 if __name__ == '__main__':

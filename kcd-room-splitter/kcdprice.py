@@ -1053,16 +1053,14 @@ if __name__ == '__main__':
                          'folders in order, the full base list first and then each update pack (for example '
                          '--pricelist "...\\_26-05-03 MAY CFFL PRICING" --pricelist "...\\_26-05-22 MAY"); a later folder\'s '
                          'file replaces an earlier one with the same name')
-    ap.add_argument('--lib', required=True, help='KCD library root or compact catalog .json')
-    ap.add_argument('--raw', help='rawlib.json with the full .cab texts (needed for doors when --lib is a compact catalog)')
+    ap.add_argument('--lib', help='KCD library root or compact catalog .json / .json.gz; default: the one in this repo\'s data folder')
+    ap.add_argument('--raw', help='rawlib bundle (.json / .json.gz) with the full .cab texts (needed for doors when --lib is a compact catalog); default: data/rawlib.json.gz')
     ap.add_argument('--room', type=int, help='only this room number')
     ap.add_argument('--afterprice', action='store_true', help='also run XXAfterPrice.PCB after every line (slow, totals only)')
     ap.add_argument('--trace', action='store_true')
     ap.add_argument('--unknown', action='store_true', help='list unknown identifiers and variables')
     a = ap.parse_args()
-    cat = kcdunits.Catalog.from_json(a.lib) if a.lib.lower().endswith('.json') else kcdunits.Catalog.from_library_root(a.lib)
-    if a.raw:
-        cat.load_rawlib_json(a.raw)
+    cat = kcdunits.load_catalog(a.lib, a.raw)
     job = kcdunits.read_job(a.job, cat)
     eng = Engine(a.pricelist, cat, afterprice=a.afterprice, trace=a.trace)
     eng.price_job(job, rooms=[a.room] if a.room else None)

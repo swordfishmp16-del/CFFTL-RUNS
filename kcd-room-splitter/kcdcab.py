@@ -506,15 +506,13 @@ if __name__ == '__main__':
     import argparse, kcdunits
     ap = argparse.ArgumentParser(description='List the door / drawer faces of every unit of a KCD job.')
     ap.add_argument('job')
-    ap.add_argument('--lib', required=True, help='library root, compact catalog .json')
-    ap.add_argument('--raw', help='rawlib.json (full library texts) when --lib is a compact catalog')
+    ap.add_argument('--lib', help='library root, or compact catalog .json / .json.gz; default: the one in this repo\'s data folder')
+    ap.add_argument('--raw', help='rawlib bundle (.json / .json.gz, the full library texts) when --lib is a compact catalog; default: data/rawlib.json.gz')
     ap.add_argument('--room', type=int)
     ap.add_argument('--pair', type=float, default=27.0)
     ap.add_argument('--rules', action='store_true', help='re-apply the U/UI/UIQ rules to the stored sizes')
     a = ap.parse_args()
-    cat = kcdunits.Catalog.from_json(a.lib) if a.lib.lower().endswith('.json') else kcdunits.Catalog.from_library_root(a.lib)
-    if a.raw:
-        cat.load_rawlib_json(a.raw)
+    cat = kcdunits.load_catalog(a.lib, a.raw)
     job = kcdunits.read_job(a.job, cat)
     for u in job.units:
         if a.room and u.room != a.room:
