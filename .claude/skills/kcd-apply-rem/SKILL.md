@@ -29,7 +29,8 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
   order form (the sizing rule is not settled); they go in the report for the engineer.
 - The live Jewelry Trays Direct Shopify store is never touched. The test laptop is read-only except our own `%TEMP%`
   folders. Customer files never go into git: only code, notes and the `data/` bundles.
-- Every output is a TEST file until KCD has opened it. The applied job is named `<Client> - REM <order> applied - TESTn.job`.
+- Every output is a TEST file until KCD has opened it. What goes back per job: one KCD file per room (`<order> <NAME>
+  <ROOM>.job`), one workbook per room, the reports, all in one folder named `<order> <NAME>`.
 
 ## Steps
 0. `run 1084476` means: find the KCD file and the scan for that order, do steps 1-2 with the read-out JSON written
@@ -58,8 +59,9 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
    It applies the walls and heights, shares the change over the same-size sections, fits the interior shelves, runs the
    filler rule (a 3/4 filler is added where a run between two walls has none; corner zones, angled corners and drawer
    units at a wall end become CHECKs), moves the drawing cache, writes `<Client> - REM <order> applied - TESTn.job`
-   and its REPORT (the one KCD file Mike wants per job), reads the rooms with the splitter (the one-room files are
-   not kept unless `--keep-rooms`), fills `<order> <NAME> <ROOM>.xlsm` per room from `data/template.xltm` (Data Entry answers from the sale page
+   and its REPORT, splits it with the splitter into `<order> <NAME> <ROOM>.job` (one KCD file per room: these are the
+   files handed back; the whole-job file is dropped unless `--keep-whole`), fills `<order> <NAME> <ROOM>.xlsm` per room
+   from `data/template.xltm` (Data Entry answers from the sale page
    and the sidebar, the Purchase Order lines and the Doormark design and colour that are certain) with a WORKBOOK
    REPORT each, and writes `DIR/<order> <NAME> RUN REPORT - TESTn.txt` with every CHECK in one place. Without `--rem`
    the first file is `<Client> - fillers checked - TESTn.job` (only when a filler was added).

@@ -22,8 +22,8 @@ Steps and the files they write (DIR = --out):
   1 apply      kcdwalls.apply_rem, filler step on        DIR/<Client> - REM <order> applied - TEST<N>.job  (+ " REPORT.txt")
                without --rem: kcdwalls.fillers_only       DIR/<Client> - fillers checked - TEST<N>.job (+ " REPORT.txt") when a
                                                           filler was added, else only DIR/<Client> - fillers checked.txt
-  2 split      kcdsplit.split_job                        one file per room, read for the workbooks; kept only with --keep-rooms
-                                                          (DIR/<order> <NAME>/<order> <NAME> <ROOM>.job and its SPLIT REPORT)
+  2 split      kcdsplit.split_job                        DIR/<order> <NAME> <ROOM>.job, one KCD file per room (these are the
+                                                          files handed back; the whole-job TEST file is dropped unless --keep-whole)
   3 workbooks  kcdbook.fill from the bundled template    DIR/<order> <NAME> <ROOM>.xlsm  (+ " WORKBOOK REPORT.txt")
   4 report                                               DIR/<order> <NAME> RUN REPORT - TEST<N>.txt
 
@@ -1063,10 +1063,8 @@ def in_short(args, ap, split_res, rooms, books, checks, not_done, shorts, split_
         s1 = 'No remeasure given. ' + (('Filler rule run: %s%s.' % (fp, ('; %s left to the engineer' % plural(holds, 'corner')) if holds else '')) if fp is not None else 'Filler rule not run.')
     L.append('  1. ' + s1)
     # 2. split
-    if split_res and all(r.get('kept', True) for r in rooms):
-        L.append('  2. Split into %s: %s.' % (plural(len(rooms), 'room file'), ', '.join(r['name'] for r in rooms)))
-    elif split_res:
-        L.append('  2. %s read for the workbooks: %s (one KCD file is kept, the applied job).' % (plural(len(rooms), 'room'), ', '.join(r['name'] for r in rooms)))
+    if split_res:
+        L.append('  2. Split into %s, one KCD file per room: %s.' % (plural(len(rooms), 'room file'), ', '.join(r['name'] for r in rooms)))
     elif args.no_split or args.workbooks_only:
         L.append('  2. Not split (not asked for); the workbooks come from the whole file.')
     else:
@@ -1107,43 +1105,56 @@ def in_short(args, ap, split_res, rooms, books, checks, not_done, shorts, split_
     return L
 
 
-def flatten_rooms(out_dir, split_res, rooms, books, not_done):
-    """Mike wants one KCD file per job (the applied one) and everything in one folder: move each room's workbook and
-    WORKBOOK REPORT up into out_dir, drop the one-room KCD files and the splitter's folder and report."""
+def flatten_rooms(out_dir, split_res, rooms, books, not_done, ap, keep_whole):
+    """Mike wants one KCD file PER ROOM that has been through the process, one workbook per room, all in one folder:
+    move the room files, their workbooks and reports and the splitter's report up into out_dir, drop the splitter's
+    folder, and drop the whole-job TEST file (every room is in a room file) unless keep_whole."""
     folder = split_res['folder']
+    moved_all = True
+
+    def up(src):
+        if not src or not os.path.isfile(src) or os.path.dirname(os.path.abspath(src)) == os.path.abspath(out_dir):
+            return src
+        dst = os.path.join(out_dir, os.path.basename(src))
+        os.replace(src, dst)
+        return dst
+    for room in rooms:
+        if room.get('md5') and room.get('path'):
+            old = room['path']
+            try:
+                room['path'] = up(old)
+            except OSError as e:
+                moved_all = False
+                not_done.append('The room file %s could not be moved into %s (%s); it is in %s.' % (os.path.basename(old), out_dir, e.strerror, folder))
+                continue
+            for b in books:
+                if b.get('job') == old:
+                    b['job'] = room['path']
+                    if b.get('text'):
+                        b['text'] = b['text'].replace(rel(old, out_dir), rel(room['path'], out_dir))
     for b in books:
         for key in ('xlsm', 'report'):
             src = b.get(key)
-            if src and os.path.isfile(src) and os.path.dirname(os.path.abspath(src)) != os.path.abspath(out_dir):
-                dst = os.path.join(out_dir, os.path.basename(src))
-                try:
-                    os.replace(src, dst)
-                    if key == 'report':
-                        try:
-                            t = open(dst, encoding='utf-8').read().replace(folder + os.sep, out_dir + os.sep)
-                            open(dst, 'w', encoding='utf-8').write(t)
-                        except OSError:
-                            pass
-                    if key == 'xlsm' and b.get('text'):
-                        b['text'] = b['text'].replace(rel(src, out_dir), rel(dst, out_dir))
-                    b[key] = dst
-                except OSError as e:
-                    not_done.append('%s could not be moved into %s (%s); it is in %s.' % (os.path.basename(src), out_dir, e.strerror, folder))
-    for room in rooms:
-        if room.get('md5') and room.get('path') and os.path.isfile(room['path']):
             try:
-                os.remove(room['path'])
+                dst = up(src)
             except OSError as e:
-                not_done.append('The room file %s could not be removed (%s).' % (os.path.basename(room['path']), e.strerror))
+                not_done.append('%s could not be moved into %s (%s); it is in %s.' % (os.path.basename(src), out_dir, e.strerror, folder))
                 continue
-            for b in books:
-                if b.get('job') == room['path'] and b.get('text'):
-                    b['text'] = b['text'].replace('  Room file:  %s' % rel(room['path'], out_dir), '  Room file:  not kept (the job for KCD is the applied TEST file)')
-            room['kept'] = False
+            if dst != src:
+                if key == 'report':
+                    try:
+                        t = open(dst, encoding='utf-8').read().replace(folder + os.sep, out_dir + os.sep)
+                        open(dst, 'w', encoding='utf-8').write(t)
+                    except OSError:
+                        pass
+                if key == 'xlsm' and b.get('text'):
+                    b['text'] = b['text'].replace(rel(src, out_dir), rel(dst, out_dir))
+                b[key] = dst
     try:
-        if split_res.get('report') and os.path.isfile(split_res['report']):
-            os.remove(split_res['report'])
-        split_res['report'] = None
+        split_res['report'] = up(split_res.get('report'))
+    except OSError:
+        pass
+    try:
         for f in os.listdir(folder):
             if f.lower().endswith('.rtf'):
                 os.remove(os.path.join(folder, f))
@@ -1151,6 +1162,16 @@ def flatten_rooms(out_dir, split_res, rooms, books, not_done):
             os.rmdir(folder)
     except OSError:
         pass
+    # the whole-job TEST file: every room is now in its own file, so it goes unless asked for
+    w = ap.get('written')
+    if w and os.path.isfile(w):
+        ap['written_md5'] = md5(w)
+        if moved_all and not keep_whole and all(r.get('md5') for r in rooms):
+            try:
+                os.remove(w)
+                ap['whole_kept'] = False
+            except OSError as e:
+                not_done.append('The whole-job TEST file could not be removed (%s); it is still in the folder.' % e.strerror)
 
 
 def write_run_report(args, out_dir, client, test_no, ap, split_res, rooms, books, checks, not_done, suggestions, started, split_note):
@@ -1165,16 +1186,16 @@ def write_run_report(args, out_dir, client, test_no, ap, split_res, rooms, books
     L += in_short(args, ap, split_res, rooms, books, checks, not_done, shorts, split_note)
     # files
     L += ['', 'FILES  (all in %s)' % out_dir]
-    if ap.get('written'):
-        L.append('  %s  (the job for KCD)' % rel(ap['written'], out_dir))
+    if ap.get('written') and ap.get('whole_kept', True):
+        L.append('  %s  (the whole job after the changes%s)' % (rel(ap['written'], out_dir), '; the room files below are the ones for KCD' if rooms else ''))
     if ap.get('report'):
         L.append('  %s  (what step 1 did, wall by wall)' % rel(ap['report'], out_dir))
     for room in rooms:
-        if room.get('md5') and room.get('kept', True):
-            L.append('  %s  (room file)' % rel(room['path'], out_dir))
+        if room.get('md5'):
+            L.append('  %s  (the KCD file of this room, after the changes)' % rel(room['path'], out_dir))
         b = next((x for x in books if x['job'] == room['path'] and x['room'] == room['name']), None)
         if b:
-            L.append('  %s  (%s)' % (rel(b['xlsm'], out_dir), 'its workbook' if room.get('kept', True) else 'workbook of ' + room['name']))
+            L.append('  %s  (its workbook)' % rel(b['xlsm'], out_dir))
     if split_res and split_res.get('report'):
         L.append('  %s  (the splitter\'s own check)' % rel(split_res['report'], out_dir))
     L.append('  %s  (this report)' % rel(rp, out_dir))
@@ -1226,8 +1247,7 @@ def write_run_report(args, out_dir, client, test_no, ap, split_res, rooms, books
         else:
             L += ['ROOM: %s' % room['name'], '  Room file:  %s' % rel(room['path'], out_dir), '  Workbook:   none']
         if room.get('md5'):
-            L.append('  Room check: %s, %s, %s%s.' % (plural(room['walls'], 'wall'), plural(room['cabinets'], 'cabinet'), plural(room['notes'], 'note'),
-                                                   '' if room.get('kept', True) else ' (read for the workbook; the one-room file was not kept)'))
+            L.append('  Room file check: %s, %s, %s.' % (plural(room['walls'], 'wall'), plural(room['cabinets'], 'cabinet'), plural(room['notes'], 'note')))
         for lvl, msg in room.get('flags', []):
             if lvl == NOTE:
                 L.append('  Note: ' + msg)
@@ -1238,7 +1258,7 @@ def write_run_report(args, out_dir, client, test_no, ap, split_res, rooms, books
     if args.rem:
         rec.append('read-out %s' % args.rem)
     if ap.get('written'):
-        rec.append('TEST job md5 %s' % md5(ap['written']))
+        rec.append('whole-job TEST md5 %s%s' % (ap.get('written_md5') or (md5(ap['written']) if os.path.isfile(ap['written']) else '?'), '' if ap.get('whole_kept', True) else ' (file not kept)'))
     for room in rooms:
         if room.get('md5'):
             rec.append('%s md5 %s' % (os.path.basename(room['path']), room['md5']))
@@ -1276,7 +1296,7 @@ def parse_args(argv):
     ap.add_argument('--sold', type=float, help='the sold-at price (goes into the main room, see --main)')
     ap.add_argument('--main', help='the room that carries the sold-at price (name, contains); not needed for a one-room job')
     ap.add_argument('--replace', action='store_true', help='replace room files, a TEST job or a RUN REPORT already in the output folder')
-    ap.add_argument('--keep-rooms', action='store_true', help='also keep the one-room KCD files the splitter makes (by default only the applied job, the workbooks and the reports are kept, all in one folder)')
+    ap.add_argument('--keep-whole', action='store_true', help='also keep the whole-job TEST file (by default the room files are the KCD files handed back, one per room, with a workbook each, all in one folder)')
     return ap.parse_args(argv)
 
 
@@ -1557,8 +1577,8 @@ def main(argv=None):
     if any(b['has_faces'] for b in books):
         not_done.append('Door sizes were not typed on any order form: the size to order is the size on the door elevation, not the KCD face size, and the tool cannot settle that yet; the faces are listed per room.')
     not_done.append('Nothing was typed on the VJT, CF5, CF Thermo, Final Price Sheet and Job Cart Cover Sheet tabs; what the tool can suggest is listed per room.')
-    if split_res and not args.keep_rooms:
-        flatten_rooms(out_dir, split_res, rooms, books, not_done)
+    if split_res:
+        flatten_rooms(out_dir, split_res, rooms, books, not_done, ap, args.keep_whole)
     rp = write_run_report(args, out_dir, client, test_no, ap, split_res, rooms, books, checks, not_done, suggestions, started, split_note)
     print(open(rp, encoding='utf-8').read())
     print('RUN REPORT: %s' % rp)

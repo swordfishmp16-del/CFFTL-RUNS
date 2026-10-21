@@ -12,8 +12,8 @@ Drop into it:
 - later, if you have them: the engineer's finished room files and workbook (they are used to check the tools)
 
 Then type `run 1084476`. Claude reads the scan, writes the read-out next to it (`REM-1084476-ROBERTS.json`) and runs
-the whole chain. Everything it makes lands in one folder: the applied TEST job (the one KCD file) and its report, one pricing
-workbook per room, and the RUN REPORT with every CHECK in one place.
+the whole chain. Everything it makes lands in one folder: one KCD file per room that has been through the process, one pricing
+workbook per room, the step report and the RUN REPORT with every CHECK in one place.
 
 Nothing in this folder is ever committed to git (see `.gitignore`): customer files stay on this computer or in this
 session only. The READ ME is the only file here that is in the repo.
