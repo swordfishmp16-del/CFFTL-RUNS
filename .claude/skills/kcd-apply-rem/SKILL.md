@@ -30,16 +30,21 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
 - The live Jewelry Trays Direct Shopify store is never touched. The test laptop is read-only except our own `%TEMP%`
   folders. Customer files never go into git: only code, notes and the `data/` bundles.
 - Every output is a TEST file until KCD has opened it. What goes back per job: one KCD file per room (`<order> <NAME>
-  <ROOM>.job`), one workbook per room, the reports, all in one folder named `<order> <NAME>`.
+  <ROOM>.job`) and one workbook per room, in the finished folder `<order> <NAME>` and NOTHING else in it (owner's rule,
+  Oct 21 2026: a bot moves that folder as it is into the shop's production folders). Every report, the inputs and any
+  work file go to the reports folder of the order instead; the run does this itself. Never put anything else into the
+  finished folder.
 
 ## Steps
 0. `run 1084476` means: find the KCD file and the scan for that order, do steps 1-2 with the read-out JSON written
    next to the scan, then step 3 with `python3 kcdrun.py 1084476` (it finds the files itself). Where it looks:
    - on Mike's own computer: the in folder `C:\grok rem in` (the files dropped flat in it, named like
      `ELIZABETH ROBERTS KCD.job` and `REM-1084476-ROBERTS.pdf`); the finished run lands in
-     `C:\grok rem completed\1084476 ROBERTS\` and the three input files are moved there when the run succeeds, so
+     `C:\grok rem completed\1084476 ROBERTS\` (room files and workbooks only); the reports go to
+     `C:\grok rem reports\1084476 ROBERTS\`, and the three input files are moved there when the run succeeds, so
      the in folder is empty again for that order. Tell Mike which files were taken and where everything went.
-   - in a cloud session: `jobs/1084476 <NAME>/` (uploaded files go there), results in its `out/` folder.
+   - in a cloud session: `jobs/1084476 <NAME>/` (uploaded files go there); room files and workbooks in its `out/`
+     folder, every report in its `reports/` folder.
    If there are two `.job` files and neither is clearly this order, or no scan, stop and ask which.
 1. Render the scan (`pdftoppm -r 150 -png`, and `-r 260` crops for the handwritten numbers) and READ it yourself.
    On a Windows computer without `pdftoppm`, read the PDF pages directly with the Read tool (a few pages at a time).
@@ -63,7 +68,9 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
    files handed back; the whole-job file is dropped unless `--keep-whole`), fills `<order> <NAME> <ROOM>.xlsm` per room
    from `data/template.xltm` (Data Entry answers from the sale page
    and the sidebar, the Purchase Order lines and the Doormark design and colour that are certain) with a WORKBOOK
-   REPORT each, and writes `DIR/<order> <NAME> RUN REPORT - TESTn.txt` with every CHECK in one place. Without `--rem`
+   REPORT each, and writes `<order> <NAME> RUN REPORT - TESTn.txt` with every CHECK in one place. DIR keeps only the
+   room files and workbooks; the reports (and a kept whole-job TEST file) go to the reports folder (`--work`,
+   default as in step 0, or `"<DIR> reports"` beside an `--out DIR`). Without `--rem`
    the first file is `<Client> - fillers checked - TESTn.job` (only when a filler was added).
    `--price "<ROOM>=PRICE.tsv"` pastes a price run; `--entry CELL=VALUE` or `"TAB!CELL=VALUE"` types a cell you are
    sure of; `--replace` overwrites room files from an earlier run; `--no-rem` is simply leaving `--rem` out (filler
@@ -74,8 +81,8 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
    `python3 experiments/po/adjust.py TEST1.job TEST2.job UNIT=X,W ...` on the applied file, then
    `python3 kcdrun.py TEST2.job --order ... --name ... --client ... --out DIR --replace` (no `--rem`) to split and
    book the adjusted file. Say so in the report.
-6. Deliver the TEST job, the RUN REPORT, the room files and the workbooks with SendUserFile, then list the CHECKs in
-   three or four lines. Keep the tool's wording; add the human notes.
+6. When the run is done, deliver the finished folder's files (every room `.job` and `.xlsm`) and the RUN REPORT with
+   SendUserFile, then list the CHECKs in three or four lines. Keep the tool's wording; add the human notes.
 
 ## What goes back to the learning project
 The KCD-saved copy of every TEST file, the engineer's finished room file and workbook, and every rule the owner states

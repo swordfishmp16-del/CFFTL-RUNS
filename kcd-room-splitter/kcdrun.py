@@ -27,6 +27,12 @@ Steps and the files they write (DIR = --out):
   3 workbooks  kcdbook.fill from the bundled template    DIR/<order> <NAME> <ROOM>.xlsm  (+ " WORKBOOK REPORT.txt")
   4 report                                               DIR/<order> <NAME> RUN REPORT - TEST<N>.txt
 
+The finished folder DIR holds ONLY the room files (.job) and the workbooks (.xlsm): it is moved as it is into the shop's
+production folders (owner's rule, Oct 21 2026). Every report, the whole-job TEST file when kept, and the input files
+taken from the in folder go to the reports folder WORK instead (--work; default C:\\grok rem reports\\<order> <NAME> next
+to C:\\grok rem completed, or jobs/<order> <NAME>/reports in a cloud session, or "<DIR> reports" beside an --out DIR).
+At the end of every run anything else left in DIR is moved to WORK, so the finished folder is clean without hand work.
+
 Rules: nothing uncertain is written as a fact; a doubtful value becomes a CHECK line for the engineer that says what to
 look at and what to do. An --entry you type wins over everything and is reported as "typed by you". Every file written
 here is a TEST file until KCD has opened it. A bad input stops the run with one plain sentence; a failure in a later step
@@ -107,6 +113,43 @@ def default_done(inbox):
     if os.name == 'nt':
         return WIN_DONE
     return os.path.join(os.path.dirname(os.path.abspath(inbox)), 'grok rem completed')
+
+
+def default_work(out_dir):
+    """The reports folder of a run whose finished folder is out_dir: next to the done folder (C:\\grok rem completed\\X
+    -> C:\\grok rem reports\\X), jobs/X/out -> jobs/X/reports, any other DIR -> 'DIR reports' beside it."""
+    out_dir = os.path.abspath(out_dir)
+    parent, base = os.path.split(out_dir)
+    if os.path.basename(parent).lower() == 'grok rem completed':
+        return os.path.join(os.path.dirname(parent), 'grok rem reports', base)
+    if base.lower() == 'out':
+        return os.path.join(parent, 'reports')
+    return out_dir + ' reports'
+
+
+FINISHED_KEEPS = ('.job', '.xlsm')            # the only files the finished folder holds (room files and workbooks)
+
+
+def is_finished_file(name):
+    """A room file or a workbook; a TEST job or a 'fillers checked' job is work, not a finished file."""
+    return name.lower().endswith(FINISHED_KEEPS) and not TEST_RE.search(name) and 'fillers checked' not in name.lower()
+
+
+def tidy_finished(out_dir, work_dir, ap, split_res, books):
+    """Move everything but the finished room files and workbooks out of out_dir into work_dir, and keep the paths
+    the RUN REPORT names in step. Nothing is deleted; a file of the same name in work_dir is replaced."""
+    moved = {}
+    for f in sorted(os.listdir(out_dir)):
+        p = os.path.join(out_dir, f)
+        if os.path.isfile(p) and not is_finished_file(f):
+            os.makedirs(work_dir, exist_ok=True)
+            q = os.path.join(work_dir, f)
+            os.replace(p, q)
+            moved[p] = q
+    for d, k in [(ap, 'written'), (ap, 'report'), (split_res or {}, 'report')] + [(b, 'report') for b in books]:
+        if d.get(k) in moved:
+            d[k] = moved[d[k]]
+    return moved
 PO_FIRST_ROW = 19
 TEST_RE = re.compile(r' - TEST(\d+)\b', re.I)
 CHECK, NOTE = 'CHECK', 'NOTE'
@@ -145,10 +188,12 @@ def default_client(job_path):
     return re.sub(r'\s+', ' ', base).strip(' -_')
 
 
-def next_test_number(out_dir):
+def next_test_number(out_dir, work_dir=None):
     n = 0
-    if os.path.isdir(out_dir):
-        for f in os.listdir(out_dir):
+    for d in (out_dir, work_dir):
+        if not d or not os.path.isdir(d):
+            continue
+        for f in os.listdir(d):
             m = TEST_RE.search(f)
             if m:
                 n = max(n, int(m.group(1)))
@@ -281,12 +326,12 @@ def step1_names(args, out_dir, client, test_no):
     """(the TEST job path, its REPORT path) for this run."""
     tag = ('REM %s applied' % args.order) if args.rem else 'fillers checked'
     out_job = os.path.join(out_dir, '%s - %s - TEST%d.job' % (client, tag, test_no))
-    out_rep = os.path.join(out_dir, '%s - %s - TEST%d REPORT.txt' % (client, tag, test_no))
+    out_rep = os.path.join(args.work, '%s - %s - TEST%d REPORT.txt' % (client, tag, test_no))
     return out_job, out_rep
 
 
 def run_report_path(args, out_dir, test_no):
-    return os.path.join(out_dir, kcdsplit.file_part('%s %s RUN REPORT - TEST%d.txt' % (args.order, args.name, test_no)))
+    return os.path.join(args.work, kcdsplit.file_part('%s %s RUN REPORT - TEST%d.txt' % (args.order, args.name, test_no)))
 
 
 def step_apply(args, out_dir, client, test_no):
@@ -334,10 +379,10 @@ def step_apply(args, out_dir, client, test_no):
             os.remove(rep['written'])                        # a byte-for-byte copy of the input is no TEST file
             rep['written'] = None
         if not rep.get('written'):
-            out_rep = os.path.join(out_dir, '%s - fillers checked.txt' % client)      # no TEST number when no job was written
+            out_rep = os.path.join(args.work, '%s - fillers checked.txt' % client)      # no TEST number when no job was written
         title = 'Fillers checked in %s' % os.path.basename(args.job)
     if args.rem and not rep.get('written'):
-        out_rep = os.path.join(out_dir, '%s - REM %s checked.txt' % (client, args.order))     # nothing applied, no TEST file
+        out_rep = os.path.join(args.work, '%s - REM %s checked.txt' % (client, args.order))     # nothing applied, no TEST file
     res['rep'] = rep
     text = kcdwalls.format_report(rep, title)
     with open(out_rep, 'w', encoding='utf-8') as fh:
@@ -629,7 +674,7 @@ def room_workbook(room, args, dd, cat, template, price_path, entries_typed, is_m
          'dropped': [], 'engine_flags': [], 'price_lines': [], 'molding_blank': False, 'has_faces': False, 'priced': bool(price_path)}
     folder = os.path.dirname(room['path']) if room['md5'] else args.out
     xlsm = os.path.join(folder, room['base'] + '.xlsm')
-    wrep = os.path.join(folder, room['base'] + ' WORKBOOK REPORT.txt')
+    wrep = os.path.join(args.work, room['base'] + ' WORKBOOK REPORT.txt')
     rn = room['name']
 
     # -- the sidebar and the special-order sheet of this file
@@ -1105,7 +1150,7 @@ def in_short(args, ap, split_res, rooms, books, checks, not_done, shorts, split_
     return L
 
 
-def flatten_rooms(out_dir, split_res, rooms, books, not_done, ap, keep_whole):
+def flatten_rooms(out_dir, split_res, rooms, books, not_done, ap, keep_whole, work_dir):
     """Mike wants one KCD file PER ROOM that has been through the process, one workbook per room, all in one folder:
     move the room files, their workbooks and reports and the splitter's report up into out_dir, drop the splitter's
     folder, and drop the whole-job TEST file (every room is in a room file) unless keep_whole."""
@@ -1133,7 +1178,7 @@ def flatten_rooms(out_dir, split_res, rooms, books, not_done, ap, keep_whole):
                     if b.get('text'):
                         b['text'] = b['text'].replace(rel(old, out_dir), rel(room['path'], out_dir))
     for b in books:
-        for key in ('xlsm', 'report'):
+        for key in ('xlsm',):                       # the workbook reports are already in the reports folder
             src = b.get(key)
             try:
                 dst = up(src)
@@ -1151,7 +1196,12 @@ def flatten_rooms(out_dir, split_res, rooms, books, not_done, ap, keep_whole):
                     b['text'] = b['text'].replace(rel(src, out_dir), rel(dst, out_dir))
                 b[key] = dst
     try:
-        split_res['report'] = up(split_res.get('report'))
+        src = split_res.get('report')               # the splitter's report goes to the reports folder, not the finished one
+        if src and os.path.isfile(src):
+            os.makedirs(work_dir, exist_ok=True)
+            dst = os.path.join(work_dir, os.path.basename(src))
+            os.replace(src, dst)
+            split_res['report'] = dst
     except OSError:
         pass
     try:
@@ -1185,11 +1235,13 @@ def write_run_report(args, out_dir, client, test_no, ap, split_res, rooms, books
         shorts = short_room_names([r['name'] for r in rooms])
     L += in_short(args, ap, split_res, rooms, books, checks, not_done, shorts, split_note)
     # files
-    L += ['', 'FILES  (all in %s)' % out_dir]
+    L += ['', 'FILES',
+          '  Finished folder (only the room files and workbooks, ready to move): %s' % out_dir,
+          '  Reports folder (every report and the inputs): %s' % args.work]
     if ap.get('written') and ap.get('whole_kept', True):
-        L.append('  %s  (the whole job after the changes%s)' % (rel(ap['written'], out_dir), '; the room files below are the ones for KCD' if rooms else ''))
+        L.append('  %s  (the whole job after the changes%s)' % (('reports: ' + os.path.basename(ap['written'])) if os.path.dirname(ap['written']) == args.work else rel(ap['written'], out_dir), '; the room files below are the ones for KCD' if rooms else ''))
     if ap.get('report'):
-        L.append('  %s  (what step 1 did, wall by wall)' % rel(ap['report'], out_dir))
+        L.append('  reports: %s  (what step 1 did, wall by wall)' % os.path.basename(ap['report']))
     for room in rooms:
         if room.get('md5'):
             L.append('  %s  (the KCD file of this room, after the changes)' % rel(room['path'], out_dir))
@@ -1197,8 +1249,11 @@ def write_run_report(args, out_dir, client, test_no, ap, split_res, rooms, books
         if b:
             L.append('  %s  (its workbook)' % rel(b['xlsm'], out_dir))
     if split_res and split_res.get('report'):
-        L.append('  %s  (the splitter\'s own check)' % rel(split_res['report'], out_dir))
-    L.append('  %s  (this report)' % rel(rp, out_dir))
+        L.append('  reports: %s  (the splitter\'s own check)' % os.path.basename(split_res['report']))
+    for b in books:
+        if b.get('report'):
+            L.append('  reports: %s  (the workbook report of %s)' % (os.path.basename(b['report']), b['room']))
+    L.append('  reports: %s  (this report)' % os.path.basename(rp))
     made = 'Made from %s' % os.path.basename(args.job)
     if args.rem:
         made += ' and %s' % os.path.basename(args.rem)
@@ -1277,6 +1332,7 @@ def parse_args(argv):
     ap.add_argument('--jobs', help='with an order number: the folder that holds "<order> <NAME>" folders (default: jobs/ at the repo root)')
     ap.add_argument('--inbox', help='with an order number: the in folder where the KCD file and the remeasure were dropped (default: C:\\grok rem in when it exists)')
     ap.add_argument('--done', help='with --inbox: where the finished run goes, one folder per order (default: C:\\grok rem completed)')
+    ap.add_argument('--work', help='the reports folder: every report, the inputs taken from the in folder and any work file (default: C:\\grok rem reports\\<order> <NAME>, jobs/<order> <NAME>/reports, or "<out> reports"); the finished folder keeps only room files and workbooks')
     ap.add_argument('--rem', help='the remeasure read-out JSON; without it only the fillers are checked')
     ap.add_argument('--order', help='the order (job) number, e.g. 1084476 (not needed when the first argument is the order number)')
     ap.add_argument('--name', help='the customer last name for the file names, e.g. ROBERTS (with an order number: from the folder name)')
@@ -1461,6 +1517,13 @@ def check_inputs(args):
     except OSError as e:
         raise StopRun('The output folder %s could not be made (%s).' % (args.out, e.strerror))
     args.out = os.path.abspath(args.out)
+    args.work = os.path.abspath(args.work or default_work(args.out))
+    if args.work == args.out:
+        raise StopRun('The reports folder must not be the finished folder %s: that one holds only the room files and workbooks.' % args.out)
+    try:
+        os.makedirs(args.work, exist_ok=True)
+    except OSError as e:
+        raise StopRun('The reports folder %s could not be made (%s).' % (args.work, e.strerror))
 
 
 def refuse_existing_test(args, out_dir, client, test_no):
@@ -1468,7 +1531,8 @@ def refuse_existing_test(args, out_dir, client, test_no):
     if not args.test or args.replace:
         return
     out_job, out_rep = step1_names(args, out_dir, client, test_no)
-    there = [os.path.basename(p) for p in (out_job, out_rep, run_report_path(args, out_dir, test_no)) if os.path.exists(p)]
+    kept_job = os.path.join(args.work, os.path.basename(out_job))       # a kept whole-job TEST file is moved there
+    there = [os.path.basename(p) for p in (out_job, kept_job, out_rep, run_report_path(args, out_dir, test_no)) if os.path.exists(p)]
     if there:
         raise StopRun('TEST %d is already in %s (%s). Use the next number, or run again with --replace to overwrite it.' % (test_no, out_dir, ', '.join(there)))
 
@@ -1480,7 +1544,7 @@ def main(argv=None):
         check_inputs(args)
         out_dir = args.out
         client = args.client or default_client(args.job)
-        test_no = args.test or next_test_number(out_dir)
+        test_no = args.test or next_test_number(out_dir, args.work)
         refuse_existing_test(args, out_dir, client, test_no)
     except StopRun as e:
         print(str(e))
@@ -1578,7 +1642,12 @@ def main(argv=None):
         not_done.append('Door sizes were not typed on any order form: the size to order is the size on the door elevation, not the KCD face size, and the tool cannot settle that yet; the faces are listed per room.')
     not_done.append('Nothing was typed on the VJT, CF5, CF Thermo, Final Price Sheet and Job Cart Cover Sheet tabs; what the tool can suggest is listed per room.')
     if split_res:
-        flatten_rooms(out_dir, split_res, rooms, books, not_done, ap, args.keep_whole)
+        flatten_rooms(out_dir, split_res, rooms, books, not_done, ap, args.keep_whole, args.work)
+    # the finished folder keeps only the room files and the workbooks; everything else goes to the reports folder
+    try:
+        tidy_finished(out_dir, args.work, ap, split_res, books)
+    except OSError as e:
+        not_done.append('The finished folder could not be cleaned (%s): move every file but the room .job files and the .xlsm workbooks out of %s by hand.' % (e.strerror, out_dir))
     rp = write_run_report(args, out_dir, client, test_no, ap, split_res, rooms, books, checks, not_done, suggestions, started, split_note)
     print(open(rp, encoding='utf-8').read())
     print('RUN REPORT: %s' % rp)
@@ -1587,12 +1656,12 @@ def main(argv=None):
         moved = []
         for f in args.inbox_files:
             try:
-                shutil.move(f, os.path.join(out_dir, os.path.basename(f)))
+                shutil.move(f, os.path.join(args.work, os.path.basename(f)))
                 moved.append(os.path.basename(f))
             except OSError as e:
-                print('Could not move %s into %s (%s); it is still in the in folder.' % (f, out_dir, e))
+                print('Could not move %s into %s (%s); it is still in the in folder.' % (f, args.work, e))
         if moved:
-            line = 'Moved from the in folder into %s: %s.' % (out_dir, ', '.join(moved))
+            line = 'Moved from the in folder into the reports folder %s: %s.' % (args.work, ', '.join(moved))
             print(line)
             with open(rp, 'a', encoding='utf-8') as fh:
                 fh.write('\n' + line + '\n')
