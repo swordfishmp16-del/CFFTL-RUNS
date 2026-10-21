@@ -1,5 +1,9 @@
 # jobs folder: where you drop a job to run it
 
+On your own computer you do not need this folder: drop the KCD file and the scan into `C:\grok rem in`, type
+`run <order>`, and the finished run lands in `C:\grok rem completed\<order> <NAME>\` (the inputs are moved there too).
+In a cloud session the files are uploaded and this folder is used instead:
+
 One folder per order, named with the order number and the last name, for example `jobs/1084476 ROBERTS/`.
 Drop into it:
 

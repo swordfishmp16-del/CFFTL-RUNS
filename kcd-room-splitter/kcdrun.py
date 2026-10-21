@@ -10,7 +10,7 @@ everything that is certain, and write one plain-English RUN REPORT for the engin
                       [--template PATH] [--price "ROOM NAME=PRICE.tsv" ...] [--entry CELL=VALUE ...]
                       [--designer NAME] [--install YYYY-MM-DD] [--sold 5585] [--main "ROOM NAME"] [--replace]
 
-    python3 kcdrun.py 1084476 [--jobs DIR] [every other flag]
+    python3 kcdrun.py 1084476 [--jobs DIR | --inbox DIR --done DIR] [every other flag]
         Run by order number: DIR (default: the jobs/ folder at the repo root) holds one folder "1084476 <NAME>" with the
         designer's .job and the read-out REM-*.json; the name comes from the folder, the output goes to its out/ folder.
 
@@ -76,6 +76,7 @@ import datetime
 import hashlib
 import json
 import os
+import shutil
 import re
 import sys
 import traceback
@@ -93,6 +94,18 @@ import soitems  # noqa: E402
 
 DOORMARK_REF = os.path.join(HERE, 'experiments', 'po', 'doormark_ref.json')
 DEFAULT_JOBS_DIR = os.path.normpath(os.path.join(HERE, '..', 'jobs'))
+WIN_INBOX = r'C:\grok rem in'                 # Mike's in folder on his own computer: the KCD file and the scan go there
+WIN_DONE = r'C:\grok rem completed'           # where a finished run lands, one folder per order
+
+
+def default_inbox():
+    return WIN_INBOX if os.path.isdir(WIN_INBOX) else None
+
+
+def default_done(inbox):
+    if os.name == 'nt':
+        return WIN_DONE
+    return os.path.join(os.path.dirname(os.path.abspath(inbox)), 'grok rem completed')
 PO_FIRST_ROW = 19
 TEST_RE = re.compile(r' - TEST(\d+)\b', re.I)
 CHECK, NOTE = 'CHECK', 'NOTE'
@@ -1192,6 +1205,8 @@ def parse_args(argv):
     ap = argparse.ArgumentParser(description='Apply a remeasure to a KCD job, split it into room files and fill a pricing workbook per room.')
     ap.add_argument('job', help="the designer's .job, or an order number (then the job and the read-out are taken from the jobs folder)")
     ap.add_argument('--jobs', help='with an order number: the folder that holds "<order> <NAME>" folders (default: jobs/ at the repo root)')
+    ap.add_argument('--inbox', help='with an order number: the in folder where the KCD file and the remeasure were dropped (default: C:\\grok rem in when it exists)')
+    ap.add_argument('--done', help='with --inbox: where the finished run goes, one folder per order (default: C:\\grok rem completed)')
     ap.add_argument('--rem', help='the remeasure read-out JSON; without it only the fillers are checked')
     ap.add_argument('--order', help='the order (job) number, e.g. 1084476 (not needed when the first argument is the order number)')
     ap.add_argument('--name', help='the customer last name for the file names, e.g. ROBERTS (with an order number: from the folder name)')
@@ -1215,9 +1230,62 @@ def parse_args(argv):
 
 
 def resolve_order(args):
-    """'python3 kcdrun.py 1084476': find jobs/1084476*/ with the designer's job and the read-out; fill in args."""
+    """'python3 kcdrun.py 1084476': find the designer's job and the read-out by the order number and fill in args.
+    With an in folder (--inbox, or C:\\grok rem in on Mike's computer) the two files are taken from there and the run
+    lands in the done folder; otherwise jobs/<order> <NAME>/ at the repo root is used."""
     order = args.job.strip()
-    jobs_dir = os.path.abspath(args.jobs or DEFAULT_JOBS_DIR)
+    inbox = args.inbox or default_inbox()
+    if inbox:
+        return resolve_inbox(args, order, inbox)
+    return resolve_folder(args, order, os.path.abspath(args.jobs or DEFAULT_JOBS_DIR))
+
+
+def resolve_inbox(args, order, inbox):
+    inbox = os.path.abspath(inbox)
+    if not os.path.isdir(inbox):
+        raise StopRun('The in folder %s does not exist; make it and drop the KCD file and the remeasure scan in it.' % inbox)
+    files = sorted(os.listdir(inbox))
+    subs = [d for d in files if os.path.isdir(os.path.join(inbox, d)) and d.startswith(order) and (len(d) == len(order) or not d[len(order)].isdigit())]
+    if subs:                                        # a folder per order inside the in folder works too
+        resolve_folder(args, order, inbox)
+        args.out = os.path.join(os.path.abspath(args.done or default_done(inbox)), os.path.basename(os.path.dirname(args.job)))
+        args.inbox_files = [args.job, args.rem] + [os.path.join(os.path.dirname(args.job), f) for f in os.listdir(os.path.dirname(args.job)) if f.lower().endswith('.pdf')]
+        args.found += ' Results go to %s.' % args.out
+        return
+    pdfs = [f for f in files if f.lower().endswith('.pdf') and order in f]
+    jsons = [f for f in files if f.lower().endswith('.json') and order in f]
+    jobs = [f for f in files if f.lower().endswith('.job') and not re.search(r'test|applied|fillers checked', f, re.I)]
+    rem_name = (jsons or pdfs or [''])[0]
+    m = re.match(r'REM[-_ ]*\d+[-_ ]*(.+?)\.(pdf|json)$', rem_name, re.I)
+    name = (args.name or (m.group(1).strip(' -_') if m else '')).upper()
+    if not jobs:
+        raise StopRun("No KCD job file in %s; drop the designer's .job there." % inbox)
+    if len(jobs) > 1:
+        narrowed = [f for f in jobs if order in f] or ([f for f in jobs if name and name.lower() in f.lower()] if name else [])
+        if len(narrowed) == 1:
+            jobs = narrowed
+        else:
+            raise StopRun('More than one KCD job file in %s (%s) and none is clearly order %s; leave only the right one there.' % (inbox, ', '.join(jobs), order))
+    if not jsons:
+        if pdfs:
+            raise StopRun('The in folder %s has the scan %s but no read-out yet: read the scan and write REM-%s-%s.json next to it first.'
+                          % (inbox, pdfs[0], order, name or 'NAME'))
+        raise StopRun('No remeasure for order %s in %s (no REM-%s-*.pdf and no REM-%s-*.json), so nothing was run.' % (order, inbox, order, order))
+    if len(jsons) > 1:
+        raise StopRun('More than one read-out for order %s in %s (%s); keep one.' % (order, inbox, ', '.join(jsons)))
+    if not name:
+        raise StopRun('The customer name is not in the file names (expected REM-%s-NAME.pdf); give it with --name.' % order)
+    done_root = os.path.abspath(args.done or default_done(inbox))
+    args.job = os.path.join(inbox, jobs[0])
+    args.rem = os.path.join(inbox, jsons[0])
+    args.order = order
+    args.name = name
+    args.out = args.out or os.path.join(done_root, '%s %s' % (order, name))
+    args.inbox_files = [args.job, args.rem] + [os.path.join(inbox, f) for f in pdfs]
+    args.found = 'Order %s: job %s and read-out %s found in %s; results go to %s.' % (order, jobs[0], jsons[0], inbox, args.out)
+
+
+def resolve_folder(args, order, jobs_dir):
     if not os.path.isdir(jobs_dir):
         raise StopRun('The jobs folder %s does not exist; make it and put the folder "%s <NAME>" with the job and the remeasure in it.' % (jobs_dir, order))
     hits = [d for d in sorted(os.listdir(jobs_dir)) if d.startswith(order) and os.path.isdir(os.path.join(jobs_dir, d))
@@ -1442,6 +1510,19 @@ def main(argv=None):
     print(open(rp, encoding='utf-8').read())
     print('RUN REPORT: %s' % rp)
     failed = any('failed' in s or 'was not made' in s or 'was not run' in s for s in not_done)
+    if getattr(args, 'inbox_files', None) and not failed:
+        moved = []
+        for f in args.inbox_files:
+            try:
+                shutil.move(f, os.path.join(out_dir, os.path.basename(f)))
+                moved.append(os.path.basename(f))
+            except OSError as e:
+                print('Could not move %s into %s (%s); it is still in the in folder.' % (f, out_dir, e))
+        if moved:
+            line = 'Moved from the in folder into %s: %s.' % (out_dir, ', '.join(moved))
+            print(line)
+            with open(rp, 'a', encoding='utf-8') as fh:
+                fh.write('\n' + line + '\n')
     return 1 if failed else 0
 
 
