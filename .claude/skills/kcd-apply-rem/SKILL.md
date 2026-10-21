@@ -58,8 +58,8 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
    It applies the walls and heights, shares the change over the same-size sections, fits the interior shelves, runs the
    filler rule (a 3/4 filler is added where a run between two walls has none; corner zones, angled corners and drawer
    units at a wall end become CHECKs), moves the drawing cache, writes `<Client> - REM <order> applied - TESTn.job`
-   and its REPORT, splits that file into `DIR/<order> <NAME>/<order> <NAME> <ROOM>.job` with the splitter's own SPLIT
-   REPORT, fills `<order> <NAME> <ROOM>.xlsm` per room from `data/template.xltm` (Data Entry answers from the sale page
+   and its REPORT (the one KCD file Mike wants per job), reads the rooms with the splitter (the one-room files are
+   not kept unless `--keep-rooms`), fills `<order> <NAME> <ROOM>.xlsm` per room from `data/template.xltm` (Data Entry answers from the sale page
    and the sidebar, the Purchase Order lines and the Doormark design and colour that are certain) with a WORKBOOK
    REPORT each, and writes `DIR/<order> <NAME> RUN REPORT - TESTn.txt` with every CHECK in one place. Without `--rem`
    the first file is `<Client> - fillers checked - TESTn.job` (only when a filler was added).
