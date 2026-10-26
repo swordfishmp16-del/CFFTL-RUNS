@@ -1,0 +1,60 @@
+        DOORMARK QUICK REFERENCE – ORDERING CODES, OPTIONS
+                         & MINIMUM SIZES
+                                                                                   AVAILABLE STYLES                     MINIMUM SIZES
+DESIGN                                               ORDERING
+ TYPE           DOOR DESIGNS                           CODE                                                             DOOR      DRAWER
+                                                                                    DOORS                   DRAWERS
+                                                                                                                        WIDTH     HEIGHT
+  SLAB         BAL HARBOR                              BAL                      BAL                         SLB   BAL     6.00”     4.00”
+  SLAB         BIMINI                                   BIM          SLB                                    SLB          6.00”      2.00”
+  SLAB         BISCAYNE                                 BIS                     BIS                         SLB   BIS    6.00”      4.00”
+  SLAB         CAPRIS                                   CPR          SLB                                    SLB           6.00”     2.00”
+  SLAB         FAIRWAY                                 FRW                     FRW                          SLB   FRW    6.00”      4.50”
+  SLAB         GULFSTREAM                              GUL           SLB                                    SLB          6.00”      2.00”
+  SLAB         ISLAMORADA                               ISL          SLB                                    SLB          6.00”      3.00”
+  SLAB         SEBRING                                  SEB          SLB                                    SLB          6.00”      2.00”
+  SLAB         SOUTH BEACH                             SOU           SLB                                    SLB          6.00”      2.00”
+  SLAB         SUNRISE                                 SUN           SLB                                    SLB           6.00”     2.00”
+  SLAB         VENICE                                  VEN           SLB                                    SLB          6.00”      2.00”
+ ROUND         DORAL                                   DOR           SLB       SRP         ARP       CRP    SLB   RR      7.75”     5.75”
+ ROUND         MARTINIQUE                              MAR           SLB       SRP         ARP       CRP    SLB   RR     7.50”      5.25”
+ ROUND         MONTEGO                                 MON           SLB       SRP         ARP       CRP    SLB   RR     8.00”      6.00”
+ ROUND         ORLANDO                                 ORL           SLB       SRP         ARP       CRP    SLB   RR     7.50”      5.75”
+ ROUND         POMPANO                                 POM           SLB       SRP         ARP       CRP    SLB   RR      7.50”    5.375”
+ ROUND         WESTON                                  WES           SLB       SRP         ARP       CRP    SLB   RR     7.625”     5.50”
+SQUARE         CAPTIVA                                  CAP          SLB       SPR         ARP       CRP    SLB   RR     7.375”    5.375”
+SQUARE         DAYTONA                                 DAY           SLB       SRP         ARP       CRP    SLB   RR     7.375”    5.375”
+SQUARE         ENGLEWOOD                               ENG           SLB       SRP         ARP       CRP    SLB   RR     7.375”    5.375”
+SQUARE         HOLLYWOOD                               HOL           SLB        SRP        ARP       CRP    SLB   RR     7.00”      5.00”
+SQUARE         KEY LARGO                               KEY           SLB        SRP        ARP       CRP    SLB   RR      7.50”     5.50”
+SQUARE         LAS OLAS                                 LAS          SLB        SRP        ARP       CRP    SLB   RR      8.00”     5.50”
+SQUARE         PORT CHARLOTTE                           POR          SLB        SRP        ARP       CRP    SLB   RR      7.50”     5.50”
+SQUARE         SAN MARCO                               SAN           SLB        SRP        ARP       CRP    SLB   RR     8.125”    5.875”
+SHAKER         SHAKER ABACOA                           SHA                     SHA                          SLB   RR     6.00”      4.50”
+SHAKER         SHAKER BAHAMA                            SHB                     SHB                         SLB   RR     6.00”      4.50”
+SHAKER         SHAKER DULUTH                           SHD                     SHD                          SLB   RR     6.00”      4.50”
+SHAKER         EURO SHAKER                             EUSH                    EUSH                         SLB   RR     6.00”      4.50”
+SHAKER         SHAKER FREEPORT                          SHF                     SHF                         SLB   RR     6.00”      4.50”
+SHAKER         HOLLY HILL                               HHI                     HHI                         N/A          6.00”      N/A
+SHAKER         SHAKER MARATHON                         SHM                     SHM                          SLB   RR     6.00”      4.50”
+SHAKER         SHAKER NAPLES                           SHN                     SHN                          SLB   RR     6.00”      4.50”
+SHAKER         SHAKER PANAMA                           SHP                     SHP                          SLB   RR     8.00”      4.50”
+SHAKER         SHAKER SARASOTA                         SHS                     SHS                          SLB   RR     6.00”      4.50”
+SHAKER         SHAKER TORTUGA                          SHR                     SRP         ARP       CRP    SLB   RR      7.00”     5.00”
+APPLIED        PALM BEACH                              PAL           SLB       SRP                          SLB   RR     8.00”     5.875”
+APPLIED        VIZCAYA                                  VIZ          SLB       SRP                          SLB   RR     8.00”      5.75”
+APPLIED        WELLINGTON                              WEL           SLB       SRP                          SLB   RR     8.00”      5.75”
+INFINITE       SHAKER JUPITER                           SHJ                     SHJ                         SLB   RR     7.25”      5.00”
+INFINITE       SHAKER LARGO                            SHL                     SHL                          SLB   RR     7.25”      5.00”
+INFINITE       SHAKER VERO                             SHV                     SHV                          SLB   RR     7.25”      5.00”
+**All Minimum Width sizes shown for Raised Panel door designs are for SRP style ONLY…
+ARP & CRP style doors require an additional 2 inches or more, depending on the door design.
+
+
+
+**SLB = Slab (designs ordered as slab will have the matching door edge unless square edges are requested)
+**SRP = Square Raised Panel
+**ARP = Arched Raised Panel
+**CRP = Cathedral Raised Pane
+**RR = Reduced Rail Raised Panel
+

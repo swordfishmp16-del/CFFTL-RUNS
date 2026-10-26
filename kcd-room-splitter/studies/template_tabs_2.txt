@@ -1,0 +1,609 @@
+
+## CF5 Order maxrow 51 maxcol 21
+B1	Minimum Door Width is 9 1/2"           Minimum Drawer Height is 7 1/2"
+K1	CF5 PURCHASE ORDER
+K2	CLOSET FACTORY 5 PIECE / INSERT FORM
+J3	ENGINEER
+J4	='Data Entry'!F3
+L4	P.O. DATE  
+M4	=TODAY()
+L6	PO NUMBER
+M6	=CONCATENATE('Data Entry'!B5," - ",'Data Entry'!B7," - ",'Data Entry'!B9)
+J7	TOTAL RIPS: 
+B8	Input Size according to KCD
+J8	=SUM(K14,K18,K22,K26,K30,K34,K38,K42,K46,K50)
+L8	INSTALL DATE
+M8	='Data Entry'!C1
+B10	WIDTH
+D10	HEIGHT
+G10	QTY.
+H10	WIDTH
+I10	HEIGHT
+J10	SPECS
+L10	COLOR
+M10	INSERT
+N10	INSERT WIDTH                                      (W-5 1/2")
+O10	INSERT HEIGHT                          (H-5 1/2")
+H11	=IF(B11=""," ",B11-'Data Conversions'!AB1)
+I11	=IF(D11=""," ",D11-'Data Conversions'!AB1)
+J11	1MM
+N11	=IF(ISBLANK(B11),"",B11-5.5625)
+O11	=IF(ISBLANK(D11),"",D11-5.5625)
+G13	CUT SIZE
+H13	=IF(B11=""," ",B11+'Data Conversions'!AC1)
+I13	=IF(D11=""," ",D11+'Data Conversions'!AD1)
+G14	ROOM:
+J14	RIPS:
+H15	=IF(B15=""," ",B15-'Data Conversions'!AB2)
+I15	=IF(D15=""," ",D15-'Data Conversions'!AB2)
+J15	1MM
+N15	=IF(ISBLANK(B15),"",B15-5.5625)
+O15	=IF(ISBLANK(D15),"",D15-5.5625)
+G17	CUT SIZE
+H17	=IF(B15=""," ",B15+'Data Conversions'!AC2)
+I17	=IF(D15=""," ",D15+'Data Conversions'!AD2)
+G18	ROOM:
+J18	RIPS:
+H19	=IF(B19=""," ",B19-'Data Conversions'!AB3)
+I19	=IF(D19=""," ",D19-'Data Conversions'!AB3)
+J19	1MM
+N19	=IF(ISBLANK(B19),"",B19-5.5625)
+O19	=IF(ISBLANK(D19),"",D19-5.5625)
+G21	CUT SIZE
+H21	=IF(B19=""," ",B19+'Data Conversions'!AC3)
+I21	=IF(D19=""," ",D19+'Data Conversions'!AD3)
+G22	ROOM:
+J22	RIPS:
+H23	=IF(B23=""," ",B23-'Data Conversions'!AB4)
+I23	=IF(D23=""," ",D23-'Data Conversions'!AB4)
+J23	1MM
+N23	=IF(ISBLANK(B23),"",B23-5.5625)
+O23	=IF(ISBLANK(D23),"",D23-5.5625)
+G25	CUT SIZE
+H25	=IF(B23=""," ",B23+'Data Conversions'!AC4)
+I25	=IF(D23=""," ",D23+'Data Conversions'!AD4)
+G26	ROOM:
+J26	RIPS:
+H27	=IF(B27=""," ",B27-'Data Conversions'!AB5)
+I27	=IF(D27=""," ",D27-'Data Conversions'!AB5)
+J27	1MM
+N27	=IF(ISBLANK(B27),"",B27-5.5625)
+O27	=IF(ISBLANK(D27),"",D27-5.5625)
+G29	CUT SIZE
+H29	=IF(B27=""," ",B27+'Data Conversions'!AC5)
+I29	=IF(D27=""," ",D27+'Data Conversions'!AD5)
+G30	ROOM:
+J30	RIPS:
+H31	=IF(B31=""," ",B31-'Data Conversions'!AB6)
+I31	=IF(D31=""," ",D31-'Data Conversions'!AB6)
+J31	1MM
+N31	=IF(ISBLANK(B31),"",B31-5.5625)
+O31	=IF(ISBLANK(D31),"",D31-5.5625)
+G33	CUT SIZE
+H33	=IF(B31=""," ",B31+'Data Conversions'!AC6)
+I33	=IF(D31=""," ",D31+'Data Conversions'!AD6)
+G34	ROOM:
+J34	RIPS:
+H35	=IF(B35=""," ",B35-'Data Conversions'!AB7)
+I35	=IF(D35=""," ",D35-'Data Conversions'!AB7)
+J35	1MM
+N35	=IF(ISBLANK(B35),"",B35-5.5625)
+O35	=IF(ISBLANK(D35),"",D35-5.5625)
+G37	CUT SIZE
+H37	=IF(B35=""," ",B35+'Data Conversions'!AC7)
+I37	=IF(D35=""," ",D35+'Data Conversions'!AD7)
+G38	ROOM:
+J38	RIPS:
+H39	=IF(B39=""," ",B39-'Data Conversions'!AB8)
+I39	=IF(D39=""," ",D39-'Data Conversions'!AB8)
+J39	1MM
+N39	=IF(ISBLANK(B39),"",B39-5.5625)
+O39	=IF(ISBLANK(D39),"",D39-5.5625)
+G41	CUT SIZE
+H41	=IF(B39=""," ",B39+'Data Conversions'!AC8)
+I41	=IF(D39=""," ",D39+'Data Conversions'!AD8)
+G42	ROOM:
+J42	RIPS:
+H43	=IF(B43=""," ",B43-'Data Conversions'!AB9)
+I43	=IF(D43=""," ",D43-'Data Conversions'!AB9)
+J43	1MM
+N43	=IF(ISBLANK(B43),"",B43-5.5625)
+O43	=IF(ISBLANK(D43),"",D43-5.5625)
+G45	CUT SIZE
+H45	=IF(B43=""," ",B43+'Data Conversions'!AC9)
+I45	=IF(D43=""," ",D43+'Data Conversions'!AD9)
+G46	ROOM:
+J46	RIPS:
+H47	=IF(B47=""," ",B47-'Data Conversions'!AB10)
+I47	=IF(D47=""," ",D47-'Data Conversions'!AB10)
+J47	1MM
+N47	=IF(ISBLANK(B47),"",B47-5.5625)
+O47	=IF(ISBLANK(D47),"",D47-5.5625)
+G49	CUT SIZE
+H49	=IF(B47=""," ",B47+'Data Conversions'!AC10)
+I49	=IF(D47=""," ",D47+'Data Conversions'!AD10)
+G50	ROOM:
+J50	RIPS:
+G51	*PLEASE SEE ATTACHED PLANS FOR SPECS*
+/usr/local/lib/python3.13/dist-packages/openpyxl/worksheet/_reader.py:329: UserWarning: Data Validation extension is not supported and will be removed
+  warn(msg)
+
+## VJT Order maxrow 54 maxcol 19
+B1	Formula
+E1	ENGINEER
+F1	VJT PURCHASE ORDER
+B2	To get the width of a VJT            -2" from the ES width. If it’s a DBL VJT  the  top tray -3 1/16" from ES width
+D2	Drawer Box Depths
+E2	='Data Entry'!F3
+F2	CLOSET FACTORY VJT INSERT FORM
+E3	LAYOUT STYLES
+G4	P.O. DATE  
+H4	=TODAY()
+B5	To get the depth of a VJT subtract 1 5/8" from the drawer box depth
+D5	12"
+E5	1 = BOT TRAY ONLY
+D6	15"
+E6	2 = DBL VJT
+G6	PO NUMBER
+H6	=CONCATENATE('Data Entry'!B5," - ",'Data Entry'!B7," - ",'Data Entry'!B9)
+D7	18"
+E7	3 = TOP TRAY ONLY
+D8	21"
+E8	4 = DOVETAIL (NO TOP)
+G8	INSTALL DATE
+H8	='Data Entry'!C1
+B9	LAYOUT
+C9	SHELF WIDTH
+D9	DRAWER DEPTH
+E9	INSERT, COLOR (BOT)
+F9	SINGLE (BOT)
+H9	INSERT, COLOR (TOP)
+I9	DOUBLE (TOP)
+F10	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba47dbe00>
+G10	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3771590>
+I10	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3771450>
+J10	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3f5fce0>
+H11	=E11
+E12	FRONT AND BACK
+F12	=IF(B10=""," ",F10-0.1875)
+H12	FRONT AND BACK
+I12	=IF(ISBLANK(I10), "", IFERROR(I10-0.1875, ""))
+B13	ROOM:
+E13	BOTTOM
+F13	=IF(B10=""," ",F12-0.375)
+H13	BOTTOM
+I13	=IF(ISBLANK(I10), "", IFERROR(I12-0.375, ""))
+F14	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3f5fce0>
+G14	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3efd490>
+I14	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3eb9480>
+J14	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3eb97b0>
+H15	=E15
+E16	FRONT AND BACK
+F16	=IF(B14=""," ",F14-0.1875)
+H16	FRONT AND BACK
+I16	=IF(ISBLANK(I14), "", IFERROR(I14-0.1875, ""))
+B17	ROOM:
+E17	BOTTOM
+F17	=IF(B14=""," ",F16-0.375)
+H17	BOTTOM
+I17	=IF(ISBLANK(I14), "", IFERROR(I16-0.375, ""))
+F18	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3e86050>
+G18	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3e85c50>
+I18	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3eb1220>
+J18	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3eb1130>
+H19	=E19
+E20	FRONT AND BACK
+F20	=IF(B18=""," ",F18-0.1875)
+H20	FRONT AND BACK
+I20	=IF(ISBLANK(I18), "", IFERROR(I18-0.1875, ""))
+B21	ROOM:
+E21	BOTTOM
+F21	=IF(B18=""," ",F20-0.375)
+H21	BOTTOM
+I21	=IF(ISBLANK(I18), "", IFERROR(I20-0.375, ""))
+F22	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3762cf0>
+G22	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3762a50>
+I22	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3787040>
+J22	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba37c3590>
+H23	=E23
+E24	FRONT AND BACK
+F24	=IF(B22=""," ",F22-0.1875)
+H24	FRONT AND BACK
+I24	=IF(ISBLANK(I22), "", IFERROR(I22-0.1875, ""))
+B25	ROOM:
+E25	BOTTOM
+F25	=IF(B22=""," ",F24-0.375)
+H25	BOTTOM
+I25	=IF(ISBLANK(I22), "", IFERROR(I24-0.375, ""))
+F26	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba37c3410>
+G26	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3fb2a40>
+I26	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3fb38b0>
+J26	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba37dafd0>
+H27	=E27
+E28	FRONT AND BACK
+F28	=IF(B26=""," ",F26-0.1875)
+H28	FRONT AND BACK
+I28	=IF(ISBLANK(I26), "", IFERROR(I26-0.1875, ""))
+B29	ROOM:
+E29	BOTTOM
+F29	=IF(B26=""," ",F28-0.375)
+H29	BOTTOM
+I29	=IF(ISBLANK(I26), "", IFERROR(I28-0.375, ""))
+F30	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba37dafd0>
+G30	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3e7d6d0>
+I30	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36ed150>
+J30	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36ed250>
+H31	=E31
+E32	FRONT AND BACK
+F32	=IF(B30=""," ",F30-0.1875)
+H32	FRONT AND BACK
+I32	=IF(ISBLANK(I30), "", IFERROR(I30-0.1875, ""))
+B33	ROOM:
+E33	BOTTOM
+F33	=IF(B30=""," ",F32-0.375)
+H33	BOTTOM
+I33	=IF(ISBLANK(I30), "", IFERROR(I32-0.375, ""))
+F34	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba338f5b0>
+G34	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba338f540>
+I34	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3ef72f0>
+J34	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36a9850>
+H35	=E35
+E36	FRONT AND BACK
+F36	=IF(B34=""," ",F34-0.1875)
+H36	FRONT AND BACK
+I36	=IF(ISBLANK(I34), "", IFERROR(I34-0.1875, ""))
+B37	ROOM:
+E37	BOTTOM
+F37	=IF(B34=""," ",F36-0.375)
+H37	BOTTOM
+I37	=IF(ISBLANK(I34), "", IFERROR(I36-0.375, ""))
+F38	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3ef61b0>
+G38	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36a9850>
+I38	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36a97f0>
+J38	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36a91f0>
+H39	=E39
+E40	FRONT AND BACK
+F40	=IF(B38=""," ",F38-0.1875)
+H40	FRONT AND BACK
+I40	=IF(ISBLANK(I38), "", IFERROR(I38-0.1875, ""))
+B41	ROOM:
+E41	BOTTOM
+F41	=IF(B38=""," ",F40-0.375)
+H41	BOTTOM
+I41	=IF(ISBLANK(I38), "", IFERROR(I40-0.375, ""))
+F42	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3ef6090>
+G42	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36a9850>
+I42	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36a97f0>
+J42	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36a91f0>
+H43	=E43
+E44	FRONT AND BACK
+F44	=IF(B42=""," ",F42-0.1875)
+H44	FRONT AND BACK
+I44	=IF(ISBLANK(I42), "", IFERROR(I42-0.1875, ""))
+B45	ROOM:
+E45	BOTTOM
+F45	=IF(B42=""," ",F44-0.375)
+H45	BOTTOM
+I45	=IF(ISBLANK(I42), "", IFERROR(I44-0.375, ""))
+F46	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba3ef6c30>
+G46	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36a9850>
+I46	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36a97f0>
+J46	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f3ba36a91f0>
+H47	=E47
+E48	FRONT AND BACK
+F48	=IF(B46=""," ",F46-0.1875)
+H48	FRONT AND BACK
+I48	=IF(ISBLANK(I46), "", IFERROR(I46-0.1875, ""))
+B49	ROOM:
+E49	BOTTOM
+F49	=IF(B46=""," ",F48-0.375)
+H49	BOTTOM
+I49	=IF(ISBLANK(I46), "", IFERROR(I48-0.375, ""))
+B50	*PLEASE SEE ATTACHED PLANS FOR VJT SPECS*
+
+## CF Stone maxrow 36 maxcol 21
+B1	CF STONE
+B2	JOB NUMBER: 
+C2	='Data Entry'!B5
+E2	INSTALL DATE:
+H2	='Data Entry'!B1
+L2	When filling out the sizes for the stone remove 1/8" from the Width of the ES & 1/8" from the Depth.
+B3	CLIENT NAME:
+C3	='Data Entry'!B7
+E3	SELECTION:
+B4	ROOM NAME:
+C4	='Data Entry'!B9
+E4	COLOR:
+L4	When you have a Double Drawer Bank do not adjust the Width of CTOP. You must still remove 1/8" from the Depth. 
+B5	ENGINEER:
+C5	='Data Entry'!F3
+E5	THICKNESS:
+H5	1 1/2"
+B6	DESIGNER:
+C6	='Data Entry'!F1
+E6	EDGE:
+H6	Flat Polish
+B7	  3/4" AND 1 1/4"  
+F7	   1 1/2"   
+B13	ADDITIONAL NOTES:
+S13	When you need to reset the Circles, you need to set them all to black first then you can hit clear to reset them
+
+## CF Thermo maxrow 58 maxcol 29
+B1	Design
+K1	CF-THERMOFOIL
+K2	CLOSET FACTORY THERMOFOIL / INSERT FORM
+B4	Style
+K4	P.O. DATE  
+M4	=TODAY()
+B6	Miter
+K6	PO NUMBER
+M6	=CONCATENATE('Data Entry'!B5," - ",'Data Entry'!B7," - ",'Data Entry'!B9)
+K8	INSTALL DATE
+M8	='Data Entry'!C1
+K9	ENGINEER
+M9	='Data Entry'!F3
+B10	Color
+E10	Qty.
+G10	Width
+I10	Height
+K10	Insert
+M10	Insert Width
+O10	Insert Height
+Q10	Type
+M11	=IF(G11=""," ",G11-'Data Conversions'!M21)
+O11	=IF(I11=""," ",I11-'Data Conversions'!M21)
+G13	CUT SIZE
+I13	CUT SIZE
+G14	=IF(G11=""," ",G11+'Data Conversions'!AE1)
+I14	=IF(I11=""," ",I11+'Data Conversions'!AE1)
+M15	=IF(G15=""," ",G15-'Data Conversions'!M21)
+O15	=IF(I15=""," ",I15-'Data Conversions'!M21)
+G17	CUT SIZE
+I17	CUT SIZE
+G18	=IF(G15=""," ",G15+'Data Conversions'!AE2)
+I18	=IF(I15=""," ",I15+'Data Conversions'!AE2)
+M19	=IF(G19=""," ",G19-'Data Conversions'!M21)
+O19	=IF(I19=""," ",I19-'Data Conversions'!M21)
+G21	CUT SIZE
+I21	CUT SIZE
+G22	=IF(G19=""," ",G19+'Data Conversions'!AE3)
+I22	=IF(I19=""," ",I19+'Data Conversions'!AE3)
+M23	=IF(G23=""," ",G23-'Data Conversions'!M21)
+O23	=IF(I23=""," ",I23-'Data Conversions'!M21)
+G25	CUT SIZE
+I25	CUT SIZE
+G26	=IF(G23=""," ",G23+'Data Conversions'!AE4)
+I26	=IF(I23=""," ",I23+'Data Conversions'!AE4)
+M27	=IF(G27=""," ",G27-'Data Conversions'!M21)
+O27	=IF(I27=""," ",I27-'Data Conversions'!M21)
+G29	CUT SIZE
+I29	CUT SIZE
+G30	=IF(G27=""," ",G27+'Data Conversions'!AE5)
+I30	=IF(I27=""," ",I27+'Data Conversions'!AE5)
+M31	=IF(G31=""," ",G31-'Data Conversions'!M21)
+O31	=IF(I31=""," ",I31-'Data Conversions'!M21)
+G33	CUT SIZE
+I33	CUT SIZE
+G34	=IF(G31=""," ",G31+'Data Conversions'!AE6)
+I34	=IF(I31=""," ",I31+'Data Conversions'!AE6)
+M35	=IF(G35=""," ",G35-'Data Conversions'!M21)
+O35	=IF(I35=""," ",I35-'Data Conversions'!M21)
+G37	CUT SIZE
+I37	CUT SIZE
+G38	=IF(G35=""," ",G35+'Data Conversions'!AE7)
+I38	=IF(I35=""," ",I35+'Data Conversions'!AE7)
+M39	=IF(G39=""," ",G39-'Data Conversions'!M21)
+O39	=IF(I39=""," ",I39-'Data Conversions'!M21)
+G41	CUT SIZE
+I41	CUT SIZE
+G42	=IF(G39=""," ",G39+'Data Conversions'!AE8)
+I42	=IF(I39=""," ",I39+'Data Conversions'!AE8)
+M43	=IF(G43=""," ",G43-'Data Conversions'!M21)
+O43	=IF(I43=""," ",I43-'Data Conversions'!M21)
+G45	CUT SIZE
+I45	CUT SIZE
+G46	=IF(G43=""," ",G43+'Data Conversions'!AE9)
+I46	=IF(I43=""," ",I43+'Data Conversions'!AE9)
+M47	=IF(G47=""," ",G47-'Data Conversions'!M21)
+O47	=IF(I47=""," ",I47-'Data Conversions'!M21)
+G49	CUT SIZE
+I49	CUT SIZE
+G50	=IF(G47=""," ",G47+'Data Conversions'!AE10)
+I50	=IF(I47=""," ",I47+'Data Conversions'!AE10)
+B52	MOULDINGS
+E52	Qty.
+G52	ADDITIONAL NOTES
+M52	RIPS & 1/4" Sheets
+Q52	Qty.
+B54	Crown #4766
+M54	=B2
+B56	Base #4873
+M56	1/4" Sheets
+B58	*PLEASE SEE ATTACHED PLANS*
+
+## Doormark A1 maxrow 209 maxcol 166
+A4	(954) 418-4700
+AA4	Doormark Inc.
+DN4	Fax: (954) 418-4703
+A8	(888) 969-0124
+DN8	Fax: (888) 969-9915
+AA10	430 Goolsby Blvd. • Deerfield Beach, Florida 33442
+N14	C F J
+AT14	7 4 7 4
+BS14	PO # or JOB NAME
+A15	COMPANY
+AF15	CUSTOMER
+BS17	=CONCATENATE('Data Entry'!B5," - ",'Data Entry'!B7," - ",'Data Entry'!B9)
+A18	ID CODE
+AF18	NUMBER
+DQ23	9 pcs or less subject
+N24	=CONCATENATE("Closet Factory, Deerfield"," - ",'Data Entry'!F3)
+BT24	(954) 959-5150
+CY24	=TODAY()
+A25	COMPANY
+BL25	Phone
+CS25	Date
+DQ26	to a $20 Charge
+EM27	DOOR DESIGN
+AH31	=IFERROR(VLOOKUP(EM31, 'Data Conversions'!X3:Y36, 2, FALSE), "")
+CA31	=IFERROR(VLOOKUP(EM41, 'Data Conversions'!X41:Y58, 2, FALSE), "")
+DQ31	White Back
+A32	DOOR DESIGN
+BI32	COLOR
+DN35	X
+DQ35	Match Back
+EM37	DOOR COLOR
+A41	GLAZING OPTIONS
+AB41	Black
+AY41	Dark Walnut
+CI41	Egg Shell
+DH41	Umber Brown
+A46	HINGE BORING
+AB46	DR1 (1-35mm hole)
+BH46	DR3 (1-35mm and 2-8mm holes)
+A51	DOOR STYLE
+R51	QTY
+Y51	WIDTH
+AR51	HEIGHT
+BK51	HINGE
+BU51	DOOR STYLE
+CL51	QTY
+CS51	WIDTH
+DL51	HEIGHT
+EE51	HINGE
+BK53	SIDE
+EE53	SIDE
+A55	=IF(AH31=""," ",AH31)
+BK55	L
+BO55	R
+BU55	=A55
+EE55	L
+EI55	R
+BK61	L
+BO61	R
+EE61	L
+EI61	R
+F66	Finger Pull
+BZ66	Finger Pull
+BK67	L
+BO67	R
+EE67	L
+EI67	R
+F68	Top of Door
+BZ68	Top of Door
+F72	Finger Pull
+BZ72	Finger Pull
+BK73	L
+BO73	R
+EE73	L
+EI73	R
+F74	Bottom
+BZ74	Bottom
+F76	of Door
+BZ76	of Door
+BK79	L
+BO79	R
+EE79	L
+EI79	R
+BK85	L
+BO85	R
+EE85	L
+EI85	R
+BK91	L
+BO91	R
+EE91	L
+EI91	R
+BK97	L
+BO97	R
+EE97	L
+EI97	R
+BK103	L
+BO103	R
+EE103	L
+EI103	R
+BK109	L
+BO109	R
+EE109	L
+EI109	R
+A117	DRAWER
+AA117	QTY
+AH117	WIDTH
+BA117	HEIGHT
+BU117	DRAWER
+CU117	QTY
+DB117	WIDTH
+DU117	HEIGHT
+A120	STYLE
+R120	Bisc.Only
+BU120	STYLE
+CL120	Bisc.Only
+S122	W
+W122	K
+CM122	W
+CQ122	K
+F125	Slab
+BZ125	Slab
+F129	RR
+BZ129	RR
+F133	Biscayne
+BZ133	Biscayne
+F137	Hgrain
+BZ137	Hgrain
+F141	Vgrain
+BZ141	Vgrain
+F145	Finger Pull
+BZ145	Finger Pull
+A152	Quarter Circle L
+E152	Quarter Circle R
+I152	Square
+M152	Arched
+Q152	Cathedral
+BU152	All Profiled
+BY152	SQUARE
+CK152	Side Four
+CO152	All Edges Square
+DW152	Side One
+Z153	MULLION DOORS
+CX153	SLAB FILLERS
+BY154	EDGE ON
+DY154	WIDTH
+EC154	 H E I G H T
+DQ156	Side Four
+EE156	Side Two
+Z157	Painted backs $15 ea.
+BB157	Finger Pulls
+CC157	Side Two
+CG157	Side Three
+BY158	Side One
+BB159	Bottom of Door
+DV160	Side Three
+U162	QTY
+AA162	WIDTH
+AQ162	HEIGHT
+BM162	HINGE
+CS162	QTY
+CZ162	WIDTH
+DT162	HEIGHT
+BG164	#LITES
+BM164	SIDE
+BM166	L
+BP166	R
+BM171	L
+BP171	R
+BM176	L
+BP176	R
+BM181	L
+BP181	R
+BM186	L
+BP186	R
+A193	LAMINATE (4'x8' Sheets)
+CM193	MOLDING (8' lengths only)
+A197	FOILON PHENOLIC (4'x8' Sheets)
+CI197	# Pcs
+DD197	Type
+A201	FOIL (Lineal Feet)
+CI201	# Pcs
+DD201	Type
+A206	Order Form-Page 1
+BY206	Continued Next Page
+DO206	End of Order

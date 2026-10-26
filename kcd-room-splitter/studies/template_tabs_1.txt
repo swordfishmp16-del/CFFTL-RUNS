@@ -1,0 +1,269 @@
+
+## Purchase Order maxrow 131 maxcol 15
+K1	PURCHASE ORDER
+I4	P.O. DATE  
+J4	=TODAY()
+I6	CUSTOMER #
+J6	='Data Entry'!B5
+B7	The following number must appear on all invoices, bills
+B8	of lading, and acknowledgements relating to this PO:
+I8	CUSTOMER NAME
+J8	='Data Entry'!B7&" - "&'Data Entry'!B9
+B9	PURCHASE ORDER:
+H10	INSTALL DATE
+J10	='Data Entry'!B1
+B11	TO:
+I11	BILL TO/SHIP TO:
+J12	Closet Factory
+C13	CARRIE 
+H13	ENGINEER
+J13	1650 S. Powerline Road
+H14	='Data Entry'!F3
+J14	Suite E
+J15	Deerfield Beach, FL 33442
+J16	954-979-5150
+J17	954-979-5165
+B18	ROOM
+C18	QTY
+D18	ITEM
+E18	DESCTRIPTION
+K18	VENDOR
+
+## Job Cart Cover Sheet maxrow 43 maxcol 42
+A1	SPECIALTY DEPARTMENT
+K1	DRAWER DEPARTMENT
+X1	='Data Entry'!B5 & CHAR(10) & 'Data Entry'!B7
+K2	Drawer Count
+A4	=IF('Data Entry'!B17="V9","KCCD V9",IF('Data Entry'!B17="V23","KCD V23",))
+E4	=IF('Data Entry'!F21="None","",IF('Data Entry'!F21="Melamine","Molding:",IF('Data Entry'!F21="ThermoFoil","Molding:",IF('Data Entry'!F21="Wood","Molding:",IF('D...
+G4	=IF('Data Entry'!F21="None","",IF('Data Entry'!F21="Melamine","Melamine",IF('Data Entry'!F21="Thermo Foil","Thermo Foil",IF('Data Entry'!F21="Wood","Wood",IF('D...
+I4	=IF('Data Entry'!F23="None","",IF('Data Entry'!F23="Base Only","Base Only",IF('Data Entry'!F23="Crown Only","Crown Only",IF('Data Entry'!F23="Base & Crown","Bas...
+K4	=IF('Data Entry'!B13="Special Order","VJT",IF('Data Entry'!B13="Cut From Stock","VJT",IF('Data Entry'!B13="Combination","VJT",)))
+L4	=IF('Data Entry'!B13="Special Order","Special Order",IF('Data Entry'!B13="Cut From Stock","Cut From Stock",IF('Data Entry'!B13="Combination","Combination",)))
+A5	CNC Cover Sheet
+K5	=IF('Data Entry'!F25="Yes","Notched",IF('Data Entry'!F25="No","No Notch",))
+M5	='Data Entry'!F26
+N5	=IF(M5>0,"X",)
+O5	=IF(M5>0,'Data Entry'!F27,)
+A7	Client #:
+B7	=IF('Data Entry'!B5>0,"# "&'Data Entry'!B5,"")
+D7	Client Name:
+F7	=IF(ISTEXT('Data Entry'!B7),PROPER('Data Entry'!B7&" - "&'Data Entry'!B9),"")
+A8	Install Date:
+C8	=IF('Data Entry'!B1,'Data Entry'!B1,"")
+G8	CAM Color
+H8	Construction Type
+J8	='Data Entry'!F19
+A9	Core Material:
+B9	='Data Entry'!F5
+G9	=_xlfn.IFNA(VLOOKUP(B9, 'Data Conversions'!$B:$C, 2, FALSE), "")
+H9	Unit Banding:
+J9	='Data Entry'!F7
+K9	='Data Entry'!F9
+A10	Faces:
+B10	='Data Entry'!F13
+H10	Face Banding:
+J10	='Data Entry'!F15
+K10	='Data Entry'!F17
+A11	BOARD COUNT
+B11	QTY: 
+D11	=B9
+G11	Beam Saw
+I11	STD Rebore
+K11	Designer
+A12	BOARD COUNT
+B12	QTY: 
+D12	=IF(B10="Thermo Foil"," ",IF(B10="Wood"," ",IF(B10="CF5"," ",IF(B10="Egger"," ",IF(B10="Combination"," ",IF(B10="CF Thermo Foil"," ",IF(B9=B10," ",B10)))))))
+G12	Board Count
+I12	WW Rebore
+A13	BOARD COUNT
+B13	QTY: 
+G13	WoodWOP
+I13	AIG
+K13	='Data Entry'!F1
+A14	BOARD COUNT
+B14	QTY: 
+G14	Board Count
+I14	Board Count
+A15	Purchasing:
+B15	=IF('Data Entry'!B17="Special Order",'Work Required Grid'!F16,"N / A")
+D15	=IF('Data Entry'!B17="Special Order","("&TEXT(B15,"dddd")&")",)
+E15	SEE ENGINEER
+G15	CNC
+H15	DRAWER DEPT.
+J15	=IF('Data Entry'!B25="Yes",'Modify Here'!G1+199,'Modify Here'!G1)
+K15	=IF(ISBLANK('Data Entry'!F3),"         Completed by: ____________________                           Date:  _____ / _____",CONCATENATE("      Engineered by: "&PR...
+A16	Cutlist:
+B16	='Work Required Grid'!G16
+D16	="("&TEXT(B16,"dddd")&")"
+G16	INSTALLER
+H16	SPECIALTY DEPT.
+A17	Saw Work:
+B17	='Work Required Grid'!H16
+D17	="("&TEXT(B17,"dddd")&")"
+E17	ADDITIONAL PIECES & ACCESSORIES
+A18	Edgebanding:
+B18	='Work Required Grid'!K16
+D18	="("&TEXT(B18,"dddd")&")"
+A19	Drawers:
+B19	='Work Required Grid'!J16
+D19	="("&TEXT(B19,"dddd")&")"
+A20	Specialty Work:
+B20	=IF('Data Entry'!B21="yes",'Work Required Grid'!M16,"N / A")
+D20	=IF('Data Entry'!B21="yes","("&TEXT(B20,"dddd")&")",)
+A21	Finishing Work:
+B21	=IF('Data Entry'!B19="yes",'Work Required Grid'!N16,"N / A")
+D21	=IF('Data Entry'!B19="yes","("&TEXT(B21,"dddd")&")",)
+A22	Job Cart Check:
+B22	='Work Required Grid'!O16
+D22	="("&TEXT(B22,"dddd")&")"
+A23	HINGE INFORMATION
+A24	=IF('Data Entry'!B15="","","Hinge Type")
+B24	='Data Entry'!B15
+A25	SPECIALTY HINGES
+A28	Please Read Thorougly
+K28	=IF('Data Entry'!B11="Yes","COSTCO","")
+A30	Bean Saw Cover Sheet
+E33	Client #:
+F33	=IF('Data Entry'!B71>0,"# "&'Data Entry'!B71,"")
+E34	Client Name:
+F34	=IF(ISTEXT('Data Entry'!B73),PROPER('Data Entry'!B73),"")
+A35	Install Date:
+D35	=IF('Data Entry'!B67,'Data Entry'!B67,"")
+H35	Construction Type
+J35	='Data Entry'!F84
+A36	Material:
+C36	='Data Entry'!F70
+H36	Unit Banding:
+J36	='Data Entry'!F72
+K36	='Data Entry'!F74
+A37	Faces:
+C37	='Data Entry'!F78
+H37	Face Banding:
+J37	='Data Entry'!F80
+K37	='Data Entry'!F82
+A38	Nested
+D38	Beam Saw
+G38	WoodWOP
+I38	Rebore
+K38	Designer
+A39	Done By
+D39	Sent By
+G39	Programmed By
+I39	# Of Panels
+A40	Date
+D40	Date
+G40	Date
+I40	Rebored By
+K40	='Data Entry'!F66
+A41	Board Count
+D41	Board Count
+G41	Board Count
+I41	Date
+A43	Due Dates
+E43	=IF(ISBLANK('Data Entry'!F68),"         Completed by: ____________________                           Date:  _____ / _____",CONCATENATE("      Engineered by: "&P...
+/usr/local/lib/python3.13/dist-packages/openpyxl/worksheet/_reader.py:329: UserWarning: Data Validation extension is not supported and will be removed
+  warn(msg)
+
+## Final Price Sheet maxrow 69 maxcol 20
+B1	Job Pricing Page
+G1	Client Information
+B2	Closet Factory
+G2	Client Name:
+H2	='Data Entry'!B7&" - "&'Data Entry'!B9
+G3	Client #:
+H3	='Data Entry'!B5
+B4	Initial Pricing By:
+E4	='Data Entry'!F3
+G4	Designer:
+H4	='Data Entry'!F1
+B5	Special Order Pricing By:
+G5	Standard Price:
+H5	=E65
+B6	Final Pricing By:
+G6	Sold at Price:
+H6	='Data Entry'!B27
+G7	Percentage of Standard:
+H7	=IF(H6>0,IF(H5>0,E66/E65),)
+B9	Basic Components
+G9	Accessories
+G10	Common Accessories
+H10	Quantity or Units
+I10	Price per Unit
+J10	Extended Price
+B12	Additional Closets
+J12	=H12*I12
+B13	Room Name
+E13	Standard Price
+J13	=H13*I13
+J14	=H14*I14
+J15	=H15*I15
+J16	=H16*I16
+J17	=H17*I17
+J18	=H18*I18
+J19	=H19*I19
+J20	=H20*I20
+J21	=H21*I21
+J22	=H22*I22
+J23	=H23*I23
+J24	=H24*I24
+J25	=H25*I25
+J26	=H26*I26
+J27	=H27*I27
+J28	=H28*I28
+J29	=H29*I29
+J30	=H30*I30
+J31	=H31*I31
+J32	=H32*I32
+J33	=H33*I33
+J34	=H34*I34
+J35	=H35*I35
+J36	=H36*I36
+J37	=H37*I37
+J38	=H38*I38
+J39	=H39*I39
+J40	=H40*I40
+J41	=H41*I41
+J42	=H42*I42
+J43	=H43*I43
+J44	=H44*I44
+J45	=H45*I45
+J46	=H46*I46
+J47	=H47*I47
+J48	=H48*I48
+J49	=H49*I49
+J50	=H50*I50
+J51	=H51*I51
+J52	=H52*I52
+J53	=H53*I53
+B55	Pricing Totals
+G55	Items That Need Pricing (Special Order Hardware & Misc Items)
+D56	Subtotal
+E56	<openpyxl.worksheet.formula.ArrayFormula object at 0x7f1ea3d0a7b0>
+F56	0
+J56	=H56*I56
+D57	Multiplier
+J57	=H57*I57
+D58	Basic Components:
+E58	=IF(E57>0,E57*E56,)
+J58	=H58*I58
+D59	Accessories:
+E59	=IF(J67>0,J67,"")
+J59	=H59*I59
+J60	=H60*I60
+D61	Additional Closets
+E61	=SUM(E14:F34)
+J61	=H61*I61
+D62	Processing Fee:
+E62	=IF('Data Entry'!B25="Yes",199,)
+J62	=H62*I62
+J63	=H63*I63
+J64	=H64*I64
+D65	Standard Price:
+E65	=SUM(E56:E62)
+J65	=H65*I65
+D66	Sold At Price:
+E66	=H6
+J66	=H66*I66
+I67	Subtotal of Accessories:
+J67	=SUM(J12:J66)
