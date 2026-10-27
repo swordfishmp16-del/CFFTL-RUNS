@@ -20,3 +20,9 @@ Rules in the run project:
 - Everything a run makes is a TEST file until KCD has opened it; the owner's rules in the run book never bend.
 - What goes back to the learning project: the KCD-saved copy of every TEST file, the engineer's finished room file and
   workbook, and every rule Mike states in words.
+
+Exception, Oct 21 2026 (Mike asked for it in the run project, so his engineers can start testing): `kcdrun.py` was
+changed HERE so the finished folder (`C:\grok rem completed\<order> <NAME>\`, or `out/` in the cloud) holds only the
+room files (.job) and workbooks (.xlsm); every report and the inputs go to the reports folder
+(`C:\grok rem reports\<order> <NAME>\`, or `reports/`). Copy `kcdrun.py`, the run book and `jobs/README.md` back to the
+learning project's work branch before its next push to `main`, or that push will undo this.
