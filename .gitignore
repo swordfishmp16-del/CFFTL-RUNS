@@ -12,3 +12,5 @@ kcd-room-splitter/experiments/po/*.txt
 *.xlsx
 *.pdf
 !kcd-room-splitter/experiments/po/doormark_ref.json
+.DS_Store
+._*
