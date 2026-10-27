@@ -1,0 +1,12 @@
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+Load, B-Side Cost.Pcb
+
+Set,#UsePanelTouchingWallCost=0
+Set,(ul=1):#UsePanelTouchingWallCost=#PanelTouchingWallCost
+Set,(ur=1):#UsePanelTouchingWallCost=#PanelTouchingWallCost
+
+Price, 1,   #LeftSideName,      #CostOfSide+#UsePanelTouchingWallCost,             H, d,          #LeftSidePrintOrderNumber,     
+,*****************************************
+

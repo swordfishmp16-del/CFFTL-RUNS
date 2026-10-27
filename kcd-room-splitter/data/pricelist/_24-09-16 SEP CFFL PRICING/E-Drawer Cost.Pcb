@@ -1,0 +1,1587 @@
+,Use Grid
+,**
+,**
+,Update V8.0 start
+Displayset, #swapglidescharge=[-25], ....Charge for Swapping Undermount for Sidemount (use for predesigned jewelry drawers)
+,Update V8.0 end
+,,**            ***** Go back to A-Setup to change the method of pricing Drawer Boxes *****
+,,**
+
+
+,**  SECTION 1 Drawer Box Cost
+
+,**
+
+,DisplaySet,#DrawerboxType0=No Drawer Boxes,              Drawer Box Type 0 Name
+,DisplaySet,#DrawerboxCost0=0,1.0        #DrawerboxType0 Cost 
+
+,DisplaySet,#DrawerboxMultiplierCost0=0,1.0       #DrawerboxType0 Multiplier When you use MaterialCostGroup this will factor for your current material multiplier
+
+DisplaySet,#DrawerboxType1=Melamine Undermount Match,              Drawer Box Type 1 Name
+DisplaySet,#DrawerboxCost1=190,1.1         #DrawerboxType1 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost1=#MaterialCostGroup,1.1b       #DrawerboxType1 Multiplier When you use MaterialCostGroup this will factor for your current material multiplier
+Displayset,#DrawerboxTag1=Undermount, #DrawerboxType1 Glide Style Name
+,**
+
+DisplaySet,#DrawerboxType2=Dovetail Undermount,              Drawer Box Type 2 Name
+DisplaySet,#DrawerboxCost2=300,1.2         #DrawerboxType2 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost2=1,1.2b       #DrawerboxType2 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+Displayset,#DrawerboxTag2=Undermount, #DrawerboxType2 Glide Style Name
+,**
+
+DisplaySet,#DrawerboxType3=No Drawer Boxes,              Drawer Box Type 3 Name
+DisplaySet,#DrawerboxCost3=0,1.3         #DrawerboxType3 Cost
+
+DisplaySet,#DrawerboxMultiplierCost3=0,1.3b       #DrawerboxType3 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType4=LastCFFLDrawer add drawer tags,              Drawer Box Type 4 Name
+DisplaySet,#DrawerboxCost4=,1.4         #DrawerboxType4 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost4=,1.4b       #DrawerboxType4 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType5=,              Drawer Box Type 5 Name
+DisplaySet,#DrawerboxCost5=,1.5         #DrawerboxType5 Cost
+
+DisplaySet,#DrawerboxMultiplierCost5=,1.5b       #DrawerboxType5 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+
+,**
+
+DisplaySet,#DrawerboxType6=,              Drawer Box Type 6 Name
+DisplaySet,#DrawerboxCost6=,1.6         #DrawerboxType6 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost6=,1.6b       #DrawerboxType6 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType7=,              Drawer Box Type 7 Name
+DisplaySet,#DrawerboxCost7=,1.7         #DrawerboxType7 Cost
+
+DisplaySet,#DrawerboxMultiplierCost7=,1.7b       #DrawerboxType7 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType8=,              Drawer Box Type 8 Name
+DisplaySet,#DrawerboxCost8=,1.8         #DrawerboxType8 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost8=,1.8b       #DrawerboxType8 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType9=,              Drawer Box Type 9 Name
+DisplaySet,#DrawerboxCost9=,1.9         #DrawerboxType9 Cost
+
+DisplaySet,#DrawerboxMultiplierCost9=,1.9b       #DrawerboxType9 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+
+,**
+
+DisplaySet,#DrawerboxType10=,              Drawer Box Type 10 Name
+DisplaySet,#DrawerboxCost10=,1.10         #DrawerboxType10 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost10=,1.10b       #DrawerboxType10 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType11=,              Drawer Box Type 11 Name
+DisplaySet,#DrawerboxCost11=,1.11        #DrawerboxType11 Cost
+
+DisplaySet,#DrawerboxMultiplierCost11=,1.11b       #DrawerboxType11 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+
+,**
+
+DisplaySet,#DrawerboxType12=,              Drawer Box Type 12 Name
+DisplaySet,#DrawerboxCost12=,1.12         #DrawerboxType12 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost12=,1.12b       #DrawerboxType12 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType13=,              Drawer Box Type 13 Name
+DisplaySet,#DrawerboxCost13=,1.13         #DrawerboxType13 Cost
+
+DisplaySet,#DrawerboxMultiplierCost13=,1.13b       #DrawerboxType13 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType14=,              Drawer Box Type 14 Name
+DisplaySet,#DrawerboxCost14=,1.14         #DrawerboxType14 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost14=,1.14b       #DrawerboxType14 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType15=,              Drawer Box Type 15 Name
+DisplaySet,#DrawerboxCost15=,1.15         #DrawerboxType15 Cost
+
+DisplaySet,#DrawerboxMultiplierCost15=,1.15b       #DrawerboxType15 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+
+,**
+
+DisplaySet,#DrawerboxType16=,              Drawer Box Type 16 Name
+DisplaySet,#DrawerboxCost16=,1.16         #DrawerboxType16 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost16=,1.16b       #DrawerboxType16 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType17=,              Drawer Box Type 17 Name
+DisplaySet,#DrawerboxCost17=,1.17         #DrawerboxType17 Cost
+
+DisplaySet,#DrawerboxMultiplierCost17=,1.17b       #DrawerboxType17 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType18=,              Drawer Box Type 18 Name
+DisplaySet,#DrawerboxCost18=,1.18         #DrawerboxType18 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost18=,1.18b       #DrawerboxType18 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType19=,              Drawer Box Type 19 Name
+DisplaySet,#DrawerboxCost19=,1.19         #DrawerboxType19 Cost
+
+DisplaySet,#DrawerboxMultiplierCost19=,1.19b       #DrawerboxType19 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+
+,**
+
+DisplaySet,#DrawerboxType20=,              Drawer Box Type 20 Name
+DisplaySet,#DrawerboxCost20=,1.20         #DrawerboxType20 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost20=,1.20b       #DrawerboxType20 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType21=,              Drawer Box Type 21 Name
+DisplaySet,#DrawerboxCost21=,1.21        #DrawerboxType21 Cost
+
+DisplaySet,#DrawerboxMultiplierCost21=,1.21b       #DrawerboxType21 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+
+,**
+
+DisplaySet,#DrawerboxType22=,              Drawer Box Type 22 Name
+DisplaySet,#DrawerboxCost22=,1.22         #DrawerboxType22 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost22=,1.22b       #DrawerboxType22 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType23=,              Drawer Box Type 23 Name
+DisplaySet,#DrawerboxCost23=,1.23         #DrawerboxType23 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost23=,1.23b       #DrawerboxType23 Multiplier When you use MaterialCostGroup this will factor for your current material multiplier
+,**
+
+DisplaySet,#DrawerboxType24=,              Drawer Box Type 24 Name
+DisplaySet,#DrawerboxCost24=,1.24         #DrawerboxType24 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost24=,1.24b       #DrawerboxType24 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+
+DisplaySet,#DrawerboxType25=,              Drawer Box Type 25 Name
+DisplaySet,#DrawerboxCost25=,1.25         #DrawerboxType25 Cost
+
+DisplaySet,#DrawerboxMultiplierCost25=,1.25b       #DrawerboxType25 Multiplier 1 = no multiplier 1.10 = 10 percent multiplier
+,**
+DisplaySet,#DrawerboxType26=,              Drawer Box Type 26 Name
+DisplaySet,#DrawerboxCost26=,1.26        #DrawerboxType26 Cost 
+
+DisplaySet,#DrawerboxMultiplierCost26=,1.26b       #DrawerboxType26 Multiplier When you use MaterialCostGroup this will factor for your current material multiplier
+
+
+
+
+Load,GetDrawerBoxCost.pcb
+DisplaySet,#MaxDrawerdepth=24, Maximun drawer box depth 
+,Set Drawer Box Width Height Depth from the Closet size (drawer face height, width between panels, panel depth)
+Set, #W = [#DrawerOpeningWidth]   
+Set, #H = [#DrawerFrontHeight]     
+Set,(D<=#maxdrawerdepth): #D = [D]: #D=#maxdrawerdepth
+
+,------- Set Cost from Drawer Box Size (Largest to Smallest) -------
+Set, #CostOfDrawer = 100 ,Default Drawer Box Cost - reset to proper cost below
+
+
+,**  FILE DRAWER COST FACTORS BELOW (for optional use)
+DisplaySet,#ShowFileDrawerOp=Yes, Q...     Show File Drawer setup [Yes;No]
+Do, (#ShowFileDrawerOp ="Yes")|(#DisplayEdit):1
+{
+
+DisplaySet,#FileMinHt=12.5, File Drawer Minimum Ht
+DisplaySet,#FileMaxHt=20, File Drawer Max Ht
+DisplaySet,#TempFileDrawerCost=1000, Extra Charge for file Drawer (to be used when taller than Minimum Ht above and less than Max Ht)
+DisplaySet,#TempDoubleFileDrawerCost=1000, Extra Charge for Double file Drawer (to be used when taller than max ht above)
+
+Set,(#H>=#FileMinHt)&(#H<=#FileMaxHt):#FileDrawerCost=#TempFileDrawerCost:#FileDrawerCost=0
+Set,(#H>#FileMaxHt):#DoubleFileDrawerCost=#TempDoubleFileDrawerCost:#DoubleFileDrawerCost=0
+
+,** Extra Cost factor for exception not covered above
+Displayset,#numberusedOP=, Option number used for extra cost on any drawers (user selects this option on a section to increase cost by value below)
+DisplaySet,#AddonCostFileDrawertemp=, Drawer Cost Factor To be used with Option above
+
+Set,(Option=#numberusedOP):#FileDrawer=1:#FileDrawer=0
+
+Set,(#FileDrawer=0):#AddonCostFileDrawertemp=0, Amount extra added for file drawers
+
+Set,#AddonCostFileDrawer=#AddonCostFileDrawertemp
+
+Set,#AdditionaldrwCost=(#DoubleFileDrawerCost+#FileDrawerCost+#AddonCostFileDrawer)
+
+}
+,**
+
+,** Setting up your Drawer Box cost EXAMPLES BELOW of variables you should and can use in the Cost of drawer lines below for various drawer box sizes.
+,** Make sure to use the variable for DrawerBoxCostgroup in your pricing for cost of drawer. If you do not use the variable when your designers make a selection for drawer box type it will have zero effect in your pricing.
+
+DisplaySet,#ExampleDrawer=#DrawerBoxCostgroup,Example A.   This would read your cost set above for various Drawer Box types
+DisplaySet,#ExampleDrawer=#DrawerBoxCostgroup*#DrawerBoxCostMultiplier,Example B.   This would take your drawer cost and multiply it by your drawer multiplier above
+DisplaySet,#ExampleDrawer=#DrawerBoxCostgroup+#AdditionaldrwCost*#DrawerBoxCostMultiplier,Example C.   This would Charge for your Drawer Box Type and Add for your file drawer Cost from above if true and multiply it by your drawer multiplier.
+
+
+,**
+DisplaySet, #NumberOfDrawerSizes =1,      Q.    How many different drawer sizes do you use?  [1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32;33;34;35;36;37;38;39;40;41;42;43;44;45;46;47;48;49;50;51;52;53;54;55;56;57;58;59;60;61;62;63;64;65;66;67;68;69;70;71;72;73;74;75;76;77;78;79;80;81;82;83;84;85;86;87;88;89;90]
+
+
+,** 
+,**  Fill in the information below for each of your drawer sizes
+,**  ** Start with your Largest Drawer and work to your Smallest   (they MUST be in this order)  **
+,**
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Do, (#NumberOfDrawerSizes>=1):1
+{
+,**   Drawer Size #1   (Largest)
+DisplaySet, #DrawerWidth =40,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =20,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =(#DrawerBoxCostgroup)*#DrawerBoxCostMultiplier,     -----------------     Cost of drawer             - COST -
+,Update V8.0 added line below
+Set,(#H<4)&(opt=#optDrw1boxtoshelf)& (#drawernumber=1):#Drawercost=100
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=2):1
+{
+,**   Drawer Size #2
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =2.5,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =(#DrawerBoxCostgroup)*#DrawerBoxCostMultiplier,     -----------------     Cost of drawer             - COST -
+,Update V8.0 added line below
+Set,(#H<4)&(opt=#optDrw1boxtoshelf)& (#drawernumber=1):#Drawercost=100
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=3):1
+{
+,**   Drawer Size #3
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =2.5,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =157,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=4):1
+{
+,**   Drawer Size #4
+DisplaySet, #DrawerWidth =32,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =24,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =(#DrawerBoxCostgroup+35)*#DrawerBoxCostMultiplier,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=5):1
+{
+,**   Drawer Size #5
+DisplaySet, #DrawerWidth =32,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12.5,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =#DrawerBoxCostgroup*#DrawerBoxCostMultiplier,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=6):1
+{
+,**   Drawer Size #6
+DisplaySet, #DrawerWidth =32,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =2.5,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =100,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=7):1
+{
+,**   Drawer Size #7
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =7.07,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=8):1
+{
+,**   Drawer Size #8
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =8.08,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=9):1
+{
+,**   Drawer Size #9
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =9.09,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=10):1
+{
+,**   Drawer Size #10
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =10.10,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=11):1
+{
+,**   Drawer Size #11
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =11.11,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=12):1
+{
+,**   Drawer Size #12
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =12.12,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=13):1
+{
+,**   Drawer Size #13
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =13.13,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=14):1
+{
+,**   Drawer Size #14
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =14.14,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=15):1
+{
+,**   Drawer Size #15
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =15.15,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=16):1
+{
+,**   Drawer Size #16
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =16.16,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=17):1
+{
+,**   Drawer Size #17
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =17.17,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=18):1
+{
+,**   Drawer Size #18
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =18.18,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=19):1
+{
+,**   Drawer Size #19
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =19.19,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=20):1
+{
+,**   Drawer Size #20
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =20.20,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=21):1
+{
+,**   Drawer Size #21
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =21.21,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=22):1
+{
+,**   Drawer Size #22
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =22.22,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=23):1
+{
+,**   Drawer Size #23
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =23.23,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=24):1
+{
+,**   Drawer Size #24
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =24.24,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=25):1
+{
+,**   Drawer Size #25
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =25.25,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=26):1
+{
+,**   Drawer Size #26
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =26.26,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=27):1
+{
+,**   Drawer Size #27
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =27.27,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=28):1
+{
+,**   Drawer Size #28
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =28.28,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=29):1
+{
+,**   Drawer Size #29
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =29.29,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=30):1
+{
+,**   Drawer Size #30
+DisplaySet, #DrawerWidth =36,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =30.30,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=31):1
+{
+,**   Drawer Size #31   
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =31.31,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=32):1
+{
+,**   Drawer Size #32
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =32.32,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=33):1
+{
+,**   Drawer Size #33
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =33.33,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=34):1
+{
+,**   Drawer Size #34
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =34.34,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=35):1
+{
+,**   Drawer Size #35
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =35.35,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=36):1
+{
+,**   Drawer Size #36
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =36.36,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=37):1
+{
+,**   Drawer Size #37
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =37.37,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=38):1
+{
+,**   Drawer Size #38
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =38.38,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=39):1
+{
+,**   Drawer Size #39
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =39.39,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=40):1
+{
+,**   Drawer Size #40
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =40.40,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=41):1
+{
+,**   Drawer Size #41
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =41.41,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=42):1
+{
+,**   Drawer Size #42
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =42.42,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=43):1
+{
+,**   Drawer Size #43
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =43.43,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=44):1
+{
+,**   Drawer Size #44
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =44.44,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=45):1
+{
+,**   Drawer Size #45
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =45.45,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=46):1
+{
+,**   Drawer Size #46
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =46.46,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=47):1
+{
+,**   Drawer Size #47
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =47.47,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=48):1
+{
+,**   Drawer Size #48
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =48.48,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=49):1
+{
+,**   Drawer Size #49
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =49.49,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=50):1
+{
+,**   Drawer Size #50
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =5050,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=51):1
+{
+,**   Drawer Size #51
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =51.51,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=52):1
+{
+,**   Drawer Size #52
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =52.52,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=53):1
+{
+,**   Drawer Size #53
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =53.53,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=54):1
+{
+,**   Drawer Size #54
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =54.54,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=55):1
+{
+,**   Drawer Size #55
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =55.55,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=56):1
+{
+,**   Drawer Size #56
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =56.56,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=57):1
+{
+,**   Drawer Size #57
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =57.57,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=58):1
+{
+,**   Drawer Size #58
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =58.58,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=59):1
+{
+,**   Drawer Size #59
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =59.59,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=60):1
+{
+,**   Drawer Size #60
+DisplaySet, #DrawerWidth =24,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =60.60,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=61):1
+{
+,**   Drawer Size #61   
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =61.61,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=62):1
+{
+,**   Drawer Size #62
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =62.62,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=63):1
+{
+,**   Drawer Size #63
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =63.63,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=64):1
+{
+,**   Drawer Size #64
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =64.64,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=65):1
+{
+,**   Drawer Size #65
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =65.65,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=66):1
+{
+,**   Drawer Size #66
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =24,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =66.66,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=67):1
+{
+,**   Drawer Size #67
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =67.67,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=68):1
+{
+,**   Drawer Size #68
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =68.68,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=69):1
+{
+,**   Drawer Size #69
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =69.69,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=70):1
+{
+,**   Drawer Size #70
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =70.70,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=71):1
+{
+,**   Drawer Size #71
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =71.71,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=72):1
+{
+,**   Drawer Size #72
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =21,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =72.72,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=73):1
+{
+,**   Drawer Size #73
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =73.73,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=74):1
+{
+,**   Drawer Size #74
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =74.74,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=75):1
+{
+,**   Drawer Size #75
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =75.75,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=76):1
+{
+,**   Drawer Size #76
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =76.76,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=77):1
+{
+,**   Drawer Size #77
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =77.77,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=78):1
+{
+,**   Drawer Size #78
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =18,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =78.78,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=79):1
+{
+,**   Drawer Size #79
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =79.79,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=80):1
+{
+,**   Drawer Size #80
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =80.80,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=81):1
+{
+,**   Drawer Size #81
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =81.81,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=82):1
+{
+,**   Drawer Size #82
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =82.82,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=83):1
+{
+,**   Drawer Size #83
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =83.83,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=84):1
+{
+,**   Drawer Size #84
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =15,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =84.84,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=85):1
+{
+,**   Drawer Size #85
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =18,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =85.85,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=86):1
+{
+,**   Drawer Size #86
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =15,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =86.86,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=87):1
+{
+,**   Drawer Size #87
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =12,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =87.87,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=88):1
+{
+,**   Drawer Size #88
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =9,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =88.88,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=89):1
+{
+,**   Drawer Size #89
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =6,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =89.89,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfDrawerSizes>=90):1
+{
+,**   Drawer Size #90
+DisplaySet, #DrawerWidth =12,     -----------------     Width of drawer           - WIDTH -
+DisplaySet, #DrawerDepth =12,     -----------------     Depth of drawer          - DEPTH -
+DisplaySet, #DrawerHeight =3,     -----------------     Height of drawer         - HEIGHT -
+DisplaySet, #DrawerCost =90.90,     -----------------     Cost of drawer             - COST -
+
+Set, (#W<=#DrawerWidth) & (#D<=#DrawerDepth) & (#H<=#DrawerHeight):  #CostOfDrawer=[#DrawerCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+
+
+,valid drawer
+Do, ((#CostofDrawer<>100)):1
+{
+,Update V8.0 start
+ Price, (#swapglides=1):1, RM#Roomnum Switch Glides to Side Mount Charge, #swapglidescharge, ,  , #DoorPrintOrderNumber, 
+,Update V8.0 end
+,Below used in Subtotal Calculations
+
+Set,#UnitDrawerCost=[#UnitDrawerCost+#CostOfDrawer]
+Set,#UnitDrawerNum=[#UnitDrawerNum+1]
+,update v7.2.2 start
+,upcharge to cover drawerface only edgeband finish charge.
+Set, #costofdrawer=[#costofdrawer]
+,Set, #costofdrawer=[#costofdrawer*#edgebanddoorspecialfinishcost]
+
+,update v7.2.2 end
+,Price Drawer Box
+,Update V7.2.6 start
+,get special edgeband door upcharges
+set, (#DoorDrawerFinishingType="*Front*"):#Drawerfaceupcharge=((#DrawerFrontWidth*#DrawerFrontHeight)/144*#DoorDrawerFinishingCostGroup)
+set, ((#DoorDrawerFinishingType<>"*Front*")&(#DoorDrawerFinishingType="*mm*")):#Drawerfaceupcharge=((#CostOfDrawer)*(#DoorDrawerFinishingCostGroup))
+,Price Drawer Box
+Set, #H = {#H} 
+Price, (#DoorDrawerType="#DoorDrawerTypeName1")&((#DoorDrawerFinishingType="*mm*")&(#DoorDrawerFinishingType<>"*2nd*")):1, Add to DrFrt-#DoorDrawerFinishingType, #Drawerfaceupcharge, #DrawerFrontHeight, #DrawerFrontWidth , #DoorPrintOrderNumber, 
+Price, (#DoorDrawerType="#DoorDrawerTypeName2")&((#DoorDrawerFinishingType="*mm*")&(#DoorDrawerFinishingType<>"*Front*")):1, Add to DrFrt-#DoorDrawerFinishingType, #Drawerfaceupcharge, #DrawerFrontHeight, #DrawerFrontWidth , #DoorPrintOrderNumber, 
+Price, 1,    #H" #DrawerBoxName-#BoxDrawertype,      #CostOfDrawer,     #D, #W,  #DrawerBoxPrintOrderNumber,  
+}
+,Update V7.2.6 end
+
+,***Cost for pullout shelf
+DisplaySet, #Pulloutshelfupcharge =60,     -----------------    Cost for Pullout Shelf  -UPCHARGE-
+
+, Update V8.0 start
+Do, ((#CostofDrawer=100)&(#H<3))|((#H<4)&(opt=#optDrw1boxtoshelf)&(#drawernumber=1)):1
+,Update V8.0 end
+{
+
+Set, #ShelfWidth = [(W-LS-RS)-1]     
+Set, #ShelfDepth = [#D]
+Set, #H = {#H}
+Load, C-Shelf Cost.Pcb
+set, #Tempshelfcount=1
+load, Countshelves.pcb
+Price, 1,    #H" Pullout Shelf-#unitmaterialname,      #CostOfAdjustableShelf+#Pulloutshelfupcharge,     #ShelfDepth, #ShelfWidth,  #DrawerBoxPrintOrderNumber, 
+
+} 
+
+,drawer too big
+Do, ((#CostofDrawer=100)&(#laundry=0)&(#H>3)):1
+{
+set, #name = Invalid Drawer Size
+load, Eachunit.pcb
+} 
+
+,drawer converted to laundry door
+Do, ((#CostofDrawer=100)&(#laundry=1)&(#H>26)&(#DoorDrawerType="#DoorDrawerTypeName1")):1
+{
+set, #CostOfDrawer=#48orLessDoorCost*#DoorDrawerTypeCostFactor1
+Price ,1         ,Changed to door - #Doordrawertype - #unitmaterialname, #CostOfDrawer,    #DoorW-(#Gap/2), #DoorH, #DrawerBoxPrintOrderNumber,
+set, #laundry=0
+}
+
+,Remove These
+Erase, #W
+Erase, #H
+Erase, #D 
+
+
+

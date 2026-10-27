@@ -1,0 +1,6 @@
+,Use Grid
+
+
+,This was moved to I-Designer markup.pcb
+displaySet,#DesignerMarkup=00, Markup - will NOT be reflected in the UNIT PRICE REPORT answer 01 for 1 percent
+Set,#notusedhereDesignerMarkup=00, re-doing the markup calculations. no markup

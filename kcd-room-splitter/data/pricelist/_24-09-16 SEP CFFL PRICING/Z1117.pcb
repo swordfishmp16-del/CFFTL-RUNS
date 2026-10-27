@@ -1,0 +1,16 @@
+,Valance Raise Arch
+
+Set, #ztype=1117
+set,#unitlineal=w
+set,#unitsquare=w*h
+set,#unitcubic=w*h*d
+set,#squareamt=h*w
+
+
+Load,GetMaterialCostBaseKick.pcb
+
+,******** ALL FILLERS *********
+Price,       1,    Valance-#BaseType,           #BaseTypeCostGroup,           w, h,          #FillerPrintOrderNumber,              
+,******************************
+
+

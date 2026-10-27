@@ -1,0 +1,8 @@
+,*****Decorative Back Panel
+
+Set, #EndpanelH = H
+Set, #EndpanelW = W
+Set, #DecorativePanelName = #TopPanelName
+Load, Endpanels.pcb
+,*****************************************
+

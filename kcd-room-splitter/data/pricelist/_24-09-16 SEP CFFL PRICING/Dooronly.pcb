@@ -1,0 +1,19 @@
+,KCD System File. DO NOT CHANGE
+
+Set, #UnitDoorCost=0    , DO NOT CHANGE
+Set, #UnitDrawerFrtCost=0 , DO NOT CHANGE
+Set, #TotalNumDrawers=0     , DO NOT CHANGE
+
+Set, #DoorW=W
+Set, #DoorH=H
+Set, #DoorA=W*H
+Set, #DoorLD=0
+Set, #DoorRD=0
+Set, (DoorDrawerOnly=1):#DoorSD=DoorOnly:#DoorSD=0
+Set, (DoorDrawerOnly=3):#DoorDR=DoorOnly:#DoorDR=0
+
+Load, door.pcb
+
+Set, #Num={Num}
+Price ,(DoorDrawerOnly=1):1  ,Door (@Door),    #UnitDoorCost     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(DoorDrawerOnly=3):1  ,Drawer (@Door),  #UnitDrawerFrtCost     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]

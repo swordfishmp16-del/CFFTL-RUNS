@@ -1,0 +1,74 @@
+,This calculates the cost of each Door and Drawer Front
+Set, #Gap = DrGp
+load, okDoorset.pcb
+,load, D-Door Cost.pcb
+Set, #CostOfDoor=10 ,Set as Default
+set, #includeinsert=0
+,Set,(#UseDoorCode=Yes):#DoorName=#CodeDoor:#DoorName=Door - #MemoDoor
+,Set,(#UseDoorCode=Yes):#DrFrtName=#CodeDoor:#DrFrtName=DrFrt - #MemoDoor
+
+,Set,(#UseDoorCode=Yes):#DoorName=#CodeDoor:#DoorName=Door - #DoorDrawerType
+Set,(#endpanel=1):#DoorName=Door End Panel-#DoorDrawerType:#DoorName=Door-#DoorDrawerType
+,Set,(#UseDoorCode=Yes):#DrFrtName=#CodeDoor:#DrFrtName=DrFrt-#DoorDrawerType
+Set,#DrFrtName=DrFrt-#DoorDrawerType
+Set, ((#DoorDrawerFinishingCostGroup<1)):#edgebanddoorspecialfinishcost=(1+#DoorDrawerFinishingCostGroup):#edgebanddoorspecialfinishcost=1
+Set, ((#DoorDrawerFinishingType="*mm*")):#edgebandfinish=-#DoorDrawerFinishingType:#edgebandfinish=-#EdgeBandingType
+Set, ((#DoorDrawerFinishingType="*Front*")):#edgebandfinish=
+Set, ((#DoorDrawerFinishingType="*Front*")|(#DoorDrawerFinishingType="*mm*")):#dredgebandfinish=:#dredgebandfinish=-#EdgeBandingType
+
+set, (#DoorDrawerFinishingType="*Front*"):#Doorfaceupcharge=((#Doorw*#DoorH)/144*#DoorDrawerFinishingCostGroup)
+
+set, #drawerstop=99
+
+,Single Door
+Set,  (#DoorSD>0): #ThisDoor = #DoorSD                                      ,SINGLE DOOR
+set, #whichdoor=Single
+Do, (#DoorSD>0):1
+{
+Load, (#DoorSD>0): okDoorSet.Pcb
+Load, (#DoorSD>0): okDoorHandleKnob.Pcb
+
+}
+
+,Left Door of a pair
+Set,  (#DoorLD>0): #ThisDoor = #DoorLD                                    ,LEFT DOOR OF PAIR
+set, #whichdoor=Pairleft
+Do, (#DoorLD>0):1
+{
+Load, (#DoorLD>0): okDoorSet.Pcb
+Load, (#DoorLD>0): okDoorHandleKnob.Pcb
+
+}
+
+,Right Door of a pair
+Set,  (#DoorRD>0): #ThisDoor = #DoorRD                                  ,RIGHT DOOR OF PAIR
+set, #whichdoor=Pairright
+Do, (#DoorRD>0):1
+{
+Load, (#DoorRD>0): okDoorSet.Pcb
+Load, (#DoorRD>0): okDoorHandleKnob.Pcb
+}
+
+,Drawer Front
+set, #drawerstop=1
+,Do, (#PriceDrawerFronts =Yes):1
+,set, #includeddrawerface = 0
+,{
+
+Set,  (#DoorDR>0): #ThisDoor = #DoorDR                                  ,DRAWER OF DRAWER FRONT 
+Do, (#DoorDR>0):1
+{
+Load, (#DoorDR>0): okDoorSet.Pcb
+Load, (#DoorDR>0):okDrawerHandleKnob.Pcb
+}
+
+
+
+
+
+set, #drawerstop=2
+set, #stopdrawerfront=2
+Load,GetHandleKnobCost.pcb
+Set, #IncludeInsert=0
+set,#costofdoor=0
+set,#basicdoorcost=0

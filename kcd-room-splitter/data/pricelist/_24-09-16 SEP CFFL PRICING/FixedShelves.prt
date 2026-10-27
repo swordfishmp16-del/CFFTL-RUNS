@@ -1,0 +1,361 @@
+,*********** All FIXED shELVES for tall drawer units ***********
+set, #dividerbackboreadj=0
+set, (bkyn=1):#dividerbackboreadj=#xStdBackingMatThickness
+Set, (opt=#CutToFitoptnum):#addforCTF=#Wallwidthadj:#addforCTF=0
+Set, (opt=#CutToFitoptnum):#UsetwoCamlock=yes:#UsetwoCamlock=no
+set, (opt=#Optfrontandbackstiffeners)|(opt=#Optfrontstiffeners):#fronttrim=#frontsupporttrim:#fronttrim=0
+set, (opt=#Optfrontandbackstiffeners):#backtrim=#backsupporttrim:#backtrim=0
+
+load, shelf notes.prt
+set,#routelockcatch=No
+set,#routelockcatch2=No
+set,#routelockcatch3=No
+set, (T<300)&(opt=#optDrw1LN):#routelockcatch=Yes
+set, (#unithas2topdrws=Yes)&(T<300)&(opt=#optDrw2LN):#routelockcatch2=Yes
+set, (#unithas3topdrws=Yes)&(T<300)&(opt=#optDrw2LN):#routelockcatch2=Yes
+set, (#unithas3topdrws=Yes)&(T<300)&(opt=#optDrw3LN):#routelockcatch3=Yes
+
+Set, ((#routelockcatch=Yes)|(#routelockcatch2=Yes)|(#routelockcatch3=Yes)):#Toplocknote=Lock catch
+
+
+,***Full depth top shelf unless front lip or backing
+set, ((tr>=#DoubleWidth)&(opt=#OptMakeEuroLipPiece)):#Liptrim=#lipamount:#liptrim=0
+Part, (tr>0)&(#TopSpannerQty=0):1,          #TopName ,         #TopDepth-#TopBackamount,         #TopWidth+#addforCTF,         #TopMaterial, #TopNote ,#TopshelfPONumber,0,      Top.tem
+set,#routelockcatch=No
+set,#routelockcatch2=No
+Do,(#Doublethick="Yes"):1
+{
+set, #fixedshelfstop=1
+ Part, ((tr>#Doublewidth)&(opt<>#OptMakeEuroLipPiece)):1,          #TopName ,         #TopDepth-#TopBackamount,         #TopWidth+#addforCTF,         #TopMaterial, #TopNote ,#TopshelfPONumber,0,      shelf.tem
+ Part,((tr>#Doublewidth)&(opt=#OptMakeEuroLipPiece)):1,     #FixedLipName ,  #LipHeight,  #FixedshelfWidth,  #FixedshelfMaterial,#TopName #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+}
+set, #fixedshelfstop=2
+,***Full depth mid shelves unless front lip or backing
+set,#routelockcatch=No
+set, (#unithas2topdrws=No)&(T<300)&(opt=#optDrw2LN):#routelockcatch=Yes
+Set, (T<300)&(#lowermidcount=0)&((opt=#optDrw3LN)|(opt=#optDrw4LN)|(opt=#optDrw5LN)|(opt=#optDrw6LN)|(opt=#optDrw7LN)|(opt=#optDrw8LN)|(opt=#optDrw9LN)):#routelockcatch=Yes
+set, (#unithas2middrws=Yes)&(T<300)&(opt=#optDrw3LN):#routelockcatch=Yes
+set, (#unithas2middrws=Yes)&(T<300)&(opt=#optDrw4LN):#routelockcatch2=Yes
+set, (#unithas3topdrws=Yes)&(T<300)&(opt=#optDrw3LN):#routelockcatch=No
+set, (#unithas3topdrws=Yes)&(T<300)&(opt=#optDrw4LN):#routelockcatch=Yes
+set, (#unithas3topdrws=Yes)&(#unithas2middrws=Yes)&(T<300)&(opt=#optDrw4LN):#routelockcatch=Yes
+set, (#unithas3topdrws=Yes)&(#unithas2middrws=Yes)&(T<300)&(opt=#optDrw5LN):#routelockcatch2=Yes
+
+Set, ((#routelockcatch=Yes)|(#routelockcatch2=Yes)):#Mfixedlocknote=Lock catch
+
+
+
+Do,(  (#rafixmidshelf=Yes)  |  (  (#rafixmidshelf=No)&((#yesmidlighting=1)|(MS>0))  )  ):1,
+{
+set, ((MR>=#DoubleWidth)&(opt=#OptMakeEuroLipPiece)):#Liptrim=#lipamount:#liptrim=0 
+Part, (MR>=#DoubleWidth)&(opt=#OptMakeEuroLipPiece):1,          #FixedshelfName  ,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#MFixedShelfNote  ,#MiddleshelfPONumber,0,   Midshelf.tem
+Set, #tempnumshelf=1
+Part, (MR>0)&(opt<>#OptMakeEuroLipPiece):1,          #FixedshelfName  ,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#MFixedShelfNote  ,#MiddleshelfPONumber,0,   Midshelf.tem
+Do,(#Doublethick="Yes"):1
+{
+Set, #tempnumshelf=0
+ Part, ((MR>#Doublewidth)&(opt<>#OptMakeEuroLipPiece)):1,          #FixedshelfName,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#MFixedShelfNote  ,#MiddleshelfPONumber,0,   shelf.tem
+ Part,((MR>#Doublewidth)&(opt=#OptMakeEuroLipPiece)):1,     #FixedLipName ,  #LipHeight,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#FixedshelfName #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+}
+}
+,**When no rafix above selected hanging rods is set
+Do,((LMR>0)&(#rafixmidshelf=No)&((#yesmidlighting=0)&(MS=0))  ) :1,
+{
+Set, #tempnumshelf=1
+Part, (MR>=#DoubleWidth)&(opt=#OptMakeEuroLipPiece):1,          #adjshelfName  ,  #shelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#MFixedShelfNote  ,#MiddleshelfPONumber,0,   shelf.tem
+Part, (MR>0)&(opt<>#OptMakeEuroLipPiece):1,          #adjshelfName  ,  #shelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#MFixedShelfNote  ,#MiddleshelfPONumber,0,   shelf.tem
+
+Do,(#Doublethick="Yes"):1
+{
+Set, #tempnumshelf=0
+ Part, ((MR>#Doublewidth)&(opt<>#OptMakeEuroLipPiece)):1,          #shelfName,  #shelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#MFixedShelfNote  ,#MiddleshelfPONumber,0,   shelf.tem
+ Part,((MR>#Doublewidth)&(opt=#OptMakeEuroLipPiece)):1,     #LipName ,  #LipHeight,  #shelfWidth+#addforCTF,  #FixedshelfMaterial,#FixedshelfName #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+}
+}
+
+,**When no rafix above selected hanging rods is set
+Do,((LMR=0)&(#rafixmidshelf=No)&((#yesmidlighting=0)&(MS=0))  ) :1,
+{
+Set, #tempnumshelf=1
+Part, (MR>=#DoubleWidth)&(opt=#OptMakeEuroLipPiece):1,          #FixedshelfName  ,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#MFixedShelfNote  ,#MiddleshelfPONumber,0,   Midshelf.tem
+Part, (MR>0)&(opt<>#OptMakeEuroLipPiece):1,          #FixedshelfName  ,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#MFixedShelfNote  ,#MiddleshelfPONumber,0,   Midshelf.tem
+
+Do,(#Doublethick="Yes"):1
+{
+Set, #tempnumshelf=0
+ Part, ((MR>#Doublewidth)&(opt<>#OptMakeEuroLipPiece)):1,          #FixedshelfName,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#MFixedShelfNote  ,#MiddleshelfPONumber,0,   Midshelf.tem
+ Part,((MR>#Doublewidth)&(opt=#OptMakeEuroLipPiece)):1,     #FixedLipName ,  #LipHeight,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#FixedshelfName #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+}
+}
+
+
+,***Full depth bottom shelf unless notched for baseboard
+,Set,(bkyn=1)&(#FullDepthTop=No)&(#BaseBoardBotAdj=0):#BaseBoardBotAdj=#backamounttemp
+,Set,(bkyn=1)&(#bottombackamount>#backamounttemp):#backamount=0
+set, ((br>=#DoubleWidth)&(opt=#OptMakeEuroLipPiece)):#Liptrim=#lipamount:#liptrim=0
+,Part, (br>0):1,          #BottomName ,      #BottomDepth ,      #BottomWidth+#addforCTF,      #BottomMaterial,#BottomNote  ,#BottomshelfPONumber,0,   Bottom.tem
+,Part, (br>0):1,          #BottomName ,      #BottomDepth-#BaseBoardBotAdj ,      #BottomWidth+#addforCTF,      #BottomMaterial,#BottomNote  ,#BottomshelfPONumber,0,   Bottom.tem
+,Part, (br>0):1,          #BottomName ,      #BottomDepth-#backamount ,      #BottomWidth+#addforCTF,      #BottomMaterial,#BottomNote  ,#BottomshelfPONumber,0,   Bottom.tem
+Part, (br>0):1,          #BottomName ,      #BottomDepth-#BottomBackamount,      #BottomWidth+#addforCTF,      #BottomMaterial,#BottomNote  ,#BottomshelfPONumber,0,   Bottom.tem
+
+Do,(#Doublethick="Yes"):1
+{
+ Part, ((br>#Doublewidth)&(opt<>#OptMakeEuroLipPiece)):1,          #BottomName ,         #bottomDepth-#bottomBackamount,         #bottomWidth+#addforCTF,         #bottomMaterial, #BottomNote ,#BottomshelfPONumber,0,      shelf.tem
+ Part,((br>#Doublewidth)&(opt=#OptMakeEuroLipPiece)):1,     #FixedLipName ,  #LipHeight,  #FixedshelfWidth,  #FixedshelfMaterial,#bottomname #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+}
+,*****************************************
+
+,***Full depth  lower mid unless front lip
+set, #routelockcatch=No
+Set, (#unithas2topdrws=No)&(#unithas3topdrws=No)&(T<300)&(#lowermidcount>0)&((opt=#optDrw2LN)|(opt=#optDrw3LN)|(opt=#optDrw4LN)|(opt=#optDrw5LN)|(opt=#optDrw6LN)|(opt=#optDrw7LN)|(opt=#optDrw8LN)|(opt=#optDrw9LN)):#routelockcatch=Yes
+Set, (#unithas2topdrws=Yes)&(#unithas2middrws=No)&(T<300)&(#lowermidcount>0)&((opt=#optDrw4LN)|(opt=#optDrw5LN)|(opt=#optDrw6LN)|(opt=#optDrw7LN)|(opt=#optDrw8LN)|(opt=#optDrw9LN)):#routelockcatch=Yes
+Set, (#unithas2topdrws=Yes)&(#unithas2middrws=Yes)&(T<300)&(#lowermidcount>0)&((opt=#optDrw5LN)|(opt=#optDrw6LN)|(opt=#optDrw7LN)|(opt=#optDrw8LN)|(opt=#optDrw9LN)):#routelockcatch=Yes
+Set, (#unithas3topdrws=Yes)&(#unithas2middrws=No)&(T<300)&(#lowermidcount>0)&((opt=#optDrw5LN)|(opt=#optDrw6LN)|(opt=#optDrw7LN)|(opt=#optDrw8LN)|(opt=#optDrw9LN)):#routelockcatch=Yes
+Set, (#unithas3topdrws=Yes)&(#unithas2middrws=Yes)&(T<300)&(#lowermidcount>0)&((opt=#optDrw6LN)|(opt=#optDrw7LN)|(opt=#optDrw8LN)|(opt=#optDrw9LN)):#routelockcatch=Yes
+
+Set, (#routelockcatch=Yes):#LMfixedlocknote=Lock catch
+
+set, (LMR>0):#templowermidcount=#lowermidcount-1:#templowermidcount=#lowermidcount
+set, ((LMR>=#DoubleWidth)&(opt=#OptMakeEuroLipPiece)):#Liptrim=#lipamount:#liptrim=0 
+Part, ((LMR>0)&(#rafixLowermidshelf="Yes")):#lowermidcount,          #FixedshelfName-lower ,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#LMFixedShelfNote  ,#MiddleshelfPONumber,0,   Fixedshelf.tem
+Part, ((LMR>0)&(#rafixLowermidshelf="No")):#lowermidcount-1,          #adjshelfName  ,  #shelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#LMFixedShelfNote  ,#MiddleshelfPONumber,0,   shelf.tem
+Part, ((LMR=0)&(#lowermidcount>0)):#lowermidcount,          #FixedshelfName-lower ,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#LMFixedShelfNote  ,#MiddleshelfPONumber,0,   Fixedshelf.tem
+
+Do,(#Doublethick="Yes"):1
+{
+ Part, ((LMR>#Doublewidth)&(opt<>#OptMakeEuroLipPiece)&(#rafixLowermidshelf="Yes")):1,          #FixedshelfName  ,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#LMFixedShelfNote  ,#MiddleshelfPONumber,0,   shelf.tem
+ Part, ((LMR>#Doublewidth)&(opt<>#OptMakeEuroLipPiece)&(#rafixLowermidshelf="No")):1,          #FixedshelfName  ,  #shelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#LMFixedShelfNote  ,#MiddleshelfPONumber,0,   shelf.tem
+
+ Part,((LMR>#Doublewidth)&(opt=#OptMakeEuroLipPiece)):1,     #FixedLipName ,  #LipHeight,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#fixedshelfname #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+}
+set, #routelockcatch=No
+,*********** All SPANNERS ***********
+
+
+Do,(#UseSpanner=Yes):1
+{
+   set,(#FullTopSpanner=yes):#SpannerTopDepthtemp=[d-#TopBackAmount]:#SpannerTopDepthtemp=[#SpannerTopDepth]
+,   set,(#FullTopSpanner=yes):#SpannerTopDepthtemp=[d-#FullSpannerTopDepth-#TopBackAmount]:#SpannerTopDepthtemp=[#SpannerTopDepth]
+   
+   Part, #TopSpannerQty,         #SpannerTopName ,       #SpannerTopDepthtemp,         #SpannerWidth+#addforCTF,     #SpannerMaterial,#TopSpannerNote     ,#SpannerPONumber,0,       Spanner.tem
+   
+   Part, #TopSpannerQty,         #SpannerTopBackName ,   #SpannerTopBackDepth,     #SpannerWidth+#addforCTF,     #SpannerMaterial,#TopBackSpannerNote     ,#SpannerPONumber,0,       Spanner.tem
+   Do,((t>=300)&(t<400)|(t=620)):1
+   {
+      Part,(#SpannerQty>0):1,         #SpannerName ,          #SpannerDepth,            #SpannerWidth+#addforCTF,     #SpannerMaterial,  #MidSpannerNote   ,#SpannerPONumber,0,       Spanner.tem
+   }
+set, #stophere=1
+   Do,(t=260):1
+   {
+      Part,(#SpannerQty>0):1,         #SpannerName-lowersp ,          #SpannerDepth,            #SpannerWidth+#addforCTF,     #SpannerMaterial,  #MidSpannerNote   ,#SpannerPONumber,0,       Spanner.tem
+      Part,(#SpannerQty>1):1,         #SpannerName-lowersp ,          #SpannerDepth,            #SpannerWidth+#addforCTF,     #SpannerMaterial,  #MidSpannerNote   ,#SpannerPONumber,0,       Spanner.tem
+
+   }
+
+   Do,((t<300)|(t>=400))&(t<>620)&(t<>260):1
+   {
+      Part,#SpannerQty*#SpannerMultiplier,         #SpannerName ,          #SpannerDepth,            #SpannerWidth+#addforCTF,     #SpannerMaterial,  #MidSpannerNote   ,#SpannerPONumber,0,       Spanner.tem
+      
+   }
+}
+,*********** All ADJUSTABLE shELVES ***********
+,V2.9 add a euro with option
+Part,(opt=#OptAdjToFix)&(MS=0):1,          #FixedshelfName   ,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial, #AdjtofixedShelfNote ,#MiddleshelfPONumber,0,   adjtoFixedshelf.tem
+Part, (MS=0)&(Opt=#OptAdjtoFix)&(#fronttrim>0):1, Shelf Stiffener, .75,#FixedshelfWidth+#addforCTF ,Assign Finish,,#MiddleshelfPONumber,0
+Part, (MS=0)&(Opt=#OptAdjtoFix)&(#backtrim>0):1, Shelf Stiffener, .75,#FixedshelfWidth+#addforCTF ,Assign Finish,,#MiddleshelfPONumber,0
+Part,(opt=#OptAdjToFix)&(MS>0):2,          #FixedshelfName  ,  #FixedshelfDepth-#Backamount,  (#FixedshelfWidth-MS+#addforCTF)/2,  #FixedshelfMaterial, #AdjtofixedShelfNote ,#MiddleshelfPONumber,0,   adjtoFixedshelf.tem
+Part,  (MS>0)&(Opt=#OptAdjtoFix)&(#fronttrim>0):2, Shelf Stiffener, .75,(#FixedshelfWidth-MS+#addforCTF)/2,Assign Finish,,#MiddleshelfPONumber,0
+Part,  (MS>0)&(Opt=#OptAdjtoFix)&(#backtrim>0):2, Shelf Stiffener, .75, (#FixedshelfWidth-MS+#addforCTF)/2 ,Assign Finish,,#MiddleshelfPONumber,0
+
+set, (opt=#OptMakeLipPiece):#Liptrim=#lipamount:#liptrim=0
+,V2.9 end
+
+
+Do,((#UnitFileName<>"cse101-E.cab")&(#UnitFileName<>"cse101stacked.cab")&(#UnitFileName<>"760-1.cab")):1
+{
+Do,((#swapforeuro="Yes")&(sh>0)):1
+{
+  set, (DH1>#heighttoaddeuro)&(MS=0):#Numshelf=sh-1
+  set, (DH1>#heighttoaddeuro)&(MS>0):#Numshelf=(sh-1)*2
+  Part,(DH1>#heighttoaddeuro)&(MS=0):1,          #FixedshelfName   ,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#AdjtofixedShelfNote  ,#MiddleshelfPONumber,0,   adjtoFixedshelf.tem
+  Part, (DH1>#heighttoaddeuro)&(MS=0)&(#fronttrim>0):1, Shelf Stiffener, .75,#FixedshelfWidth+#addforCTF ,Assign Finish,#note,#MiddleshelfPONumber,0
+  Part, (DH1>#heighttoaddeuro)&(MS=0)&(#backtrim>0):1, Shelf Stiffener,.75, #FixedshelfWidth+#addforCTF ,Assign Finish,#note,100,0
+
+,Part, (CRodHt3>0):1,                 #ClosetPoleName,   #ClosetPoleWidth,  #ClosetPoleLength+#addforCTF, #ClosetPoleMaterial, #ClosetPoleNote,#ClosetPolePONumber,0
+
+
+  Part,(DH1>#heighttoaddeuro)&(MS>0):2,          #FixedshelfName  ,  #FixedshelfDepth-#Backamount,  (#FixedshelfWidth-MS+#addforCTF)/2,  #FixedshelfMaterial, #AdjtofixedShelfNote ,#MiddleshelfPONumber,0,   adjtoFixedshelf.tem
+  Part, (DH1>#heighttoaddeuro)&(MS>0)&(#fronttrim>0):2, Shelf Stiffener,.75, (#FixedshelfWidth-MS+#addforCTF)/2 ,Assign Finish,#note,100,0
+  Part, (DH1>#heighttoaddeuro)&(MS>0)&(#backtrim>0):2, Shelf Stiffener, .75,(#FixedshelfWidth-MS+#addforCTF)/2 ,Assign Finish,#note,100,0
+
+}
+}
+Do,((#UnitFileName="cse101-E.cab")|(#UnitFileName="cse101stacked.cab")|(#UnitFileName="760-1.cab")):1
+{
+Do,((#swapforeuro="Yes")&(sh>0)):1
+{
+  set, (DH1>#heighttoaddeuro):#Numshelf=sh-1  
+  Part,(DH1>#heighttoaddeuro):1,          #FixedshelfName  ,  #FixedshelfDepth-#Backamount,  #FixedshelfWidth+#addforCTF,  #FixedshelfMaterial,#AdjtofixedShelfNote  ,#MiddleshelfPONumber,0,   adjtoFixedshelf.tem
+Part,  (Opt=#OptAdjtoFix)&(#fronttrim>0):1, Shelf Stiffener,.75, (#FixedshelfWidth+#addforCTF) ,Assign Finish,,#MiddleshelfPONumber,0
+Part,  (Opt=#OptAdjtoFix)&(#backtrim>0):1, Shelf Stiffener,.75, (#FixedshelfWidth+#addforCTF) ,Assign Finish,,#MiddleshelfPONumber,0
+
+}
+}
+
+set,(opt=#OptAdjToFixAll)|((opt=#NoholesCustomoptnum)&(#customadjtoeuro="Yes"))|(#makeadjeuro=1):#alleuros=1:#alleuros=0
+ set, (opt=#OptMakeLipPiece):#Liptrim=#lipamount:#liptrim=0
+Do,(#alleuros=0):1
+{  
+set, #stophere=0 
+   set, #tempnumshelf=#numshelf
+   Part, (sh>0):#Numshelf,         #AdjshelfName ,     #ShelfDepth-#Backamount,    #Adjshelfwidth,            #AdjshelfMaterial,  #AdjShelfNote  ,#AdjshelfPONumber,0,      shelf.tem
+   set, #tempnumshelf=#numshelf2
+   Part, (sh2>0):#Numshelf2,         #AdjshelfName ,     #ShelfDepth-#Backamount,    #Adjshelfwidth2,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+   set, #tempnumshelf=#numshelf3
+   Part, (sh3>0):#Numshelf3,         #AdjshelfName ,     #ShelfDepth-#Backamount,    #Adjshelfwidth3,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+   set, #tempnumshelf=#numshelf4
+   Part, (sh4>0):#Numshelf4,         #AdjshelfName ,     #ShelfDepth-#Backamount,    #Adjshelfwidth4,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+   set, #tempnumshelf=#numshelf5
+   Part, (sh5>0):#Numshelf5,         #AdjshelfName ,     #ShelfDepth-#Backamount,    #Adjshelfwidth5,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+   set, #tempnumshelf=#numshelf6
+   Part, (sh6>0):#Numshelf6,         #AdjshelfName ,     #ShelfDepth-#Backamount,    #Adjshelfwidth6,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+}
+Do,(#alleuros=1):1
+{  
+set, #stophere=0 
+   Part, (sh>0):#Numshelf,         #FixedshelfName ,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth+#addforCTF,            #AdjshelfMaterial,  #AdjShelfNote  ,#AdjshelfPONumber,0,      adjtoFixedshelf.tem
+   Part, (sh2>0):#Numshelf2,         #FixedshelfName ,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth2+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      adjtoFixedshelf.tem
+   Part, (sh3>0):#Numshelf3,         #FixedshelfName ,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth3+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      adjtoFixedshelf.tem
+   Part, (sh4>0):#Numshelf4,         #FixedshelfName ,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth4+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      adjtoFixedshelf.tem
+   Part, (sh5>0):#Numshelf5,         #FixedshelfName ,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth5+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      adjtoFixedshelf.tem
+   Part, (sh6>0):#Numshelf6,         #FixedshelfName ,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth6+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      adjtoFixedshelf.tem
+}
+
+,Stiffeners
+,SH1 is always the top section shelf count
+  Part, (sh1>0)&(#fronttrim>0):#numshelf, Shelf Stiffener,.75, #Adjshelfwidth+#addforCTF , Assign Finish,#note,100,0
+  Part, (sh1>0)&(#backtrim>0):#numshelf, Shelf Stiffener, .75,#Adjshelfwidth+#addforCTF ,Assign Finish,#note,100,0
+,SH2 is always the bottom section shelf count
+  Part, (sh2>0)&(#fronttrim>0):#numshelf2, Shelf Stiffener,.75, #Adjshelfwidth2+#addforCTF ,Assign Finish,#note,100,0
+  Part, (sh2>0)&(#backtrim>0):#numshelf2, Shelf Stiffener,.75, #Adjshelfwidth2+#addforCTF ,Assign Finish,#note,100,0
+,SH3 is always the 2nd section shelf count if not the bottom
+  Part, (sh3>0)&(#fronttrim>0):#numshelf3, Shelf Stiffener, .75,#Adjshelfwidth3+#addforCTF ,Assign Finish,#note,100,0
+  Part, (sh3>0)&(#backtrim>0):#numshelf3, Shelf Stiffener,.75, #Adjshelfwidth3+#addforCTF,Assign Finish,#note,100,0
+,SH4 is always the 3rd section shelf count if not the bottom
+  Part, (sh4>0)&(#fronttrim>0):#numshelf4, Shelf Stiffener,.75, #Adjshelfwidth4+#addforCTF ,Assign Finish,#note,100,0
+  Part, (sh4>0)&(#backtrim>0):#numshelf4, Shelf Stiffener,.75, #Adjshelfwidth4+#addforCTF ,Assign Finish,#note,100,0
+,SH5 is always the 4th section shelf count if not the bottom
+  Part, (sh5>0)&(#fronttrim>0):#numshelf5, Shelf Stiffener, .75,#Adjshelfwidth5+#addforCTF ,Assign Finish,#note,100,0
+  Part, (sh5>0)&(#backtrim>0):#numshelf5, Shelf Stiffener,.75, #Adjshelfwidth5+#addforCTF,Assign Finish,#note,100,0
+,SH6 is always the 5th section shelf count if not the bottom
+  Part, (sh6>0)&(#fronttrim>0):#numshelf6, Shelf Stiffener,.75, #Adjshelfwidth6+#addforCTF ,Assign Finish,#note,100,0
+  Part, (sh6>0)&(#backtrim>0):#numshelf6, Shelf Stiffener,.75, #Adjshelfwidth6+#addforCTF ,Assign Finish,#note,100,0
+Do,(#DoubleThick="Yes"):1
+{
+   ,Double thickness 2 pieces
+  set, (MS=0):#Numshelf=sh
+  set, (MS>0):#Numshelf=(sh)*2
+  
+   Do,(opt=#OptAdjdblthick)&(#alleuros=0):1
+   {
+      
+      Part, (sh>0):#Numshelf,         #AdjshelfName,     #ShelfDepth-#Backamount,    #Adjshelfwidth+#addforCTF,            #AdjshelfMaterial,  #AdjShelfNote  ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh2>0):#Numshelf2,         #AdjshelfName,     #ShelfDepth-#Backamount,    #Adjshelfwidth2+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh3>0):#Numshelf3,         #AdjshelfName,     #ShelfDepth-#Backamount,    #Adjshelfwidth3+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh4>0):#Numshelf4,         #AdjshelfName,     #ShelfDepth-#Backamount,    #Adjshelfwidth4+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh5>0):#Numshelf5,         #AdjshelfName,     #ShelfDepth-#Backamount,    #Adjshelfwidth5+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh6>0):#Numshelf6,         #AdjshelfName,     #ShelfDepth-#Backamount,    #Adjshelfwidth6+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+   }
+ Do,(opt=#OptAdjdblthick)&(#alleuros=1):1
+   {
+      
+      Part, (sh>0):#Numshelf,         #AdjshelfName,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth+#addforCTF,            #AdjshelfMaterial,  #AdjShelfNote  ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh2>0):#Numshelf2,         #AdjshelfName,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth2+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh3>0):#Numshelf3,         #AdjshelfName,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth3+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh4>0):#Numshelf4,         #AdjshelfName,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth4+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh5>0):#Numshelf5,         #AdjshelfName,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth5+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh6>0):#Numshelf6,         #AdjshelfName,     #FixedShelfDepth-#Backamount,    #Adjshelfwidth6+#addforCTF,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+   }
+   ,Double thickness 1 lip piece
+   Do,(opt=#OptMakeLipPiece):1
+   {
+      
+      ,Part, (sh>0):#Numshelf,         #AdjshelfName,     #ShelfDepth-#LipAmount-#Backamount,    #Adjshelfwidth,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh>0):#Numshelf,         #FixedLipName ,    #LipHeight,  #AdjshelfWidth,  #FixedshelfMaterial,#AdjshelfName #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+      
+      ,Part, (sh2>0):#Numshelf2,         #AdjshelfName,     #ShelfDepth-#LipAmount-#Backamount,    #Adjshelfwidth2,            #AdjshelfMaterial,#AdjShelfNote    ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh2>0):#Numshelf2,         #FixedLipName ,    #LipHeight,  #AdjshelfWidth2,  #FixedshelfMaterial,#AdjshelfName #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+      
+      ,Part, (sh3>0):#Numshelf3,         #AdjshelfName,     #ShelfDepth-#LipAmount-#Backamount,    #Adjshelfwidth3,            #AdjshelfMaterial,  #AdjShelfNote  ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh3>0):#Numshelf3,         #FixedLipName ,    #LipHeight,  #AdjshelfWidth3,  #FixedshelfMaterial,#AdjshelfName #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+      
+      ,Part, (sh4>0):#Numshelf4,         #AdjshelfName,     #ShelfDepth-#LipAmount-#Backamount,    #Adjshelfwidth4,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh4>0):#Numshelf4,         #FixedLipName ,    #LipHeight,  #AdjshelfWidth4,  #FixedshelfMaterial,#AdjshelfName #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+      
+      ,Part, (sh5>0):#Numshelf5,         #AdjshelfName,     #ShelfDepth-#LipAmount-#Backamount,    #Adjshelfwidth5,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh5>0):#Numshelf5,         #FixedLipName ,    #LipHeight,  #AdjshelfWidth5,  #FixedshelfMaterial,#AdjshelfName #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+      
+     , Part, (sh6>0):#Numshelf6,         #AdjshelfName,     #ShelfDepth-#LipAmount-#Backamount,    #Adjshelfwidth6,            #AdjshelfMaterial, #AdjShelfNote   ,#AdjshelfPONumber,0,      shelf.tem
+      Part, (sh6>0):#Numshelf6,         #FixedLipName ,    #LipHeight,  #AdjshelfWidth6,  #FixedshelfMaterial,#AdjshelfName #FixedShelfLipNote  ,#MiddleshelfPONumber,0,   kick.tem
+      
+   }
+   
+}
+
+,*********** All SHOE shELVES ***********
+
+,Shoe Shelves
+set,(#Unitfilename="*Match*"): #ShoerailMaterial=3/4 #UnitMaterial
+set,(#Unitfilename="*2nd*"): #ShoerailMaterial=3/4 #ContrastMaterial
+set, ((#Unitfilename="*Match*")|(#Unitfilename="*2nd*")):#ShoeShelfNote=Rail-#ShoerailMaterial:#ShoeShelfNote=Rail-Other
+Part, (w>0):#Numshoeshelf,#ShoeShelfName,#FixedShelfDepth-#Backamount,#Shoeshelfwidth,#FixedShelfMaterial,#ShoeShelfNote,#MiddleShelfPONumber,0,ShoeShelfBack.tem
+Set,#NumOfShoeRail=#NumShoeShelf
+set, #ShoeRailWidth=#Shoeshelfwidth
+Part, ((#Unitfilename="*Match*")|(#Unitfilename="*2nd*"))&(w>0)&(#UseShoeShelfRail=Yes):#NumOfShoeRail,#ShoeRailName,#ShoeRailHeight,#ShoeRailWidth,#ShoerailMaterial,#ShoeRailNote,#AdjshelfPONumber,0, shoeshelfRail.tem
+
+,*********** All DIVIDERS ***********
+set, #dividerbackboreadj=0
+,set, (bkyn=1):#dividerbackboreadj=#xStdBackingMatThickness
+set, (#fixedbackbore=Yes)&(bkyn=1):#dividerbackboreadj=#xStdBackingMatThickness
+set, (#fixedbackbore=No)&(bkyn=1):#dividerbackboreadj=-#xStdBackingMatThickness
+,Dividers Below
+set, (#unitfilename="*stack*")&((#unitfilename<>"*141*")&(MS>0)):#not32mm=1
+set, ((#unitfilename="141stacked.cab")&(MS>0)):#not32mm=0
+set, #specialbackbetween=Yes
+Part, (#DivHt1>0):1,  #DividerName ,     #DividerDepth,        #DivHt1,       #SideMaterial, #DividerNote       ,#MiddleDividerPONumber,0, Divider.tem
+Set, #not32mm=0
+set, ((#unitfilename="141stacked.cab")&(LMS>0)):#not32mm=1
+set, #railcount=0
+set, #correcteddivht1=0
+Do, (#not32mm=1):1
+{
+  set, ((((#Divht1+#sizecorrection)/32mm)-((#divht1+#sizecorrection)\32mm))>.5):#numberofincrements = [((#divht1+#sizecorrection)\32mm)+1]:#numberofincrements = [(#divht1+#sizecorrection)\32mm]
+  Set,#correcteddivht1= [((#numberofincrements*32mm)-#sizecorrection)]
+
+  Set, (TR>0): #addtr=1:#addtr=0
+  Set, (MR>0): #addmr=1:#addmr=0
+  Set, (BR>0): #addbr=1:#addbr=0
+  set, #railcount=(#addtr+#addmr+#addbr)
+}
+Part, ((#not32mm=1)&(#DivHt2>0)):1,  #DividerName ,     #DividerDepth,       (H-#correcteddivht1-(#kcdxMaterialWidth*#railcount)),       #SideMaterial, #DividerNote       ,#MiddleDividerPONumber,0, Divider2.tem
+set, ((#unitfilename="141stacked.cab")&(LMS>0)):#not32mm=1
+Part, ((#not32mm=0)&(#DivHt2>0)):1,  #DividerName ,     #DividerDepth,        #DivHt2,       #SideMaterial, #DividerNote       ,#MiddleDividerPONumber,0, Divider2.tem
+Part, (#DivHt3>0):1,  #DividerName ,     #DividerDepth,        #DivHt3,       #SideMaterial, #DividerNote       ,#MiddleDividerPONumber,0, Divider3.tem
+Part, (#DivHt4>0):1,  #DividerName ,     #DividerDepth,        #DivHt4,       #SideMaterial, #DividerNote       ,#MiddleDividerPONumber,0, Divider4.tem
+Part, (#DivHt5>0):1,  #DividerName ,     #DividerDepth,        #DivHt5,       #SideMaterial, #DividerNote       ,#MiddleDividerPONumber,0, Divider5.tem
+Part, (#DivHt6>0):1,  #DividerName ,     #DividerDepth,        #DivHt6,       #SideMaterial, #DividerNote       ,#MiddleDividerPONumber,0, Divider6.tem
+set, #specialbackbetween=No
+
+Do,(#DoubleThick="Yes"):1
+{
+        
+      ,Dividers Below
+      Part, (MS>#DoubleWidth)&(#DivHt1>0):1,  #DividerName ,     #DividerDepth,        #DivHt1,       #SideMaterial,  #DividerNote      ,#MiddleDividerPONumber,0, Divider.tem
+      Part, (MS2>#DoubleWidth)&(#DivHt2>0):1,  #DividerName ,     #DividerDepth,        #DivHt2,       #SideMaterial,  #DividerNote      ,#MiddleDividerPONumber,0, Divider2.tem
+      Part, (MS3>#DoubleWidth)&(#DivHt3>0):1,  #DividerName ,     #DividerDepth,        #DivHt3,       #SideMaterial,  #DividerNote      ,#MiddleDividerPONumber,0, Divider3.tem
+      Part, (MS4>#DoubleWidth)&(#DivHt4>0):1,  #DividerName ,     #DividerDepth,        #DivHt4,       #SideMaterial,  #DividerNote      ,#MiddleDividerPONumber,0, Divider4.tem
+      Part, (MS5>#DoubleWidth)&(#DivHt5>0):1,  #DividerName ,     #DividerDepth,        #DivHt5,       #SideMaterial,  #DividerNote      ,#MiddleDividerPONumber,0, Divider5.tem
+      Part, (MS6>#DoubleWidth)&(#DivHt6>0):1,  #DividerName ,     #DividerDepth,        #DivHt6,       #SideMaterial,  #DividerNote      ,#MiddleDividerPONumber,0, Divider6.tem
+  
+}
+

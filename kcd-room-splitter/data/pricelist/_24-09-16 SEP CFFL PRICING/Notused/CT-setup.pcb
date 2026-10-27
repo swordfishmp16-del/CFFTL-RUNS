@@ -1,0 +1,189 @@
+use grid
+
+,This is here so I can test popup regarding the countertop edges eventually
+,Set, #IncludeBackName =Include Backs Yes or No?, --- Include Backs Question?
+,DisplaySet, #IncludeBacksName =Include Backs Yes or No?, --- Include Backs Question?
+,AskQuestion,#IncludeBacksYN,No,#IncludeBacksName  [Yes;No]
+
+
+,**-----------------------KCDW COUNTERTOP PRICING---------------------------
+
+,**  SECTION 12 Countertop Cost
+DisplaySet,#CountertopType0=None,12.0         Countertop 0 Name
+DisplaySet,#CountertopTypeCost0=0,12.0         #CountertopType0 0 Cost
+
+DisplaySet,#CountertopType1=Melamine 3/4 Match,12.1         Countertop 1 Name
+DisplaySet,#CountertopTypeCost1=14*#MaterialCostGroup,12.1         #CountertopType1 1 Cost
+
+DisplaySet,#CountertopType2=Melamine 3/4 2nd Material,12.2         Countertop 2 Name
+DisplaySet,#CountertopTypeCost2=14*#ContrastMaterialCostGroup,12.2         #CountertopType2 2 Cost
+
+DisplaySet,#CountertopType3=High Pressure Laminate 1 1/2,12.3         Countertop 3 Name
+DisplaySet,#CountertopTypeCost3=40,12.3        #CountertopType3 3 Cost
+
+DisplaySet,#CountertopType4=Thermofoil Slab Top ,12.4         Countertop 4 Name
+DisplaySet,#CountertopTypeCost4=40,12.4         #CountertopType4 4 Cost
+
+DisplaySet,#CountertopType5=Surfaces,12.5         Countertop 5 Name
+DisplaySet,#CountertopTypeCost5=50,12.5         #CountertopType5 5 Cost
+DisplaySet,#Addwoodedgecost=0,12.5.1         Linear foot cost of Wood Edge 
+
+DisplaySet,#CountertopType6=MDF Primed 3/4,12.6         Countertop 6 Name
+DisplaySet,#CountertopTypeCost6=45,12.6         #CountertopType6 6 Cost
+
+DisplaySet,#CountertopType7=MDF Painted 3/4,12.7         Countertop 7 Name
+DisplaySet,#CountertopTypeCost7=60,12.7         #CountertopType7 7 Cost
+
+DisplaySet,#CountertopType8=Wood Clear Coat 3/4,12.8         Countertop 8 Name
+DisplaySet,#CountertopTypeCost8=90,12.8         #CountertopType8 8 Cost
+
+DisplaySet,#CountertopType9=Wood Stained 3/4,12.9         Countertop 9 Name
+DisplaySet,#CountertopTypeCost9=95,12.9         #CountertopType9 9 Cost
+
+DisplaySet,#CountertopType10=Wood Clear Coat 1 1/2,12.10         Countertop 10 Name
+DisplaySet,#CountertopTypeCost10=110,12.10         #CountertopType10 10 Cost
+DisplaySet,#Addwoodedgecost=0,12.10.1         Linear foot cost of Wood Edge 
+
+DisplaySet,#CountertopType11=Wood Stained 1 1/2,12.11         Countertop 11 Name
+DisplaySet,#CountertopTypeCost11=115,12.11         #CountertopType11 11 Cost
+
+DisplaySet,#CountertopType12=Butcher Block Maple,12.12         Countertop 12 Name
+DisplaySet,#CountertopTypeCost12=75,12.12         #CountertopType12 12 Cost
+
+DisplaySet,#CountertopType13=Butcher Block Cherry,12.13         Countertop 13 Name
+DisplaySet,#CountertopTypeCost13=100,12.13         #CountertopType13 13 Cost
+
+DisplaySet,#CountertopType14=Butcher Block Walnut,12.14         Countertop 14 Name
+DisplaySet,#CountertopTypeCost14=135,12.14         #CountertopType14 14 Cost
+
+DisplaySet,#CountertopType15=Solid Surface,12.15         Countertop 15 Name
+DisplaySet,#CountertopTypeCost15=0,12.15         #CountertopType15 15 Cost
+
+DisplaySet,#CountertopType16=Reserved,12.16         Countertop 16 Name
+DisplaySet,#CountertopTypeCost16=0,12.16         #CountertopType16 16 Cost
+
+DisplaySet,#CountertopType17=Reserved,12.17         Countertop 17 Name
+DisplaySet,#CountertopTypeCost17=0,12.17         #CountertopType17 17 Cost
+
+DisplaySet,#CountertopType18=Reserved,12.18         Countertop 18 Name
+DisplaySet,#CountertopTypeCost18=0,12.18         #CountertopType18 18 Cost
+
+DisplaySet,#CountertopType19=Reserved,12.19         Countertop 19 Name
+DisplaySet,#CountertopTypeCost19=0,12.19         #CountertopType19 19 Cost
+
+DisplaySet,#CountertopType20 =Reserved,12.20         Countertop 20 Name
+DisplaySet,#CountertopTypeCost20=0,12.20         #CountertopType20 20 Cost
+
+DisplaySet,#CountertopType21 =Reserved,12.21         Countertop 21 Name
+DisplaySet,#CountertopTypeCost21=0,12.21         #CountertopType21 21 Cost
+
+DisplaySet,#CountertopType22 =Reserved,12.22         Countertop 22 Name
+DisplaySet,#CountertopTypeCost22=0,12.22         #CountertopType22 22 Cost
+
+DisplaySet,#CountertopType23 =Reserved,12.23         Countertop 23 Name
+DisplaySet,#CountertopTypeCost23=0,12.23         #CountertopType23 23 Cost
+
+DisplaySet,#CountertopType24 =Reserved,12.24         Countertop 24 Name
+DisplaySet,#CountertopTypeCost24=0,12.24         #CountertopType24 24 Cost
+
+DisplaySet,#CountertopType25=Reserved,12.25         Countertop 25 Name
+DisplaySet,#CountertopTypeCost25=0,12.25         #CountertopType25 25 Cost
+
+DisplaySet,#CountertopType26=Reserved,12.26         Countertop 26 Name
+DisplaySet,#CountertopTypeCost26=0,12.26         #CountertopType26 26 Cost
+
+DisplaySet,#CountertopType27=Reserved,12.27         Countertop 27 Name
+DisplaySet,#CountertopTypeCost27=0,12.27         #CountertopType27 27 Cost
+
+DisplaySet,#CountertopType28=Reserved,12.28         Countertop 28 Name
+DisplaySet,#CountertopTypeCost28=0,12.28         #CountertopType28 28 Cost
+
+DisplaySet,#CountertopType29=Reserved,12.29         Countertop 29 Name
+DisplaySet,#CountertopTypeCost29=0,12.29         #CountertopType29 29 Cost
+
+DisplaySet,#CountertopType30 =Reserved,12.30         Countertop 30 Name
+DisplaySet,#CountertopTypeCost30=0,12.30         #CountertopType30 30 Cost
+
+DisplaySet,#CountertopType31=Reserved,12.31         Countertop 31 Name
+DisplaySet,#CountertopTypeCost31=0,12.31         #CountertopType31 31 Cost
+
+
+
+
+
+set, (#incm="-Inch"):#CTopLinealFactor=12
+set, (#incm="-Inch"):#CtopSquareFactor=144 
+set, (#incm="-Mm"):#CTopLinealFactor=1000
+set, (#incm="-Mm"):#CtopSquareFactor=1000000
+set, (#incm="-Cm"):#CTopLinealFactor=100
+set, (#incm="-Cm"):#CtopSquareFactor=10000 
+
+
+,Attention Do Not Change Below
+Set, #CTopCost=0
+Set, #Splash4Cost=0
+Set, #SplashFCost=0
+Set, #SplashTCost=0
+
+
+
+Set,#Subtotal11Cost = 0
+Set,#Subtotal12Cost = 0
+Set,#Subtotal13Cost = 0
+
+
+Set,#Room1CTopCost =0
+Set,#Room2CTopCost =0
+Set,#Room3CTopCost =0
+Set,#Room4CTopCost =0
+Set,#Room5CTopCost =0
+Set,#Room6CTopCost =0
+Set,#Room7CTopCost =0
+Set,#Room8CTopCost =0
+Set,#Room9CTopCost =0
+Set,#Room10CTopCost =0
+Set,#Room11CTopCost =0
+Set,#Room12CTopCost =0
+Set,#Room13CTopCost =0
+Set,#Room14CTopCost =0
+Set,#Room15CTopCost =0
+Set,#Room16CTopCost =0
+Set,#Room17CTopCost =0
+Set,#Room18CTopCost =0
+Set,#Room19CTopCost =0
+Set,#Room20CTopCost =0
+Set,#Room21CTopCost =0
+Set,#Room22CTopCost =0
+Set,#Room23CTopCost =0
+Set,#Room24CTopCost =0
+Set,#Room25CTopCost =0
+Set,#ExtraCost=0
+
+Set,#Room1CTSqFt = 0
+Set,#Room2CTSqFt = 0
+Set,#Room3CTSqFt =0
+Set,#Room4CTSqFt =0
+Set,#Room5CTSqFt =0
+Set,#Room6CTSqFt =0
+Set,#Room7CTSqFt =0
+Set,#Room8CTSqFt =0
+Set,#Room9CTSqFt =0
+Set,#Room10CTSqFt =0
+Set,#Room11CTSqFt =0
+Set,#Room12CTSqFt =0
+Set,#Room13CTSqFt =0
+Set,#Room14CTSqFt =0
+Set,#Room15CTSqFt =0
+Set,#Room16CTSqFt =0
+Set,#Room17CTSqFt =0
+Set,#Room18CTSqFt =0
+Set,#Room19CTSqFt =0
+Set,#Room20CTSqFt =0
+Set,#Room21CTSqFt =0
+Set,#Room22CTSqFt =0
+Set,#Room23CTSqFt =0
+Set,#Room24CTSqFt =0
+Set,#Room25CTSqFt =0
+
+Set, #CTopNameV= Marble Countertops
+Set, #CTopCostV=0

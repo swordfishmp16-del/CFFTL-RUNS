@@ -1,0 +1,118 @@
+
+
+set, #stopOKcost=0
+set, #whichdoor=1
+Set,#UnitMaterialNameOK=#ExtraUnitText1
+load, (#unitfilename<>"*OKACCESSORY*"):Getdoorstylecost.pcb
+,load, getdoordrawerfinishingcost.pcb
+
+,******* All DOORS & DRAWER FRONTS *******
+Load, OKDoors.pcb
+,*****************************************
+
+set, #Note =#Memodoor #DoorDrawerFinishingType
+
+Set, #doorstyleupcharge=1.00
+
+
+set, (#DoorDrawerFinishingCostGroup>1.00):#finishupcharge=1.05:#finishupcharge=1.00
+Set, (#unitfilename="*ACCESSORY*"):#finishupcharge=1.00
+
+set, #stopOKcost=1
+
+set, #hingeside=L
+Do, (#unitfilename="*SD*"):1
+{
+set, (D1HG=2): #hingeside=R:#hingeside=L
+}
+Do, (#unitfilename="*SD*")|(#unitfilename="*Door*")|(#unitfilename="*drawer*"):1
+{
+set, (#DoorDrawerStyleCostgroup>1.00):#doorstyleupcharge=1.05:#doorstyleupcharge=1.00
+}
+
+
+set, #Widthcode=W
+set, (D>27):#depthcode=D:#depthcode=
+set, #partsize=#Widthcode#depthcode#HingeSide
+
+
+Do,(#UnitLibrary="*Outdoor*"):1
+ {
+  ReadCSVFile,Outdoor Cabinet Costs.csv,1,2,3,4,5
+  ReadCsvValue,Outdoor Cabinet Costs.csv,#Name,#tagcodeL,#tagcodeR,#TemptotalunitCost,#haslegs
+ }
+ 
+set, #legchoice=#ExtraUnitText15
+set, #legPN=STAINLESS-LEGS-4PK
+
+
+
+set, (#hingeside="L"):#okPartnumber=#tagcodeL:#okPartnumber=#tagcodeR
+
+
+Set, #TotalUnitCost=[#TempTotalUnitCost*#doorstyleupcharge*#finishupcharge*#universalupchargeOK]
+Price,(#unitfilename<>"*ToeKick*")&(#unitfilename<>"*Filler*"):1, RM#roomnum #Name #OKPartnumber ,#TotalUnitCost, w, d, h 
+
+
+Do,(1=2)&(#unitfilename="*BaseEndPanel*"):1
+{
+Set, #baseendpanelcost=<#temptotalunitcost>
+Set, #baseendpanelpn=<#tagcodeL>
+Set, #addbaseendpanel=1
+}
+Do,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):1
+{
+Set, #Toekickcost96=<#temptotalunitcost>
+set, #Toekickcost48=#Toekickcost96/2
+Set, #toekick48pn=<#tagcodeL w 4 TK Clips>
+Set, #toekick96pn=<#tagcodeR w 8 TK Clips>
+
+}
+Load, countparts-ok.pcb
+
+Set, #addbaseendpanel=0
+
+  ,Once the cutlist has made it to the bottom for the first time this is here to prevent TagCounterFile from resetting itself to all 0s again & the header won't print for every single TAG item.
+ Set, #FirstokTimeHere=1
+
+,   We will be collecting names of objects on job, a qty, and a cost for the "row" based on the drawing to report as a CSV table.
+
+
+
+,Do, (#ExcludePoleItem=1):1
+, {
+,  SendToFile, #OKDestinationPath\#CSVName Outdoor Cabinet Order List.CSV,#Name#Comma#Code#Comma#Width#Comma#Length#Comma#Depth#Comma1#Comma$#TotalUnitCost
+  ,
+  ,Set,#OutdoorTotal=[#TotalUnitCost+#TagHardwareTotal]
+  
+  
+, }
+
+
+,Chelsea was here 9-13-21 - Step 2 - Collect - Take in totals/running the meter when "Pole" exclusion is not present.
+,Do, (#ExcludePoleItem=0):1
+, {
+ , Set, #QuantityLoop=1
+
+  ,Chelsea was here 11-12-21 - Clipped the "While" structure from !! KCD Frame
+  ,  Loop the "Collect" for NUM times - a single unit is 1, a unit with quantity 9 would run 9 times.
+ , While, (#QuantityLoop<=NUM)
+
+     , Load, CommonOKCounter_Collect.pcb
+
+   , set,#QuantityLoop=[#QuantityLoop+1]
+    ,Set,#TagHardwareTotal=<#TotalUnitCost+#TagHardwareTotal>
+    ,Loops through until #QuantityLoop is greater than NUM or Quantity on the object from the design screen.
+  ,Wend
+
+, }
+
+
+load, xxafterpriceok.pcb
+
+
+set, #stopOKcost=2
+
+end
+
+

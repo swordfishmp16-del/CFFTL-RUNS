@@ -1,0 +1,10 @@
+,CF Individual Left Panels
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+set, #justapanelR=0
+set, #justapanelL=1
+load, Pricesides.pcb
+set, #justapanelL=0 
+,*****************************************
+

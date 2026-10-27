@@ -1,0 +1,34 @@
+,****Divider "Cubby" Vertical
+,********* All VERTICAL DIVIDERS *********
+
+,***************************************
+Do, (#verticalpricechoice="Fixed Cost"):1
+{
+Set, ((D>#MaxCubbyVdepth)|(H>#MaxcubbyVheight)|(W>0.75)):#costofcubbydivider=#CostofcubbyVunit*2:#costofcubbydivider=#CostofcubbyVunit
+
+set, #costofcubbydivider=[#costofcubbydivider*#universalupcharge]
+set, #label={W}
+
+Price, 1,  #label"  #CubbyVertName-#UnitMaterialName-#edgebandingtype, #costofcubbydivider, D ,H ,  #AdjustableShelfPrintOrderNumber,
+
+}
+Do, (#verticalpricechoice="Panel"):1
+{
+Set, #VertH = [H]
+Set, #VertD = [D]
+set, #sideTH={W}
+set, #temppanelcount=1
+,set, #justapanelR=1
+,Load, Pricesides.pcb 
+
+,Do, (#verticalpricechoice="Panel"):1
+,{
+Load, B-Side Cost.Pcb
+Set, #CostOfCubbyVertical = [#CostOfSide]
+set, #displaythickness={#sideTH}
+set, #roomtag= #displaythickness"  #CubbyVertName-#UnitMaterialName-#edgebandingtype
+Price, 1,   #roomtag ,        #CostOfCubbyVertical,    D,  H,  #CubbyUnitPrintOrderNumber,         
+
+    
+}
+

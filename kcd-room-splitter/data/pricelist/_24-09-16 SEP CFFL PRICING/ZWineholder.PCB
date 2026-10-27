@@ -1,0 +1,11 @@
+,WineHolder
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+
+
+Price, (w>0)&(W<=24):SH,   RM#Roomnum Wine Scallops-24,         150*#universalupcharge,             #VertD, W,          1000,  
+Price, (W>24)&(W<=48):SH,   RM#Roomnum Wine Scallops-48,         200*#universalupcharge,             #VertD, W,          1000,        
+

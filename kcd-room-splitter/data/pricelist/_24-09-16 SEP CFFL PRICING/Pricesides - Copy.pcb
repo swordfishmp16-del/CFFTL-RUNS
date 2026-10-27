@@ -1,0 +1,79 @@
+,CF Prices and counts the left and right (panels) sides
+
+Do, (#PartFileName<>"ZCustomPanelLeft.prt")&(#PartFileName<>"ZCustomPanelRight.prt")&(#PartFileName<>"ZFixedShelfPanelLeft.prt")&(#PartFileName<>"ZFixedShelfPanelRight.prt"):1
+{
+Do,(LS>0):1
+{
+set, #sideTH = LS
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH = {LS}
+Set,(ul=1)&(LS>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+
+Do,(#wallbeddepthtrack=0):1
+{
+Price, (LS>0):1, #sideTH"-#LeftSideName-#EdgeBandingType,         #CostOfSide+#UsePanelTouchingWallCost,             #VertD, #VertH,          #LeftSidePrintOrderNumber,
+Set, ((#Vertd>#FinaldogearDepth)&(LS>0)&(#dogear=1)):#dogearadd=[#dogearadd+1]
+Price, ((#Vertd>#FinaldogearDepth)&(LS>0)&(#dogear=1)):1, Dog-Ear Panel Cut, #Dogearpanelcost, ,,#LeftSidePrintOrderNumber,
+Set, ((LS>0)&(#ledroutedFpanel=1)):#ledFpaneladd=[#ledFpaneladd+1]
+Price, ((LS>0)&(#ledroutedFpanel=1)):1, Routed LED Strip Full Panel, #FullLEDPanelStripcost, ,#VertH,#LeftSidePrintOrderNumber,
+Set, ((LS>0)&(#ledroutedHpanel=1)):#ledHpaneladd=[#ledHpaneladd+1]
+Price, ((LS>0)&(#ledroutedHpanel=1)):1, Routed LED Strip Half Panel, #HalfLEDPanelStripcost, ,#VertH,#LeftSidePrintOrderNumber,
+Price, ((LS>0)&(#Hutchpanel=1)):1, Charge for Hutch Panel, #Hutchpanelcharge, ,,#LeftSidePrintOrderNumber,
+}
+}
+Do,(RS>0):1
+{
+set, #sideTH = RS
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb 
+set, #sideTH = {RS} 
+Set,(ur=1)&(RS>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+
+Do,(#wallbeddepthtrack=0):1
+{        
+Price, (RS>0):1,   #sideTH"-#RightSideName-#EdgeBandingType,        #CostOfSide+#UsePanelTouchingWallCost,             #VertD, #VertH,          #RightSidePrintOrderNumber,
+Set, ((#Vertd>#FinaldogearDepth)&(RS>0)&(#dogear=1)):#dogearadd=[#dogearadd+1]
+Price, ((#Vertd>#FinaldogearDepth)&(RS>0)&(#dogear=1)):1, Dog-Ear Panel Cut, #Dogearpanelcost, ,,#RightSidePrintOrderNumber,
+Set, ((RS>0)&(#ledroutedFpanel=1)):#ledFpaneladd=[#ledFpaneladd+1]
+Price, ((RS>0)&(#ledroutedFpanel=1)):1, Routed LED Strip Full Panel, #FullLEDPanelStripcost, ,#VertH,#RightSidePrintOrderNumber,
+Set, ((RS>0)&(#ledroutedHpanel=1)):#ledHpaneladd=[#ledHpaneladd+1]
+Price, ((RS>0)&(#ledroutedHpanel=1)):1, Routed LED Strip Half Panel, #HalfLEDPanelStripcost, ,#VertH,#RightSidePrintOrderNumber,
+Price, ((RS>0)&(#Hutchpanel=1)):1, Charge for Hutch Panel, #Hutchpanelcharge, ,,#LeftSidePrintOrderNumber,
+}
+}  
+
+}
+  
+Do, (#justapanelR=1):1
+{
+set, #sideTH=W
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH={W}  
+Set,(ur=1)&(w>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+        
+Price, (w>0):1,   #sideTH"-#RightSideName-#EdgeBandingType,        #CostOfSide+#UsePanelTouchingWallCost,             #VertD, #VertH,          #RightSidePrintOrderNumber,
+Set, ((#Vertd>#FinaldogearDepth)&(w>0)&(#dogear=1)):#dogearadd=[#dogearadd+1]
+Price, ((#Vertd>#FinaldogearDepth)&(w>0)&(#dogear=1)):1, Dog-Ear Panel Cut, #Dogearpanelcost, ,,#RightSidePrintOrderNumber,
+Set, ((w>0)&(#ledroutedFpanel=1)):#ledFpaneladd=[#ledFpaneladd+1]
+Price, ((w>0)&(#ledroutedFpanel=1)):1, Routed LED Strip Full Panel, #FullLEDPanelStripcost, ,#VertH,#RightSidePrintOrderNumber,
+Set, ((w>0)&(#ledroutedHpanel=1)):#ledHpaneladd=[#ledHpaneladd+1]
+Price, ((w>0)&(#ledroutedHpanel=1)):1, Routed LED Strip Half Panel, #HalfLEDPanelStripcost, ,#VertH,#RightSidePrintOrderNumber,
+} 
+Do, (#justapanelL=1):1
+{
+set, #sideTH=W
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb 
+set, #sideTH={W} 
+Set,(ur=1)&(w>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+        
+Price, (w>0):1,   #sideTH"-#LeftSideName-#EdgeBandingType,        #CostOfSide+#UsePanelTouchingWallCost,             #VertD, #VertH,          #LeftSidePrintOrderNumber,
+Set, ((#Vertd>#FinaldogearDepth)&(w>0)&(#dogear=1)):#dogearadd=[#dogearadd+1]
+Price, ((#Vertd>#FinaldogearDepth)&(w>0)&(#dogear=1)):1, Dog-Ear Panel Cut, #Dogearpanelcost, ,,#LeftSidePrintOrderNumber,
+Set, ((w>0)&(#ledroutedFpanel=1)):#ledFpaneladd=[#ledFpaneladd+1]
+Price, ((w>0)&(#ledroutedFpanel=1)):1, Routed LED Strip Full Panel, #FullLEDPanelStripcost, ,#VertH,#LeftSidePrintOrderNumber,
+Set, ((w>0)&(#ledroutedHpanel=1)):#ledHpaneladd=[#ledHpaneladd+1]
+Price, ((w>0)&(#ledroutedHpanel=1)):1, Routed LED Strip Half Panel, #HalfLEDPanelStripcost, ,#VertH,#LeftSidePrintOrderNumber,
+} 

@@ -1,0 +1,206 @@
+,THIS SECTION WILL LET YOU SET THE COST OF YOUR MOLDINGS
+,JMF CFLA not used for CF
+
+
+
+
+SetOnly, (#ThisMld=Facia):             #MldCost=#CrownMoldingTypeCost2
+SetOnly, (#ThisMld=RTF Crown Small):   #MldCost=#CrownMoldingTypeCost3
+SetOnly, (#ThisMld=RTF Crown Large):   #MldCost=#CrownMoldingTypeCost4
+SetOnly, (#ThisMld=Wood Crown):        #MldCost=#CrownMoldingTypeCost5
+SetOnly, (#ThisMld=Dental Crown):      #MldCost=#CrownMoldingTypeCost6
+
+end
+
+
+
+load, I-Molding Cost.pcb
+
+                   Molding Name             Cost/Ft.     Percentage set in A-setup
+,---------------------------------------------------------------------------
+SetOnly, (#ThisMld=1 1/8" Band - Nosing + Dentil):      #MldCost=#$118BandNosingDentil$    *   #percent
+SetOnly, (#ThisMld=1 1/2" Band - Nosing + Dentil):      #MldCost=#$112BandNosingDentil$     *   #percent
+SetOnly, (#ThisMld=1 5/8" Band - Nosing + Dentil):      #MldCost=#$158BandNosingDentil$    *   #percent
+SetOnly, (#ThisMld=1 3/4" Band - Nosing + Dentil):      #MldCost=#$134BandNosingDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/4" Band - Nosing + Dentil):      #MldCost=#$214BandNosingDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Band - Nosing + Dentil):      #MldCost=#$212BandNosingDentil$     *   #percent
+SetOnly, (#ThisMld=3 1/4" Band - Nosing + Dentil):      #MldCost=#$314BandNosingDentil$     *   #percent
+
+SetOnly, (#ThisMld=1 1/8" Band - Nosing):      #MldCost=#$118BandNosing$    *   #percent
+SetOnly, (#ThisMld=1 1/2" Band - Nosing):      #MldCost=#$112BandNosing$     *   #percent
+SetOnly, (#ThisMld=1 5/8" Band - Nosing):      #MldCost=#$158BandNosing$    *   #percent
+SetOnly, (#ThisMld=1 3/4" Band - Nosing):      #MldCost=#$134BandNosing$     *   #percent
+SetOnly, (#ThisMld=2 1/4" Band - Nosing):      #MldCost=#$214BandNosing$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Band - Nosing):      #MldCost=#$212BandNosing$     *   #percent
+SetOnly, (#ThisMld=3 1/4" Band - Nosing):      #MldCost=#$314BandNosing$     *   #percent
+
+SetOnly, (#ThisMld=1 1/8" Band - Dentil):      #MldCost=#$118BandDentil$    *   #percent
+SetOnly, (#ThisMld=1 1/2" Band - Dentil):      #MldCost=#$112BandDentil$     *   #percent
+SetOnly, (#ThisMld=1 5/8" Band - Dentil):      #MldCost=#$158BandDentil$    *   #percent
+SetOnly, (#ThisMld=1 3/4" Band - Dentil):      #MldCost=#$134BandDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/4" Band - Dentil):      #MldCost=#$214BandDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Band - Dentil):      #MldCost=#$212BandDentil$     *   #percent
+SetOnly, (#ThisMld=3 1/4" Band - Dentil):      #MldCost=#$314BandDentil$     *   #percent
+
+SetOnly, (#ThisMld=1 1/8" Band):       #MldCost=#$118Band$    *   #percent
+SetOnly, (#ThisMld=1 1/2" Band):       #MldCost=#$112Band$     *   #percent
+SetOnly, (#ThisMld=1 5/8" Band):       #MldCost=#$158Band$    *   #percent
+SetOnly, (#ThisMld=1 3/4" Band):       #MldCost=#$134Band$     *   #percent
+SetOnly, (#ThisMld=2 1/4" Band):       #MldCost=#$214Band$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Band):       #MldCost=#$212Band$     *   #percent
+SetOnly, (#ThisMld=3 1/4" Band):       #MldCost=#$314Band$     *   #percent
+
+SetOnly, (#ThisMld=3 15/16" Camden):            #MldCost=#$Camden$     *   #percent
+SetOnly, (#ThisMld=2 1/8" Contemporary):#MldCost=#$SmContemp$     *   #percent
+SetOnly, (#ThisMld=6 11/16" Contemporary):#MldCost=#$LgContemp$     *   #percent
+
+SetOnly, (#ThisMld=2 7/8" Cove - Cap):   #MldCost=#$278CoveCap$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Cove - Cap):   #MldCost=#$312CoveCap$     *   #percent
+
+SetOnly, (#ThisMld=3/4" Cove):         #MldCost=#$34Cove$      *   #percent
+SetOnly, (#ThisMld=1 1/2" Cove):       #MldCost=#$112Cove$     *   #percent
+SetOnly, (#ThisMld=2 1/8" Cove):       #MldCost=#$218Cove$    *   #percent
+SetOnly, (#ThisMld=2 1/2" Cove):       #MldCost=#$212Cove$     *   #percent
+SetOnly, (#ThisMld=2 9/16" Cove):      #MldCost=#$2916Cove$     *   #percent
+SetOnly, (#ThisMld=2 7/8" Cove):       #MldCost=#$278Cove$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Cove):       #MldCost=#$312Cove$     *   #percent
+
+SetOnly, (#ThisMld=3/4" Cove - Dentil):        #MldCost=#$34CoveDentil$      *   #percent
+SetOnly, (#ThisMld=1 1/2" Cove - Dentil):      #MldCost=#$112CoveDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Cove - Dentil):      #MldCost=#$212CoveDentil$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Cove - Dentil):      #MldCost=#$312CoveDentil$     *   #percent
+
+SetOnly, (#ThisMld=3/4" Cove - Nosing):        #MldCost=#$34CoveNosing$      *   #percent
+SetOnly, (#ThisMld=1 1/2" Cove - Nosing):      #MldCost=#$112CoveNosing$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Cove - Nosing):      #MldCost=#$212CoveNosing$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Cove - Nosing):      #MldCost=#$312CoveNosing$     *   #percent
+
+SetOnly, (#ThisMld=3/4" Cove - Nosing + Dentil):        #MldCost=#$34CoveNosingDentil$      *   #percent
+SetOnly, (#ThisMld=1 1/2" Cove - Nosing + Dentil):      #MldCost=#$112CoveNosingDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Cove - Nosing + Dentil):      #MldCost=#$212CoveNosingDentil$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Cove - Nosing + Dentil):      #MldCost=#$312CoveNosingDentil$     *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Crown - Nosing + Dentil):      #MldCost=#$112CrownNosingDentil$    *   #percent
+SetOnly, (#ThisMld=2 1/4" Crown - Nosing + Dentil):      #MldCost=#$214CrownNosingDentil$    *   #percent
+SetOnly, (#ThisMld=3 1/4" Crown - Nosing + Dentil):      #MldCost=#$314CrownNosingDentil$    *   #percent
+SetOnly, (#ThisMld=4 1/4" Crown - Nosing + Dentil):      #MldCost=#$414CrownNosingDentil$    *   #percent
+SetOnly, (#ThisMld=5 1/4" Crown - Nosing + Dentil):      #MldCost=#$514CrownNosingDentil$    *   #percent
+SetOnly, (#ThisMld=6 1/4" Crown - Nosing + Dentil):     #MldCost=#$614CrownNosingDentil$    *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Crown - Nosing):      #MldCost=#$112CrownNosing$    *   #percent
+SetOnly, (#ThisMld=2 1/4" Crown - Nosing):      #MldCost=#$214CrownNosing$    *   #percent
+SetOnly, (#ThisMld=3 1/4" Crown - Nosing):      #MldCost=#$314CrownNosing$    *   #percent
+SetOnly, (#ThisMld=4 1/4" Crown - Nosing):      #MldCost=#$414CrownNosing$    *   #percent
+SetOnly, (#ThisMld=5 1/4" Crown - Nosing):      #MldCost=#$514CrownNosing$    *   #percent
+SetOnly, (#ThisMld=6 1/4" Crown - Nosing):      #MldCost=#$614CrownNosing$    *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Crown - Dentil):      #MldCost=#$112CrownDentil$    *   #percent
+SetOnly, (#ThisMld=2 1/4" Crown - Dentil):      #MldCost=#$214CrownDentil$    *   #percent
+SetOnly, (#ThisMld=3 1/4" Crown - Dentil):      #MldCost=#$314CrownDentil$    *   #percent
+SetOnly, (#ThisMld=4 1/4" Crown - Dentil):      #MldCost=#$414CrownDentil$    *   #percent
+SetOnly, (#ThisMld=5 1/4" Crown - Dentil):      #MldCost=#$514CrownDentil$    *   #percent
+SetOnly, (#ThisMld=6 1/4" Crown - Dentil):      #MldCost=#$614CrownDentil$    *   #percent
+
+SetOnly, (#ThisMld=2 1/8" Crown - Cap):      #MldCost=#$218CrownCap$     *   #percent
+
+SetOnly, (#ThisMld=2 1/8" Crown):      #MldCost=#$218Crown$     *   #percent
+SetOnly, (#ThisMld=2 3/16" Crown):     #MldCost=#$2316Crown$     *   #percent
+SetOnly, (#ThisMld=2 1/4" Crown):      #MldCost=#$214Crown$     *   #percent
+SetOnly, (#ThisMld=2 3/4" Crown):      #MldCost=#$234Crown$     *   #percent
+SetOnly, (#ThisMld=3 1/4" Crown):      #MldCost=#$314Crown$     *   #percent
+SetOnly, (#ThisMld=3 5/8" Crown):      #MldCost=#$358Crown$     *   #percent
+SetOnly, (#ThisMld=3 3/4" Crown):      #MldCost=#$334Crown$     *   #percent
+SetOnly, (#ThisMld=4 1/4" Crown):      #MldCost=#$414Crown$     *   #percent
+SetOnly, (#ThisMld=5 1/4" Crown):      #MldCost=#$514Crown$     *   #percent
+SetOnly, (#ThisMld=6 1/4" Crown):                #MldCost=#$614Crown$     *   #percent
+SetOnly, (#ThisMld=7 1/4" Crown):   #MldCost=#$714Crown$     *   #percent
+
+SetOnly, (#ThisMld=2" Dentil):         #MldCost=#$Dentil$        *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Double Bead):#MldCost=#$112DoubleBead$     *   #percent
+SetOnly, (#ThisMld=2" Double Bead):    #MldCost=#$2DoubleBead$        *   #percent 
+SetOnly, (#ThisMld=2 1/2" Double Bead):#MldCost=#$212DoubleBead$     *   #percent
+SetOnly, (#ThisMld=3" Double Bead):    #MldCost=#$3DoubleBead$        *   #percent
+SetOnly, (#ThisMld=3 1/2" Double Bead):#MldCost=#$312DoubleBead$     *   #percent
+SetOnly, (#ThisMld=4" Double Bead):    #MldCost=#$4DoubleBead$        *   #percent
+SetOnly, (#ThisMld=4 1/2" Double Bead):#MldCost=#$412DoubleBead$     *   #percent
+SetOnly, (#ThisMld=5" Double Bead):    #MldCost=#$5DoubleBead$        *   #percent
+SetOnly, (#ThisMld=5 1/2" Double Bead):#MldCost=#$512DoubleBead$     *   #percent
+SetOnly, (#ThisMld=6" Double Bead):    #MldCost=#$6DoubleBead$        *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Double Bead - Dentil):#MldCost=#$112DoubleBeadDentil$     *   #percent
+SetOnly, (#ThisMld=2" Double Bead - Dentil):    #MldCost=#$2DoubleBeadDentil$        *   #percent 
+SetOnly, (#ThisMld=2 1/2" Double Bead - Dentil):#MldCost=#$212DoubleBeadDentil$     *   #percent
+SetOnly, (#ThisMld=3" Double Bead - Dentil):    #MldCost=#$3DoubleBeadDentil$        *   #percent
+SetOnly, (#ThisMld=3 1/2" Double Bead - Dentil):#MldCost=#$312DoubleBeadDentil$     *   #percent
+SetOnly, (#ThisMld=4" Double Bead - Dentil):    #MldCost=#$4DoubleBeadDentil$        *   #percent
+SetOnly, (#ThisMld=4 1/2" Double Bead - Dentil):#MldCost=#$412DoubleBeadDentil$     *   #percent
+SetOnly, (#ThisMld=5" Double Bead - Dentil):    #MldCost=#$5DoubleBeadDentil$        *   #percent
+SetOnly, (#ThisMld=5 1/2" Double Bead - Dentil):#MldCost=#$512DoubleBeadDentil$     *   #percent
+SetOnly, (#ThisMld=6" Double Bead - Dentil):    #MldCost=#$6DoubleBeadDentil$        *   #percent
+
+SetOnly, (#ThisMld=3" Galley Rail):    #MldCost=#$3GalleyRail$        *   #percent
+
+SetOnly, (#ThisMld=3" Roman Crown):   #MldCost=#$3RomanCrown$     *   #percent
+SetOnly, (#ThisMld=2 3/8" Santa Fe):          #MldCost=#$SantaFe$     *   #percent
+
+SetOnly, (#ThisMld=1" Square):         #MldCost=#$1Square$      *   #percent
+SetOnly, (#ThisMld=1 1/2" Square):     #MldCost=#$112Square$        *   #percent 
+SetOnly, (#ThisMld=2" Square):         #MldCost=#$2Square$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Square):     #MldCost=#$212Square$     *   #percent
+SetOnly, (#ThisMld=3" Square):         #MldCost=#$3Square$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Square):     #MldCost=#$312Square$     *   #percent
+SetOnly, (#ThisMld=4" Square):         #MldCost=#$4Square$     *   #percent
+SetOnly, (#ThisMld=4 1/2" Square):     #MldCost=#$412Square$     *   #percent
+SetOnly, (#ThisMld=5" Square):         #MldCost=#$5Square$     *   #percent
+SetOnly, (#ThisMld=5 1/2" Square):     #MldCost=#$512Square$     *   #percent
+SetOnly, (#ThisMld=6" Square):         #MldCost=#$6Square$     *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Square - Cove):     #MldCost=#$112SquareCove$        *   #percent 
+SetOnly, (#ThisMld=2" Square - Cove):         #MldCost=#$2SquareCove$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Square - Cove):     #MldCost=#$212SquareCove$     *   #percent
+SetOnly, (#ThisMld=3" Square - Cove):         #MldCost=#$3SquareCove$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Square - Cove):     #MldCost=#$312SquareCove$     *   #percent
+SetOnly, (#ThisMld=4" Square - Cove):         #MldCost=#$4SquareCove$     *   #percent
+SetOnly, (#ThisMld=4 1/2" Square - Cove):     #MldCost=#$412SquareCove$     *   #percent
+SetOnly, (#ThisMld=5" Square - Cove):         #MldCost=#$5SquareCove$     *   #percent
+SetOnly, (#ThisMld=5 1/2" Square - Cove):     #MldCost=#$512SquareCove$     *   #percent
+SetOnly, (#ThisMld=6" Square - Cove):         #MldCost=#$6SquareCove$     *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Square - Cove + Nosing):     #MldCost=#$112SquareCoveNosing$        *   #percent 
+SetOnly, (#ThisMld=2" Square - Cove + Nosing):         #MldCost=#$2SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Square - Cove + Nosing):     #MldCost=#$212SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=3" Square - Cove + Nosing):         #MldCost=#$3SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Square - Cove + Nosing):     #MldCost=#$312SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=4" Square - Cove + Nosing):         #MldCost=#$4SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=4 1/2" Square - Cove + Nosing):     #MldCost=#$412SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=5" Square - Cove + Nosing):         #MldCost=#$5SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=5 1/2" Square - Cove + Nosing):     #MldCost=#$512SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=6" Square - Cove + Nosing):         #MldCost=#$6SquareCoveNosing$     *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Square - Cove 1/4 Thick):    #MldCost=#$112SquareCove14$        *   #percent 
+SetOnly, (#ThisMld=2" Square - Cove 1/4 Thick):         #MldCost=#$2SquareCove14$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Square - Cove 1/4 Thick):     #MldCost=#$212SquareCove14$     *   #percent
+SetOnly, (#ThisMld=3" Square - Cove 1/4 Thick):         #MldCost=#$3SquareCove14$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Square - Cove 1/4 Thick):     #MldCost=#$312SquareCove14$     *   #percent
+SetOnly, (#ThisMld=4" Square - Cove 1/4 Thick):         #MldCost=#$4SquareCove14$     *   #percent
+SetOnly, (#ThisMld=4 1/2" Square - Cove 1/4 Thick):     #MldCost=#$412SquareCove14$     *   #percent
+SetOnly, (#ThisMld=5" Square - Cove 1/4 Thick):         #MldCost=#$5SquareCove14$     *   #percent
+SetOnly, (#ThisMld=5 1/2" Square - Cove 1/4 Thick):     #MldCost=#$512SquareCove14$     *   #percent
+SetOnly, (#ThisMld=6" Square - Cove 1/4 Thick):         #MldCost=#$6SquareCove14$     *   #percent
+
+SetOnly, (#ThisMld=2" Traditional): #MldCost=#$SmTrad$     *   #percent
+SetOnly, (#ThisMld=3 1/8" Traditional):#MldCost=#$MedTrad$    *   #percent
+SetOnly, (#ThisMld=4 1/8" Traditional): #MldCost=#$LgTrad$     *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Wide Crown):      #MldCost=#$112WideCrown$    *   #percent
+SetOnly, (#ThisMld=2 1/4" Wide Crown):      #MldCost=#$214WideCrown$    *   #percent
+SetOnly, (#ThisMld=3 1/4" Wide Crown):      #MldCost=#$314WideCrown$    *   #percent
+SetOnly, (#ThisMld=4 1/4" Wide Crown):      #MldCost=#$414WideCrown$    *   #percent
+SetOnly, (#ThisMld=5 1/4" Wide Crown):      #MldCost=#$514WideCrown$    *   #percent
+SetOnly, (#ThisMld=6 1/4" Wide Crown):      #MldCost=#$614WideCrown$    *   #percent
+
+
+
+Set, #MldCost=5.00 ,Default Molding Cost
+

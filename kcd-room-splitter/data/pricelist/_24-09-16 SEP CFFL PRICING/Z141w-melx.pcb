@@ -1,0 +1,60 @@
+,CF Upper w Doors and wide grid (no middle stile)
+,Calculates the price for each part
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+Load, Pricesides.pcb    
+,*****************************************
+
+
+
+,*********** All FIXED SHELVES ***********
+Set, #ShelfWidth = [(W-LS-RS)]     
+Set, #ShelfDepth = [(D)]
+load, Pricefixedshelves.pcb
+,*****************************************
+
+
+,*********** All ADJ SHELVES *************
+,Top Adj Shelves
+Set, #Tempshelfcount=SH
+load, Priceadjshelves.pcb
+,*****************************************
+
+
+,************* OTHER PARTS ***************
+set, #Backheight = [H-TR-BR-K]
+Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,         
+
+set, #Gridheight = DH2
+
+,Wine Grid xxx
+load, W-Winegridxxx.pcb
+
+,*****************************************
+
+
+
+
+,******* All DOORS & DRAWER FRONTS *******
+Load, Doors.pcb
+,*****************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

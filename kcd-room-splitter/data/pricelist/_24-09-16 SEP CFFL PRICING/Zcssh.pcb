@@ -1,0 +1,7 @@
+,**** CF SLANTED SHOES - Closet Pieces
+,******** ALL SHOE SHELVES ***********
+Set, #ShelfWidth = [(W)]
+Set, #ShelfDepth = [(D)]
+load, Priceshoeshelves.pcb
+     
+,*************************************

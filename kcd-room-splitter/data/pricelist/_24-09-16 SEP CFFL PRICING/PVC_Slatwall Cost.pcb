@@ -1,0 +1,71 @@
+,Use Grid
+
+
+,**
+,**
+,** SET COSTS FOR PVC Slatwall Colors
+,** 
+,**
+,**  
+,** 
+DisplaySet, #PVCColorname1=White, 1.0 PCV Slatwall Color Name
+DisplaySet, #PVCColorcost1=16, 1.1 PCV Slatwall Color ft2 cost
+DisplaySet, #PVCColorPartNumber1=792.10.721, 1.2 PCV Slatwall Color Part Number
+Set, (#unitfilename="*#PVCColorname1*"):#SlatWallName=#PVCColorname1-#PVCColorPartNumber1
+Set, (#unitfilename="*#PVCColorname1*"):#CostSlatWallPerSqFt=#PVCColorcost1
+,**
+DisplaySet, #PVCColorname2=AntiqueWhite, 2.0 PCV Slatwall Color Name
+DisplaySet, #PVCColorcost2=16, 2.1 PCV Slatwall Color ft2 cost
+DisplaySet, #PVCColorPartNumber2=792.10.731, 2.2 PCV Slatwall Color Part Number
+Set, (#unitfilename="*#PVCColorname2*"):#SlatWallName=#PVCColorname2-#PVCColorPartNumber2
+Set, (#unitfilename="*#PVCColorname2*"):#CostSlatWallPerSqFt=#PVCColorcost2
+,**
+DisplaySet, #PVCColorname3=Taupe, 3.0 PCV Slatwall Color Name
+DisplaySet, #PVCColorcost3=16, 3.1 PCV Slatwall Color ft2 cost
+DisplaySet, #PVCColorPartNumber3=792.10.621, 3.2 PCV Slatwall Color Part Number
+Set, (#unitfilename="*#PVCColorname3*"):#SlatWallName=#PVCColorname3-#PVCColorPartNumber3
+Set, (#unitfilename="*#PVCColorname3*"):#CostSlatWallPerSqFt=#PVCColorcost3
+,**
+DisplaySet, #PVCColorname4=Gray, 4.0 PCV Slatwall Color Name
+DisplaySet, #PVCColorcost4=16, 4.1 PCV Slatwall Color ft2 cost
+DisplaySet, #PVCColorPartNumber4=792.10.521, 4.2 PCV Slatwall Color Part Number
+Set, (#unitfilename="*#PVCColorname4*"):#SlatWallName=#PVCColorname4-#PVCColorPartNumber4
+Set, (#unitfilename="*#PVCColorname4*"):#CostSlatWallPerSqFt=#PVCColorcost4
+,**
+DisplaySet, #PVCColorname5=Black, 5.0 PCV Slatwall Color Name
+DisplaySet, #PVCColorcost5=16, 5.1 PCV Slatwall Color ft2 cost
+DisplaySet, #PVCColorPartNumber5=792.10.321, 5.2 PCV Slatwall Color Part Number
+Set, (#unitfilename="*#PVCColorname5*"):#SlatWallName=#PVCColorname5-#PVCColorPartNumber5
+Set, (#unitfilename="*#PVCColorname5*"):#CostSlatWallPerSqFt=#PVCColorcost5
+,**
+DisplaySet, #PVCColorname6=Graphite, 6.0 PCV Slatwall Color Name
+DisplaySet, #PVCColorcost6=16, 6.1 PCV Slatwall Color ft2 cost
+DisplaySet, #PVCColorPartNumber6=792.10.431, 6.2 PCV Slatwall Color Part Number
+Set, (#unitfilename="*#PVCColorname6*"):#SlatWallName=#PVCColorname6-#PVCColorPartNumber6
+Set, (#unitfilename="*#PVCColorname6*"):#CostSlatWallPerSqFt=#PVCColorcost6
+,**
+DisplaySet, #PVCColorname7=Beachwood, 7.0 PCV Slatwall Color Name
+DisplaySet, #PVCColorcost7=16, 7.1 PCV Slatwall Color ft2 cost
+DisplaySet, #PVCColorPartNumber7=792.10.021, 7.2 PCV Slatwall Color Part Number
+Set, (#unitfilename="*#PVCColorname7*"):#SlatWallName=#PVCColorname7-#PVCColorPartNumber7
+Set, (#unitfilename="*#PVCColorname7*"):#CostSlatWallPerSqFt=#PVCColorcost7
+,**
+DisplaySet, #PVCColorname8=Driftwood, 8.0 PCV Slatwall Color Name
+DisplaySet, #PVCColorcost8=16, 8.1 PCV Slatwall Color ft2 cost
+DisplaySet, #PVCColorPartNumber8=792.10.821, 8.2 PCV Slatwall Color Part Number
+Set, (#unitfilename="*#PVCColorname8*"):#SlatWallName=#PVCColorname8-#PVCColorPartNumber8
+Set, (#unitfilename="*#PVCColorname8*"):#CostSlatWallPerSqFt=#PVCColorcost8
+,**
+DisplaySet, #PVCColorname9=Maple, 9.0 PCV Slatwall Color Name
+DisplaySet, #PVCColorcost9=16, 9.1 PCV Slatwall Color ft2 cost
+DisplaySet, #PVCColorPartNumber9=792.10.121, 9.2 PCV Slatwall Color Part Number
+Set, (#unitfilename="*#PVCColorname9*"):#SlatWallName=#PVCColorname9-#PVCColorPartNumber9
+Set, (#unitfilename="*#PVCColorname9*"):#CostSlatWallPerSqFt=#PVCColorcost9
+,**
+DisplaySet, #PVCColorname10=Silver, 10.0 PCV Slatwall Color Name
+DisplaySet, #PVCColorcost10=16, 10.1 PCV Slatwall Color ft2 cost
+DisplaySet, #PVCColorPartNumber10=792.10.931, 10.2 PCV Slatwall Color Part Number
+Set, (#unitfilename="*#PVCColorname10*"):#SlatWallName=#PVCColorname10-#PVCColorPartNumber10
+Set, (#unitfilename="*#PVCColorname10*"):#CostSlatWallPerSqFt=#PVCColorcost10
+,**
+

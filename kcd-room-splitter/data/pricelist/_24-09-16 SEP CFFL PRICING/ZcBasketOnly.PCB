@@ -1,0 +1,10 @@
+
+
+
+Set, #BasketOpeningWidth = {W}
+Set, #BasketOpeningHeight = {H}
+Set, #BasketDepth = {D}
+
+,Calculates a Basket cost
+Set, #BasketOpeningWidth = [W]
+Load, F-Basket Cost.pcb

@@ -1,0 +1,6 @@
+Set, (#ExtraUnitText3="*2nd Material"): #FillerMaterial=#ContrastMaterialName:#FillerMaterial=#UnitMaterialName
+Set, (#ExtraUnitText3="*Wood*"):#FillerMaterial=Match Edge Material
+
+,********** ALL FILLERS ************
+Price,       1,    #FillerName-#FillerMaterial,           #CostOfFiller*#universalupcharge,           w, h,          #FillerPrintOrderNumber,              
+,***********************************

@@ -1,0 +1,158 @@
+,Set Item Costs factor for Countertop
+,**
+
+,Calculating subtotals
+
+Set,#CountertopCostGroup=100
+set, #addedge=0
+
+Set,(#CountertopTypeName = "#CountertopType0"):#CountertopCostGroup=[#CountertopTypeCost0]
+Set,(#CountertopTypeName = "#CountertopType1"):#CountertopCostGroup=[#CountertopTypeCost1]
+Set,(#CountertopTypeName = "#CountertopType2"):#CountertopCostGroup=[#CountertopTypeCost2]
+Set,(#CountertopTypeName = "#CountertopType3"):#CountertopCostGroup=[#CountertopTypeCost3]
+Set,(#CountertopTypeName = "#CountertopType4"):#CountertopCostGroup=[#CountertopTypeCost4]
+Set,(#CountertopTypeName = "#CountertopType5"):#CountertopCostGroup=[#CountertopTypeCost5]
+Set,(#CountertopTypeName = "#CountertopType5"):#addedge=1
+
+Set,(#CountertopTypeName = "#CountertopType6"):#CountertopCostGroup=[#CountertopTypeCost6]
+Set,(#CountertopTypeName = "#CountertopType7"):#CountertopCostGroup=[#CountertopTypeCost7]
+Set,(#CountertopTypeName = "#CountertopType8"):#CountertopCostGroup=[#CountertopTypeCost8]
+Set,(#CountertopTypeName = "#CountertopType9"):#CountertopCostGroup=[#CountertopTypeCost9]
+Set,(#CountertopTypeName = "#CountertopType10"):#CountertopCostGroup=[#CountertopTypeCost10]
+Set,(#CountertopTypeName = "#CountertopType10"):#addedge=1
+
+Set,(#CountertopTypeName = "#CountertopType11"):#CountertopCostGroup=[#CountertopTypeCost11]
+Set,(#CountertopTypeName = "#CountertopType12"):#CountertopCostGroup=[#CountertopTypeCost12]
+Set,(#CountertopTypeName = "#CountertopType13"):#CountertopCostGroup=[#CountertopTypeCost13]
+Set,(#CountertopTypeName = "#CountertopType14"):#CountertopCostGroup=[#CountertopTypeCost14]
+Set,(#CountertopTypeName = "#CountertopType15"):#CountertopCostGroup=[#CountertopTypeCost15]
+Set,(#CountertopTypeName = "#CountertopType16"):#CountertopCostGroup=[#CountertopTypeCost16]
+Set,(#CountertopTypeName = "#CountertopType17"):#CountertopCostGroup=[#CountertopTypeCost17]
+Set,(#CountertopTypeName = "#CountertopType18"):#CountertopCostGroup=[#CountertopTypeCost18]
+Set,(#CountertopTypeName = "#CountertopType19"):#CountertopCostGroup=[#CountertopTypeCost19]
+Set,(#CountertopTypeName = "#CountertopType20"):#CountertopCostGroup=[#CountertopTypeCost20]
+Set,(#CountertopTypeName = "#CountertopType21"):#CountertopCostGroup=[#CountertopTypeCost21]
+Set,(#CountertopTypeName = "#CountertopType22"):#CountertopCostGroup=[#CountertopTypeCost22]
+Set,(#CountertopTypeName = "#CountertopType23"):#CountertopCostGroup=[#CountertopTypeCost23]
+Set,(#CountertopTypeName = "#CountertopType24"):#CountertopCostGroup=[#CountertopTypeCost24]
+Set,(#CountertopTypeName = "#CountertopType25"):#CountertopCostGroup=[#CountertopTypeCost25]
+Set,(#CountertopTypeName = "#CountertopType26"):#CountertopCostGroup=[#CountertopTypeCost26]
+Set,(#CountertopTypeName = "#CountertopType27"):#CountertopCostGroup=[#CountertopTypeCost27]
+Set,(#CountertopTypeName = "#CountertopType28"):#CountertopCostGroup=[#CountertopTypeCost28]
+Set,(#CountertopTypeName = "#CountertopType29"):#CountertopCostGroup=[#CountertopTypeCost29]
+Set,(#CountertopTypeName = "#CountertopType30"):#CountertopCostGroup=[#CountertopTypeCost30]
+Set,(#CountertopTypeName = "#CountertopType31"):#CountertopCostGroup=[#CountertopTypeCost31]
+Set,(#CountertopTypeName = "#CountertopType32"):#CountertopCostGroup=[#CountertopTypeCost32]
+Set,(#CountertopTypeName = "#CountertopType33"):#CountertopCostGroup=[#CountertopTypeCost33]
+Set,(#CountertopTypeName = "#CountertopType34"):#CountertopCostGroup=[#CountertopTypeCost34]
+Set,(#CountertopTypeName = "#CountertopType35"):#CountertopCostGroup=[#CountertopTypeCost35]
+Set,(#CountertopTypeName = "#CountertopType36"):#CountertopCostGroup=[#CountertopTypeCost36]
+Set,(#CountertopTypeName = "#CountertopType37"):#CountertopCostGroup=[#CountertopTypeCost37]
+Set,(#CountertopTypeName = "#CountertopType38"):#CountertopCostGroup=[#CountertopTypeCost38]
+Set,(#CountertopTypeName = "#CountertopType39"):#CountertopCostGroup=[#CountertopTypeCost39]
+Set,(#CountertopTypeName = "#CountertopType40"):#CountertopCostGroup=[#CountertopTypeCost40]
+Set,(#CountertopTypeName = "#CountertopType41"):#CountertopCostGroup=[#CountertopTypeCost41]
+Set,(#CountertopTypeName = "#CountertopType42"):#CountertopCostGroup=[#CountertopTypeCost42]
+Set,(#CountertopTypeName = "#CountertopType43"):#CountertopCostGroup=[#CountertopTypeCost43]
+Set,(#CountertopTypeName = "#CountertopType44"):#CountertopCostGroup=[#CountertopTypeCost44]
+Set,(#CountertopTypeName = "#CountertopType45"):#CountertopCostGroup=[#CountertopTypeCost45]
+Set,(#CountertopTypeName = "#CountertopType46"):#CountertopCostGroup=[#CountertopTypeCost46]
+Set,(#CountertopTypeName = "#CountertopType47"):#CountertopCostGroup=[#CountertopTypeCost47]
+Set,(#CountertopTypeName = "#CountertopType48"):#CountertopCostGroup=[#CountertopTypeCost48]
+Set,(#CountertopTypeName = "#CountertopType49"):#CountertopCostGroup=[#CountertopTypeCost49]
+Set,(#CountertopTypeName = "#CountertopType50"):#CountertopCostGroup=[#CountertopTypeCost50]
+Set,(#CountertopTypeName = "#CountertopType51"):#CountertopCostGroup=[#CountertopTypeCost51]
+Set,(#CountertopTypeName = "#CountertopType52"):#CountertopCostGroup=[#CountertopTypeCost52]
+Set,(#CountertopTypeName = "#CountertopType53"):#CountertopCostGroup=[#CountertopTypeCost53]
+Set,(#CountertopTypeName = "#CountertopType54"):#CountertopCostGroup=[#CountertopTypeCost54]
+Set,(#CountertopTypeName = "#CountertopType55"):#CountertopCostGroup=[#CountertopTypeCost55]
+Set,(#CountertopTypeName = "#CountertopType56"):#CountertopCostGroup=[#CountertopTypeCost56]
+Set,(#CountertopTypeName = "#CountertopType57"):#CountertopCostGroup=[#CountertopTypeCost57]
+Set,(#CountertopTypeName = "#CountertopType58"):#CountertopCostGroup=[#CountertopTypeCost58]
+Set,(#CountertopTypeName = "#CountertopType59"):#CountertopCostGroup=[#CountertopTypeCost59]
+Set,(#CountertopTypeName = "#CountertopType60"):#CountertopCostGroup=[#CountertopTypeCost60]
+Set,(#CountertopTypeName = "#CountertopType61"):#CountertopCostGroup=[#CountertopTypeCost61]
+Set,(#CountertopTypeName = "#CountertopType62"):#CountertopCostGroup=[#CountertopTypeCost62]
+Set,(#CountertopTypeName = "#CountertopType63"):#CountertopCostGroup=[#CountertopTypeCost63]
+Set,(#CountertopTypeName = "#CountertopType64"):#CountertopCostGroup=[#CountertopTypeCost64]
+Set,(#CountertopTypeName = "#CountertopType65"):#CountertopCostGroup=[#CountertopTypeCost65]
+Set,(#CountertopTypeName = "#CountertopType66"):#CountertopCostGroup=[#CountertopTypeCost66]
+Set,(#CountertopTypeName = "#CountertopType67"):#CountertopCostGroup=[#CountertopTypeCost67]
+Set,(#CountertopTypeName = "#CountertopType68"):#CountertopCostGroup=[#CountertopTypeCost68]
+Set,(#CountertopTypeName = "#CountertopType69"):#CountertopCostGroup=[#CountertopTypeCost69]
+Set,(#CountertopTypeName = "#CountertopType70"):#CountertopCostGroup=[#CountertopTypeCost70]
+Set,(#CountertopTypeName = "#CountertopType71"):#CountertopCostGroup=[#CountertopTypeCost71]
+Set,(#CountertopTypeName = "#CountertopType72"):#CountertopCostGroup=[#CountertopTypeCost72]
+Set,(#CountertopTypeName = "#CountertopType73"):#CountertopCostGroup=[#CountertopTypeCost73]
+Set,(#CountertopTypeName = "#CountertopType74"):#CountertopCostGroup=[#CountertopTypeCost74]
+Set,(#CountertopTypeName = "#CountertopType75"):#CountertopCostGroup=[#CountertopTypeCost75]
+Set,(#CountertopTypeName = "#CountertopType76"):#CountertopCostGroup=[#CountertopTypeCost76]
+Set,(#CountertopTypeName = "#CountertopType77"):#CountertopCostGroup=[#CountertopTypeCost77]
+Set,(#CountertopTypeName = "#CountertopType78"):#CountertopCostGroup=[#CountertopTypeCost78]
+Set,(#CountertopTypeName = "#CountertopType79"):#CountertopCostGroup=[#CountertopTypeCost79]
+
+Set,#CTopSq$temp = #CountertopCostGroup
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

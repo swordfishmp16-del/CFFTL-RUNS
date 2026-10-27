@@ -1,0 +1,109 @@
+
+
+
+, Determine extra charge (*subtotal is for standard pricing, *total is for pricing with markup)
+
+Do, (#UseSub5=yes):1
+{
+ set,(#Sub5PosNeg=No):#jobdiscount=[#jobdiscount*(-1)]
+}
+
+set, ((#Room1subtotal<>0)&(#designermarkup=0)):#Room1cost=[#Room1subtotal]:#Room1cost=[#Room1total]
+set, ((#Room1subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room1extracharge=0:#Room1extracharge=[#Room1subtotal*#jobdiscount]
+set, ((#Room1subtotal<>0)&(#designermarkup=0)):#Room1grandtotal=[#Room1subtotal+#Room1extracharge]:#Room1grandtotal=[#Room1total+#Room1extracharge]
+
+set, ((#Room2subtotal<>0)&(#designermarkup=0)):#Room2cost=[#Room2subtotal]:#Room2cost=[#Room2total]
+set, ((#Room2subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room2extracharge=0:#Room2extracharge=[#Room2subtotal*#jobdiscount]
+set, ((#Room2subtotal<>0)&(#designermarkup=0)):#Room2grandtotal=[#Room2subtotal+#Room2extracharge]:#Room2grandtotal=[#Room2total+#Room2extracharge]
+
+set, ((#Room3subtotal<>0)&(#designermarkup=0)):#Room3cost=[#Room3subtotal]:#Room3cost=[#Room3total]
+set, ((#Room3subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room3extracharge=0:#Room3extracharge=[#Room3subtotal*#jobdiscount]
+set, ((#Room3subtotal<>0)&(#designermarkup=0)):#Room3grandtotal=[#Room3subtotal+#Room3extracharge]:#Room3grandtotal=[#Room3total+#Room3extracharge]
+
+set, ((#Room4subtotal<>0)&(#designermarkup=0)):#Room4cost=[#Room4subtotal]:#Room4cost=[#Room4total]
+set, ((#Room4subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room4extracharge=0:#Room4extracharge=[#Room4subtotal*#jobdiscount]
+set, ((#Room4subtotal<>0)&(#designermarkup=0)):#Room4grandtotal=[#Room4subtotal+#Room4extracharge]:#Room4grandtotal=[#Room4total+#Room4extracharge]
+
+set, ((#Room5subtotal<>0)&(#designermarkup=0)):#Room5cost=[#Room5subtotal]:#Room5cost=[#Room5total]
+set, ((#Room5subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room5extracharge=0:#Room5extracharge=[#Room5subtotal*#jobdiscount]
+set, ((#Room5subtotal<>0)&(#designermarkup=0)):#Room5grandtotal=[#Room5subtotal+#Room5extracharge]:#Room5grandtotal=[#Room5total+#Room5extracharge]
+
+set, ((#Room6subtotal<>0)&(#designermarkup=0)):#Room6cost=[#Room6subtotal]:#Room6cost=[#Room6total]
+set, ((#Room6subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room6extracharge=0:#Room6extracharge=[#Room6subtotal*#jobdiscount]
+set, ((#Room6subtotal<>0)&(#designermarkup=0)):#Room6grandtotal=[#Room6subtotal+#Room6extracharge]:#Room6grandtotal=[#Room6total+#Room6extracharge]
+
+set, ((#Room7subtotal<>0)&(#designermarkup=0)):#Room7cost=[#Room7subtotal]:#Room7cost=[#Room7total]
+set, ((#Room7subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room7extracharge=0:#Room7extracharge=[#Room7subtotal*#jobdiscount]
+set, ((#Room7subtotal<>0)&(#designermarkup=0)):#Room7grandtotal=[#Room7subtotal+#Room7extracharge]:#Room7grandtotal=[#Room7total+#Room7extracharge]
+
+set, ((#Room8subtotal<>0)&(#designermarkup=0)):#Room8cost=[#Room8subtotal]:#Room8cost=[#Room8total]
+set, ((#Room8subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room8extracharge=0:#Room8extracharge=[#Room8subtotal*#jobdiscount]
+set, ((#Room8subtotal<>0)&(#designermarkup=0)):#Room8grandtotal=[#Room8subtotal+#Room8extracharge]:#Room8grandtotal=[#Room8total+#Room8extracharge]
+
+set, ((#Room9subtotal<>0)&(#designermarkup=0)):#Room9cost=[#Room9subtotal]:#Room9cost=[#Room9total]
+set, ((#Room9subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room9extracharge=0:#Room9extracharge=[#Room9subtotal*#jobdiscount]
+set, ((#Room9subtotal<>0)&(#designermarkup=0)):#Room9grandtotal=[#Room9subtotal+#Room9extracharge]:#Room9grandtotal=[#Room9total+#Room9extracharge]
+
+set, ((#Room10subtotal<>0)&(#designermarkup=0)):#Room10cost=[#Room10subtotal]:#Room10cost=[#Room10total]
+set, ((#Room10subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room10extracharge=0:#Room10extracharge=[#Room10subtotal*#jobdiscount]
+set, ((#Room10subtotal<>0)&(#designermarkup=0)):#Room10grandtotal=[#Room10subtotal+#Room10extracharge]:#Room10grandtotal=[#Room10total+#Room10extracharge]
+
+set, ((#Room11subtotal<>0)&(#designermarkup=0)):#Room11cost=[#Room11subtotal]:#Room11cost=[#Room11total]
+set, ((#Room11subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room11extracharge=0:#Room11extracharge=[#Room11subtotal*#jobdiscount]
+set, ((#Room11subtotal<>0)&(#designermarkup=0)):#Room11grandtotal=[#Room11subtotal+#Room11extracharge]:#Room11grandtotal=[#Room11total+#Room11extracharge]
+
+set, ((#Room12subtotal<>0)&(#designermarkup=0)):#Room12cost=[#Room12subtotal]:#Room12cost=[#Room12total]
+set, ((#Room12subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room12extracharge=0:#Room12extracharge=[#Room12subtotal*#jobdiscount]
+set, ((#Room12subtotal<>0)&(#designermarkup=0)):#Room12grandtotal=[#Room12subtotal+#Room12extracharge]:#Room12grandtotal=[#Room12total+#Room12extracharge]
+
+set, ((#Room13subtotal<>0)&(#designermarkup=0)):#Room13cost=[#Room13subtotal]:#Room13cost=[#Room13total]
+set, ((#Room13subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room13extracharge=0:#Room13extracharge=[#Room13subtotal*#jobdiscount]
+set, ((#Room13subtotal<>0)&(#designermarkup=0)):#Room13grandtotal=[#Room13subtotal+#Room13extracharge]:#Room13grandtotal=[#Room13total+#Room13extracharge]
+
+set, ((#Room14subtotal<>0)&(#designermarkup=0)):#Room14cost=[#Room14subtotal]:#Room14cost=[#Room14total]
+set, ((#Room14subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room14extracharge=0:#Room14extracharge=[#Room14subtotal*#jobdiscount]
+set, ((#Room14subtotal<>0)&(#designermarkup=0)):#Room14grandtotal=[#Room14subtotal+#Room14extracharge]:#Room14grandtotal=[#Room14total+#Room14extracharge]
+
+set, ((#Room15subtotal<>0)&(#designermarkup=0)):#Room15cost=[#Room15subtotal]:#Room15cost=[#Room15total]
+set, ((#Room15subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room15extracharge=0:#Room15extracharge=[#Room15subtotal*#jobdiscount]
+set, ((#Room15subtotal<>0)&(#designermarkup=0)):#Room15grandtotal=[#Room15subtotal+#Room15extracharge]:#Room15grandtotal=[#Room15total+#Room15extracharge]
+
+set, ((#Room16subtotal<>0)&(#designermarkup=0)):#Room16cost=[#Room16subtotal]:#Room16cost=[#Room16total]
+set, ((#Room16subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room16extracharge=0:#Room16extracharge=[#Room16subtotal*#jobdiscount]
+set, ((#Room16subtotal<>0)&(#designermarkup=0)):#Room16grandtotal=[#Room16subtotal+#Room16extracharge]:#Room16grandtotal=[#Room16total+#Room16extracharge]
+
+set, ((#Room17subtotal<>0)&(#designermarkup=0)):#Room17cost=[#Room17subtotal]:#Room17cost=[#Room17total]
+set, ((#Room17subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room17extracharge=0:#Room17extracharge=[#Room17subtotal*#jobdiscount]
+set, ((#Room17subtotal<>0)&(#designermarkup=0)):#Room17grandtotal=[#Room17subtotal+#Room17extracharge]:#Room17grandtotal=[#Room17total+#Room17extracharge]
+
+set, ((#Room18subtotal<>0)&(#designermarkup=0)):#Room18cost=[#Room18subtotal]:#Room18cost=[#Room18total]
+set, ((#Room18subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room18extracharge=0:#Room18extracharge=[#Room18subtotal*#jobdiscount]
+set, ((#Room18subtotal<>0)&(#designermarkup=0)):#Room18grandtotal=[#Room18subtotal+#Room18extracharge]:#Room18grandtotal=[#Room18total+#Room18extracharge]
+
+set, ((#Room19subtotal<>0)&(#designermarkup=0)):#Room19cost=[#Room19subtotal]:#Room19cost=[#Room19total]
+set, ((#Room19subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room19extracharge=0:#Room19extracharge=[#Room19subtotal*#jobdiscount]
+set, ((#Room19subtotal<>0)&(#designermarkup=0)):#Room19grandtotal=[#Room19subtotal+#Room19extracharge]:#Room19grandtotal=[#Room19total+#Room19extracharge]
+
+set, ((#Room20subtotal<>0)&(#designermarkup=0)):#Room20cost=[#Room20subtotal]:#Room20cost=[#Room20total]
+set, ((#Room20subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room20extracharge=0:#Room20extracharge=[#Room20subtotal*#jobdiscount]
+set, ((#Room20subtotal<>0)&(#designermarkup=0)):#Room20grandtotal=[#Room20subtotal+#Room20extracharge]:#Room20grandtotal=[#Room20total+#Room20extracharge]
+
+set, ((#Room21subtotal<>0)&(#designermarkup=0)):#Room21cost=[#Room21subtotal]:#Room21cost=[#Room21total]
+set, ((#Room21subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room21extracharge=0:#Room21extracharge=[#Room21subtotal*#jobdiscount]
+set, ((#Room21subtotal<>0)&(#designermarkup=0)):#Room21grandtotal=[#Room21subtotal+#Room21extracharge]:#Room21grandtotal=[#Room21total+#Room21extracharge]
+
+set, ((#Room22subtotal<>0)&(#designermarkup=0)):#Room22cost=[#Room22subtotal]:#Room22cost=[#Room22total]
+set, ((#Room22subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room22extracharge=0:#Room22extracharge=[#Room22subtotal*#jobdiscount]
+set, ((#Room22subtotal<>0)&(#designermarkup=0)):#Room22grandtotal=[#Room22subtotal+#Room22extracharge]:#Room22grandtotal=[#Room22total+#Room22extracharge]
+
+set, ((#Room23subtotal<>0)&(#designermarkup=0)):#Room23cost=[#Room23subtotal]:#Room23cost=[#Room23total]
+set, ((#Room23subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room23extracharge=0:#Room23extracharge=[#Room23subtotal*#jobdiscount]
+set, ((#Room23subtotal<>0)&(#designermarkup=0)):#Room23grandtotal=[#Room23subtotal+#Room23extracharge]:#Room23grandtotal=[#Room23total+#Room23extracharge]
+
+set, ((#Room24subtotal<>0)&(#designermarkup=0)):#Room24cost=[#Room24subtotal]:#Room24cost=[#Room24total]
+set, ((#Room24subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room24extracharge=0:#Room24extracharge=[#Room24subtotal*#jobdiscount]
+set, ((#Room24subtotal<>0)&(#designermarkup=0)):#Room24grandtotal=[#Room24subtotal+#Room24extracharge]:#Room24grandtotal=[#Room24total+#Room24extracharge]
+
+set, ((#Room25subtotal<>0)&(#designermarkup=0)):#Room25cost=[#Room25subtotal]:#Room25cost=[#Room25total]
+set, ((#Room25subtotal<>0)&(#designermarkup=0)&(#Sub5FlatCost<>0)):#Room25extracharge=0:#Room25extracharge=[#Room25subtotal*#jobdiscount]
+set, ((#Room25subtotal<>0)&(#designermarkup=0)):#Room25grandtotal=[#Room25subtotal+#Room25extracharge]:#Room25grandtotal=[#Room25total+#Room25extracharge]

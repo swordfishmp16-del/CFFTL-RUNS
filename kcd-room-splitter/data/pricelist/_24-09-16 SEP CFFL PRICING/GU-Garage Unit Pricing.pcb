@@ -1,0 +1,5 @@
+
+
+,This line is used ONLY when there is NO PRICE SET FOR A UNIT
+,Price ,(t<>1000)&(ct=0):1         ,#Name - CALL FOR QUOTE,       0         ,W,H,1000 
+Price ,1         ,#Name - Garage unit,       0         ,,,#CallforQuotePrintOrderNumber, 

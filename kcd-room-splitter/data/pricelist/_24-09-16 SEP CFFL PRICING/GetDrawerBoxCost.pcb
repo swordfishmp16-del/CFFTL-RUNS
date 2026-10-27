@@ -1,0 +1,218 @@
+
+
+,Calculating subtotals
+
+Set,#DrawerBoxCostGroup=0
+
+Set,(#DrawerboxType1 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost1
+Set,(#DrawerboxType2 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost2
+Set,(#DrawerboxType3 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost3
+Set,(#DrawerboxType4 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost4
+Set,(#DrawerboxType5 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost5
+Set,(#DrawerboxType6 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost6
+Set,(#DrawerboxType7 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost7
+Set,(#DrawerboxType8 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost8
+Set,(#DrawerboxType9 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost9
+Set,(#DrawerboxType10 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost10
+Set,(#DrawerboxType11 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost11
+Set,(#DrawerboxType12 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost12
+Set,(#DrawerboxType13 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost13
+Set,(#DrawerboxType14 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost14
+Set,(#DrawerboxType15 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost15
+Set,(#DrawerboxType16 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost16
+Set,(#DrawerboxType17 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost17
+Set,(#DrawerboxType18 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost18
+Set,(#DrawerboxType19 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost19
+Set,(#DrawerboxType20 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost20
+Set,(#DrawerboxType21 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost21
+Set,(#DrawerboxType22 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost22
+Set,(#DrawerboxType23 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost23
+Set,(#DrawerboxType24 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost24
+Set,(#DrawerboxType25 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost25
+Set,(#DrawerboxType26 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost26
+Set,(#DrawerboxType27 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost27
+Set,(#DrawerboxType28 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost28
+Set,(#DrawerboxType29 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost29
+Set,(#DrawerboxType30 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost30
+Set,(#DrawerboxType31 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost31
+Set,(#DrawerboxType32 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost32
+Set,(#DrawerboxType33 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost33
+Set,(#DrawerboxType34 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost34
+Set,(#DrawerboxType35 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost35
+Set,(#DrawerboxType36 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost36
+Set,(#DrawerboxType37 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost37
+Set,(#DrawerboxType38 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost38
+Set,(#DrawerboxType39 = "#BoxDrawertype"):#DrawerBoxCostGroup=#DrawerboxCost39
+
+Set,#DrawerBoxCostMultiplier=0
+
+Set,(#DrawerboxType1 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost1
+Set,(#DrawerboxType2 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost2
+Set,(#DrawerboxType3 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost3
+Set,(#DrawerboxType4 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost4
+Set,(#DrawerboxType5 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost5
+Set,(#DrawerboxType6 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost6
+Set,(#DrawerboxType7 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost7
+Set,(#DrawerboxType8 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost8
+Set,(#DrawerboxType9 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost9
+Set,(#DrawerboxType10 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost10
+Set,(#DrawerboxType11 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost11
+Set,(#DrawerboxType12 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost12
+Set,(#DrawerboxType13 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost13
+Set,(#DrawerboxType14 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost14
+Set,(#DrawerboxType15 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost15
+Set,(#DrawerboxType16 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost16
+Set,(#DrawerboxType17 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost17
+Set,(#DrawerboxType18 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost18
+Set,(#DrawerboxType19 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost19
+Set,(#DrawerboxType20 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost20
+Set,(#DrawerboxType21 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost21
+Set,(#DrawerboxType22 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost22
+Set,(#DrawerboxType23 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost23
+Set,(#DrawerboxType24 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost24
+Set,(#DrawerboxType25 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost25
+Set,(#DrawerboxType26 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost26
+Set,(#DrawerboxType27 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost27
+Set,(#DrawerboxType28 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost28
+Set,(#DrawerboxType29 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost29
+Set,(#DrawerboxType30 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost30
+Set,(#DrawerboxType31 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost31
+Set,(#DrawerboxType32 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost32
+Set,(#DrawerboxType33 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost33
+Set,(#DrawerboxType34 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost34
+Set,(#DrawerboxType35 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost35
+Set,(#DrawerboxType36 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost36
+Set,(#DrawerboxType37 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost37
+Set,(#DrawerboxType38 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost38
+Set,(#DrawerboxType39 = "#BoxDrawertype"):#DrawerBoxCostMultiplier=#DrawerboxMultiplierCost39
+
+
+
+Set,(#DrawerboxType1 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType1
+Set,(#DrawerboxType2 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType2
+Set,(#DrawerboxType3 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType3
+Set,(#DrawerboxType4 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType4
+Set,(#DrawerboxType5 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType5
+Set,(#DrawerboxType6 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType6
+Set,(#DrawerboxType7 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType7
+Set,(#DrawerboxType8 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType8
+Set,(#DrawerboxType9 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType9
+Set,(#DrawerboxType10 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType10
+Set,(#DrawerboxType11 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType11
+Set,(#DrawerboxType12 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType12
+Set,(#DrawerboxType13 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType13
+Set,(#DrawerboxType14 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType14
+Set,(#DrawerboxType15 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType15
+Set,(#DrawerboxType16 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType16
+Set,(#DrawerboxType17 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType17
+Set,(#DrawerboxType18 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType18
+Set,(#DrawerboxType19 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType19
+Set,(#DrawerboxType20 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType20
+Set,(#DrawerboxType21 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType21
+Set,(#DrawerboxType22 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType22
+Set,(#DrawerboxType23 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType23
+Set,(#DrawerboxType24 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType24
+Set,(#DrawerboxType25 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType25
+Set,(#DrawerboxType26 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType26
+Set,(#DrawerboxType27 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType27
+Set,(#DrawerboxType28 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType28
+Set,(#DrawerboxType29 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType29
+Set,(#DrawerboxType30 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType30
+Set,(#DrawerboxType31 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType31
+Set,(#DrawerboxType32 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType32
+Set,(#DrawerboxType33 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType33
+Set,(#DrawerboxType34 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType34
+Set,(#DrawerboxType35 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType35
+Set,(#DrawerboxType36 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType36
+Set,(#DrawerboxType37 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType37
+Set,(#DrawerboxType38 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType38
+Set,(#DrawerboxType39 = "#BoxDrawertype"):#drawertypewidthmax=#MaxwidthDrawerboxType39
+
+
+
+Set,(#DrawerboxType1 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag1
+Set,(#DrawerboxType2 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag2
+Set,(#DrawerboxType3 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag3
+Set,(#DrawerboxType4 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag4
+Set,(#DrawerboxType5 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag5
+Set,(#DrawerboxType6 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag6
+Set,(#DrawerboxType7 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag7
+Set,(#DrawerboxType8 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag8
+Set,(#DrawerboxType9 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag9
+Set,(#DrawerboxType10 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag10
+Set,(#DrawerboxType11 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag11
+Set,(#DrawerboxType12 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag12
+Set,(#DrawerboxType13 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag13
+Set,(#DrawerboxType14 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag14
+Set,(#DrawerboxType15 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag15
+Set,(#DrawerboxType16 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag16
+Set,(#DrawerboxType17 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag17
+Set,(#DrawerboxType18 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag18
+Set,(#DrawerboxType19 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag19
+Set,(#DrawerboxType20 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag20
+Set,(#DrawerboxType21 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag21
+Set,(#DrawerboxType22 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag22
+Set,(#DrawerboxType23 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag23
+Set,(#DrawerboxType24 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag24
+Set,(#DrawerboxType25 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag25
+Set,(#DrawerboxType26 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag26
+Set,(#DrawerboxType27 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag27
+Set,(#DrawerboxType28 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag28
+Set,(#DrawerboxType29 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag29
+Set,(#DrawerboxType30 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag30
+Set,(#DrawerboxType31 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag31
+Set,(#DrawerboxType32 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag32
+Set,(#DrawerboxType33 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag33
+Set,(#DrawerboxType34 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag34
+Set,(#DrawerboxType35 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag35
+Set,(#DrawerboxType36 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag36
+Set,(#DrawerboxType37 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag37
+Set,(#DrawerboxType38 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag38
+Set,(#DrawerboxType39 = "#BoxDrawertype"):#drawerboxglidetag=#DrawerboxTag39
+
+
+
+
+Set,#MaterialCostGroup=0
+
+
+Load, GetMaterialCostGroup.Pcb
+
+set, #DrawerBoxCostMultiplier=[#DrawerBoxCostMultiplier*#universalupcharge]
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

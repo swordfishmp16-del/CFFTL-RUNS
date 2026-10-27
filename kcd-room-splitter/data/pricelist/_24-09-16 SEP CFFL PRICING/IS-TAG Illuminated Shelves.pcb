@@ -1,0 +1,33 @@
+,
+,Use Grid
+
+
+,**
+,**
+,** SET COSTS FOR TAG ILLUMINATED SHELVES 
+,** 
+,**
+,**  
+,** 
+DisplaySet, #IS-Filler=50, 1.0 Cost for Shelf Filler
+DisplaySet,  #IS-18Wx14D =365, 1.1 Cost for 18Wx14D Illuminated Shelf
+DisplaySet,  #IS-24Wx14D =365, 1.1 Cost for 24Wx14D Illuminated Shelf
+DisplaySet,  #IS-30Wx14D =465, 1.1 Cost for 30Wx14D Illuminated Shelf
+DisplaySet,  #IS-36Wx14D =465, 1.1 Cost for 36Wx14D Illuminated Shelf
+DisplaySet,  #IS-18Wx205D =420, 1.1 Cost for 18Wx20.5D Illuminated Shelf
+DisplaySet,  #IS-24Wx205D =420, 1.1 Cost for 24Wx20.5D Illuminated Shelf
+DisplaySet,  #IS-30Wx205D =525, 1.1 Cost for 30Wx20.5D Illuminated Shelf
+DisplaySet,  #IS-36Wx205D =525, 1.1 Cost for 36Wx20.5D Illuminated Shelf
+
+Set, (#Name = "*18W x 14D*"):  #ISprice= #IS-18Wx14D 
+Set, (#Name = "*24W x 14D*"):  #ISprice= #IS-24Wx14D 
+Set, (#Name = "*30W x 14D*"):  #ISprice= #IS-30Wx14D 
+Set, (#Name = "*36W x 14D*"):  #ISprice= #IS-36Wx14D 
+Set, (#Name = "*18W x 20.5D*") : #ISprice= #IS-18Wx205D 
+Set, (#Name = "*24W x 20.5D*"):  #ISprice= #IS-24Wx205D 
+Set, (#Name = "*30W x 20.5D*") : #ISprice= #IS-30Wx205D 
+Set, (#Name = "*36W x 20.5D*"):  #ISprice= #IS-36Wx205D 
+
+Set,(#Name = "*filler*"): #ISprice = [#ISprice+#IS-Filler]
+
+Price, 1, RM#Roomnum #Name #Code,#ISPrice*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 

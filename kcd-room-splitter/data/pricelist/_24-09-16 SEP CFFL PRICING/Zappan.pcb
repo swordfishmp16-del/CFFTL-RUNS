@@ -1,0 +1,62 @@
+This is a KCD system file. Do NOT change it in any way!
+
+Set, #UnitDoorCost = 0
+Set, #UnitDrawerFrtCost = 0
+
+Set, #TotalNumDoors = 0
+Set, #TotalNumDrawers = 0
+
+Set,(ap1w>0): #DoorW=ap1w
+Set,(ap1h>0): #DoorH=ap1h
+Set,(ap1w>0): #DoorA=ap1w*ap1h
+Set,(ap1w>0): #Door=D1
+Load, (ap1w>0)&(D1T>0)&(D1H>2)&(D1W>2):Door.pcb
+
+Set,(ap2w>0): #DoorW=ap2w
+Set,(ap2h>0): #DoorH=ap2h
+Set,(ap2w>0): #DoorA=ap2w*ap2h
+Set,(ap2w>0): #Door=D2
+Load, (ap2w>0)&(D2T>0)&(D2H>2)&(D2W>2):Door.pcb
+
+Set,(ap3w>0): #DoorW=ap3w
+Set,(ap3h>0): #DoorH=ap3h
+Set,(ap3w>0): #DoorA=ap3w*ap3h
+Set,(ap3w>0): #Door=D3
+Load, (D3T>0)&(D3H>2)&(D3W>2):Door.pcb
+
+Skip,(1=1):1
+{
+Set, #Door=D4
+Load, (D4T>0)&(D4H>2)&(D4W>2):Door.pcb
+
+Set, #Door=D5
+Load, (D5T>0)&(D5H>2)&(D5W>2):Door.pcb
+
+Set, #Door=D6
+Load, (D6T>0)&(D6H>2)&(D6W>2):Door.pcb
+
+Set, #Door=D7
+Load, (D7T>0)&(D7H>2)&(D7W>2):Door.pcb
+
+Set, #Door=D8
+Load, (D8T>0)&(D8H>2)&(D8W>2):Door.pcb
+
+Set, #Door=D9
+Load, (D9T>0)&(D9H>2)&(D9W>2):Door.pcb
+
+Set, #Door=D10
+Load, (D10T>0)&(D10H>2)&(D10W>2):Door.pcb
+
+Set, #Door=D11
+Load, (D11T>0)&(D11H>2)&(D11W>2):Door.pcb
+
+Set, #Door=D12
+Load, (D12T>0)&(D12H>2)&(D12W>2):Door.pcb
+
+,Set, #TotalDoorCost = [[#TotalDoorCost] + [#UnitDoorCost]]
+,Set, #TotalDrawerCost = [[#TotalDrawerCost] + [#UnitDrawerFrtCost]]
+}
+End of 'DOORS.PCB' KCD system file
+SetRemove, #DoorH
+SetRemove, #DoorW
+SetRemove, #DoorA

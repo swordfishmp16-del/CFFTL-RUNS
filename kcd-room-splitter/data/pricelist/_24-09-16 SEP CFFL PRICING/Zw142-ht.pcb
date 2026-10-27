@@ -1,0 +1,9 @@
+
+
+,Calculates the price for each part
+Price, 1,          #WireShelfName,         #CostOfWireShelf,             W, d,          #WireShelfPrintOrderNumber,          
+Price, 1,          #WireShelfName,         #CostOfWireShelf,             W, d,          #WireShelfPrintOrderNumber,          
+
+
+Price, (WSS>0):1,  #WireSupportName,       #CostOfWireSupport,           W, d,          #WireSupportPrintOrderNumber,        
+Price, (WSS>1):1,  #WireSupportName,       #CostOfWireSupport,           W, d,          #WireSupportPrintOrderNumber,        

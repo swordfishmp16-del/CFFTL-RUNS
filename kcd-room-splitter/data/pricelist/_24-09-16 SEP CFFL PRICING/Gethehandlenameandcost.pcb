@@ -1,0 +1,87 @@
+
+,Chelsea was here 10-12-21 - Hold real name, set #Name to handle/knob name from selector, then search CSV table for values appropriate...
+
+,This is where I need to uncover HK selection and assign the appropriate name to #HKName.
+Load, DoorAndDrawer-RoomToHardwareMatching.PCB
+
+Set, #TempHKtotalUnitCost=0
+
+Set, #HoldUnitCode=<#Code>
+Set, #HoldUnitLength=<#Length>
+Set, #HoldUnitWidth=<#Width>
+Set, #HoldUnitDepth=<#Depth>
+
+
+
+,Chelsea was here 5-16-23 - Initialize the following at zero, these get set on DrawerHandleKnob and DoorHandleKnob
+Set, #TAGHardwareH=0
+Set, #TAGHardwareK=0
+
+,Chelsea was here 10-7-21 - We're reading TAG Hardware handle names, if one matches we get a new handle cost. This needs to go out on the counter.
+  ReadCSVFile,Tag Hardware Handles and Knobs.csv,1,2,3
+  ReadCsvValue,Tag Hardware Handles and Knobs.csv,#HKName,#HKCode,#TempHKtotalunitCost
+
+Load, CountDoorAndDrawer-RoomToHardwareMatching.PCB
+
+Do,(1=2):1,SKIP THIS FOR NOW
+{
+,The Do statement below is to give the TAG handle cost to the collection for the array.
+
+Do, (#TempHKTotalUnitCost>0):1
+{
+Set, #Name=#HKName
+Set, #Code="#HKCode"
+Set, #Length="X"
+Set, #Width="X"
+Set, #Depth="X"
+Set, #QuantityLoop=0
+Set, #TotalUnitCost=[#TempHKTotalUnitCost]
+
+Set, #TAGHardwareK=[#CURRENTKnobCount]
+Set, #TAGHardwareH=[#CURRENTHandleCount]
+
+
+
+  , IF I'm a TAG handle, then set handle cost if I'm a TAG knob set knob cost
+  Set, #TagKCost=[#TempHKTotalUnitCost]
+  Set, #TagHCost=[#TempHKTotalUnitCost]
+  
+
+  ,Right now total unit cost will be the single handle/knob cost for the array purposes.
+   Set, #TotalUnitCost=[#TempHKTotalUnitCost]
+  ,Sets loop quantity for the array
+   ,Set, #LoopQuantity=[NUM*(#TAGHardwareK+#TAGHardwareH)]
+
+  ,Starting with 1...
+     ,  Set, #QuantityLoop=1
+
+  ,Chelsea was here 11-12-21 - Clipped the "While" structure from !! KCD Frame
+  ,  Loop through per handle/knob for array.
+
+ , While, (#QuantityLoop<=#LoopQuantity)
+
+      ,Load, CommonTAGHardwareCounter_Collect.pcb
+    
+    ,set,#QuantityLoop=[#QuantityLoop+1]
+
+  , Wend
+
+
+,Now that I'm done looping for the array - set the Total Unit cost here and drop it into the TAG total.
+     
+  
+  Set, #TAGHardwareKQty=[#TAGHardwareK+#TAGHardwareKQty]
+  Set, #TAGHardwareHQty=[#TAGHardwareH+#TAGHardwareHQty]
+  
+  Set, #TAGKCostTotal=[(#TAGHardwareK*#TempHKTotalUnitCost*NUM)+#TAGKCostTotal]
+  Set, #TAGHCostTotal=[(#TAGHardwareH*#TempHKTotalUnitCost*NUM)+#TAGHCostTotal]
+  Set, #TotalUnitCost=[#TAGKCostTotal+#TAGHCostTotal]
+  Set, #TAGHardwareTotal=[#TAGHardwareTotal+#TotalUnitCost]
+  
+}
+},END SKIP
+Set, #Code=<#HoldUnitCode>
+Set, #Length=<#HoldUnitLength>
+Set, #Width=<#HoldUnitWidth>
+Set, #Depth=<#HoldUnitDepth>
+

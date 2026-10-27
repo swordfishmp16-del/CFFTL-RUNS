@@ -1,0 +1,87 @@
+,Set Item Costs factor for Door Finishing
+
+,**
+
+,Calculating subtotals
+
+Set,#DoorDrawerFinishingCostGroup=0
+
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType1"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost1]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType2"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost2]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType3"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost3]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType4"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost4]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType5"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost5]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType6"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost6]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType7"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost7]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType8"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost8]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType9"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

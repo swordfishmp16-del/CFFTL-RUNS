@@ -1,0 +1,55 @@
+'***********************************************************************
+'** Create OK  Parts.
+'** Name - Qty - Running total of price for Name/Qty based on TotalUnitCost * Qty technically.
+'**
+'** Pre:  #gOKTotalsArr contains OK  parts to be exported.
+'**
+'** Post: OK  Parts created.
+'**
+'***********************************************************************
+
+local, #TotalUnitCost
+local, #index
+
+
+'** Loop through the OK  Parts **
+Set, #index = [0]
+while, (#index < #gOKtotalsArrSize)
+   
+   'Increment Loop Counter
+   Set, #index = [#index + 1]
+   
+   '** Trim of the ".0" from the end of the Number **
+   Len, #Size, #index
+   Set, #Size = [#Size - 3]
+   Left, #index, #Size, #index
+   
+   'Get Name from the array.
+   Set, #OKName = <#gOKTotalsArr(#index).Name>
+
+   'Get stored dimensions  from the array.
+   Set, #OKL = [#gOKTotalsArr(#index).Length]
+   Set, #OKW = [#gOKTotalsArr(#index).Width]
+   Set, #OKD = [#gOKTotalsArr(#index).Depth]
+   ,Set, #OKCode = <#gOKTotalsArr(#index).Code>
+
+   'Get the Quantity from the array.
+   Set, #OKQty = [#gOKTotalsArr(#Index).Quantity]
+
+   'Get the Cost from the array.
+   Set, #OKCost = [#gOKTotalsArr(#Index).TotalCost]
+  
+   
+
+   
+   'This will print the info out to the CSV table. - The below line was my model, it's irrelevant here technically.
+   ,Part,(#FillerFrontPartLength>0): #NumFillerFrontPartsRounded, Filler Front, #FillerFrontPartSize, #FillerFrontPartLength, #gFillerFrontArr(#index).Material, ,100,0,FillerFront,#CabinetBoxIndex
+  , SendToFile,  #OKDestinationPath\#CSVName OK  Order List.csv,#OKName#Comma#OKW#Comma#OKL#Comma#OKD#Comma#OKQty#Comma$#OKCost
+
+
+  , SendToFile, #OKDestinationPath\#CSVName OK  Order List.rtf,#OKName   Qty-#OKQty    $#OKCost
+
+wend
+
+
+

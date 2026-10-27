@@ -1,0 +1,381 @@
+Set, #stopfinalOK=1
+
+
+
+Do,(#Room1fillertoekicktotallength>0):1
+{
+ Set,#note=#Room1DoorDrawerFinishingType
+ set, (#Room1fillertoekickremainder>.5):#Room1fillertoekickcount96=[#Room1fillertoekickcount96+1]
+ set, (#Room1fillertoekickremainder<.5):#Room1fillertoekickcount48=1.00
+ Price, (#Room1fillertoekickcount96>0):1,RM1 Toe Kick Filler 96in #toekick96pn Qty #Room1fillertoekickcount96 ,#toekickCost96*#Room1finishupcharge*#universalupchargeOK*#Room1fillertoekickcount96,6,98,0
+ Price, (#Room1fillertoekickcount48>0):1,RM1 Toe Kick Filler 48in #toekick48pn Qty #Room1fillertoekickcount48 ,#toekickCost48*#Room1finishupcharge*#universalupchargeOK*#Room1fillertoekickcount48,6,48,0
+}
+Do,(1=2)&(#Room1endpaneltotallength>0):1
+{
+ Set,#note=#Room1DoorDrawerFinishingType
+ set, (#Room1endpanelsetremainder>0):#Room1endpanelsetcount=[#Room1endpanelsetcount+1]
+ Price, (#Room1endpanelsetcount>0):1,RM1 Base End Panels #baseendpanelpn Qty #Room1endpanelsetcount ,#baseendpanelCost*#Room1finishupcharge*#universalupchargeOK*#Room1endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room2fillertoekicktotallength>0):1
+{
+ Set,#note=#Room2DoorDrawerFinishingType
+ set, (#Room2fillertoekickremainder>.5):#Room2fillertoekickcount96=[#Room2fillertoekickcount96+1]
+ set, (#Room2fillertoekickremainder<.5):#Room2fillertoekickcount48=1.00
+ Price, (#Room2fillertoekickcount96>0):1,RM2 Toe Kick Filler 96in #toekick96pn Qty #Room2fillertoekickcount96 ,#toekickCost96*#Room2finishupcharge*#universalupchargeOK*#Room2fillertoekickcount96,6,98,0
+ Price, (#Room2fillertoekickcount48>0):1,RM2 Toe Kick Filler 48in #toekick48pn Qty #Room2fillertoekickcount48 ,#toekickCost48*#Room2finishupcharge*#universalupchargeOK*#Room2fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room2endpaneltotallength>0):1
+{
+ Set,#note=#Room2DoorDrawerFinishingType
+ set, (#Room2endpanelsetremainder>0):#Room2endpanelsetcount=[#Room2endpanelsetcount+1]
+ Price, (#Room2endpanelsetcount>0):1,RM2 Base End Panels #baseendpanelpn Qty #Room2endpanelsetcount ,#baseendpanelCost*#Room2finishupcharge*#universalupchargeOK*#Room2endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room3fillertoekicktotallength>0):1
+{
+ Set,#note=#Room3DoorDrawerFinishingType
+ set, (#Room3fillertoekickremainder>.5):#Room3fillertoekickcount96=[#Room3fillertoekickcount96+1]
+ set, (#Room3fillertoekickremainder<.5):#Room3fillertoekickcount48=1.00
+ Price, (#Room3fillertoekickcount96>0):1,RM3 Toe Kick Filler 96in #toekick96pn Qty #Room3fillertoekickcount96 ,#toekickCost96*#Room3finishupcharge*#universalupchargeOK*#Room3fillertoekickcount96,6,98,0
+ Price, (#Room3fillertoekickcount48>0):1,RM3 Toe Kick Filler 48in #toekick48pn Qty #Room3fillertoekickcount48 ,#toekickCost48*#Room3finishupcharge*#universalupchargeOK*#Room3fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room3endpaneltotallength>0):1
+{
+ Set,#note=#Room3DoorDrawerFinishingType
+ set, (#Room3endpanelsetremainder>0):#Room3endpanelsetcount=[#Room3endpanelsetcount+1]
+ Price, (#Room3endpanelsetcount>0):1,RM3 Base End Panels #baseendpanelpn Qty #Room3endpanelsetcount ,#baseendpanelCost*#Room3finishupcharge*#universalupchargeOK*#Room3endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room4fillertoekicktotallength>0):1
+{
+ Set,#note=#Room4DoorDrawerFinishingType
+ set, (#Room4fillertoekickremainder>.5):#Room4fillertoekickcount96=[#Room4fillertoekickcount96+1]
+ set, (#Room4fillertoekickremainder<.5):#Room4fillertoekickcount48=1.00
+ Price, (#Room4fillertoekickcount96>0):1,RM4 Toe Kick Filler 96in #toekick96pn Qty #Room4fillertoekickcount96 ,#toekickCost96*#Room4finishupcharge*#universalupchargeOK*#Room4fillertoekickcount96,6,98,0
+ Price, (#Room4fillertoekickcount48>0):1,RM4 Toe Kick Filler 48in #toekick48pn Qty #Room4fillertoekickcount48 ,#toekickCost48*#Room4finishupcharge*#universalupchargeOK*#Room4fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room4endpaneltotallength>0):1
+{
+ Set,#note=#Room4DoorDrawerFinishingType
+ set, (#Room4endpanelsetremainder>0):#Room4endpanelsetcount=[#Room4endpanelsetcount+1]
+ Price, (#Room4endpanelsetcount>0):1,RM4 Base End Panels #baseendpanelpn Qty #Room4endpanelsetcount ,#baseendpanelCost*#Room4finishupcharge*#universalupchargeOK*#Room4endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room5fillertoekicktotallength>0):1
+{
+ Set,#note=#Room5DoorDrawerFinishingType
+ set, (#Room5fillertoekickremainder>.5):#Room5fillertoekickcount96=[#Room5fillertoekickcount96+1]
+ set, (#Room5fillertoekickremainder<.5):#Room5fillertoekickcount48=1.00
+ Price, (#Room5fillertoekickcount96>0):1,RM5 Toe Kick Filler 96in #toekick96pn Qty #Room5fillertoekickcount96 ,#toekickCost96*#Room5finishupcharge*#universalupchargeOK*#Room5fillertoekickcount96,6,98,0
+ Price, (#Room5fillertoekickcount48>0):1,RM5 Toe Kick Filler 48in #toekick48pn Qty #Room5fillertoekickcount48 ,#toekickCost48*#Room5finishupcharge*#universalupchargeOK*#Room5fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room5endpaneltotallength>0):1
+{
+ Set,#note=#Room5DoorDrawerFinishingType
+ set, (#Room5endpanelsetremainder>0):#Room5endpanelsetcount=[#Room5endpanelsetcount+1]
+ Price, (#Room5endpanelsetcount>0):1,RM5 Base End Panels #baseendpanelpn Qty #Room5endpanelsetcount ,#baseendpanelCost*#Room5finishupcharge*#universalupchargeOK*#Room5endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room6fillertoekicktotallength>0):1
+{
+ Set,#note=#Room6DoorDrawerFinishingType
+ set, (#Room6fillertoekickremainder>.5):#Room6fillertoekickcount96=[#Room6fillertoekickcount96+1]
+ set, (#Room6fillertoekickremainder<.5):#Room6fillertoekickcount48=1.00
+ Price, (#Room6fillertoekickcount96>0):1,RM6 Toe Kick Filler 96in #toekick96pn Qty #Room6fillertoekickcount96 ,#toekickCost96*#Room6finishupcharge*#universalupchargeOK*#Room6fillertoekickcount96,6,98,0
+ Price, (#Room6fillertoekickcount48>0):1,RM6 Toe Kick Filler 48in #toekick48pn Qty #Room6fillertoekickcount48 ,#toekickCost48*#Room6finishupcharge*#universalupchargeOK*#Room6fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room6endpaneltotallength>0):1
+{
+ Set,#note=#Room6DoorDrawerFinishingType
+ set, (#Room6endpanelsetremainder>0):#Room6endpanelsetcount=[#Room6endpanelsetcount+1]
+ Price, (#Room6endpanelsetcount>0):1,RM6 Base End Panels #baseendpanelpn Qty #Room6endpanelsetcount ,#baseendpanelCost*#Room6finishupcharge*#universalupchargeOK*#Room6endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room7fillertoekicktotallength>0):1
+{
+ Set,#note=#Room7DoorDrawerFinishingType
+ set, (#Room7fillertoekickremainder>.5):#Room7fillertoekickcount96=[#Room7fillertoekickcount96+1]
+ set, (#Room7fillertoekickremainder<.5):#Room7fillertoekickcount48=1.00
+ Price, (#Room7fillertoekickcount96>0):1,RM7 Toe Kick Filler 96in #toekick96pn Qty #Room7fillertoekickcount96 ,#toekickCost96*#Room7finishupcharge*#universalupchargeOK*#Room7fillertoekickcount96,6,98,0
+ Price, (#Room7fillertoekickcount48>0):1,RM7 Toe Kick Filler 48in #toekick48pn Qty #Room7fillertoekickcount48 ,#toekickCost48*#Room7finishupcharge*#universalupchargeOK*#Room7fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room7endpaneltotallength>0):1
+{
+ Set,#note=#Room7DoorDrawerFinishingType
+ set, (#Room7endpanelsetremainder>0):#Room7endpanelsetcount=[#Room7endpanelsetcount+1]
+ Price, (#Room7endpanelsetcount>0):1,RM7 Base End Panels #baseendpanelpn Qty #Room7endpanelsetcount ,#baseendpanelCost*#Room7finishupcharge*#universalupchargeOK*#Room7endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room8fillertoekicktotallength>0):1
+{
+ Set,#note=#Room8DoorDrawerFinishingType
+ set, (#Room8fillertoekickremainder>.5):#Room8fillertoekickcount96=[#Room8fillertoekickcount96+1]
+ set, (#Room8fillertoekickremainder<.5):#Room8fillertoekickcount48=1.00
+ Price, (#Room8fillertoekickcount96>0):1,RM8 Toe Kick Filler 96in #toekick96pn Qty #Room8fillertoekickcount96 ,#toekickCost96*#Room8finishupcharge*#universalupchargeOK*#Room8fillertoekickcount96,6,98,0
+ Price, (#Room8fillertoekickcount48>0):1,RM8 Toe Kick Filler 48in #toekick48pn Qty #Room8fillertoekickcount48 ,#toekickCost48*#Room8finishupcharge*#universalupchargeOK*#Room8fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room8endpaneltotallength>0):1
+{
+ Set,#note=#Room8DoorDrawerFinishingType
+ set, (#Room8endpanelsetremainder>0):#Room8endpanelsetcount=[#Room8endpanelsetcount+1]
+ Price, (#Room8endpanelsetcount>0):1,RM8 Base End Panels #baseendpanelpn Qty #Room8endpanelsetcount ,#baseendpanelCost*#Room8finishupcharge*#universalupchargeOK*#Room8endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room9fillertoekicktotallength>0):1
+{
+ Set,#note=#Room9DoorDrawerFinishingType
+ set, (#Room9fillertoekickremainder>.5):#Room9fillertoekickcount96=[#Room9fillertoekickcount96+1]
+ set, (#Room9fillertoekickremainder<.5):#Room9fillertoekickcount48=1.00
+ Price, (#Room9fillertoekickcount96>0):1,RM9 Toe Kick Filler 96in #toekick96pn Qty #Room9fillertoekickcount96 ,#toekickCost96*#Room9finishupcharge*#universalupchargeOK*#Room9fillertoekickcount96,6,98,0
+ Price, (#Room9fillertoekickcount48>0):1,RM9 Toe Kick Filler 48in #toekick48pn Qty #Room9fillertoekickcount48 ,#toekickCost48*#Room9finishupcharge*#universalupchargeOK*#Room9fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room9endpaneltotallength>0):1
+{
+ Set,#note=#Room9DoorDrawerFinishingType
+ set, (#Room9endpanelsetremainder>0):#Room9endpanelsetcount=[#Room9endpanelsetcount+1]
+ Price, (#Room9endpanelsetcount>0):1,RM9 Base End Panels #baseendpanelpn Qty #Room9endpanelsetcount ,#baseendpanelCost*#Room9finishupcharge*#universalupchargeOK*#Room9endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room10fillertoekicktotallength>0):1
+{
+ Set,#note=#Room10DoorDrawerFinishingType
+ set, (#Room10fillertoekickremainder>.5):#Room10fillertoekickcount96=[#Room10fillertoekickcount96+1]
+ set, (#Room10fillertoekickremainder<.5):#Room10fillertoekickcount48=1.00
+ Price, (#Room10fillertoekickcount96>0):1,RM10 Toe Kick Filler 96in #toekick96pn Qty #Room10fillertoekickcount96 ,#toekickCost96*#Room10finishupcharge*#universalupchargeOK*#Room10fillertoekickcount96,6,98,0
+ Price, (#Room10fillertoekickcount48>0):1,RM10 Toe Kick Filler 48in #toekick48pn Qty #Room10fillertoekickcount48 ,#toekickCost48*#Room10finishupcharge*#universalupchargeOK*#Room10fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room10endpaneltotallength>0):1
+{
+ Set,#note=#Room10DoorDrawerFinishingType
+ set, (#Room10endpanelsetremainder>0):#Room10endpanelsetcount=[#Room10endpanelsetcount+1]
+ Price, (#Room10endpanelsetcount>0):1,RM10 Base End Panels #baseendpanelpn Qty #Room10endpanelsetcount ,#baseendpanelCost*#Room10finishupcharge*#universalupchargeOK*#Room10endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room11fillertoekicktotallength>0):1
+{
+ Set,#note=#Room11DoorDrawerFinishingType
+ set, (#Room11fillertoekickremainder>.5):#Room11fillertoekickcount96=[#Room11fillertoekickcount96+1]
+ set, (#Room11fillertoekickremainder<.5):#Room11fillertoekickcount48=1.00
+ Price, (#Room11fillertoekickcount96>0):1,RM11 Toe Kick Filler 96in #toekick96pn Qty #Room11fillertoekickcount96 ,#toekickCost96*#Room11finishupcharge*#universalupchargeOK*#Room11fillertoekickcount96,6,98,0
+ Price, (#Room11fillertoekickcount48>0):1,RM11 Toe Kick Filler 48in #toekick48pn Qty #Room11fillertoekickcount48 ,#toekickCost48*#Room11finishupcharge*#universalupchargeOK*#Room11fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room11endpaneltotallength>0):1
+{
+ Set,#note=#Room11DoorDrawerFinishingType
+ set, (#Room11endpanelsetremainder>0):#Room11endpanelsetcount=[#Room11endpanelsetcount+1]
+ Price, (#Room11endpanelsetcount>0):1,RM11 Base End Panels #baseendpanelpn Qty #Room11endpanelsetcount ,#baseendpanelCost*#Room11finishupcharge*#universalupchargeOK*#Room11endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room12fillertoekicktotallength>0):1
+{
+ Set,#note=#Room12DoorDrawerFinishingType
+ set, (#Room12fillertoekickremainder>.5):#Room12fillertoekickcount96=[#Room12fillertoekickcount96+1]
+ set, (#Room12fillertoekickremainder<.5):#Room12fillertoekickcount48=1.00
+ Price, (#Room12fillertoekickcount96>0):1,RM12 Toe Kick Filler 96in #toekick96pn Qty #Room12fillertoekickcount96 ,#toekickCost96*#Room12finishupcharge*#universalupchargeOK*#Room12fillertoekickcount96,6,98,0
+ Price, (#Room12fillertoekickcount48>0):1,RM12 Toe Kick Filler 48in #toekick48pn Qty #Room12fillertoekickcount48 ,#toekickCost48*#Room12finishupcharge*#universalupchargeOK*#Room12fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room12endpaneltotallength>0):1
+{
+ Set,#note=#Room12DoorDrawerFinishingType
+ set, (#Room12endpanelsetremainder>0):#Room12endpanelsetcount=[#Room12endpanelsetcount+1]
+ Price, (#Room12endpanelsetcount>0):1,RM12 Base End Panels #baseendpanelpn Qty #Room12endpanelsetcount ,#baseendpanelCost*#Room12finishupcharge*#universalupchargeOK*#Room12endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room13fillertoekicktotallength>0):1
+{
+ Set,#note=#Room13DoorDrawerFinishingType
+ set, (#Room13fillertoekickremainder>.5):#Room13fillertoekickcount96=[#Room13fillertoekickcount96+1]
+ set, (#Room13fillertoekickremainder<.5):#Room13fillertoekickcount48=1.00
+ Price, (#Room13fillertoekickcount96>0):1,RM13 Toe Kick Filler 96in #toekick96pn Qty #Room13fillertoekickcount96 ,#toekickCost96*#Room13finishupcharge*#universalupchargeOK*#Room13fillertoekickcount96,6,98,0
+ Price, (#Room13fillertoekickcount48>0):1,RM13 Toe Kick Filler 48in #toekick48pn Qty #Room13fillertoekickcount48 ,#toekickCost48*#Room13finishupcharge*#universalupchargeOK*#Room13fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room13endpaneltotallength>0):1
+{
+ Set,#note=#Room13DoorDrawerFinishingType
+ set, (#Room13endpanelsetremainder>0):#Room13endpanelsetcount=[#Room13endpanelsetcount+1]
+ Price, (#Room13endpanelsetcount>0):1,RM13 Base End Panels #baseendpanelpn Qty #Room13endpanelsetcount ,#baseendpanelCost*#Room13finishupcharge*#universalupchargeOK*#Room13endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room14fillertoekicktotallength>0):1
+{
+ Set,#note=#Room14DoorDrawerFinishingType
+ set, (#Room14fillertoekickremainder>.5):#Room14fillertoekickcount96=[#Room14fillertoekickcount96+1]
+ set, (#Room14fillertoekickremainder<.5):#Room14fillertoekickcount48=1.00
+ Price, (#Room14fillertoekickcount96>0):1,RM14 Toe Kick Filler 96in #toekick96pn Qty #Room14fillertoekickcount96 ,#toekickCost96*#Room14finishupcharge*#universalupchargeOK*#Room14fillertoekickcount96,6,98,0
+ Price, (#Room14fillertoekickcount48>0):1,RM14 Toe Kick Filler 48in #toekick48pn Qty #Room14fillertoekickcount48 ,#toekickCost48*#Room14finishupcharge*#universalupchargeOK*#Room14fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room14endpaneltotallength>0):1
+{
+ Set,#note=#Room14DoorDrawerFinishingType
+ set, (#Room14endpanelsetremainder>0):#Room14endpanelsetcount=[#Room14endpanelsetcount+1]
+ Price, (#Room14endpanelsetcount>0):1,RM14 Base End Panels #baseendpanelpn Qty #Room14endpanelsetcount ,#baseendpanelCost*#Room14finishupcharge*#universalupchargeOK*#Room14endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room15fillertoekicktotallength>0):1
+{
+ Set,#note=#Room15DoorDrawerFinishingType
+ set, (#Room15fillertoekickremainder>.5):#Room15fillertoekickcount96=[#Room15fillertoekickcount96+1]
+ set, (#Room15fillertoekickremainder<.5):#Room15fillertoekickcount48=1.00
+ Price, (#Room15fillertoekickcount96>0):1,RM15 Toe Kick Filler 96in #toekick96pn Qty #Room15fillertoekickcount96 ,#toekickCost96*#Room15finishupcharge*#universalupchargeOK*#Room15fillertoekickcount96,6,98,0
+ Price, (#Room15fillertoekickcount48>0):1,RM15 Toe Kick Filler 48in #toekick48pn Qty #Room15fillertoekickcount48 ,#toekickCost48*#Room15finishupcharge*#universalupchargeOK*#Room15fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room15endpaneltotallength>0):1
+{
+ Set,#note=#Room15DoorDrawerFinishingType
+ set, (#Room15endpanelsetremainder>0):#Room15endpanelsetcount=[#Room15endpanelsetcount+1]
+ Price, (#Room15endpanelsetcount>0):1,RM15 Base End Panels #baseendpanelpn Qty #Room15endpanelsetcount ,#baseendpanelCost*#Room15finishupcharge*#universalupchargeOK*#Room15endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room16fillertoekicktotallength>0):1
+{
+ Set,#note=#Room16DoorDrawerFinishingType
+ set, (#Room16fillertoekickremainder>.5):#Room16fillertoekickcount96=[#Room16fillertoekickcount96+1]
+ set, (#Room16fillertoekickremainder<.5):#Room16fillertoekickcount48=1.00
+ Price, (#Room16fillertoekickcount96>0):1,RM16 Toe Kick Filler 96in #toekick96pn Qty #Room16fillertoekickcount96 ,#toekickCost96*#Room16finishupcharge*#universalupchargeOK*#Room16fillertoekickcount96,6,98,0
+ Price, (#Room16fillertoekickcount48>0):1,RM16 Toe Kick Filler 48in #toekick48pn Qty #Room16fillertoekickcount48 ,#toekickCost48*#Room16finishupcharge*#universalupchargeOK*#Room16fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room16endpaneltotallength>0):1
+{
+ Set,#note=#Room16DoorDrawerFinishingType
+ set, (#Room16endpanelsetremainder>0):#Room16endpanelsetcount=[#Room16endpanelsetcount+1]
+ Price, (#Room16endpanelsetcount>0):1,RM16 Base End Panels #baseendpanelpn Qty #Room16endpanelsetcount ,#baseendpanelCost*#Room16finishupcharge*#universalupchargeOK*#Room16endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room17fillertoekicktotallength>0):1
+{
+ Set,#note=#Room17DoorDrawerFinishingType
+ set, (#Room17fillertoekickremainder>.5):#Room17fillertoekickcount96=[#Room17fillertoekickcount96+1]
+ set, (#Room17fillertoekickremainder<.5):#Room17fillertoekickcount48=1.00
+ Price, (#Room17fillertoekickcount96>0):1,RM17 Toe Kick Filler 96in #toekick96pn Qty #Room17fillertoekickcount96 ,#toekickCost96*#Room17finishupcharge*#universalupchargeOK*#Room17fillertoekickcount96,6,98,0
+ Price, (#Room17fillertoekickcount48>0):1,RM17 Toe Kick Filler 48in #toekick48pn Qty #Room17fillertoekickcount48 ,#toekickCost48*#Room17finishupcharge*#universalupchargeOK*#Room17fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room17endpaneltotallength>0):1
+{
+ Set,#note=#Room17DoorDrawerFinishingType
+ set, (#Room17endpanelsetremainder>0):#Room17endpanelsetcount=[#Room17endpanelsetcount+1]
+ Price, (#Room17endpanelsetcount>0):1,RM17 Base End Panels #baseendpanelpn Qty #Room17endpanelsetcount ,#baseendpanelCost*#Room17finishupcharge*#universalupchargeOK*#Room17endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room18fillertoekicktotallength>0):1
+{
+ Set,#note=#Room18DoorDrawerFinishingType
+ set, (#Room18fillertoekickremainder>.5):#Room18fillertoekickcount96=[#Room18fillertoekickcount96+1]
+ set, (#Room18fillertoekickremainder<.5):#Room18fillertoekickcount48=1.00
+ Price, (#Room18fillertoekickcount96>0):1,RM18 Toe Kick Filler 96in #toekick96pn Qty #Room18fillertoekickcount96 ,#toekickCost96*#Room18finishupcharge*#universalupchargeOK*#Room18fillertoekickcount96,6,98,0
+ Price, (#Room18fillertoekickcount48>0):1,RM18 Toe Kick Filler 48in #toekick48pn Qty #Room18fillertoekickcount48 ,#toekickCost48*#Room18finishupcharge*#universalupchargeOK*#Room18fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room18endpaneltotallength>0):1
+{
+ Set,#note=#Room18DoorDrawerFinishingType
+ set, (#Room18endpanelsetremainder>0):#Room18endpanelsetcount=[#Room18endpanelsetcount+1]
+ Price, (#Room18endpanelsetcount>0):1,RM18 Base End Panels #baseendpanelpn Qty #Room18endpanelsetcount ,#baseendpanelCost*#Room18finishupcharge*#universalupchargeOK*#Room18endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room19fillertoekicktotallength>0):1
+{
+ Set,#note=#Room19DoorDrawerFinishingType
+ set, (#Room19fillertoekickremainder>.5):#Room19fillertoekickcount96=[#Room19fillertoekickcount96+1]
+ set, (#Room19fillertoekickremainder<.5):#Room19fillertoekickcount48=1.00
+ Price, (#Room19fillertoekickcount96>0):1,RM19 Toe Kick Filler 96in #toekick96pn Qty #Room19fillertoekickcount96 ,#toekickCost96*#Room19finishupcharge*#universalupchargeOK*#Room19fillertoekickcount96,6,98,0
+ Price, (#Room19fillertoekickcount48>0):1,RM19 Toe Kick Filler 48in #toekick48pn Qty #Room19fillertoekickcount48 ,#toekickCost48*#Room19finishupcharge*#universalupchargeOK*#Room19fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room19endpaneltotallength>0):1
+{
+ Set,#note=#Room19DoorDrawerFinishingType
+ set, (#Room19endpanelsetremainder>0):#Room19endpanelsetcount=[#Room19endpanelsetcount+1]
+ Price, (#Room19endpanelsetcount>0):1,RM19 Base End Panels #baseendpanelpn Qty #Room19endpanelsetcount ,#baseendpanelCost*#Room19finishupcharge*#universalupchargeOK*#Room19endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room20fillertoekicktotallength>0):1
+{
+ Set,#note=#Room20DoorDrawerFinishingType
+ set, (#Room20fillertoekickremainder>.5):#Room20fillertoekickcount96=[#Room20fillertoekickcount96+1]
+ set, (#Room20fillertoekickremainder<.5):#Room20fillertoekickcount48=1.00
+ Price, (#Room20fillertoekickcount96>0):1,RM20 Toe Kick Filler 96in #toekick96pn Qty #Room20fillertoekickcount96 ,#toekickCost96*#Room20finishupcharge*#universalupchargeOK*#Room20fillertoekickcount96,6,98,0
+ Price, (#Room20fillertoekickcount48>0):1,RM20 Toe Kick Filler 48in #toekick48pn Qty #Room20fillertoekickcount48 ,#toekickCost48*#Room20finishupcharge*#universalupchargeOK*#Room20fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room20endpaneltotallength>0):1
+{
+ Set,#note=#Room20DoorDrawerFinishingType
+ set, (#Room20endpanelsetremainder>0):#Room20endpanelsetcount=[#Room20endpanelsetcount+1]
+ Price, (#Room20endpanelsetcount>0):1,RM20 Base End Panels #baseendpanelpn Qty #Room20endpanelsetcount ,#baseendpanelCost*#Room20finishupcharge*#universalupchargeOK*#Room20endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room21fillertoekicktotallength>0):1
+{
+ Set,#note=#Room21DoorDrawerFinishingType
+ set, (#Room21fillertoekickremainder>.5):#Room21fillertoekickcount96=[#Room21fillertoekickcount96+1]
+ set, (#Room21fillertoekickremainder<.5):#Room21fillertoekickcount48=1.00
+ Price, (#Room21fillertoekickcount96>0):1,RM21 Toe Kick Filler 96in #toekick96pn Qty #Room21fillertoekickcount96 ,#toekickCost96*#Room21finishupcharge*#universalupchargeOK*#Room21fillertoekickcount96,6,98,0
+ Price, (#Room21fillertoekickcount48>0):1,RM21 Toe Kick Filler 48in #toekick48pn Qty #Room21fillertoekickcount48 ,#toekickCost48*#Room21finishupcharge*#universalupchargeOK*#Room21fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room21endpaneltotallength>0):1
+{
+ Set,#note=#Room21DoorDrawerFinishingType
+ set, (#Room21endpanelsetremainder>0):#Room21endpanelsetcount=[#Room21endpanelsetcount+1]
+ Price, (#Room21endpanelsetcount>0):1,RM21 Base End Panels #baseendpanelpn Qty #Room21endpanelsetcount ,#baseendpanelCost*#Room21finishupcharge*#universalupchargeOK*#Room21endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room22fillertoekicktotallength>0):1
+{
+ Set,#note=#Room22DoorDrawerFinishingType
+ set, (#Room22fillertoekickremainder>.5):#Room22fillertoekickcount96=[#Room22fillertoekickcount96+1]
+ set, (#Room22fillertoekickremainder<.5):#Room22fillertoekickcount48=1.00
+ Price, (#Room22fillertoekickcount96>0):1,RM22 Toe Kick Filler 96in #toekick96pn Qty #Room22fillertoekickcount96 ,#toekickCost96*#Room22finishupcharge*#universalupchargeOK*#Room22fillertoekickcount96,6,98,0
+ Price, (#Room22fillertoekickcount48>0):1,RM22 Toe Kick Filler 48in #toekick48pn Qty #Room22fillertoekickcount48 ,#toekickCost48*#Room22finishupcharge*#universalupchargeOK*#Room22fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room22endpaneltotallength>0):1
+{
+ Set,#note=#Room22DoorDrawerFinishingType
+ set, (#Room22endpanelsetremainder>0):#Room22endpanelsetcount=[#Room22endpanelsetcount+1]
+ Price, (#Room22endpanelsetcount>0):1,RM22 Base End Panels #baseendpanelpn Qty #Room22endpanelsetcount ,#baseendpanelCost*#Room22finishupcharge*#universalupchargeOK*#Room22endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room23fillertoekicktotallength>0):1
+{
+ Set,#note=#Room23DoorDrawerFinishingType
+ set, (#Room23fillertoekickremainder>.5):#Room23fillertoekickcount96=[#Room23fillertoekickcount96+1]
+ set, (#Room23fillertoekickremainder<.5):#Room23fillertoekickcount48=1.00
+ Price, (#Room23fillertoekickcount96>0):1,RM23 Toe Kick Filler 96in #toekick96pn Qty #Room23fillertoekickcount96 ,#toekickCost96*#Room23finishupcharge*#universalupchargeOK*#Room23fillertoekickcount96,6,98,0
+ Price, (#Room23fillertoekickcount48>0):1,RM23 Toe Kick Filler 48in #toekick48pn Qty #Room23fillertoekickcount48 ,#toekickCost48*#Room23finishupcharge*#universalupchargeOK*#Room23fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room23endpaneltotallength>0):1
+{
+ Set,#note=#Room23DoorDrawerFinishingType
+ set, (#Room23endpanelsetremainder>0):#Room23endpanelsetcount=[#Room23endpanelsetcount+1]
+ Price, (#Room23endpanelsetcount>0):1,RM23 Base End Panels #baseendpanelpn Qty #Room23endpanelsetcount ,#baseendpanelCost*#Room23finishupcharge*#universalupchargeOK*#Room23endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room24fillertoekicktotallength>0):1
+{
+ Set,#note=#Room24DoorDrawerFinishingType
+ set, (#Room24fillertoekickremainder>.5):#Room24fillertoekickcount96=[#Room24fillertoekickcount96+1]
+ set, (#Room24fillertoekickremainder<.5):#Room24fillertoekickcount48=1.00
+ Price, (#Room24fillertoekickcount96>0):1,RM24 Toe Kick Filler 96in #toekick96pn Qty #Room24fillertoekickcount96 ,#toekickCost96*#Room24finishupcharge*#universalupchargeOK*#Room24fillertoekickcount96,6,98,0
+ Price, (#Room24fillertoekickcount48>0):1,RM24 Toe Kick Filler 48in #toekick48pn Qty #Room24fillertoekickcount48 ,#toekickCost48*#Room24finishupcharge*#universalupchargeOK*#Room24fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room24endpaneltotallength>0):1
+{
+ Set,#note=#Room24DoorDrawerFinishingType
+ set, (#Room24endpanelsetremainder>0):#Room24endpanelsetcount=[#Room24endpanelsetcount+1]
+ Price, (#Room24endpanelsetcount>0):1,RM24 Base End Panels #baseendpanelpn Qty #Room24endpanelsetcount ,#baseendpanelCost*#Room24finishupcharge*#universalupchargeOK*#Room24endpanelsetcount,28.5,30,0
+}
+
+Do,(#Room25fillertoekicktotallength>0):1
+{
+ Set,#note=#Room25DoorDrawerFinishingType
+ set, (#Room25fillertoekickremainder>.5):#Room25fillertoekickcount96=[#Room25fillertoekickcount96+1]
+ set, (#Room25fillertoekickremainder<.5):#Room25fillertoekickcount48=1.00
+ Price, (#Room25fillertoekickcount96>0):1,RM25 Toe Kick Filler 96in #toekick96pn Qty #Room25fillertoekickcount96 ,#toekickCost96*#Room25finishupcharge*#universalupchargeOK*#Room25fillertoekickcount96,6,98,0
+ Price, (#Room25fillertoekickcount48>0):1,RM25 Toe Kick Filler 48in #toekick48pn Qty #Room25fillertoekickcount48 ,#toekickCost48*#Room25finishupcharge*#universalupchargeOK*#Room25fillertoekickcount48,6,48,0
+}
+Do, (1=2)&(#Room25endpaneltotallength>0):1
+{
+ Set,#note=#Room25DoorDrawerFinishingType
+ set, (#Room25endpanelsetremainder>0):#Room25endpanelsetcount=[#Room25endpanelsetcount+1]
+ Price, (#Room25endpanelsetcount>0):1,RM25 Base End Panels #baseendpanelpn Qty #Room25endpanelsetcount ,#baseendpanelCost*#Room25finishupcharge*#universalupchargeOK*#Room25endpanelsetcount,28.5,30,0
+}
+
+
+Set, #stopfinalOK=2

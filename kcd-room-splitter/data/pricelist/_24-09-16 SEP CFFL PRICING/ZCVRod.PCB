@@ -1,0 +1,38 @@
+,Determine Cost of Valet Rod
+
+Do,(#UnitFileName="Rodforward.cab"):1
+{
+Set, #CostofValetRod = #CostofStdValetRod
+Set, #VRodtype = Standard CHR
+}
+Do,(#UnitFileName="RodforwardBN.cab"):1
+{
+Set, #CostofValetRod = #CostofStdValetRod
+Set, #VRodtype = Standard BN
+}
+Do,(#UnitFileName="RodforwardORB.cab"):1
+{
+Set, #CostofValetRod = #CostofStdValetRod
+Set, #VRodtype = Standard ORB
+}
+Do,(#UnitFileName="RodforwardU1.cab"):1
+{
+Set, #CostofValetRod = #CostOfU1ValetRod 
+Set, #VRodtype = Vector CHR
+}
+Do,(#UnitFileName="RodforwardU1MNL.cab"):1
+{
+Set, #CostofValetRod = #CostOfU1ValetRod 
+Set, #VRodtype = Vector MNL
+}
+Do,(#UnitFileName="RodforwardU1ORB.cab"):1
+{
+Set, #CostofValetRod = #CostOfU1ValetRod 
+Set, #VRodtype = Vector ORB
+}
+
+,*********** ALL VALET RODS ************
+Price, 1,   RM#Roomnum #ValetRodName,      #CostOfValetRod*#universalupcharge,             W, d,          #ValetRodPrintOrderNumber,     
+,***************************************
+
+

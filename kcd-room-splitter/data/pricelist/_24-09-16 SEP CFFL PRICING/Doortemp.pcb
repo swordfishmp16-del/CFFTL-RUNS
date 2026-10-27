@@ -1,0 +1,497 @@
+,This calculates the cost of each Door and Drawer Front
+Set, #Gap = DrGp
+
+Set, #CostOfDoor=0 ,Set as Default
+,Set,(#UseDoorCode=Yes):#DoorName=#CodeDoor:#DoorName=Door - #MemoDoor
+,Set,(#UseDoorCode=Yes):#DrFrtName=#CodeDoor:#DrFrtName=DrFrt - #MemoDoor
+
+Set,(#UseDoorCode=Yes):#DoorName=#CodeDoor:#DoorName=Door - #DoorDrawerType
+Set,(#UseDoorCode=Yes):#DrFrtName=#CodeDoor:#DrFrtName=DrFrt - #DoorDrawerType
+
+
+
+
+
+,Single Door
+Set,  (#DoorSD>0): #ThisDoor = #DoorSD                                      ,SINGLE DOOR
+set, #whichdoor=Single
+Do, (#DoorSD>0):1
+{
+Load, (#DoorSD>0): DoorSet.Pcb
+Load, (#DoorSD>0): DoorHandleKnob.Pcb
+Load, (#DoorSD>0): Glassdr.Pcb
+Set, #CFSpecialDoors=0
+Set,(#Codedoor="Clear Acrylic")|(#Codedoor="Matte Acrylic")|(#Codedoor="flatCFMirror"):#CFSpecialDoors=1
+
+Do,(#CFSpecialDoors=1):1
+{
+Set, (#wallbeddepthtrack=0): #CostOfDoor=0 ,Set as Default for invalid door
+Set, (#wallbeddepthtrack=1): #CostOfDoor=((#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1)*(#DoorW/24)   , Wall bed default
+
+,mirrored doors all sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#48by24orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#48by30orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#48by36orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+
+,mirrored doors all sizes 2nd color melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#48by24orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#48by30orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#48by36orLessDoorCost+#Appliedmirrorcostcoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+
+
+,Acrylic doors
+Set,(#Codedoor="Clear Acrylic"):#CostOfDoor=(#ClearAcrylicdoorcost), clear acrylic door
+Set,(#Codedoor="Matte Acrylic"):#CostOfDoor=(#MatteAcrylicdoorcost), Matte acrylic door
+
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor<>"flatCFMirror"):1 ,#Codedoor Door,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):1 ,#Codedoor Door Flat Edgeband-#UnitMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"): 1 ,#Codedoor Door Flat Edgeband-#ContrastMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+Set,  (#DoorSD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorSD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+
+}
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialdoors=0):1              ,flat edgeband door cost
+{
+Set, (#wallbeddepthtrack=0):#CostOfDoor=0 ,Set as Default for invalid edgeband door
+
+,Edgeband doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#48by24orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small flat door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0):#CostOfDoor=#48by30orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small wide flat door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0):#CostOfDoor=#48by36orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small extra wide flat door 
+
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0):#CostOfDoor=#Plus48by18orLessDoorCost*#DoorDrawerTypeCostFactor1   , Tall flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#Plus48by24orLessDoorCost*#DoorDrawerTypeCostFactor1   , Tall wide flat door
+
+,Framed doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#Framed48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 , Small Framed flat door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=1):#CostOfDoor=(#FramedPlus48by18orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1   , Tall Framed flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#Plus48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1   , Tall wide Framed flat door
+
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#UnitMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#UnitMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorSD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorSD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,flat edgeband door cost 2nd color
+{
+Set, (#wallbeddepthtrack=0):#CostOfDoor=0 ,Set as Default for invalid edgeband door
+Set, (#wallbeddepthtrack=1):#CostOfDoor=(#2ndcolorPlus48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor2
+
+,Edgeband doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#2ndcolor48by24orLessDoorCost*#DoorDrawerTypeCostFactor2 , Small flat door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0):#CostOfDoor=#2ndcolor48by30orLessDoorCost*#DoorDrawerTypeCostFactor2 , Small wide flat door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0):#CostOfDoor=#2ndcolor48by36orLessDoorCost*#DoorDrawerTypeCostFactor2 , Small extra wide flat door 
+
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0):#CostOfDoor=#2ndcolorPlus48by18orLessDoorCost*#DoorDrawerTypeCostFactor2   , Tall flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#2ndcolorPlus48by24orLessDoorCost*#DoorDrawerTypeCostFactor2   , Tall wide flat door
+
+,Framed doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#2ndcolorFramed48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor2 , Small Framed flat door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=1):#CostOfDoor=(#2ndcolorFramedPlus48by18orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor2   , Tall Framed flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#2ndcolorPlus48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor2   , Tall wide Framed flat door
+
+
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#ContrastMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#ContrastMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorSD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorSD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+Do, (#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,Custom Door cost
+{
+Set,(#DoorW>#Maxdoorwidth)&(#wallbeddepthtrack=0): #Costofdoor=0, invalid size
+ Do,(#DoorW<=#Maxdoorwidth)|(#wallbeddepthtrack=1):1
+ {
+ , solid doors
+ Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DoorName-#DoorDrawerFinishingType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+ ,Framed doors 
+ Price,(#CostOfDoor>0)&(#IncludeInsert=1):1   ,#DoorName-#DoorDrawerFinishingType-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+ Set,  (#DoorSD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+ Set,  (#DoorSD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+ }
+}
+
+}
+
+,Left Door of a pair
+Set,  (#DoorLD>0): #ThisDoor = #DoorLD                                    ,LEFT DOOR OF PAIR
+set, #whichdoor=Pairleft
+Do, (#DoorLD>0):1
+{
+Load, (#DoorLD>0): DoorSet.Pcb
+Load, (#DoorLD>0): DoorHandleKnob.Pcb
+Load, (#DoorLD>0): Glassdr.Pcb
+Set, #CFSpecialDoors=0
+Set,(#Codedoor="Clear Acrylic")|(#Codedoor="Matte Acrylic")|(#Codedoor="flatCFMirror"):#CFSpecialDoors=1
+
+Do,(#CFSpecialDoors=1):1
+{
+Set, (#wallbeddepthtrack=0):#CostOfDoor=0 ,Set as Default for invalid  door
+,mirrored doors all sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#48by24orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#48by30orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#48by36orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+,mirrored doors all sizes 2nd color melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#48by24orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#48by30orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#48by36orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+
+,Acrylic doors
+Set,(#Codedoor="Clear Acrylic"):#CostOfDoor=(#ClearAcrylicdoorcost), clear acrylic door
+Set,(#Codedoor="Matte Acrylic"):#CostOfDoor=(#MatteAcrylicdoorcost), Matte acrylic door
+
+,Set,((#DoorH<=48)&(#DoorW>36.625))|(#DoorH>96):#costofdoor = 0 ,invalid size
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor<>"flatCFMirror"):1 ,#Codedoor Door,    #CostOfDoor,    #DoorW-(#Gap/2), #DoorH, #DoorPrintOrderNumber,
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):1 ,#Codedoor Door Flat Edgeband-#UnitMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"): 1 ,#Codedoor Door Flat Edgeband-#ContrastMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+Set,  (#DoorLD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorLD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+
+}
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialdoors=0):1              ,flat edgeband door cost
+{
+Set, (#wallbeddepthtrack=0):#CostOfDoor=0 ,Set as Default for invalid edgeband door
+,Edgeband doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#48by24orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small flat door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0):#CostOfDoor=#48by30orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small wide flat door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0):#CostOfDoor=#48by36orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small extra wide flat door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0):#CostOfDoor=#Plus48by18orLessDoorCost*#DoorDrawerTypeCostFactor1   , Tall flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#Plus48by24orLessDoorCost*#DoorDrawerTypeCostFactor1   , Tall wide flat door
+,Framed doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#Framed48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 , Small Framed flat door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=1):#CostOfDoor=(#FramedPlus48by18orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1   , Tall Framed flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#Plus48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1   , Tall wide Framed flat door
+
+,Set,((#DoorH<=48)&(#DoorW>36.625))|(#DoorH>96):#costofdoor = 0 ,invalid size
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#UnitMaterialName,    #CostOfDoor,   #DoorW-(#Gap/2), #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#UnitMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW-(#Gap/2), #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorLD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorLD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,flat edgeband door cost 2nd color
+{
+Set, (#wallbeddepthtrack=0):#CostOfDoor=0 ,Set as Default for invalid edgeband door
+,Edgeband doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#2ndcolor48by24orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small flat door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0):#CostOfDoor=#2ndcolor48by30orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small wide flat door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0):#CostOfDoor=#2ndcolor48by36orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small extra wide flat door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0):#CostOfDoor=#2ndcolorPlus48by18orLessDoorCost*#DoorDrawerTypeCostFactor1   , Tall flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#2ndcolorPlus48by24orLessDoorCost*#DoorDrawerTypeCostFactor1   , Tall wide flat door
+,Framed doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#2ndcolorFramed48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 , Small Framed flat door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=1):#CostOfDoor=(#2ndcolorFramedPlus48by18orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1   , Tall Framed flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#2ndcolorPlus48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1   , Tall wide Framed flat door
+
+,Set,((#DoorH<=48)&(#DoorW>36.625))|(#DoorH>96):#costofdoor = 0 ,invalid size
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#ContrastMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#ContrastMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorLD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorLD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+
+
+Do, (#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,Custom Door cost
+{
+Set,(#DoorW>#Maxdoorwidth)&(#wallbeddepthtrack=0): #Costofdoor=0, invalid size
+ Do,(#DoorW<=#Maxdoorwidth)|(#wallbeddepthtrack=1):1
+ {
+ , solid doors
+ Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DoorName-#DoorDrawerFinishingType,    #CostOfDoor,    #DoorW-(#Gap/2), #DoorH, #DoorPrintOrderNumber,
+ ,Framed doors 
+ Price,(#CostOfDoor>0)&(#IncludeInsert=1):1   ,#DoorName-#DoorDrawerFinishingType-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW-(#Gap/2), #DoorH, #DoorPrintOrderNumber,
+
+
+ Set,  (#DoorLD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+ Set,  (#DoorLD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+}
+
+}
+
+,Right Door of a pair
+Set,  (#DoorRD>0): #ThisDoor = #DoorRD                                  ,RIGHT DOOR OF PAIR
+set, #whichdoor=Pairright
+Do, (#DoorRD>0):1
+{
+Load, (#DoorRD>0): DoorSet.Pcb
+Load, (#DoorRD>0): DoorHandleKnob.Pcb
+Load, (#DoorRD>0): Glassdr.Pcb
+Set, #CFSpecialDoors=0
+Set,(#Codedoor="Clear Acrylic")|(#Codedoor="Matte Acrylic")|(#Codedoor="flatCFMirror"):#CFSpecialDoors=1
+
+Do,(#CFSpecialDoors=1):1
+{
+Set, (#wallbeddepthtrack=0):#CostOfDoor=0 ,Set as Default for invalid door
+,mirrored doors all sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#48by24orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#48by30orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#48by36orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+,mirrored doors all sizes 2nd color melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#48by24orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#48by30orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#48by36orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#Plus48by18orLessDoorCost+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1   , Tall flatCFMirror door
+
+,Acrylic doors
+Set,(#Codedoor="Clear Acrylic"):#CostOfDoor=(#ClearAcrylicdoorcost), clear acrylic door
+Set,(#Codedoor="Matte Acrylic"):#CostOfDoor=(#MatteAcrylicdoorcost), Matte acrylic door
+
+,Set,((#DoorH<=48)&(#DoorW>36.625))|(#DoorH>96):#costofdoor = 0 ,invalid size
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor<>"flatCFMirror"):1 ,#Codedoor Door,    #CostOfDoor,    #DoorW-(#Gap/2), #DoorH, #DoorPrintOrderNumber,
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):1 ,#Codedoor Door Flat Edgeband-#UnitMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"): 1 ,#Codedoor Door Flat Edgeband-#ContrastMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+Set,  (#DoorRD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorRD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+
+}
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialdoors=0):1              ,flat edgeband door cost
+{
+Set, (#wallbeddepthtrack=0):#CostOfDoor=0 ,Set as Default for invalid edgeband door
+,Edgeband doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#48by24orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small flat door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0):#CostOfDoor=#48by30orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small wide flat door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0):#CostOfDoor=#48by36orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small extra wide flat door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0):#CostOfDoor=#Plus48by18orLessDoorCost*#DoorDrawerTypeCostFactor1   , Tall flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#Plus48by24orLessDoorCost*#DoorDrawerTypeCostFactor1   , Tall wide flat door
+,Framed doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#Framed48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 , Small Framed flat door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=1):#CostOfDoor=(#FramedPlus48by18orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1   , Tall Framed flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#Plus48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1   , Tall wide Framed flat door
+
+,Set,((#DoorH<=48)&(#DoorW>36.625))|(#DoorH>96):#costofdoor = 0 ,invalid size
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#UnitMaterialName,    #CostOfDoor,    #DoorW-(#Gap/2), #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#UnitMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW-(#Gap/2), #DoorH, #DoorPrintOrderNumber,
+
+Set,  (#DoorRD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorRD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,flat edgeband door cost 2nd color
+{
+Set, (#wallbeddepthtrack=0):#CostOfDoor=0 ,Set as Default for invalid edgeband door
+,Edgeband doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#2ndcolor48by24orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small flat door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0):#CostOfDoor=#2ndcolor48by30orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small wide flat door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0):#CostOfDoor=#2ndcolor48by36orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small extra wide flat door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=0):#CostOfDoor=#2ndcolorPlus48by18orLessDoorCost*#DoorDrawerTypeCostFactor1   , Tall flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#2ndcolorPlus48by24orLessDoorCost*#DoorDrawerTypeCostFactor1   , Tall wide flat door
+,Framed doors allowed sizes matching melamine
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#2ndcolorFramed48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 , Small Framed flat door 
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW<=18.625)&(#IncludeInsert=1):#CostOfDoor=(#2ndcolorFramedPlus48by18orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1   , Tall Framed flat door
+Set,(#DoorH>48)&(#DoorH<=96)&(#DoorW>18.625)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#2ndcolorPlus48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1   , Tall wide Framed flat door
+
+,Set,((#DoorH<=48)&(#DoorW>36.625))|(#DoorH>96):#costofdoor = 0 ,invalid size
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#ContrastMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#ContrastMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorRD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorRD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+
+
+Do, (#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,Custom Door cost
+{
+Set,(#DoorW>#Maxdoorwidth)&(#wallbeddepthtrack=0): #Costofdoor=0, invalid size
+ Do,(#DoorW<=#Maxdoorwidth)|(#wallbeddepthtrack=1):1
+ {
+ , solid doors
+ Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DoorName-#DoorDrawerFinishingType,    #CostOfDoor,    #DoorW-(#Gap/2), #DoorH, #DoorPrintOrderNumber,
+ ,Framed doors 
+ Price,(#CostOfDoor>0)&(#IncludeInsert=1):1   ,#DoorName-#DoorDrawerFinishingType-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW-(#Gap/2), #DoorH, #DoorPrintOrderNumber,
+
+
+ Set,  (#DoorRD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+ Set,  (#DoorRD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+ }
+}
+
+}
+
+,Drawer Front
+Do, (#PriceDrawerFronts =Yes):1
+set, #includeddrawerface = 0
+{
+Set,  (#DoorDR>0): #ThisDoor = #DoorDR                                  ,DRAWER OF DRAWER FRONT 
+Do, (#DoorDR>0):1
+{
+Load, (#DoorDR>0): DoorSet.Pcb
+Load, (#DoorDR>0): DoorHandleKnob.Pcb
+Load, (#DoorDR>0): Glassdr.Pcb
+Set, #CFSpecialDoors=0
+Set,(#Codedoor="Clear Acrylic")|(#Codedoor="Matte Acrylic")|(#Codedoor="flatCFMirror"):#CFSpecialDoors=1
+
+
+
+Do,(#CFSpecialDoors=1):1
+{
+Set,(#DoorH<=48)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#Appliedmirrorcostdwr)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorH<=48)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#2ndcolorFlatEdgeBandDrawerFront+#Appliedmirrorcostdwr)*#DoorDrawerTypeCostFactor2 , Small flatCFMirror door 2nd color
+Set,(#Codedoor="Clear Acrylic"):#CostOfDoor=(#ClearAcrylicdoorcost), clear acrylic door
+Set,(#Codedoor="Matte Acrylic"):#CostOfDoor=(#MatteAcrylicdoorcost), Matte acrylic door
+
+Set, (#HasHinges=0): #facetype=DrFrt:#facetype=Door
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor<>"flatCFMirror"):1 ,#Codedoor #facetype,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):1 ,#Codedoor #facetype Flat Edgeband-#UnitMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"): 1 ,#Codedoor #facetype Flat Edgeband-#ContrastMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+Set,  (#DoorDR>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorDR>0): #TotalNumDoors = [#TotalNumDoors + 1]
+
+}
+,******flat drawer face pricing with drawerbox
+Do, (#HasHinges=0):1
+{
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialDoors=0)&(#BoxDrawertype="White*"):1        ,Flat edgeband Drawer front cost with white box 
+{
+,Set,(#DoorH<=48)&(#IncludeInsert=0)&(#CFSpecialdoors=0):#CostOfDoor=#2ndcolorFlatEdgeBandDrawerFront , Standard edgeband drawer front
+Set,(#DoorH<=48)&(#IncludeInsert=0)&(#CFSpecialdoors=0):#CostOfDoor=#2ndcolorFlatEdgeBandDrawerFront , Standard edgeband drawer front
+Set,(#DoorH<=48)&(#IncludeInsert=1):#CostOfDoor=#2ndcolorFramedDrawerFrontCost+#GlassDoorExtraCost , Framed edgeband drawer with insert
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DrFrtName-#UnitMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Codedoor<>"flatCFMirror"):1   ,Framed #DrfrtName-#UnitMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorDR>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorDR>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialDoors=0)&(#BoxDrawertype<>"White*"):1              ,Flat edgeband Drawer front cost with matching material boxes
+{
+,Set,(#DoorH<=48)&(#IncludeInsert=0)&(#CFSpecialdoors=0):#CostOfDoor=0 , Standard edgeband drawer front
+
+Set,(#DoorH<=48)&(#IncludeInsert=0)&(#CFSpecialdoors=0):#CostOfDoor=0 , Standard edgeband drawer front
+Set,(#DoorH<=48)&(#IncludeInsert=0)&(#CFSpecialdoors=0):#Includeddrawerface=1 , Standard edgeband drawer front
+Set,(#DoorH<=48)&(#IncludeInsert=1):#CostOfDoor=#FramedDrawerFrontCost+#GlassDoorExtraCost , Framed edgeband drawer with insert
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DrFrtName-#UnitMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Codedoor<>"flatCFMirror"):1   ,Framed #DrfrtName-#UnitMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorDR>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorDR>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#CFSpecialDoors=0):1              ,Flat edgeband Drawer front cost 2nd color
+{
+Set,(#DoorH<=48)&(#IncludeInsert=0)&(#CFSpecialdoors=0):#CostOfDoor=#2ndcolorFlatEdgeBandDrawerFront , Standard edgeband drawer front 2nd color
+Set,(#DoorH<=48)&(#IncludeInsert=1):#CostOfDoor=#2ndcolorFramedDrawerFrontCost+#GlassDoorExtraCost , Framed edgeband drawer with insert 2nd color
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DrFrtName-#ContrastMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Codedoor<>"flatCFMirror"):1   ,Framed #DrfrtName-#ContrastMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorDR>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorDR>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+}
+,*******Drawer become a door Flat drawer face pricing without drawerbox is a door
+Do, (#HasHinges=1):1
+{
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialDoors=0):1              ,Flat edgeband Drawer front cost
+{
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#48by24orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small flat door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0):#CostOfDoor=#48by30orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small wide flat door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=36.625)&(#IncludeInsert=0):#CostOfDoor=#48by36orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small extra wide flat door 
+
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#Framed48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 , Small Framed flat door 
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#Doorname-#UnitMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Codedoor<>"flatCFMirror"):1   ,Framed #DoorName-#UnitMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorDR>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorDR>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#CFSpecialDoors=0):1              ,Flat edgeband Drawer front cost 2nd color
+{
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=0):#CostOfDoor=#2ndColor48by24orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small flat door 
+Set,(#DoorH<=48)&(#DoorW>24.875)&(#DoorW<=30.625)&(#IncludeInsert=0):#CostOfDoor=#2ndColor48by30orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small wide flat door 
+Set,(#DoorH<=48)&(#DoorW>30.625)&(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0):#CostOfDoor=#2ndColor48by36orLessDoorCost*#DoorDrawerTypeCostFactor1 , Small extra wide flat door 
+
+Set,(#DoorH<=48)&(#DoorW<=24.875)&(#IncludeInsert=1):#CostOfDoor=(#2ndColorFramed48by24orLessDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 , Small Framed flat door 
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DoorName-#ContrastMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Codedoor<>"flatCFMirror"):1   ,Framed #DoorName-#ContrastMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorDR>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorDR>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+}
+
+Do, (#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2")&(#CFSpecialDoors=0):1              ,Custom Drawer Front cost
+{
+Set, (#HasHinges=0)&(#wallbeddepthtrack=0): #facetype=#DrFrtName:#facetype=#DoorName
+, solid drawer front
+
+Set,(#DoorW>#Maxdrawerwidth)&(#wallbeddepthtrack=0): #Costofdoor=0, invalid size
+ Do,(#DoorW<=#Maxdrawerwidth)|(#wallbeddepthtrack=1):1
+ {
+ Price,(#CostOfDoor>0)&(#IncludeInsert=0):1   ,#Facetype-#DoorDrawerFinishingType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+ ,Framed doors 
+ Price,(#CostOfDoor>0)&(#IncludeInsert=1):1   ,#Facetype-#DoorDrawerFinishingType-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+ Set,  (#DoorDR>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+ Set,  (#DoorDR>0): #TotalNumDoors = [#TotalNumDoors + 1]
+ }
+}
+}
+}
+,invalid door
+Do, (#CostofDoor=0)&(#includeddrawerface = 0):1
+{
+set, #name =  No Color Selected or invalid size
+load, Eachunit.pcb
+} 
+Load,GetHandleKnobCost.pcb
+Set, #IncludeInsert=0

@@ -1,0 +1,3308 @@
+Set, #qty=0
+
+Set, #Taxname1=None
+Set, #Taxname2=None
+Set, #Taxname3=None
+Set, #Taxname4=None
+Set, #Taxname5=None
+Set, #Taxname6=None
+Set, #Taxname7=None
+Set, #Taxname8=None
+Set, #Taxname9=None
+Set, #Taxname10=None
+Set, #Taxamount1=0
+Set, #Taxamount2=0
+Set, #Taxamount3=0
+Set, #Taxamount4=0
+Set, #Taxamount5=0
+Set, #Taxamount6=0
+Set, #Taxamount7=0
+Set, #Taxamount8=0
+Set, #Taxamount9=0
+Set, #Taxamount10=0
+set, #costofdoor=0
+set, #StdHingeadd = 0
+set, #OverlayHingeadd=0
+set, #Tophingeadd=0
+set, #Bottomhingeadd = 0
+set, #addhinges=0
+set, #hashinges=0
+set, #stdhingetype=1
+set, #Basemoldremainder=0
+set, #hutchpanel=0
+set, #chargeallwbdoors=No
+set, #Costoftopconnector=0
+set, #Costofbottomconnector=0
+set, #basicdoorcost=0
+set, #shoefencefinish=None
+set, #addledshelf=0
+set, #Waddledshelf=0
+set, #addpuckshelf=0
+set, #addspuckshelf=0
+set, #addSXLpuckshelf=0
+set, #add12intaskshelf=0
+set, #add24intaskshelf=0
+set, #add30intaskshelf=0
+set, #add36intaskshelf=0
+set, #add42intaskshelf=0
+set, #add45intaskshelf=0
+set, #addmidshelf=0
+set, #Garageplatform=0
+Set, #DoorHandlePN=0
+Set, #DoorKnobPN=0
+set, #doorfaceupcharge=0
+set, #drawerfaceupcharge=0
+set, #presetinsertcost=0
+Set, #Wallbeddesk=0
+Set, #Wallbedshelf=0
+Set, #wallbedmidshelffordoors=0
+set,#swapglides=0
+set, #drawernumber=0
+Set,#slidingshelf=0
+Set,#UMslidingshelf=0
+Set,#Pullout=0
+Set,#UMPullout=0
+Set,#VDunit=0
+Set,#VD2unit=0
+Set,#Drawerswitchcount=0
+set, #makevalence=No
+Set, #singlerod=No
+set, #bottombasketdepthadj=0
+set, #drawerboxglidetag=None
+
+set, #TAGCSVFILE=Yes
+set, #FirstTimeHere=1
+set, #tagpricedone=0
+set, #TagLibrary=0
+
+
+,Set,#Room1cuttofitcount=0
+
+set, #specialback=0
+
+set,#TotalDoorHWcost=0
+
+,Initialize rooms
+Set,#Room1Material = None
+Set,#Room1ContrastMaterial= None
+Set,#Room1use2ndmaterial=0
+Set,#Room1EdgeBandingType= None
+
+Set,#Room1ClosetRodType= None
+Set,#Room1ClosetRodCount= 0
+Set,#Room1ClosetRodlengthCount= 0
+
+Set,#Room1DoorDrawerType= None
+Set,#Room1DoorDrawerFinishingType= None
+Set,#Room1DoorDrawerInsertType= None
+Set,#room1Basicdoorcost=0
+set,#Room1DoorCost=0
+
+set, #RM1otherinsert1=None
+set, #RM1otherinsert2=None
+set, #RM1otherinsert3=None
+set, #RM1otherinsert4=None
+set, #RM1otherinsert5=None
+set, #RM1otherinsert6=None
+set, #RM1otherinsert7=None
+
+Set,#Room1CrownMoldingType=None
+set,#Rm1MldName=None
+Set,#Rm1MldLen=0
+Set,#Rm1MldCnt=0
+set,#Rm1MldCost = 0
+
+Set,#Room1BaseType= None
+Set,#Room1basecostgroup=0
+Set,#Rm1BaseLengthtotal=0
+Set,#Rm1GarageWoodBaseLengthtotal=0
+Set,#Rm1BaseCost=0
+Set,#Rm1WGBaseCost=0
+Set,#Rm1BaseQty=0
+
+Set,#Room1ShoeFenceType= None
+Set,#Room1ShoeFencefinish= None
+Set,#Room1Shoefencecount=0
+
+Set,#Room1Cchannel2shelfcount=0
+Set,#Room1Cchannel1shelfcount=0
+Set,#Room1Cchannelcount=0
+Set,#Room1Cchannellengthcount=0
+Set,#Room1thickadjshelfcount=0
+Set,#Room1adjtoeuroshelfcount=0
+Set,#Room1frontlipshelfcount=0
+Set,#Room1ledshelfcount=0
+Set,#Room1dogearpanelcount=0
+Set,#Room1ledFpanelcount=0
+Set,#Room1ledHpanelcount=0
+
+
+Set,#Room1BackType = None
+Set, #Room1Specialback = 0
+Set,#Room1hasbacking=0
+set, #room1needbackingselected=0
+
+
+Set,#Room1BoxDrawertype= None
+Set,#Room1BoxGlideTag=None
+set,#Room1BoxDrawercount=0
+Set,#Room1Glidecount=0
+Set,#Room1Switchglidecount=0
+set,#Room1Drawerswitchcount=0
+Set,#Room1SSGlidecount=0
+Set,#Room1SSUMGlidecount=0
+Set,#Room1POGlidecount=0
+Set,#Room1POUMGlidecount=0
+Set,#Room1VDGlidecount=0
+Set,#Room1VD2Glidecount=0
+Set,#Room1VDTotalGlidecount=0
+
+
+set,#extrudedHandlesRoom1=0
+set,#extrudedHandlesRoom2=0
+set,#extrudedHandlesRoom3=0
+set,#extrudedHandlesRoom4=0
+set,#extrudedHandlesRoom5=0
+set,#extrudedHandlesRoom6=0
+set,#extrudedHandlesRoom7=0
+set,#extrudedHandlesRoom8=0
+set,#extrudedHandlesRoom9=0
+set,#extrudedHandlesRoom10=0
+set,#extrudedHandlesRoom11=0
+set,#extrudedHandlesRoom12=0
+set,#extrudedHandlesRoom13=0
+set,#extrudedHandlesRoom14=0
+set,#extrudedHandlesRoom15=0
+set,#extrudedHandlesRoom16=0
+set,#extrudedHandlesRoom17=0
+set,#extrudedHandlesRoom18=0
+set,#extrudedHandlesRoom19=0
+set,#extrudedHandlesRoom20=0
+set,#extrudedHandlesRoom21=0
+set,#extrudedHandlesRoom22=0
+set,#extrudedHandlesRoom23=0
+set,#extrudedHandlesRoom24=0
+set,#extrudedHandlesRoom25=0
+
+Set,#CostHandleName0Room1=0
+Set,#CostHandleName1Room1=0
+Set,#CostHandleName2Room1=0
+Set,#CostHandleName3Room1=0
+Set,#CostHandleName4Room1=0
+Set,#CostHandleName5Room1=0
+Set,#CostHandleName6Room1=0
+Set,#CostHandleName7Room1=0
+Set,#CostHandleName8Room1=0
+Set,#CostHandleName9Room1=0
+Set,#CodeHandleName0Room1=0
+Set,#CodeHandleName1Room1=0
+Set,#CodeHandleName2Room1=0
+Set,#CodeHandleName3Room1=0
+Set,#CodeHandleName4Room1=0
+Set,#CodeHandleName5Room1=0
+Set,#CodeHandleName6Room1=0
+Set,#CodeHandleName7Room1=0
+Set,#CodeHandleName8Room1=0
+Set,#CodeHandleName9Room1=0
+Set,#CountHandleName0Room1=0
+Set,#CountHandleName1Room1=0
+Set,#CountHandleName2Room1=0
+Set,#CountHandleName3Room1=0
+Set,#CountHandleName4Room1=0
+Set,#CountHandleName5Room1=0
+Set,#CountHandleName6Room1=0
+Set,#CountHandleName7Room1=0
+Set,#CountHandleName8Room1=0
+Set,#CountHandleName9Room1=0
+set,#room1unitHWcost=0
+set,#Room1DoorHWCost=0
+
+
+Set,#Room1ClosetHardwareType= None
+Set, #Room1HandlePN=None
+Set, #Room1KnobPN=None
+Set,#Room1StdDoorHingeCount=0
+Set,#Room1OverlayDoorHingeCount=0
+Set,#Room1TopDoorHingeCount=0
+Set,#Room1BottomDoorHingeCount=0
+
+Set,#Room1notchdepth= 0
+Set,#Room1notchheight= 0
+set, #Room1notchdepthhasshoe=0
+
+Set,#Room1CTName=None
+Set,#Room1CTSqFt=0
+
+
+
+Set,#Room2Material = None
+Set,#Room2ContrastMaterial= None
+Set,#Room2use2ndmaterial=0
+Set,#Room2EdgeBandingType= None
+
+Set,#Room2ClosetRodType= None
+Set,#Room2ClosetRodCount= 0
+Set,#Room2ClosetRodlengthCount= 0
+
+Set,#Room2DoorDrawerType= None
+Set,#Room2DoorDrawerFinishingType= None
+Set,#Room2DoorDrawerInsertType= None
+Set,#Room2Basicdoorcost=0
+set,#Room2DoorCost=0
+
+set, #RM2otherinsert1=None
+set, #RM2otherinsert2=None
+set, #RM2otherinsert3=None
+set, #RM2otherinsert4=None
+set, #RM2otherinsert5=None
+set, #RM2otherinsert6=None
+set, #RM2otherinsert7=None
+
+Set,#Room2CrownMoldingType=None
+set,#RM2MldName=None
+Set,#RM2MldLen=0
+Set,#RM2MldCnt=0
+set,#RM2MldCost = 0
+
+Set,#Room2BaseType= None
+Set,#Room2basecostgroup=0
+Set,#RM2BaseLengthtotal=0
+Set,#RM2GarageWoodBaseLengthtotal=0
+Set,#RM2BaseCost=0
+Set,#RM2WGBaseCost=0
+Set,#RM2BaseQty=0
+
+Set,#Room2ShoeFenceType= None
+Set,#Room2ShoeFencefinish= None
+Set,#Room2Shoefencecount=0
+
+Set,#Room2Cchannel2shelfcount=0
+Set,#Room2Cchannel1shelfcount=0
+Set,#Room2Cchannelcount=0
+Set,#Room2Cchannellengthcount=0
+Set,#Room2thickadjshelfcount=0
+Set,#Room2adjtoeuroshelfcount=0
+Set,#Room2frontlipshelfcount=0
+Set,#Room2ledshelfcount=0
+Set,#Room2dogearpanelcount=0
+Set,#Room2ledFpanelcount=0
+Set,#Room2ledHpanelcount=0
+
+Set,#Room2BackType = None
+Set, #Room2Specialback = 0
+Set,#Room2hasbacking=0
+set, #Room2needbackingselected=0
+
+
+Set,#Room2BoxDrawertype= None
+Set,#Room2BoxGlideTag=None
+set,#Room2BoxDrawercount=0
+Set,#Room2Glidecount=0
+Set,#Room2Switchglidecount=0
+set,#Room2Drawerswitchcount=0
+Set,#Room2SSGlidecount=0
+Set,#Room2SSUMGlidecount=0
+Set,#Room2POGlidecount=0
+Set,#Room2POUMGlidecount=0
+Set,#Room2VDGlidecount=0
+Set,#Room2VD2Glidecount=0
+Set,#Room2VDTotalGlidecount=0
+
+Set,#CostHandleName0Room2=0
+Set,#CostHandleName1Room2=0
+Set,#CostHandleName2Room2=0
+Set,#CostHandleName3Room2=0
+Set,#CostHandleName4Room2=0
+Set,#CostHandleName5Room2=0
+Set,#CostHandleName6Room2=0
+Set,#CostHandleName7Room2=0
+Set,#CostHandleName8Room2=0
+Set,#CostHandleName9Room2=0
+Set,#CodeHandleName0Room2=0
+Set,#CodeHandleName1Room2=0
+Set,#CodeHandleName2Room2=0
+Set,#CodeHandleName3Room2=0
+Set,#CodeHandleName4Room2=0
+Set,#CodeHandleName5Room2=0
+Set,#CodeHandleName6Room2=0
+Set,#CodeHandleName7Room2=0
+Set,#CodeHandleName8Room2=0
+Set,#CodeHandleName9Room2=0
+Set,#CountHandleName0Room2=0
+Set,#CountHandleName1Room2=0
+Set,#CountHandleName2Room2=0
+Set,#CountHandleName3Room2=0
+Set,#CountHandleName4Room2=0
+Set,#CountHandleName5Room2=0
+Set,#CountHandleName6Room2=0
+Set,#CountHandleName7Room2=0
+Set,#CountHandleName8Room2=0
+Set,#CountHandleName9Room2=0
+set,#Room2unitHWcost=0
+set,#Room2DoorHWCost=0
+
+
+
+Set,#Room2ClosetHardwareType= None
+Set, #Room2HandlePN=None
+Set, #Room2KnobPN=None
+Set,#Room2StdDoorHingeCount=0
+Set,#Room2OverlayDoorHingeCount=0
+Set,#Room2TopDoorHingeCount=0
+Set,#Room2BottomDoorHingeCount=0
+
+Set,#Room2notchdepth= 0
+Set,#Room2notchheight= 0
+set, #Room2notchdepthhasshoe=0
+
+
+Set,#Room2CTName=None
+Set,#Room2CTSqFt=0
+
+
+
+Set,#Room3Material = None
+Set,#Room3ContrastMaterial= None
+Set,#Room3use2ndmaterial=0
+Set,#Room3EdgeBandingType= None
+
+Set,#Room3ClosetRodType= None
+Set,#Room3ClosetRodCount= 0
+Set,#Room3ClosetRodlengthCount= 0
+
+Set,#Room3DoorDrawerType= None
+Set,#Room3DoorDrawerFinishingType= None
+Set,#Room3DoorDrawerInsertType= None
+Set,#Room3Basicdoorcost=0
+set,#Room3DoorCost=0
+
+set, #RM3otherinsert1=None
+set, #RM3otherinsert2=None
+set, #RM3otherinsert3=None
+set, #RM3otherinsert4=None
+set, #RM3otherinsert5=None
+set, #RM3otherinsert6=None
+set, #RM3otherinsert7=None
+
+Set,#Room3CrownMoldingType=None
+set,#RM3MldName=None
+Set,#RM3MldLen=0
+Set,#RM3MldCnt=0
+set,#RM3MldCost = 0
+
+Set,#Room3BaseType= None
+Set,#Room3basecostgroup=0
+Set,#RM3BaseLengthtotal=0
+Set,#RM3GarageWoodBaseLengthtotal=0
+Set,#RM3BaseCost=0
+Set,#RM3WGBaseCost=0
+Set,#RM3BaseQty=0
+
+Set,#Room3ShoeFenceType= None
+Set,#Room3ShoeFencefinish= None
+Set,#Room3Shoefencecount=0
+
+Set,#Room3Cchannel2shelfcount=0
+Set,#Room3Cchannel1shelfcount=0
+Set,#Room3Cchannelcount=0
+Set,#Room3Cchannellengthcount=0
+Set,#Room3thickadjshelfcount=0
+Set,#Room3adjtoeuroshelfcount=0
+Set,#Room3frontlipshelfcount=0
+Set,#Room3ledshelfcount=0
+Set,#Room3dogearpanelcount=0
+Set,#Room3ledFpanelcount=0
+Set,#Room3ledHpanelcount=0
+
+Set,#Room3BackType = None
+Set, #Room3Specialback = 0
+Set,#Room3hasbacking=0
+set, #Room3needbackingselected=0
+
+
+Set,#Room3BoxDrawertype= None
+Set,#Room3BoxGlideTag=None
+set,#Room3BoxDrawercount=0
+Set,#Room3Glidecount=0
+Set,#Room3Switchglidecount=0
+set,#Room3Drawerswitchcount=0
+Set,#Room3SSGlidecount=0
+Set,#Room3SSUMGlidecount=0
+Set,#Room3POGlidecount=0
+Set,#Room3POUMGlidecount=0
+Set,#Room3VDGlidecount=0
+Set,#Room3VD2Glidecount=0
+Set,#Room3VDTotalGlidecount=0
+
+
+Set,#CostHandleName0Room3=0
+Set,#CostHandleName1Room3=0
+Set,#CostHandleName2Room3=0
+Set,#CostHandleName3Room3=0
+Set,#CostHandleName4Room3=0
+Set,#CostHandleName5Room3=0
+Set,#CostHandleName6Room3=0
+Set,#CostHandleName7Room3=0
+Set,#CostHandleName8Room3=0
+Set,#CostHandleName9Room3=0
+Set,#CodeHandleName0Room3=0
+Set,#CodeHandleName1Room3=0
+Set,#CodeHandleName2Room3=0
+Set,#CodeHandleName3Room3=0
+Set,#CodeHandleName4Room3=0
+Set,#CodeHandleName5Room3=0
+Set,#CodeHandleName6Room3=0
+Set,#CodeHandleName7Room3=0
+Set,#CodeHandleName8Room3=0
+Set,#CodeHandleName9Room3=0
+Set,#CountHandleName0Room3=0
+Set,#CountHandleName1Room3=0
+Set,#CountHandleName2Room3=0
+Set,#CountHandleName3Room3=0
+Set,#CountHandleName4Room3=0
+Set,#CountHandleName5Room3=0
+Set,#CountHandleName6Room3=0
+Set,#CountHandleName7Room3=0
+Set,#CountHandleName8Room3=0
+Set,#CountHandleName9Room3=0
+set,#Room3unitHWcost=0
+set,#Room3DoorHWCost=0
+
+
+Set,#Room3ClosetHardwareType= None
+Set, #Room3HandlePN=None
+Set, #Room3KnobPN=None
+Set,#Room3StdDoorHingeCount=0
+Set,#Room3OverlayDoorHingeCount=0
+Set,#Room3TopDoorHingeCount=0
+Set,#Room3BottomDoorHingeCount=0
+
+Set,#Room3notchdepth= 0
+Set,#Room3notchheight= 0
+set, #Room3notchdepthhasshoe=0
+
+
+Set,#Room3CTName=None
+Set,#Room3CTSqFt=0
+
+Set,#Room4Material = None
+Set,#Room4ContrastMaterial= None
+Set,#Room4use2ndmaterial=0
+Set,#Room4EdgeBandingType= None
+
+Set,#Room4ClosetRodType= None
+Set,#Room4ClosetRodCount= 0
+Set,#Room4ClosetRodlengthCount= 0
+
+Set,#Room4DoorDrawerType= None
+Set,#Room4DoorDrawerFinishingType= None
+Set,#Room4DoorDrawerInsertType= None
+Set,#Room4Basicdoorcost=0
+set,#Room4DoorCost=0
+
+set, #RM4otherinsert1=None
+set, #RM4otherinsert2=None
+set, #RM4otherinsert3=None
+set, #RM4otherinsert4=None
+set, #RM4otherinsert5=None
+set, #RM4otherinsert6=None
+set, #RM4otherinsert7=None
+
+Set,#Room4CrownMoldingType=None
+set,#RM4MldName=None
+Set,#RM4MldLen=0
+Set,#RM4MldCnt=0
+set,#RM4MldCost = 0
+
+Set,#Room4BaseType= None
+Set,#Room4basecostgroup=0
+Set,#RM4BaseLengthtotal=0
+Set,#RM4GarageWoodBaseLengthtotal=0
+Set,#RM4BaseCost=0
+Set,#RM4WGBaseCost=0
+Set,#RM4BaseQty=0
+
+Set,#Room4ShoeFenceType= None
+Set,#Room4ShoeFencefinish= None
+Set,#Room4Shoefencecount=0
+
+Set,#Room4Cchannel2shelfcount=0
+Set,#Room4Cchannel1shelfcount=0
+Set,#Room4Cchannelcount=0
+Set,#Room4Cchannellengthcount=0
+Set,#Room4thickadjshelfcount=0
+Set,#Room4adjtoeuroshelfcount=0
+Set,#Room4frontlipshelfcount=0
+Set,#Room4ledshelfcount=0
+Set,#Room4dogearpanelcount=0
+Set,#Room4ledFpanelcount=0
+Set,#Room4ledHpanelcount=0
+
+Set,#Room4BackType = None
+Set, #Room4Specialback = 0
+Set,#Room4hasbacking=0
+set, #Room4needbackingselected=0
+
+
+Set,#Room4BoxDrawertype= None
+Set,#Room4BoxGlideTag=None
+set,#Room4BoxDrawercount=0
+Set,#Room4Glidecount=0
+Set,#Room4Switchglidecount=0
+set,#Room4Drawerswitchcount=0
+Set,#Room4SSGlidecount=0
+Set,#Room4SSUMGlidecount=0
+Set,#Room4POGlidecount=0
+Set,#Room4POUMGlidecount=0
+Set,#Room4VDGlidecount=0
+Set,#Room4VD2Glidecount=0
+Set,#Room4VDTotalGlidecount=0
+
+Set,#CostHandleName0Room4=0
+Set,#CostHandleName1Room4=0
+Set,#CostHandleName2Room4=0
+Set,#CostHandleName3Room4=0
+Set,#CostHandleName4Room4=0
+Set,#CostHandleName5Room4=0
+Set,#CostHandleName6Room4=0
+Set,#CostHandleName7Room4=0
+Set,#CostHandleName8Room4=0
+Set,#CostHandleName9Room4=0
+Set,#CodeHandleName0Room4=0
+Set,#CodeHandleName1Room4=0
+Set,#CodeHandleName2Room4=0
+Set,#CodeHandleName3Room4=0
+Set,#CodeHandleName4Room4=0
+Set,#CodeHandleName5Room4=0
+Set,#CodeHandleName6Room4=0
+Set,#CodeHandleName7Room4=0
+Set,#CodeHandleName8Room4=0
+Set,#CodeHandleName9Room4=0
+Set,#CountHandleName0Room4=0
+Set,#CountHandleName1Room4=0
+Set,#CountHandleName2Room4=0
+Set,#CountHandleName3Room4=0
+Set,#CountHandleName4Room4=0
+Set,#CountHandleName5Room4=0
+Set,#CountHandleName6Room4=0
+Set,#CountHandleName7Room4=0
+Set,#CountHandleName8Room4=0
+Set,#CountHandleName9Room4=0
+set,#Room4unitHWcost=0
+set,#Room4DoorHWCost=0
+
+
+
+
+Set,#Room4ClosetHardwareType= None
+Set, #Room4HandlePN=None
+Set, #Room4KnobPN=None
+Set,#Room4StdDoorHingeCount=0
+Set,#Room4OverlayDoorHingeCount=0
+Set,#Room4TopDoorHingeCount=0
+Set,#Room4BottomDoorHingeCount=0
+
+Set,#Room4notchdepth= 0
+Set,#Room4notchheight= 0
+set, #Room4notchdepthhasshoe=0
+
+
+Set,#Room4CTName=None
+Set,#Room4CTSqFt=0
+
+Set,#Room5Material = None
+Set,#Room5ContrastMaterial= None
+Set,#Room5use2ndmaterial=0
+Set,#Room5EdgeBandingType= None
+
+Set,#Room5ClosetRodType= None
+Set,#Room5ClosetRodCount= 0
+Set,#Room5ClosetRodlengthCount= 0
+
+Set,#Room5DoorDrawerType= None
+Set,#Room5DoorDrawerFinishingType= None
+Set,#Room5DoorDrawerInsertType= None
+Set,#Room5Basicdoorcost=0
+set,#Room5DoorCost=0
+
+set, #RM5otherinsert1=None
+set, #RM5otherinsert2=None
+set, #RM5otherinsert3=None
+set, #RM5otherinsert4=None
+set, #RM5otherinsert5=None
+set, #RM5otherinsert6=None
+set, #RM5otherinsert7=None
+
+Set,#Room5CrownMoldingType=None
+set,#RM5MldName=None
+Set,#RM5MldLen=0
+Set,#RM5MldCnt=0
+set,#RM5MldCost = 0
+
+Set,#Room5BaseType= None
+Set,#Room5basecostgroup=0
+Set,#RM5BaseLengthtotal=0
+Set,#RM5GarageWoodBaseLengthtotal=0
+Set,#RM5BaseCost=0
+Set,#RM5WGBaseCost=0
+Set,#RM5BaseQty=0
+
+Set,#Room5ShoeFenceType= None
+Set,#Room5ShoeFencefinish= None
+Set,#Room5Shoefencecount=0
+
+Set,#Room5Cchannel2shelfcount=0
+Set,#Room5Cchannel1shelfcount=0
+Set,#Room5Cchannelcount=0
+Set,#Room5Cchannellengthcount=0
+Set,#Room5thickadjshelfcount=0
+Set,#Room5adjtoeuroshelfcount=0
+Set,#Room5frontlipshelfcount=0
+Set,#Room5ledshelfcount=0
+Set,#Room5dogearpanelcount=0
+Set,#Room5ledFpanelcount=0
+Set,#Room5ledHpanelcount=0
+
+Set,#Room5BackType = None
+Set, #Room5Specialback = 0
+Set,#Room5hasbacking=0
+set, #Room5needbackingselected=0
+
+
+Set,#Room5BoxDrawertype= None
+Set,#Room5BoxGlideTag=None
+set,#Room5BoxDrawercount=0
+Set,#Room5Glidecount=0
+Set,#Room5Switchglidecount=0
+set,#Room5Drawerswitchcount=0
+Set,#Room5SSGlidecount=0
+Set,#Room5SSUMGlidecount=0
+Set,#Room5POGlidecount=0
+Set,#Room5POUMGlidecount=0
+Set,#Room5VDGlidecount=0
+Set,#Room5VD2Glidecount=0
+Set,#Room5VDTotalGlidecount=0
+
+Set,#CostHandleName0Room5=0
+Set,#CostHandleName1Room5=0
+Set,#CostHandleName2Room5=0
+Set,#CostHandleName3Room5=0
+Set,#CostHandleName4Room5=0
+Set,#CostHandleName5Room5=0
+Set,#CostHandleName6Room5=0
+Set,#CostHandleName7Room5=0
+Set,#CostHandleName8Room5=0
+Set,#CostHandleName9Room5=0
+Set,#CodeHandleName0Room5=0
+Set,#CodeHandleName1Room5=0
+Set,#CodeHandleName2Room5=0
+Set,#CodeHandleName3Room5=0
+Set,#CodeHandleName4Room5=0
+Set,#CodeHandleName5Room5=0
+Set,#CodeHandleName6Room5=0
+Set,#CodeHandleName7Room5=0
+Set,#CodeHandleName8Room5=0
+Set,#CodeHandleName9Room5=0
+Set,#CountHandleName0Room5=0
+Set,#CountHandleName1Room5=0
+Set,#CountHandleName2Room5=0
+Set,#CountHandleName3Room5=0
+Set,#CountHandleName4Room5=0
+Set,#CountHandleName5Room5=0
+Set,#CountHandleName6Room5=0
+Set,#CountHandleName7Room5=0
+Set,#CountHandleName8Room5=0
+Set,#CountHandleName9Room5=0
+set,#Room5unitHWcost=0
+set,#Room5DoorHWCost=0
+
+
+
+Set,#Room5ClosetHardwareType= None
+Set, #Room5HandlePN=None
+Set, #Room5KnobPN=None
+Set,#Room5StdDoorHingeCount=0
+Set,#Room5OverlayDoorHingeCount=0
+Set,#Room5TopDoorHingeCount=0
+Set,#Room5BottomDoorHingeCount=0
+
+Set,#Room5notchdepth= 0
+Set,#Room5notchheight= 0
+set, #Room5notchdepthhasshoe=0
+
+
+Set,#Room5CTName=None
+Set,#Room5CTSqFt=0
+
+Set,#Room6Material = None
+Set,#Room6ContrastMaterial= None
+Set,#Room6use2ndmaterial=0
+Set,#Room6EdgeBandingType= None
+
+Set,#Room6ClosetRodType= None
+Set,#Room6ClosetRodCount= 0
+Set,#Room6ClosetRodlengthCount= 0
+
+Set,#Room6DoorDrawerType= None
+Set,#Room6DoorDrawerFinishingType= None
+Set,#Room6DoorDrawerInsertType= None
+Set,#Room6Basicdoorcost=0
+set,#Room6DoorCost=0
+
+set, #RM6otherinsert1=None
+set, #RM6otherinsert2=None
+set, #RM6otherinsert3=None
+set, #RM6otherinsert4=None
+set, #RM6otherinsert5=None
+set, #RM6otherinsert6=None
+set, #RM6otherinsert7=None
+
+Set,#Room6CrownMoldingType=None
+set,#RM6MldName=None
+Set,#RM6MldLen=0
+Set,#RM6MldCnt=0
+set,#RM6MldCost = 0
+
+Set,#Room6BaseType= None
+Set,#Room6basecostgroup=0
+Set,#RM6BaseLengthtotal=0
+Set,#RM6GarageWoodBaseLengthtotal=0
+Set,#RM6BaseCost=0
+Set,#RM6WGBaseCost=0
+Set,#RM6BaseQty=0
+
+Set,#Room6ShoeFenceType= None
+Set,#Room6ShoeFencefinish= None
+Set,#Room6Shoefencecount=0
+
+Set,#Room6Cchannel2shelfcount=0
+Set,#Room6Cchannel1shelfcount=0
+Set,#Room6Cchannelcount=0
+Set,#Room6Cchannellengthcount=0
+Set,#Room6thickadjshelfcount=0
+Set,#Room6adjtoeuroshelfcount=0
+Set,#Room6frontlipshelfcount=0
+Set,#Room6ledshelfcount=0
+Set,#Room6dogearpanelcount=0
+Set,#Room6ledFpanelcount=0
+Set,#Room6ledHpanelcount=0
+
+Set,#Room6BackType = None
+Set, #Room6Specialback = 0
+Set,#Room6hasbacking=0
+set, #Room6needbackingselected=0
+
+
+Set,#Room6BoxDrawertype= None
+Set,#Room6BoxGlideTag=None
+set,#Room6BoxDrawercount=0
+Set,#Room6Glidecount=0
+Set,#Room6Switchglidecount=0
+set,#Room6Drawerswitchcount=0
+Set,#Room6SSGlidecount=0
+Set,#Room6SSUMGlidecount=0
+Set,#Room6POGlidecount=0
+Set,#Room6POUMGlidecount=0
+Set,#Room6VDGlidecount=0
+Set,#Room6VD2Glidecount=0
+Set,#Room6VDTotalGlidecount=0
+
+
+Set,#CostHandleName0Room6=0
+Set,#CostHandleName1Room6=0
+Set,#CostHandleName2Room6=0
+Set,#CostHandleName3Room6=0
+Set,#CostHandleName4Room6=0
+Set,#CostHandleName5Room6=0
+Set,#CostHandleName6Room6=0
+Set,#CostHandleName7Room6=0
+Set,#CostHandleName8Room6=0
+Set,#CostHandleName9Room6=0
+Set,#CodeHandleName0Room6=0
+Set,#CodeHandleName1Room6=0
+Set,#CodeHandleName2Room6=0
+Set,#CodeHandleName3Room6=0
+Set,#CodeHandleName4Room6=0
+Set,#CodeHandleName5Room6=0
+Set,#CodeHandleName6Room6=0
+Set,#CodeHandleName7Room6=0
+Set,#CodeHandleName8Room6=0
+Set,#CodeHandleName9Room6=0
+Set,#CountHandleName0Room6=0
+Set,#CountHandleName1Room6=0
+Set,#CountHandleName2Room6=0
+Set,#CountHandleName3Room6=0
+Set,#CountHandleName4Room6=0
+Set,#CountHandleName5Room6=0
+Set,#CountHandleName6Room6=0
+Set,#CountHandleName7Room6=0
+Set,#CountHandleName8Room6=0
+Set,#CountHandleName9Room6=0
+set,#Room6unitHWcost=0
+set,#Room6DoorHWCost=0
+
+
+Set,#Room6ClosetHardwareType= None
+Set, #Room6HandlePN=None
+Set, #Room6KnobPN=None
+Set,#Room6StdDoorHingeCount=0
+Set,#Room6OverlayDoorHingeCount=0
+Set,#Room6TopDoorHingeCount=0
+Set,#Room6BottomDoorHingeCount=0
+
+Set,#Room6notchdepth= 0
+Set,#Room6notchheight= 0
+set, #Room6notchdepthhasshoe=0
+
+
+Set,#Room6CTName=None
+Set,#Room6CTSqFt=0
+
+
+Set,#Room7Material = None
+Set,#Room7ContrastMaterial= None
+Set,#Room7use2ndmaterial=0
+Set,#Room7EdgeBandingType= None
+
+Set,#Room7ClosetRodType= None
+Set,#Room7ClosetRodCount= 0
+Set,#Room7ClosetRodlengthCount= 0
+
+Set,#Room7DoorDrawerType= None
+Set,#Room7DoorDrawerFinishingType= None
+Set,#Room7DoorDrawerInsertType= None
+Set,#Room7Basicdoorcost=0
+set,#Room7DoorCost=0
+
+set, #RM7otherinsert1=None
+set, #RM7otherinsert2=None
+set, #RM7otherinsert3=None
+set, #RM7otherinsert4=None
+set, #RM7otherinsert5=None
+set, #RM7otherinsert6=None
+set, #RM7otherinsert7=None
+
+Set,#Room7CrownMoldingType=None
+set,#RM7MldName=None
+Set,#RM7MldLen=0
+Set,#RM7MldCnt=0
+set,#RM7MldCost = 0
+
+Set,#Room7BaseType= None
+Set,#Room7basecostgroup=0
+Set,#RM7BaseLengthtotal=0
+Set,#RM7GarageWoodBaseLengthtotal=0
+Set,#RM7BaseCost=0
+Set,#RM7WGBaseCost=0
+Set,#RM7BaseQty=0
+
+Set,#Room7ShoeFenceType= None
+Set,#Room7ShoeFencefinish= None
+Set,#Room7Shoefencecount=0
+
+Set,#Room7Cchannel2shelfcount=0
+Set,#Room7Cchannel1shelfcount=0
+Set,#Room7Cchannelcount=0
+Set,#Room7Cchannellengthcount=0
+Set,#Room7thickadjshelfcount=0
+Set,#Room7adjtoeuroshelfcount=0
+Set,#Room7frontlipshelfcount=0
+Set,#Room7ledshelfcount=0
+Set,#Room7dogearpanelcount=0
+Set,#Room7ledFpanelcount=0
+Set,#Room7ledHpanelcount=0
+
+Set,#Room7BackType = None
+Set, #Room7Specialback = 0
+Set,#Room7hasbacking=0
+set, #Room7needbackingselected=0
+
+
+Set,#Room7BoxDrawertype= None
+Set,#Room7BoxGlideTag=None
+set,#Room7BoxDrawercount=0
+Set,#Room7Glidecount=0
+Set,#Room7Switchglidecount=0
+set,#Room7Drawerswitchcount=0
+Set,#Room7SSGlidecount=0
+Set,#Room7SSUMGlidecount=0
+Set,#Room7POGlidecount=0
+Set,#Room7POUMGlidecount=0
+Set,#Room7VDGlidecount=0
+Set,#Room7VD2Glidecount=0
+Set,#Room7VDTotalGlidecount=0
+
+Set,#CostHandleName0Room7=0
+Set,#CostHandleName1Room7=0
+Set,#CostHandleName2Room7=0
+Set,#CostHandleName3Room7=0
+Set,#CostHandleName4Room7=0
+Set,#CostHandleName5Room7=0
+Set,#CostHandleName6Room7=0
+Set,#CostHandleName7Room7=0
+Set,#CostHandleName8Room7=0
+Set,#CostHandleName9Room7=0
+Set,#CodeHandleName0Room7=0
+Set,#CodeHandleName1Room7=0
+Set,#CodeHandleName2Room7=0
+Set,#CodeHandleName3Room7=0
+Set,#CodeHandleName4Room7=0
+Set,#CodeHandleName5Room7=0
+Set,#CodeHandleName6Room7=0
+Set,#CodeHandleName7Room7=0
+Set,#CodeHandleName8Room7=0
+Set,#CodeHandleName9Room7=0
+Set,#CountHandleName0Room7=0
+Set,#CountHandleName1Room7=0
+Set,#CountHandleName2Room7=0
+Set,#CountHandleName3Room7=0
+Set,#CountHandleName4Room7=0
+Set,#CountHandleName5Room7=0
+Set,#CountHandleName6Room7=0
+Set,#CountHandleName7Room7=0
+Set,#CountHandleName8Room7=0
+Set,#CountHandleName9Room7=0
+set,#Room7unitHWcost=0
+set,#Room7DoorHWCost=0
+
+
+
+Set,#Room7ClosetHardwareType= None
+Set, #Room7HandlePN=None
+Set, #Room7KnobPN=None
+Set,#Room7StdDoorHingeCount=0
+Set,#Room7OverlayDoorHingeCount=0
+Set,#Room7TopDoorHingeCount=0
+Set,#Room7BottomDoorHingeCount=0
+
+Set,#Room7notchdepth= 0
+Set,#Room7notchheight= 0
+set, #Room7notchdepthhasshoe=0
+
+
+Set,#Room7CTName=None
+Set,#Room7CTSqFt=0
+
+
+Set,#Room8Material = None
+Set,#Room8ContrastMaterial= None
+Set,#Room8use2ndmaterial=0
+Set,#Room8EdgeBandingType= None
+
+Set,#Room8ClosetRodType= None
+Set,#Room8ClosetRodCount= 0
+Set,#Room8ClosetRodlengthCount= 0
+
+Set,#Room8DoorDrawerType= None
+Set,#Room8DoorDrawerFinishingType= None
+Set,#Room8DoorDrawerInsertType= None
+Set,#Room8Basicdoorcost=0
+set,#Room8DoorCost=0
+
+set, #RM8otherinsert1=None
+set, #RM8otherinsert2=None
+set, #RM8otherinsert3=None
+set, #RM8otherinsert4=None
+set, #RM8otherinsert5=None
+set, #RM8otherinsert6=None
+set, #RM8otherinsert7=None
+
+Set,#Room8CrownMoldingType=None
+set,#RM8MldName=None
+Set,#RM8MldLen=0
+Set,#RM8MldCnt=0
+set,#RM8MldCost = 0
+
+Set,#Room8BaseType= None
+Set,#Room8basecostgroup=0
+Set,#RM8BaseLengthtotal=0
+Set,#RM8GarageWoodBaseLengthtotal=0
+Set,#RM8BaseCost=0
+Set,#RM8WGBaseCost=0
+Set,#RM8BaseQty=0
+
+Set,#Room8ShoeFenceType= None
+Set,#Room8ShoeFencefinish= None
+Set,#Room8Shoefencecount=0
+
+Set,#Room8Cchannel2shelfcount=0
+Set,#Room8Cchannel1shelfcount=0
+Set,#Room8Cchannelcount=0
+Set,#Room8Cchannellengthcount=0
+Set,#Room8thickadjshelfcount=0
+Set,#Room8adjtoeuroshelfcount=0
+Set,#Room8frontlipshelfcount=0
+Set,#Room8ledshelfcount=0
+Set,#Room8dogearpanelcount=0
+Set,#Room8ledFpanelcount=0
+Set,#Room8ledHpanelcount=0
+
+Set,#Room8BackType = None
+Set, #Room8Specialback = 0
+Set,#Room8hasbacking=0
+set, #Room8needbackingselected=0
+
+
+Set,#Room8BoxDrawertype= None
+Set,#Room8BoxGlideTag=None
+set,#Room8BoxDrawercount=0
+Set,#Room8Glidecount=0
+Set,#Room8Switchglidecount=0
+set,#Room8Drawerswitchcount=0
+Set,#Room8SSGlidecount=0
+Set,#Room8SSUMGlidecount=0
+Set,#Room8POGlidecount=0
+Set,#Room8POUMGlidecount=0
+Set,#Room8VDGlidecount=0
+Set,#Room8VD2Glidecount=0
+Set,#Room8VDTotalGlidecount=0
+
+Set,#CostHandleName0Room8=0
+Set,#CostHandleName1Room8=0
+Set,#CostHandleName2Room8=0
+Set,#CostHandleName3Room8=0
+Set,#CostHandleName4Room8=0
+Set,#CostHandleName5Room8=0
+Set,#CostHandleName6Room8=0
+Set,#CostHandleName7Room8=0
+Set,#CostHandleName8Room8=0
+Set,#CostHandleName9Room8=0
+Set,#CodeHandleName0Room8=0
+Set,#CodeHandleName1Room8=0
+Set,#CodeHandleName2Room8=0
+Set,#CodeHandleName3Room8=0
+Set,#CodeHandleName4Room8=0
+Set,#CodeHandleName5Room8=0
+Set,#CodeHandleName6Room8=0
+Set,#CodeHandleName7Room8=0
+Set,#CodeHandleName8Room8=0
+Set,#CodeHandleName9Room8=0
+Set,#CountHandleName0Room8=0
+Set,#CountHandleName1Room8=0
+Set,#CountHandleName2Room8=0
+Set,#CountHandleName3Room8=0
+Set,#CountHandleName4Room8=0
+Set,#CountHandleName5Room8=0
+Set,#CountHandleName6Room8=0
+Set,#CountHandleName7Room8=0
+Set,#CountHandleName8Room8=0
+Set,#CountHandleName9Room8=0
+set,#Room8unitHWcost=0
+set,#Room8DoorHWCost=0
+
+Set,#Room8ClosetHardwareType= None
+Set, #Room8HandlePN=None
+Set, #Room8KnobPN=None
+Set,#Room8StdDoorHingeCount=0
+Set,#Room8OverlayDoorHingeCount=0
+Set,#Room8TopDoorHingeCount=0
+Set,#Room8BottomDoorHingeCount=0
+
+Set,#Room8notchdepth= 0
+Set,#Room8notchheight= 0
+set, #Room8notchdepthhasshoe=0
+
+
+Set,#Room8CTName=None
+Set,#Room8CTSqFt=0
+
+
+Set,#Room9Material = None
+Set,#Room9ContrastMaterial= None
+Set,#Room9use2ndmaterial=0
+Set,#Room9EdgeBandingType= None
+
+Set,#Room9ClosetRodType= None
+Set,#Room9ClosetRodCount= 0
+Set,#Room9ClosetRodlengthCount= 0
+
+Set,#Room9DoorDrawerType= None
+Set,#Room9DoorDrawerFinishingType= None
+Set,#Room9DoorDrawerInsertType= None
+Set,#Room9Basicdoorcost=0
+set,#Room9DoorCost=0
+
+set, #RM9otherinsert1=None
+set, #RM9otherinsert2=None
+set, #RM9otherinsert3=None
+set, #RM9otherinsert4=None
+set, #RM9otherinsert5=None
+set, #RM9otherinsert6=None
+set, #RM9otherinsert7=None
+
+Set,#Room9CrownMoldingType=None
+set,#RM9MldName=None
+Set,#RM9MldLen=0
+Set,#RM9MldCnt=0
+set,#RM9MldCost = 0
+
+Set,#Room9BaseType= None
+Set,#Room9basecostgroup=0
+Set,#RM9BaseLengthtotal=0
+Set,#RM9GarageWoodBaseLengthtotal=0
+Set,#RM9BaseCost=0
+Set,#RM9WGBaseCost=0
+Set,#RM9BaseQty=0
+
+Set,#Room9ShoeFenceType= None
+Set,#Room9ShoeFencefinish= None
+Set,#Room9Shoefencecount=0
+
+Set,#Room9Cchannel2shelfcount=0
+Set,#Room9Cchannel1shelfcount=0
+Set,#Room9Cchannelcount=0
+Set,#Room9Cchannellengthcount=0
+Set,#Room9thickadjshelfcount=0
+Set,#Room9adjtoeuroshelfcount=0
+Set,#Room9frontlipshelfcount=0
+Set,#Room9ledshelfcount=0
+Set,#Room9dogearpanelcount=0
+Set,#Room9ledFpanelcount=0
+Set,#Room9ledHpanelcount=0
+
+Set,#Room9BackType = None
+Set, #Room9Specialback = 0
+Set,#Room9hasbacking=0
+set, #Room9needbackingselected=0
+
+
+Set,#Room9BoxDrawertype= None
+Set,#Room9BoxGlideTag=None
+set,#Room9BoxDrawercount=0
+Set,#Room9Glidecount=0
+Set,#Room9Switchglidecount=0
+set,#Room9Drawerswitchcount=0
+Set,#Room9SSGlidecount=0
+Set,#Room9SSUMGlidecount=0
+Set,#Room9POGlidecount=0
+Set,#Room9POUMGlidecount=0
+Set,#Room9VDGlidecount=0
+Set,#Room9VD2Glidecount=0
+Set,#Room9VDTotalGlidecount=0
+
+Set,#CostHandleName0Room9=0
+Set,#CostHandleName1Room9=0
+Set,#CostHandleName2Room9=0
+Set,#CostHandleName3Room9=0
+Set,#CostHandleName4Room9=0
+Set,#CostHandleName5Room9=0
+Set,#CostHandleName6Room9=0
+Set,#CostHandleName7Room9=0
+Set,#CostHandleName8Room9=0
+Set,#CostHandleName9Room9=0
+Set,#CodeHandleName0Room9=0
+Set,#CodeHandleName1Room9=0
+Set,#CodeHandleName2Room9=0
+Set,#CodeHandleName3Room9=0
+Set,#CodeHandleName4Room9=0
+Set,#CodeHandleName5Room9=0
+Set,#CodeHandleName6Room9=0
+Set,#CodeHandleName7Room9=0
+Set,#CodeHandleName8Room9=0
+Set,#CodeHandleName9Room9=0
+Set,#CountHandleName0Room9=0
+Set,#CountHandleName1Room9=0
+Set,#CountHandleName2Room9=0
+Set,#CountHandleName3Room9=0
+Set,#CountHandleName4Room9=0
+Set,#CountHandleName5Room9=0
+Set,#CountHandleName6Room9=0
+Set,#CountHandleName7Room9=0
+Set,#CountHandleName8Room9=0
+Set,#CountHandleName9Room9=0
+set,#Room9unitHWcost=0
+set,#Room9DoorHWCost=0
+
+
+
+Set,#Room9ClosetHardwareType= None
+Set, #Room9HandlePN=None
+Set, #Room9KnobPN=None
+Set,#Room9StdDoorHingeCount=0
+Set,#Room9OverlayDoorHingeCount=0
+Set,#Room9TopDoorHingeCount=0
+Set,#Room9BottomDoorHingeCount=0
+
+Set,#Room9notchdepth= 0
+Set,#Room9notchheight= 0
+set, #Room9notchdepthhasshoe=0
+
+
+Set,#Room9CTName=None
+Set,#Room9CTSqFt=0
+
+
+Set,#Room10Material = None
+Set,#Room10ContrastMaterial= None
+Set,#Room10use2ndmaterial=0
+Set,#Room10EdgeBandingType= None
+
+Set,#Room10ClosetRodType= None
+Set,#Room10ClosetRodCount= 0
+Set,#Room10ClosetRodlengthCount= 0
+
+Set,#Room10DoorDrawerType= None
+Set,#Room10DoorDrawerFinishingType= None
+Set,#Room10DoorDrawerInsertType= None
+Set,#Room10Basicdoorcost=0
+set,#Room10DoorCost=0
+
+set, #RM10otherinsert1=None
+set, #RM10otherinsert2=None
+set, #RM10otherinsert3=None
+set, #RM10otherinsert4=None
+set, #RM10otherinsert5=None
+set, #RM10otherinsert6=None
+set, #RM10otherinsert7=None
+
+Set,#Room10CrownMoldingType=None
+set,#RM10MldName=None
+Set,#RM10MldLen=0
+Set,#RM10MldCnt=0
+set,#RM10MldCost = 0
+
+Set,#Room10BaseType= None
+Set,#Room10basecostgroup=0
+Set,#RM10BaseLengthtotal=0
+Set,#RM10GarageWoodBaseLengthtotal=0
+Set,#RM10BaseCost=0
+Set,#RM10WGBaseCost=0
+Set,#RM10BaseQty=0
+
+Set,#Room10ShoeFenceType= None
+Set,#Room10ShoeFencefinish= None
+Set,#Room10Shoefencecount=0
+
+Set,#Room10Cchannel2shelfcount=0
+Set,#Room10Cchannel1shelfcount=0
+Set,#Room10Cchannelcount=0
+Set,#Room10Cchannellengthcount=0
+Set,#Room10thickadjshelfcount=0
+Set,#Room10adjtoeuroshelfcount=0
+Set,#Room10frontlipshelfcount=0
+Set,#Room10ledshelfcount=0
+Set,#Room10dogearpanelcount=0
+Set,#Room10ledFpanelcount=0
+Set,#Room10ledHpanelcount=0
+
+Set,#Room10BackType = None
+Set, #Room10Specialback = 0
+Set,#Room10hasbacking=0
+set, #Room10needbackingselected=0
+
+
+Set,#Room10BoxDrawertype= None
+Set,#Room10BoxGlideTag=None
+set,#Room10BoxDrawercount=0
+Set,#Room10Glidecount=0
+Set,#Room10Switchglidecount=0
+set,#Room10Drawerswitchcount=0
+Set,#Room10SSGlidecount=0
+Set,#Room10SSUMGlidecount=0
+Set,#Room10POGlidecount=0
+Set,#Room10POUMGlidecount=0
+Set,#Room10VDGlidecount=0
+Set,#Room10VD2Glidecount=0
+Set,#Room10VDTotalGlidecount=0
+
+Set,#CostHandleName0Room10=0
+Set,#CostHandleName1Room10=0
+Set,#CostHandleName2Room10=0
+Set,#CostHandleName3Room10=0
+Set,#CostHandleName4Room10=0
+Set,#CostHandleName5Room10=0
+Set,#CostHandleName6Room10=0
+Set,#CostHandleName7Room10=0
+Set,#CostHandleName8Room10=0
+Set,#CostHandleName9Room10=0
+Set,#CodeHandleName0Room10=0
+Set,#CodeHandleName1Room10=0
+Set,#CodeHandleName2Room10=0
+Set,#CodeHandleName3Room10=0
+Set,#CodeHandleName4Room10=0
+Set,#CodeHandleName5Room10=0
+Set,#CodeHandleName6Room10=0
+Set,#CodeHandleName7Room10=0
+Set,#CodeHandleName8Room10=0
+Set,#CodeHandleName9Room10=0
+Set,#CountHandleName0Room10=0
+Set,#CountHandleName1Room10=0
+Set,#CountHandleName2Room10=0
+Set,#CountHandleName3Room10=0
+Set,#CountHandleName4Room10=0
+Set,#CountHandleName5Room10=0
+Set,#CountHandleName6Room10=0
+Set,#CountHandleName7Room10=0
+Set,#CountHandleName8Room10=0
+Set,#CountHandleName9Room10=0
+set,#Room10unitHWcost=0
+set,#Room10DoorHWCost=0
+
+Set,#Room10ClosetHardwareType= None
+Set, #Room10HandlePN=None
+Set, #Room10KnobPN=None
+Set,#Room10StdDoorHingeCount=0
+Set,#Room10OverlayDoorHingeCount=0
+Set,#Room10TopDoorHingeCount=0
+Set,#Room10BottomDoorHingeCount=0
+
+Set,#Room10notchdepth= 0
+Set,#Room10notchheight= 0
+set, #Room10notchdepthhasshoe=0
+
+
+Set,#Room10CTName=None
+Set,#Room10CTSqFt=0
+
+
+Set,#Room11Material = None
+Set,#Room11ContrastMaterial= None
+Set,#Room11use2ndmaterial=0
+Set,#Room11EdgeBandingType= None
+
+Set,#Room11ClosetRodType= None
+Set,#Room11ClosetRodCount= 0
+Set,#Room11ClosetRodlengthCount= 0
+
+Set,#Room11DoorDrawerType= None
+Set,#Room11DoorDrawerFinishingType= None
+Set,#Room11DoorDrawerInsertType= None
+Set,#Room11Basicdoorcost=0
+set,#Room11DoorCost=0
+
+set, #RM11otherinsert1=None
+set, #RM11otherinsert2=None
+set, #RM11otherinsert3=None
+set, #RM11otherinsert4=None
+set, #RM11otherinsert5=None
+set, #RM11otherinsert6=None
+set, #RM11otherinsert7=None
+
+Set,#Room11CrownMoldingType=None
+set,#RM11MldName=None
+Set,#RM11MldLen=0
+Set,#RM11MldCnt=0
+set,#RM11MldCost = 0
+
+Set,#Room11BaseType= None
+Set,#Room11basecostgroup=0
+Set,#RM11BaseLengthtotal=0
+Set,#RM11GarageWoodBaseLengthtotal=0
+Set,#RM11BaseCost=0
+Set,#RM11WGBaseCost=0
+Set,#RM11BaseQty=0
+
+Set,#Room11ShoeFenceType= None
+Set,#Room11ShoeFencefinish= None
+Set,#Room11Shoefencecount=0
+
+Set,#Room11Cchannel2shelfcount=0
+Set,#Room11Cchannel1shelfcount=0
+Set,#Room11Cchannelcount=0
+Set,#Room11Cchannellengthcount=0
+Set,#Room11thickadjshelfcount=0
+Set,#Room11adjtoeuroshelfcount=0
+Set,#Room11frontlipshelfcount=0
+Set,#Room11ledshelfcount=0
+Set,#Room11dogearpanelcount=0
+Set,#Room11ledFpanelcount=0
+Set,#Room11ledHpanelcount=0
+
+Set,#Room11BackType = None
+Set, #Room11Specialback = 0
+Set,#Room11hasbacking=0
+set, #Room11needbackingselected=0
+
+
+Set,#Room11BoxDrawertype= None
+Set,#Room11BoxGlideTag=None
+set,#Room11BoxDrawercount=0
+Set,#Room11Glidecount=0
+Set,#Room11Switchglidecount=0
+set,#Room11Drawerswitchcount=0
+Set,#Room11SSGlidecount=0
+Set,#Room11SSUMGlidecount=0
+Set,#Room11POGlidecount=0
+Set,#Room11POUMGlidecount=0
+Set,#Room11VDGlidecount=0
+Set,#Room11VD2Glidecount=0
+Set,#Room11VDTotalGlidecount=0
+
+Set,#CostHandleName0Room11=0
+Set,#CostHandleName1Room11=0
+Set,#CostHandleName2Room11=0
+Set,#CostHandleName3Room11=0
+Set,#CostHandleName4Room11=0
+Set,#CostHandleName5Room11=0
+Set,#CostHandleName6Room11=0
+Set,#CostHandleName7Room11=0
+Set,#CostHandleName8Room11=0
+Set,#CostHandleName9Room11=0
+Set,#CodeHandleName0Room11=0
+Set,#CodeHandleName1Room11=0
+Set,#CodeHandleName2Room11=0
+Set,#CodeHandleName3Room11=0
+Set,#CodeHandleName4Room11=0
+Set,#CodeHandleName5Room11=0
+Set,#CodeHandleName6Room11=0
+Set,#CodeHandleName7Room11=0
+Set,#CodeHandleName8Room11=0
+Set,#CodeHandleName9Room11=0
+Set,#CountHandleName0Room11=0
+Set,#CountHandleName1Room11=0
+Set,#CountHandleName2Room11=0
+Set,#CountHandleName3Room11=0
+Set,#CountHandleName4Room11=0
+Set,#CountHandleName5Room11=0
+Set,#CountHandleName6Room11=0
+Set,#CountHandleName7Room11=0
+Set,#CountHandleName8Room11=0
+Set,#CountHandleName9Room11=0
+set,#Room11unitHWcost=0
+set,#Room11DoorHWCost=0
+
+
+
+Set,#Room11ClosetHardwareType= None
+Set, #Room11HandlePN=None
+Set, #Room11KnobPN=None
+Set,#Room11StdDoorHingeCount=0
+Set,#Room11OverlayDoorHingeCount=0
+Set,#Room11TopDoorHingeCount=0
+Set,#Room11BottomDoorHingeCount=0
+
+Set,#Room11notchdepth= 0
+Set,#Room11notchheight= 0
+set, #Room11notchdepthhasshoe=0
+
+
+Set,#Room11CTName=None
+Set,#Room11CTSqFt=0
+
+
+Set,#Room12Material = None
+Set,#Room12ContrastMaterial= None
+Set,#Room12use2ndmaterial=0
+Set,#Room12EdgeBandingType= None
+
+Set,#Room12ClosetRodType= None
+Set,#Room12ClosetRodCount= 0
+Set,#Room12ClosetRodlengthCount= 0
+
+Set,#Room12DoorDrawerType= None
+Set,#Room12DoorDrawerFinishingType= None
+Set,#Room12DoorDrawerInsertType= None
+Set,#Room12Basicdoorcost=0
+set,#Room12DoorCost=0
+
+set, #RM12otherinsert1=None
+set, #RM12otherinsert2=None
+set, #RM12otherinsert3=None
+set, #RM12otherinsert4=None
+set, #RM12otherinsert5=None
+set, #RM12otherinsert6=None
+set, #RM12otherinsert7=None
+
+Set,#Room12CrownMoldingType=None
+set,#RM12MldName=None
+Set,#RM12MldLen=0
+Set,#RM12MldCnt=0
+set,#RM12MldCost = 0
+
+Set,#Room12BaseType= None
+Set,#Room12basecostgroup=0
+Set,#RM12BaseLengthtotal=0
+Set,#RM12GarageWoodBaseLengthtotal=0
+Set,#RM12BaseCost=0
+Set,#RM12WGBaseCost=0
+Set,#RM12BaseQty=0
+
+Set,#Room12ShoeFenceType= None
+Set,#Room12ShoeFencefinish= None
+Set,#Room12Shoefencecount=0
+
+Set,#Room12Cchannel2shelfcount=0
+Set,#Room12Cchannel1shelfcount=0
+Set,#Room12Cchannelcount=0
+Set,#Room12Cchannellengthcount=0
+Set,#Room12thickadjshelfcount=0
+Set,#Room12adjtoeuroshelfcount=0
+Set,#Room12frontlipshelfcount=0
+Set,#Room12ledshelfcount=0
+Set,#Room12dogearpanelcount=0
+Set,#Room12ledFpanelcount=0
+Set,#Room12ledHpanelcount=0
+
+Set,#Room12BackType = None
+Set, #Room12Specialback = 0
+Set,#Room12hasbacking=0
+set, #Room12needbackingselected=0
+
+
+Set,#Room12BoxDrawertype= None
+Set,#Room12BoxGlideTag=None
+set,#Room12BoxDrawercount=0
+Set,#Room12Glidecount=0
+Set,#Room12Switchglidecount=0
+set,#Room12Drawerswitchcount=0
+Set,#Room12SSGlidecount=0
+Set,#Room12SSUMGlidecount=0
+Set,#Room12POGlidecount=0
+Set,#Room12POUMGlidecount=0
+Set,#Room12VDGlidecount=0
+Set,#Room12VD2Glidecount=0
+Set,#Room12VDTotalGlidecount=0
+
+Set,#CostHandleName0Room12=0
+Set,#CostHandleName1Room12=0
+Set,#CostHandleName2Room12=0
+Set,#CostHandleName3Room12=0
+Set,#CostHandleName4Room12=0
+Set,#CostHandleName5Room12=0
+Set,#CostHandleName6Room12=0
+Set,#CostHandleName7Room12=0
+Set,#CostHandleName8Room12=0
+Set,#CostHandleName9Room12=0
+Set,#CodeHandleName0Room12=0
+Set,#CodeHandleName1Room12=0
+Set,#CodeHandleName2Room12=0
+Set,#CodeHandleName3Room12=0
+Set,#CodeHandleName4Room12=0
+Set,#CodeHandleName5Room12=0
+Set,#CodeHandleName6Room12=0
+Set,#CodeHandleName7Room12=0
+Set,#CodeHandleName8Room12=0
+Set,#CodeHandleName9Room12=0
+Set,#CountHandleName0Room12=0
+Set,#CountHandleName1Room12=0
+Set,#CountHandleName2Room12=0
+Set,#CountHandleName3Room12=0
+Set,#CountHandleName4Room12=0
+Set,#CountHandleName5Room12=0
+Set,#CountHandleName6Room12=0
+Set,#CountHandleName7Room12=0
+Set,#CountHandleName8Room12=0
+Set,#CountHandleName9Room12=0
+set,#Room12unitHWcost=0
+set,#Room12DoorHWCost=0
+
+
+
+Set,#Room12ClosetHardwareType= None
+Set, #Room12HandlePN=None
+Set, #Room12KnobPN=None
+Set,#Room12StdDoorHingeCount=0
+Set,#Room12OverlayDoorHingeCount=0
+Set,#Room12TopDoorHingeCount=0
+Set,#Room12BottomDoorHingeCount=0
+
+Set,#Room12notchdepth= 0
+Set,#Room12notchheight= 0
+set, #Room12notchdepthhasshoe=0
+
+
+Set,#Room12CTName=None
+Set,#Room12CTSqFt=0
+
+
+
+Set,#Room13Material = None
+Set,#Room13ContrastMaterial= None
+Set,#Room13use2ndmaterial=0
+Set,#Room13EdgeBandingType= None
+
+Set,#Room13ClosetRodType= None
+Set,#Room13ClosetRodCount= 0
+Set,#Room13ClosetRodlengthCount= 0
+
+Set,#Room13DoorDrawerType= None
+Set,#Room13DoorDrawerFinishingType= None
+Set,#Room13DoorDrawerInsertType= None
+Set,#Room13Basicdoorcost=0
+set,#Room13DoorCost=0
+
+set, #RM13otherinsert1=None
+set, #RM13otherinsert2=None
+set, #RM13otherinsert3=None
+set, #RM13otherinsert4=None
+set, #RM13otherinsert5=None
+set, #RM13otherinsert6=None
+set, #RM13otherinsert7=None
+
+Set,#Room13CrownMoldingType=None
+set,#RM13MldName=None
+Set,#RM13MldLen=0
+Set,#RM13MldCnt=0
+set,#RM13MldCost = 0
+
+Set,#Room13BaseType= None
+Set,#Room13basecostgroup=0
+Set,#RM13BaseLengthtotal=0
+Set,#RM13GarageWoodBaseLengthtotal=0
+Set,#RM13BaseCost=0
+Set,#RM13WGBaseCost=0
+Set,#RM13BaseQty=0
+
+Set,#Room13ShoeFenceType= None
+Set,#Room13ShoeFencefinish= None
+Set,#Room13Shoefencecount=0
+
+Set,#Room13Cchannel2shelfcount=0
+Set,#Room13Cchannel1shelfcount=0
+Set,#Room13Cchannelcount=0
+Set,#Room13Cchannellengthcount=0
+Set,#Room13thickadjshelfcount=0
+Set,#Room13adjtoeuroshelfcount=0
+Set,#Room13frontlipshelfcount=0
+Set,#Room13ledshelfcount=0
+Set,#Room13dogearpanelcount=0
+Set,#Room13ledFpanelcount=0
+Set,#Room13ledHpanelcount=0
+
+Set,#Room13BackType = None
+Set, #Room13Specialback = 0
+Set,#Room13hasbacking=0
+set, #Room13needbackingselected=0
+
+
+Set,#Room13BoxDrawertype= None
+Set,#Room13BoxGlideTag=None
+set,#Room13BoxDrawercount=0
+Set,#Room13Glidecount=0
+Set,#Room13Switchglidecount=0
+set,#Room13Drawerswitchcount=0
+Set,#Room13SSGlidecount=0
+Set,#Room13SSUMGlidecount=0
+Set,#Room13POGlidecount=0
+Set,#Room13POUMGlidecount=0
+Set,#Room13VDGlidecount=0
+Set,#Room13VD2Glidecount=0
+Set,#Room13VDTotalGlidecount=0
+
+
+Set,#CostHandleName0Room13=0
+Set,#CostHandleName1Room13=0
+Set,#CostHandleName2Room13=0
+Set,#CostHandleName3Room13=0
+Set,#CostHandleName4Room13=0
+Set,#CostHandleName5Room13=0
+Set,#CostHandleName6Room13=0
+Set,#CostHandleName7Room13=0
+Set,#CostHandleName8Room13=0
+Set,#CostHandleName9Room13=0
+Set,#CodeHandleName0Room13=0
+Set,#CodeHandleName1Room13=0
+Set,#CodeHandleName2Room13=0
+Set,#CodeHandleName3Room13=0
+Set,#CodeHandleName4Room13=0
+Set,#CodeHandleName5Room13=0
+Set,#CodeHandleName6Room13=0
+Set,#CodeHandleName7Room13=0
+Set,#CodeHandleName8Room13=0
+Set,#CodeHandleName9Room13=0
+Set,#CountHandleName0Room13=0
+Set,#CountHandleName1Room13=0
+Set,#CountHandleName2Room13=0
+Set,#CountHandleName3Room13=0
+Set,#CountHandleName4Room13=0
+Set,#CountHandleName5Room13=0
+Set,#CountHandleName6Room13=0
+Set,#CountHandleName7Room13=0
+Set,#CountHandleName8Room13=0
+Set,#CountHandleName9Room13=0
+set,#Room13unitHWcost=0
+set,#Room13DoorHWCost=0
+
+
+Set,#Room13ClosetHardwareType= None
+Set, #Room13HandlePN=None
+Set, #Room13KnobPN=None
+Set,#Room13StdDoorHingeCount=0
+Set,#Room13OverlayDoorHingeCount=0
+Set,#Room13TopDoorHingeCount=0
+Set,#Room13BottomDoorHingeCount=0
+
+Set,#Room13notchdepth= 0
+Set,#Room13notchheight= 0
+set, #Room13notchdepthhasshoe=0
+
+
+Set,#Room13CTName=None
+Set,#Room13CTSqFt=0
+
+
+Set,#Room14Material = None
+Set,#Room14ContrastMaterial= None
+Set,#Room14use2ndmaterial=0
+Set,#Room14EdgeBandingType= None
+
+Set,#Room14ClosetRodType= None
+Set,#Room14ClosetRodCount= 0
+Set,#Room14ClosetRodlengthCount= 0
+
+Set,#Room14DoorDrawerType= None
+Set,#Room14DoorDrawerFinishingType= None
+Set,#Room14DoorDrawerInsertType= None
+Set,#Room14Basicdoorcost=0
+set,#Room14DoorCost=0
+
+set, #RM14otherinsert1=None
+set, #RM14otherinsert2=None
+set, #RM14otherinsert3=None
+set, #RM14otherinsert4=None
+set, #RM14otherinsert5=None
+set, #RM14otherinsert6=None
+set, #RM14otherinsert7=None
+
+Set,#Room14CrownMoldingType=None
+set,#RM14MldName=None
+Set,#RM14MldLen=0
+Set,#RM14MldCnt=0
+set,#RM14MldCost = 0
+
+Set,#Room14BaseType= None
+Set,#Room14basecostgroup=0
+Set,#RM14BaseLengthtotal=0
+Set,#RM14GarageWoodBaseLengthtotal=0
+Set,#RM14BaseCost=0
+Set,#RM14WGBaseCost=0
+Set,#RM14BaseQty=0
+
+Set,#Room14ShoeFenceType= None
+Set,#Room14ShoeFencefinish= None
+Set,#Room14Shoefencecount=0
+
+Set,#Room14Cchannel2shelfcount=0
+Set,#Room14Cchannel1shelfcount=0
+Set,#Room14Cchannelcount=0
+Set,#Room14Cchannellengthcount=0
+Set,#Room14thickadjshelfcount=0
+Set,#Room14adjtoeuroshelfcount=0
+Set,#Room14frontlipshelfcount=0
+Set,#Room14ledshelfcount=0
+Set,#Room14dogearpanelcount=0
+Set,#Room14ledFpanelcount=0
+Set,#Room14ledHpanelcount=0
+
+Set,#Room14BackType = None
+Set, #Room14Specialback = 0
+Set,#Room14hasbacking=0
+set, #Room14needbackingselected=0
+
+
+Set,#Room14BoxDrawertype= None
+Set,#Room14BoxGlideTag=None
+set,#Room14BoxDrawercount=0
+Set,#Room14Glidecount=0
+Set,#Room14Switchglidecount=0
+set,#Room14Drawerswitchcount=0
+Set,#Room14SSGlidecount=0
+Set,#Room14SSUMGlidecount=0
+Set,#Room14POGlidecount=0
+Set,#Room14POUMGlidecount=0
+Set,#Room14VDGlidecount=0
+Set,#Room14VD2Glidecount=0
+Set,#Room14VDTotalGlidecount=0
+
+Set,#CostHandleName0Room14=0
+Set,#CostHandleName1Room14=0
+Set,#CostHandleName2Room14=0
+Set,#CostHandleName3Room14=0
+Set,#CostHandleName4Room14=0
+Set,#CostHandleName5Room14=0
+Set,#CostHandleName6Room14=0
+Set,#CostHandleName7Room14=0
+Set,#CostHandleName8Room14=0
+Set,#CostHandleName9Room14=0
+Set,#CodeHandleName0Room14=0
+Set,#CodeHandleName1Room14=0
+Set,#CodeHandleName2Room14=0
+Set,#CodeHandleName3Room14=0
+Set,#CodeHandleName4Room14=0
+Set,#CodeHandleName5Room14=0
+Set,#CodeHandleName6Room14=0
+Set,#CodeHandleName7Room14=0
+Set,#CodeHandleName8Room14=0
+Set,#CodeHandleName9Room14=0
+Set,#CountHandleName0Room14=0
+Set,#CountHandleName1Room14=0
+Set,#CountHandleName2Room14=0
+Set,#CountHandleName3Room14=0
+Set,#CountHandleName4Room14=0
+Set,#CountHandleName5Room14=0
+Set,#CountHandleName6Room14=0
+Set,#CountHandleName7Room14=0
+Set,#CountHandleName8Room14=0
+Set,#CountHandleName9Room14=0
+set,#Room14unitHWcost=0
+set,#Room14DoorHWCost=0
+
+Set,#Room14ClosetHardwareType= None
+Set, #Room14HandlePN=None
+Set, #Room14KnobPN=None
+Set,#Room14StdDoorHingeCount=0
+Set,#Room14OverlayDoorHingeCount=0
+Set,#Room14TopDoorHingeCount=0
+Set,#Room14BottomDoorHingeCount=0
+
+Set,#Room14notchdepth= 0
+Set,#Room14notchheight= 0
+set, #Room14notchdepthhasshoe=0
+
+
+Set,#Room14CTName=None
+Set,#Room14CTSqFt=0
+
+
+Set,#Room15Material = None
+Set,#Room15ContrastMaterial= None
+Set,#Room15use2ndmaterial=0
+Set,#Room15EdgeBandingType= None
+
+Set,#Room15ClosetRodType= None
+Set,#Room15ClosetRodCount= 0
+Set,#Room15ClosetRodlengthCount= 0
+
+Set,#Room15DoorDrawerType= None
+Set,#Room15DoorDrawerFinishingType= None
+Set,#Room15DoorDrawerInsertType= None
+Set,#Room15Basicdoorcost=0
+set,#Room15DoorCost=0
+
+set, #RM15otherinsert1=None
+set, #RM15otherinsert2=None
+set, #RM15otherinsert3=None
+set, #RM15otherinsert4=None
+set, #RM15otherinsert5=None
+set, #RM15otherinsert6=None
+set, #RM15otherinsert7=None
+
+Set,#Room15CrownMoldingType=None
+set,#RM15MldName=None
+Set,#RM15MldLen=0
+Set,#RM15MldCnt=0
+set,#RM15MldCost = 0
+
+Set,#Room15BaseType= None
+Set,#Room15basecostgroup=0
+Set,#RM15BaseLengthtotal=0
+Set,#RM15GarageWoodBaseLengthtotal=0
+Set,#RM15BaseCost=0
+Set,#RM15WGBaseCost=0
+Set,#RM15BaseQty=0
+
+Set,#Room15ShoeFenceType= None
+Set,#Room15ShoeFencefinish= None
+Set,#Room15Shoefencecount=0
+
+Set,#Room15Cchannel2shelfcount=0
+Set,#Room15Cchannel1shelfcount=0
+Set,#Room15Cchannelcount=0
+Set,#Room15Cchannellengthcount=0
+Set,#Room15thickadjshelfcount=0
+Set,#Room15adjtoeuroshelfcount=0
+Set,#Room15frontlipshelfcount=0
+Set,#Room15ledshelfcount=0
+Set,#Room15dogearpanelcount=0
+Set,#Room15ledFpanelcount=0
+Set,#Room15ledHpanelcount=0
+
+Set,#Room15BackType = None
+Set, #Room15Specialback = 0
+Set,#Room15hasbacking=0
+set, #Room15needbackingselected=0
+
+
+Set,#Room15BoxDrawertype= None
+Set,#Room15BoxGlideTag=None
+set,#Room15BoxDrawercount=0
+Set,#Room15Glidecount=0
+Set,#Room15Switchglidecount=0
+set,#Room15Drawerswitchcount=0
+Set,#Room15SSGlidecount=0
+Set,#Room15SSUMGlidecount=0
+Set,#Room15POGlidecount=0
+Set,#Room15POUMGlidecount=0
+Set,#Room15VDGlidecount=0
+Set,#Room15VD2Glidecount=0
+Set,#Room15VDTotalGlidecount=0
+
+Set,#CostHandleName0Room15=0
+Set,#CostHandleName1Room15=0
+Set,#CostHandleName2Room15=0
+Set,#CostHandleName3Room15=0
+Set,#CostHandleName4Room15=0
+Set,#CostHandleName5Room15=0
+Set,#CostHandleName6Room15=0
+Set,#CostHandleName7Room15=0
+Set,#CostHandleName8Room15=0
+Set,#CostHandleName9Room15=0
+Set,#CodeHandleName0Room15=0
+Set,#CodeHandleName1Room15=0
+Set,#CodeHandleName2Room15=0
+Set,#CodeHandleName3Room15=0
+Set,#CodeHandleName4Room15=0
+Set,#CodeHandleName5Room15=0
+Set,#CodeHandleName6Room15=0
+Set,#CodeHandleName7Room15=0
+Set,#CodeHandleName8Room15=0
+Set,#CodeHandleName9Room15=0
+Set,#CountHandleName0Room15=0
+Set,#CountHandleName1Room15=0
+Set,#CountHandleName2Room15=0
+Set,#CountHandleName3Room15=0
+Set,#CountHandleName4Room15=0
+Set,#CountHandleName5Room15=0
+Set,#CountHandleName6Room15=0
+Set,#CountHandleName7Room15=0
+Set,#CountHandleName8Room15=0
+Set,#CountHandleName9Room15=0
+set,#Room15unitHWcost=0
+set,#Room15DoorHWCost=0
+
+Set,#Room15ClosetHardwareType= None
+Set, #Room15HandlePN=None
+Set, #Room15KnobPN=None
+Set,#Room15StdDoorHingeCount=0
+Set,#Room15OverlayDoorHingeCount=0
+Set,#Room15TopDoorHingeCount=0
+Set,#Room15BottomDoorHingeCount=0
+
+Set,#Room15notchdepth= 0
+Set,#Room15notchheight= 0
+set, #Room15notchdepthhasshoe=0
+
+
+Set,#Room15CTName=None
+Set,#Room15CTSqFt=0
+
+
+Set,#Room16Material = None
+Set,#Room16ContrastMaterial= None
+Set,#Room16use2ndmaterial=0
+Set,#Room16EdgeBandingType= None
+
+Set,#Room16ClosetRodType= None
+Set,#Room16ClosetRodCount= 0
+Set,#Room16ClosetRodlengthCount= 0
+
+Set,#Room16DoorDrawerType= None
+Set,#Room16DoorDrawerFinishingType= None
+Set,#Room16DoorDrawerInsertType= None
+Set,#Room16Basicdoorcost=0
+set,#Room16DoorCost=0
+
+set, #RM16otherinsert1=None
+set, #RM16otherinsert2=None
+set, #RM16otherinsert3=None
+set, #RM16otherinsert4=None
+set, #RM16otherinsert5=None
+set, #RM16otherinsert6=None
+set, #RM16otherinsert7=None
+
+Set,#Room16CrownMoldingType=None
+set,#RM16MldName=None
+Set,#RM16MldLen=0
+Set,#RM16MldCnt=0
+set,#RM16MldCost = 0
+
+Set,#Room16BaseType= None
+Set,#Room16basecostgroup=0
+Set,#RM16BaseLengthtotal=0
+Set,#RM16GarageWoodBaseLengthtotal=0
+Set,#RM16BaseCost=0
+Set,#RM16WGBaseCost=0
+Set,#RM16BaseQty=0
+
+Set,#Room16ShoeFenceType= None
+Set,#Room16ShoeFencefinish= None
+Set,#Room16Shoefencecount=0
+
+Set,#Room16Cchannel2shelfcount=0
+Set,#Room16Cchannel1shelfcount=0
+Set,#Room16Cchannelcount=0
+Set,#Room16Cchannellengthcount=0
+Set,#Room16thickadjshelfcount=0
+Set,#Room16adjtoeuroshelfcount=0
+Set,#Room16frontlipshelfcount=0
+Set,#Room16ledshelfcount=0
+Set,#Room16dogearpanelcount=0
+Set,#Room16ledFpanelcount=0
+Set,#Room16ledHpanelcount=0
+
+Set,#Room16BackType = None
+Set, #Room16Specialback = 0
+Set,#Room16hasbacking=0
+set, #Room16needbackingselected=0
+
+
+Set,#Room16BoxDrawertype= None
+Set,#Room16BoxGlideTag=None
+set,#Room16BoxDrawercount=0
+Set,#Room16Glidecount=0
+Set,#Room16Switchglidecount=0
+set,#Room16Drawerswitchcount=0
+Set,#Room16SSGlidecount=0
+Set,#Room16SSUMGlidecount=0
+Set,#Room16POGlidecount=0
+Set,#Room16POUMGlidecount=0
+Set,#Room16VDGlidecount=0
+Set,#Room16VD2Glidecount=0
+Set,#Room16VDTotalGlidecount=0
+
+
+Set,#CostHandleName0Room16=0
+Set,#CostHandleName1Room16=0
+Set,#CostHandleName2Room16=0
+Set,#CostHandleName3Room16=0
+Set,#CostHandleName4Room16=0
+Set,#CostHandleName5Room16=0
+Set,#CostHandleName6Room16=0
+Set,#CostHandleName7Room16=0
+Set,#CostHandleName8Room16=0
+Set,#CostHandleName9Room16=0
+Set,#CodeHandleName0Room16=0
+Set,#CodeHandleName1Room16=0
+Set,#CodeHandleName2Room16=0
+Set,#CodeHandleName3Room16=0
+Set,#CodeHandleName4Room16=0
+Set,#CodeHandleName5Room16=0
+Set,#CodeHandleName6Room16=0
+Set,#CodeHandleName7Room16=0
+Set,#CodeHandleName8Room16=0
+Set,#CodeHandleName9Room16=0
+Set,#CountHandleName0Room16=0
+Set,#CountHandleName1Room16=0
+Set,#CountHandleName2Room16=0
+Set,#CountHandleName3Room16=0
+Set,#CountHandleName4Room16=0
+Set,#CountHandleName5Room16=0
+Set,#CountHandleName6Room16=0
+Set,#CountHandleName7Room16=0
+Set,#CountHandleName8Room16=0
+Set,#CountHandleName9Room16=0
+set,#Room16unitHWcost=0
+set,#Room16DoorHWCost=0
+
+
+Set,#Room16ClosetHardwareType= None
+Set, #Room16HandlePN=None
+Set, #Room16KnobPN=None
+Set,#Room16StdDoorHingeCount=0
+Set,#Room16OverlayDoorHingeCount=0
+Set,#Room16TopDoorHingeCount=0
+Set,#Room16BottomDoorHingeCount=0
+
+Set,#Room16notchdepth= 0
+Set,#Room16notchheight= 0
+set, #Room16notchdepthhasshoe=0
+
+
+Set,#Room16CTName=None
+Set,#Room16CTSqFt=0
+
+
+
+Set,#Room17Material = None
+Set,#Room17ContrastMaterial= None
+Set,#Room17use2ndmaterial=0
+Set,#Room17EdgeBandingType= None
+
+Set,#Room17ClosetRodType= None
+Set,#Room17ClosetRodCount= 0
+Set,#Room17ClosetRodlengthCount= 0
+
+Set,#Room17DoorDrawerType= None
+Set,#Room17DoorDrawerFinishingType= None
+Set,#Room17DoorDrawerInsertType= None
+Set,#Room17Basicdoorcost=0
+set,#Room17DoorCost=0
+
+set, #RM17otherinsert1=None
+set, #RM17otherinsert2=None
+set, #RM17otherinsert3=None
+set, #RM17otherinsert4=None
+set, #RM17otherinsert5=None
+set, #RM17otherinsert6=None
+set, #RM17otherinsert7=None
+
+Set,#Room17CrownMoldingType=None
+set,#RM17MldName=None
+Set,#RM17MldLen=0
+Set,#RM17MldCnt=0
+set,#RM17MldCost = 0
+
+Set,#Room17BaseType= None
+Set,#Room17basecostgroup=0
+Set,#RM17BaseLengthtotal=0
+Set,#RM17GarageWoodBaseLengthtotal=0
+Set,#RM17BaseCost=0
+Set,#RM17WGBaseCost=0
+Set,#RM17BaseQty=0
+
+Set,#Room17ShoeFenceType= None
+Set,#Room17ShoeFencefinish= None
+Set,#Room17Shoefencecount=0
+
+Set,#Room17Cchannel2shelfcount=0
+Set,#Room17Cchannel1shelfcount=0
+Set,#Room17Cchannelcount=0
+Set,#Room17Cchannellengthcount=0
+Set,#Room17thickadjshelfcount=0
+Set,#Room17adjtoeuroshelfcount=0
+Set,#Room17frontlipshelfcount=0
+Set,#Room17ledshelfcount=0
+Set,#Room17dogearpanelcount=0
+Set,#Room17ledFpanelcount=0
+Set,#Room17ledHpanelcount=0
+
+Set,#Room17BackType = None
+Set, #Room17Specialback = 0
+Set,#Room17hasbacking=0
+set, #Room17needbackingselected=0
+
+
+Set,#Room17BoxDrawertype= None
+Set,#Room17BoxGlideTag=None
+set,#Room17BoxDrawercount=0
+Set,#Room17Glidecount=0
+Set,#Room17Switchglidecount=0
+set,#Room17Drawerswitchcount=0
+Set,#Room17SSGlidecount=0
+Set,#Room17SSUMGlidecount=0
+Set,#Room17POGlidecount=0
+Set,#Room17POUMGlidecount=0
+Set,#Room17VDGlidecount=0
+Set,#Room17VD2Glidecount=0
+Set,#Room17VDTotalGlidecount=0
+
+Set,#CostHandleName0Room17=0
+Set,#CostHandleName1Room17=0
+Set,#CostHandleName2Room17=0
+Set,#CostHandleName3Room17=0
+Set,#CostHandleName4Room17=0
+Set,#CostHandleName5Room17=0
+Set,#CostHandleName6Room17=0
+Set,#CostHandleName7Room17=0
+Set,#CostHandleName8Room17=0
+Set,#CostHandleName9Room17=0
+Set,#CodeHandleName0Room17=0
+Set,#CodeHandleName1Room17=0
+Set,#CodeHandleName2Room17=0
+Set,#CodeHandleName3Room17=0
+Set,#CodeHandleName4Room17=0
+Set,#CodeHandleName5Room17=0
+Set,#CodeHandleName6Room17=0
+Set,#CodeHandleName7Room17=0
+Set,#CodeHandleName8Room17=0
+Set,#CodeHandleName9Room17=0
+Set,#CountHandleName0Room17=0
+Set,#CountHandleName1Room17=0
+Set,#CountHandleName2Room17=0
+Set,#CountHandleName3Room17=0
+Set,#CountHandleName4Room17=0
+Set,#CountHandleName5Room17=0
+Set,#CountHandleName6Room17=0
+Set,#CountHandleName7Room17=0
+Set,#CountHandleName8Room17=0
+Set,#CountHandleName9Room17=0
+set,#Room17unitHWcost=0
+set,#Room17DoorHWCost=0
+
+Set,#Room17ClosetHardwareType= None
+Set, #Room17HandlePN=None
+Set, #Room17KnobPN=None
+Set,#Room17StdDoorHingeCount=0
+Set,#Room17OverlayDoorHingeCount=0
+Set,#Room17TopDoorHingeCount=0
+Set,#Room17BottomDoorHingeCount=0
+
+Set,#Room17notchdepth= 0
+Set,#Room17notchheight= 0
+set, #Room17notchdepthhasshoe=0
+
+
+Set,#Room17CTName=None
+Set,#Room17CTSqFt=0
+
+
+Set,#Room18Material = None
+Set,#Room18ContrastMaterial= None
+Set,#Room18use2ndmaterial=0
+Set,#Room18EdgeBandingType= None
+
+Set,#Room18ClosetRodType= None
+Set,#Room18ClosetRodCount= 0
+Set,#Room18ClosetRodlengthCount= 0
+
+Set,#Room18DoorDrawerType= None
+Set,#Room18DoorDrawerFinishingType= None
+Set,#Room18DoorDrawerInsertType= None
+Set,#Room18Basicdoorcost=0
+set,#Room18DoorCost=0
+
+set, #RM18otherinsert1=None
+set, #RM18otherinsert2=None
+set, #RM18otherinsert3=None
+set, #RM18otherinsert4=None
+set, #RM18otherinsert5=None
+set, #RM18otherinsert6=None
+set, #RM18otherinsert7=None
+
+Set,#Room18CrownMoldingType=None
+set,#RM18MldName=None
+Set,#RM18MldLen=0
+Set,#RM18MldCnt=0
+set,#RM18MldCost = 0
+
+Set,#Room18BaseType= None
+Set,#Room18basecostgroup=0
+Set,#RM18BaseLengthtotal=0
+Set,#RM18GarageWoodBaseLengthtotal=0
+Set,#RM18BaseCost=0
+Set,#RM18WGBaseCost=0
+Set,#RM18BaseQty=0
+
+Set,#Room18ShoeFenceType= None
+Set,#Room18ShoeFencefinish= None
+Set,#Room18Shoefencecount=0
+
+Set,#Room18Cchannel2shelfcount=0
+Set,#Room18Cchannel1shelfcount=0
+Set,#Room18Cchannelcount=0
+Set,#Room18Cchannellengthcount=0
+Set,#Room18thickadjshelfcount=0
+Set,#Room18adjtoeuroshelfcount=0
+Set,#Room18frontlipshelfcount=0
+Set,#Room18ledshelfcount=0
+Set,#Room18dogearpanelcount=0
+Set,#Room18ledFpanelcount=0
+Set,#Room18ledHpanelcount=0
+
+Set,#Room18BackType = None
+Set, #Room18Specialback = 0
+Set,#Room18hasbacking=0
+set, #Room18needbackingselected=0
+
+
+Set,#Room18BoxDrawertype= None
+Set,#Room18BoxGlideTag=None
+set,#Room18BoxDrawercount=0
+Set,#Room18Glidecount=0
+Set,#Room18Switchglidecount=0
+set,#Room18Drawerswitchcount=0
+Set,#Room18SSGlidecount=0
+Set,#Room18SSUMGlidecount=0
+Set,#Room18POGlidecount=0
+Set,#Room18POUMGlidecount=0
+Set,#Room18VDGlidecount=0
+Set,#Room18VD2Glidecount=0
+Set,#Room18VDTotalGlidecount=0
+
+Set,#CostHandleName0Room18=0
+Set,#CostHandleName1Room18=0
+Set,#CostHandleName2Room18=0
+Set,#CostHandleName3Room18=0
+Set,#CostHandleName4Room18=0
+Set,#CostHandleName5Room18=0
+Set,#CostHandleName6Room18=0
+Set,#CostHandleName7Room18=0
+Set,#CostHandleName8Room18=0
+Set,#CostHandleName9Room18=0
+Set,#CodeHandleName0Room18=0
+Set,#CodeHandleName1Room18=0
+Set,#CodeHandleName2Room18=0
+Set,#CodeHandleName3Room18=0
+Set,#CodeHandleName4Room18=0
+Set,#CodeHandleName5Room18=0
+Set,#CodeHandleName6Room18=0
+Set,#CodeHandleName7Room18=0
+Set,#CodeHandleName8Room18=0
+Set,#CodeHandleName9Room18=0
+Set,#CountHandleName0Room18=0
+Set,#CountHandleName1Room18=0
+Set,#CountHandleName2Room18=0
+Set,#CountHandleName3Room18=0
+Set,#CountHandleName4Room18=0
+Set,#CountHandleName5Room18=0
+Set,#CountHandleName6Room18=0
+Set,#CountHandleName7Room18=0
+Set,#CountHandleName8Room18=0
+Set,#CountHandleName9Room18=0
+set,#Room18unitHWcost=0
+set,#Room18DoorHWCost=0
+
+
+Set,#Room18ClosetHardwareType= None
+Set, #Room18HandlePN=None
+Set, #Room18KnobPN=None
+Set,#Room18StdDoorHingeCount=0
+Set,#Room18OverlayDoorHingeCount=0
+Set,#Room18TopDoorHingeCount=0
+Set,#Room18BottomDoorHingeCount=0
+
+Set,#Room18notchdepth= 0
+Set,#Room18notchheight= 0
+set, #Room18notchdepthhasshoe=0
+
+
+Set,#Room18CTName=None
+Set,#Room18CTSqFt=0
+
+
+
+Set,#Room19Material = None
+Set,#Room19ContrastMaterial= None
+Set,#Room19use2ndmaterial=0
+Set,#Room19EdgeBandingType= None
+
+Set,#Room19ClosetRodType= None
+Set,#Room19ClosetRodCount= 0
+Set,#Room19ClosetRodlengthCount= 0
+
+Set,#Room19DoorDrawerType= None
+Set,#Room19DoorDrawerFinishingType= None
+Set,#Room19DoorDrawerInsertType= None
+Set,#Room19Basicdoorcost=0
+set,#Room19DoorCost=0
+
+set, #RM19otherinsert1=None
+set, #RM19otherinsert2=None
+set, #RM19otherinsert3=None
+set, #RM19otherinsert4=None
+set, #RM19otherinsert5=None
+set, #RM19otherinsert6=None
+set, #RM19otherinsert7=None
+
+Set,#Room19CrownMoldingType=None
+set,#RM19MldName=None
+Set,#RM19MldLen=0
+Set,#RM19MldCnt=0
+set,#RM19MldCost = 0
+
+Set,#Room19BaseType= None
+Set,#Room19basecostgroup=0
+Set,#RM19BaseLengthtotal=0
+Set,#RM19GarageWoodBaseLengthtotal=0
+Set,#RM19BaseCost=0
+Set,#RM19WGBaseCost=0
+Set,#RM19BaseQty=0
+
+Set,#Room19ShoeFenceType= None
+Set,#Room19ShoeFencefinish= None
+Set,#Room19Shoefencecount=0
+
+Set,#Room19Cchannel2shelfcount=0
+Set,#Room19Cchannel1shelfcount=0
+Set,#Room19Cchannelcount=0
+Set,#Room19Cchannellengthcount=0
+Set,#Room19thickadjshelfcount=0
+Set,#Room19adjtoeuroshelfcount=0
+Set,#Room19frontlipshelfcount=0
+Set,#Room19ledshelfcount=0
+Set,#Room19dogearpanelcount=0
+Set,#Room19ledFpanelcount=0
+Set,#Room19ledHpanelcount=0
+
+Set,#Room19BackType = None
+Set, #Room19Specialback = 0
+Set,#Room19hasbacking=0
+set, #Room19needbackingselected=0
+
+
+Set,#Room19BoxDrawertype= None
+Set,#Room19BoxGlideTag=None
+set,#Room19BoxDrawercount=0
+Set,#Room19Glidecount=0
+Set,#Room19Switchglidecount=0
+set,#Room19Drawerswitchcount=0
+Set,#Room19SSGlidecount=0
+Set,#Room19SSUMGlidecount=0
+Set,#Room19POGlidecount=0
+Set,#Room19POUMGlidecount=0
+Set,#Room19VDGlidecount=0
+Set,#Room19VD2Glidecount=0
+Set,#Room19VDTotalGlidecount=0
+
+Set,#CostHandleName0Room19=0
+Set,#CostHandleName1Room19=0
+Set,#CostHandleName2Room19=0
+Set,#CostHandleName3Room19=0
+Set,#CostHandleName4Room19=0
+Set,#CostHandleName5Room19=0
+Set,#CostHandleName6Room19=0
+Set,#CostHandleName7Room19=0
+Set,#CostHandleName8Room19=0
+Set,#CostHandleName9Room19=0
+Set,#CodeHandleName0Room19=0
+Set,#CodeHandleName1Room19=0
+Set,#CodeHandleName2Room19=0
+Set,#CodeHandleName3Room19=0
+Set,#CodeHandleName4Room19=0
+Set,#CodeHandleName5Room19=0
+Set,#CodeHandleName6Room19=0
+Set,#CodeHandleName7Room19=0
+Set,#CodeHandleName8Room19=0
+Set,#CodeHandleName9Room19=0
+Set,#CountHandleName0Room19=0
+Set,#CountHandleName1Room19=0
+Set,#CountHandleName2Room19=0
+Set,#CountHandleName3Room19=0
+Set,#CountHandleName4Room19=0
+Set,#CountHandleName5Room19=0
+Set,#CountHandleName6Room19=0
+Set,#CountHandleName7Room19=0
+Set,#CountHandleName8Room19=0
+Set,#CountHandleName9Room19=0
+set,#Room19unitHWcost=0
+set,#Room19DoorHWCost=0
+
+Set,#Room19ClosetHardwareType= None
+Set, #Room19HandlePN=None
+Set, #Room19KnobPN=None
+Set,#Room19StdDoorHingeCount=0
+Set,#Room19OverlayDoorHingeCount=0
+Set,#Room19TopDoorHingeCount=0
+Set,#Room19BottomDoorHingeCount=0
+
+Set,#Room19notchdepth= 0
+Set,#Room19notchheight= 0
+set, #Room19notchdepthhasshoe=0
+
+
+Set,#Room19CTName=None
+Set,#Room19CTSqFt=0
+
+
+Set,#Room20Material = None
+Set,#Room20ContrastMaterial= None
+Set,#Room20use2ndmaterial=0
+Set,#Room20EdgeBandingType= None
+
+Set,#Room20ClosetRodType= None
+Set,#Room20ClosetRodCount= 0
+Set,#Room20ClosetRodlengthCount= 0
+
+Set,#Room20DoorDrawerType= None
+Set,#Room20DoorDrawerFinishingType= None
+Set,#Room20DoorDrawerInsertType= None
+Set,#Room20Basicdoorcost=0
+set,#Room20DoorCost=0
+
+set, #RM20otherinsert1=None
+set, #RM20otherinsert2=None
+set, #RM20otherinsert3=None
+set, #RM20otherinsert4=None
+set, #RM20otherinsert5=None
+set, #RM20otherinsert6=None
+set, #RM20otherinsert7=None
+
+Set,#Room20CrownMoldingType=None
+set,#RM20MldName=None
+Set,#RM20MldLen=0
+Set,#RM20MldCnt=0
+set,#RM20MldCost = 0
+
+Set,#Room20BaseType= None
+Set,#Room20basecostgroup=0
+Set,#RM20BaseLengthtotal=0
+Set,#RM20GarageWoodBaseLengthtotal=0
+Set,#RM20BaseCost=0
+Set,#RM20WGBaseCost=0
+Set,#RM20BaseQty=0
+
+Set,#Room20ShoeFenceType= None
+Set,#Room20ShoeFencefinish= None
+Set,#Room20Shoefencecount=0
+
+Set,#Room20Cchannel2shelfcount=0
+Set,#Room20Cchannel1shelfcount=0
+Set,#Room20Cchannelcount=0
+Set,#Room20Cchannellengthcount=0
+Set,#Room20thickadjshelfcount=0
+Set,#Room20adjtoeuroshelfcount=0
+Set,#Room20frontlipshelfcount=0
+Set,#Room20ledshelfcount=0
+Set,#Room20dogearpanelcount=0
+Set,#Room20ledFpanelcount=0
+Set,#Room20ledHpanelcount=0
+
+Set,#Room20BackType = None
+Set, #Room20Specialback = 0
+Set,#Room20hasbacking=0
+set, #Room20needbackingselected=0
+
+
+Set,#Room20BoxDrawertype= None
+Set,#Room20BoxGlideTag=None
+set,#Room20BoxDrawercount=0
+Set,#Room20Glidecount=0
+Set,#Room20Switchglidecount=0
+set,#Room20Drawerswitchcount=0
+Set,#Room20SSGlidecount=0
+Set,#Room20SSUMGlidecount=0
+Set,#Room20POGlidecount=0
+Set,#Room20POUMGlidecount=0
+Set,#Room20VDGlidecount=0
+Set,#Room20VD2Glidecount=0
+Set,#Room20VDTotalGlidecount=0
+
+Set,#CostHandleName0Room20=0
+Set,#CostHandleName1Room20=0
+Set,#CostHandleName2Room20=0
+Set,#CostHandleName3Room20=0
+Set,#CostHandleName4Room20=0
+Set,#CostHandleName5Room20=0
+Set,#CostHandleName6Room20=0
+Set,#CostHandleName7Room20=0
+Set,#CostHandleName8Room20=0
+Set,#CostHandleName9Room20=0
+Set,#CodeHandleName0Room20=0
+Set,#CodeHandleName1Room20=0
+Set,#CodeHandleName2Room20=0
+Set,#CodeHandleName3Room20=0
+Set,#CodeHandleName4Room20=0
+Set,#CodeHandleName5Room20=0
+Set,#CodeHandleName6Room20=0
+Set,#CodeHandleName7Room20=0
+Set,#CodeHandleName8Room20=0
+Set,#CodeHandleName9Room20=0
+Set,#CountHandleName0Room20=0
+Set,#CountHandleName1Room20=0
+Set,#CountHandleName2Room20=0
+Set,#CountHandleName3Room20=0
+Set,#CountHandleName4Room20=0
+Set,#CountHandleName5Room20=0
+Set,#CountHandleName6Room20=0
+Set,#CountHandleName7Room20=0
+Set,#CountHandleName8Room20=0
+Set,#CountHandleName9Room20=0
+set,#Room20unitHWcost=0
+set,#Room20DoorHWCost=0
+
+
+Set,#Room20ClosetHardwareType= None
+Set, #Room20HandlePN=None
+Set, #Room20KnobPN=None
+Set,#Room20StdDoorHingeCount=0
+Set,#Room20OverlayDoorHingeCount=0
+Set,#Room20TopDoorHingeCount=0
+Set,#Room20BottomDoorHingeCount=0
+
+Set,#Room20notchdepth= 0
+Set,#Room20notchheight= 0
+set, #Room20notchdepthhasshoe=0
+
+
+Set,#Room20CTName=None
+Set,#Room20CTSqFt=0
+
+
+
+
+Set,#Room21Material = None
+Set,#Room21ContrastMaterial= None
+Set,#Room21use2ndmaterial=0
+Set,#Room21EdgeBandingType= None
+
+Set,#Room21ClosetRodType= None
+Set,#Room21ClosetRodCount= 0
+Set,#Room21ClosetRodlengthCount= 0
+
+Set,#Room21DoorDrawerType= None
+Set,#Room21DoorDrawerFinishingType= None
+Set,#Room21DoorDrawerInsertType= None
+Set,#Room21Basicdoorcost=0
+set,#Room21DoorCost=0
+
+set, #RM21otherinsert1=None
+set, #RM21otherinsert2=None
+set, #RM21otherinsert3=None
+set, #RM21otherinsert4=None
+set, #RM21otherinsert5=None
+set, #RM21otherinsert6=None
+set, #RM21otherinsert7=None
+
+Set,#Room21CrownMoldingType=None
+set,#RM21MldName=None
+Set,#RM21MldLen=0
+Set,#RM21MldCnt=0
+set,#RM21MldCost = 0
+
+Set,#Room21BaseType= None
+Set,#Room21basecostgroup=0
+Set,#RM21BaseLengthtotal=0
+Set,#RM21GarageWoodBaseLengthtotal=0
+Set,#RM21BaseCost=0
+Set,#RM21WGBaseCost=0
+Set,#RM21BaseQty=0
+
+Set,#Room21ShoeFenceType= None
+Set,#Room21ShoeFencefinish= None
+Set,#Room21Shoefencecount=0
+
+Set,#Room21Cchannel2shelfcount=0
+Set,#Room21Cchannel1shelfcount=0
+Set,#Room21Cchannelcount=0
+Set,#Room21Cchannellengthcount=0
+Set,#Room21thickadjshelfcount=0
+Set,#Room21adjtoeuroshelfcount=0
+Set,#Room21frontlipshelfcount=0
+Set,#Room21ledshelfcount=0
+Set,#Room21dogearpanelcount=0
+Set,#Room21ledFpanelcount=0
+Set,#Room21ledHpanelcount=0
+
+Set,#Room21BackType = None
+Set, #Room21Specialback = 0
+Set,#Room21hasbacking=0
+set, #Room21needbackingselected=0
+
+
+Set,#Room21BoxDrawertype= None
+Set,#Room21BoxGlideTag=None
+set,#Room21BoxDrawercount=0
+Set,#Room21Glidecount=0
+Set,#Room21Switchglidecount=0
+set,#Room21Drawerswitchcount=0
+Set,#Room21SSGlidecount=0
+Set,#Room21SSUMGlidecount=0
+Set,#Room21POGlidecount=0
+Set,#Room21POUMGlidecount=0
+Set,#Room21VDGlidecount=0
+Set,#Room21VD2Glidecount=0
+Set,#Room21VDTotalGlidecount=0
+
+Set,#CostHandleName0Room21=0
+Set,#CostHandleName1Room21=0
+Set,#CostHandleName2Room21=0
+Set,#CostHandleName3Room21=0
+Set,#CostHandleName4Room21=0
+Set,#CostHandleName5Room21=0
+Set,#CostHandleName6Room21=0
+Set,#CostHandleName7Room21=0
+Set,#CostHandleName8Room21=0
+Set,#CostHandleName9Room21=0
+Set,#CodeHandleName0Room21=0
+Set,#CodeHandleName1Room21=0
+Set,#CodeHandleName2Room21=0
+Set,#CodeHandleName3Room21=0
+Set,#CodeHandleName4Room21=0
+Set,#CodeHandleName5Room21=0
+Set,#CodeHandleName6Room21=0
+Set,#CodeHandleName7Room21=0
+Set,#CodeHandleName8Room21=0
+Set,#CodeHandleName9Room21=0
+Set,#CountHandleName0Room21=0
+Set,#CountHandleName1Room21=0
+Set,#CountHandleName2Room21=0
+Set,#CountHandleName3Room21=0
+Set,#CountHandleName4Room21=0
+Set,#CountHandleName5Room21=0
+Set,#CountHandleName6Room21=0
+Set,#CountHandleName7Room21=0
+Set,#CountHandleName8Room21=0
+Set,#CountHandleName9Room21=0
+set,#Room21unitHWcost=0
+set,#Room21DoorHWCost=0
+
+
+Set,#Room21ClosetHardwareType= None
+Set, #Room21HandlePN=None
+Set, #Room21KnobPN=None
+Set,#Room21StdDoorHingeCount=0
+Set,#Room21OverlayDoorHingeCount=0
+Set,#Room21TopDoorHingeCount=0
+Set,#Room21BottomDoorHingeCount=0
+
+Set,#Room21notchdepth= 0
+Set,#Room21notchheight= 0
+set, #Room21notchdepthhasshoe=0
+
+
+Set,#Room21CTName=None
+Set,#Room21CTSqFt=0
+
+
+Set,#Room22Material = None
+Set,#Room22ContrastMaterial= None
+Set,#Room22use2ndmaterial=0
+Set,#Room22EdgeBandingType= None
+
+Set,#Room22ClosetRodType= None
+Set,#Room22ClosetRodCount= 0
+Set,#Room22ClosetRodlengthCount= 0
+
+Set,#Room22DoorDrawerType= None
+Set,#Room22DoorDrawerFinishingType= None
+Set,#Room22DoorDrawerInsertType= None
+Set,#Room22Basicdoorcost=0
+set,#Room22DoorCost=0
+
+set, #RM22otherinsert1=None
+set, #RM22otherinsert2=None
+set, #RM22otherinsert3=None
+set, #RM22otherinsert4=None
+set, #RM22otherinsert5=None
+set, #RM22otherinsert6=None
+set, #RM22otherinsert7=None
+
+Set,#Room22CrownMoldingType=None
+set,#RM22MldName=None
+Set,#RM22MldLen=0
+Set,#RM22MldCnt=0
+set,#RM22MldCost = 0
+
+Set,#Room22BaseType= None
+Set,#Room22basecostgroup=0
+Set,#RM22BaseLengthtotal=0
+Set,#RM22GarageWoodBaseLengthtotal=0
+Set,#RM22BaseCost=0
+Set,#RM22WGBaseCost=0
+Set,#RM22BaseQty=0
+
+Set,#Room22ShoeFenceType= None
+Set,#Room22ShoeFencefinish= None
+Set,#Room22Shoefencecount=0
+
+Set,#Room22Cchannel2shelfcount=0
+Set,#Room22Cchannel1shelfcount=0
+Set,#Room22Cchannelcount=0
+Set,#Room22Cchannellengthcount=0
+Set,#Room22thickadjshelfcount=0
+Set,#Room22adjtoeuroshelfcount=0
+Set,#Room22frontlipshelfcount=0
+Set,#Room22ledshelfcount=0
+Set,#Room22dogearpanelcount=0
+Set,#Room22ledFpanelcount=0
+Set,#Room22ledHpanelcount=0
+
+Set,#Room22BackType = None
+Set, #Room22Specialback = 0
+Set,#Room22hasbacking=0
+set, #Room22needbackingselected=0
+
+
+Set,#Room22BoxDrawertype= None
+Set,#Room22BoxGlideTag=None
+set,#Room22BoxDrawercount=0
+Set,#Room22Glidecount=0
+Set,#Room22Switchglidecount=0
+set,#Room22Drawerswitchcount=0
+Set,#Room22SSGlidecount=0
+Set,#Room22SSUMGlidecount=0
+Set,#Room22POGlidecount=0
+Set,#Room22POUMGlidecount=0
+Set,#Room22VDGlidecount=0
+Set,#Room22VD2Glidecount=0
+Set,#Room22VDTotalGlidecount=0
+
+Set,#CostHandleName0Room22=0
+Set,#CostHandleName1Room22=0
+Set,#CostHandleName2Room22=0
+Set,#CostHandleName3Room22=0
+Set,#CostHandleName4Room22=0
+Set,#CostHandleName5Room22=0
+Set,#CostHandleName6Room22=0
+Set,#CostHandleName7Room22=0
+Set,#CostHandleName8Room22=0
+Set,#CostHandleName9Room22=0
+Set,#CodeHandleName0Room22=0
+Set,#CodeHandleName1Room22=0
+Set,#CodeHandleName2Room22=0
+Set,#CodeHandleName3Room22=0
+Set,#CodeHandleName4Room22=0
+Set,#CodeHandleName5Room22=0
+Set,#CodeHandleName6Room22=0
+Set,#CodeHandleName7Room22=0
+Set,#CodeHandleName8Room22=0
+Set,#CodeHandleName9Room22=0
+Set,#CountHandleName0Room22=0
+Set,#CountHandleName1Room22=0
+Set,#CountHandleName2Room22=0
+Set,#CountHandleName3Room22=0
+Set,#CountHandleName4Room22=0
+Set,#CountHandleName5Room22=0
+Set,#CountHandleName6Room22=0
+Set,#CountHandleName7Room22=0
+Set,#CountHandleName8Room22=0
+Set,#CountHandleName9Room22=0
+set,#Room22unitHWcost=0
+set,#Room22DoorHWCost=0
+
+
+Set,#Room22ClosetHardwareType= None
+Set, #Room22HandlePN=None
+Set, #Room22KnobPN=None
+Set,#Room22StdDoorHingeCount=0
+Set,#Room22OverlayDoorHingeCount=0
+Set,#Room22TopDoorHingeCount=0
+Set,#Room22BottomDoorHingeCount=0
+
+Set,#Room22notchdepth= 0
+Set,#Room22notchheight= 0
+set, #Room22notchdepthhasshoe=0
+
+
+Set,#Room22CTName=None
+Set,#Room22CTSqFt=0
+
+
+
+Set,#Room23Material = None
+Set,#Room23ContrastMaterial= None
+Set,#Room23use2ndmaterial=0
+Set,#Room23EdgeBandingType= None
+
+Set,#Room23ClosetRodType= None
+Set,#Room23ClosetRodCount= 0
+Set,#Room23ClosetRodlengthCount= 0
+
+Set,#Room23DoorDrawerType= None
+Set,#Room23DoorDrawerFinishingType= None
+Set,#Room23DoorDrawerInsertType= None
+Set,#Room23Basicdoorcost=0
+set,#Room23DoorCost=0
+
+set, #RM23otherinsert1=None
+set, #RM23otherinsert2=None
+set, #RM23otherinsert3=None
+set, #RM23otherinsert4=None
+set, #RM23otherinsert5=None
+set, #RM23otherinsert6=None
+set, #RM23otherinsert7=None
+
+Set,#Room23CrownMoldingType=None
+set,#RM23MldName=None
+Set,#RM23MldLen=0
+Set,#RM23MldCnt=0
+set,#RM23MldCost = 0
+
+Set,#Room23BaseType= None
+Set,#Room23basecostgroup=0
+Set,#RM23BaseLengthtotal=0
+Set,#RM23GarageWoodBaseLengthtotal=0
+Set,#RM23BaseCost=0
+Set,#RM23WGBaseCost=0
+Set,#RM23BaseQty=0
+
+Set,#Room23ShoeFenceType= None
+Set,#Room23ShoeFencefinish= None
+Set,#Room23Shoefencecount=0
+
+Set,#Room23Cchannel2shelfcount=0
+Set,#Room23Cchannel1shelfcount=0
+Set,#Room23Cchannelcount=0
+Set,#Room23Cchannellengthcount=0
+Set,#Room23thickadjshelfcount=0
+Set,#Room23adjtoeuroshelfcount=0
+Set,#Room23frontlipshelfcount=0
+Set,#Room23ledshelfcount=0
+Set,#Room23dogearpanelcount=0
+Set,#Room23ledFpanelcount=0
+Set,#Room23ledHpanelcount=0
+
+Set,#Room23BackType = None
+Set, #Room23Specialback = 0
+Set,#Room23hasbacking=0
+set, #Room23needbackingselected=0
+
+
+Set,#Room23BoxDrawertype= None
+Set,#Room23BoxGlideTag=None
+set,#Room23BoxDrawercount=0
+Set,#Room23Glidecount=0
+Set,#Room23Switchglidecount=0
+set,#Room23Drawerswitchcount=0
+Set,#Room23SSGlidecount=0
+Set,#Room23SSUMGlidecount=0
+Set,#Room23POGlidecount=0
+Set,#Room23POUMGlidecount=0
+Set,#Room23VDGlidecount=0
+Set,#Room23VD2Glidecount=0
+Set,#Room23VDTotalGlidecount=0
+
+Set,#CostHandleName0Room23=0
+Set,#CostHandleName1Room23=0
+Set,#CostHandleName2Room23=0
+Set,#CostHandleName3Room23=0
+Set,#CostHandleName4Room23=0
+Set,#CostHandleName5Room23=0
+Set,#CostHandleName6Room23=0
+Set,#CostHandleName7Room23=0
+Set,#CostHandleName8Room23=0
+Set,#CostHandleName9Room23=0
+Set,#CodeHandleName0Room23=0
+Set,#CodeHandleName1Room23=0
+Set,#CodeHandleName2Room23=0
+Set,#CodeHandleName3Room23=0
+Set,#CodeHandleName4Room23=0
+Set,#CodeHandleName5Room23=0
+Set,#CodeHandleName6Room23=0
+Set,#CodeHandleName7Room23=0
+Set,#CodeHandleName8Room23=0
+Set,#CodeHandleName9Room23=0
+Set,#CountHandleName0Room23=0
+Set,#CountHandleName1Room23=0
+Set,#CountHandleName2Room23=0
+Set,#CountHandleName3Room23=0
+Set,#CountHandleName4Room23=0
+Set,#CountHandleName5Room23=0
+Set,#CountHandleName6Room23=0
+Set,#CountHandleName7Room23=0
+Set,#CountHandleName8Room23=0
+Set,#CountHandleName9Room23=0
+set,#Room23unitHWcost=0
+set,#Room23DoorHWCost=0
+
+
+Set,#Room23ClosetHardwareType= None
+Set, #Room23HandlePN=None
+Set, #Room23KnobPN=None
+Set,#Room23StdDoorHingeCount=0
+Set,#Room23OverlayDoorHingeCount=0
+Set,#Room23TopDoorHingeCount=0
+Set,#Room23BottomDoorHingeCount=0
+
+Set,#Room23notchdepth= 0
+Set,#Room23notchheight= 0
+set, #Room23notchdepthhasshoe=0
+
+
+Set,#Room23CTName=None
+Set,#Room23CTSqFt=0
+
+
+Set,#Room24Material = None
+Set,#Room24ContrastMaterial= None
+Set,#Room24use2ndmaterial=0
+Set,#Room24EdgeBandingType= None
+
+Set,#Room24ClosetRodType= None
+Set,#Room24ClosetRodCount= 0
+Set,#Room24ClosetRodlengthCount= 0
+
+Set,#Room24DoorDrawerType= None
+Set,#Room24DoorDrawerFinishingType= None
+Set,#Room24DoorDrawerInsertType= None
+Set,#Room24Basicdoorcost=0
+set,#Room24DoorCost=0
+
+set, #RM24otherinsert1=None
+set, #RM24otherinsert2=None
+set, #RM24otherinsert3=None
+set, #RM24otherinsert4=None
+set, #RM24otherinsert5=None
+set, #RM24otherinsert6=None
+set, #RM24otherinsert7=None
+
+Set,#Room24CrownMoldingType=None
+set,#RM24MldName=None
+Set,#RM24MldLen=0
+Set,#RM24MldCnt=0
+set,#RM24MldCost = 0
+
+Set,#Room24BaseType= None
+Set,#Room24basecostgroup=0
+Set,#RM24BaseLengthtotal=0
+Set,#RM24GarageWoodBaseLengthtotal=0
+Set,#RM24BaseCost=0
+Set,#RM24WGBaseCost=0
+Set,#RM24BaseQty=0
+
+Set,#Room24ShoeFenceType= None
+Set,#Room24ShoeFencefinish= None
+Set,#Room24Shoefencecount=0
+
+Set,#Room24Cchannel2shelfcount=0
+Set,#Room24Cchannel1shelfcount=0
+Set,#Room24Cchannelcount=0
+Set,#Room24Cchannellengthcount=0
+Set,#Room24thickadjshelfcount=0
+Set,#Room24adjtoeuroshelfcount=0
+Set,#Room24frontlipshelfcount=0
+Set,#Room24ledshelfcount=0
+Set,#Room24dogearpanelcount=0
+Set,#Room24ledFpanelcount=0
+Set,#Room24ledHpanelcount=0
+
+Set,#Room24BackType = None
+Set, #Room24Specialback = 0
+Set,#Room24hasbacking=0
+set, #Room24needbackingselected=0
+
+
+Set,#Room24BoxDrawertype= None
+Set,#Room24BoxGlideTag=None
+set,#Room24BoxDrawercount=0
+Set,#Room24Glidecount=0
+Set,#Room24Switchglidecount=0
+set,#Room24Drawerswitchcount=0
+Set,#Room24SSGlidecount=0
+Set,#Room24SSUMGlidecount=0
+Set,#Room24POGlidecount=0
+Set,#Room24POUMGlidecount=0
+Set,#Room24VDGlidecount=0
+Set,#Room24VD2Glidecount=0
+Set,#Room24VDTotalGlidecount=0
+
+Set,#CostHandleName0Room24=0
+Set,#CostHandleName1Room24=0
+Set,#CostHandleName2Room24=0
+Set,#CostHandleName3Room24=0
+Set,#CostHandleName4Room24=0
+Set,#CostHandleName5Room24=0
+Set,#CostHandleName6Room24=0
+Set,#CostHandleName7Room24=0
+Set,#CostHandleName8Room24=0
+Set,#CostHandleName9Room24=0
+Set,#CodeHandleName0Room24=0
+Set,#CodeHandleName1Room24=0
+Set,#CodeHandleName2Room24=0
+Set,#CodeHandleName3Room24=0
+Set,#CodeHandleName4Room24=0
+Set,#CodeHandleName5Room24=0
+Set,#CodeHandleName6Room24=0
+Set,#CodeHandleName7Room24=0
+Set,#CodeHandleName8Room24=0
+Set,#CodeHandleName9Room24=0
+Set,#CountHandleName0Room24=0
+Set,#CountHandleName1Room24=0
+Set,#CountHandleName2Room24=0
+Set,#CountHandleName3Room24=0
+Set,#CountHandleName4Room24=0
+Set,#CountHandleName5Room24=0
+Set,#CountHandleName6Room24=0
+Set,#CountHandleName7Room24=0
+Set,#CountHandleName8Room24=0
+Set,#CountHandleName9Room24=0
+set,#Room24unitHWcost=0
+set,#Room24DoorHWCost=0
+
+
+Set,#Room24ClosetHardwareType= None
+Set, #Room24HandlePN=None
+Set, #Room24KnobPN=None
+Set,#Room24StdDoorHingeCount=0
+Set,#Room24OverlayDoorHingeCount=0
+Set,#Room24TopDoorHingeCount=0
+Set,#Room24BottomDoorHingeCount=0
+
+Set,#Room24notchdepth= 0
+Set,#Room24notchheight= 0
+set, #Room24notchdepthhasshoe=0
+
+
+Set,#Room24CTName=None
+Set,#Room24CTSqFt=0
+
+
+Set,#Room25Material = None
+Set,#Room25ContrastMaterial= None
+Set,#Room25use2ndmaterial=0
+Set,#Room25EdgeBandingType= None
+
+Set,#Room25ClosetRodType= None
+Set,#Room25ClosetRodCount= 0
+Set,#Room25ClosetRodlengthCount= 0
+
+Set,#Room25DoorDrawerType= None
+Set,#Room25DoorDrawerFinishingType= None
+Set,#Room25DoorDrawerInsertType= None
+Set,#Room25Basicdoorcost=0
+set,#Room25DoorCost=0
+
+set, #RM25otherinsert1=None
+set, #RM25otherinsert2=None
+set, #RM25otherinsert3=None
+set, #RM25otherinsert4=None
+set, #RM25otherinsert5=None
+set, #RM25otherinsert6=None
+set, #RM25otherinsert7=None
+
+Set,#Room25CrownMoldingType=None
+set,#RM25MldName=None
+Set,#RM25MldLen=0
+Set,#RM25MldCnt=0
+set,#RM25MldCost = 0
+
+Set,#Room25BaseType= None
+Set,#Room25basecostgroup=0
+Set,#RM25BaseLengthtotal=0
+Set,#RM25GarageWoodBaseLengthtotal=0
+Set,#RM25BaseCost=0
+Set,#RM25WGBaseCost=0
+Set,#RM25BaseQty=0
+
+Set,#Room25ShoeFenceType= None
+Set,#Room25ShoeFencefinish= None
+Set,#Room25Shoefencecount=0
+
+Set,#Room25Cchannel2shelfcount=0
+Set,#Room25Cchannel1shelfcount=0
+Set,#Room25Cchannelcount=0
+Set,#Room25Cchannellengthcount=0
+Set,#Room25thickadjshelfcount=0
+Set,#Room25adjtoeuroshelfcount=0
+Set,#Room25frontlipshelfcount=0
+Set,#Room25ledshelfcount=0
+Set,#Room25dogearpanelcount=0
+Set,#Room25ledFpanelcount=0
+Set,#Room25ledHpanelcount=0
+
+Set,#Room25BackType = None
+Set, #Room25Specialback = 0
+Set,#Room25hasbacking=0
+set, #Room25needbackingselected=0
+
+
+Set,#Room25BoxDrawertype= None
+Set,#Room25BoxGlideTag=None
+set,#Room25BoxDrawercount=0
+Set,#Room25Glidecount=0
+Set,#Room25Switchglidecount=0
+set,#Room25Drawerswitchcount=0
+Set,#Room25SSGlidecount=0
+Set,#Room25SSUMGlidecount=0
+Set,#Room25POGlidecount=0
+Set,#Room25POUMGlidecount=0
+Set,#Room25VDGlidecount=0
+Set,#Room25VD2Glidecount=0
+Set,#Room25VDTotalGlidecount=0
+
+Set,#CostHandleName0Room25=0
+Set,#CostHandleName1Room25=0
+Set,#CostHandleName2Room25=0
+Set,#CostHandleName3Room25=0
+Set,#CostHandleName4Room25=0
+Set,#CostHandleName5Room25=0
+Set,#CostHandleName6Room25=0
+Set,#CostHandleName7Room25=0
+Set,#CostHandleName8Room25=0
+Set,#CostHandleName9Room25=0
+Set,#CodeHandleName0Room25=0
+Set,#CodeHandleName1Room25=0
+Set,#CodeHandleName2Room25=0
+Set,#CodeHandleName3Room25=0
+Set,#CodeHandleName4Room25=0
+Set,#CodeHandleName5Room25=0
+Set,#CodeHandleName6Room25=0
+Set,#CodeHandleName7Room25=0
+Set,#CodeHandleName8Room25=0
+Set,#CodeHandleName9Room25=0
+Set,#CountHandleName0Room25=0
+Set,#CountHandleName1Room25=0
+Set,#CountHandleName2Room25=0
+Set,#CountHandleName3Room25=0
+Set,#CountHandleName4Room25=0
+Set,#CountHandleName5Room25=0
+Set,#CountHandleName6Room25=0
+Set,#CountHandleName7Room25=0
+Set,#CountHandleName8Room25=0
+Set,#CountHandleName9Room25=0
+set,#Room25unitHWcost=0
+set,#Room25DoorHWCost=0
+
+
+Set,#Room25ClosetHardwareType= None
+Set, #Room25HandlePN=None
+Set, #Room25KnobPN=None
+Set,#Room25StdDoorHingeCount=0
+Set,#Room25OverlayDoorHingeCount=0
+Set,#Room25TopDoorHingeCount=0
+Set,#Room25BottomDoorHingeCount=0
+
+Set,#Room25notchdepth= 0
+Set,#Room25notchheight= 0
+set, #Room25notchdepthhasshoe=0
+
+
+Set,#Room25CTName=None
+Set,#Room25CTSqFt=0
+
+
+
+
+
+
+
+set,#lowerspannercount=0
+
+
+   Set,#TaxLevel1=0
+   Set,#TaxLevel2=0
+   Set,#TaxLevel3=0
+   Set,#TaxLevel4=0
+   Set,#TaxLevel5=0
+   Set,#TaxLevel6=0
+   Set,#TaxLevel7=0
+   Set,#TaxLevel8=0
+   Set,#TaxLevel9=0
+   Set,#TaxLevel10=0
+
+   
+   Set,#TaxName1=
+   Set,#TaxName2=
+   Set,#TaxName3=
+   Set,#TaxName4=
+   Set,#TaxName5=
+   Set,#TaxName6=
+   Set,#TaxName7=
+   Set,#TaxName8=
+   Set,#TaxName9=
+   Set,#TaxName10=
+
+set, #Room1railcoverlength=0
+set, #Room1raillength=0
+set, #Room2railcoverlength=0
+set, #Room2raillength=0
+set, #Room3railcoverlength=0
+set, #Room3raillength=0
+set, #Room4railcoverlength=0
+set, #Room4raillength=0
+set, #Room5railcoverlength=0
+set, #Room5raillength=0
+set, #Room6railcoverlength=0
+set, #Room6raillength=0
+set, #Room7railcoverlength=0
+set, #Room7raillength=0
+set, #Room8railcoverlength=0
+set, #Room8raillength=0
+set, #Room9railcoverlength=0
+set, #Room9raillength=0
+set, #Room10railcoverlength=0
+set, #Room10raillength=0
+set, #Room11railcoverlength=0
+set, #Room11raillength=0
+set, #Room12railcoverlength=0
+set, #Room12raillength=0
+set, #Room13railcoverlength=0
+set, #Room13raillength=0
+set, #Room14railcoverlength=0
+set, #Room14raillength=0
+set, #Room15railcoverlength=0
+set, #Room15raillength=0
+set, #Room16railcoverlength=0
+set, #Room16raillength=0
+set, #Room17railcoverlength=0
+set, #Room17raillength=0
+set, #Room18railcoverlength=0
+set, #Room18raillength=0
+set, #Room19railcoverlength=0
+set, #Room19raillength=0
+set, #Room20railcoverlength=0
+set, #Room20raillength=0
+set, #Room21railcoverlength=0
+set, #Room21raillength=0
+set, #Room22railcoverlength=0
+set, #Room22raillength=0
+set, #Room23railcoverlength=0
+set, #Room23raillength=0
+set, #Room24railcoverlength=0
+set, #Room24raillength=0
+set, #Room25railcoverlength=0
+set, #Room25raillength=0
+
+set, #temppanelcount=0
+
+Load, aa-initializeflex.pcb

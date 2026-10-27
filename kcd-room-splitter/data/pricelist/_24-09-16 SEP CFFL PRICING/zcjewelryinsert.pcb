@@ -1,0 +1,160 @@
+,Determine Cost of Jewelry Insert
+
+
+
+,DisplaySet,#ChargeOversizeinsertupsizew=24, ---------------------- Max width for no-upcharge (wider will be charged)?
+,DisplaySet,#ChargeOversizeinsertupsized=24, ---------------------- Max width for no-upcharge (wider will be charged)?
+   ,DisplaySet,#ChargeOversizeinsertpercent= .5, ---------------------- Percent to upcharge for oversize custom insert.
+
+
+load, V-jewelryinsertcost.pcb
+Set, #upcharge = 1
+Set, (w>#ChargeOversizeinsertupsizew):#upcharge=[1+#ChargeOversizeinsertpercentw]
+Set, (w>#ChargeOversizeinsertupsizew):#insertsize=over-size width:#insertsize=std-size
+Set, (d>#ChargeOversizeinsertupsized):#upcharge=[1+#ChargeOversizeinsertpercentd]
+Set, (d>#ChargeOversizeinsertupsized):#insertsize=over-size depth
+Set, ((w>#ChargeOversizeinsertupsizew)&(d>#ChargeOversizeinsertupsized)):#upcharge=[1+#ChargeOversizeinsertpercentw+#ChargeOversizeinsertpercentd]
+Set, ((w>#ChargeOversizeinsertupsizew)&(d>#ChargeOversizeinsertupsized)):#insertsize=over-size width and depth
+
+Do,(#UnitFileName="jewelryinsertVL.cab"):1
+{
+Set, #CostofJewelryInsert = #Velvetlinercost*#Upcharge
+Set, #Jewelryinserttype=Bottom 
+}
+Do,(#UnitFileName="JewelryinsertPFA.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabAcost
+Set, #Jewelryinserttype= #PrefabAname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="JewelryinsertPFB.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabBcost
+Set, #Jewelryinserttype= #PrefabBname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="JewelryinsertPFC.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabCcost
+Set, #Jewelryinserttype= #PrefabCname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="JewelryinsertPFD.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabDcost
+Set, #Jewelryinserttype= #PrefabDname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="JewelryinsertPFE.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabEcost
+Set, #Jewelryinserttype= #PrefabEname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="JewelryinsertPFF.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabFcost
+Set, #Jewelryinserttype= #PrefabFname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="JewelryinsertPFG.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabGcost
+Set, #Jewelryinserttype= #PrefabGname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="JewelryinsertPFH.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabHcost
+Set, #Jewelryinserttype= #PrefabHname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="JewelryinsertPFI.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabIcost
+Set, #Jewelryinserttype= #PrefabIname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="JewelryinsertPFX.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabXcost
+Set, #Jewelryinserttype= #PrefabXname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="JewelryinsertPFY.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabYcost
+Set, #Jewelryinserttype= #PrefabYname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="JewelryinsertPFZ.cab"):1
+{
+Set, #CostofJewelryInsert = #PrefabZcost
+Set, #Jewelryinserttype= #PrefabZname
+set, #insertsize=one-size
+}
+Do,(#UnitFileName="Jewelryinsert1.cab"):1
+{
+Set, #CostofJewelryInsert = #Custom1cost*#Upcharge
+Set, #Jewelryinserttype= #Custom1name
+}
+Do,(#UnitFileName="Jewelryinsert2.cab"):1
+{
+Set, #CostofJewelryInsert = #Custom2cost*#Upcharge
+Set, #Jewelryinserttype= #Custom2name
+}
+Do,(#UnitFileName="Jewelryinsert3.cab"):1
+{
+Set, #CostofJewelryInsert = #Custom3cost*#Upcharge
+Set, #Jewelryinserttype= #Custom3name
+}
+Do,(#UnitFileName="Jewelryinsert4.cab"):1
+{
+Set, #CostofJewelryInsert = #Custom4cost*#Upcharge
+Set, #Jewelryinserttype= #Custom4name
+}
+Do,(#UnitFileName="Jewelryinsert5.cab"):1
+{
+Set, #CostofJewelryInsert = #Custom5cost*#Upcharge
+Set, #Jewelryinserttype= #Custom5name
+}
+Do,(#UnitFileName="Jewelryinsert6.cab"):1
+{
+Set, #CostofJewelryInsert = #Custom6cost*#Upcharge
+Set, #Jewelryinserttype= #Custom6name
+}
+Do,(#UnitFileName="Jewelryinsert7.cab"):1
+{
+Set, #CostofJewelryInsert = #Custom7cost*#Upcharge
+Set, #Jewelryinserttype= #Custom7name
+}
+Do,(#UnitFileName="Jewelryinsert8.cab"):1
+{
+Set, #CostofJewelryInsert = #Custom8cost*#Upcharge
+Set, #Jewelryinserttype= #Custom8name
+}
+Do,(#UnitFileName="Jewelryinsert9.cab"):1
+{
+Set, #CostofJewelryInsert = #Custom9cost*#Upcharge
+Set, #Jewelryinserttype= #Custom9name
+}
+Do,(#UnitFileName="Jewelryinsert10.cab"):1
+{
+Set, #CostofJewelryInsert = #Custom10cost*#Upcharge
+Set, #Jewelryinserttype= #Custom10name
+}
+Do,(#UnitFileName="JewelryinsertMV.cab"):1
+{
+Set, #CostofJewelryInsert = #CustomMVcost*#Upcharge
+Set, #Jewelryinserttype= Men's Valet
+}
+Do,(#UnitFileName="JewelryinsertCV.cab"):1
+{
+Set, #CostofJewelryInsert = #CustomCVcost*#Upcharge
+Set, #Jewelryinserttype= Custom Design
+}
+
+
+,******** ALL JEWELRY INSERTS ************
+Price, 1,   RM#Roomnum #Name-#Jewelryinserttype-#insertsize,      #CostofJewelryInsert*#universalupcharge,             W, d,          #ValetrodPrintOrderNumber,     
+,************************************

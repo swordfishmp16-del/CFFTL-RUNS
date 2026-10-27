@@ -1,0 +1,201 @@
+set,#linealtotal=[#linealtotal+(#unitlineal*num)]
+set,#squaretotal=[#squaretotal+(#unitsquare*num)]
+set,#cubictotal=[#cubictotal+(#unitcubic*num)]
+set,#NumofUnits=[#NumofUnits + num]
+
+
+,For Top Cabinets
+do, (t>=100) & (t<200) & (t<>150):1
+{
+set,#WallLinealTotal=[#WallLinealTotal+(#unitlineal*num)]
+set,#WallSquareTotal=[#WallSquareTotal+(#unitsquare*num)]
+set,#WallCubicTotal=[#WallCubicTotal+(#unitcubic*num)]
+set,#WallNumofUnits=[#WallNumofUnits + num]
+
+}
+
+,For Base Cabinets
+do, (t>=200) & (t<300)&(t<>230):1
+{
+set,#BaseLinealTotal=[#BaseLinealTotal+(#unitlineal*num)]
+set,#BaseSquareTotal=[#BaseSquareTotal+(#unitsquare*num)]
+set,#BaseCubicTotal=[#BaseCubicTotal+(#unitcubic*num)]
+set,#BaseNumofUnits=[#BaseNumofUnits + num]
+
+}
+
+,Base Fillers
+do, (t=230)&(#Ztype="231"):1
+{
+set,#BaseLinealTotal=[#BaseLinealTotal+(#unitlineal*num)]
+set,#BaseSquareTotal=[#BaseSquareTotal+(#unitsquare*num)]
+set,#BaseCubicTotal=[#BaseCubicTotal+(#unitcubic*num)]
+set,#BaseNumofUnits=[#BaseNumofUnits + num]
+
+}
+
+
+,Tall Fillers
+do, (t=230)&(#Ztype="234"):1
+{
+set,#TallLinealTotal=[#TallLinealTotal+(#unitlineal*num)]
+set,#TallSquareTotal=[#TallSquareTotal+(#unitsquare*num)]
+set,#TallCubicTotal=[#TallCubicTotal+(#unitcubic*num)]
+set,#TallNumofUnits=[#TallNumofUnits + num]
+
+}
+
+,For Tall Cabinets
+do, (t>=300) & (t<400):1
+{
+set,#TallLinealTotal=[#TallLinealTotal+(#unitlineal*num)]
+set,#TallSquareTotal=[#TallSquareTotal+(#unitsquare*num)]
+set,#TallCubicTotal=[#TallCubicTotal+(#unitcubic*num)]
+set,#TallNumofUnits=[#TallNumofUnits + num]
+
+}
+
+,For All Cabinets
+do,  (t<400)& (t<>150)&(t>99):1
+{
+set,#AllLinealTotal=[#AllLinealTotal+(#unitlineal*num)]
+set,#AllSquareTotal=[#AllSquareTotal+(#unitsquare*num)]
+set,#AllCubicTotal=[#AllCubicTotal+(#unitcubic*num)]
+set,#AllNumofUnits=[#AllNumofUnits + num]
+
+}
+
+
+,For Other Units
+do, ((t>=400)&(t<600)) | (t>=800) | (t=150) :1
+{
+set,#OtherLinealTotal=[#OtherLinealTotal+(#unitlineal*num)]
+set,#OtherSquareTotal=[#OtherSquareTotal+(#unitsquare*num)]
+set,#OtherCubicTotal=[#OtherCubicTotal+(#unitcubic*num)]
+set,#OtherNumofUnits=[#OtherNumofUnits + num]
+
+}
+
+,For Panels Cabinets
+do, (t>=400)&(t<=550) :1
+{
+set,#PanelLinealTotal=[#PanelLinealTotal+(#unitlineal*num)]
+set,#PanelSquareTotal=[#PanelSquareTotal+(#unitsquare*num)]
+set,#PanelCubicTotal=[#PanelCubicTotal+(#unitcubic*num)]
+set,#PanelNumofUnits=[#PanelNumofUnits + num]
+
+}
+
+,For Top Panels Cabinets
+do, (t=400) | (T=410) | (T=480):1
+{
+set,#WallPanelLinealTotal=[#WallPanelLinealTotal+(#unitlineal*num)]
+set,#WallPanelSquareTotal=[#WallPanelSquareTotal+(#unitsquare*num)]
+set,#WallPanelCubicTotal=[#WallPanelCubicTotal+(#unitcubic*num)]
+set,#WallPanelNumofUnits=[#WallPanelNumofUnits + num]
+
+}
+
+,For Base Panels Cabinets
+do, (t=450) | (T=460) | (T=500):1
+{
+set,#BasePanelLinealTotal=[#BasePanelLinealTotal+(#unitlineal*num)]
+set,#BasePanelSquareTotal=[#BasePanelSquareTotal+(#unitsquare*num)]
+set,#BasePanelCubicTotal=[#BasePanelCubicTotal+(#unitcubic*num)]
+set,#BasePanelNumofUnits=[#BasePanelNumofUnits + num]
+
+}
+
+,For Tall Panels Cabinets
+do, (t=550):1
+{
+set,#TallPanelLinealTotal=[#TallPanelLinealTotal+(#unitlineal*num)]
+set,#TallPanelSquareTotal=[#TallPanelSquareTotal+(#unitsquare*num)]
+set,#TallPanelCubicTotal=[#TallPanelCubicTotal+(#unitcubic*num)]
+set,#TallPanelNumofUnits=[#TallPanelNumofUnits + num]
+
+}
+
+
+,For All Closet Units
+do, (t>=600)&(t<800):1
+{
+set,#AllClosetLinealTotal=[#AllClosetLinealTotal+(#unitlineal*num)]
+set,#AllClosetSquareTotal=[#AllClosetSquareTotal+(#unitsquare*num)]
+set,#AllClosetCubicTotal=[#AllClosetCubicTotal+(#unitcubic*num)]
+set,#AllClosetNumofUnits=[#AllClosetNumofUnits + num]
+
+}
+
+,For Closet Wall Hangs/Drawers
+do, ((t>=601)&(t<604)) | (T=620):1
+{
+set,#ClosetWallHangLinealTotal=[#ClosetWallHangLinealTotal+(#unitlineal*num)]
+set,#ClosetWallHangSquareTotal=[#ClosetWallHangSquareTotal+(#unitsquare*num)]
+set,#ClosetWallHangCubicTotal=[#ClosetWallHangCubicTotal+(#unitcubic*num)]
+set,#ClosetWallHangNumofUnits=[#ClosetWallHangNumofUnits + num]
+
+}
+
+,For Closet Shelf/Cubby Modules
+do, (t>=610)&(t<616):1
+{
+set,#ClosetShelfLinealTotal=[#ClosetShelfLinealTotal+(#unitlineal*num)]
+set,#ClosetShelfSquareTotal=[#ClosetShelfSquareTotal+(#unitsquare*num)]
+set,#ClosetShelfCubicTotal=[#ClosetShelfCubicTotal+(#unitcubic*num)]
+set,#ClosetShelfNumofUnits=[#ClosetShelfNumofUnits + num]
+
+}
+
+
+
+,For Closet Floor Hangs
+do, (t>=651)&(t<654):1
+{
+set,#ClosetFloorHangLinealTotal=[#ClosetFloorHangLinealTotal+(#unitlineal*num)]
+set,#ClosetFloorHangSquareTotal=[#ClosetFloorHangSquareTotal+(#unitsquare*num)]
+set,#ClosetFloorHangCubicTotal=[#ClosetFloorHangCubicTotal+(#unitcubic*num)]
+set,#ClosetFloorHangNumofUnits=[#ClosetFloorHangNumofUnits + num]
+
+}
+
+,For Closet Pieces
+do, (t>=630)&(t<650):1
+{
+set,#ClosetPiecesLinealTotal=[#ClosetPiecesLinealTotal+(#unitlineal*num)]
+set,#ClosetPiecesSquareTotal=[#ClosetPiecesSquareTotal+(#unitsquare*num)]
+set,#ClosetPiecesCubicTotal=[#ClosetPiecesCubicTotal+(#unitcubic*num)]
+set,#ClosetPiecesNumofUnits=[#ClosetPiecesNumofUnits + num]
+
+}
+
+
+,For Closet Wire Baskets
+do, (t=750):1
+{
+set,#ClosetBasketLinealTotal=[#ClosetBasketLinealTotal+(#unitlineal*num)]
+set,#ClosetBasketSquareTotal=[#ClosetBasketSquareTotal+(#unitsquare*num)]
+set,#ClosetBasketCubicTotal=[#ClosetBasketCubicTotal+(#unitcubic*num)]
+set,#ClosetBasketNumofUnits=[#ClosetBasketNumofUnits + num]
+
+}
+
+,For Closet Units, no pieces no accessories no wires
+do, (t>=600)&(t<>630)&(t<>641)&(t<>642)&(t<>643)&(t<>644)&(t<>645)&(t<>646)&(t<>647)&(t<>661)&(t<>662)&(t<>663)&(t<700):1
+{
+set,#ClosetUnitLinealTotal=[#ClosetUnitLinealTotal+(#unitlineal*num)]
+set,#ClosetUnitSquareTotal=[#ClosetUnitSquareTotal+(#unitsquare*num)]
+set,#ClosetUnitCubicTotal=[#ClosetUnitCubicTotal+(#unitcubic*num)]
+set,#ClosetUnitNumofUnits=[#ClosetUnitNumofUnits + num]
+
+}
+
+,For All Cabinets/Closets
+do,  ((t>99)&(t<>150)&(t<400)) | ((t>=600)&(t<>630)&(t<>641)&(t<>642)&(t<>643)&(t<>644)&(t<>645)&(t<>646)&(t<>647)&(t<>661)&(t<>662)&(t<>663)&(t<700)) :1
+{
+set,#AllCabClosetLinealTotal=[#AllCabClosetLinealTotal+(#unitlineal*num)]
+set,#AllCabClosetSquareTotal=[#AllCabClosetSquareTotal+(#unitsquare*num)]
+set,#AllCabClosetCubicTotal=[#AllCabClosetCubicTotal+(#unitcubic*num)]
+set,#AllCabClosetNumofUnits=[#AllCabClosetNumofUnits + num]
+
+}

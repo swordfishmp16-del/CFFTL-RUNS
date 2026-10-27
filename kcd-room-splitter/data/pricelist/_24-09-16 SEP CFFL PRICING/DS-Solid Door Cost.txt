@@ -1,0 +1,996 @@
+,Use Grid
+,** These doors are priced by ft2
+
+,DisplaySet,#SolidDoorDrawerTypeName4=Adobe Solid Paint Grade,         Door Drawer Type 4 Name
+DisplaySet,#SolidDoorDrawerTypeCostFactor4=24, 1.4   #DoorDrawerTypeName4 Door Drawer Type Cost Factor
+,**
+,DisplaySet,#SolidDoorDrawerTypeName5=Adobe Solid Alder,         Door Drawer Type 5 Name
+DisplaySet,#SolidDoorDrawerTypeCostFactor5=33, 1.5   #DoorDrawerTypeName5 Door Drawer Type Cost Factor
+,**
+,DisplaySet,#SolidDoorDrawerTypeName6=Adobe Solid Maple,         Door Drawer Type 6 Name
+DisplaySet,#SolidDoorDrawerTypeCostFactor6=46, 1.6   #DoorDrawerTypeName6 Door Drawer Type Cost Factor
+,**
+,DisplaySet,#SolidDoorDrawerTypeName7=Adobe Solid Red Oak,         Door Drawer Type 7 Name
+DisplaySet,#SolidDoorDrawerTypeCostFactor7=34, 1.7   #DoorDrawerTypeName7 Door Drawer Type Cost Factor
+,**
+,DisplaySet,#SolidDoorDrawerTypeName8=Adobe Solid Cherry,         Door Drawer Type 8 Name
+DisplaySet,#SolidDoorDrawerTypeCostFactor8=54, 1.8   #DoorDrawerTypeName8 Door Drawer Type Cost Factor
+,**
+Do,(1=2):1
+{
+DisplaySet,#DoorDrawerTypeName9=Embassy Paint Grade,         Door Drawer Type 9 Name
+DisplaySet,#DoorDrawerTypeCostFactor9=38, 1.9   #DoorDrawerTypeName9 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName10=Embassy Alder,         Door Drawer Type 10 Name
+DisplaySet,#DoorDrawerTypeCostFactor10=47, 1.10   #DoorDrawerTypeName10 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName11=Embassy Maple,         Door Drawer Type 11 Name
+DisplaySet,#DoorDrawerTypeCostFactor11=58, 1.11   #DoorDrawerTypeName11 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName12=Embassy Red Oak,         Door Drawer Type 12 Name
+DisplaySet,#DoorDrawerTypeCostFactor12=46, 1.12   #DoorDrawerTypeName12 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName13=Embassy Cherry,         Door Drawer Type 13 Name
+DisplaySet,#DoorDrawerTypeCostFactor13=66, 1.13   #DoorDrawerTypeName13 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName14=Fiesta Paint Grade,         Door Drawer Type 14 Name
+DisplaySet,#DoorDrawerTypeCostFactor14=38, 1.14   #DoorDrawerTypeName14 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName15=Fiesta Alder,         Door Drawer Type 15 Name
+DisplaySet,#DoorDrawerTypeCostFactor15=47, 1.15   #DoorDrawerTypeName15 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName16=Fiesta Maple,         Door Drawer Type 16 Name
+DisplaySet,#DoorDrawerTypeCostFactor16=58, 1.16   #DoorDrawerTypeName16 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName17=Fiesta Red Oak,         Door Drawer Type 17 Name
+DisplaySet,#DoorDrawerTypeCostFactor17=46, 1.17   #DoorDrawerTypeName17 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName18=Fiesta Cherry,         Door Drawer Type 18 Name
+DisplaySet,#DoorDrawerTypeCostFactor18=66, 1.18   #DoorDrawerTypeName18 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName19=Heritage Paint Grade,         Door Drawer Type 19 Name
+DisplaySet,#DoorDrawerTypeCostFactor19=38, 1.19   #DoorDrawerTypeName19 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName20=Heritage Alder,         Door Drawer Type 20 Name
+DisplaySet,#DoorDrawerTypeCostFactor20=47, 1.20   #DoorDrawerTypeName20 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName21=Heritage Maple,         Door Drawer Type 21 Name
+DisplaySet,#DoorDrawerTypeCostFactor21=58, 1.21   #DoorDrawerTypeName21 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName22=Hertage Red Oak,         Door Drawer Type 22 Name
+DisplaySet,#DoorDrawerTypeCostFactor22=46, 1.22   #DoorDrawerTypeName22 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName23=Heritage Cherry,         Door Drawer Type 23 Name
+DisplaySet,#DoorDrawerTypeCostFactor23=66, 1.23   #DoorDrawerTypeName23 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName24=Mission Paint Grade,         Door Drawer Type 24 Name
+DisplaySet,#DoorDrawerTypeCostFactor24=38, 1.24   #DoorDrawerTypeName24 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName25=Mission Alder,         Door Drawer Type 25 Name
+DisplaySet,#DoorDrawerTypeCostFactor25=47, 1.25   #DoorDrawerTypeName25 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName26=Mission Maple,         Door Drawer Type 26 Name
+DisplaySet,#DoorDrawerTypeCostFactor26=58, 1.26   #DoorDrawerTypeName26 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName27=Mission Red Oak,         Door Drawer Type 27 Name
+DisplaySet,#DoorDrawerTypeCostFactor27=46, 1.27   #DoorDrawerTypeName27 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName28=Mission Cherry,         Door Drawer Type 28 Name
+DisplaySet,#DoorDrawerTypeCostFactor28=66, 1.28   #DoorDrawerTypeName28 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName29=Canyon Paint Grade,         Door Drawer Type 29 Name
+DisplaySet,#DoorDrawerTypeCostFactor29=38, 1.29   #DoorDrawerTypeName29 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName30=Canyon Alder,         Door Drawer Type 30 Name
+DisplaySet,#DoorDrawerTypeCostFactor30=47, 1.30   #DoorDrawerTypeName30 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName31=Canyon Maple,         Door Drawer Type 31 Name
+DisplaySet,#DoorDrawerTypeCostFactor31=58, 1.31   #DoorDrawerTypeName31 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName32=Canyon Red Oak,         Door Drawer Type 32 Name
+DisplaySet,#DoorDrawerTypeCostFactor32=46, 1.32   #DoorDrawerTypeName32 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName33=Canyon Cherry,         Door Drawer Type 33 Name
+DisplaySet,#DoorDrawerTypeCostFactor33=66, 1.33   #DoorDrawerTypeName33 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName34=Normandie Paint Grade,         Door Drawer Type 34 Name
+DisplaySet,#DoorDrawerTypeCostFactor34=38, 1.34   #DoorDrawerTypeName34 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName35=Normandie Alder,         Door Drawer Type 35 Name
+DisplaySet,#DoorDrawerTypeCostFactor35=47, 1.35   #DoorDrawerTypeName35 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName36=Normandie Maple,         Door Drawer Type 36 Name
+DisplaySet,#DoorDrawerTypeCostFactor36=58, 1.36   #DoorDrawerTypeName36 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName37=Normandie Red Oak,         Door Drawer Type 37 Name
+DisplaySet,#DoorDrawerTypeCostFactor37=46, 1.37   #DoorDrawerTypeName37 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName38=Normandie Cherry,         Door Drawer Type 38 Name
+DisplaySet,#DoorDrawerTypeCostFactor38=66, 1.38   #DoorDrawerTypeName38 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName39=Revere Paint Grade,         Door Drawer Type 39 Name
+DisplaySet,#DoorDrawerTypeCostFactor39=38, 1.39   #DoorDrawerTypeName39 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName40=Revere Alder,         Door Drawer Type 40 Name
+DisplaySet,#DoorDrawerTypeCostFactor40=47, 1.40   #DoorDrawerTypeName40 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName41=Revere Maple,         Door Drawer Type 41 Name
+DisplaySet,#DoorDrawerTypeCostFactor41=58, 1.41   #DoorDrawerTypeName41 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName42=Revere Red Oak,         Door Drawer Type 42 Name
+DisplaySet,#DoorDrawerTypeCostFactor42=46, 1.42   #DoorDrawerTypeName42 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName43=Revere Cherry,         Door Drawer Type 43 Name
+DisplaySet,#DoorDrawerTypeCostFactor43=66, 1.43   #DoorDrawerTypeName43 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName44=Shaker Paint Grade,         Door Drawer Type 44 Name
+DisplaySet,#DoorDrawerTypeCostFactor44=38, 1.44   #DoorDrawerTypeName44 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName45=Shaker Alder,         Door Drawer Type 45 Name
+DisplaySet,#DoorDrawerTypeCostFactor45=47, 1.45   #DoorDrawerTypeName45 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName46=Shaker Maple,         Door Drawer Type 46 Name
+DisplaySet,#DoorDrawerTypeCostFactor46=58, 1.46   #DoorDrawerTypeName46 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName47=Shaker Red Oak,         Door Drawer Type 47 Name
+DisplaySet,#DoorDrawerTypeCostFactor47=46, 1.47   #DoorDrawerTypeName47 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName48=Shaker Cherry,         Door Drawer Type 48 Name
+DisplaySet,#DoorDrawerTypeCostFactor48=66, 1.48   #DoorDrawerTypeName48 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName49=Tacoma Paint Grade,         Door Drawer Type 49 Name
+DisplaySet,#DoorDrawerTypeCostFactor49=38, 1.49   #DoorDrawerTypeName49 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName50=Tacoma Alder,         Door Drawer Type 50 Name
+DisplaySet,#DoorDrawerTypeCostFactor50=47, 1.50   #DoorDrawerTypeName50 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName51=Tacoma Maple,         Door Drawer Type 51 Name
+DisplaySet,#DoorDrawerTypeCostFactor51=58, 1.51   #DoorDrawerTypeName51 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName52=Tacoma Red Oak,         Door Drawer Type 52 Name
+DisplaySet,#DoorDrawerTypeCostFactor52=46, 1.52   #DoorDrawerTypeName52 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName53=Tacoma Cherry,         Door Drawer Type 53 Name
+DisplaySet,#DoorDrawerTypeCostFactor53=66, 1.53   #DoorDrawerTypeName53 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName54=Victoria Paint Grade,         Door Drawer Type 54 Name
+DisplaySet,#DoorDrawerTypeCostFactor54=38, 1.54   #DoorDrawerTypeName54 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName55=Victoria Alder,         Door Drawer Type 55 Name
+DisplaySet,#DoorDrawerTypeCostFactor55=47, 1.55   #DoorDrawerTypeName55 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName56=Victoria Maple,         Door Drawer Type 56 Name
+DisplaySet,#DoorDrawerTypeCostFactor56=58, 1.56   #DoorDrawerTypeName56 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName57=Victoria Red Oak,         Door Drawer Type 57 Name
+DisplaySet,#DoorDrawerTypeCostFactor57=46, 1.57   #DoorDrawerTypeName57 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName58=Victoria Cherry,         Door Drawer Type 58 Name
+DisplaySet,#DoorDrawerTypeCostFactor58=66, 1.58   #DoorDrawerTypeName58 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName59=Windsor Paint Grade,         Door Drawer Type 59 Name
+DisplaySet,#DoorDrawerTypeCostFactor59=38, 1.59   #DoorDrawerTypeName59 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName60=Windsor Alder,         Door Drawer Type 60 Name
+DisplaySet,#DoorDrawerTypeCostFactor60=47, 1.60   #DoorDrawerTypeName60 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName61=Windsor Maple,         Door Drawer Type 61 Name
+DisplaySet,#DoorDrawerTypeCostFactor61=58, 1.61   #DoorDrawerTypeName61 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName62=Windsor Red Oak,         Door Drawer Type 62 Name
+DisplaySet,#DoorDrawerTypeCostFactor62=46, 1.62   #DoorDrawerTypeName62 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName63=Windsor Cherry,         Door Drawer Type 63 Name
+DisplaySet,#DoorDrawerTypeCostFactor63=66, 1.63   #DoorDrawerTypeName63 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName64=Camden Paint Grade,         Door Drawer Type 64 Name
+DisplaySet,#DoorDrawerTypeCostFactor64=55, 1.64   #DoorDrawerTypeName64 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName65=Camden Alder,         Door Drawer Type 65 Name
+DisplaySet,#DoorDrawerTypeCostFactor65=58, 1.65   #DoorDrawerTypeName65 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName66=Camden Maple,         Door Drawer Type 66 Name
+DisplaySet,#DoorDrawerTypeCostFactor66=75, 1.66   #DoorDrawerTypeName66 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName67=Camden Red Oak,         Door Drawer Type 67 Name
+DisplaySet,#DoorDrawerTypeCostFactor67=63, 1.67   #DoorDrawerTypeName67 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName68=Camden Cherry,         Door Drawer Type 68 Name
+DisplaySet,#DoorDrawerTypeCostFactor68=92, 1.68   #DoorDrawerTypeName68 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName69=Fallbrook Paint Grade,         Door Drawer Type 69 Name
+DisplaySet,#DoorDrawerTypeCostFactor69=55, 1.69   #DoorDrawerTypeName69 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName70=Fallbrook Alder,         Door Drawer Type 70 Name
+DisplaySet,#DoorDrawerTypeCostFactor70=58, 1.70   #DoorDrawerTypeName70 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName71=Fallbrook Maple,         Door Drawer Type 71 Name
+DisplaySet,#DoorDrawerTypeCostFactor71=75, 1.71   #DoorDrawerTypeName71 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName72=Fallbrook Red Oak,         Door Drawer Type 72 Name
+DisplaySet,#DoorDrawerTypeCostFactor72=63, 1.72   #DoorDrawerTypeName72 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName73=Fallbrook Cherry,         Door Drawer Type 73 Name
+DisplaySet,#DoorDrawerTypeCostFactor73=92, 1.73   #DoorDrawerTypeName73 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName74=Freedom Paint Grade,         Door Drawer Type 74 Name
+DisplaySet,#DoorDrawerTypeCostFactor74=55, 1.74   #DoorDrawerTypeName74 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName75=Freedom Alder,         Door Drawer Type 75 Name
+DisplaySet,#DoorDrawerTypeCostFactor75=58, 1.75   #DoorDrawerTypeName75 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName76=Freedom Maple,         Door Drawer Type 76 Name
+DisplaySet,#DoorDrawerTypeCostFactor76=75, 1.76   #DoorDrawerTypeName76 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName77=Freedom Red Oak,         Door Drawer Type 77 Name
+DisplaySet,#DoorDrawerTypeCostFactor77=63, 1.77   #DoorDrawerTypeName77 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName78=Freedom Cherry,         Door Drawer Type 78 Name
+DisplaySet,#DoorDrawerTypeCostFactor78=92, 1.78   #DoorDrawerTypeName78 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName79=Liberty Paint Grade,         Door Drawer Type 79 Name
+DisplaySet,#DoorDrawerTypeCostFactor79=55, 1.79   #DoorDrawerTypeName79 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName80=Liberty Alder,         Door Drawer Type 80 Name
+DisplaySet,#DoorDrawerTypeCostFactor80=58, 1.80   #DoorDrawerTypeName80 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName81=Liberty Maple,         Door Drawer Type 81 Name
+DisplaySet,#DoorDrawerTypeCostFactor81=75, 1.81   #DoorDrawerTypeName81 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName82=Liberty Red Oak ,         Door Drawer Type 82 Name
+DisplaySet,#DoorDrawerTypeCostFactor82=63, 1.82   #DoorDrawerTypeName82 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName83=Liberty Cherry,         Door Drawer Type 83 Name
+DisplaySet,#DoorDrawerTypeCostFactor83=92, 1.83   #DoorDrawerTypeName83 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName84=Malibu Paint Grade,         Door Drawer Type 84 Name
+DisplaySet,#DoorDrawerTypeCostFactor84=55, 1.84   #DoorDrawerTypeName84 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName85=Malibu Alder,         Door Drawer Type 85 Name
+DisplaySet,#DoorDrawerTypeCostFactor85=58, 1.85   #DoorDrawerTypeName85 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName86=Malibu Maple,         Door Drawer Type 86 Name
+DisplaySet,#DoorDrawerTypeCostFactor86=75, 1.86   #DoorDrawerTypeName86 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName87=Malibu Red Oak,         Door Drawer Type 87 Name
+DisplaySet,#DoorDrawerTypeCostFactor87=63, 1.87   #DoorDrawerTypeName87 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName88=Malibu Cherry,         Door Drawer Type 88 Name
+DisplaySet,#DoorDrawerTypeCostFactor88=92, 1.88   #DoorDrawerTypeName88 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName89=Maverick Paint Grade,         Door Drawer Type 89 Name
+DisplaySet,#DoorDrawerTypeCostFactor89=55, 1.89   #DoorDrawerTypeName89 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName90=Maverick Alder,         Door Drawer Type 90 Name
+DisplaySet,#DoorDrawerTypeCostFactor90=58, 1.90   #DoorDrawerTypeName90 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName91=Maverick Maple,         Door Drawer Type 91 Name
+DisplaySet,#DoorDrawerTypeCostFactor91=75, 1.91   #DoorDrawerTypeName91 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName92=Maverick Red Oak,         Door Drawer Type 92 Name
+DisplaySet,#DoorDrawerTypeCostFactor92=63, 1.92   #DoorDrawerTypeName92 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName93=Maverick Cherry,         Door Drawer Type 93 Name
+DisplaySet,#DoorDrawerTypeCostFactor93=92, 1.93   #DoorDrawerTypeName93 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName94=Patriot Paint Grade,         Door Drawer Type 94 Name
+DisplaySet,#DoorDrawerTypeCostFactor94=55, 1.94   #DoorDrawerTypeName94 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName95=Patriot Alder,         Door Drawer Type 95 Name
+DisplaySet,#DoorDrawerTypeCostFactor95=58, 1.95   #DoorDrawerTypeName95 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName96=Patriot Maple,         Door Drawer Type 96 Name
+DisplaySet,#DoorDrawerTypeCostFactor96=75, 1.96   #DoorDrawerTypeName96 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName97=Patriot Red Oak,         Door Drawer Type 97 Name
+DisplaySet,#DoorDrawerTypeCostFactor97=63, 1.97   #DoorDrawerTypeName97 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName98=Patriot Cherry,         Door Drawer Type 98 Name
+DisplaySet,#DoorDrawerTypeCostFactor98=92, 1.98   #DoorDrawerTypeName98 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName99=Pueblo Paint Grade,         Door Drawer Type 99 Name
+DisplaySet,#DoorDrawerTypeCostFactor99=55, 1.99   #DoorDrawerTypeName99 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName100=Pueblo Alder,         Door Drawer Type 100 Name
+DisplaySet,#DoorDrawerTypeCostFactor100=58, 1.100   #DoorDrawerTypeName100 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName101=Pueblo Maple,         Door Drawer Type 101 Name
+DisplaySet,#DoorDrawerTypeCostFactor101=75, 1.101   #DoorDrawerTypeName101 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName102=Pueblo Red Oak,         Door Drawer Type 102 Name
+DisplaySet,#DoorDrawerTypeCostFactor102=63, 1.102   #DoorDrawerTypeName102 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName103=Pueblo Cherry,         Door Drawer Type 103 Name
+DisplaySet,#DoorDrawerTypeCostFactor103=92, 1.103   #DoorDrawerTypeName103 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName104=Trenton Paint Grade,         Door Drawer Type 104 Name
+DisplaySet,#DoorDrawerTypeCostFactor104=55, 1.104   #DoorDrawerTypeName104 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName105=Trenton Alder,         Door Drawer Type 105 Name
+DisplaySet,#DoorDrawerTypeCostFactor105=58, 1.105   #DoorDrawerTypeName105 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName106=Trenton Maple,         Door Drawer Type 106 Name
+DisplaySet,#DoorDrawerTypeCostFactor106=75, 1.106   #DoorDrawerTypeName106 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName107=Trenton Red Oak,         Door Drawer Type 107 Name
+DisplaySet,#DoorDrawerTypeCostFactor107=63, 1.107   #DoorDrawerTypeName107 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName108=Trenton Cherry,         Door Drawer Type 108 Name
+DisplaySet,#DoorDrawerTypeCostFactor108=92, 1.108   #DoorDrawerTypeName108 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName109=Brighton Paint Grade,         Door Drawer Type 109 Name
+DisplaySet,#DoorDrawerTypeCostFactor109=65, 1.109   #DoorDrawerTypeName109 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName110=Brighton Alder,         Door Drawer Type 110 Name
+DisplaySet,#DoorDrawerTypeCostFactor110=72, 1.110   #DoorDrawerTypeName110 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName111=Brighton Maple,         Door Drawer Type 111 Name
+DisplaySet,#DoorDrawerTypeCostFactor111=96, 1.111   #DoorDrawerTypeName111 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName112=Brighton Red Oak,         Door Drawer Type 112 Name
+DisplaySet,#DoorDrawerTypeCostFactor112=75, 1.112   #DoorDrawerTypeName112 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName113=Brighton Cherry,         Door Drawer Type 113 Name
+DisplaySet,#DoorDrawerTypeCostFactor113=106, 1.113   #DoorDrawerTypeName113 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName114=Cascade Paint Grade,         Door Drawer Type 114 Name
+DisplaySet,#DoorDrawerTypeCostFactor114=65, 1.114   #DoorDrawerTypeName114 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName115=Cascade Alder,         Door Drawer Type 115 Name
+DisplaySet,#DoorDrawerTypeCostFactor115=72, 1.115   #DoorDrawerTypeName115 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName116=Cascade Maple,         Door Drawer Type 116 Name
+DisplaySet,#DoorDrawerTypeCostFactor116=96, 1.116   #DoorDrawerTypeName116 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName117=Cascade Red Oak,         Door Drawer Type 117 Name
+DisplaySet,#DoorDrawerTypeCostFactor117=75, 1.117   #DoorDrawerTypeName117 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName118=Cascade Cherry,         Door Drawer Type 118 Name
+DisplaySet,#DoorDrawerTypeCostFactor118=106, 1.118   #DoorDrawerTypeName118 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName119=Delaware Paint Grade,         Door Drawer Type 119 Name
+DisplaySet,#DoorDrawerTypeCostFactor119=65, 1.119   #DoorDrawerTypeName119 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName120=Delaware Alder,         Door Drawer Type 120 Name
+DisplaySet,#DoorDrawerTypeCostFactor120=72, 1.120   #DoorDrawerTypeName120 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName121=Delaware Maple,         Door Drawer Type 121 Name
+DisplaySet,#DoorDrawerTypeCostFactor121=96, 1.121   #DoorDrawerTypeName121 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName122=Delaware Red Oak,         Door Drawer Type 122 Name
+DisplaySet,#DoorDrawerTypeCostFactor122=75, 1.122   #DoorDrawerTypeName122 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName123=Delaware Cherry,         Door Drawer Type 123 Name
+DisplaySet,#DoorDrawerTypeCostFactor123=106, 1.123   #DoorDrawerTypeName123 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName124=Manhattan Paint Grade,         Door Drawer Type 124 Name
+DisplaySet,#DoorDrawerTypeCostFactor124=65, 1.124   #DoorDrawerTypeName124 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName125=Manhattan Alder,         Door Drawer Type 125 Name
+DisplaySet,#DoorDrawerTypeCostFactor125=72, 1.125   #DoorDrawerTypeName125 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName126=Manhattan Maple,         Door Drawer Type 126 Name
+DisplaySet,#DoorDrawerTypeCostFactor126=96, 1.126   #DoorDrawerTypeName126 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName127=Manhattan Red Oak,         Door Drawer Type 127 Name
+DisplaySet,#DoorDrawerTypeCostFactor127=75, 1.127   #DoorDrawerTypeName127 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName128=Manhattan Cherry,         Door Drawer Type 128 Name
+DisplaySet,#DoorDrawerTypeCostFactor128=106, 1.128   #DoorDrawerTypeName128 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName129=San Marino Paint Grade,         Door Drawer Type 129 Name
+DisplaySet,#DoorDrawerTypeCostFactor129=65, 1.129   #DoorDrawerTypeName129 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName130=San Marino Alder,         Door Drawer Type 130 Name
+DisplaySet,#DoorDrawerTypeCostFactor130=72, 1.130   #DoorDrawerTypeName130 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName131=San Marino Maple,         Door Drawer Type 131 Name
+DisplaySet,#DoorDrawerTypeCostFactor131=96, 1.131   #DoorDrawerTypeName131 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName132=San Marino Red Oak,         Door Drawer Type 132 Name
+DisplaySet,#DoorDrawerTypeCostFactor132=75, 1.132   #DoorDrawerTypeName132 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName133=San Marino Cherry,         Door Drawer Type 133 Name
+DisplaySet,#DoorDrawerTypeCostFactor133=106, 1.133   #DoorDrawerTypeName133 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName134=Studio Paint Grade,         Door Drawer Type 134 Name
+DisplaySet,#DoorDrawerTypeCostFactor134=65, 1.134   #DoorDrawerTypeName134 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName135=Studio Alder,         Door Drawer Type 135 Name
+DisplaySet,#DoorDrawerTypeCostFactor135=72, 1.135   #DoorDrawerTypeName135 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName136=Studio Maple,         Door Drawer Type 136 Name
+DisplaySet,#DoorDrawerTypeCostFactor136=96, 1.136   #DoorDrawerTypeName136 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName137=Studio Red Oak,         Door Drawer Type 137 Name
+DisplaySet,#DoorDrawerTypeCostFactor137=75, 1.137   #DoorDrawerTypeName137 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName138=Studio Cherry,         Door Drawer Type 138 Name
+DisplaySet,#DoorDrawerTypeCostFactor138=106, 1.138   #DoorDrawerTypeName138 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName139=Ambassador Paint Grade,         Door Drawer Type 139 Name
+DisplaySet,#DoorDrawerTypeCostFactor139=65, 1.139   #DoorDrawerTypeName139 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName140=Ambassador Alder,         Door Drawer Type 140 Name
+DisplaySet,#DoorDrawerTypeCostFactor140=80, 1.140   #DoorDrawerTypeName140 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName141=Ambassador Maple,         Door Drawer Type 141 Name
+DisplaySet,#DoorDrawerTypeCostFactor141=100, 1.141   #DoorDrawerTypeName141 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName142=Ambassador Red Oak,         Door Drawer Type 142 Name
+DisplaySet,#DoorDrawerTypeCostFactor142=85, 1.142   #DoorDrawerTypeName142 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName143=Ambassador Cherry,         Door Drawer Type 143 Name
+DisplaySet,#DoorDrawerTypeCostFactor143=111, 1.143   #DoorDrawerTypeName143 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName144=Barcelona Paint Grade,         Door Drawer Type 144 Name
+DisplaySet,#DoorDrawerTypeCostFactor144=65, 1.144   #DoorDrawerTypeName144 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName145=Barcelona Alder,         Door Drawer Type 145 Name
+DisplaySet,#DoorDrawerTypeCostFactor145=80, 1.145   #DoorDrawerTypeName145 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName146=Barcelona Maple,         Door Drawer Type 146 Name
+DisplaySet,#DoorDrawerTypeCostFactor146=100, 1.146   #DoorDrawerTypeName146 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName147=Barcelona Red Oak,         Door Drawer Type 147 Name
+DisplaySet,#DoorDrawerTypeCostFactor147=85, 1.147   #DoorDrawerTypeName147 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName148=Barcelona Cherry,         Door Drawer Type 148 Name
+DisplaySet,#DoorDrawerTypeCostFactor148=111, 1.148   #DoorDrawerTypeName148 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName149=Bel Air Paint Grade,         Door Drawer Type 149 Name
+DisplaySet,#DoorDrawerTypeCostFactor149=65, 1.149   #DoorDrawerTypeName149 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName150=Bel Air Alder,         Door Drawer Type 150 Name
+DisplaySet,#DoorDrawerTypeCostFactor150=80, 1.150   #DoorDrawerTypeName150 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName151=Bel Air Maple,         Door Drawer Type 151 Name
+DisplaySet,#DoorDrawerTypeCostFactor151=100, 1.151   #DoorDrawerTypeName151 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName152=Bel Air Red Oak,         Door Drawer Type 152 Name
+DisplaySet,#DoorDrawerTypeCostFactor152=85, 1.152   #DoorDrawerTypeName152 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName153=Bel Air Cherry,         Door Drawer Type 153 Name
+DisplaySet,#DoorDrawerTypeCostFactor153=111, 1.153   #DoorDrawerTypeName153 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName154=Laguna Paint Grade,         Door Drawer Type 154 Name
+DisplaySet,#DoorDrawerTypeCostFactor154=65, 1.154   #DoorDrawerTypeName154 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName155=Laguna Alder,         Door Drawer Type 155 Name
+DisplaySet,#DoorDrawerTypeCostFactor155=80, 1.155   #DoorDrawerTypeName155 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName156=Laguna Maple,         Door Drawer Type 156 Name
+DisplaySet,#DoorDrawerTypeCostFactor156=100, 1.156   #DoorDrawerTypeName156 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName157=Laguna Red Oak,         Door Drawer Type 157 Name
+DisplaySet,#DoorDrawerTypeCostFactor157=85, 1.157   #DoorDrawerTypeName157 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName158=Laguna Cherry,         Door Drawer Type 158 Name
+DisplaySet,#DoorDrawerTypeCostFactor158=111, 1.158   #DoorDrawerTypeName158 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName159=Laredo Paint Grade,         Door Drawer Type 159 Name
+DisplaySet,#DoorDrawerTypeCostFactor159=65, 1.159   #DoorDrawerTypeName159 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName160=Laredo Alder,         Door Drawer Type 160 Name
+DisplaySet,#DoorDrawerTypeCostFactor160=80, 1.160   #DoorDrawerTypeName160 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName161=Laredo Maple,         Door Drawer Type 161 Name
+DisplaySet,#DoorDrawerTypeCostFactor161=100, 1.161   #DoorDrawerTypeName161 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName162=Laredo Red Oak,         Door Drawer Type 162 Name
+DisplaySet,#DoorDrawerTypeCostFactor162=85, 1.162   #DoorDrawerTypeName162 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName163=Laredo Cherry,         Door Drawer Type 163 Name
+DisplaySet,#DoorDrawerTypeCostFactor163=111, 1.163   #DoorDrawerTypeName163 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName164=Bellingham Paint Grade,         Door Drawer Type 164 Name
+DisplaySet,#DoorDrawerTypeCostFactor164=88, 1.164   #DoorDrawerTypeName164 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName165=Bellingham Alder,         Door Drawer Type 165 Name
+DisplaySet,#DoorDrawerTypeCostFactor165=96, 1.165   #DoorDrawerTypeName165 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName166=Bellingham Maple,         Door Drawer Type 166 Name
+DisplaySet,#DoorDrawerTypeCostFactor166=122, 1.166   #DoorDrawerTypeName166 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName167=Bellingham Red Oak,         Door Drawer Type 167 Name
+DisplaySet,#DoorDrawerTypeCostFactor167=98, 1.167   #DoorDrawerTypeName167 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName168=Bellingham Cherry,         Door Drawer Type 168 Name
+DisplaySet,#DoorDrawerTypeCostFactor168=132, 1.168   #DoorDrawerTypeName168 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName169=Talbot Paint Grade,         Door Drawer Type 169 Name
+DisplaySet,#DoorDrawerTypeCostFactor169=88, 1.169   #DoorDrawerTypeName169 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName170=Talbot Alder,         Door Drawer Type 170 Name
+DisplaySet,#DoorDrawerTypeCostFactor170=96, 1.170   #DoorDrawerTypeName170 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName171=Talbot Maple,         Door Drawer Type 171 Name
+DisplaySet,#DoorDrawerTypeCostFactor171=122, 1.171   #DoorDrawerTypeName171 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName172=Talbot Red Oak,         Door Drawer Type 172 Name
+DisplaySet,#DoorDrawerTypeCostFactor172=98, 1.172   #DoorDrawerTypeName172 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName173=Talbot Cherry,         Door Drawer Type 173 Name
+DisplaySet,#DoorDrawerTypeCostFactor173=132, 1.173   #DoorDrawerTypeName173 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName174=Crofton Paint Grade,         Door Drawer Type 174 Name
+DisplaySet,#DoorDrawerTypeCostFactor174=115, 1.174   #DoorDrawerTypeName174 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName175=Crofton Alder,         Door Drawer Type 175 Name
+DisplaySet,#DoorDrawerTypeCostFactor175=130, 1.175   #DoorDrawerTypeName175 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName176=Crofton Maple,         Door Drawer Type 176 Name
+DisplaySet,#DoorDrawerTypeCostFactor176=140, 1.176   #DoorDrawerTypeName176 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName177=Crofton Red Oak,         Door Drawer Type 177 Name
+DisplaySet,#DoorDrawerTypeCostFactor177=127, 1.177   #DoorDrawerTypeName177 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName178=Crofton Cherry,         Door Drawer Type 178 Name
+DisplaySet,#DoorDrawerTypeCostFactor178=160, 1.178   #DoorDrawerTypeName178 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName179=Pinnacle Paint Grade,         Door Drawer Type 179 Name
+DisplaySet,#DoorDrawerTypeCostFactor179=115, 1.179   #DoorDrawerTypeName179 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName180=Pinnacle Alder,         Door Drawer Type 180 Name
+DisplaySet,#DoorDrawerTypeCostFactor180=130, 1.180   #DoorDrawerTypeName180 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName181=Pinnacle Maple,         Door Drawer Type 181 Name
+DisplaySet,#DoorDrawerTypeCostFactor181=140, 1.181   #DoorDrawerTypeName181 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName182=Pinnacle Red Oak,         Door Drawer Type 182 Name
+DisplaySet,#DoorDrawerTypeCostFactor182=127, 1.182   #DoorDrawerTypeName182 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName183=Pinnacle Cherry,         Door Drawer Type 183 Name
+DisplaySet,#DoorDrawerTypeCostFactor183=160, 1.183   #DoorDrawerTypeName183 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName184=Ridgeview Paint Grade,         Door Drawer Type 184 Name
+DisplaySet,#DoorDrawerTypeCostFactor184=115, 1.184   #DoorDrawerTypeName184 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName185=Ridgeview Alder,         Door Drawer Type 185 Name
+DisplaySet,#DoorDrawerTypeCostFactor185=130, 1.185   #DoorDrawerTypeName185 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName186=Ridgeview Maple,         Door Drawer Type 186 Name
+DisplaySet,#DoorDrawerTypeCostFactor186=140, 1.186   #DoorDrawerTypeName186 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName187=Ridgeview Red Oak,         Door Drawer Type 187 Name
+DisplaySet,#DoorDrawerTypeCostFactor187=127, 1.187   #DoorDrawerTypeName187 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName188=Ridgeview Cherry,         Door Drawer Type 188 Name
+DisplaySet,#DoorDrawerTypeCostFactor188=160, 1.188   #DoorDrawerTypeName188 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName189=Venezuela LL657 MDF,         Door Drawer Type 189 Name
+DisplaySet,#DoorDrawerTypeCostFactor189=35, 1.189   #DoorDrawerTypeName189 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName190=Canteburry LP658 MDF,         Door Drawer Type 190 Name
+DisplaySet,#DoorDrawerTypeCostFactor190=35, 1.190   #DoorDrawerTypeName190 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName191=Capistrano LR656 MDF,         Door Drawer Type 191 Name
+DisplaySet,#DoorDrawerTypeCostFactor191=35, 1.191   #DoorDrawerTypeName191 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName192=Boston ML5 MDF,         Door Drawer Type 192 Name
+DisplaySet,#DoorDrawerTypeCostFactor192=35, 1.192   #DoorDrawerTypeName192 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName193=Chelsey ML8 MDF,         Door Drawer Type 193 Name
+DisplaySet,#DoorDrawerTypeCostFactor193=35, 1.193   #DoorDrawerTypeName193 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName194=Hampshire MP5 MDF,         Door Drawer Type 194 Name
+DisplaySet,#DoorDrawerTypeCostFactor194=35, 1.194   #DoorDrawerTypeName194 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName195=Modena MP8 MDF,         Door Drawer Type 195 Name
+DisplaySet,#DoorDrawerTypeCostFactor195=35, 1.195   #DoorDrawerTypeName195 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName196=Peru MR5 MDF,         Door Drawer Type 196 Name
+DisplaySet,#DoorDrawerTypeCostFactor196=35, 1.196   #DoorDrawerTypeName196 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName197=Diego MR8 MDF,         Door Drawer Type 197 Name
+DisplaySet,#DoorDrawerTypeCostFactor197=35, 1.197   #DoorDrawerTypeName197 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName198=Luna WB617 MDF,         Door Drawer Type 198 Name
+DisplaySet,#DoorDrawerTypeCostFactor198=35, 1.198   #DoorDrawerTypeName198 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName199=Vista WC676 MDF,         Door Drawer Type 199 Name
+DisplaySet,#DoorDrawerTypeCostFactor199=35, 1.199   #DoorDrawerTypeName199 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName200=Centro WF654 MDF,         Door Drawer Type 200 Name
+DisplaySet,#DoorDrawerTypeCostFactor200=35, 1.200   #DoorDrawerTypeName200 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName201=Trifecta WR606 MDF,         Door Drawer Type 201 Name
+DisplaySet,#DoorDrawerTypeCostFactor201=35, 1.201   #DoorDrawerTypeName201 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName202=Linea WR609 MDF,         Door Drawer Type 202 Name
+DisplaySet,#DoorDrawerTypeCostFactor202=35, 1.202   #DoorDrawerTypeName202 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName203=Crossroads WT679 MDF,         Door Drawer Type 203 Name
+DisplaySet,#DoorDrawerTypeCostFactor203=35, 1.203   #DoorDrawerTypeName203 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName204=Athena LB672 MDF,         Door Drawer Type 204 Name
+DisplaySet,#DoorDrawerTypeCostFactor204=40, 1.204   #DoorDrawerTypeName204 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName205=Cantor LL667 MDF,         Door Drawer Type 205 Name
+DisplaySet,#DoorDrawerTypeCostFactor205=40, 1.205   #DoorDrawerTypeName205 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName206=Reno LP668 MDF,         Door Drawer Type 206 Name
+DisplaySet,#DoorDrawerTypeCostFactor206=40, 1.206   #DoorDrawerTypeName206 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName207=Trinity LR665 MDF,         Door Drawer Type 207 Name
+DisplaySet,#DoorDrawerTypeCostFactor207=40, 1.207   #DoorDrawerTypeName207 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName208=MBH MDF,         Door Drawer Type 208 Name
+DisplaySet,#DoorDrawerTypeCostFactor208=40, 1.208   #DoorDrawerTypeName208 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName209=MBQ MDF,         Door Drawer Type 209 Name
+DisplaySet,#DoorDrawerTypeCostFactor209=40, 1.209   #DoorDrawerTypeName209 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName210=MBR MDF,         Door Drawer Type 210 Name
+DisplaySet,#DoorDrawerTypeCostFactor210=40, 1.210   #DoorDrawerTypeName210 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName211=MBS MDF,         Door Drawer Type 211 Name
+DisplaySet,#DoorDrawerTypeCostFactor211=40, 1.211   #DoorDrawerTypeName211 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName212=MBW MDF,         Door Drawer Type 212 Name
+DisplaySet,#DoorDrawerTypeCostFactor212=40, 1.212   #DoorDrawerTypeName212 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName213=Chesterfield ML457 MDF,         Door Drawer Type 213 Name
+DisplaySet,#DoorDrawerTypeCostFactor213=40, 1.213   #DoorDrawerTypeName213 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName214=Sunset MP458 MDF,         Door Drawer Type 214 Name
+DisplaySet,#DoorDrawerTypeCostFactor214=40, 1.214   #DoorDrawerTypeName214 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName215=Tesoro MR31 MDF,         Door Drawer Type 215 Name
+DisplaySet,#DoorDrawerTypeCostFactor215=40, 1.215   #DoorDrawerTypeName215 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName216=Phoenix MR456 MDF,         Door Drawer Type 216 Name
+DisplaySet,#DoorDrawerTypeCostFactor216=40, 1.216   #DoorDrawerTypeName216 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName217=Savannah MR470 MDF,         Door Drawer Type 217 Name
+DisplaySet,#DoorDrawerTypeCostFactor217=40, 1.217   #DoorDrawerTypeName217 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName218=Apache MR69 MDF,         Door Drawer Type 218 Name
+DisplaySet,#DoorDrawerTypeCostFactor218=40, 1.218   #DoorDrawerTypeName218 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName219=Sierra OX542 MDF,         Door Drawer Type 219 Name
+DisplaySet,#DoorDrawerTypeCostFactor219=40, 1.219   #DoorDrawerTypeName219 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName220=Robles OX544 MDF,         Door Drawer Type 220 Name
+DisplaySet,#DoorDrawerTypeCostFactor220=40, 1.220   #DoorDrawerTypeName220 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName221=Mountainview OX546 MDF,         Door Drawer Type 221 Name
+DisplaySet,#DoorDrawerTypeCostFactor221=40, 1.221   #DoorDrawerTypeName221 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName222=Malaga OX612 MDF,         Door Drawer Type 222 Name
+DisplaySet,#DoorDrawerTypeCostFactor222=40, 1.222   #DoorDrawerTypeName222 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName223=Cordoba OX622 MDF,         Door Drawer Type 223 Name
+DisplaySet,#DoorDrawerTypeCostFactor223=40, 1.223   #DoorDrawerTypeName223 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName224=Topanga OX632 MDF,         Door Drawer Type 224 Name
+DisplaySet,#DoorDrawerTypeCostFactor224=40, 1.224   #DoorDrawerTypeName224 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName225=Manchester OX642 MDF,         Door Drawer Type 225 Name
+DisplaySet,#DoorDrawerTypeCostFactor225=40, 1.225   #DoorDrawerTypeName225 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName226=Seville OX644 MDF,         Door Drawer Type 226 Name
+DisplaySet,#DoorDrawerTypeCostFactor226=40, 1.226   #DoorDrawerTypeName226 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName227=New Castle OX646 MDF,         Door Drawer Type 227 Name
+DisplaySet,#DoorDrawerTypeCostFactor227=40, 1.227   #DoorDrawerTypeName227 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName228=Bristol ML381 MDF,         Door Drawer Type 228 Name
+DisplaySet,#DoorDrawerTypeCostFactor228=47, 1.228   #DoorDrawerTypeName228 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName229=Santiago MP382 MDF,         Door Drawer Type 229 Name
+DisplaySet,#DoorDrawerTypeCostFactor229=47, 1.229   #DoorDrawerTypeName229 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName230=Revere Style MR1 MDF,         Door Drawer Type 230 Name
+DisplaySet,#DoorDrawerTypeCostFactor230=47, 1.230   #DoorDrawerTypeName230 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName231=Chesapeake MR2 MDF,         Door Drawer Type 231 Name
+DisplaySet,#DoorDrawerTypeCostFactor231=47, 1.231   #DoorDrawerTypeName231 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName232=Athena MR380 MDF,         Door Drawer Type 232 Name
+DisplaySet,#DoorDrawerTypeCostFactor232=47, 1.232   #DoorDrawerTypeName232 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName233=Chariot MR63 MDF,         Door Drawer Type 233 Name
+DisplaySet,#DoorDrawerTypeCostFactor233=47, 1.233   #DoorDrawerTypeName233 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName234=Shaker Style MRS231 MDF,         Door Drawer Type 234 Name
+DisplaySet,#DoorDrawerTypeCostFactor234=47, 1.234   #DoorDrawerTypeName234 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName235=Belle SL9 MDF,         Door Drawer Type 235 Name
+DisplaySet,#DoorDrawerTypeCostFactor235=47, 1.235   #DoorDrawerTypeName235 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName236=Arch SP9 MDF,         Door Drawer Type 236 Name
+DisplaySet,#DoorDrawerTypeCostFactor236=47, 1.236   #DoorDrawerTypeName236 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName237=Milano SR7 MDF,         Door Drawer Type 237 Name
+DisplaySet,#DoorDrawerTypeCostFactor237=47, 1.237   #DoorDrawerTypeName237 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName238=Vienna SR9 MDF,         Door Drawer Type 238 Name
+DisplaySet,#DoorDrawerTypeCostFactor238=47, 1.238   #DoorDrawerTypeName238 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName239=Kapelli AL757 RTF,         Door Drawer Type 239 Name
+DisplaySet,#DoorDrawerTypeCostFactor239=35, 1.239   #DoorDrawerTypeName239 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName240=Canyon AP758 RTF,         Door Drawer Type 240 Name
+DisplaySet,#DoorDrawerTypeCostFactor240=35, 1.240   #DoorDrawerTypeName240 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName241=Winston AR756 RTF,         Door Drawer Type 241 Name
+DisplaySet,#DoorDrawerTypeCostFactor241=35, 1.241   #DoorDrawerTypeName241 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName242=Stanton DBQ RTF,         Door Drawer Type 242 Name
+DisplaySet,#DoorDrawerTypeCostFactor242=35, 1.242   #DoorDrawerTypeName242 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName243=Easton DBR RTF,         Door Drawer Type 243 Name
+DisplaySet,#DoorDrawerTypeCostFactor243=35, 1.243   #DoorDrawerTypeName243 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName244=Jasper DBS RTF,         Door Drawer Type 244 Name
+DisplaySet,#DoorDrawerTypeCostFactor244=35, 1.244   #DoorDrawerTypeName244 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName245=Shelby DJ890 RTF,         Door Drawer Type 245 Name
+DisplaySet,#DoorDrawerTypeCostFactor245=35, 1.245   #DoorDrawerTypeName245 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName246=Durango DL8 RTF,         Door Drawer Type 246 Name
+DisplaySet,#DoorDrawerTypeCostFactor246=35, 1.246   #DoorDrawerTypeName246 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName247=Sedona DP8 RTF,         Door Drawer Type 247 Name
+DisplaySet,#DoorDrawerTypeCostFactor247=35, 1.247   #DoorDrawerTypeName247 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName248=Zara DR8 RTF,         Door Drawer Type 248 Name
+DisplaySet,#DoorDrawerTypeCostFactor248=35, 1.248   #DoorDrawerTypeName248 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName249=Phillipe FC712 RTF,         Door Drawer Type 249 Name
+DisplaySet,#DoorDrawerTypeCostFactor249=35, 1.249   #DoorDrawerTypeName249 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName250=Cantina FC714 RTF,         Door Drawer Type 250 Name
+DisplaySet,#DoorDrawerTypeCostFactor250=35, 1.250   #DoorDrawerTypeName250 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName251=Delilah FC716 RTF,         Door Drawer Type 251 Name
+DisplaySet,#DoorDrawerTypeCostFactor251=35, 1.251   #DoorDrawerTypeName251 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName252=Atticus AB770 RTF,         Door Drawer Type 252 Name
+DisplaySet,#DoorDrawerTypeCostFactor252=48, 1.252   #DoorDrawerTypeName252 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName253=Allouette AL767 RTF,         Door Drawer Type 253 Name
+DisplaySet,#DoorDrawerTypeCostFactor253=48, 1.253   #DoorDrawerTypeName253 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName254=Hadley AP768 RTF,         Door Drawer Type 254 Name
+DisplaySet,#DoorDrawerTypeCostFactor254=48, 1.254   #DoorDrawerTypeName254 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName255=Arnica AR766 RTF,         Door Drawer Type 255 Name
+DisplaySet,#DoorDrawerTypeCostFactor255=48, 1.255   #DoorDrawerTypeName255 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName256=Griego DBH RTF,         Door Drawer Type 256 Name
+DisplaySet,#DoorDrawerTypeCostFactor256=48, 1.256   #DoorDrawerTypeName256 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName257=Odella DBW RTF,         Door Drawer Type 257 Name
+DisplaySet,#DoorDrawerTypeCostFactor257=48, 1.257   #DoorDrawerTypeName257 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName258=Sampson DR69 RTF,         Door Drawer Type 258 Name
+DisplaySet,#DoorDrawerTypeCostFactor258=48, 1.258   #DoorDrawerTypeName258 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName259=Braga FL557 RTF,         Door Drawer Type 259 Name
+DisplaySet,#DoorDrawerTypeCostFactor259=48, 1.259   #DoorDrawerTypeName259 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName260=Vestiva FP558 RTF,         Door Drawer Type 260 Name
+DisplaySet,#DoorDrawerTypeCostFactor260=48, 1.260   #DoorDrawerTypeName260 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName261=Antina FR556 RTF,         Door Drawer Type 261 Name
+DisplaySet,#DoorDrawerTypeCostFactor261=48, 1.261   #DoorDrawerTypeName261 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName262=Franco FS742 RTF,         Door Drawer Type 262 Name
+DisplaySet,#DoorDrawerTypeCostFactor262=48, 1.262   #DoorDrawerTypeName262 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName263=Firestone FS744 RTF,         Door Drawer Type 263 Name
+DisplaySet,#DoorDrawerTypeCostFactor263=48, 1.263   #DoorDrawerTypeName263 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName264=Oslo FS746 RTF,         Door Drawer Type 264 Name
+DisplaySet,#DoorDrawerTypeCostFactor264=48, 1.264   #DoorDrawerTypeName264 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName265=Tiempo FS842 RTF,         Door Drawer Type 265 Name
+DisplaySet,#DoorDrawerTypeCostFactor265=48, 1.265   #DoorDrawerTypeName265 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName266=Harbor FS844 RTF,         Door Drawer Type 266 Name
+DisplaySet,#DoorDrawerTypeCostFactor266=48, 1.266   #DoorDrawerTypeName266 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName267=Pennsylvania FS846 RTF,         Door Drawer Type 267 Name
+DisplaySet,#DoorDrawerTypeCostFactor267=48, 1.267   #DoorDrawerTypeName267 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName268=Mandeville KB732 RTF,         Door Drawer Type 268 Name
+DisplaySet,#DoorDrawerTypeCostFactor268=48, 1.268   #DoorDrawerTypeName268 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName269=Saffire KC776 RTF,         Door Drawer Type 269 Name
+DisplaySet,#DoorDrawerTypeCostFactor269=48, 1.269   #DoorDrawerTypeName269 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName270=Duel KF754 RTF,         Door Drawer Type 270 Name
+DisplaySet,#DoorDrawerTypeCostFactor270=48, 1.270   #DoorDrawerTypeName270 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName271=Shoffer KR709 RTF,         Door Drawer Type 271 Name
+DisplaySet,#DoorDrawerTypeCostFactor271=48, 1.271   #DoorDrawerTypeName271 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName272=Trine KR771 RTF,         Door Drawer Type 272 Name
+DisplaySet,#DoorDrawerTypeCostFactor272=48, 1.272   #DoorDrawerTypeName272 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName273=Carson KT779 RTF,         Door Drawer Type 273 Name
+DisplaySet,#DoorDrawerTypeCostFactor273=48, 1.273   #DoorDrawerTypeName273 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName274=Danfield DR1 RTF,         Door Drawer Type 274 Name
+DisplaySet,#DoorDrawerTypeCostFactor274=55, 1.274   #DoorDrawerTypeName274 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName275=Dresdon DR31 RTF,         Door Drawer Type 275 Name
+DisplaySet,#DoorDrawerTypeCostFactor275=55, 1.275   #DoorDrawerTypeName275 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName276=Hunter DR570 RTF,         Door Drawer Type 276 Name
+DisplaySet,#DoorDrawerTypeCostFactor276=55, 1.276   #DoorDrawerTypeName276 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName277=Squared DRS131 RTF,         Door Drawer Type 277 Name
+DisplaySet,#DoorDrawerTypeCostFactor277=55, 1.277   #DoorDrawerTypeName277 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName278=Devina DRV819 RTF,         Door Drawer Type 278 Name
+DisplaySet,#DoorDrawerTypeCostFactor278=55, 1.278   #DoorDrawerTypeName278 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName279=Gallilee FS702 RTF,         Door Drawer Type 279 Name
+DisplaySet,#DoorDrawerTypeCostFactor279=55, 1.279   #DoorDrawerTypeName279 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName280=Amber FS704 RTF,         Door Drawer Type 280 Name
+DisplaySet,#DoorDrawerTypeCostFactor280=55, 1.280   #DoorDrawerTypeName280 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName281=Halverson FS706 RTF,         Door Drawer Type 281 Name
+DisplaySet,#DoorDrawerTypeCostFactor281=55, 1.281   #DoorDrawerTypeName281 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName282=Felton JL7 RTF,         Door Drawer Type 282 Name
+DisplaySet,#DoorDrawerTypeCostFactor282=55, 1.282   #DoorDrawerTypeName282 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName283=Jester JL9 RTF,         Door Drawer Type 283 Name
+DisplaySet,#DoorDrawerTypeCostFactor283=55, 1.283   #DoorDrawerTypeName283 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName284=Grover JP7 RTF,         Door Drawer Type 284 Name
+DisplaySet,#DoorDrawerTypeCostFactor284=55, 1.284   #DoorDrawerTypeName284 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName285=Bynner JP9 RTF,         Door Drawer Type 285 Name
+DisplaySet,#DoorDrawerTypeCostFactor285=55, 1.285   #DoorDrawerTypeName285 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName286=Montreal JR7 RTF,         Door Drawer Type 286 Name
+DisplaySet,#DoorDrawerTypeCostFactor286=55, 1.286   #DoorDrawerTypeName286 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName287=Felina JR9 RTF,         Door Drawer Type 287 Name
+DisplaySet,#DoorDrawerTypeCostFactor287=55, 1.287   #DoorDrawerTypeName287 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName288=Barouche LR981 RTF,         Door Drawer Type 288 Name
+DisplaySet,#DoorDrawerTypeCostFactor288=55, 1.288   #DoorDrawerTypeName288 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName289=Clinton LS7 RTF,         Door Drawer Type 289 Name
+DisplaySet,#DoorDrawerTypeCostFactor289=55, 1.289   #DoorDrawerTypeName289 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName290=Sarape PR982 RTF,         Door Drawer Type 290 Name
+DisplaySet,#DoorDrawerTypeCostFactor290=55, 1.290   #DoorDrawerTypeName290 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName291=Byzantine PS7 RTF,         Door Drawer Type 291 Name
+DisplaySet,#DoorDrawerTypeCostFactor291=55, 1.291   #DoorDrawerTypeName291 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName292=Brussels RR980 RTF,         Door Drawer Type 292 Name
+DisplaySet,#DoorDrawerTypeCostFactor292=55, 1.292   #DoorDrawerTypeName292 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName293=Regal RS7 RTF,         Door Drawer Type 293 Name
+DisplaySet,#DoorDrawerTypeCostFactor293=55, 1.293   #DoorDrawerTypeName293 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName294=Lima AMR808 RTF,         Door Drawer Type 294 Name
+DisplaySet,#DoorDrawerTypeCostFactor294=68, 1.294   #DoorDrawerTypeName294 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName295=Edmonton AMR814 RTF,         Door Drawer Type 295 Name
+DisplaySet,#DoorDrawerTypeCostFactor295=68, 1.295   #DoorDrawerTypeName295 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName296=Stockton AMS329 RTF,         Door Drawer Type 296 Name
+DisplaySet,#DoorDrawerTypeCostFactor296=68, 1.296   #DoorDrawerTypeName296 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName297=Belgium AMS813 RTF,         Door Drawer Type 297 Name
+DisplaySet,#DoorDrawerTypeCostFactor297=68, 1.297   #DoorDrawerTypeName297 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName298=Parisian AMV807 RTF,         Door Drawer Type 298 Name
+DisplaySet,#DoorDrawerTypeCostFactor298=68, 1.298   #DoorDrawerTypeName298 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName299=Alamo DR133 RTF,         Door Drawer Type 299 Name
+DisplaySet,#DoorDrawerTypeCostFactor299=68, 1.299   #DoorDrawerTypeName299 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName300=Houston DR2 RTF,         Door Drawer Type 300 Name
+DisplaySet,#DoorDrawerTypeCostFactor300=68, 1.300   #DoorDrawerTypeName300 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName301=Raleigh DR63 RTF,         Door Drawer Type 301 Name
+DisplaySet,#DoorDrawerTypeCostFactor301=68, 1.301   #DoorDrawerTypeName301 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName302=Argus AMD361 RTF,         Door Drawer Type 302 Name
+DisplaySet,#DoorDrawerTypeCostFactor302=75, 1.302   #DoorDrawerTypeName302 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName303=Tripoli AMW359 RTF,         Door Drawer Type 303 Name
+DisplaySet,#DoorDrawerTypeCostFactor303=75, 1.303   #DoorDrawerTypeName303 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName304=Mecca JLR RTF,         Door Drawer Type 304 Name
+DisplaySet,#DoorDrawerTypeCostFactor304=75, 1.304   #DoorDrawerTypeName304 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName305=Argentina JLS RTF,         Door Drawer Type 305 Name
+DisplaySet,#DoorDrawerTypeCostFactor305=75, 1.305   #DoorDrawerTypeName305 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName306=Luxe Antracita Flat Edgeband,         Door Drawer Type 306 Name
+DisplaySet,#DoorDrawerTypeCostFactor306=70, 1.306   #DoorDrawerTypeName306 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName307=Luxe Basalto Pearl Flat Edgeband,         Door Drawer Type 307 Name
+DisplaySet,#DoorDrawerTypeCostFactor307=70, 1.307   #DoorDrawerTypeName307 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName308=Luxe Basalto Flat Edgeband,         Door Drawer Type 308 Name
+DisplaySet,#DoorDrawerTypeCostFactor308=70, 1.308   #DoorDrawerTypeName308 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName309=Luxe Blanco Pearl Flat Edgeband,         Door Drawer Type 309 Name
+DisplaySet,#DoorDrawerTypeCostFactor309=70, 1.309   #DoorDrawerTypeName309 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName310=Luxe Blanco Flat Edgeband,         Door Drawer Type 310 Name
+DisplaySet,#DoorDrawerTypeCostFactor310=70, 1.310   #DoorDrawerTypeName310 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName311=Luxe Cashmere Flat Edgeband,         Door Drawer Type 311 Name
+DisplaySet,#DoorDrawerTypeCostFactor311=70, 1.311   #DoorDrawerTypeName311 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName312=Luxe Cuzco Grafitt Flat Edgeband,         Door Drawer Type 312 Name
+DisplaySet,#DoorDrawerTypeCostFactor312=70, 1.312   #DoorDrawerTypeName312 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName313=Luxe Cuzco Oro Flat Edgeband,         Door Drawer Type 313 Name
+DisplaySet,#DoorDrawerTypeCostFactor313=70, 1.313   #DoorDrawerTypeName313 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName314=Luxe Cuzco Royal Gold Flat Edgeband,         Door Drawer Type 314 Name
+DisplaySet,#DoorDrawerTypeCostFactor314=70, 1.314   #DoorDrawerTypeName314 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName315=Luxe Cuzco Silver Flat Edgeband,         Door Drawer Type 315 Name
+DisplaySet,#DoorDrawerTypeCostFactor315=70, 1.315   #DoorDrawerTypeName315 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName316=Luxe Gris-2 Flat Edgeband,         Door Drawer Type 316 Name
+DisplaySet,#DoorDrawerTypeCostFactor316=70, 1.316   #DoorDrawerTypeName316 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName317=Luxe Guayana Grain Flat Edgeband,         Door Drawer Type 317 Name
+DisplaySet,#DoorDrawerTypeCostFactor317=70, 1.317   #DoorDrawerTypeName317 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName318=Luxe Lava Flat Edgeband,         Door Drawer Type 318 Name
+DisplaySet,#DoorDrawerTypeCostFactor318=70, 1.318   #DoorDrawerTypeName318 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName319=Luxe Magnolia Flat Edgeband,         Door Drawer Type 319 Name
+DisplaySet,#DoorDrawerTypeCostFactor319=70, 1.319   #DoorDrawerTypeName319 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName320=Luxe Negro Flat Edgeband,         Door Drawer Type 320 Name
+DisplaySet,#DoorDrawerTypeCostFactor320=70, 1.320   #DoorDrawerTypeName320 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName321=Luxe Olivo Grain Flat Edgeband,         Door Drawer Type 321 Name
+DisplaySet,#DoorDrawerTypeCostFactor321=70, 1.321   #DoorDrawerTypeName321 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName322=Luxe Olmo Grain Flat Edgeband,         Door Drawer Type 322 Name
+DisplaySet,#DoorDrawerTypeCostFactor322=70, 1.322   #DoorDrawerTypeName322 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName323=Luxe Roble Frappe Grain Flat Edgeband,         Door Drawer Type 323 Name
+DisplaySet,#DoorDrawerTypeCostFactor323=70, 1.323   #DoorDrawerTypeName323 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName324=Luxe Rojo Flat Edgeband,         Door Drawer Type 324 Name
+DisplaySet,#DoorDrawerTypeCostFactor324=70, 1.324   #DoorDrawerTypeName324 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName325=Luxe Textil Plata Grain Flat Edgeband,         Door Drawer Type 325 Name
+DisplaySet,#DoorDrawerTypeCostFactor325=70, 1.325   #DoorDrawerTypeName325 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName326=Flat MBQ MDF,         Door Drawer Type 326 Name
+DisplaySet,#DoorDrawerTypeCostFactor326=35, 1.326   #DoorDrawerTypeName326 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName327=Navajo Paint Grade,         Door Drawer Type 327 Name
+DisplaySet,#DoorDrawerTypeCostFactor327=38, 1.327   #DoorDrawerTypeName327 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName328=Navajo  Alder,         Door Drawer Type 328 Name
+DisplaySet,#DoorDrawerTypeCostFactor328=47, 1.328   #DoorDrawerTypeName328 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName329=Navajo  Maple,         Door Drawer Type 329 Name
+DisplaySet,#DoorDrawerTypeCostFactor329=58, 1.329  #DoorDrawerTypeName329 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName330=Navajo  Red Oak,         Door Drawer Type 330 Name
+DisplaySet,#DoorDrawerTypeCostFactor330=46, 1.330   #DoorDrawerTypeName330 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName331=Navajo  Cherry,         Door Drawer Type 331 Name
+DisplaySet,#DoorDrawerTypeCostFactor331=66, 1.331   #DoorDrawerTypeName331 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName332=CF 5-Piece,         Door Drawer Type 332 Name
+DisplaySet,#DoorDrawerTypeCostFactor332=66, 1.332   #DoorDrawerTypeName332 Door Drawer Type Cost Factor
+,**
+,**
+}
+
+

@@ -1,0 +1,779 @@
+,Use Grid
+
+,**            ***** TRIPLE THICK SIDES works for LIST method only for 6 depths only *****
+,**
+
+
+Set, #CostOfVertical = 0, Default Cost
+
+
+
+
+
+ 
+  Do,  (#NumSideDepth>0):1
+  {
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   
+    Do, (#NumSideHeightA>0):1
+      {
+      DisplaySet, #SideCost1AC =218*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthA" deep)   by   (up to #SideHeight1A" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost1AC ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1A) & (#VertD>0)&(#VertD<=#SideDepthA): #addpanel = 1 ,panel count
+      }
+
+    Do, (#NumSideHeightA>1):1
+      {   
+      DisplaySet, #SideCost2AC =264*#panelpricemultiplier,                   Cost of a Side  #SidethickC thick (up to #SideDepthA" deep)   by   (up to #SideHeight2A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1A)&(#VertH<=#SideHeight2A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost2AC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1A)&(#VertH<=#SideHeight2A) & (#VertD>0)&(#VertD<=#SideDepthA): #addpanel=2, panel count
+      }
+
+    Do, (#NumSideHeightA>2):1
+      {
+      DisplaySet, #SideCost3AC =344*#panelpricemultiplier,                   Cost of a Side  #SidethickC thick (up to #SideDepthA" deep)   by   (up to #SideHeight3A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2A)&(#VertH<=#SideHeight3A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost3AC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2A)&(#VertH<=#SideHeight3A) & (#VertD>0)&(#VertD<=#SideDepthA):#addpanel=3, panel count
+      }
+
+    Do, (#NumSideHeightA>3):1
+      {
+      DisplaySet, #SideCost4AC =413*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthA" deep)   by   (up to #SideHeight4A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3A)&(#VertH<=#SideHeight4A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost4AC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3A)&(#VertH<=#SideHeight4A) & (#VertD>0)&(#VertD<=#SideDepthA): #addpanel=4, panelcount
+      }
+
+    Do, (#NumSideHeightA>4):1
+      {
+      DisplaySet, #SideCost5AC =60.11,                   Cost of a Side  #SidethickC thick (up to #SideDepthA" deep)   by   (up to #SideHeight5A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4A)&(#VertH<=#SideHeight5A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost5AC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightA>5):1
+      {
+      DisplaySet, #SideCost6AC =72.11,                   Cost of a Side #SidethickC thick  (up to #SideDepthA" deep)   by   (up to #SideHeight6A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5A)&(#VertH<=#SideHeight6A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost6AC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightA>6):1
+      {
+      DisplaySet, #SideCost7AC =84.11,                   Cost of a Side #SidethickC thick  (up to #SideDepthA" deep)   by   (up to #SideHeight7A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6A)&(#VertH<=#SideHeight7A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost7AC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightA>7):1
+      {
+      DisplaySet, #SideCost8AC =96.11,                    Cost of a Side  #SidethickC thick (up to #SideDepthA" deep)   by   (up to #SideHeight8A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7A)&(#VertH<=#SideHeight8A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost8AC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightA>8):1
+      {
+      DisplaySet, #SideCost9AC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthA" deep)   by   (up to #SideHeight9A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8A)&(#VertH<=#SideHeight9A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost9AC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightA>9):1
+      {
+      DisplaySet, #SideCost10AC =0  ,                    Cost of a Side #SidethickC thick  (up to #SideDepthA" deep)   by   (up to #SideHeight10A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9A)&(#VertH<=#SideHeight10A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost10AC , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+  Do,  (#NumSideDepth>1):1
+  {
+    Do, (#NumSideHeightB>0):1
+      {     
+      DisplaySet, #SideCost1BC =242*#panelpricemultiplier,                   Cost of a Side  #SidethickC thick (up to #SideDepthB" deep)   by   (up to #SideHeight1B" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost1BC ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB):#addpanel = 5 ,panel count
+      }
+
+    Do, (#NumSideHeightB>1):1
+      {
+      DisplaySet, #SideCost2BC =286*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthB" deep)   by   (up to #SideHeight2B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1B)&(#VertH<=#SideHeight2B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost2BC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1B)&(#VertH<=#SideHeight2B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB):#addpanel = 6, panel count
+      }
+
+    Do, (#NumSideHeightB>2):1
+      {
+      DisplaySet, #SideCost3BC =414*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthB" deep)   by   (up to #SideHeight3B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2B)&(#VertH<=#SideHeight3B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost3BC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2B)&(#VertH<=#SideHeight3B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB):#addpanel = 7, panel count
+      }
+
+    Do, (#NumSideHeightB>3):1
+      {
+      DisplaySet, #SideCost4BC =497*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthB" deep)   by   (up to #SideHeight4B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3B)&(#VertH<=#SideHeight4B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost4BC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3B)&(#VertH<=#SideHeight4B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB):#addpanel = 8, panelcount
+      }
+
+    Do, (#NumSideHeightB>4):1
+      {
+      DisplaySet, #SideCost5BC =60.12,                   Cost of a Side #SidethickC thick  (up to #SideDepthB" deep)   by   (up to #SideHeight5B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4B)&(#VertH<=#SideHeight5B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost5BC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightB>5):1
+      {
+      DisplaySet, #SideCost6BC =72.12,                   Cost of a Side #SidethickC thick (up to #SideDepthB" deep)   by   (up to #SideHeight6B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5B)&(#VertH<=#SideHeight6B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost6BC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightB>6):1
+      {
+      DisplaySet, #SideCost7BC =84.12,                   Cost of a Side #SidethickC thick  (up to #SideDepthB" deep)   by   (up to #SideHeight7B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6B)&(#VertH<=#SideHeight7B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost7BC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightB>7):1
+      {
+      DisplaySet, #SideCost8BC =96.12,                    Cost of a Side #SidethickC thick  (up to #SideDepthB" deep)   by   (up to #SideHeight8B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7B)&(#VertH<=#SideHeight8B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost8BC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightB>8):1
+      {
+    
+      DisplaySet, #SideCost9BC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthB" deep)   by   (up to #SideHeight9B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8B)&(#VertH<=#SideHeight9B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost9BC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightB>9):1
+      {
+      DisplaySet, #SideCost10BC =0  ,                    Cost of a Side #SidethickC thick  (up to #SideDepthB" deep)   by   (up to #SideHeight10B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9B)&(#VertH<=#SideHeight10B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost10BC , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+  
+
+
+
+
+  Do,  (#NumSideDepth>2):1
+  {
+
+    Do, (#NumSideHeightC>0):1
+      {
+      DisplaySet, #SideCost1CC =264*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthC" deep)   by   (up to #SideHeight1C" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost1CC ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #addpanel = 9, panelcount
+      }
+
+    Do, (#NumSideHeightC>1):1
+      {
+      DisplaySet, #SideCost2CC =310*#panelpricemultiplier,                   Cost of a Side #SidethickC thick (up to #SideDepthC" deep)   by   (up to #SideHeight2C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1C)&(#VertH<=#SideHeight2C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost2CC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1C)&(#VertH<=#SideHeight2C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #addpanel = 10, panel count
+      }
+
+    Do, (#NumSideHeightC>2):1
+      {
+      DisplaySet, #SideCost3CC =460*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthC" deep)   by   (up to #SideHeight3C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2C)&(#VertH<=#SideHeight3C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost3CC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2C)&(#VertH<=#SideHeight3C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #addpanel = 11, panel count
+      }
+
+    Do, (#NumSideHeightC>3):1
+      {
+      DisplaySet, #SideCost4CC =552*#panelpricemultiplier,                   Cost of a Side  #SidethickC thick  (up to #SideDepthC" deep)   by   (up to #SideHeight4C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3C)&(#VertH<=#SideHeight4C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost4CC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3C)&(#VertH<=#SideHeight4C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #addpanel = 12, panel count
+      }
+
+    Do, (#NumSideHeightC>4):1
+      {
+      DisplaySet, #SideCost5CC =60.13,                   Cost of a Side #SidethickC thick  (up to #SideDepthC" deep)   by   (up to #SideHeight5C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4C)&(#VertH<=#SideHeight5C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost5CC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightC>5):1
+      {
+
+      DisplaySet, #SideCost6CC =72.13,                   Cost of a Side #SidethickC thick  (up to #SideDepthC" deep)   by   (up to #SideHeight6C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5C)&(#VertH<=#SideHeight6C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost6CC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightC>6):1
+      {
+
+      DisplaySet, #SideCost7CC =84.13,                   Cost of a Side #SidethickC thick  (up to #SideDepthC" deep)   by   (up to #SideHeight7C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6C)&(#VertH<=#SideHeight7C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost7CC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightC>7):1
+      {
+
+      DisplaySet, #SideCost8CC =96.13,                    Cost of a Side #SidethickC thick  (up to #SideDepthC" deep)   by   (up to #SideHeight8C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7C)&(#VertH<=#SideHeight8C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost8CC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightC>8):1
+      {
+
+      DisplaySet, #SideCost9CC =0   ,                    Cost of a Side #SidethickC thick (up to #SideDepthC" deep)   by   (up to #SideHeight9C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8C)&(#VertH<=#SideHeight9C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost9CC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightC>9):1
+      {
+
+      DisplaySet, #SideCost10CC =0  ,                    Cost of a Side #SidethickC thick  (up to #SideDepthC" deep)   by   (up to #SideHeight10C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9C)&(#VertH<=#SideHeight10C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost10CC , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+ 
+
+
+
+
+  Do,  (#NumSideDepth>3):1
+  {
+  
+    Do, (#NumSideHeightd>0):1
+      {
+      DisplaySet, #SideCost1DC =286*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthD" deep)   by   (up to #SideHeight1D" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost1DC ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #addpanel = 13, panel count
+      }
+
+    Do, (#NumSideHeightD>1):1
+      {
+      DisplaySet, #SideCost2DC =368*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthD" deep)   by   (up to #SideHeight2D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1D)&(#VertH<=#SideHeight2D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost2DC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1D)&(#VertH<=#SideHeight2D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #addpanel = 14, panel count
+      }
+
+    Do, (#NumSideHeightD>2):1
+      {
+      DisplaySet, #SideCost3DC =494*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthD" deep)   by   (up to #SideHeight3D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2D)&(#VertH<=#SideHeight3D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost3DC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2D)&(#VertH<=#SideHeight3D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD):#addpanel= 15, panel count
+      }
+
+    Do, (#NumSideHeightD>3):1
+      {
+      DisplaySet, #SideCost4DC =593*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthD" deep)   by   (up to #SideHeight4D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3D)&(#VertH<=#SideHeight4D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost4DC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3D)&(#VertH<=#SideHeight4D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #addpanel = 16, panel count
+      }
+
+    Do, (#NumSideHeightD>4):1
+      {
+      DisplaySet, #SideCost5DC =60.14,                   Cost of a Side #SidethickC thick  (up to #SideDepthD" deep)   by   (up to #SideHeight5D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4D)&(#VertH<=#SideHeight5D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost5DC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightD>5):1
+      {
+      DisplaySet, #SideCost6DC =72.14,                   Cost of a Side #SidethickC thick   (up to #SideDepthD" deep)   by   (up to #SideHeight6D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5D)&(#VertH<=#SideHeight6D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost6DC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightD>6):1
+      {
+      DisplaySet, #SideCost7DC =84.14,                   Cost of a Side #SidethickC thick  (up to #SideDepthD" deep)   by   (up to #SideHeight7D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6D)&(#VertH<=#SideHeight7D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost7DC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightD>7):1
+      {
+      DisplaySet, #SideCost8DC =96.14,                    Cost of a Side #SidethickC thick  (up to #SideDepthD" deep)   by   (up to #SideHeight8D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7D)&(#VertH<=#SideHeight8D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost8DC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightD>8):1
+      {
+      DisplaySet, #SideCost9DC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthD" deep)   by   (up to #SideHeight9D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8D)&(#VertH<=#SideHeight9D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost9DC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightD>9):1
+      {
+      DisplaySet, #SideCost10DC =0  ,                    Cost of a Side #SidethickC thick  (up to #SideDepthD" deep)   by   (up to #SideHeight10D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9D)&(#VertH<=#SideHeight10D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost10DC , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>4):1
+  {
+  
+    Do, (#NumSideHeightE>0):1
+      {
+      DisplaySet, #SideCost1EC =346*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthE" deep)   by   (up to #SideHeight1E" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost1EC ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #addpanel = 17, panel count
+      }
+
+    Do, (#NumSideHeightE>1):1
+      {
+      DisplaySet, #SideCost2EC =390*#panelpricemultiplier,                   Cost of a Side  #SidethickC thick (up to #SideDepthE" deep)   by   (up to #SideHeight2E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1E)&(#VertH<=#SideHeight2E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost2EC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1E)&(#VertH<=#SideHeight2E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #addpanel = 18, panel count
+      }
+
+    Do, (#NumSideHeightE>2):1
+      {
+      DisplaySet, #SideCost3EC =644*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthE" deep)   by   (up to #SideHeight3E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2E)&(#VertH<=#SideHeight3E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost3EC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2E)&(#VertH<=#SideHeight3E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE):#addpanel = 19, panel count
+      }
+
+    Do, (#NumSideHeightE>3):1
+      {
+      DisplaySet, #SideCost4EC =773*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthE" deep)   by   (up to #SideHeight4E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3E)&(#VertH<=#SideHeight4E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost4EC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3E)&(#VertH<=#SideHeight4E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #addpanel = 20, panel count
+      }
+
+    Do, (#NumSideHeightE>4):1
+      {
+      DisplaySet, #SideCost5EC =60.15,                   Cost of a Side #SidethickC thick  (up to #SideDepthE" deep)   by   (up to #SideHeight5E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4E)&(#VertH<=#SideHeight5E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost5EC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightE>5):1
+      {
+      DisplaySet, #SideCost6EC =72.15,                   Cost of a Side #SidethickC thick  (up to #SideDepthE" deep)   by   (up to #SideHeight6E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5E)&(#VertH<=#SideHeight6E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost6EC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightE>6):1
+      {
+      DisplaySet, #SideCost7EC =84.15,                   Cost of a Side #SidethickC thick  (up to #SideDepthE" deep)   by   (up to #SideHeight7E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6E)&(#VertH<=#SideHeight7E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost7EC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightE>7):1
+      {
+      DisplaySet, #SideCost8EC =96.15,                    Cost of a Side #SidethickC thick  (up to #SideDepthE" deep)   by   (up to #SideHeight8E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7E)&(#VertH<=#SideHeight8E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost8EC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightE>8):1
+      {
+      DisplaySet, #SideCost9EC =0   ,                    Cost of a Side  #SidethickC thick (up to #SideDepthE" deep)   by   (up to #SideHeight9E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8E)&(#VertH<=#SideHeight9E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost9EC, Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightE>9):1
+      {
+      DisplaySet, #SideCost10EC =0  ,                    Cost of a Side #SidethickC thick  (up to #SideDepthE" deep)   by   (up to #SideHeight10E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9E)&(#VertH<=#SideHeight10E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost10EC, Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>5):1
+  {
+
+    Do, (#NumSideHeightF>0):1
+      {
+      DisplaySet, #SideCost1FC =386*#panelpricemultiplier,                   Cost of a Side  #SidethickC thick (up to #SideDepthF" deep)   by   (up to #SideHeight1F" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost1FC ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #addpanel= 21, panel count
+      }
+
+    Do, (#NumSideHeightF>1):1
+      {
+      DisplaySet, #SideCost2FC =530*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthF" deep)   by   (up to #SideHeight2F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1F)&(#VertH<=#SideHeight2F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost2FC , Set the Cost of This Side
+     Set, (#VertH>#SideHeight1F)&(#VertH<=#SideHeight2F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #addpanel = 22, panel count
+      }
+
+    Do, (#NumSideHeightF>2):1
+      {
+      DisplaySet, #SideCost3FC =838*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthF" deep)   by   (up to #SideHeight3F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2F)&(#VertH<=#SideHeight3F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost3FC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2F)&(#VertH<=#SideHeight3F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #addpanel = 23, panel count
+      }
+
+    Do, (#NumSideHeightF>3):1
+      {
+      DisplaySet, #SideCost4FC =1005*#panelpricemultiplier,                   Cost of a Side #SidethickC thick  (up to #SideDepthF" deep)   by   (up to #SideHeight4F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3F)&(#VertH<=#SideHeight4F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost4FC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3F)&(#VertH<=#SideHeight4F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #addpanel = 24, panel count
+      }
+
+    Do, (#NumSideHeightF>4):1
+      {
+      DisplaySet, #SideCost5FC =60.16,                   Cost of a Side  #SidethickC thick (up to #SideDepthF" deep)   by   (up to #SideHeight5F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4F)&(#VertH<=#SideHeight5F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost5FC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightF>5):1
+      {
+      DisplaySet, #SideCost6FC =72.16,                   Cost of a Side #SidethickC thick  (up to #SideDepthF" deep)   by   (up to #SideHeight6F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5F)&(#VertH<=#SideHeight6F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost6FC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightF>6):1
+      {
+      DisplaySet, #SideCost7FC =84.16,                   Cost of a Side #SidethickC thick  (up to #SideDepthF" deep)   by   (up to #SideHeight7F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6F)&(#VertH<=#SideHeight7F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost7FC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightF>7):1
+      {
+      DisplaySet, #SideCost8FC =96.16,                    Cost of a Side #SidethickC thick  (up to #SideDepthF" deep)   by   (up to #SideHeight8F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7F)&(#VertH<=#SideHeight8F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost8FC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightF>8):1
+      {
+      DisplaySet, #SideCost9FC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthF" deep)   by   (up to #SideHeight9F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8F)&(#VertH<=#SideHeight9F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost9FC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightF>9):1
+      {
+      DisplaySet, #SideCost10FC =0  ,                    Cost of a Side #SidethickC thick  (up to #SideDepthF" deep)   by   (up to #SideHeight10F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9F)&(#VertH<=#SideHeight10F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost10FC , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>6):1
+  {
+    Do, (#NumSideHeightG>0):1
+      {
+      DisplaySet, #SideCost1GC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthG" deep)   by   (up to #SideHeight1G" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost1GC ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG):#addpanel = 25, panel count
+      }
+
+    Do, (#NumSideHeightG>1):1
+      {
+      DisplaySet, #SideCost2GC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthG" deep)   by   (up to #SideHeight2G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1G)&(#VertH<=#SideHeight2G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost2GC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1G)&(#VertH<=#SideHeight2G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG):#addpanel = 26, panel count
+      }
+
+    Do, (#NumSideHeightG>2):1
+      {
+      DisplaySet, #SideCost3GC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthG" deep)   by   (up to #SideHeight3G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2G)&(#VertH<=#SideHeight3G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost3GC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2G)&(#VertH<=#SideHeight3G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG):#addpanel = 27, panel count
+      }
+
+    Do, (#NumSideHeightG>3):1
+      {
+      DisplaySet, #SideCost4GC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthG" deep)   by   (up to #SideHeight4G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3G)&(#VertH<=#SideHeight4G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost4GC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3G)&(#VertH<=#SideHeight4G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG):#addpanel = 28, panel count
+      }
+
+    Do, (#NumSideHeightG>4):1
+      {
+      DisplaySet, #SideCost5GC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthG" deep)   by   (up to #SideHeight5G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4G)&(#VertH<=#SideHeight5G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost5GC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightG>5):1
+      {
+      DisplaySet, #SideCost6GC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthG" deep)   by   (up to #SideHeight6G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6G)&(#VertH<=#SideHeight6G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost6GC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightG>6):1
+      {
+      DisplaySet, #SideCost7GC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthG" deep)   by   (up to #SideHeight7G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6G)&(#VertH<=#SideHeight7G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost7GC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightG>7):1
+      {
+      DisplaySet, #SideCost8GC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthG" deep)   by   (up to #SideHeight8G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7G)&(#VertH<=#SideHeight8G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost8GC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightG>8):1
+      {
+      DisplaySet, #SideCost9GC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthG" deep)   by   (up to #SideHeight9G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8G)&(#VertH<=#SideHeight9G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost9GC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightG>9):1
+      {
+      DisplaySet, #SideCost10GC =0  ,                    Cost of a Side #SidethickC thick  (up to #SideDepthG" deep)   by   (up to #SideHeight10G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9G)&(#VertH<=#SideHeight10G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost10GC , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>7):1
+  {
+    Do, (#NumSideHeightH>0):1
+      {
+      DisplaySet, #SideCost1HC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthH" deep)   by   (up to #SideHeight1H" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost1HC ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #addpanel = 29, panel count
+      }
+
+    Do, (#NumSideHeightH>1):1
+      {
+      DisplaySet, #SideCost2HC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthH" deep)   by   (up to #SideHeight2H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1H)&(#VertH<=#SideHeight2H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost2HC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1H)&(#VertH<=#SideHeight2H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH):#addpanel = 30, panel count
+      }
+
+    Do, (#NumSideHeightH>2):1
+      {
+      DisplaySet, #SideCost3HC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthH" deep)   by   (up to #SideHeight3H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2H)&(#VertH<=#SideHeight3H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost3HC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2H)&(#VertH<=#SideHeight3H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH):#addpanel = 31, panel count
+      }
+
+    Do, (#NumSideHeightH>3):1
+      {
+      DisplaySet, #SideCost4HC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthH" deep)   by   (up to #SideHeight4H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3H)&(#VertH<=#SideHeight4H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost4HC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3H)&(#VertH<=#SideHeight4H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH):#addpanel = 32, panel count
+      }
+
+    Do, (#NumSideHeightH>4):1
+      {
+      DisplaySet, #SideCost5HC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthH" deep)   by   (up to #SideHeight5H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4H)&(#VertH<=#SideHeight5H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost5HC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightH>5):1
+      {
+      DisplaySet, #SideCost6HC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthH" deep)   by   (up to #SideHeight6H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5H)&(#VertH<=#SideHeight6H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost6HC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightH>6):1
+      {
+      DisplaySet, #SideCost7HC =0,                   Cost of a Side   (up to #SideDepthH" deep)   by   (up to #SideHeight7H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6H)&(#VertH<=#SideHeight7H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost7HC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightH>7):1
+      {
+      DisplaySet, #SideCost8HC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthH" deep)   by   (up to #SideHeight8H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7H)&(#VertH<=#SideHeight8H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost8HC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightH>8):1
+      {
+      DisplaySet, #SideCost9HC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthH" deep)   by   (up to #SideHeight9H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8H)&(#VertH<=#SideHeight9H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost9HC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightH>9):1
+      {
+      DisplaySet, #SideCost10HC =0  ,                    Cost of a Side #SidethickC thick  (up to #SideDepthH" deep)   by   (up to #SideHeight10H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9H)&(#VertH<=#SideHeight10H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost10HC , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>8):1
+  {
+    Do, (#NumSideHeightI>0):1
+      {
+      DisplaySet, #SideCost1IC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthI" deep)   by   (up to #SideHeight1I" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost1IC ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI):#addpanel = 33, panel count
+      }
+
+    Do, (#NumSideHeightI>1):1
+      {
+      DisplaySet, #SideCost2IC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthI" deep)   by   (up to #SideHeight2I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1I)&(#VertH<=#SideHeight2I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost2IC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1I)&(#VertH<=#SideHeight2I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI):#addpanel = 34, panel count
+      }
+
+    Do, (#NumSideHeightI>2):1
+      {
+      DisplaySet, #SideCost3IC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthI" deep)   by   (up to #SideHeight3I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2I)&(#VertH<=#SideHeight3I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost3IC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2I)&(#VertH<=#SideHeight3I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #addpanel = 35, panel count
+     }
+
+    Do, (#NumSideHeightI>3):1
+      {
+      DisplaySet, #SideCost4IC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthI" deep)   by   (up to #SideHeight4I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3I)&(#VertH<=#SideHeight4I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost4IC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3I)&(#VertH<=#SideHeight4I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI):#addpanel = 36, panel count
+      }
+
+    Do, (#NumSideHeightI>4):1
+      {
+      DisplaySet, #SideCost5IC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthI" deep)   by   (up to #SideHeight5I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4I)&(#VertH<=#SideHeight5I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost5IC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightI>5):1
+      {
+      DisplaySet, #SideCost6IC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthI" deep)   by   (up to #SideHeight6I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5I)&(#VertH<=#SideHeight6I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost6IC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightI>6):1
+      {
+      DisplaySet, #SideCost7IC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthI" deep)   by   (up to #SideHeight7I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6I)&(#VertH<=#SideHeight7I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost7IC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightI>7):1
+      {
+      DisplaySet, #SideCost8IC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthI" deep)   by   (up to #SideHeight8I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7I)&(#VertH<=#SideHeight8I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost8IC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightI>8):1
+      {
+      DisplaySet, #SideCost9IC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthI" deep)   by   (up to #SideHeight9I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8I)&(#VertH<=#SideHeight9I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost9IC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightI>9):1
+      {
+      DisplaySet, #SideCost10IC =0  ,                    Cost of a Side #SidethickC thick  (up to #SideDepthI" deep)   by   (up to #SideHeight10I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9I)&(#VertH<=#SideHeight10I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost10IC , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>9):1
+  {
+    Do, (#NumSideHeightJ>0):1
+      {
+      DisplaySet, #SideCost1JC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthJ" deep)   by   (up to #SideHeight1J" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost1JC ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ):#addpanel = 37, panel count
+      }
+
+    Do, (#NumSideHeightJ>1):1
+      {
+      DisplaySet, #SideCost2JC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthJ" deep)   by   (up to #SideHeight2J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1J)&(#VertH<=#SideHeight2J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost2JC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1J)&(#VertH<=#SideHeight2J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ):#addpanel = 38, panel count
+      }
+
+    Do, (#NumSideHeightJ>2):1
+      {
+      DisplaySet, #SideCost3JC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthJ" deep)   by   (up to #SideHeight3J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2J)&(#VertH<=#SideHeight3J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost3JC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2J)&(#VertH<=#SideHeight3J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ):#addpanel = 39, panel count
+      }
+
+    Do, (#NumSideHeightA>3):1
+      {
+      DisplaySet, #SideCost4JC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthJ" deep)   by   (up to #SideHeight4J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3J)&(#VertH<=#SideHeight4J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost4JC , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3J)&(#VertH<=#SideHeight4J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ):#addpanel = 40, panel count
+      }
+
+    Do, (#NumSideHeightJ>4):1
+      {
+      DisplaySet, #SideCost5JC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthJ" deep)   by   (up to #SideHeight5J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4J)&(#VertH<=#SideHeight5J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost5JC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightJ>5):1
+      {
+      DisplaySet, #SideCost6JC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthJ" deep)   by   (up to #SideHeight6J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5J)&(#VertH<=#SideHeight6J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost6JC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightJ>6):1
+      {
+      DisplaySet, #SideCost7JC =0,                   Cost of a Side #SidethickC thick  (up to #SideDepthJ" deep)   by   (up to #SideHeight7J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6J)&(#VertH<=#SideHeight7J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost7JC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightJ>7):1
+      {
+      DisplaySet, #SideCost8JC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthJ" deep)   by   (up to #SideHeight8J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7J)&(#VertH<=#SideHeight8J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost8JC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightJ>8):1
+      {
+      DisplaySet, #SideCost9JC =0   ,                    Cost of a Side #SidethickC thick  (up to #SideDepthJ" deep)   by   (up to #SideHeight9J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8J)&(#VertH<=#SideHeight9J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost9JC , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightJ>9):1
+      {
+      DisplaySet, #SideCost10JC =0  ,                    Cost of a Side #SidethickC thick  (up to #SideDepthJ" deep)   by   (up to #SideHeight10J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9J)&(#VertH<=#SideHeight10J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost10JC , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  }
+
+
+,**
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+,Blank Lines at the end of the Grid (for Looks Only)
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**

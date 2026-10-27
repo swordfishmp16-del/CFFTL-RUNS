@@ -1,0 +1,201 @@
+,Set Item Costs by Size Increaments
+
+
+Load, GetMaterialCostGroup.Pcb
+Load, GetShoeFencecost.pcb
+
+,Set,#UsePanelTouchingWallCost=0
+
+,Set,#countloadsforsides=1
+,Set,#Totalcountloadsforsides=[#Totalcountloadsforsides+#countloadsforsides]
+
+,Set,(ul=1)&(LS>0)&(#Totalcountloadsforsides=1):#UsePanelTouchingWallCost=#PanelTouchingWallCost
+
+,Set,(#Totalcountloadsforsides=2):#UsePanelTouchingWallCost=0
+,Set,(ur=1)&(RS>0)&(#Totalcountloadsforsides=2):#UsePanelTouchingWallCost=#PanelTouchingWallCost
+
+,Change below requested LA CF 7-17-14 Edgeband multiplier
+,Set the Cost of Each Type of Shelf
+,Set, #CostOfTopShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+,Set, #CostOfMiddleShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+,Set, #CostOfBottomShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+,Set, #CostOfAdjustableShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+,Set, #CostOfCubbyShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+,Set, #CostOfShoeShelf = [((#CostOfHorizontal + #CostAddedToShoeShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+
+,Change below requested LA CF 8-27-14 Finishing multiplier to work like edgeband
+,Set, #CostOfTopShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)-#CostOfHorizontal)]
+,Set, #CostOfMiddleShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)-#CostOfHorizontal)]
+,Set, #CostOfBottomShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)-#CostOfHorizontal)]
+,Set, #CostOfAdjustableShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)-#CostOfHorizontal)]
+,Set, #CostOfCubbyShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)-#CostOfHorizontal)]
+,Set, #CostOfShoeShelf = [((#CostOfHorizontal + #CostAddedToShoeShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)-#CostOfHorizontal)]
+,*******Changed 3/2018 added finish multiplier with material
+,Set, #CostOfTopShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup))+((#CostOfHorizontal*#FinishCostGroup))]
+,Set, #CostOfMiddleShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup))+((#CostOfHorizontal*#FinishCostGroup))]
+,Set, #CostOfBottomShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup))+((#CostOfHorizontal*#FinishCostGroup))]
+,Set, #CostOfAdjustableShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup))+((#CostOfHorizontal*#FinishCostGroup))]
+,Set, #CostOfCubbyShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup))+((#CostOfHorizontal*#FinishCostGroup))]
+,Set, #CostOfShoeShelf = [((#CostOfHorizontal)*#MaterialCostGroup + #ShoeFenceCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup))+((#CostOfHorizontal*#FinishCostGroup))]
+,*****
+
+set, #stopcshelf=0
+Do, (#edgebyfoot=yes):1
+{
+Set, #CostOfTopShelf = [(((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+(((W/12)*#EdgeBandCostGroup)))*#universalupcharge]
+Set, #CostOfMiddleShelf = [(((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+(((W/12)*#EdgeBandCostGroup)))*#universalupcharge]
+Set, #CostOfBottomShelf = [(((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+(((W/12)*#EdgeBandCostGroup)))*#universalupcharge]
+Set, #CostOfAdjustableShelf = [(((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+(((W/12)*#EdgeBandCostGroup)))*#universalupcharge]
+Set, #CostOfCubbyShelf = [(((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+(((W/12)*#EdgeBandCostGroup)))*#universalupcharge]
+,Set, #CostOfShoeShelf = [(((#CostOfHorizontal)*#MaterialCostGroup + #ShoeFenceCostGroup)+(((W/12)*#EdgeBandCostGroup)))*#universalupcharge]
+}
+Do, (#edgebyfoot=no):1
+{
+Set, #CostOfTopShelf = [(((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)))*#universalupcharge]
+Set, #CostOfMiddleShelf = [(((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)))*#universalupcharge]
+Set, #CostOfBottomShelf = [(((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)))*#universalupcharge]
+Set, #CostOfAdjustableShelf = [(((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)))*#universalupcharge]
+Set, #CostOfCubbyShelf = [(((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)))*#universalupcharge]
+,Set, #CostOfShoeShelf = [(((#CostOfHorizontal)*#MaterialCostGroup + #ShoeFenceCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup)))*#universalupcharge]
+}
+set, #stopcshelf=1
+,leave file here
+End 
+
+
+
+
+
+
+
+
+,Calculating subtotals
+Set,#MaterialCostGroup=0
+
+Set,(#UnitMaterial = "#MaterialName1"):#MaterialCostGroup=#DetailedMaterialCostFactor1
+Set,(#UnitMaterial = "#MaterialName2"):#MaterialCostGroup=#DetailedMaterialCostFactor2
+Set,(#UnitMaterial = "#MaterialName3"):#MaterialCostGroup=#DetailedMaterialCostFactor3
+Set,(#UnitMaterial = "#MaterialName4"):#MaterialCostGroup=#DetailedMaterialCostFactor4
+Set,(#UnitMaterial = "#MaterialName5"):#MaterialCostGroup=#DetailedMaterialCostFactor5
+Set,(#UnitMaterial = "#MaterialName6"):#MaterialCostGroup=#DetailedMaterialCostFactor6
+Set,(#UnitMaterial = "#MaterialName7"):#MaterialCostGroup=#DetailedMaterialCostFactor7
+Set,(#UnitMaterial = "#MaterialName8"):#MaterialCostGroup=#DetailedMaterialCostFactor8
+Set,(#UnitMaterial = "#MaterialName9"):#MaterialCostGroup=#DetailedMaterialCostFactor9
+Set,(#UnitMaterial = "#MaterialName10"):#MaterialCostGroup=#DetailedMaterialCostFactor10
+Set,(#UnitMaterial = "#MaterialName11"):#MaterialCostGroup=#DetailedMaterialCostFactor11
+Set,(#UnitMaterial = "#MaterialName12"):#MaterialCostGroup=#DetailedMaterialCostFactor12
+Set,(#UnitMaterial = "#MaterialName13"):#MaterialCostGroup=#DetailedMaterialCostFactor13
+Set,(#UnitMaterial = "#MaterialName14"):#MaterialCostGroup=#DetailedMaterialCostFactor14
+Set,(#UnitMaterial = "#MaterialName15"):#MaterialCostGroup=#DetailedMaterialCostFactor15
+Set,(#UnitMaterial = "#MaterialName16"):#MaterialCostGroup=#DetailedMaterialCostFactor16
+Set,(#UnitMaterial = "#MaterialName17"):#MaterialCostGroup=#DetailedMaterialCostFactor17
+Set,(#UnitMaterial = "#MaterialName18"):#MaterialCostGroup=#DetailedMaterialCostFactor18
+Set,(#UnitMaterial = "#MaterialName19"):#MaterialCostGroup=#DetailedMaterialCostFactor19
+Set,(#UnitMaterial = "#MaterialName20"):#MaterialCostGroup=#DetailedMaterialCostFactor20
+Set,(#UnitMaterial = "#MaterialName21"):#MaterialCostGroup=#DetailedMaterialCostFactor21
+Set,(#UnitMaterial = "#MaterialName22"):#MaterialCostGroup=#DetailedMaterialCostFactor22
+Set,(#UnitMaterial = "#MaterialName23"):#MaterialCostGroup=#DetailedMaterialCostFactor23
+Set,(#UnitMaterial = "#MaterialName24"):#MaterialCostGroup=#DetailedMaterialCostFactor24
+Set,(#UnitMaterial = "#MaterialName25"):#MaterialCostGroup=#DetailedMaterialCostFactor25
+Set,(#UnitMaterial = "#MaterialName26"):#MaterialCostGroup=#DetailedMaterialCostFactor26
+Set,(#UnitMaterial = "#MaterialName27"):#MaterialCostGroup=#DetailedMaterialCostFactor27
+Set,(#UnitMaterial = "#MaterialName28"):#MaterialCostGroup=#DetailedMaterialCostFactor28
+Set,(#UnitMaterial = "#MaterialName29"):#MaterialCostGroup=#DetailedMaterialCostFactor29
+Set,(#UnitMaterial = "#MaterialName30"):#MaterialCostGroup=#DetailedMaterialCostFactor30
+Set,(#UnitMaterial = "#MaterialName31"):#MaterialCostGroup=#DetailedMaterialCostFactor31
+Set,(#UnitMaterial = "#MaterialName32"):#MaterialCostGroup=#DetailedMaterialCostFactor32
+Set,(#UnitMaterial = "#MaterialName33"):#MaterialCostGroup=#DetailedMaterialCostFactor33
+Set,(#UnitMaterial = "#MaterialName34"):#MaterialCostGroup=#DetailedMaterialCostFactor34
+Set,(#UnitMaterial = "#MaterialName35"):#MaterialCostGroup=#DetailedMaterialCostFactor35
+Set,(#UnitMaterial = "#MaterialName36"):#MaterialCostGroup=#DetailedMaterialCostFactor36
+Set,(#UnitMaterial = "#MaterialName37"):#MaterialCostGroup=#DetailedMaterialCostFactor37
+Set,(#UnitMaterial = "#MaterialName38"):#MaterialCostGroup=#DetailedMaterialCostFactor38
+Set,(#UnitMaterial = "#MaterialName39"):#MaterialCostGroup=#DetailedMaterialCostFactor39
+Set,(#UnitMaterial = "#MaterialName40"):#MaterialCostGroup=#DetailedMaterialCostFactor40
+Set,(#UnitMaterial = "#MaterialName41"):#MaterialCostGroup=#DetailedMaterialCostFactor41
+Set,(#UnitMaterial = "#MaterialName42"):#MaterialCostGroup=#DetailedMaterialCostFactor42
+Set,(#UnitMaterial = "#MaterialName43"):#MaterialCostGroup=#DetailedMaterialCostFactor43
+Set,(#UnitMaterial = "#MaterialName44"):#MaterialCostGroup=#DetailedMaterialCostFactor44
+Set,(#UnitMaterial = "#MaterialName45"):#MaterialCostGroup=#DetailedMaterialCostFactor45
+
+,Set the Cost of Each Type of Shelf
+Set, #CostOfTopShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+Set, #CostOfMiddleShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+Set, #CostOfBottomShelf = [((#CostOfHorizontal + #CostAddedToFixedShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+Set, #CostOfAdjustableShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+Set, #CostOfCubbyShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+Set, #CostOfShoeShelf = [((#CostOfHorizontal + #CostAddedToShoeShelves)*#MaterialCostGroup)*#EdgeBandCostGroup]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

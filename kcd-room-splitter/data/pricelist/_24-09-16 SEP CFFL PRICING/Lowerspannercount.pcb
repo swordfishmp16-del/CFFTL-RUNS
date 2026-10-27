@@ -1,0 +1,149 @@
+set, #addlowerspanner1=0
+set, #addlowerspanner2=0
+set, #addlowerspanner3=0
+set, #addlowerspanner4=0
+set, #addlowerspanner5=0
+set, #addlowerspanner6=0
+set, #addlowerspanner7=0
+set, #addlowerspanner8=0
+set, #addlowerspanner9=0
+
+set, #Addshelfopening1=0
+set, #Addshelfopening2=0
+set, #Addshelfopening3=0
+set, #Addshelfopening4=0
+set, #Addshelfopening5=0
+set, #Addshelfopening6=0
+set, #Addshelfopening7=0
+set, #Addshelfopening8=0
+set, #Addshelfopening9=0
+set, #stopmidcount=1
+
+,for tall drawer units
+
+
+Do, (#bottomdrw=2):1
+{
+Set,((D2H=0)|(D2HG<>0)): #Addshelfopening1=1
+Set,((D3H=0)|(D3HG<>0)|(OPT=#optionLockdr2)): #Addshelfopening2=1
+
+set, #stopmidcount=2
+}
+
+Do, (#bottomdrw=3):1
+{
+set, ((D2H=0)|(D2HG<>0)):#Addshelfopening1=1
+set, ((D3H=0)|(D3HG<>0)|((D3HG<>0)&(OPT=#optionLockdr2))): #Addshelfopening2=2
+set, ((D3H>0)&(D3HG=0)&(OPT=#optionLockdr2)): #Addshelfopening2=1
+set, ((D4H=0)|(D4HG<>0)|(OPT=#optionLockdr3):  #Addshelfopening3=1
+
+}
+
+Do, (#bottomdrw=4):1
+{
+set, ((D2H=0)|(D2HG<>0)):#Addshelfopening1=1
+set, ((D3H=0)|(D3HG<>0)|((D3HG<>0)&(OPT=#optionLockdr2))): #Addshelfopening2=2
+set, ((D3H>0)&(D3HG=0)&(OPT=#optionLockdr2)): #Addshelfopening2=1
+set, ((D4H=0)|(D4HG<>0)|((D4HG<>0)&(OPT=#optionLockdr3)):  #Addshelfopening3=2
+set, ((D4H>0)&(D4HG=0)&(OPT=#optionLockdr3)):  #Addshelfopening3=1
+set, ((D5H=0)|(D5HG<>0)|(OPT=#optionLockdr4)):#Addshelfopening4=1
+
+}
+
+Do, (#bottomdrw=5):1
+{
+set, ((D2H=0)|(D2HG<>0)):#Addshelfopening1=1
+set, ((D3H=0)|(D3HG<>0)|((D3HG<>0)&(OPT=#optionLockdr2))): #Addshelfopening2=2
+set, ((D3H>0)&(D3HG=0)&(OPT=#optionLockdr2)): #Addshelfopening2=1
+set, ((D4H=0)|(D4HG<>0)|((D4HG<>0)&(OPT=#optionLockdr3)):  #Addshelfopening3=2
+set, ((D4H>0)&(D4HG=0)&(OPT=#optionLockdr3)):  #Addshelfopening3=1
+set, ((D5H=0)|(D5HG<>0)|(OPT=#optionLockdr4)):#Addshelfopening4=1
+set, ((D5H>0)&(D5HG=0)&(OPT=#optionLockdr4)):#Addshelfopening4=1
+set, ((D6H=0)|(D6HG<>0)|(OPT=#optionLockdr5)):#Addshelfopening5=1
+
+set, #stopmidcount=5
+
+}
+
+
+Do, (#bottomdrw=6):1
+{
+
+set, ((D2H=0)|(D2HG<>0)):#Addshelfopening1=1
+set, ((D3H=0)|(D3HG<>0)|((D3HG<>0)&(OPT=#optionLockdr2))): #Addshelfopening2=2
+set, ((D3H>0)&(D3HG=0)&(OPT=#optionLockdr2)): #Addshelfopening2=1
+set, ((D4H=0)|(D4HG<>0)|((D4HG<>0)&(OPT=#optionLockdr3))):  #Addshelfopening3=2
+set, ((D4H>0)&(D4HG=0)&(OPT=#optionLockdr3)):  #Addshelfopening3=1
+set, ((D5H=0)|(D5HG<>0)|((D5HG<>0)&(OPT=#optionLockdr4))):#Addshelfopening4=2
+set, ((D5H>0)&(D5HG=0)&(OPT=#optionLockdr4)):#Addshelfopening4=1
+set, ((D6H=0)|(D6HG<>0)|((D6HG<>0)&(OPT=#optionLockdr5))):#Addshelfopening5=2
+set, ((D6H>0)&(D6HG=0)&(OPT=#optionLockdr5)):#Addshelfopening5=1
+set, ((D7H=0)|(D7HG<>0)|(OPT=#optionLockdr6)):#Addshelfopening6=1
+
+}
+
+Do, (#bottomdrw=7):1
+{
+
+set, ((D2H=0)|(D2HG<>0)):#Addshelfopening1=1
+set, ((D3H=0)|(D3HG<>0)|((D3HG<>0)&(OPT=#optionLockdr2))): #Addshelfopening2=2
+set, ((D3H>0)&(D3HG=0)&(OPT=#optionLockdr2)): #Addshelfopening2=1
+set, ((D4H=0)|(D4HG<>0)|((D4HG<>0)&(OPT=#optionLockdr3))):  #Addshelfopening3=2
+set, ((D4H>0)&(D4HG=0)&(OPT=#optionLockdr3)):  #Addshelfopening3=1
+set, ((D5H=0)|(D5HG<>0)|((D5HG<>0)&(OPT=#optionLockdr4))):#Addshelfopening4=2
+set, ((D5H>0)&(D5HG=0)&(OPT=#optionLockdr4)):#Addshelfopening4=1
+set, ((D6H=0)|(D6HG<>0)|((D6HG<>0)&(OPT=#optionLockdr5))):#Addshelfopening5=2
+set, ((D6H>0)&(D6HG=0)&(OPT=#optionLockdr5)):#Addshelfopening5=1
+set, ((D7H=0)|(D7HG<>0)|((D7HG<>0)&(OPT=#optionLockdr6))):#Addshelfopening6=2
+set, ((D7H>0)&(D7HG=0)&(OPT=#optionLockdr6)):#Addshelfopening6=1
+set, ((D8H=0)|(D8HG<>0)|(OPT=#optionLockdr7)):#Addshelfopening7=1
+
+}
+
+Do, (#bottomdrw=8):1
+{
+
+set, ((D2H=0)|(D2HG<>0)):#Addshelfopening1=1
+set, ((D3H=0)|(D3HG<>0)|((D3HG<>0)&(OPT=#optionLockdr2))): #Addshelfopening2=2
+set, ((D3H>0)&(D3HG=0)&(OPT=#optionLockdr2)): #Addshelfopening2=1
+set, ((D4H=0)|(D4HG<>0)|((D4HG<>0)&(OPT=#optionLockdr3))):  #Addshelfopening3=2
+set, ((D4H>0)&(D4HG=0)&(OPT=#optionLockdr3)):  #Addshelfopening3=1
+set, ((D5H=0)|(D5HG<>0)|((D5HG<>0)&(OPT=#optionLockdr4))):#Addshelfopening4=2
+set, ((D5H>0)&(D5HG=0)&(OPT=#optionLockdr4)):#Addshelfopening4=1
+set, ((D6H=0)|(D6HG<>0)|((D6HG<>0)&(OPT=#optionLockdr5))):#Addshelfopening5=2
+set, ((D6H>0)&(D6HG=0)&(OPT=#optionLockdr5)):#Addshelfopening5=1
+set, ((D7H=0)|(D7HG<>0)|((D7HG<>0)&(OPT=#optionLockdr6))):#Addshelfopening6=2
+set, ((D7H>0)&(D7HG=0)&(OPT=#optionLockdr6)):#Addshelfopening6=1
+set, ((D8H=0)|(D8HG<>0)|((D8HG<>0)&(OPT=#optionLockdr7))):#Addshelfopening7=2
+set, ((D8H=0)|(D8HG<>0)|(OPT=#optionLockdr7)):#Addshelfopening7=1
+set, ((D9H=0)|(D9HG<>0)|(OPT=#optionLockdr8)):#Addshelfopening8=1
+
+}
+
+
+
+Set, (#addshelfopening1=1)|((#addshelfopening2=1)|(#addshelfopening2=2)):#addlowerspanner1=1
+set, (#addshelfopening2=2)|((#addshelfopening3=1)|(#addshelfopening3=2)):#addlowerspanner2=1
+set, (#addshelfopening3=2)|((#addshelfopening4=1)|(#addshelfopening4=2)):#addlowerspanner3=1
+set, (#addshelfopening4=2)|((#addshelfopening5=1)|(#addshelfopening5=2)):#addlowerspanner4=1
+set, (#addshelfopening5=2)|((#addshelfopening6=1)|(#addshelfopening6=2)):#addlowerspanner5=1
+set, (#addshelfopening6=2)|((#addshelfopening7=1)|(#addshelfopening7=2)):#addlowerspanner6=1
+set, (#addshelfopening7=2)|((#addshelfopening8=1)|(#addshelfopening8=2)):#addlowerspanner7=1
+set, (#addshelfopening8=2)|(#addshelfopening9=1):#addlowerspanner8=1
+
+set, #lowerspannercount=(#addlowerspanner1+#addlowerspanner2+#addlowerspanner3+#addlowerspanner4+#addlowerspanner5+#addlowerspanner6+#addlowerspanner7+#addlowerspanner8+#addlowerspanner9-1)
+
+
+
+set, #stopmidcount=7
+
+
+
+
+
+
+
+
+
+
+

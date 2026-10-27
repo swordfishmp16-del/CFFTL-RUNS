@@ -1,0 +1,557 @@
+
+
+
+set,#S1num=[#NumofUnits]
+set,(#Sub1numOfUnits="Total Number of Units"):#S1num=[#NumofUnits]
+set,(#Sub1numOfUnits="Total Number of Cabinets"):#S1num=[#AllNumofUnits]
+set,(#Sub1numOfUnits="Total Number of Cabinets/Closets"):#S1num=[#AllCabClosetNumofUnits]
+set,(#Sub1numOfUnits="Total Number of Base Cabinets"):#S1num=[#BaseNumofUnits]
+set,(#Sub1numOfUnits="Total Number of Wall Cabinets"):#S1num=[#WallNumofUnits]
+set,(#Sub1numOfUnits="Total Number of Tall Cabinets"):#S1num=[#TallNumofUnits]
+set,(#Sub1numOfUnits="Total Number of Panels"):#S1num=[#PanelNumofUnits]
+set,(#Sub1numOfUnits="Total Number of Wall Panels"):#S1num=[#WallPanelNumofUnits]
+set,(#Sub1numOfUnits="Total Number of Base Panels"):#S1num=[#BasePanelNumofUnits]
+set,(#Sub1numOfUnits="Total Number of Tall Panels"):#S1num=[#TallPanelNumofUnits]
+set,(#Sub1numOfUnits="Total Number of Units w/o Cabinets"):#S1num=[#OtherNumofUnits]
+set,(#Sub1numOfUnits="Total Number of Doors"):#S1num=[#TotalDoorNum]
+set,(#Sub1numOfUnits="Total Number of DrawerBoxes"):#S1num=[#TotalDrawerNum]
+set,(#Sub1numOfUnits="Total Number of Pullouts"):#S1num=[#TotalPulloutNum]
+
+
+set,#S1length=#LinealTotal#Linealfactor
+set, (#Sub1Length="Lineal Footage of All Units"):#S1length=#LinealTotal#Linealfactor
+set, (#Sub1Length="Square Footage of All Units"):#S1length=#SquareTotal#SquareFactor
+set, (#Sub1Length="Cubic Footage of All Units"):#S1length=#CubicTotal#CubicFactor
+set, (#Sub1Length="Lineal Footage of All Cabinets"):#s1length=#AllLinealTotal#Linealfactor
+set, (#Sub1Length="Square Footage of All Cabinets"):#s1length=#AllSquareTotal#SquareFactor
+set, (#Sub1Length="Cubic Footage of All Cabinets"):#s1length=#AllCubicTotal#CubicFactor
+set, (#Sub1Length="Lineal Footage of All Cabinets/Closets"):#s1length=#AllCabClosetLinealTotal#Linealfactor
+set, (#Sub1Length="Square Footage of All Cabinets/Closets"):#s1length=#AllCabClosetSquareTotal#SquareFactor
+set, (#Sub1Length="Cubic Footage of All Cabinets/Closets"):#s1length=#AllCabClosetCubicTotal#CubicFactor
+set, (#Sub1Length="Lineal Footage of Base Cabinets"):#s1length=#BaseLinealTotal#Linealfactor
+set, (#Sub1Length="Square Footage of Base Cabinets"):#s1length=#BaseSquareTotal#SquareFactor
+set, (#Sub1Length="Cubic Footage of Base Cabinets"):#s1length=#BaseCubicTotal#CubicFactor
+set, (#Sub1Length="Lineal Footage of Wall Cabinets"):#s1length=#WallLinealTotal#Linealfactor
+set, (#Sub1Length="Square Footage of Wall Cabinets"):#s1length=#WallSquareTotal#SquareFactor
+set, (#Sub1Length="Cubic Footage of Wall Cabinets"):#s1length=#WallCubicTotal#CubicFactor
+set, (#Sub1Length="Lineal Footage of Tall Cabinets"):#s1length=#TallLinealTotal#Linealfactor
+set, (#Sub1Length="Square Footage of Tall Cabinets"):#s1length=#TallSquareTotal#SquareFactor
+set, (#Sub1Length="Cubic Footage of Tall Cabinets"):#s1length=#TallCubicTotal#CubicFactor
+set, (#Sub1Length="Total Area of Doors"):#s1length=#TotalDoorArea#SquareFactor
+set, (#Sub1Length="Lineal Footage of Panels"):#s1length=#PanelLinealTotal#LinealFactor
+set, (#Sub1Length="Square Footage of Panels"):#s1length=#PanelSquareTotal#SquareFactor
+set, (#Sub1Length="Cubic Footage of Panels"):#s1length=#PanelCubicTotal#CubicFactor
+
+
+set,#S1SubTotal=#SubTotal
+set, (#Sub1SubTotal="SubTotal"):#S1sub=#SubTotal
+set, (#Sub1SubTotal="SubTotal Before Extras"):#S1sub=#PreSubTotal
+set, (#Sub1SubTotal="SubTotal of Closets"):#S1sub=#TotalCabCost
+set, (#Sub1SubTotal="SubTotal of Doors"):#S1sub=#TotalDoorCost
+set, (#Sub1SubTotal="SubTotal of Pullouts"):#S1sub=#TotalPulloutCost
+set, (#Sub1SubTotal="SubTotal of Drawer Boxes"):#S1sub=#TotalDrawerCost
+
+set,#TotalSub1Cost=[(#S1Sub*#Sub1SubTotalCost)+(#S1Length*#Sub1LengthCost)+(#S1num*#Sub1CostNumOfUnits)+(#Sub1FlatCost)]
+set,(#Sub1PosNeg=No):#TotalSub1Cost=[#TotalSub1Cost*(-1)]
+
+,===================================================================
+,Sub total 2
+
+set,#S2num=[#NumofUnits]
+set,(#Sub2numOfUnits="Total Number of Units"):#S2num=[#NumofUnits]
+set,(#Sub2numOfUnits="Total Number of Cabinets"):#S2num=[#AllNumofUnits]
+set,(#Sub2numOfUnits="Total Number of Cabinets/Closets"):#S2num=[#AllCabClosetNumofUnits]
+set,(#Sub2numOfUnits="Total Number of Base Cabinets"):#S2num=[#BaseNumofUnits]
+set,(#Sub2numOfUnits="Total Number of Wall Cabinets"):#S2num=[#WallNumofUnits]
+set,(#Sub2numOfUnits="Total Number of Tall Cabinets"):#S2num=[#TallNumofUnits]
+set,(#Sub2numOfUnits="Total Number of Panels"):#S2num=[#PanelNumofUnits]
+set,(#Sub2numOfUnits="Total Number of Wall Panels"):#S2num=[#WallPanelNumofUnits]
+set,(#Sub2numOfUnits="Total Number of Base Panels"):#S2num=[#BasePanelNumofUnits]
+set,(#Sub2numOfUnits="Total Number of Tall Panels"):#S2num=[#TallPanelNumofUnits]
+set,(#Sub2numOfUnits="Total Number of Units w/o Cabinets"):#S2num=[#OtherNumofUnits]
+set,(#Sub2numOfUnits="Total Number of Doors"):#S2num=[#TotalDoorNum]
+set,(#Sub2numOfUnits="Total Number of DrawerBoxes"):#S2num=[#TotalDrawerNum]
+set,(#Sub2numOfUnits="Total Number of Pullouts"):#S2num=[#TotalPulloutNum]
+
+
+set,#S2length=#LinealTotal#Linealfactor
+set, (#Sub2Length="Lineal Footage of All Units"):#S2length=#LinealTotal#Linealfactor
+set, (#Sub2Length="Square Footage of All Units"):#S2length=#SquareTotal#SquareFactor
+set, (#Sub2Length="Cubic Footage of All Units"):#S2length=#CubicTotal#CubicFactor
+set, (#Sub2Length="Lineal Footage of All Cabinets"):#s2length=#AllLinealTotal#Linealfactor
+set, (#Sub2Length="Square Footage of All Cabinets"):#s2length=#AllSquareTotal#SquareFactor
+set, (#Sub2Length="Cubic Footage of All Cabinets"):#s2length=#AllCubicTotal#CubicFactor
+set, (#Sub2Length="Lineal Footage of All Cabinets/Closets"):#s2length=#AllCabClosetLinealTotal#Linealfactor
+set, (#Sub2Length="Square Footage of All Cabinets/Closets"):#s2length=#AllCabClosetSquareTotal#SquareFactor
+set, (#Sub2Length="Cubic Footage of All Cabinets/Closets"):#s2length=#AllCabClosetCubicTotal#CubicFactor
+
+set, (#Sub2Length="Lineal Footage of Base Cabinets"):#s2length=#BaseLinealTotal#Linealfactor
+set, (#Sub2Length="Square Footage of Base Cabinets"):#s2length=#BaseSquareTotal#SquareFactor
+set, (#Sub2Length="Cubic Footage of Base Cabinets"):#s2length=#BaseCubicTotal#CubicFactor
+set, (#Sub2Length="Lineal Footage of Wall Cabinets"):#s2length=#WallLinealTotal#Linealfactor
+set, (#Sub2Length="Square Footage of Wall Cabinets"):#s2length=#WallSquareTotal#SquareFactor
+set, (#Sub2Length="Cubic Footage of Wall Cabinets"):#s2length=#WallCubicTotal#CubicFactor
+set, (#Sub2Length="Lineal Footage of Tall Cabinets"):#s2length=#TallLinealTotal#Linealfactor
+set, (#Sub2Length="Square Footage of Tall Cabinets"):#s2length=#TallSquareTotal#SquareFactor
+set, (#Sub2Length="Cubic Footage of Tall Cabinets"):#s2length=#TallCubicTotal#CubicFactor
+set, (#Sub2Length="Total Area of Doors"):#s2length=#TotalDoorArea#SquareFactor
+set, (#Sub2Length="Lineal Footage of Panels"):#s2length=#PanelLinealTotal#LinealFactor
+set, (#Sub2Length="Square Footage of Panels"):#s2length=#PanelSquareTotal#SquareFactor
+set, (#Sub2Length="Cubic Footage of Panels"):#s2length=#PanelCubicTotal#CubicFactor
+
+set,#S2SubTotal=#SubTotal
+set, (#Sub2SubTotal="SubTotal"):#S2sub=#SubTotal
+set, (#Sub2SubTotal="SubTotal Before Extras"):#S2sub=#PreSubTotal
+set, (#Sub2SubTotal="SubTotal of Closets"):#S2sub=#TotalCabCost
+set, (#Sub2SubTotal="SubTotal of Doors"):#S2sub=#TotalDoorCost
+set, (#Sub2SubTotal="SubTotal of Pullouts"):#S2sub=#TotalPulloutCost
+set, (#Sub2SubTotal="SubTotal of Drawer Boxes"):#S2sub=#TotalDrawerCost
+
+set,#TotalSub2Cost=[(#S2Sub*#Sub2SubTotalCost)+(#S2Length*#Sub2LengthCost)+(#S2num*#Sub2CostNumOfUnits)+(#Sub2FlatCost)]
+set,(#Sub2PosNeg=No):#TotalSub2Cost=[#TotalSub2Cost*(-1)]
+
+,=======================================================================
+,Subtotal 3
+
+set,#S3num=[#NumofUnits]
+set,(#Sub3numOfUnits="Total Number of Units"):#S3num=[#NumofUnits]
+set,(#Sub3numOfUnits="Total Number of Cabinets"):#S3num=[#AllNumofUnits]
+set,(#Sub3numOfUnits="Total Number of Cabinets/Closets"):#S3num=[#AllCabClosetNumofUnits]
+set,(#Sub3numOfUnits="Total Number of Base Cabinets"):#S3num=[#BaseNumofUnits]
+set,(#Sub3numOfUnits="Total Number of Wall Cabinets"):#S3num=[#WallNumofUnits]
+set,(#Sub3numOfUnits="Total Number of Tall Cabinets"):#S3num=[#TallNumofUnits]
+set,(#Sub3numOfUnits="Total Number of Panels"):#S3num=[#PanelNumofUnits]
+set,(#Sub3numOfUnits="Total Number of Wall Panels"):#S3num=[#WallPanelNumofUnits]
+set,(#Sub3numOfUnits="Total Number of Base Panels"):#S3num=[#BasePanelNumofUnits]
+set,(#Sub3numOfUnits="Total Number of Tall Panels"):#S3num=[#TallPanelNumofUnits]
+set,(#Sub3numOfUnits="Total Number of Units w/o Cabinets"):#S3num=[#OtherNumofUnits]
+set,(#Sub3numOfUnits="Total Number of Doors"):#S3num=[#TotalDoorNum]
+set,(#Sub3numOfUnits="Total Number of DrawerBoxes"):#S3num=[#TotalDrawerNum]
+set,(#Sub3numOfUnits="Total Number of Pullouts"):#S3num=[#TotalPulloutNum]
+
+set,#S3length=#LinealTotal#Linealfactor
+set, (#Sub3Length="Lineal Footage of All Units"):#S3length=#LinealTotal#Linealfactor
+set, (#Sub3Length="Square Footage of All Units"):#S3length=#SquareTotal#SquareFactor
+set, (#Sub3Length="Cubic Footage of All Units"):#S3length=#CubicTotal#CubicFactor
+set, (#Sub3Length="Lineal Footage of All Cabinets"):#s3length=#AllLinealTotal#Linealfactor
+set, (#Sub3Length="Square Footage of All Cabinets"):#s3length=#AllSquareTotal#SquareFactor
+set, (#Sub3Length="Cubic Footage of All Cabinets"):#s3length=#AllCubicTotal#CubicFactor
+set, (#Sub3Length="Lineal Footage of All Cabinets/Closets"):#s3length=#AllCabClosetLinealTotal#Linealfactor
+set, (#Sub3Length="Square Footage of All Cabinets/Closets"):#s3length=#AllCabClosetSquareTotal#SquareFactor
+set, (#Sub3Length="Cubic Footage of All Cabinets/Closets"):#s3length=#AllCabClosetCubicTotal#CubicFactor
+
+set, (#Sub3Length="Lineal Footage of Base Cabinets"):#s3length=#BaseLinealTotal#Linealfactor
+set, (#Sub3Length="Square Footage of Base Cabinets"):#s3length=#BaseSquareTotal#SquareFactor
+set, (#Sub3Length="Cubic Footage of Base Cabinets"):#s3length=#BaseCubicTotal#CubicFactor
+set, (#Sub3Length="Lineal Footage of Wall Cabinets"):#s3length=#WallLinealTotal#Linealfactor
+set, (#Sub3Length="Square Footage of Wall Cabinets"):#s3length=#WallSquareTotal#SquareFactor
+set, (#Sub3Length="Cubic Footage of Wall Cabinets"):#s3length=#WallCubicTotal#CubicFactor
+set, (#Sub3Length="Lineal Footage of Tall Cabinets"):#s3length=#TallLinealTotal#Linealfactor
+set, (#Sub3Length="Square Footage of Tall Cabinets"):#s3length=#TallSquareTotal#SquareFactor
+set, (#Sub3Length="Cubic Footage of Tall Cabinets"):#s3length=#TallCubicTotal#CubicFactor
+set, (#Sub3Length="Total Area of Doors"):#s3length=#TotalDoorArea#SquareFactor
+set, (#Sub3Length="Lineal Footage of Panels"):#s3length=#PanelLinealTotal#LinealFactor
+set, (#Sub3Length="Square Footage of Panels"):#s3length=#PanelSquareTotal#SquareFactor
+set, (#Sub3Length="Cubic Footage of Panels"):#s3length=#PanelCubicTotal#CubicFactor
+
+set,#S3SubTotal=#SubTotal
+set, (#Sub3SubTotal="SubTotal"):#S3sub=#SubTotal
+set, (#Sub3SubTotal="SubTotal Before Extras"):#S3sub=#PreSubTotal
+set, (#Sub3SubTotal="SubTotal of Closets"):#S3sub=#TotalCabCost
+set, (#Sub3SubTotal="SubTotal of Doors"):#S3sub=#TotalDoorCost
+set, (#Sub3SubTotal="SubTotal of Pullouts"):#S3sub=#TotalPulloutCost
+set, (#Sub3SubTotal="SubTotal of Drawer Boxes"):#S3sub=#TotalDrawerCost
+
+set,#TotalSub3Cost=[(#S3Sub*#Sub3SubTotalCost)+(#S3Length*#Sub3LengthCost)+(#S3num*#Sub3CostNumOfUnits)+(#Sub3FlatCost)]
+set,(#Sub3PosNeg=No):#TotalSub3Cost=[#TotalSub3Cost*(-1)]
+
+,=======================================================================
+,Sub Total 4
+
+set,#S4num=[#NumofUnits]
+set,(#Sub4numOfUnits="Total Number of Units"):#S4num=[#NumofUnits]
+set,(#Sub4numOfUnits="Total Number of Cabinets"):#S4num=[#AllNumofUnits]
+set,(#Sub4numOfUnits="Total Number of Cabinets/Closets"):#S4num=[#AllCabClosetNumofUnits]
+set,(#Sub4numOfUnits="Total Number of Base Cabinets"):#S4num=[#BaseNumofUnits]
+set,(#Sub4numOfUnits="Total Number of Wall Cabinets"):#S4num=[#WallNumofUnits]
+set,(#Sub4numOfUnits="Total Number of Tall Cabinets"):#S4num=[#TallNumofUnits]
+set,(#Sub4numOfUnits="Total Number of Panels"):#S4num=[#PanelNumofUnits]
+set,(#Sub4numOfUnits="Total Number of Wall Panels"):#S4num=[#WallPanelNumofUnits]
+set,(#Sub4numOfUnits="Total Number of Base Panels"):#S4num=[#BasePanelNumofUnits]
+set,(#Sub4numOfUnits="Total Number of Tall Panels"):#S4num=[#TallPanelNumofUnits]
+set,(#Sub4numOfUnits="Total Number of Units w/o Cabinets"):#S4num=[#OtherNumofUnits]
+set,(#Sub4numOfUnits="Total Number of Doors"):#S4num=[#TotalDoorNum]
+set,(#Sub4numOfUnits="Total Number of DrawerBoxes"):#S4num=[#TotalDrawerNum]
+set,(#Sub4numOfUnits="Total Number of Pullouts"):#S4num=[#TotalPulloutNum]
+
+set,#S4length=#LinealTotal#Linealfactor
+set, (#Sub4Length="Lineal Footage of All Units"):#S4length=#LinealTotal#Linealfactor
+set, (#Sub4Length="Square Footage of All Units"):#S4length=#SquareTotal#SquareFactor
+set, (#Sub4Length="Cubic Footage of All Units"):#S4length=#CubicTotal#CubicFactor
+set, (#Sub4Length="Lineal Footage of All Cabinets"):#s4length=#AllLinealTotal#Linealfactor
+set, (#Sub4Length="Square Footage of All Cabinets"):#s4length=#AllSquareTotal#SquareFactor
+set, (#Sub4Length="Cubic Footage of All Cabinets"):#s4length=#AllCubicTotal#CubicFactor
+set, (#Sub4Length="Lineal Footage of All Cabinets/Closets"):#s4length=#AllCabClosetLinealTotal#Linealfactor
+set, (#Sub4Length="Square Footage of All Cabinets/Closets"):#s4length=#AllCabClosetSquareTotal#SquareFactor
+set, (#Sub4Length="Cubic Footage of All Cabinets/Closets"):#s4length=#AllCabClosetCubicTotal#CubicFactor
+
+set, (#Sub4Length="Lineal Footage of Base Cabinets"):#s4length=#BaseLinealTotal#Linealfactor
+set, (#Sub4Length="Square Footage of Base Cabinets"):#s4length=#BaseSquareTotal#SquareFactor
+set, (#Sub4Length="Cubic Footage of Base Cabinets"):#s4length=#BaseCubicTotal#CubicFactor
+set, (#Sub4Length="Lineal Footage of Wall Cabinets"):#s4length=#WallLinealTotal#Linealfactor
+set, (#Sub4Length="Square Footage of Wall Cabinets"):#s4length=#WallSquareTotal#SquareFactor
+set, (#Sub4Length="Cubic Footage of Wall Cabinets"):#s4length=#WallCubicTotal#CubicFactor
+set, (#Sub4Length="Lineal Footage of Tall Cabinets"):#s4length=#TallLinealTotal#Linealfactor
+set, (#Sub4Length="Square Footage of Tall Cabinets"):#s4length=#TallSquareTotal#SquareFactor
+set, (#Sub4Length="Cubic Footage of Tall Cabinets"):#s4length=#TallCubicTotal#CubicFactor
+set, (#Sub4Length="Total Area of Doors"):#s4length=#TotalDoorArea#SquareFactor
+set, (#Sub4Length="Lineal Footage of Panels"):#s4length=#PanelLinealTotal#LinealFactor
+set, (#Sub4Length="Square Footage of Panels"):#s4length=#PanelSquareTotal#SquareFactor
+set, (#Sub4Length="Cubic Footage of Panels"):#s4length=#PanelCubicTotal#CubicFactor
+
+set,#S4SubTotal=#SubTotal
+set, (#Sub4SubTotal="SubTotal"):#S4sub=#SubTotal
+set, (#Sub4SubTotal="SubTotal Before Extras"):#S4sub=#PreSubTotal
+set, (#Sub4SubTotal="SubTotal of Closets"):#S4sub=#TotalCabCost
+set, (#Sub4SubTotal="SubTotal of Doors"):#S4sub=#TotalDoorCost
+set, (#Sub4SubTotal="SubTotal of Pullouts"):#S4sub=#TotalPulloutCost
+set, (#Sub4SubTotal="SubTotal of Drawer Boxes"):#S4sub=#TotalDrawerCost
+
+
+set,#TotalSub4Cost=[(#S4Sub*#Sub4SubTotalCost)+(#S4Length*#Sub4LengthCost)+(#S4num*#Sub4CostNumOfUnits)+(#Sub4FlatCost)]
+set,(#Sub4PosNeg=No):#TotalSub4Cost=[#TotalSub4Cost*(-1)]
+
+,===========================================================================
+,Sub Total 5
+
+set,#S5num=[#NumofUnits]
+set,(#Sub5numOfUnits="Total Number of Units"):#S5num=[#NumofUnits]
+set,(#Sub5numOfUnits="Total Number of Cabinets"):#S5num=[#AllNumofUnits]
+set,(#Sub5numOfUnits="Total Number of Cabinets/Closets"):#S5num=[#AllCabClosetNumofUnits]
+set,(#Sub5numOfUnits="Total Number of Base Cabinets"):#S5num=[#BaseNumofUnits]
+set,(#Sub5numOfUnits="Total Number of Wall Cabinets"):#S5num=[#WallNumofUnits]
+set,(#Sub5numOfUnits="Total Number of Tall Cabinets"):#S5num=[#TallNumofUnits]
+set,(#Sub5numOfUnits="Total Number of Panels"):#S5num=[#PanelNumofUnits]
+set,(#Sub5numOfUnits="Total Number of Wall Panels"):#S5num=[#WallPanelNumofUnits]
+set,(#Sub5numOfUnits="Total Number of Base Panels"):#S5num=[#BasePanelNumofUnits]
+set,(#Sub5numOfUnits="Total Number of Tall Panels"):#S5num=[#TallPanelNumofUnits]
+set,(#Sub5numOfUnits="Total Number of Units w/o Cabinets"):#S5num=[#OtherNumofUnits]
+set,(#Sub5numOfUnits="Total Number of Doors"):#S5num=[#TotalDoorNum]
+set,(#Sub5numOfUnits="Total Number of DrawerBoxes"):#S5num=[#TotalDrawerNum]
+set,(#Sub5numOfUnits="Total Number of Pullouts"):#S5num=[#TotalPulloutNum]
+
+
+set,#S5length=#LinealTotal#Linealfactor
+set, (#Sub5Length="Lineal Footage of All Units"):#S5length=#LinealTotal#Linealfactor
+set, (#Sub5Length="Square Footage of All Units"):#S5length=#SquareTotal#SquareFactor
+set, (#Sub5Length="Cubic Footage of All Units"):#S5length=#CubicTotal#CubicFactor
+set, (#Sub5Length="Lineal Footage of All Cabinets"):#s5length=#AllLinealTotal#Linealfactor
+set, (#Sub5Length="Square Footage of All Cabinets"):#s5length=#AllSquareTotal#SquareFactor
+set, (#Sub5Length="Cubic Footage of All Cabinets"):#S5length=#AllCubicTotal#CubicFactor
+set, (#Sub5Length="Lineal Footage of All Cabinets/Closets"):#s5length=#AllCabClosetLinealTotal#Linealfactor
+set, (#Sub5Length="Square Footage of All Cabinets/Closets"):#s5length=#AllCabClosetSquareTotal#SquareFactor
+set, (#Sub5Length="Cubic Footage of All Cabinets/Closets"):#s5length=#AllCabClosetCubicTotal#CubicFactor
+
+set, (#Sub5Length="Lineal Footage of Base Cabinets"):#s5length=#BaseLinealTotal#Linealfactor
+set, (#Sub5Length="Square Footage of Base Cabinets"):#s5length=#BaseSquareTotal#SquareFactor
+set, (#Sub5Length="Cubic Footage of Base Cabinets"):#s5length=#BaseCubicTotal#CubicFactor
+set, (#Sub5Length="Lineal Footage of Wall Cabinets"):#s5length=#WallLinealTotal#Linealfactor
+set, (#Sub5Length="Square Footage of Wall Cabinets"):#s5length=#WallSquareTotal#SquareFactor
+set, (#Sub5Length="Cubic Footage of Wall Cabinets"):#s5length=#WallCubicTotal#CubicFactor
+set, (#Sub5Length="Lineal Footage of Tall Cabinets"):#s5length=#TallLinealTotal#Linealfactor
+set, (#Sub5Length="Square Footage of Tall Cabinets"):#s5length=#TallSquareTotal#SquareFactor
+set, (#Sub5Length="Cubic Footage of Tall Cabinets"):#s5length=#TallCubicTotal#CubicFactor
+set, (#Sub5Length="Total Area of Doors"):#s5length=#TotalDoorArea#SquareFactor
+set, (#Sub5Length="Lineal Footage of Panels"):#s5length=#PanelLinealTotal#LinealFactor
+set, (#Sub5Length="Square Footage of Panels"):#s5length=#PanelSquareTotal#SquareFactor
+set, (#Sub5Length="Cubic Footage of Panels"):#s5length=#PanelCubicTotal#CubicFactor
+
+
+
+set,#S5SubTotal=#SubTotal
+set, (#Sub5SubTotal="SubTotal"):#S5sub=#SubTotal
+set, (#Sub5SubTotal="SubTotal Before Extras"):#S5sub=#PreSubTotal
+set, (#Sub5SubTotal="SubTotal of Closets"):#S5sub=#TotalCabCost
+set, (#Sub5SubTotal="SubTotal of Doors"):#S5sub=#TotalDoorCost
+set, (#Sub5SubTotal="SubTotal of Pullouts"):#S5sub=#TotalPulloutCost
+set, (#Sub5SubTotal="SubTotal of Drawer Boxes"):#S5sub=#TotalDrawerCost
+
+set,#TotalSub5Cost=[(#S5Sub*#Sub5SubTotalCost)+(#S5Length*#Sub5LengthCost)+(#S5num*#Sub5CostNumOfUnits)+(#Sub5FlatCost)]
+set,(#Sub5PosNeg=No):#TotalSub5Cost=[#TotalSub5Cost*(-1)]
+
+,===============================================================
+,Sub Total 6
+
+set,#S6num=[#NumofUnits]
+set,(#Sub6numOfUnits="Total Number of Units"):#S6num=[#NumofUnits]
+set,(#Sub6numOfUnits="Total Number of Cabinets"):#S6num=[#AllNumofUnits]
+set,(#Sub6numOfUnits="Total Number of Cabinets/Closets"):#S6num=[#AllCabClosetNumofUnits]
+set,(#Sub6numOfUnits="Total Number of Base Cabinets"):#S6num=[#BaseNumofUnits]
+set,(#Sub6numOfUnits="Total Number of Wall Cabinets"):#S6num=[#WallNumofUnits]
+set,(#Sub6numOfUnits="Total Number of Tall Cabinets"):#S6num=[#TallNumofUnits]
+set,(#Sub6numOfUnits="Total Number of Panels"):#S6num=[#PanelNumofUnits]
+set,(#Sub6numOfUnits="Total Number of Wall Panels"):#S6num=[#WallPanelNumofUnits]
+set,(#Sub6numOfUnits="Total Number of Base Panels"):#S6num=[#BasePanelNumofUnits]
+set,(#Sub6numOfUnits="Total Number of Tall Panels"):#S6num=[#TallPanelNumofUnits]
+set,(#Sub6numOfUnits="Total Number of Units w/o Cabinets"):#S6num=[#OtherNumofUnits]
+set,(#Sub6numOfUnits="Total Number of Doors"):#S6num=[#TotalDoorNum]
+set,(#Sub6numOfUnits="Total Number of DrawerBoxes"):#S6num=[#TotalDrawerNum]
+set,(#Sub6numOfUnits="Total Number of Pullouts"):#S6num=[#TotalPulloutNum]
+
+
+set,#S6length=#LinealTotal#Linealfactor
+set, (#Sub6Length="Lineal Footage of All Units"):#S6length=#LinealTotal#Linealfactor
+set, (#Sub6Length="Square Footage of All Units"):#S6length=#SquareTotal#SquareFactor
+set, (#Sub6Length="Cubic Footage of All Units"):#S6length=#CubicTotal#CubicFactor
+set, (#Sub6Length="Lineal Footage of All Cabinets"):#s6length=#AllLinealTotal#Linealfactor
+set, (#Sub6Length="Square Footage of All Cabinets"):#s6length=#AllSquareTotal#SquareFactor
+set, (#Sub6Length="Cubic Footage of All Cabinets"):#S6length=#AllCubicTotal#CubicFactor
+set, (#Sub6Length="Lineal Footage of All Cabinets/Closets"):#s6length=#AllCabClosetLinealTotal#Linealfactor
+set, (#Sub6Length="Square Footage of All Cabinets/Closets"):#s6length=#AllCabClosetSquareTotal#SquareFactor
+set, (#Sub6Length="Cubic Footage of All Cabinets/Closets"):#s6length=#AllCabClosetCubicTotal#CubicFactor
+
+set, (#Sub6Length="Lineal Footage of Base Cabinets"):#s6length=#BaseLinealTotal#Linealfactor
+set, (#Sub6Length="Square Footage of Base Cabinets"):#s6length=#BaseSquareTotal#SquareFactor
+set, (#Sub6Length="Cubic Footage of Base Cabinets"):#s6length=#BaseCubicTotal#CubicFactor
+set, (#Sub6Length="Lineal Footage of Wall Cabinets"):#s6length=#WallLinealTotal#Linealfactor
+set, (#Sub6Length="Square Footage of Wall Cabinets"):#s6length=#WallSquareTotal#SquareFactor
+set, (#Sub6Length="Cubic Footage of Wall Cabinets"):#s6length=#WallCubicTotal#CubicFactor
+set, (#Sub6Length="Lineal Footage of Tall Cabinets"):#s6length=#TallLinealTotal#Linealfactor
+set, (#Sub6Length="Square Footage of Tall Cabinets"):#s6length=#TallSquareTotal#SquareFactor
+set, (#Sub6Length="Cubic Footage of Tall Cabinets"):#s6length=#TallCubicTotal#CubicFactor
+set, (#Sub6Length="Total Area of Doors"):#s6length=#TotalDoorArea#SquareFactor
+set, (#Sub6Length="Lineal Footage of Panels"):#s6length=#PanelLinealTotal#LinealFactor
+set, (#Sub6Length="Square Footage of Panels"):#s6length=#PanelSquareTotal#SquareFactor
+set, (#Sub6Length="Cubic Footage of Panels"):#s6length=#PanelCubicTotal#CubicFactor
+
+set,#S6SubTotal=#SubTotal
+set, (#Sub6SubTotal="SubTotal"):#S6sub=#SubTotal
+set, (#Sub6SubTotal="SubTotal Before Extras"):#S6sub=#PreSubTotal
+set, (#Sub6SubTotal="SubTotal of Closets"):#S6sub=#TotalCabCost
+set, (#Sub6SubTotal="SubTotal of Doors"):#S6sub=#TotalDoorCost
+set, (#Sub6SubTotal="SubTotal of Pullouts"):#S6sub=#TotalPulloutCost
+set, (#Sub6SubTotal="SubTotal of Drawer Boxes"):#S6sub=#TotalDrawerCost
+
+set,#TotalSub6Cost=[(#S6Sub*#Sub6SubTotalCost)+(#S6Length*#Sub6LengthCost)+(#S6num*#Sub6CostNumOfUnits)+(#Sub6FlatCost)]
+set,(#Sub6PosNeg=No):#TotalSub6Cost=[#TotalSub6Cost*(-1)]
+
+,============================================================
+,Sub Total 7
+
+set,#S7num=[#NumofUnits]
+set,(#Sub7numOfUnits="Total Number of Units"):#S7num=[#NumofUnits]
+set,(#Sub7numOfUnits="Total Number of Cabinets"):#S7num=[#AllNumofUnits]
+set,(#Sub7numOfUnits="Total Number of Cabinets/Closets"):#S7num=[#AllCabClosetNumofUnits]
+set,(#Sub7numOfUnits="Total Number of Base Cabinets"):#S7num=[#BaseNumofUnits]
+set,(#Sub7numOfUnits="Total Number of Wall Cabinets"):#S7num=[#WallNumofUnits]
+set,(#Sub7numOfUnits="Total Number of Tall Cabinets"):#S7num=[#TallNumofUnits]
+set,(#Sub7numOfUnits="Total Number of Panels"):#S7num=[#PanelNumofUnits]
+set,(#Sub7numOfUnits="Total Number of Wall Panels"):#S7num=[#WallPanelNumofUnits]
+set,(#Sub7numOfUnits="Total Number of Base Panels"):#S7num=[#BasePanelNumofUnits]
+set,(#Sub7numOfUnits="Total Number of Tall Panels"):#S7num=[#TallPanelNumofUnits]
+set,(#Sub7numOfUnits="Total Number of Units w/o Cabinets"):#S7num=[#OtherNumofUnits]
+set,(#Sub7numOfUnits="Total Number of Doors"):#S7num=[#TotalDoorNum]
+set,(#Sub7numOfUnits="Total Number of DrawerBoxes"):#S7num=[#TotalDrawerNum]
+set,(#Sub7numOfUnits="Total Number of Pullouts"):#S7num=[#TotalPulloutNum]
+
+
+set,#S7length=#LinealTotal#Linealfactor
+set, (#Sub7Length="Lineal Footage of All Units"):#S7length=#LinealTotal#Linealfactor
+set, (#Sub7Length="Square Footage of All Units"):#S7length=#SquareTotal#SquareFactor
+set, (#Sub7Length="Cubic Footage of All Units"):#S7length=#CubicTotal#CubicFactor
+set, (#Sub7Length="Lineal Footage of All Cabinets"):#s7length=#AllLinealTotal#Linealfactor
+set, (#Sub7Length="Square Footage of All Cabinets"):#s7length=#AllSquareTotal#SquareFactor
+set, (#Sub7Length="Cubic Footage of All Cabinets"):#S7length=#AllCubicTotal#CubicFactor
+set, (#Sub7Length="Lineal Footage of All Cabinets/Closets"):#s7length=#AllCabClosetLinealTotal#Linealfactor
+set, (#Sub7Length="Square Footage of All Cabinets/Closets"):#s7length=#AllCabClosetSquareTotal#SquareFactor
+set, (#Sub7Length="Cubic Footage of All Cabinets/Closets"):#s7length=#AllCabClosetCubicTotal#CubicFactor
+
+set, (#Sub7Length="Lineal Footage of Base Cabinets"):#s7length=#BaseLinealTotal#Linealfactor
+set, (#Sub7Length="Square Footage of Base Cabinets"):#s7length=#BaseSquareTotal#SquareFactor
+set, (#Sub7Length="Cubic Footage of Base Cabinets"):#s7length=#BaseCubicTotal#CubicFactor
+set, (#Sub7Length="Lineal Footage of Wall Cabinets"):#s7length=#WallLinealTotal#Linealfactor
+set, (#Sub7Length="Square Footage of Wall Cabinets"):#s7length=#WallSquareTotal#SquareFactor
+set, (#Sub7Length="Cubic Footage of Wall Cabinets"):#s7length=#WallCubicTotal#CubicFactor
+set, (#Sub7Length="Lineal Footage of Tall Cabinets"):#s7length=#TallLinealTotal#Linealfactor
+set, (#Sub7Length="Square Footage of Tall Cabinets"):#s7length=#TallSquareTotal#SquareFactor
+set, (#Sub7Length="Cubic Footage of Tall Cabinets"):#s7length=#TallCubicTotal#CubicFactor
+set, (#Sub7Length="Total Area of Doors"):#s7length=#TotalDoorArea#SquareFactor
+set, (#Sub7Length="Lineal Footage of Panels"):#s7length=#PanelLinealTotal#LinealFactor
+set, (#Sub7Length="Square Footage of Panels"):#s7length=#PanelSquareTotal#SquareFactor
+set, (#Sub7Length="Cubic Footage of Panels"):#s7length=#PanelCubicTotal#CubicFactor
+
+set,#S7SubTotal=#SubTotal
+set, (#Sub7SubTotal="SubTotal"):#S7sub=#SubTotal
+set, (#Sub7SubTotal="SubTotal Before Extras"):#S7sub=#PreSubTotal
+set, (#Sub7SubTotal="SubTotal of Closets"):#S7sub=#TotalCabCost
+set, (#Sub7SubTotal="SubTotal of Doors"):#S7sub=#TotalDoorCost
+set, (#Sub7SubTotal="SubTotal of Pullouts"):#S7sub=#TotalPulloutCost
+set, (#Sub7SubTotal="SubTotal of Drawer Boxes"):#S7sub=#TotalDrawerCost
+
+set,#TotalSub7Cost=[(#S7Sub*#Sub7SubTotalCost)+(#S7Length*#Sub7LengthCost)+(#S7num*#Sub7CostNumOfUnits)+(#Sub7FlatCost)]
+set,(#Sub7PosNeg=No):#TotalSub7Cost=[#TotalSub7Cost*(-1)]
+
+,===============================================================
+,Subtotal 8
+
+set,#S8num=[#NumofUnits]
+set,(#Sub8numOfUnits="Total Number of Units"):#S8num=[#NumofUnits]
+set,(#Sub8numOfUnits="Total Number of Cabinets"):#S8num=[#AllNumofUnits]
+set,(#Sub8numOfUnits="Total Number of Cabinets/Closets"):#S8num=[#AllCabClosetNumofUnits]
+set,(#Sub8numOfUnits="Total Number of Base Cabinets"):#S8num=[#BaseNumofUnits]
+set,(#Sub8numOfUnits="Total Number of Wall Cabinets"):#S8num=[#WallNumofUnits]
+set,(#Sub8numOfUnits="Total Number of Tall Cabinets"):#S8num=[#TallNumofUnits]
+set,(#Sub8numOfUnits="Total Number of Panels"):#S8num=[#PanelNumofUnits]
+set,(#Sub8numOfUnits="Total Number of Wall Panels"):#S8num=[#WallPanelNumofUnits]
+set,(#Sub8numOfUnits="Total Number of Base Panels"):#S8num=[#BasePanelNumofUnits]
+set,(#Sub8numOfUnits="Total Number of Tall Panels"):#S8num=[#TallPanelNumofUnits]
+set,(#Sub8numOfUnits="Total Number of Units w/o Cabinets"):#S8num=[#OtherNumofUnits]
+set,(#Sub8numOfUnits="Total Number of Doors"):#S8num=[#TotalDoorNum]
+set,(#Sub8numOfUnits="Total Number of DrawerBoxes"):#S8num=[#TotalDrawerNum]
+set,(#Sub8numOfUnits="Total Number of Pullouts"):#S8num=[#TotalPulloutNum]
+
+set,#S8length=#LinealTotal#Linealfactor
+set, (#Sub8Length="Lineal Footage of All Units"):#S8length=#LinealTotal#Linealfactor
+set, (#Sub8Length="Square Footage of All Units"):#S8length=#SquareTotal#SquareFactor
+set, (#Sub8Length="Cubic Footage of All Units"):#S8length=#CubicTotal#CubicFactor
+set, (#Sub8Length="Lineal Footage of All Cabinets"):#s8length=#AllLinealTotal#Linealfactor
+set, (#Sub8Length="Square Footage of All Cabinets"):#s8length=#AllSquareTotal#SquareFactor
+set, (#Sub8Length="Cubic Footage of All Cabinets"):#S8length=#AllCubicTotal#CubicFactor
+set, (#Sub8Length="Lineal Footage of All Cabinets/Closets"):#s8length=#AllCabClosetLinealTotal#Linealfactor
+set, (#Sub8Length="Square Footage of All Cabinets/Closets"):#s8length=#AllCabClosetSquareTotal#SquareFactor
+set, (#Sub8Length="Cubic Footage of All Cabinets/Closets"):#s8length=#AllCabClosetCubicTotal#CubicFactor
+
+set, (#Sub8Length="Lineal Footage of Base Cabinets"):#s8length=#BaseLinealTotal#Linealfactor
+set, (#Sub8Length="Square Footage of Base Cabinets"):#s8length=#BaseSquareTotal#SquareFactor
+set, (#Sub8Length="Cubic Footage of Base Cabinets"):#s8length=#BaseCubicTotal#CubicFactor
+set, (#Sub8Length="Lineal Footage of Wall Cabinets"):#s8length=#WallLinealTotal#Linealfactor
+set, (#Sub8Length="Square Footage of Wall Cabinets"):#s8length=#WallSquareTotal#SquareFactor
+set, (#Sub8Length="Cubic Footage of Wall Cabinets"):#s8length=#WallCubicTotal#CubicFactor
+set, (#Sub8Length="Lineal Footage of Tall Cabinets"):#s8length=#TallLinealTotal#Linealfactor
+set, (#Sub8Length="Square Footage of Tall Cabinets"):#s8length=#TallSquareTotal#SquareFactor
+set, (#Sub8Length="Cubic Footage of Tall Cabinets"):#s8length=#TallCubicTotal#CubicFactor
+set, (#Sub8Length="Total Area of Doors"):#s8length=#TotalDoorArea#SquareFactor
+set, (#Sub8Length="Lineal Footage of Panels"):#s8length=#PanelLinealTotal#LinealFactor
+set, (#Sub8Length="Square Footage of Panels"):#s8length=#PanelSquareTotal#SquareFactor
+set, (#Sub8Length="Cubic Footage of Panels"):#s8length=#PanelCubicTotal#CubicFactor
+
+set,#S8Sub=#SubTotal
+set, (#Sub8SubTotal="SubTotal"):#S8sub=#SubTotal
+set, (#Sub8SubTotal="SubTotal Before Extras"):#S8sub=#PreSubTotal
+set, (#Sub8SubTotal="SubTotal of Closets"):#S8sub=#TotalCabCost
+set, (#Sub8SubTotal="SubTotal of Doors"):#S8sub=#TotalDoorCost
+set, (#Sub8SubTotal="SubTotal of Pullouts"):#S8sub=#TotalPulloutCost
+set, (#Sub8SubTotal="SubTotal of Drawer Boxes"):#S8sub=#TotalDrawerCost
+
+set,#TotalSub8Cost=[(#S8Sub*#Sub8SubTotalCost)+(#S8Length*#Sub8LengthCost)+(#S8num*#Sub8CostNumOfUnits)+(#Sub8FlatCost)]
+set,(#Sub8PosNeg=No):#TotalSub8Cost=[#TotalSub8Cost*(-1)]
+
+,==============================================================
+,Subtotal 9
+
+set,#S9num=[#NumofUnits]
+set,(#Sub9numOfUnits="Total Number of Units"):#S9num=[#NumofUnits]
+set,(#Sub9numOfUnits="Total Number of Cabinets"):#S9num=[#AllNumofUnits]
+set,(#Sub9numOfUnits="Total Number of Cabinets/Closets"):#S9num=[#AllCabClosetNumofUnits]
+set,(#Sub9numOfUnits="Total Number of Base Cabinets"):#S9num=[#BaseNumofUnits]
+set,(#Sub9numOfUnits="Total Number of Wall Cabinets"):#S9num=[#WallNumofUnits]
+set,(#Sub9numOfUnits="Total Number of Tall Cabinets"):#S9num=[#TallNumofUnits]
+set,(#Sub9numOfUnits="Total Number of Panels"):#S9num=[#PanelNumofUnits]
+set,(#Sub9numOfUnits="Total Number of Wall Panels"):#S9num=[#WallPanelNumofUnits]
+set,(#Sub9numOfUnits="Total Number of Base Panels"):#S9num=[#BasePanelNumofUnits]
+set,(#Sub9numOfUnits="Total Number of Tall Panels"):#S9num=[#TallPanelNumofUnits]
+set,(#Sub9numOfUnits="Total Number of Units w/o Cabinets"):#S9num=[#OtherNumofUnits]
+set,(#Sub9numOfUnits="Total Number of Doors"):#S9num=[#TotalDoorNum]
+set,(#Sub9numOfUnits="Total Number of DrawerBoxes"):#S9num=[#TotalDrawerNum]
+set,(#Sub9numOfUnits="Total Number of Pullouts"):#S9num=[#TotalPulloutNum]
+
+set,#S9length=#LinealTotal#Linealfactor
+set, (#Sub9Length="Lineal Footage of All Units"):#S9length=#LinealTotal#Linealfactor
+set, (#Sub9Length="Square Footage of All Units"):#S9length=#SquareTotal#SquareFactor
+set, (#Sub9Length="Cubic Footage of All Units"):#S9length=#CubicTotal#CubicFactor
+set, (#Sub9Length="Lineal Footage of All Cabinets"):#s9length=#AllLinealTotal#Linealfactor
+set, (#Sub9Length="Square Footage of All Cabinets"):#s9length=#AllSquareTotal#SquareFactor
+set, (#Sub9Length="Cubic Footage of All Cabinets"):#s9length=#AllCubicTotal#CubicFactor
+set, (#Sub9Length="Lineal Footage of All Cabinets/Closets"):#s9length=#AllCabClosetLinealTotal#Linealfactor
+set, (#Sub9Length="Square Footage of All Cabinets/Closets"):#s9length=#AllCabClosetSquareTotal#SquareFactor
+set, (#Sub9Length="Cubic Footage of All Cabinets/Closets"):#s9length=#AllCabClosetCubicTotal#CubicFactor
+
+set, (#Sub9Length="Lineal Footage of Base Cabinets"):#s9length=#BaseLinealTotal#Linealfactor
+set, (#Sub9Length="Square Footage of Base Cabinets"):#s9length=#BaseSquareTotal#SquareFactor
+set, (#Sub9Length="Cubic Footage of Base Cabinets"):#s9length=#BaseCubicTotal#CubicFactor
+set, (#Sub9Length="Lineal Footage of Wall Cabinets"):#s9length=#WallLinealTotal#Linealfactor
+set, (#Sub9Length="Square Footage of Wall Cabinets"):#s9length=#WallSquareTotal#SquareFactor
+set, (#Sub9Length="Cubic Footage of Wall Cabinets"):#s9length=#WallCubicTotal#CubicFactor
+set, (#Sub9Length="Lineal Footage of Tall Cabinets"):#s9length=#TallLinealTotal#Linealfactor
+set, (#Sub9Length="Square Footage of Tall Cabinets"):#s9length=#TallSquareTotal#SquareFactor
+set, (#Sub9Length="Cubic Footage of Tall Cabinets"):#s9length=#TallCubicTotal#CubicFactor
+set, (#Sub9Length="Total Area of Doors"):#s9length=#TotalDoorArea#SquareFactor
+set, (#Sub9Length="Lineal Footage of Panels"):#s9length=#PanelLinealTotal#LinealFactor
+set, (#Sub9Length="Square Footage of Panels"):#s9length=#PanelSquareTotal#SquareFactor
+set, (#Sub9Length="Cubic Footage of Panels"):#s9length=#PanelCubicTotal#CubicFactor
+
+set,#S9Sub=#SubTotal
+set, (#Sub9SubTotal="SubTotal"):#S9sub=#SubTotal
+set, (#Sub9SubTotal="SubTotal Before Extras"):#S9sub=#PreSubTotal
+set, (#Sub9SubTotal="SubTotal of Closets"):#S9sub=#TotalCabCost
+set, (#Sub9SubTotal="SubTotal of Doors"):#S9sub=#TotalDoorCost
+set, (#Sub9SubTotal="SubTotal of Pullouts"):#S9sub=#TotalPulloutCost
+set, (#Sub9SubTotal="SubTotal of Drawer Boxes"):#S9sub=#TotalDrawerCost
+
+set,#TotalSub9Cost=[(#S9Sub*#Sub9SubTotalCost)+(#S9Length*#Sub9LengthCost)+(#S9num*#Sub9CostNumOfUnits)+(#Sub9FlatCost)]
+set,(#Sub9PosNeg=No):#TotalSub9Cost=[#TotalSub9Cost*(-1)]
+
+,===========================================================
+, Subtotal 10
+
+set,#S10num=[#NumofUnits]
+set,(#Sub10numOfUnits="Total Number of Units"):#S10num=[#NumofUnits]
+set,(#Sub10numOfUnits="Total Number of Cabinets"):#S10num=[#AllNumofUnits]
+set,(#Sub10numOfUnits="Total Number of Cabinets/Closets"):#S10num=[#AllCabClosetNumofUnits]
+set,(#Sub10numOfUnits="Total Number of Base Cabinets"):#S10num=[#BaseNumofUnits]
+set,(#Sub10numOfUnits="Total Number of Wall Cabinets"):#S10num=[#WallNumofUnits]
+set,(#Sub10numOfUnits="Total Number of Tall Cabinets"):#S10num=[#TallNumofUnits]
+set,(#Sub10numOfUnits="Total Number of Panels"):#S10num=[#PanelNumofUnits]
+set,(#Sub10numOfUnits="Total Number of Wall Panels"):#S10num=[#WallPanelNumofUnits]
+set,(#Sub10numOfUnits="Total Number of Base Panels"):#S10num=[#BasePanelNumofUnits]
+set,(#Sub10numOfUnits="Total Number of Tall Panels"):#S10num=[#TallPanelNumofUnits]
+set,(#Sub10numOfUnits="Total Number of Units w/o Cabinets"):#S10num=[#OtherNumofUnits]
+set,(#Sub10numOfUnits="Total Number of Doors"):#S10num=[#TotalDoorNum]
+set,(#Sub10numOfUnits="Total Number of DrawerBoxes"):#S10num=[#TotalDrawerNum]
+set,(#Sub10numOfUnits="Total Number of Pullouts"):#S10num=[#TotalPulloutNum]
+
+set,#S10length=#LinealTotal#Linealfactor
+set, (#Sub10Length="Lineal Footage of All Units"):#S10length=#LinealTotal#Linealfactor
+set, (#Sub10Length="Square Footage of All Units"):#S10length=#SquareTotal#SquareFactor
+set, (#Sub10Length="Cubic Footage of All Units"):#S10length=#CubicTotal#CubicFactor
+set, (#Sub10Length="Lineal Footage of All Cabinets"):#s10length=#AllLinealTotal#Linealfactor
+set, (#Sub10Length="Square Footage of All Cabinets"):#s10length=#AllSquareTotal#SquareFactor
+set, (#Sub10Length="Cubic Footage of All Cabinets"):#s10length=#AllCubicTotal#CubicFactor
+set, (#Sub10Length="Lineal Footage of All Cabinets/Closets"):#s10length=#AllCabClosetLinealTotal#Linealfactor
+set, (#Sub10Length="Square Footage of All Cabinets/Closets"):#s10length=#AllCabClosetSquareTotal#SquareFactor
+set, (#Sub10Length="Cubic Footage of All Cabinets/Closets"):#s10length=#AllCabClosetCubicTotal#CubicFactor
+
+set, (#Sub10Length="Lineal Footage of Base Cabinets"):#s10length=#BaseLinealTotal#Linealfactor
+set, (#Sub10Length="Square Footage of Base Cabinets"):#s10length=#BaseSquareTotal#SquareFactor
+set, (#Sub10Length="Cubic Footage of Base Cabinets"):#s10length=#BaseCubicTotal#CubicFactor
+set, (#Sub10Length="Lineal Footage of Wall Cabinets"):#s10length=#WallLinealTotal#Linealfactor
+set, (#Sub10Length="Square Footage of Wall Cabinets"):#s10length=#WallSquareTotal#SquareFactor
+set, (#Sub10Length="Cubic Footage of Wall Cabinets"):#s10length=#WallCubicTotal#CubicFactor
+set, (#Sub10Length="Lineal Footage of Tall Cabinets"):#s10length=#TallLinealTotal#Linealfactor
+set, (#Sub10Length="Square Footage of Tall Cabinets"):#s10length=#TallSquareTotal#SquareFactor
+set, (#Sub10Length="Cubic Footage of Tall Cabinets"):#s1l0ength=#TallCubicTotal#CubicFactor
+set, (#Sub10Length="Total Area of Doors"):#s10length=#TotalDoorArea#SquareFactor
+set, (#Sub10Length="Lineal Footage of Panels"):#s10length=#PanelLinealTotal#LinealFactor
+set, (#Sub10Length="Square Footage of Panels"):#s10length=#PanelSquareTotal#SquareFactor
+set, (#Sub10Length="Cubic Footage of Panels"):#s10length=#PanelCubicTotal#CubicFactor
+
+set,#S10Sub=#SubTotal
+set, (#Sub10SubTotal="SubTotal"):#S10sub=#SubTotal
+set, (#Sub10SubTotal="SubTotal Before Extras"):#S10sub=#PreSubTotal
+set, (#Sub10SubTotal="SubTotal of Closets"):#S10sub=#TotalCabCost
+set, (#Sub10SubTotal="SubTotal of Doors"):#S10sub=#TotalDoorCost
+set, (#Sub10SubTotal="SubTotal of Pullouts"):#S10sub=#TotalPulloutCost
+set, (#Sub10SubTotal="SubTotal of Drawer Boxes"):#S10sub=#TotalDrawerCost
+
+set,#TotalSub10Cost=[(#S10Sub*#Sub10SubTotalCost)+(#S10Length*#Sub10LengthCost)+(#S10num*#Sub10CostNumOfUnits)+(#Sub10FlatCost)]
+set,(#Sub10PosNeg=No):#TotalSub10Cost=[#TotalSub10Cost*(-1)]

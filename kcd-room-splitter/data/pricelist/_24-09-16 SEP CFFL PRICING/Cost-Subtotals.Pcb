@@ -1,0 +1,205 @@
+
+,add in the cost for the handles and knobs hinge moulding 
+
+,set,#Room1subtotalstandardprice=[#Room1Subtotalstandardprice + #Room1CTopCost+ #Room1DoorHandleCost + #Room1DoorKnobCost + #Room1DoorHingeCost + #Rm1MldCost] 
+,Set,#Room1CTopCost = [(#Room1CTopCost * 1.#notusedheredesignermarkup)]
+,Set,#Room1DoorHandleCost = [(#Room1DoorHandleCost*1.#notusedheredesignermarkup)] 
+,Set,#Room1DoorKnobCost = [(#Room1DoorKnobCost*1.#notusedheredesignermarkup)]
+,Set,#Room1DoorHingeCost = [(#Room1DoorHingeCost*1.#notusedheredesignermarkup)]
+,Set,#Rm1MldCost = [(#Rm1MldCost*1.#notusedheredesignermarkup)]
+Set,#Room1Subtotal = [#Room1Subtotal + (#Room1DoorHWCost+#Room1DoorHandleCost + #Room1DoorKnobCost + #Room1DoorHingeCost + #Rm1MldCost+#Rm1BaseCost+#Rm1WGBaseCost+#Room1CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room1Total = [#Room1Subtotal*1.#designermarkup]
+
+,end Room 1
+
+,set,#Room2subtotalstandardprice=[#Room2Subtotalstandardprice + #Room2CTopCost+ #Room2DoorHandleCost + #Room2DoorKnobCost + #Room2DoorHingeCost + #Rm2MldCost] 
+,Set,#Room2CTopCost = [(#Room2CTopCost * 1.#notusedheredesignermarkup)]
+,Set,#Room2DoorHandleCost = [(#Room2DoorHandleCost*1.#notusedheredesignermarkup)] 
+,Set,#Room2DoorKnobCost = [(#Room2DoorKnobCost*1.#notusedheredesignermarkup)]
+,Set,#Room2DoorHingeCost = [(#Room2DoorHingeCost*1.#notusedheredesignermarkup)]
+,Set,#Rm2MldCost = [(#Rm2MldCost*1.#notusedheredesignermarkup)]
+Set,#Room2Subtotal = [#Room2Subtotal + (#Room2DoorHWCost+#Room2DoorHandleCost + #Room2DoorKnobCost + #Room2DoorHingeCost + #Rm2MldCost+#Rm2BaseCost+#Rm2WGBaseCost+#Room2CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room2Total = [#Room2Subtotal*1.#designermarkup]
+
+,end Room 2
+
+Set,#Room3Subtotal = [#Room3Subtotal + (#Room3DoorHWCost+#Room3DoorHandleCost + #Room3DoorKnobCost + #Room3DoorHingeCost + #Rm3MldCost+#Rm3BaseCost+#Rm3WGBaseCost+#Room3CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room3Total = [#Room3Subtotal*1.#designermarkup]
+
+
+,end Room 3
+
+Set,#Room4Subtotal = [#Room4Subtotal + (#Room4DoorHWCost+#Room4DoorHandleCost + #Room4DoorKnobCost + #Room4DoorHingeCost + #Rm4MldCost+#Rm4BaseCost+#Rm4WGBaseCost+#Room4CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room4Total = [#Room4Subtotal*1.#designermarkup]
+,end Room 4
+
+Set,#Room5Subtotal = [#Room5Subtotal + (#Room5DoorHWCost+#Room5DoorHandleCost + #Room5DoorKnobCost + #Room5DoorHingeCost + #Rm5MldCost+#Rm5BaseCost+#Rm5WGBaseCost+#Room5CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room5Total = [#Room5Subtotal*1.#designermarkup]
+
+,end Room 5
+
+Set,#Room6Subtotal = [#Room6Subtotal + (#Room6DoorHWCost+#Room6DoorHandleCost + #Room6DoorKnobCost + #Room6DoorHingeCost + #Rm6MldCost+#Rm6BaseCost+#Rm6WGBaseCost+#Room6CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room6Total = [#Room6Subtotal*1.#designermarkup]
+,end Room 6
+
+Set,#Room7Subtotal = [#Room7Subtotal + (#Room7DoorHWCost+#Room7DoorHandleCost + #Room7DoorKnobCost + #Room7DoorHingeCost + #Rm7MldCost+#Rm7BaseCost+#Rm7WGBaseCost+#Room7CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room7Total = [#Room7Subtotal*1.#designermarkup]
+,end Room 7
+
+Set,#Room8Subtotal = [#Room8Subtotal + (#Room8DoorHWCost+#Room8DoorHandleCost + #Room8DoorKnobCost + #Room8DoorHingeCost + #Rm8MldCost+#Rm8BaseCost+#Rm8WGBaseCost+#Room8CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room8Total = [#Room8Subtotal*1.#designermarkup]
+,end Room 8
+
+Set,#Room9Subtotal = [#Room9Subtotal + (#Room9DoorHWCost+#Room9DoorHandleCost + #Room9DoorKnobCost + #Room9DoorHingeCost + #Rm9MldCost+#Rm9BaseCost+#Rm9WGBaseCost+#Room9CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room9Total = [#Room9Subtotal*1.#designermarkup]
+,end Room 9
+
+Set,#Room10Subtotal = [#Room10Subtotal + (#Room10DoorHWCost+#Room10DoorHandleCost + #Room10DoorKnobCost + #Room10DoorHingeCost + #Rm10MldCost+#Rm10BaseCost+#Rm10WGBaseCost+#Room10CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room10Total = [#Room10Subtotal*1.#designermarkup]
+,end Room 10
+
+Set,#Room11Subtotal = [#Room11Subtotal + (#Room11DoorHWCost+#Room11DoorHandleCost + #Room11DoorKnobCost + #Room11DoorHingeCost + #Rm11MldCost+#Rm11BaseCost+#Rm11WGBaseCost+#Room11CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room11Total = [#Room11Subtotal*1.#designermarkup]
+,end Room 11
+
+Set,#Room12Subtotal = [#Room12Subtotal + (#Room12DoorHWCost+#Room12DoorHandleCost + #Room12DoorKnobCost + #Room12DoorHingeCost + #Rm12MldCost+#Rm12BaseCost+#Rm12WGBaseCost+#Room12CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room12Total = [#Room12Subtotal*1.#designermarkup]
+,end Room 12
+
+Set,#Room13Subtotal = [#Room13Subtotal + (#Room13DoorHWCost+#Room13DoorHandleCost + #Room13DoorKnobCost + #Room13DoorHingeCost + #Rm13MldCost+#Rm13BaseCost+#Rm13WGBaseCost+#Room13CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room13Total = [#Room13Subtotal*1.#designermarkup]
+,end Room 13
+
+Set,#Room14Subtotal = [#Room14Subtotal + (#Room14DoorHWCost+#Room14DoorHandleCost + #Room14DoorKnobCost + #Room14DoorHingeCost + #Rm14MldCost+#Rm14BaseCost+#Rm14WGBaseCost+#Room14CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room14Total = [#Room14Subtotal*1.#designermarkup]
+,end Room 14
+
+Set,#Room15Subtotal = [#Room15Subtotal + (#Room15DoorHWCost+#Room15DoorHandleCost + #Room15DoorKnobCost + #Room15DoorHingeCost + #Rm15MldCost+#Rm15BaseCost+#Rm15WGBaseCost+#Room15CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room15Total = [#Room15Subtotal*1.#designermarkup]
+,end Room 15
+
+Set,#Room16Subtotal = [#Room16Subtotal + (#Room16DoorHWCost+#Room16DoorHandleCost + #Room16DoorKnobCost + #Room16DoorHingeCost + #Rm16MldCost+#Rm16BaseCost+#Rm16WGBaseCost+#Room16CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room16Total = [#Room16Subtotal*1.#designermarkup]
+,end Room 16
+
+Set,#Room17Subtotal = [#Room17Subtotal + (#Room17DoorHWCost+#Room17DoorHandleCost + #Room17DoorKnobCost + #Room17DoorHingeCost + #Rm17MldCost+#Rm17BaseCost+#Rm17WGBaseCost+#Room17CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room17Total = [#Room17Subtotal*1.#designermarkup]
+,end Room 17
+
+Set,#Room18Subtotal = [#Room18Subtotal + (#Room18DoorHWCost+#Room18DoorHandleCost + #Room18DoorKnobCost + #Room18DoorHingeCost + #Rm18MldCost+#Rm18BaseCost+#Rm18WGBaseCost+#Room18CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room18Total = [#Room18Subtotal*1.#designermarkup]
+,end Room 18
+
+Set,#Room19Subtotal = [#Room19Subtotal + (#Room19DoorHWCost+#Room19DoorHandleCost + #Room19DoorKnobCost + #Room19DoorHingeCost + #Rm19MldCost+#Rm19BaseCost+#Rm19WGBaseCost+#Room19CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room19Total = [#Room19Subtotal*1.#designermarkup]
+,end Room 19
+
+Set,#Room20Subtotal = [#Room20Subtotal + (#Room20DoorHWCost+#Room20DoorHandleCost + #Room20DoorKnobCost + #Room20DoorHingeCost + #Rm20MldCost+#Rm20BaseCost+#Rm20WGBaseCost+#Room20CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room20Total = [#Room20Subtotal*1.#designermarkup]
+,end Room 20
+
+Set,#Room21Subtotal = [#Room21Subtotal + (#Room21DoorHWCost+#Room21DoorHandleCost + #Room21DoorKnobCost + #Room21DoorHingeCost + #Rm21MldCost+#Rm21BaseCost+#Rm21WGBaseCost+#Room21CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room21Total = [#Room21Subtotal*1.#designermarkup]
+,end Room 21
+
+Set,#Room22Subtotal = [#Room22Subtotal + (#Room22DoorHWCost+#Room22DoorHandleCost + #Room22DoorKnobCost + #Room22DoorHingeCost + #Rm22MldCost+#Rm22BaseCost+#Rm22WGBaseCost+#Room22CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room22Total = [#Room22Subtotal*1.#designermarkup]
+,end Room 22
+
+Set,#Room23Subtotal = [#Room23Subtotal + (#Room23DoorHWCost+#Room23DoorHandleCost + #Room23DoorKnobCost + #Room23DoorHingeCost + #Rm23MldCost+#Rm23BaseCost+#Rm23WGBaseCost+#Room23CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room23Total = [#Room23Subtotal*1.#designermarkup]
+,end Room 23
+
+Set,#Room24Subtotal = [#Room24Subtotal + (#Room24DoorHWCost+#Room24DoorHandleCost + #Room24DoorKnobCost + #Room24DoorHingeCost + #Rm24MldCost+#Rm24BaseCost+#Rm24WGBaseCost+#Room24CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room24Total = [#Room24Subtotal*1.#designermarkup]
+,end Room 24
+
+Set,#Room25Subtotal = [#Room25Subtotal + (#Room25DoorHWCost+#Room25DoorHandleCost + #Room25DoorKnobCost + #Room25DoorHingeCost + #Rm25MldCost+#Rm25BaseCost+#Rm25WGBaseCost+#Room25CTopCost)*1.#notusedheredesignermarkup ]
+Set,#Room25Total = [#Room25Subtotal*1.#designermarkup]
+,end Room 25
+
+
+,                         ######  HARDWARE ###### 
+
+Set,#Subtotal1Name =  Handles , --------------- Name
+Set,#Subtotal1Cost =  #TotalDoorHandleCost , ------- Cost per/handle
+
+Set,#Subtotal2Name =  Knobs , ----------------- Name
+Set,#Subtotal2Cost =  #TotalDoorKnobCost , --------- Cost per/knob
+
+Set,#Subtotal3Name =  Hinges , ---------------- Name
+Set,#Subtotal3Cost =  #TotalDoorHingeCost , -------- Cost per/hinge
+
+,                ######  SET YOUR SUBTOTALS BELOW ###### 
+
+Set,#Subtotal4Name =  Total Door and Drawer Front Cost, ------------- Name
+Set,#Subtotal4Cost =  #TotalDoorCost, ----------------- Cost
+
+Set,#Subtotal5Name =  Total Drawer Box Cost , ------------- Name
+Set,#Subtotal5Cost =  #TotalDrawerCost , ----------------- Cost
+
+Set,#Subtotal6Name =  Total Pullout Box Cost , ------------- Name
+Set,#Subtotal6Cost =  #TotalPulloutCost , ----------------- Cost
+
+Set,#Subtotal7Name =  Total Drawer Guide Cost , ------------- Name
+Set,#Subtotal7Cost =  #TotalDrawerGuideCost , ----------------- Cost
+
+Set,#Subtotal8Name =  Total Pullout Guide Cost , ------------ Name
+Set,#Subtotal8Cost =  #TotalPulloutGuideCost , --- Cost
+
+Set,#Subtotal9Name =  Total Drawer and Pullout Cost , ------ Name
+Set,#Subtotal9Cost =  #TotalDrawerCost + #TotalPulloutCost , --Cost
+
+Set,#Subtotal10Name = Total Dwr and Pullout Guide Cost , ------------- Name
+Set,#Subtotal10Cost = #TotalDrawerGuideCost + #TotalPulloutGuideCost , ----------------- Cost
+
+Set,#Subtotal14Name = #Sub1Name , ------------- Name
+Set,#Subtotal14Cost = #TotalSub1Cost , ----------------- Cost
+
+Set,#Subtotal15Name = #Sub2Name , ------------- Name
+Set,#Subtotal15Cost = #TotalSub2Cost , ----------------- Cost
+
+Set,#Subtotal16Name = #Sub3Name , ------------- Name
+Set,#Subtotal16Cost = #TotalSub3Cost , ----------------- Cost
+
+
+
+Set,#Subtotal24Name = #Sub6Name , ------------- Name
+Set,#Subtotal24Cost = #TotalSub6Cost , ----------------- Cost
+
+Set,#Subtotal25Name = #Sub7Name , ------------- Name
+Set,#Subtotal25Cost = #TotalSub7Cost , ----------------- Cost
+
+Set,#Subtotal26Name = #Sub8Name , ------------- Name
+Set,#Subtotal26Cost = #TotalSub8Cost , ----------------- Cost
+
+Load, (#UseInstallation=yes):Cost-Installation.pcb
+
+
+Set,#Subtotal19Name = #Sub19Name , ------------- Name
+Set,#Subtotal19Cost = #Sub19Cost , ----------------- Cost
+
+Set,#Subtotal20Name = #Sub20Name, ------------- Name
+Set,#Subtotal20Cost = #TotalInstallationCost , ----------------- Cost
+
+Set,#Subtotal21Name = #Sub21Name , ------------- Name
+Set,#Subtotal21Cost = #Subtotal*#TaxAmt , ----------------- Cost
+
+Set,#Subtotal22Name = #Sub20Name , ------------- Name
+Set,#Subtotal22Cost = #TotalInstallationCost , ----------------- Cost
+
+Set,#Subtotal23Name = #Sub23Name , ------------- Name
+Set,#Subtotal23Cost = #Sub23Cost , ----------------- Cost
+
+Set,#Subtotal17Name = #Sub4Name , ------------- Name
+Set,#Subtotal17Cost = #TotalSub4Cost , ----------------- Cost
+
+Set,#Subtotal18Name = #Sub5Name , ------------- Name
+Set,#Subtotal18Cost = #TotalSub5Cost , ----------------- Cost
+
+Set,#Subtotal27Name = #Sub9Name , ------------- Name
+Set,#Subtotal27Cost = #TotalSub9Cost , ----------------- Cost
+
+Set,#Subtotal28Name = #Sub10Name , ------------- Name
+Set,#Subtotal28Cost = #TotalSub10Cost , ----------------- Cost
+

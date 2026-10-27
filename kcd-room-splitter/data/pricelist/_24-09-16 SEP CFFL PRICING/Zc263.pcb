@@ -1,0 +1,62 @@
+,CF Library 3 drawer base
+,Calculates the price for each part
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+load, pricesides.pcb     
+,*****************************************
+
+
+
+,*********** All FIXED SHELVES ***********
+Set, #ShelfWidth = [(W-LS-RS)]     
+Set, #ShelfDepth = [(D)]  
+,*****************************************
+set, #bottomdrw=3
+load, lowerspannercount basedrawers.pcb
+
+
+
+,*********** TOP SPANNERS OR FULL SHELF Base Cabinet **
+Set,(#FullTops="No"):#ShelfDepth=[#SpannerWidth]:#ShelfDepth=[D]
+set, (LMR>0):#lowerspannercount=1
+load, Pricefixedshelves.pcb
+,*****************************************
+
+
+
+
+,************* OTHER PARTS ***************
+set, #Backheight = [H-TR-BR-K]
+set, #ShelfWidth = [(W-LS-RS)]
+Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,             
+     
+Price, (K>0):1,      #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,              
+,*****************************************
+
+
+
+
+,******* All DOORS & DRAWER FRONTS *******
+Load, Doors.pcb
+,*****************************************
+
+
+
+
+,*********** All DRAWER BOXES ************
+Load, Drawers.Pcb
+,*****************************************
+
+
+
+
+,************ All PULLOUTS ***************
+Set, #PulloutOpeningWidth = [W-LS-RS]
+,Load, (npo>0): G-Pullout Cost.Pcb
+,*****************************************
+
+
+

@@ -1,0 +1,12 @@
+,**Top fluted column and 2 rosettes include panels
+
+Set, #VertH = [H]
+Set, #VertD = [D-.75]
+
+set, #sideTH = W
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH = {W}
+Load, GetFlutedPilasterCost.pcb
+             
+Price, 1, RM#Roomnum #Unitmaterialname Column #sideTH" with #name 2 Rosettes #FlutedPilasterStyleName,         #CostOfSide+#CostOfFlutedPilaster+#Rosette+#Rosette,             #VertD, #VertH,          #LeftSidePrintOrderNumber,

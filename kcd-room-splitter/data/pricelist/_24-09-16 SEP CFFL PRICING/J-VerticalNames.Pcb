@@ -1,0 +1,40 @@
+,This Calculates the Name of all Vertical Sides (IF NEEDED)
+
+
+
+,Set the WidthName     ** #VertD is the Depth of the item
+Set, #DN=0
+Set, (#VertD>0) &(#VertD<=12): #DN=12
+Set, (#VertD>12)&(#VertD<=14): #DN=14
+Set, (#VertD>14)&(#VertD<=18): #DN=18
+Set, (#VertD>18)&(#VertD<=24): #DN=24
+Set, (#VertD>24)&(#VertD<=30): #DN=30
+
+
+,Set the HeightName     ** #VertH is the Height of the item
+Set, #HN=0
+Set, (#VertH>0) &(#VertH<=12): #HN=12
+Set, (#VertH>12)&(#VertH<=24): #HN=24
+Set, (#VertH>24)&(#VertH<=48): #HN=48
+Set, (#VertH>48)&(#VertH<=53): #HN=53
+Set, (#VertH>53)&(#VertH<=60): #HN=60
+Set, (#VertH>60)&(#VertH<=72): #HN=72
+Set, (#VertH>72)&(#VertH<=78): #HN=78
+Set, (#VertH>78)&(#VertH<=84): #HN=84
+Set, (#VertH>84)&(#VertH<=96): #HN=96
+Set, (#VertH>96)&(#VertH<=120):#HN=120
+
+
+,Set Option Names etc.
+Set, (Opt=4):#Rad=R:#Rad=R  , Radius Bottom Corner
+Set, (K>0):  #BN=BN:#BN=   , Bottom Notch (Kick)
+
+
+
+
+,Build the Final Vertical Side Name (This will replace the default name with this new name)
+Set, #LeftSideName  = W-V#DN#HN#Rad#BN
+Set, #RightSideName = W-V#DN#HN#Rad#BN
+
+
+

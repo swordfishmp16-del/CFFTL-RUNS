@@ -1,0 +1,158 @@
+May 1, 2021 - V8.0 - AA-User.pcb (edit V8.0), A-Setup.pcb (edit V8.0),c-shelfcost.pcb (edit V8.0),D-Door cost.pcb (Edit V8.0), E-Drawer cost.pcb (Edit V8.0), W-WinegridXXX.pcb (Edit V8.0)
+                     CFClosetaccessory.pcb - new, F-Basket cost.pcb (Replace and check), HK-Handleknobcost.pcb (replace and check), SO-Set Option Names.pcb (replace and check), GB-Garagebasepricing.pcb (added castor wheels for new unit)
+                     Added RM#roomnum to names  in - FS-floating Shelves.pcb, K-Pant Racks Cost.pcb, L-Laundry Costs.pcb, M-TAG Accessories.pcb, N-TAG Trackwall System.pcb, P-Elite Hooks and Holders.pcb 
+February 22, 2021 - V7.2.14 - f-basket cost.pcb (REPLACE and check pricing),
+                           A-setup.pcb(Edit V7.2.14 for cubby pricing)
+                           SO-Set option name.pcb (edit to add 1 door cleat and 2 door cleats option currently #82 and #83. If you need to relocate edit corresponding options.dat in your unit library and the parts list for these options in AA-User.prt)
+                           xxfinal.pcb - added financing deposit and final (copy and edit V7.2.14 Contract Report.Rpr to use this)
+                           ZC260-Pullout.pcb,ZC260-Pullout-Dovetail.pcb,ZC260-Pullout-Finger.pcb,ZC260-Pullout-Glass.pcb,ZCsh-sliding.pcb
+                           ZCTopcustomeuro.pcb
+                           doors.pcb - fixed pricing error for white drawer boxes.
+                           xxafterprice.pcb,cubbyunit.pcb,aa-user.pcb,c-shelf cost.pcb, 
+January, 25,2021 - V7.2.13 - F-basket.pcb (REPLACE and reenter pricing),Zsupport.pcb, Zcse-300c.pcb, ZC615.pcb, ZC614.pcb, ZC612-c.pcb, ZC141s.pcb, cubbyunit.pcb, getbaselength.pcb
+December 30, 2020 - V7.2.12 - new Cubbyunit.pcb
+November 3, 2020 - V7.2.11 - D-Door cost.pcb - (Edit V7.2.11) Added new door sq ft pricing
+                             A-setup.pcb (edit V7.2.11) delete #pricingversion notation (3 lines) not used
+                             aa-initializeroomsetting.pcb - fixed typo
+                             Zfreestandingdrawer.pcb - fixed box price if drawer face is a door.
+                             aa-doorcode.pcb,aa-doormemo.pcb,doorcode.pcb,doormemo.pcb - new doors
+   EDITS to make - 1) Change name of fltdr.dor in KCD folder to Beveldr.dor to better represent door style. 
+                   2) delete ZAD*.prt and ZOS*.prt from your Parts library. These are the Adams and the Osborne libraries part files which we do not produce. 
+                      Removing these files will allow the new Eachunit.prt file to properly put the unit info into the CVS file.
+                   3) delete ZAD*.pcb and ZOS*.pcb from your Pricing library. These are the Adams and the Osborne libraries pricing files which we do not regularly price.
+                      Removing these files will allow the new Eachunit.pcb file to properly put the unit info into the reports.
+   New Reports in KCD folder-V7.2.11 pricing reports allow for other library items used in drawing to be listed as accessories on reports.
+   New Doors in KCD folder-Bevel.dor and .jpg, beveldr.dor and .jpg (see Edits to make note 1 above), flatcfmolding.dor -adds M to front for distinction, doord.dat-lists new doors.        
+October 1, 2020 - V7.2.10 - Pricing for new doors styles- aa-doorcose.pcb,aa-doormemo-pcb, doorcode.pcb,doormemo.pcb, glassdr.pcb.
+                            aa-initializeroomsetting.pcb - set up for basic door calculations on reports.
+September 7, 2020 - V7.2.9 - Updated doors to calculate cost of standard doors, can be used for door pricing, and pricing comparison
+                           D-Door Cost.pcb (Edit V7.2.9), door.pcb, doorset.pcb,Dototals.pcb,endpanels.pcb,xxafter.pcb,xxafterprice.pcb,aa-initializeroomsetting.pcb
+August, 7 2020 - V7.2.8 - updates and corrections to basemolding.pcb, Door.pcb, endpanels.pcb, Getdoordrawerfinishingcost.pcb,
+                          Z281.pcb, Z282.pcb, Z291.pcb, Z292.pcb, Z409-dr.pcb, Z410-dr.pcb
+June 23, 2020 - V7.2.7 - setroomvariabledefaults.pcb - corrected variable initialization.
+                         ALL CF COUNTERTOPs folder - A-Setup.pcb -(find Update V7.2.7) added minimum countertop charge. ALL CF COUNTERTOPS folder - xxafter.pcb - updated for min counter charges. 
+                         A-setup.pcb-(find update V7.2.7)Moved mirrorbacking to AA-User backing set-up.
+                         AA-User.pcb-(find update V7.2.7)Added Closet Pieces Backing setup. Also updated set unit info for CFLA Backing.
+                         GetMaterialCostbacking.pcb-setup for 30 backing types in PLT.
+                         Z500-backing,pcb - updated for additional backing pieces.
+                         ZCedarBacking.pcb - Updated for additional cedar pieces.
+                         ZCcubbyinsert.pcb - new unit pricing. 
+                         H-Discounts and fees.pcb - (find update V7.2.7) notation on labeling, VAL-Valancecost.pcb - correct logic for custom size determination. (Find Update V7.2.7)
+                         Pricing files for open end and angle end uppers and lowers - Z181o.pcb,Z182o.pcb,Z281o.pcb,Z282o.pcb,Z191.pcb,Z192.pcb,Z291.pcb,Z292.pcb,PricecornersidesopenangleR.pcb,PricecornersidesopenangleL.pcb,PricecornersidesangleR.pcb,PricecornersidesangleL.pcb
+April 10, 2020 - V7.2.6 - Closet Accessories, Z890NC, Door, Getbaselength, E-Drawers (Find Update V7.2.6), SO-set option names (added #145 for Backing bore line for production).
+                          Pricerod.pcb for rod piece width calculation. Cost-subtotals.pcb adding room basemolding cost.
+February 24, 2020 - V7.2.5 - B-side cost, B-sidecostdoublethick, B-sidecosttriplethick - changed panel depths in reports as defined by franchise. Please document current settings before update then reenter.
+                             H-Discounts and Fees.pcb -(find Update V7.2.5) improved taxes for pricing reports if multiple levels are needed, corrected Extra charge comments 1-5 from not taxed to taxed and 6-10 to be not taxed from taxed. 
+                             SO-Set option names.pcb - edit file to remove the (") marks.
+                             A-setup.pcb - edit in grid view, version set to V7.2.5
+                             cfcountoptionsroom1 through 25.pcb corrected for consistency.
+                             pricerods.pcb - corrected issue with oversized rods.
+                             countsides.pcb - edited to work with new panel designations for reporting.
+                             xxFinal.pcb - fixed costco cash card to calculate before taxes
+                             pricefixedshelves - corrected Middle rail pricing issue.
+                             aa-initializeroomsetting.pcb and setroomvariabledefaults.pcb - added required variables.
+                             fixed all reports for consistency and for panels depth reporting. V7.2.5 designation in names.
+December 30, 2019 - V7.2.4 - A-Setup.pcb - (find Update 7.2.4) Updated pricing library version. Changed Kick costs to be set in AA-User. Specified cost of Arched base board.
+                             AA-User.pcb - (find Update 7.2.4) Updated for ability to select the section, 8 foot or foot pricing for base and crown.
+                             FS-Floating Shelves - (find Update 7.2.4) Updated to correct height of shelf.
+                             F-Basket Cost - (find Update 7.2.4) Updated to signify incorrect basket width.
+                             PCB Files changed for above molding update: z890, getmaterialcostbasekick,xxbefore,getbaselength,basemolding,molding,xxafterprice.
+                             xxFinal.pcb - added 60% first payment for franchise use. Copy V7.0 - Contract with Full Details.rpr to KCD for use.
+                             Fixed pricing issues in the following PCB files: Zkcd3003148Mal,Zkcd3003140Mal,Zkcd3003143Mal, Fixedshelfpanelright,Fixedshelfpanelleft
+October 21, 2019 - V7.2.3 - AA-User.pcb - CFLA door name correction, 
+                            D-Door cost.pcb - CFLA door name correction
+                            C-shelf cost.pcb - (find update 7.2.3) added ability to add cost to connecting shelves, 
+                            ZCStopandbottom.pcb,ZCbot.pcb,ZCTop.pcb updated for additional cost feature.
+                            aa-initializeroomsetting.pcb - new variables for connecting shelf cost addition.
+                            Endpanels.pcb - fixed pricing issue that impacted other doors in job.
+                            VAL-Valancecost.pcb - New file for valance pricing.
+                            Valance pcb files Z1111.pcb, Z1112.pcb, Z1115.pcb, Z1116.pcb, Z1112c.pcb
+September 17, 2019 - V7.2.2 - AA-User.pcb - updated rod styles for LA, door style
+                           A-setup.pcb - changed rod name for LA
+                           TAG-USES SET UNIT INFO.pcb - updated notation for reports
+                         New Pricing Files for several hanging units to correct rod counts on reports.
+                         Door.pcb added upcharge on for special edgeband on edgeband drawer faces.(Inquire for use)
+                         E-Drawer cost.pcb (find V7.2.2 for update) added upcharge on drawer box for special edgeband on included drawer faces.(Inquire for use)
+                         D-Door cost.pcb (find V7.2.2 for update) specify franchise name for basic white to make calcluations more generic. And added code to get door style earlier.
+                            also added new door styles for LA
+			 V-jeweryinsetcost.pcb - NEW quickload file to update. Allows for franchise naming.
+July 30, 2019 -V7.2.1 - Updated Island H section
+                        Added material type based on edgeband type to fillers.
+                        Added ability to adjust 3rd panel size in pricing (not shown in KCD unit library yet)
+                        D-Door Cost.pcb - (Edit as directed and update quickload for new melamine door pricing) Changed melamine door pricing set up for franchise flexibility.
+                           and added feature to charge custom drawer faces with a multiplier for different pricing from doors. Added applied molding pricing.
+                        Endpanels.pcb - corresponding changes for door pricing changes.
+                        A-Setup.pcb - added feature to allow for custom depth pricing for corner unit 3rd panels,notch and hutch pricing for future use.
+                        WB-Cost Wall Bed.pcb-NEW quickload file to update - Changed wallbeds set up and pricing for franchise flexibility.
+                        SO-Set option names.pcb - NEW quickload file to update - Changes Option naming for reports for franchise flexibility. 
+                        FS-Floating Shelves.pcb - NEW Quickload file for floating shelves for Franchise flexibility.
+                        Removed Floating shelf option from AA_User.pcb and option.dat.
+                        C-Shelf Cost Double Thick Shelves.pcb - Update Quickload file - Expanded with lengths for flexibility.
+                        C-Shelf Cost Double Thick Shelves.pcb - Update Quickload file - Expanded with lengths for flexibility.
+                        GB-Garagebasepricing.pcb - Update Quickload file - Final pricing check fixes.
+                        Verified pricing for new units.
+June 10, 2019 -V7.1.7 - Corrected GB-Garagebasepricing.pcb for typos seen in grid view
+                        Edited Z773.pcb for 3 opening with tall doors selection
+June 3, 2019 - V7.1.6 - Corrected for changes to Options.dat additions and changes as noted for Closet Factory Headquarters Feb 2019 June 2019 update notes.
+                        Added GB-Garagebasepricing.pcb to Quickload for garage platform pricing settings and leg leveler pricing.
+                        Added back the tall drawers with full backing pricing for use if units are unhidden.
+                        AA-User.pcb Section 8 Fluted Pilaster corrected to be more generic by following door finishes in Section 14.
+                        AA-User.pcb - two edits as listed below
+                          Edited this line to say "1" shelf -           Displayset,#adjtoeurooption=53,Q...    What is the option number for making 1 adj shelves euro?
+                          Added this line after above line -            Displayset,#alladjtoeurooption=61, Q...What is the option number for making ALL adj shelves euro? 
+                        C-shelf cost.pcb - Add Check for Euro shelf front lip. Edit as listed below
+                           In file text, search for ",end of 1 shelf thickness" 
+                           Replace Do, (#Frontlip=0):1
+                           with Do, ((#Frontlip=0)&(#Eurofrontlip=0)):1
+                       Wallbed pricing ZMurphybed.prt will not change for standard doors - made more generic to accomodate franchise naming.
+
+April 26, 2019 - V7.1.5 Corrected V7.0 - Room Notes.rpr, Added C:\KCD\Textures\CF Melamines for 3D textures.
+					 Corrected pricing method for ZFixedShelfPanelLeft.pcb and ZFixedShelfPanelright.pcb
+April 15, 2019 - V7.0.4 Corrected cutback pricing for adjustable shelves
+April 2, 2019 - V7.0.3 - ALL COUNTERTOPS - A-Setup - Countertop fix for MDF Colorcore 3/4" naming typo, Eachunit - waterfall and backsplash orientations, 
+                         M-TAG Accessories for folding station shelf pricing. 
+March 25, 2019 - Unit Price Review double listing room 7 at bottom.
+March 21, 2018 - AA-User.pcb changed C-channel pricing for 1 side to 13 from 25.
+March 20, 2019 - Double Hanging - 96 Lower shelf counter, PriceFixedShelves - LMR Lip and LED counter
+March 7, 2019 - Shoe shelf toestop counter fix
+March 6, 2019 - Countertop fix for backsplash orientation
+March 2, 2019 - Pricesides.pcb corrected LED halfpanel counter
+March 1, 2019 - Door.pcb corrected 24" wide door size for 32mm, F-Basket.pcb added tipout laundry basket options.
+Feb 18, 2019 - Closet Factory Price V7.0 Initial Release 
+
+
+
+
+-LEGACY HISTORY-
+Version 2.0- The begining of Versions
+Changed the Depth and Height dimensions in the way they print out for the side pieces
+Took the subtotals out of the report file to make this more like the !! KCDw Pricing file- this also made it so that new reports had to be made, some reports could stay the same just add the R to the reportID
+Changed the header file to have an R instead of a C
+Added subtotals to the price list
+Version 2.0 Continued
+added ag8p door to d-door cost file and fixed the numbering on the lines 2/12/07
+Added some instructions to the I-Molding file 2/15/07
+Added two files for the tall panels with rosettes 2/15/07
+Added file for the new closet unit added, the double hang 2OP 3/05/07
+Version 2.1
+Changing version # to 2.1
+Changed the spelling of heigth to heigth in the drawer, pullout and basket file 3/08/07
+made it so that the pullout file is now being called in the zc300 file, previously commented out 3/08/07
+Got rid of some report-sets in a few z-files 4/05/07
+Added FLATDR to the D-Door Cost file 5/08/07
+Took Molding.pcb file from the !! KCDw Pricing and added a few variables to the a-setup file for the molding, also saved the mldcost file as moldcost 10/30/07
+added a charge for the rosettes in the a-setup and in the fluted pilaster files. 1/15/08
+added a couple of options for different ways to price out the cubbies, also added a new name for the different options. 1/15/08
+added the zfiles for the frame end door units. 1/18/08 
+Version 2.2
+Changing version to 2.2 - 3/12/08
+Cleaned up the a-setup, got rid of some things that didn't belong. Switched the shoe shelf cost to be calculated in the c-shelf cost. added a variable so that the l shaped and 45 corner cabinets can have an extra back/side in the corner. JH
+Version 2.3 
+Changing version to 2.3 - 4/1/08
+Adding in the stuff for separate room by room pricing.  JH
+Added in stuff to be able to enable the sendtofile. All the switches are in the A-Setup, there is where you can turn on the output to csv's, there are 2 different csv files available to you - one that will output similar to a contract report and one that will output similar to the room by room report. The xxAfterPrice holds the information for the individual price lines for the default csv and the csvFile contains the subtotal and roomtotal information for both files. The CSVFile is loaded from the xxfinal. JH
+5/20/08 swapped out the shelf width and shelf depth dimensions in the z files so that all shelves print out the same. JH
+7/14/08 changed the way the base board prices. Changed it to lineal foot cost. JH
+11/10/08 added new version 9 units. JH
+3/19/10 added osborne and adams units. JH
+11/15/10 added in corner cabinets into price list. JH

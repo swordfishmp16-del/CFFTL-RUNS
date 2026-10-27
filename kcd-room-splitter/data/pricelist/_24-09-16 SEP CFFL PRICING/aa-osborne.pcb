@@ -1,0 +1,598 @@
+,This File Sets The Door NAME For The Code
+,Use Grid
+,**
+,**                             OSBORNE LIBRARY
+,**
+,** Round Half Molding 
+  
+DisplaySet,#$OS7100$ =0, 7100 Sm. Plinth w/Spool
+  
+ 
+DisplaySet,#$OS7101$ =0,7101 Sm. Plinth w/Spool
+  
+ 
+DisplaySet,#$OS7102$ =0,7102 Sm. Spool
+  
+ 
+DisplaySet,#$OS7105$ =0,7105 Sm. Reeded Half
+  
+ 
+DisplaySet,#$OS7106$ =0,7106 Sm. Smooth Half
+  
+ 
+DisplaySet,#$OS7107$ =0,7107 Sm. Rope Half
+  
+ 
+DisplaySet,#$OS7108$ =0,7108 Sm. Fluted Half
+  
+ 
+DisplaySet,#$OS71205$ =0,7120.5 Sm. Spool
+  
+ 
+,** Round Bun Feet   
+
+DisplaySet,#$OS4255$ =0,4255 4in Georgia Bun
+  
+ 
+DisplaySet,#$OS4250$ =0,4250 4.5in Georgia Bun
+  
+ 
+DisplaySet,#$OS4220$ =0,4220 4in Club Bun
+  
+ 
+DisplaySet,#$OS4215$ =0,4215 4.5in Club Bun
+  
+ 
+DisplaySet,#$OS4202$ =0,4202 4.5in Apple
+  
+ 
+DisplaySet,#$OS4125$ =0,4125 4in Egg Bun
+  
+ 
+DisplaySet,#$OS4120$ =0,4120 4.5in Egg Bun  
+ 
+DisplaySet,#$OS4115$ =0,4115 Medium Squat  
+ 
+DisplaySet,#$OS41155$ =0,4115.5 Medium Squat 1/2 foot  
+ 
+DisplaySet,#$OS4101$ =0,4101 Squat  
+ 
+DisplaySet,#$OS41015$ =0,4101.5 Squat 1/2 foot  
+ 
+DisplaySet,#$OS4100$ =0,4100 Tulip  
+ 
+DisplaySet,#$OS41005$ =0,4100.5 Tulip 1/2 foot  
+ 
+DisplaySet,#$OS4097$ =0,4097 4.5in Brunswick  
+ 
+DisplaySet,#$OS4095$ =0,4095 4in Brunswick  
+ 
+DisplaySet,#$OS4090$ =0,4090 3.25in Brunswick  
+ 
+DisplaySet,#$OS4075$ =0,4075 4.5in Bridle Bun  
+ 
+DisplaySet,#$OS4070$ =0,4070 4in Bridle Bun  
+ 
+DisplaySet,#$OS4055$ =0,4055 4in Round Bun  
+ 
+DisplaySet,#$OS4050$ =0,4050 4.5in Round Bun  
+ 
+DisplaySet,#$OS4015$ =0,4015 Cambridge Bun  
+ 
+DisplaySet,#$OS4012$ =0,4012 3in Ball  
+ 
+DisplaySet,#$OS4011$ =0,4011 2in Ball  
+ 
+DisplaySet,#$OS4002$ =0,4002 4in Apple  
+ 
+DisplaySet,#$OS40025$ =0,4002.5 4in Apple 1/2 foot  
+ 
+DisplaySet,#$OS4000$ =0,4000 3in Fluted Bun  
+ 
+DisplaySet,#$OS40005$ =0,4000.5 3in Fluted Bun 1/2 foot  
+ 
+,** Square Bun Feet 
+  
+DisplaySet,#$OS4082$ =0,4082 4in Tapered  
+ 
+DisplaySet,#$OS4081$ =0,4081 4.5in Tapered  
+ 
+DisplaySet,#$OS4080$ =0,4080 5in Tapered  
+ 
+,** Pedestals   
+
+DisplaySet,#$OS3007$ =0,3007 Fence Post Top  
+ 
+DisplaySet,#$OS30075$ =0,3007.5 Fence Post Top 1/2 Post
+  
+ 
+DisplaySet,#$OS3006$ =0,3006 Mirror Top Finial
+  
+ 
+DisplaySet,#$OS30065$ =0,3006.5 Mirror Top Finial 1/2 Post
+  
+ 
+DisplaySet,#$OS3005$ =0,3005 Shaker Finial
+  
+ 
+DisplaySet,#$OS30055$ =0,3005.5 Shaker Finial 1/2 Post
+  
+ 
+DisplaySet,#$OS3003$ =0,3003 Heritage
+  
+ 
+DisplaySet,#$OS30035$ =0,3003.5 Heritage 1/2 Post
+  
+ 
+DisplaySet,#$OS2500$ =0,2500 Pencil Bed Post
+  
+ 
+DisplaySet,#$OS1412$ =0,1412 Kitchen Work Station
+  
+ 
+DisplaySet,#$OS1430$ =0,1430 Cabriole Pedestal Foot
+  
+ 
+DisplaySet,#$OS1420$ =0,1420 Pedestal Center
+  
+ 
+,** Sofa Legs
+   
+DisplaySet,#$OS41033$ =0,41033 Albany
+  
+ 
+DisplaySet,#$OS410335$ =0,41033.5 Albany
+  
+ 
+DisplaySet,#$OS41090$ =0,41090 Roman
+  
+ 
+DisplaySet,#$OS410905$ =0,41090.5 Roman
+  
+ 
+DisplaySet,#$OS41231$ =0,41231 Dalton
+  
+ 
+DisplaySet,#$OS412315$ =0,41231.5 Dalton
+  
+ 
+DisplaySet,#$OS41235$ =0,41235 Athens
+  
+ 
+DisplaySet,#$OS412355$ =0,41235.5 Athens
+  
+ 
+DisplaySet,#$OS47531$ =0,47531 Augusta
+  
+ 
+DisplaySet,#$OS475315$ =0,47531.5 Augusta
+  
+ 
+,** Kitchen 40.5 Island Legs
+   
+DisplaySet,#$OS1582$ =0,1582 2 Sided Tapered
+  
+ 
+DisplaySet,#$OS1580$ =0,1580 4 Sided Tapered
+  
+ 
+DisplaySet,#$OS1563$ =0,1563 Tall Island Hutch
+  
+ 
+DisplaySet,#$OS1562$ =0,1562 Extended Rope
+  
+ 
+DisplaySet,#$OS15625$ =0,1562.5 Extended Rope 1/2 Leg
+  
+ 
+DisplaySet,#$OS1559$ =0,1559 Extended Tybee
+  
+ 
+DisplaySet,#$OS15595$ =0,1559.5 Extended Tybee 1/2 Leg
+  
+ 
+DisplaySet,#$OS1556$ =0,1556 Extended Reeded
+  
+ 
+DisplaySet,#$OS15565$ =0,1556.5 Extended Reeded 1/2 Leg
+  
+ 
+DisplaySet,#$OS1550$ =0,1550 Extended Island
+  
+ 
+DisplaySet,#$OS15505$ =0,1550.5 Extended Island 1/2 Leg
+  
+ 
+,** Kitchen 34.5 Island Post
+   
+DisplaySet,#$OS1495$ =0,1495 Barley Twist
+  
+ 
+DisplaySet,#$OS1493$ =0,1493 Jefferson
+  
+ 
+DisplaySet,#$OS1492$ =0,1492 Massive Arlington
+  
+ 
+DisplaySet,#$OS1491$ =0,1491 Husky Atlanta
+  
+ 
+DisplaySet,#$OS1490$ =0,1490 Atlanta
+  
+ 
+DisplaySet,#$OS1486$ =0,1486 world Hutch
+  
+ 
+DisplaySet,#$OS1485$ =0,1485 Right Spiro
+  
+ 
+DisplaySet,#$OS1483$ =0,1483 Contemporary Rope
+  
+ 
+DisplaySet,#$OS14835$ =0,1483.5 Contemporary Rope 1/2 Leg
+  
+ 
+DisplaySet,#$OS1482$ =0,1482 2 Sided Tapered Island
+  
+ 
+DisplaySet,#$OS1480$ =0,1480 4 Sided Tapered Island
+  
+ 
+DisplaySet,#$OS1473$ =0,1473 Massive Concord
+  
+ 
+DisplaySet,#$OS1472$ =0,1472 Husky Concord
+  
+ 
+DisplaySet,#$OS1471$ =0,1471 Concord
+  
+ 
+DisplaySet,#$OS1470$ =0,1470 Narrow Concord
+  
+ 
+DisplaySet,#$OS1463$ =0,1463 Island Hutch
+  
+ 
+DisplaySet,#$OS1462$ =0,1462 Rope Island
+  
+ 
+DisplaySet,#$OS14625$ =0,1462.5 Rope Island 1/2 Leg
+  
+ 
+DisplaySet,#$OS1461$ =0,1461 Sapelo Island (Reeded)
+  
+ 
+DisplaySet,#$OS14615$ =0,1461.5 Sapelo Island (Reeded) 1/2 Leg
+  
+ 
+DisplaySet,#$OS1459$ =0,1459 Tybee Island
+  
+ 
+DisplaySet,#$OS14595$ =0,1459.5 Tybee Island 1/2 Leg
+  
+ 
+DisplaySet,#$OS1458$ =0,1458 St. Simons Island
+  
+ 
+DisplaySet,#$OS14585$ =0,1458.5 St. Simons Island 1/2 Leg
+  
+ 
+DisplaySet,#$OS1457$ =0,1457 Cumberland Island
+  
+ 
+DisplaySet,#$OS14575$ =0,1457.5 Cumberland Island 1/2 Leg
+  
+ 
+DisplaySet,#$OS1456$ =0,1456 Classic Reeded Island
+  
+ 
+DisplaySet,#$OS14565$ =0,1456.5 Classic Reeded Island 1/2 Leg
+  
+ 
+DisplaySet,#$OS1455$ =0,1455 Grand Island
+  
+ 
+DisplaySet,#$OS14555$ =0,1455.5 Grand Island 1/2 Post 1/2 Leg
+  
+ 
+DisplaySet,#$OS1453$ =0,1453 Massive Rope
+  
+ 
+DisplaySet,#$OS1452$ =0,1452 Massive Islander
+  
+ 
+DisplaySet,#$OS14525$ =0,1452.5 Massive Islander 1/2 Post
+  
+ 
+DisplaySet,#$OS1451$ =0,1451 Husky Islander
+  
+ 
+DisplaySet,#$OS14515$ =0,1451.5 Husky Islander 1/2 Post
+  
+ 
+DisplaySet,#$OS1450$ =0,1450 Islander
+  
+ 
+DisplaySet,#$OS14505$ =0,1450.5 Islander 1/2 Post
+  
+ 
+DisplaySet,#$OS1417$ =0,1417 Concord Hutch
+  
+ 
+DisplaySet,#$OS14175$ =0,1417.5 Concord Hutch 1/2 Post
+  
+ 
+DisplaySet,#$OS1409$ =0,1409 Massive Wilmington
+  
+ 
+DisplaySet,#$OS14095$ =0,1409.5 Massive Wilmington 1/2 Post
+  
+ 
+DisplaySet,#$OS1401$ =0,1401 Grand Tavern
+  
+ 
+DisplaySet,#$OS14015$ =0,1401.5 Grand Tavern 1/2 Post
+  
+ 
+DisplaySet,#$OS1400$ =0,1400 Tavern
+  
+ 
+DisplaySet,#$OS14005$ =0,1400.5 Tavern 1/2 Post  
+ 
+ 
+ 
+,** Coffee Table Legs
+   
+DisplaySet,#$OS1380$ =0,1380 4 Sided Tapered
+  
+ 
+DisplaySet,#$OS1390$ =0,1390 Cabriole
+  
+ 
+DisplaySet,#$OS1350$ =0,1350 Big Country
+  
+ 
+DisplaySet,#$OS13505$ =0,1350.5 Big Country 1/2 LLeg
+  
+ 
+DisplaySet,#$OS1340$ =0,1340 Farm Coffee
+  
+ 
+DisplaySet,#$OS13405$ =0,1340.5 Farm Coffee
+  
+ 
+DisplaySet,#$OS1330$ =0,1330 Massive English Country
+  
+ 
+DisplaySet,#$OS13305$ =0,1330.5 Massive English Country
+  
+ 
+DisplaySet,#$OS1322$ =0,1322 Old World
+  
+ 
+DisplaySet,#$OS13225$ =0,1322.5 Old World
+  
+ 
+DisplaySet,#$OS1320$ =0,1320 English Country
+  
+ 
+DisplaySet,#$OS13205$ =0,1320.5 English Country
+  
+ 
+DisplaySet,#$OS1316$ =0,1316 Heritage
+  
+ 
+DisplaySet,#$OS13165$ =0,1316.5 Heritage
+  
+ 
+DisplaySet,#$OS1314$ =0,1314 Portsmouth
+  
+ 
+DisplaySet,#$OS13145$ =0,1314.5 Portsmouth
+  
+ 
+DisplaySet,#$OS1302$ =0,1302 Jumbo English Country
+  
+ 
+DisplaySet,#$OS13025$ =0,1302.5 Jumbo English Country
+  
+ 
+DisplaySet,#$OS1301$ =0,1301 Colonial
+  
+ 
+DisplaySet,#$OS13015$ =0,1301.5 Colonial
+  
+ 
+,** End Table Legs   
+DisplaySet,#$OS1290$ =0,1290 Cabriole End
+  
+ 
+DisplaySet,#$OS1280$ =0,1280 4 Sided Tapered End
+  
+ 
+DisplaySet,#$OS1240$ =0,1240 Farm End
+  
+ 
+DisplaySet,#$OS12405$ =0,1240.5 Farm End 1/2 Leg
+  
+ 
+DisplaySet,#$OS1222$ =0,1222 Old World End
+  
+ 
+DisplaySet,#$OS12225$ =0,1222.5 Old World End 1/2 Leg
+  
+ 
+DisplaySet,#$OS1220$ =0,1220 English Country End
+  
+ 
+DisplaySet,#$OS12205$ =0,1220.5 English Country End 1/2 Leg
+  
+ 
+DisplaySet,#$OS1215$ =0,1215 Heritage End Table
+  
+ 
+DisplaySet,#$OS12155$ =0,1215.5 Heritage End Table 1/2 Leg
+  
+ 
+DisplaySet,#$OS1214$ =0,1214 Portsmouth End
+  
+ 
+DisplaySet,#$OS12145$ =0,1214.5 Portsmouth End 1/2 Leg
+  
+ 
+DisplaySet,#$OS1210$ =0,1210 Country End Table
+  
+ 
+DisplaySet,#$OS12105$ =0,1210.5 Country End Table 1/2 Leg
+  
+ 
+DisplaySet,#$OS1201$ =0,1201 Table Leg
+  
+ 
+DisplaySet,#$OS12015$ =0,1201.5 Table Leg 1/2 Leg
+  
+ 
+,** Dining Table Legs
+   
+DisplaySet,#$OS1190$ =0,1190 Cabriote Leg
+  
+ 
+DisplaySet,#$OS1182$ =0,1182 2 Sided Tapered 
+  
+ 
+DisplaySet,#$OS1180$ =0,1180 4 Sided Tapered
+  
+ 
+DisplaySet,#$OS1153$ =0,1153 Tapered Rope
+  
+ 
+DisplaySet,#$OS1130$ =0,1130 Country Squire
+  
+ 
+DisplaySet,#$OS1128$ =0,1128 Jamestown
+  
+ 
+DisplaySet,#$OS1122$ =0,1122 Old World Dining
+  
+ 
+DisplaySet,#$OS1121$ =0,1121 Husky Farm Table
+  
+ 
+DisplaySet,#$OS1115$ =0,1115 Narrow Modifided English
+  
+ 
+DisplaySet,#$OS1114$ =0,1114 Portsmouth
+  
+ 
+DisplaySet,#$OS1113$ =0,1113 Heritage Dining
+  
+ 
+DisplaySet,#$OS1112$ =0,1112 Fluted Modified English
+  
+ 
+DisplaySet,#$OS11125$ =0,1112.5 Fluted Mod English 1/2 Leg
+  
+ 
+DisplaySet,#$OS1111$ =0,1111 Modified English Country
+  
+ 
+DisplaySet,#$OS11115$ =0,1111.5 Mod English Country 1/2 Leg
+  
+ 
+DisplaySet,#$OS1110$ =0,1110 Old English Country Dining
+  
+ 
+DisplaySet,#$OS11105$ =0,1110.5 Old English Country Dining 1/2 Leg
+  
+ 
+DisplaySet,#$OS1109$ =0,1109 Husky
+  
+ 
+DisplaySet,#$OS11095$ =0,1109.5 Husky 1/2 Leg
+  
+ 
+DisplaySet,#$OS1082$ =0,1082 2 Sided Tapered Dining
+  
+ 
+DisplaySet,#$OS1080$ =0,1080 4 Sided Tapered Dining
+  
+ 
+DisplaySet,#$OS1025$ =0,1025 Miller Farm
+  
+ 
+DisplaySet,#$OS10255$ =0,1025.5 Miller Farm 1/2 Leg
+  
+ 
+DisplaySet,#$OS1020$ =0,1020 Farm Table
+  
+ 
+DisplaySet,#$OS10205$ =0,1020.5 Farm Table 1/2 Leg
+  
+ 
+DisplaySet,#$OS1014$ =0,1014 English Country
+  
+ 
+DisplaySet,#$OS10145$ =0,1014.5 English Country 1/2 Leg
+  
+ 
+DisplaySet,#$OS1001$ =0,1001 Colonial Dining
+  
+ 
+DisplaySet,#$OS10015$ =0,1001.5 Colonial Dining 1/2 Leg
+  
+ 
+,** Corbels
+   
+DisplaySet,#$OS8228$ =0,8228 Houston Contemporary
+  
+ 
+DisplaySet,#$OS8088$ =0,8088 New York Contemporary
+  
+ 
+DisplaySet,#$OS8070$ =0,8070 Small Beaded
+  
+ 
+DisplaySet,#$OS8059$ =0,8059 Chicago Contemporary
+  
+ 
+DisplaySet,#$OS8028$ =0,8028 Boston Bar
+  
+ 
+DisplaySet,#$OS8023$ =0,8023 Athens Mission
+  
+ 
+DisplaySet,#$OS8019$ =0,8019 San Francisco Contemporary
+  
+ 
+DisplaySet,#$OS8013$ =0,8013 Milan Mission
+  
+ 
+DisplaySet,#$OS8008$ =0,8008 Carpi Mission
+  
+ 
+DisplaySet,#$OS8018$ =0,8018 Providence Contemporary
+  
+ 
+DisplaySet,#$OS8010$ =0,8010 Milan Classic
+  
+ 
+DisplaySet,#$OS8005$ =0,8005 Venice Classic
+  
+ 
+DisplaySet,#$OS8004$ =0,8004 Little Rock Contemporary
+  
+ 
+DisplaySet,#$OS1403$ =0,1403 New Orleans Island
+  
+ 
+DisplaySet,#$OS8320$ =0,8320 Narrow Chesapeake
+  
+ 
+DisplaySet,#$OS8223$ =0,8223 Amcona Mission
+  
+ 
+DisplaySet,#$OS8083$ =0,8083 Verona Mission  
+ 
+ 
+ 
+ 

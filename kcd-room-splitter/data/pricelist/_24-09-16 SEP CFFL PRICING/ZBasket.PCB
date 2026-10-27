@@ -1,0 +1,12 @@
+
+
+
+Set, #BasketWidth = {W}
+Set, #BasketHeight = {H}
+Set, #BasketDepth = {D}
+
+,********** All BASKETS ******************
+Set, #BasketOpeningWidth = [W]
+Set, #BasketOpeningHeight = H
+Load, F-Basket Cost.pcb
+,*****************************************

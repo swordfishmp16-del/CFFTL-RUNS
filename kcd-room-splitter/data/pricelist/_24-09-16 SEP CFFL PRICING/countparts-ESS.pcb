@@ -1,0 +1,308 @@
+Set, #stopcountESS=1
+
+Do(#unitfilename="*Ess-*"):1
+{
+
+ Do,(#RoomNum = 1):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room1raillength=[#Room1raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room1railcoverlength=[#Room1railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room1raillengthcount=[#Room1raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room1raillengthcountremainder=[(#Room1raillength/#railpiecelength)-(#Room1raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room1railcoverlengthcount=[#Room1railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room1railcoverlengthcountremainder=[(#Room1railcoverlength/#railcoverpiecelength)-(#Room1railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 2):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room2raillength=[#Room2raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room2railcoverlength=[#Room2railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room2raillengthcount=[#Room2raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room2raillengthcountremainder=[(#Room2raillength/#railpiecelength)-(#Room2raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room2railcoverlengthcount=[#Room2railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room2railcoverlengthcountremainder=[(#Room2railcoverlength/#railcoverpiecelength)-(#Room2railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 3):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room3raillength=[#Room3raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room3railcoverlength=[#Room3railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room3raillengthcount=[#Room3raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room3raillengthcountremainder=[(#Room3raillength/#railpiecelength)-(#Room3raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room3railcoverlengthcount=[#Room3railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room3railcoverlengthcountremainder=[(#Room3railcoverlength/#railcoverpiecelength)-(#Room3railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 4):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room4raillength=[#Room4raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room4railcoverlength=[#Room4railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room4raillengthcount=[#Room4raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room4raillengthcountremainder=[(#Room4raillength/#railpiecelength)-(#Room4raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room4railcoverlengthcount=[#Room4railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room4railcoverlengthcountremainder=[(#Room4railcoverlength/#railcoverpiecelength)-(#Room4railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 5):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room5raillength=[#Room5raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room5railcoverlength=[#Room5railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room5raillengthcount=[#Room5raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room5raillengthcountremainder=[(#Room5raillength/#railpiecelength)-(#Room5raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room5railcoverlengthcount=[#Room5railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room5railcoverlengthcountremainder=[(#Room5railcoverlength/#railcoverpiecelength)-(#Room5railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 6):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room6raillength=[#Room6raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room6railcoverlength=[#Room6railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room6raillengthcount=[#Room6raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room6raillengthcountremainder=[(#Room6raillength/#railpiecelength)-(#Room6raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room6railcoverlengthcount=[#Room6railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room6railcoverlengthcountremainder=[(#Room6railcoverlength/#railcoverpiecelength)-(#Room6railcoverlength\#railcoverpiecelength)]
+ }
+
+Do,(#RoomNum = 7):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room7raillength=[#Room7raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room7railcoverlength=[#Room7railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room7raillengthcount=[#Room7raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room7raillengthcountremainder=[(#Room7raillength/#railpiecelength)-(#Room7raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room7railcoverlengthcount=[#Room7railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room7railcoverlengthcountremainder=[(#Room7railcoverlength/#railcoverpiecelength)-(#Room7railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 8):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room8raillength=[#Room8raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room8railcoverlength=[#Room8railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room8raillengthcount=[#Room8raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room8raillengthcountremainder=[(#Room8raillength/#railpiecelength)-(#Room8raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room8railcoverlengthcount=[#Room8railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room8railcoverlengthcountremainder=[(#Room8railcoverlength/#railcoverpiecelength)-(#Room8railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 9):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room9raillength=[#Room9raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room9railcoverlength=[#Room9railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room9raillengthcount=[#Room9raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room9raillengthcountremainder=[(#Room9raillength/#railpiecelength)-(#Room9raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room9railcoverlengthcount=[#Room9railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room9railcoverlengthcountremainder=[(#Room9railcoverlength/#railcoverpiecelength)-(#Room9railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 10):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room10raillength=[#Room10raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room10railcoverlength=[#Room10railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room10raillengthcount=[#Room10raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room10raillengthcountremainder=[(#Room10raillength/#railpiecelength)-(#Room10raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room10railcoverlengthcount=[#Room10railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room10railcoverlengthcountremainder=[(#Room10railcoverlength/#railcoverpiecelength)-(#Room10railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 11):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room11raillength=[#Room11raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room11railcoverlength=[#Room11railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room11raillengthcount=[#Room11raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room11raillengthcountremainder=[(#Room11raillength/#railpiecelength)-(#Room11raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room11railcoverlengthcount=[#Room11railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room11railcoverlengthcountremainder=[(#Room11railcoverlength/#railcoverpiecelength)-(#Room11railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 12):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room12raillength=[#Room12raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room12railcoverlength=[#Room12railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room12raillengthcount=[#Room12raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room12raillengthcountremainder=[(#Room12raillength/#railpiecelength)-(#Room12raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room12railcoverlengthcount=[#Room12railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room12railcoverlengthcountremainder=[(#Room12railcoverlength/#railcoverpiecelength)-(#Room12railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 13):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room13raillength=[#Room13raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room13railcoverlength=[#Room13railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room13raillengthcount=[#Room13raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room13raillengthcountremainder=[(#Room13raillength/#railpiecelength)-(#Room13raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room13railcoverlengthcount=[#Room13railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room13railcoverlengthcountremainder=[(#Room13railcoverlength/#railcoverpiecelength)-(#Room13railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 14):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room14raillength=[#Room14raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room14railcoverlength=[#Room14railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room14raillengthcount=[#Room14raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room14raillengthcountremainder=[(#Room14raillength/#railpiecelength)-(#Room14raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room14railcoverlengthcount=[#Room14railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room14railcoverlengthcountremainder=[(#Room14railcoverlength/#railcoverpiecelength)-(#Room14railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 15):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room15raillength=[#Room15raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room15railcoverlength=[#Room15railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room15raillengthcount=[#Room15raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room15raillengthcountremainder=[(#Room15raillength/#railpiecelength)-(#Room15raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room15railcoverlengthcount=[#Room15railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room15railcoverlengthcountremainder=[(#Room15railcoverlength/#railcoverpiecelength)-(#Room15railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 16):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room16raillength=[#Room16raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room16railcoverlength=[#Room16railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room16raillengthcount=[#Room16raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room16raillengthcountremainder=[(#Room16raillength/#railpiecelength)-(#Room16raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room16railcoverlengthcount=[#Room16railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room16railcoverlengthcountremainder=[(#Room16railcoverlength/#railcoverpiecelength)-(#Room16railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 17):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room17raillength=[#Room17raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room17railcoverlength=[#Room17railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room17raillengthcount=[#Room17raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room17raillengthcountremainder=[(#Room17raillength/#railpiecelength)-(#Room17raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room17railcoverlengthcount=[#Room17railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room17railcoverlengthcountremainder=[(#Room17railcoverlength/#railcoverpiecelength)-(#Room17railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 18):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room18raillength=[#Room18raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room18railcoverlength=[#Room18railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room18raillengthcount=[#Room18raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room18raillengthcountremainder=[(#Room18raillength/#railpiecelength)-(#Room18raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room18railcoverlengthcount=[#Room18railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room18railcoverlengthcountremainder=[(#Room18railcoverlength/#railcoverpiecelength)-(#Room18railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 19):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room19raillength=[#Room19raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room19railcoverlength=[#Room19railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room19raillengthcount=[#Room19raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room19raillengthcountremainder=[(#Room19raillength/#railpiecelength)-(#Room19raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room19railcoverlengthcount=[#Room19railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room19railcoverlengthcountremainder=[(#Room19railcoverlength/#railcoverpiecelength)-(#Room19railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 20):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room20raillength=[#Room20raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room20railcoverlength=[#Room20railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room20raillengthcount=[#Room20raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room20raillengthcountremainder=[(#Room20raillength/#railpiecelength)-(#Room20raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room20railcoverlengthcount=[#Room20railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room20railcoverlengthcountremainder=[(#Room20railcoverlength/#railcoverpiecelength)-(#Room20railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 21):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room21raillength=[#Room21raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room21railcoverlength=[#Room21railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room21raillengthcount=[#Room21raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room21raillengthcountremainder=[(#Room21raillength/#railpiecelength)-(#Room21raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room21railcoverlengthcount=[#Room21railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room21railcoverlengthcountremainder=[(#Room21railcoverlength/#railcoverpiecelength)-(#Room21railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 22):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room22raillength=[#Room22raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room22railcoverlength=[#Room22railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room22raillengthcount=[#Room22raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room22raillengthcountremainder=[(#Room22raillength/#railpiecelength)-(#Room22raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room22railcoverlengthcount=[#Room22railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room22railcoverlengthcountremainder=[(#Room22railcoverlength/#railcoverpiecelength)-(#Room22railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 23):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room23raillength=[#Room23raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room23railcoverlength=[#Room23railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room23raillengthcount=[#Room23raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room23raillengthcountremainder=[(#Room23raillength/#railpiecelength)-(#Room23raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room23railcoverlengthcount=[#Room23railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room23railcoverlengthcountremainder=[(#Room23railcoverlength/#railcoverpiecelength)-(#Room23railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 24):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room24raillength=[#Room24raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room24railcoverlength=[#Room24railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room24raillengthcount=[#Room24raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room24raillengthcountremainder=[(#Room24raillength/#railpiecelength)-(#Room24raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room24railcoverlengthcount=[#Room24railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room24railcoverlengthcountremainder=[(#Room24railcoverlength/#railcoverpiecelength)-(#Room24railcoverlength\#railcoverpiecelength)]
+ }
+
+ Do,(#RoomNum = 25):1
+ {
+  set,(#unitfilename="*Rail.cab"):#Room25raillength=[#Room25raillength+W]
+  set,(#unitfilename="*Railcover.cab"):#Room25railcoverlength=[#Room25railcoverlength+W]
+  
+  set,(#unitfilename="*Rail.cab"):#Room25raillengthcount=[#Room25raillength\#railpiecelength]
+  Set,(#unitfilename="*Rail.cab"):#Room25raillengthcountremainder=[(#Room25raillength/#railpiecelength)-(#Room25raillength\#railpiecelength)]
+
+  set,(#unitfilename="*Railcover.cab"):#Room25railcoverlengthcount=[#Room25railcoverlength\#railcoverpiecelength]
+  Set,(#unitfilename="*Railcover.cab"):#Room25railcoverlengthcountremainder=[(#Room25railcoverlength/#railcoverpiecelength)-(#Room25railcoverlength\#railcoverpiecelength)]
+ }
+
+
+}
+Set, #stopcountESS=2

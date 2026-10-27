@@ -1,0 +1,16 @@
+,CF Library - free standing drawer - closet pieces.
+,******** Drawer *************
+
+Set, #W = [w]
+Set, #H = H
+Set, #D = [D]
+
+load, Doors.pcb
+
+Set, #DrawerOpeningWidth = [W]
+Set, #DrawerOpeningHeight = H
+Set, #DrawerFrontWidth = W
+Set, #DrawerFrontHeight = H
+Load, Drawers.Pcb
+
+

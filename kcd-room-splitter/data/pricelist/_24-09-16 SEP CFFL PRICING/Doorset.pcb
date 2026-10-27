@@ -1,0 +1,12 @@
+,--MEMO below-------(DOOR COST)-----------(METHOD 1 or  2 )--------
+
+,--MEMO below (ON) Prices doors by square foot
+,Load,DoorCost.pcb
+,--MEMO below (OFF) Prices doors by square foot with a minimum price
+,Load,DoorMin.pcb
+
+
+Load, DoorMemo.pcb
+Load, DoorCode.pcb
+Load, Glassdr.Pcb
+Load, D-Door Cost.Pcb

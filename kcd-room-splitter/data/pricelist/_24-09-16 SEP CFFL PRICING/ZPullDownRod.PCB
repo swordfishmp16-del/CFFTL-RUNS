@@ -1,0 +1,32 @@
+Do,(#UnitFileName="PullDownRodCHR.cab"):1
+{
+Set, #Pulldownrodfinish=CHR
+Set, #PulldownRodPN=Invalid Size
+Set, ((W>=21.25)&(W<=26)):#PulldownrodPN=805.31.201
+Set, ((W>26)&(W<=35.0625)):#PulldownrodPN=805.31.202 
+Set, ((W>35.0625)&(W<=47.625)):#PulldownrodPN=805.31.203 
+}
+Do,(#UnitFileName="PullDownRodBLK.cab"):1
+{
+Set, #Pulldownrodfinish=BLK
+Set, #PulldownRodPN=Invalid Size
+Set, ((W>=21.25)&(W<=26)):#PulldownrodPN=805.31.301
+Set, ((W>26)&(W<=35.0625)):#PulldownrodPN=805.31.302 
+Set, ((W>35.0625)&(W<=47.625)):#PulldownrodPN=805.31.303 
+
+}
+
+Do,(#UnitFileName="PullDownRodWHT.cab"):1
+{
+Set, #Pulldownrodfinish=WHT
+Set, #PulldownRodPN=Invalid Size
+Set, ((W>=21.25)&(W<=26)):#PulldownrodPN=805.31.701  
+Set, ((W>26)&(W<=35.0625)):#PulldownrodPN=805.31.702 
+Set, ((W>35.0625)&(W<=47.625)):#PulldownrodPN=805.31.703 
+
+}
+
+,************ ALL WIRE SHELVES ***********
+Price, 1,    RM#Roomnum #TriplePullDownName-#Pulldownrodfinish-#PulldownrodPN,       #CostOfTriplePullDown*#universalupcharge,           W, h,          #TopShelfPrintOrderNumber,        
+,*****************************************
+

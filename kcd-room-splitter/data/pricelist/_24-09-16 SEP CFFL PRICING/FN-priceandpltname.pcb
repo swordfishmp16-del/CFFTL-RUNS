@@ -1,0 +1,116 @@
+,Set Item Costs factor for Door Insert
+
+,**
+
+,Calculating subtotals
+
+set,#DoorDrawerInsertType = #ExtraUnitText15
+
+Set,#DoorDrawerInsertCostGroup=0
+
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType0"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost0]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType1"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost1]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType2"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost2]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType3"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost3]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType4"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost4]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType5"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost5]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType6"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost6]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType7"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost7]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType8"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost8]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType9"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost9]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType10"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost10]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType11"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost11]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType12"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost12]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType13"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost13]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType14"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost14]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType15"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost15]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType16"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost16]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType17"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost17]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType18"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost18]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType19"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost19]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType20"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost20]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType21"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost21]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType22"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost22]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType23"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost23]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType24"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost24]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType25"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost25]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType26"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost26]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType27"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost27]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType28"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost28]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType29"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost29]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType30"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost30]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType31"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost31]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType32"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost32]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType33"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost33]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType34"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost34]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType35"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost35]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType36"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost36]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType37"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost37]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType38"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost38]
+Set,(#DoorDrawerInsertType = "#DoorDrawerInsertType39"):#DoorDrawerInsertCostGroup=[#DoorDrawerInsertTypeCost39]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+,*****Decorative Tall End Panel Left or Right as Door
+
+
+Set, #EndpanelH = H
+Set, #EndpanelW = D
+Set, #DecorativePanelName =  #TallPanelName
+Load, Endpanels.pcb
+,*****************************************

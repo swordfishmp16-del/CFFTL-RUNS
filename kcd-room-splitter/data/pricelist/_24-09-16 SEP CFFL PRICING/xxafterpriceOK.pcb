@@ -1,0 +1,258 @@
+Set, #stopxxafterOK=1
+
+Do,(#unitfilename="OK-*"):1
+{
+
+ Do,(#RoomNum = 1):1
+ {
+ Set,#Room1Material = <#UnitMaterialnameok>
+ Set,#Room1DoorDrawerType= <#extraunittext2>
+ Set,#Room1DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room1DoorDrawerFinishingType<>"*Teak*")&(#Room1DoorDrawerFinishingType<>"*Ash*"):#Room1finishupcharge=1.00:#Room1finishupcharge=1.05
+ set,#room1Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #room1legsetcount=[#Room1legsetcount+1]
+ }
+
+ Do,(#RoomNum = 2):1
+ {
+ Set,#Room2Material = <#UnitMaterialnameok>
+ Set,#Room2DoorDrawerType= <#extraunittext2>
+ Set,#Room2DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room2DoorDrawerFinishingType<>"*Teak*")&(#Room2DoorDrawerFinishingType<>"*Ash*"):#Room2finishupcharge=1.00:#Room2finishupcharge=1.05
+ set,#Room2Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room2legsetcount=[#Room2legsetcount+1]
+
+ }
+
+ Do,(#RoomNum = 3):1
+ {
+ Set,#Room3Material = <#UnitMaterialnameok>
+ Set,#Room3DoorDrawerType= <#extraunittext2>
+ Set,#Room3DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room3DoorDrawerFinishingType<>"*Teak*")&(#Room3DoorDrawerFinishingType<>"*Ash*"):#Room3finishupcharge=1.00:#Room3finishupcharge=1.05
+ set,#Room3Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room3legsetcount=[#Room3legsetcount+1]
+ }
+
+ Do,(#RoomNum = 4):1
+ {
+ Set,#Room4Material = <#UnitMaterialnameok>
+ Set,#Room4DoorDrawerType= <#extraunittext2>
+ Set,#Room4DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room4DoorDrawerFinishingType<>"*Teak*")&(#Room4DoorDrawerFinishingType<>"*Ash*"):#Room4finishupcharge=1.00:#Room4finishupcharge=1.05
+ set,#Room4Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room4legsetcount=[#Room4legsetcount+1]
+ }
+
+ Do,(#RoomNum = 5):1
+ {
+ Set,#Room5Material = <#UnitMaterialnameok>
+ Set,#Room5DoorDrawerType= <#extraunittext2>
+ Set,#Room5DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room5DoorDrawerFinishingType<>"*Teak*")&(#Room5DoorDrawerFinishingType<>"*Ash*"):#Room5finishupcharge=1.00:#Room5finishupcharge=1.05
+ set,#Room5Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room5legsetcount=[#Room5legsetcount+1]
+ }
+
+ Do,(#RoomNum = 6):1
+ {
+ Set,#Room6Material = <#UnitMaterialnameok>
+ Set,#Room6DoorDrawerType= <#extraunittext2>
+ Set,#Room6DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room6DoorDrawerFinishingType<>"*Teak*")&(#Room6DoorDrawerFinishingType<>"*Ash*"):#Room6finishupcharge=1.00:#Room6finishupcharge=1.05
+ set,#Room6Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room6legsetcount=[#Room6legsetcount+1]
+ }
+
+ Do,(#RoomNum = 7):1
+ {
+ Set,#Room7Material = <#UnitMaterialnameok>
+ Set,#Room7DoorDrawerType= <#extraunittext2>
+ Set,#Room7DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room7DoorDrawerFinishingType<>"*Teak*")&(#Room7DoorDrawerFinishingType<>"*Ash*"):#Room7finishupcharge=1.00:#Room7finishupcharge=1.05
+ set,#Room7Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room7legsetcount=[#Room7legsetcount+1]
+ }
+
+ Do,(#RoomNum = 8):1
+ {
+ Set,#Room8Material = <#UnitMaterialnameok>
+ Set,#Room8DoorDrawerType= <#extraunittext2>
+ Set,#Room8DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room8DoorDrawerFinishingType<>"*Teak*")&(#Room8DoorDrawerFinishingType<>"*Ash*"):#Room8finishupcharge=1.00:#Room8finishupcharge=1.05
+ set,#Room8Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room8legsetcount=[#Room8legsetcount+1]
+ }
+
+ Do,(#RoomNum = 9):1
+ {
+ Set,#Room9Material = <#UnitMaterialnameok>
+ Set,#Room9DoorDrawerType= <#extraunittext2>
+ Set,#Room9DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room9DoorDrawerFinishingType<>"*Teak*")&(#Room9DoorDrawerFinishingType<>"*Ash*"):#Room9finishupcharge=1.00:#Room9finishupcharge=1.05
+ set,#Room9Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room9legsetcount=[#Room9legsetcount+1]
+ }
+
+ Do,(#RoomNum = 10):1
+ {
+ Set,#Room10Material = <#UnitMaterialnameok>
+ Set,#Room10DoorDrawerType= <#extraunittext2>
+ Set,#Room10DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room10DoorDrawerFinishingType<>"*Teak*")&(#Room10DoorDrawerFinishingType<>"*Ash*"):#Room10finishupcharge=1.00:#Room10finishupcharge=1.05
+ set,#Room10Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room10legsetcount=[#Room10legsetcount+1]
+ }
+
+ Do,(#RoomNum = 11):1
+ {
+ Set,#Room11Material = <#UnitMaterialnameok>
+ Set,#Room11DoorDrawerType= <#extraunittext2>
+ Set,#Room11DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room11DoorDrawerFinishingType<>"*Teak*")&(#Room11DoorDrawerFinishingType<>"*Ash*"):#Room11finishupcharge=1.00:#Room11finishupcharge=1.05
+ set,#Room11Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room11legsetcount=[#Room11legsetcount+1]
+ }
+
+ Do,(#RoomNum = 12):1
+ {
+ Set,#Room12Material = <#UnitMaterialnameok>
+ Set,#Room12DoorDrawerType= <#extraunittext2>
+ Set,#Room12DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room12DoorDrawerFinishingType<>"*Teak*")&(#Room12DoorDrawerFinishingType<>"*Ash*"):#Room12finishupcharge=1.00:#Room12finishupcharge=1.05
+ set,#Room12Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room12legsetcount=[#Room12legsetcount+1]
+ }
+
+ Do,(#RoomNum = 13):1
+ {
+ Set,#Room13Material = <#UnitMaterialnameok>
+ Set,#Room13DoorDrawerType= <#extraunittext2>
+ Set,#Room13DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room13DoorDrawerFinishingType<>"*Teak*")&(#Room13DoorDrawerFinishingType<>"*Ash*"):#Room13finishupcharge=1.00:#Room13finishupcharge=1.05
+ set,#Room13Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room13legsetcount=[#Room13legsetcount+1]
+ }
+
+ Do,(#RoomNum = 14):1
+ {
+ Set,#Room14Material = <#UnitMaterialnameok>
+ Set,#Room14DoorDrawerType= <#extraunittext2>
+ Set,#Room14DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room14DoorDrawerFinishingType<>"*Teak*")&(#Room14DoorDrawerFinishingType<>"*Ash*"):#Room14finishupcharge=1.00:#Room14finishupcharge=1.05
+ set,#Room14Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room14legsetcount=[#Room14legsetcount+1]
+ }
+
+ Do,(#RoomNum = 15):1
+ {
+ Set,#Room15Material = <#UnitMaterialnameok>
+ Set,#Room15DoorDrawerType= <#extraunittext2>
+ Set,#Room15DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room15DoorDrawerFinishingType<>"*Teak*")&(#Room15DoorDrawerFinishingType<>"*Ash*"):#Room15finishupcharge=1.00:#Room15finishupcharge=1.05
+ set,#Room15Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room15legsetcount=[#Room15legsetcount+1]
+ }
+
+ Do,(#RoomNum = 16):1
+ {
+ Set,#Room16Material = <#UnitMaterialnameok>
+ Set,#Room16DoorDrawerType= <#extraunittext2>
+ Set,#Room16DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room16DoorDrawerFinishingType<>"*Teak*")&(#Room16DoorDrawerFinishingType<>"*Ash*"):#Room16finishupcharge=1.00:#Room16finishupcharge=1.05
+ set,#Room16Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room16legsetcount=[#Room16legsetcount+1]
+ }
+
+ Do,(#RoomNum = 17):1
+ {
+ Set,#Room17Material = <#UnitMaterialnameok>
+ Set,#Room17DoorDrawerType= <#extraunittext2>
+ Set,#Room17DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room17DoorDrawerFinishingType<>"*Teak*")&(#Room17DoorDrawerFinishingType<>"*Ash*"):#Room17finishupcharge=1.00:#Room17finishupcharge=1.05
+ set,#Room17Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room17legsetcount=[#Room17legsetcount+1]
+ }
+
+ Do,(#RoomNum = 18):1
+ {
+ Set,#Room18Material = <#UnitMaterialnameok>
+ Set,#Room18DoorDrawerType= <#extraunittext2>
+ Set,#Room18DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room18DoorDrawerFinishingType<>"*Teak*")&(#Room18DoorDrawerFinishingType<>"*Ash*"):#Room18finishupcharge=1.00:#Room18finishupcharge=1.05
+ set,#Room18Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room18legsetcount=[#Room18legsetcount+1]
+ }
+
+ Do,(#RoomNum = 19):1
+ {
+ Set,#Room19Material = <#UnitMaterialnameok>
+ Set,#Room19DoorDrawerType= <#extraunittext2>
+ Set,#Room19DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room19DoorDrawerFinishingType<>"*Teak*")&(#Room19DoorDrawerFinishingType<>"*Ash*"):#Room19finishupcharge=1.00:#Room19finishupcharge=1.05
+ set,#Room19Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room19legsetcount=[#Room19legsetcount+1]
+ }
+
+ Do,(#RoomNum = 20):1
+ {
+ Set,#Room20Material = <#UnitMaterialnameok>
+ Set,#Room20DoorDrawerType= <#extraunittext2>
+ Set,#Room20DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room20DoorDrawerFinishingType<>"*Teak*")&(#Room20DoorDrawerFinishingType<>"*Ash*"):#Room20finishupcharge=1.00:#Room20finishupcharge=1.05
+ set,#Room20Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room20legsetcount=[#Room20legsetcount+1]
+ }
+
+ Do,(#RoomNum = 21):1
+ {
+ Set,#Room21Material = <#UnitMaterialnameok>
+ Set,#Room21DoorDrawerType= <#extraunittext2>
+ Set,#Room21DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room21DoorDrawerFinishingType<>"*Teak*")&(#Room21DoorDrawerFinishingType<>"*Ash*"):#Room21finishupcharge=1.00:#Room21finishupcharge=1.05
+ set,#Room21Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room21legsetcount=[#Room21legsetcount+1]
+ }
+
+ Do,(#RoomNum = 22):1
+ {
+ Set,#Room22Material = <#UnitMaterialnameok>
+ Set,#Room22DoorDrawerType= <#extraunittext2>
+ Set,#Room22DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room22DoorDrawerFinishingType<>"*Teak*")&(#Room22DoorDrawerFinishingType<>"*Ash*"):#Room22finishupcharge=1.00:#Room22finishupcharge=1.05
+ set,#Room22Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room22legsetcount=[#Room22legsetcount+1]
+ }
+
+ Do,(#RoomNum = 23):1
+ {
+ Set,#Room23Material = <#UnitMaterialnameok>
+ Set,#Room23DoorDrawerType= <#extraunittext2>
+ Set,#Room23DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room23DoorDrawerFinishingType<>"*Teak*")&(#Room23DoorDrawerFinishingType<>"*Ash*"):#Room23finishupcharge=1.00:#Room23finishupcharge=1.05
+ set,#Room23Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room23legsetcount=[#Room23legsetcount+1]
+ }
+
+ Do,(#RoomNum = 24):1
+ {
+ Set,#Room24Material = <#UnitMaterialnameok>
+ Set,#Room24DoorDrawerType= <#extraunittext2>
+ Set,#Room24DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room24DoorDrawerFinishingType<>"*Teak*")&(#Room24DoorDrawerFinishingType<>"*Ash*"):#Room24finishupcharge=1.00:#Room24finishupcharge=1.05
+ set,#Room24Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room24legsetcount=[#Room24legsetcount+1]
+ }
+
+ Do,(#RoomNum = 25):1
+ {
+ Set,#Room25Material = <#UnitMaterialnameok>
+ Set,#Room25DoorDrawerType= <#extraunittext2>
+ Set,#Room25DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+ Set, (#Room25DoorDrawerFinishingType<>"*Teak*")&(#Room25DoorDrawerFinishingType<>"*Ash*"):#Room25finishupcharge=1.00:#Room25finishupcharge=1.05
+ set,#Room25Legcolor=<#legPN>
+ ,set,(#haslegs="Yes"): #Room25legsetcount=[#Room25legsetcount+1]
+ }
+
+}
+

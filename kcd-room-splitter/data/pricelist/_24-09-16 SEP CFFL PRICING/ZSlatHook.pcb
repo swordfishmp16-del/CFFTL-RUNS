@@ -1,0 +1,10 @@
+
+Set,(#UnitFileName="slathook.cab"):#NumOfHooks=1
+Set,(#UnitFileName="slathook2.cab"):#NumOfHooks=2
+Set,(#UnitFileName="slathook3.cab"):#NumOfHooks=3
+Set,(#UnitFileName="slathook4.cab"):#NumOfHooks=4
+
+,************ ALL SLAT HOOKS ***********
+Price, 1,    RM#Roomnum #SlatHookName - QTY #NumOfHooks,       #CostOfSlatHook*#NumOfHooks*#universalupcharge,           W, h,          #TopShelfPrintOrderNumber,        
+,*****************************************
+

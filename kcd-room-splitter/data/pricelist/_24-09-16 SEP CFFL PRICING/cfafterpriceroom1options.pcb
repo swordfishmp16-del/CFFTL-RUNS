@@ -1,0 +1,40 @@
+
+,afterprice for each room options Room1
+set, #frontlip=0
+set, #Eurofrontlip=0
+set, #Cchannel1=0
+set, #Cchannel2=0
+set, #dogear=0
+set, #ledroutedFpanel=0
+set, #ledroutedHpanel=0
+set, #ledroutedTeuro=0
+set, #ledroutedMeuro=0
+set, #ledroutedLMeuro=0
+set, #ledroutedadj=0
+set, #adjtoeuro=0
+set, #alladjtoeuro=0
+set, #adjtothick=0
+set,#AddCutToFitopt=0
+
+set,(opt=1)|(opt=2)|(opt=3)|(opt=4)|(opt=5)|(opt=6)|(opt=7)|(opt=8)|(opt=9)|(opt=10):#room1hasoptions=1
+set,(opt=11)|(opt=12)|(opt=13)|(opt=14)|(opt=15)|(opt=16)|(opt=17)|(opt=18)|(opt=19)|(opt=20):#room1hasoptions=1
+set,(opt=21)|(opt=22)|(opt=23)|(opt=24)|(opt=25)|(opt=26)|(opt=27)|(opt=28)|(opt=29)|(opt=30):#room1hasoptions=1
+set,(opt=31)|(opt=32)|(opt=33)|(opt=34)|(opt=35)|(opt=36)|(opt=37)|(opt=38)|(opt=39)|(opt=40):#room1hasoptions=1
+set,(opt=41)|(opt=42)|(opt=43)|(opt=44)|(opt=45)|(opt=46)|(opt=47)|(opt=48)|(opt=49)|(opt=50):#room1hasoptions=1
+set,(opt=51)|(opt=52)|(opt=53)|(opt=54)|(opt=55)|(opt=56)|(opt=57)|(opt=58)|(opt=59)|(opt=60):#room1hasoptions=1
+set,(opt=61)|(opt=62)|(opt=63)|(opt=64)|(opt=65)|(opt=66)|(opt=67)|(opt=68)|(opt=69)|(opt=70):#room1hasoptions=1
+set,(opt=71)|(opt=72)|(opt=73)|(opt=74)|(opt=75)|(opt=76)|(opt=77)|(opt=78)|(opt=79)|(opt=80):#room1hasoptions=1
+set,(opt=81)|(opt=82)|(opt=83)|(opt=84)|(opt=85)|(opt=86)|(opt=87)|(opt=88)|(opt=89)|(opt=90):#room1hasoptions=1
+set,(opt=91)|(opt=92)|(opt=93)|(opt=94)|(opt=95)|(opt=96)|(opt=97)|(opt=98)|(opt=99)|(opt=100):#room1hasoptions=1
+set,(opt=101)|(opt=102)|(opt=103)|(opt=104)|(opt=105)|(opt=106)|(opt=107)|(opt=108)|(opt=109)|(opt=110):#room1hasoptions=1
+set,(opt=111)|(opt=112)|(opt=113)|(opt=114)|(opt=115)|(opt=116)|(opt=117)|(opt=118)|(opt=119)|(opt=120):#room1hasoptions=1
+set,(opt=121)|(opt=122)|(opt=123)|(opt=124)|(opt=125)|(opt=126)|(opt=127)|(opt=128)|(opt=129)|(opt=130):#room1hasoptions=1
+set,(opt=131)|(opt=132)|(opt=133)|(opt=134)|(opt=135)|(opt=136)|(opt=137)|(opt=138)|(opt=139)|(opt=140):#room1hasoptions=1
+set,(opt=141)|(opt=142)|(opt=143)|(opt=144)|(opt=145)|(opt=146)|(opt=147)|(opt=148)|(opt=149)|(opt=150):#room1hasoptions=1
+set,(opt=151)|(opt=152)|(opt=153)|(opt=154)|(opt=155)|(opt=156)|(opt=157)|(opt=158)|(opt=159)|(opt=160):#room1hasoptions=1
+set,(opt=161)|(opt=162)|(opt=163)|(opt=164)|(opt=165)|(opt=166)|(opt=167)|(opt=168)|(opt=169)|(opt=170):#room1hasoptions=1
+set,(opt=171)|(opt=172)|(opt=173)|(opt=174)|(opt=175)|(opt=176)|(opt=177)|(opt=178)|(opt=179)|(opt=180):#room1hasoptions=1
+set,(opt=181)|(opt=182)|(opt=183)|(opt=184)|(opt=185)|(opt=186)|(opt=187)|(opt=188)|(opt=189)|(opt=190):#room1hasoptions=1
+set,(opt=191)|(opt=192)|(opt=193)|(opt=194)|(opt=195)|(opt=196)|(opt=197)|(opt=198)|(opt=199)|(opt=200):#room1hasoptions=1
+set,(opt=201)|(opt=202)|(opt=203)|(opt=204)|(opt=205)|(opt=206)|(opt=207)|(opt=208)|(opt=209)|(opt=210):#room1hasoptions=1
+

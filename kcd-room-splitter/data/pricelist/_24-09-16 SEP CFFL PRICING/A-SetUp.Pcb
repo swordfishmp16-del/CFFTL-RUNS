@@ -1,0 +1,1616 @@
+,Use Grid
+Use IN ,This Price List Works In INCHES. If a number does Not end in "mm" or "in" it is in inches (DO NOT CHANGE THIS LINE)
+Use Translate On ,   Lets KCDw use (19mm) or (0.75in) in price lists. KCDw will adjust the numbers properly
+
+
+
+load, setroomvariabledefaults.pcb
+,Set,#PriceDrawerFronts=yes
+Set,#DrawerboxMultiplierCost1=0
+Set,#DrawerboxMultiplierCost2=0
+Set,#DrawerboxMultiplierCost3=0
+Set,#DrawerboxMultiplierCost4=0
+Set,#DrawerboxMultiplierCost5=0
+Set,#DrawerBoxCostMultiplier=0
+Set,#laundry=0
+Set,#donttrackdepth=0
+Set,#IncludeInsert=0
+Set,#Mirrorback=0
+Set,#Endpanel=0
+Set,#adjshelfcount=0
+Set,#use2ndmaterial=0
+Set, #justapanelL=0
+Set, #justapanelR=0
+set, #wallbeddepthtrack=0
+set, #backheight=0
+set, #ThisshelfTH=0
+set, #Toestopcount=0
+set, #Hasshoeshelves=0
+set, #noreturnbase=0
+set, #frontlip=0
+set, #Eurofrontlip=0
+set, #Cchannel1=0
+set, #Cchannel2=0
+set, #dogear=0
+set, #ledroutedFpanel=0
+set, #ledroutedHpanel=0
+set, #ledroutedTeuro=0
+set, #ledroutedMeuro=0
+set, #ledroutedLMeuro=0
+set, #ledroutedadj=0
+set, #adjtoeuro=0
+set, #adjtothick=0
+set, #waterfallcounter=0
+set, #stdrodcnt=0
+Set, #continuoustopshelf=0
+
+load, aa-initializeroomsetting.PCB
+load, aa-initializeOK.pcb
+
+load, cfsetupoptionsroom1.pcb
+load, cfsetupoptionsroom2.pcb
+load, cfsetupoptionsroom3.pcb
+load, cfsetupoptionsroom4.pcb
+load, cfsetupoptionsroom5.pcb
+load, cfsetupoptionsroom6.pcb
+load, cfsetupoptionsroom7.pcb
+load, cfsetupoptionsroom8.pcb
+load, cfsetupoptionsroom9.pcb
+load, cfsetupoptionsroom10.pcb
+load, cfsetupoptionsroom11.pcb
+load, cfsetupoptionsroom12.pcb
+load, cfsetupoptionsroom13.pcb
+load, cfsetupoptionsroom14.pcb
+load, cfsetupoptionsroom15.pcb
+load, cfsetupoptionsroom16.pcb
+load, cfsetupoptionsroom17.pcb
+load, cfsetupoptionsroom18.pcb
+load, cfsetupoptionsroom19.pcb
+load, cfsetupoptionsroom20.pcb
+load, cfsetupoptionsroom21.pcb
+load, cfsetupoptionsroom22.pcb
+load, cfsetupoptionsroom23.pcb
+load, cfsetupoptionsroom24.pcb
+load, cfsetupoptionsroom25.pcb
+
+
+Set,#TotalDrawerAMT=0
+Set,#DrawerAMT=0
+Set,#BackTypeCostGroup=0
+Set,#KickBaseLengthsub=0
+Set,#KickBaseLengthTotal=0
+Set,#KickBaseTotCost=0
+Set,#KickBaseCost=0
+
+Set,Room1notchdepth=0
+Set,#Room1notchheight=0
+Set,Room2notchdepth=0
+Set,#Room2notchheight=0
+Set,Room4notchdepth=0
+Set,#Room4notchheight=0
+Set,Room5notchdepth=0
+Set,#Room5notchheight=0
+Set,Room6notchdepth=0
+Set,#Room6notchheight=0
+Set,Room7notchdepth=0
+Set,#Room7notchheight=0
+
+Set,#CustomerTierName=Extra
+Set,#CustomTier="None"
+Set,#DiscountName=Extra
+Set,#DiscountName1=None
+Set,#DiscountName2=None
+Set,#DiscountName3=None
+Set,#DiscountName4=None
+Set,#DiscountName5=None
+
+Set,#MarkupTier=0
+Set,#MarkupTier1=0
+Set,#MarkupTier2=0
+Set,#MarkupTier3=0
+Set,#MarkupTier4=0
+Set,#MarkupTier5=0
+Set,#JobDiscount=0
+
+Set,#FeeName=Exra
+Set,#FeeCost=0
+
+
+Set,#BackTypeCostGroup=0
+Set,#KickBaseLengthsub=0
+Set,#KickBaseLengthTotal=0
+Set,#KickBaseTotCost=0
+Set,#KickBaseCost=0
+Set,#FlutedPilasterStyleCostGroup=0
+Set,#DoorDrawerFinishingCostGroup=0
+Set,#DoorDrawerInsertCostGroup=0
+
+
+
+Set,#BoardBaseLengthSub=0
+Set,#BoardBaseLengthTotal=0
+
+Set,#boardBaseCostSub=0
+Set,#boardBaseTotCost=0
+Set,#HanKnobHardware=0
+Set,#UnitDoorHandleCost=0
+set,#RooM1Hingeprice=0
+set,#RooM2Hingeprice=0
+set,#RooM3Hingeprice=0
+set,#RooM4Hingeprice=0
+set,#RooM5Hingeprice=0
+set,#RooM6Hingeprice=0
+set,#RooM7Hingeprice=0
+set,#RooM8Hingeprice=0
+set,#RooM9Hingeprice=0
+set,#RooM10Hingeprice=0
+set,#RooM11Hingeprice=0
+set,#RooM12Hingeprice=0
+set,#RooM13Hingeprice=0
+set,#RooM14Hingeprice=0
+set,#RooM15Hingeprice=0
+set,#RooM16Hingeprice=0
+set,#RooM17Hingeprice=0
+set,#RooM18Hingeprice=0
+set,#RooM19Hingeprice=0
+set,#RooM20Hingeprice=0
+set,#RooM21Hingeprice=0
+set,#RooM22Hingeprice=0
+set,#RooM23Hingeprice=0
+set,#RooM24Hingeprice=0
+set,#RooM25Hingeprice=0
+
+Set,#UnitDoorHingeCost=0
+Set,#TotalDoorHingeCost=0
+Set,#Doorhingecost=0
+Set,#singlehandlecost=0
+Set,#singlehingecost=0
+
+
+Set,#Room1CounterTopCosttot=0
+Set,#Room2CounterTopCosttot=0
+Set,#Room3CounterTopCosttot=0
+Set,#Room4CounterTopCosttot=0
+Set,#Room5CounterTopCosttot=0
+Set,#Room6CounterTopCosttot=0
+Set,#Room7CounterTopCosttot=0
+Set,#Room8CounterTopCosttot=0
+Set,#Room9CounterTopCosttot=0
+Set,#Room10CounterTopCosttot=0
+Set,#Room11CounterTopCosttot=0
+Set,#Room12CounterTopCosttot=0
+Set,#Room13CounterTopCosttot=0
+Set,#Room14CounterTopCosttot=0
+Set,#Room15CounterTopCosttot=0
+Set,#Room16CounterTopCosttot=0
+Set,#Room17CounterTopCosttot=0
+Set,#Room18CounterTopCosttot=0
+Set,#Room19CounterTopCosttot=0
+Set,#Room20CounterTopCosttot=0
+Set,#Room21CounterTopCosttot=0
+Set,#Room22CounterTopCosttot=0
+Set,#Room23CounterTopCosttot=0
+Set,#Room24CounterTopCosttot=0
+Set,#Room25CounterTopCosttot=0
+
+
+Set,#Room1Counthingetot=0
+Set,#Room2Counthingetot=0
+Set,#Room3Counthingetot=0
+Set,#Room4Counthingetot=0
+Set,#Room5Counthingetot=0
+Set,#Room6Counthingetot=0
+Set,#Room7Counthingetot=0
+Set,#Room8Counthingetot=0
+Set,#Room9Counthingetot=0
+Set,#Room10Counthingetot=0
+Set,#Room11Counthingetot=0
+Set,#Room12Counthingetot=0
+Set,#Room13Counthingetot=0
+Set,#Room14Counthingetot=0
+Set,#Room15Counthingetot=0
+Set,#Room16Counthingetot=0
+Set,#Room17Counthingetot=0
+Set,#Room18Counthingetot=0
+Set,#Room19Counthingetot=0
+Set,#Room20Counthingetot=0
+Set,#Room21Counthingetot=0
+Set,#Room22Counthingetot=0
+Set,#Room23Counthingetot=0
+Set,#Room24Counthingetot=0
+Set,#Room25Counthingetot=0
+
+Set,#Room1Counthandletot=0
+Set,#Room2Counthandletot=0
+Set,#Room3Counthandletot=0
+Set,#Room4Counthandletot=0
+Set,#Room5Counthandletot=0
+Set,#Room6Counthandletot=0
+Set,#Room7Counthandletot=0
+Set,#Room8Counthandletot=0
+Set,#Room9Counthandletot=0
+Set,#Room10Counthandletot=0
+Set,#Room11Counthandletot=0
+Set,#Room12Counthandletot=0
+Set,#Room13Counthandletot=0
+Set,#Room14Counthandletot=0
+Set,#Room15Counthandletot=0
+Set,#Room16Counthandletot=0
+Set,#Room17Counthandletot=0
+Set,#Room18Counthandletot=0
+Set,#Room19Counthandletot=0
+Set,#Room20Counthandletot=0
+Set,#Room21Counthandletot=0
+Set,#Room22Counthandletot=0
+Set,#Room23Counthandletot=0
+Set,#Room24Counthandletot=0
+Set,#Room25Counthandletot=0
+
+Set,#Room1Countknobtot=0
+Set,#Room2Countknobtot=0
+Set,#Room3Countknobtot=0
+Set,#Room4Countknobtot=0
+Set,#Room5Countknobtot=0
+Set,#Room6Countknobtot=0
+Set,#Room7Countknobtot=0
+Set,#Room8Countknobtot=0
+Set,#Room9Countknobtot=0
+Set,#Room10Countknobtot=0
+Set,#Room11Countknobtot=0
+Set,#Room12Countknobtot=0
+Set,#Room13Countknobtot=0
+Set,#Room14Countknobtot=0
+Set,#Room15Countknobtot=0
+Set,#Room16Countknobtot=0
+Set,#Room17Countknobtot=0
+Set,#Room18Countknobtot=0
+Set,#Room19Countknobtot=0
+Set,#Room20Countknobtot=0
+Set,#Room21Countknobtot=0
+Set,#Room22Countknobtot=0
+Set,#Room23Countknobtot=0
+Set,#Room24Countknobtot=0
+Set,#Room25Countknobtot=0
+
+Set,#Room1Counthandle=0
+Set,#Room2Counthandle=0
+Set,#Room3Counthandle=0
+Set,#Room4Counthandle=0
+Set,#Room5Counthandle=0
+Set,#Room6Counthandle=0
+Set,#Room7Counthandle=0
+Set,#Room8Counthandle=0
+Set,#Room9Counthandle=0
+Set,#Room10Counthandle=0
+Set,#Room11Counthandle=0
+Set,#Room12Counthandle=0
+Set,#Room13Counthandle=0
+Set,#Room14Counthandle=0
+Set,#Room15Counthandle=0
+Set,#Room16Counthandle=0
+Set,#Room17Counthandle=0
+Set,#Room18Counthandle=0
+Set,#Room19Counthandle=0
+Set,#Room20Counthandle=0
+Set,#Room21Counthandle=0
+Set,#Room22Counthandle=0
+Set,#Room23Counthandle=0
+Set,#Room24Counthandle=0
+Set,#Room25Counthandle=0
+
+Set,#Room1Countknob=0
+Set,#Room2Countknob=0
+Set,#Room3Countknob=0
+Set,#Room4Countknob=0
+Set,#Room5Countknob=0
+Set,#Room6Countknob=0
+Set,#Room7Countknob=0
+Set,#Room8Countknob=0
+Set,#Room9Countknob=0
+Set,#Room10Countknob=0
+Set,#Room11Countknob=0
+Set,#Room12Countknob=0
+Set,#Room13Countknob=0
+Set,#Room14Countknob=0
+Set,#Room15Countknob=0
+Set,#Room16Countknob=0
+Set,#Room17Countknob=0
+Set,#Room18Countknob=0
+Set,#Room19Countknob=0
+Set,#Room20Countknob=0
+Set,#Room21Countknob=0
+Set,#Room22Countknob=0
+Set,#Room23Countknob=0
+Set,#Room24Countknob=0
+Set,#Room25Countknob=0
+
+Set,#DoorKnobRM1Handleprice=0
+Set,#DoorKnobRM2Handleprice=0
+Set,#DoorKnobRM3Handleprice=0
+Set,#DoorKnobRM4Handleprice=0
+Set,#DoorKnobRM5Handleprice=0
+Set,#DoorKnobRM6Handleprice=0
+Set,#DoorKnobRM7Handleprice=0
+Set,#DoorKnobRM8Handleprice=0
+Set,#DoorKnobRM9Handleprice=0
+Set,#DoorKnobRM10Handleprice=0
+Set,#DoorKnobRM11Handleprice=0
+Set,#DoorKnobRM12Handleprice=0
+Set,#DoorKnobRM13Handleprice=0
+Set,#DoorKnobRM14Handleprice=0
+Set,#DoorKnobRM15Handleprice=0
+Set,#DoorKnobRM16Handleprice=0
+Set,#DoorKnobRM17Handleprice=0
+Set,#DoorKnobRM18Handleprice=0
+Set,#DoorKnobRM19Handleprice=0
+Set,#DoorKnobRM20Handleprice=0
+Set,#DoorKnobRM21Handleprice=0
+Set,#DoorKnobRM22Handleprice=0
+Set,#DoorKnobRM23Handleprice=0
+Set,#DoorKnobRM24Handleprice=0
+Set,#DoorKnobRM25Handleprice=0
+
+
+
+
+,Not needed below set through unit info
+,,*************************************************************  MATERIAL **************************************************************************
+,,**
+,Change below after = Set cabinet material type
+,DisplaySet,#Material =White Melamine,      Material used in this Price List
+Set,#Material =White Melamine,      Material used in this Price List
+,**
+
+,Below lines put the word display in front to view in the grid
+,Markup is only reflected in the room by room report***SEE H-Discounts and Fees.PCB
+,Set,#DesignerMarkup=00, Markup - will only be refleted in the room by room report answer 01 for 1 percent
+,Below will send the pricing information to a csv file 
+Set,#TurnOnSendTOFile=Yes, Do you want to create a csv file with the job name every time you run the pricing? [Yes;No]
+,Set,#DestinationPath=C:\KCDw, Path for csv file that will be created
+Set,#CSVName=#JobExportName, Name for default csv report
+,Below will send just the room subtotals to a csv file - the name of this file will be the name of the job + RBR
+,Set,#TurnOnRBRSendTOFile=No, Do you want to create a csv file with the job name + RBR every time you run the pricing? [Yes;No]
+,Set,#DestinationPath=C:\KCDw, Path for room by room csv file that will be created
+,Set,#RBRName=#JobExportName + RBR, File Name for the room by room csv file
+,Below is the variable that contains all the information that will be sent to the csv file
+,Set,#StuffForCSV =#UnitNumber#Comma#Number#Comma#Name#Comma#Cost#Comma#Length#Comma#Width#Comma#Depth#Comma#Material#Comma#WallName#Comma#RoomName#Comma#RoomNum
+Set,#StuffForCSV =#RoomName#Comma#WallNumber#comma#Number#Comma#Name#Comma#Material#Comma#Length#Comma#Width#Comma#Depth#Comma#Cost
+
+,Erase,#DestinationPath\#CSVName.csv
+,Erase,#DestinationPath\#RBRName.csv
+
+
+Set,#SectionDivisor=[36in]
+Set,#LinealDivisor=[12in]
+Set,#SquareDivisor=[144in]
+Set,#CubicDivisor=[1728in]
+
+Set,#SectionFactor=/#SectionDivisor
+Set,#LinealFactor=/#LinealDivisor
+Set,#SquareFactor=/#SquareDivisor
+Set,#CubicFactor=/#CubicDivisor
+
+,Set in User file hidden for that reason
+,,***************************************************  DOOR HARDWARE COST Door Hardware Set in a-user file *****************************************************************
+,**
+,Door Hardware Set in a-user file
+,DisplaySet, #HandleCost$ =#UnitDoorHandleCost,          1.   Cost added to each Door for Handles.
+,DisplaySet, #KnobCost$ =#UnitDoorHandleCost,          2.   Cost added to each Door for Knobs.
+,DisplaySet, #HingeCost$ =0,          3.   Cost added to each Door for Hinges.
+Set, #HandleCost$ =#UnitDoorHandleCost,          1.   Cost added to each Door for Handles.
+Set, #KnobCost$ =#UnitDoorHandleCost,          2.   Cost added to each Door for Knobs.
+Set, #HingeCost$ =0,          3.   Cost added to each Door for Hinges.
+
+
+
+
+,**
+
+,**************************************** SIDE - SHELF PRICE METHOD *********************************************
+,**
+
+
+DisplaySet, #SideCostMethod =List, Q...     PRICING METHOD FOR VERTICAL SIDES - (By Square Foot)  or  (From Size Look Up List)  [SqFt;List]
+,**          * Click on ''B-Side Cost.Pcb'' in Quick Load to set details
+,**
+
+,Set all Costs for Sides
+,Load, B-Side Cost.Pcb
+
+
+DisplaySet, #ShelfCostMethod =List, Q...     PRICING METHOD FOR HORIZONTAL SHELVES - (By Square Foot)  or  (From Size Look Up List)  [SqFt;List]
+,**          * Click on ''C-Shelf Cost.Pcb'' in Quick Load to set details
+,**
+
+,Set all Costs for Sides
+,Load, C-Shelf Cost.Pcb
+DisplaySet, #2ndthickdelimiter=none, Q------How do you label your thicker material? (thicker than .75in and less that 2 piece double thick  Use this in your PLT) Use None if not used.
+,**
+
+
+,**************************************** DRAWER FRONT METHOD *********************************************
+,**
+
+,DisplaySet, #DoorCostMethod =List, Q...     PRICING METHOD FOR DOORS & DRAWER FRONTS - (By Square Foot)  or  (From Size Look Up List)  [SqFt;List]
+DisplaySet, #PriceDrawerFronts =Yes,Q...     Price Drawer Fronts like Doors = Yes     OR     Include Drawer Fronts with Drawer Box cost = No  [Yes;No]
+,**          * Click on ''D-Door Cost.Pcb'' in Quick Load to set details
+
+,**
+
+,Update V8.0 start
+,**
+,**************************************** CUBBY METHOD *********************************************
+,**
+
+DisplaySet, #CubbyCostMethod =Pieces, Q...     PRICING METHOD FOR CUBBY HOLES    (per hole)    OR    (set cost)   OR   (per each piece needed to make unit)  [Hole;Cost;Pieces]
+Do,(#CubbyCostMethod="Hole"):1
+{
+DisplaySet,#CostOfCubbyUnit =100.00,    Cost per Each Cubby Hole 
+}
+
+Do,(#CubbyCostMethod="Cost"):1
+{
+DisplaySet,#CostOfCubbyUnit =100.00,    Cost of Cubby Hole Unit
+}
+Do,(#CubbyCostMethod="Pieces"):1
+{
+Set,#CostOfCubbyUnit =0.00,    Cost of Each Cubby Hole Unit
+Displayset, #panelorshelfcubby=Shelves, Q...Do you build Vertical panels with horizontal dividers, or Horizontal shelves with vertical dividers? [Panels;Shelves]
+,**
+Displayset, #verticalpricechoice=Fixed Cost,  Q... Do you price vertical pieces as panels or a fixed cost? [Panel;Fixed Cost]
+Do, (#verticalpricechoice="Fixed Cost"):1
+{
+Displayset, #CostofcubbyVunit=34, What is the cost of the vertical cubby?
+Displayset, #MaxcubbyVheight=16IN, What is the max height of the vertical cubby?
+Displayset, #MaxCubbyVdepth=16IN, What is the max depth of the vertical cubby?
+Displayset, #oversizeVcubbycharge=2, What is the cost multiplier for oversize vertical cubby?
+}
+,**
+Displayset, #horizontalpricechoice=Shelf,  Q... Do you price Horizontal pieces as shelves or a fixed cost? [Shelf;Fixed Cost]
+Do, (#horizontalpricechoice="Fixed Cost"):1
+{
+Displayset, #CostofcubbyHunit=15, What is the cost of the horizontal cubby?
+Displayset, #MaxCubbyHWidth=16IN, What is the max width of the horizontal cubby?
+Displayset, #MaxCubbyHdepth=16IN, What is the max depth of the horizontal cubby?
+Displayset, #oversizeHcubbycharge=2, What is the cost multiplier for oversize horizontal cubby?
+}
+}
+,Update V8.0 end
+
+
+
+
+
+,,*************************************************** OTHER PRICES *****************************************************************
+,,**
+
+
+
+DisplaySet, #ShowOtherPrices =Yes, Q...     Show Other Prices [Yes;No]
+
+Do, (#ShowOtherPrices ="Yes")|(#DisplayEdit):1
+{
+   
+   ,**     *****   Set Other Prices  -  By Cost Each  -  By Length Cost  -  By Area Cost
+   DisplaySet,#CostBackPerSqFtTemp =#BackTypeCostGroup,          1.1      Cost of Back Material per Square Foot
+   Set, #CostBackPerSqFt = (#CostBackPerSqFtTemp)
+   
+   ,DisplaySet,#CostMirrorBackPerSqFt =35,          1.2      Cost of Mirror Back Material per Square Foot
+   **V7.2.4 
+   ,Set,#CostKickPerFtTemp =#BaseCostPerUnitSection,          1.3      Cost of Kick per piece
+   ,Set, #CostKickPerFt = (#CostKickPerFtTemp)
+   **V7.2.4
+   DisplaySet,#CostSpannerPerFtTemp =0,          1.4      Cost of Spanner Material per Lineal Foot
+   Set, #CostSpannerPerFt = (#CostSpannerPerFtTemp/#LinealDivisor)
+   
+   DisplaySet,#WireShelfCostTemp =20,          1.5      Cost of Wire Shelves per Lineal Foot
+   Set,#WireShelfCost = (#WireShelfCostTemp/#LinealDivisor)
+   
+   ,DisplaySet,#CostOfClosetPoleTemp =7.00 ,          1.5      Cost of Each Closet Pole per Lineal Foot
+   ,Set,#CostOfClosetPole = (#CostOfClosetPoleTemp/#LinealDivisor)
+   
+   DisplaySet,#WireSupportCost =0.00,          1.6      Cost of Each Wire Shelf Support
+   DisplaySet,#CostOfStdBeltRack =55,          1.7.0      Cost of Each Standard Belt Rack
+      ,DisplaySet,#CostOfU1BeltRack =75,          1.7.1      Cost of Each Upgrade 1 Belt Rack
+      ,DisplaySet,#CostOfU2BeltRack =85,          1.7.2      Cost of Each Upgrade 2 Belt Rack
+   DisplaySet,#CostOfStdTieRack =55,          1.8.0      Cost of Each Standard Tie Rack
+     ,DisplaySet,#CostOfU1TieRack =75,          1.8.1      Cost of Each Upgrade 1 Tie Rack
+     ,DisplaySet,#CostOfU2TieRack =85,          1.8.2      Cost of Each Upgrade 2 Tie Rack
+   DisplaySet,#CostOfStdValetRod =55,          1.9.0      Cost of Each Standard Valet Rod
+     ,DisplaySet,#CostOfU1ValetRod =75,          1.9.1      Cost of Each Upgrade 1 Valet Rod
+     ,DisplaySet,#CostOfU2ValetRod =85,          1.9.2      Cost of Each Upgrade 2 Valet Rod
+   DisplaySet,#CostOfScarfRack =55,          1.10      Cost of Each Scarf Rod
+   DisplaySet,#CostOfDoubleHook =20,          1.11      Cost of Each Double Hook
+   DisplaySet,#CostOfTriplePullDown =255,          1.12      Cost of Each Triple Pull Down Rod
+   DisplaySet,#CostOfDetailBaseTemp =175,          1.13    Cost of Base Board per Section foot
+   Set,#CostofBase=(#CostofDetailBaseTemp/#SectionDivisor)
+   DisplaySet,#CostOfLegLevelers =40,          1.14    Cost of Section Leg Leveler
+   DisplaySet,#CostOfFiller =17*#MaterialCostGroup,          1.15    Cost of Each Filler
+   DisplaySet,#CostPerSqFttemp =8.00,          1.16    Cost for Other Material per Square Foot (ex. top panel end see cost formulas below for more ex)
+   Set,#CostPerSqFt = (#CostPerSqFttemp/#SquareDivisor)
+   DisplaySet,#CostOfFlutedPilaster =#FlutedPilasterStyleCostGroup,          1.17    Cost of Each Fluted Pilaster
+
+   ,closets doesn't have a half wall
+   Set,#CostOfHalfWall =100,              Cost of Each Half Wall
+   DisplaySet,#Rosette =60,          1.18    Cost of Each Rosette
+   DisplaySet,#CostSlatWallPerSqFtTemp =15,          1.19      Cost of Slat Wall Material per Square Foot
+   ,Set, #CostSlatWallPerSqFt = (#CostSlatWallPerSqFtTemp/#SquareDivisor)
+   Set, #CostSlatWallPerSqFt = #CostSlatWallPerSqFtTemp
+   DisplaySet,#CostOfSlatHook =0,          1.20    Cost of Each Slat Hook
+   ,DisplaySet,#CostofStemWareHolder18=100,         1.21.1    Cost of 18" Stem Ware Holder
+   ,DisplaySet,#CostofStemWareHolder30=150,         1.21.2    Cost of 30" Stem Ware Holder
+   ,DisplaySet,#CostofStemWareHolder36=175,         1.21.3    Cost of 36" Stem Ware Holder
+   DisplaySet,#CostofWineHolder=300,         1.22    Cost of Wine Holder
+   DisplaySet,#14glasscost=55,         1.23.1    Cost 1/4" Thick glass shelf
+   DisplaySet,#38glasscost=55,         1.23.2    Cost 3/8" Thick glass shelf
+   DisplaySet,#12glasscost=100,         1.23.3    Cost 1/2" Thick glass shelf
+   DisplaySet,#glassbevelperinch=3,         1.23.4    Cost glass bevel per inch
+   DisplaySet,#melcorbelcost=100,         1.24.1    Cost Melamine CF corbel
+   DisplaySet,#MDFcorbelcost=100,         1.24.2    Cost MDF CF corbel
+   DisplaySet,#veneercorbelcost=250,         1.24.3    Cost Veneer CF corbel
+   ,Update V8.0 start 
+  , Displayset,#Dogearpanelcost=30,        1.25.1    Cost to dogear cut a panel
+  , Displayset,#FinaldogearDepth=304.8MM, 1.25.2----- Depth of Top piece when dog ear top clip option activated?
+   Displayset,#Baseboardnotchcharge=25,   1.25.3      Charge to notch back of panels over room baseboard.
+    Displayset, #Notchforroombasename=Notch for Room #Roomnum Baseboard, 1.25.3.1      Name for notch back of panel over room baseboard.
+    Displayset, #Notchforroombasecost=15,1.25.3.2      Cost for notch back of panel over room baseboard.
+    Displayset,#Hutchpanelcharge=50,      1.25.4      Upcharge for hutch panel cuts.
+    Displayset, #hutchchargename=Hutch Panel Upcharge, 1.25.5 Name for Hutch Fee
+  , Displayset,#FullLEDPanelStripcost=0, 1.26.1 Cost of Full Panel Routed LED Strip
+  , Displayset,#HalfLEDPanelStripcost=0, 1.26.2 Cost of Half Panel Routed LED Strip
+  , Displayset,#LEDShelfStripcost=0, 1.26.3 Cost of Shelf Routed LED Strip
+,Update V8.0 end
+   Displayset,#CostofSwivelmirror=550, 1.27 Cost of Pull-out Swival Mirror
+}
+,**********************************************************************
+
+
+,**
+,**
+,**
+
+DisplaySet, #ShowCostFormulas =Yes, Q...     Show Cost Formulas [Yes;No]
+
+Do, (#ShowCostFormulas ="Yes")|(#DisplayEdit):1
+{
+   
+   ,**     *****   Cost Formulas  (Example:    Line 2.15     "W * H * #CostBackPerSqFt"      Multiplies a backs Width times its Height times its Cost per Sq Ft)
+   DisplaySet,#CostOfBack =((#ShelfWidth*#backheight)/144)*#CostBackPerSqFt,          2.1      Cost Formula for a Back
+ **V7.2.4   
+,Set,#CostOfKick =#CostKickPerFt,          2.2      Cost Formula for a Kick Board
+**V7.2.4    
+   DisplaySet,#CostOfTopSpanner =(W-LS-RS)  * #CostSpannerPerFt*#MaterialCostGroup,          2.3      Cost Formula for a Horizontal Top Spanner
+   DisplaySet,#CostOfMiddleSpanner =(W-LS-RS)  * #CostSpannerPerFt*#MaterialCostGroup,          2.4      Cost Formula for a Horizontal Middle Spanner
+   ,below isn't set anywhere
+   ,Set,#CostOfDivider =H * D * #CostPerSqFt,          2.5      Cost Formula for an internal Divider
+   DisplaySet,#CostOfTopPanel =D * H * #CostPerSqFt*#MaterialCostGroup,          2.5      Cost Formula for a Top Panel End (Other Material)
+   DisplaySet,#CostOfTopBPanel =W * H * #CostPerSqFt*#MaterialCostGroup,          2.6      Cost Formula for a Top Back Panel (Other Material)
+   DisplaySet,#CostOfBasePanel =D * H * #CostPerSqFt*#MaterialCostGroup,          2.7      Cost Formula for a Base Panel End (Other Material)
+   DisplaySet,#CostOfBaseBPanel =W * H * #CostPerSqFt*#MaterialCostGroup,          2.8      Cost Formula for a Base Back Panel (Other Material)
+   DisplaySet,#CostOfTallPanel =D * H * #CostPerSqFt*#MaterialCostGroup,          2.9    Cost Formula for a Tall Panel End (Other Material)
+   DisplaySet,#CostOfTallBPanel =W * H * #CostPerSqFt*#MaterialCostGroup,          2.10    Cost Formula for a Tall Back Panel (Other Material)
+   DisplaySet,#CostOfWireShelf =W * #WireShelfCost,          2.11    Cost Formula for a Wire Shelf
+   DisplaySet,#CostOfWireSupport =#WireSupportCost,          2.12    Cost Formula for a Wire Shelf Support
+   ,below is set in the c-shelf-cost file
+   ,Set,#CostOfShoeShelf =(W-LS-RS)* D * #CostPerSqFt,          2.14    Cost Formula for a Shoe Shelf
+   DisplaySet,#CostOfCShelfSupport =W * D * #CostPerSqFt,          2.13    Cost Formula for a Corner Shelf Support (Other Material)
+   ,DisplaySet,#ClosetPoleCost =W * #CostOfClosetPole,          2.14    Cost Formula for a Closet Pole
+   DisplaySet,#CostOfShelfSupport =#Cleatlength/12 *5,          2.15    Cost Formula for a Straight Ledger Shelf Support (Other Material)
+   DisplaySet,#CostofDetailBase=(W * #CostofBase) + (bbl * #CostOfBase * d) + (bbr * #CostOfBase * d),         2.16   Cost Formula for Arched Base Board
+   DisplaySet,#CostofSlatWall=((W * H)/144) * #CostSlatWallPerSqFt),         2.17   Cost Formula for Slat Wall
+}
+,**********************************************************************
+
+
+
+,**
+,**
+,**
+
+,display line below at a later date
+Set, #UsePartNames =Yes, Use Part Names = Yes Or Part Codes = No [Yes;No]
+DisplaySet, #ShowPartNames =Yes, Q...     Show Part Names [Yes;No]
+
+Do, (#ShowPartNames ="Yes")|(#DisplayEdit):1
+{
+   ,**     *****   PART NAMES   *****  Set the Name that you want to use for each of the parts below
+   DisplaySet,#LeftSideName =Left Panel - #UnitMaterialName,          3.10    Name of a Left Side
+   DisplaySet,#RightSideName =Right Panel - #UnitMaterialName,          3.11    Name of a Right Side
+   DisplaySet,#TopShelfName =Top Euro Shelf  - #UnitMaterialName,          3.12    Name of a Top Shelf
+   DisplaySet,#MiddleShelfName =Middle Euro Shelf - #UnitMaterialName,          3.13    Name of a Middle Shelf
+   DisplaySet,#BottomShelfName =Bottom Euro Shelf - #UnitMaterialName,          3.14    Name of a Bottom Shelf
+   DisplaySet,#AdjustableShelfName =Adj Shelf - #UnitMaterialName,          3.15    Name of an Adjustable Shelf
+   DisplaySet,#BackName =Back-#BackType,          3.16    Name of a Back
+   DisplaySet,#KickName =Kick #Basetype ,          3.17    Name of a Kick Board
+   DisplaySet,#TopSpannerName =TopSpanner ,          3.18    Name of a Horizontal Top Spanner or Stretcher (Base Cabs - between drawers)
+   DisplaySet,#MiddleSpannerName =MidSpanner ,          3.19    Name of a Horizontal Middle Spanner or Stretcher (Base Cabs - between drawers)
+   DisplaySet,#DividerName =Divider - #UnitMaterialName,          3.20    Name of an internal Divider
+   DisplaySet,#TopPanelName =Upper End Panel,          3.21    Name of a Top Panel End
+   DisplaySet,#BasePanelName =Base End Panel,          3.22    Name of a Base Panel End
+   DisplaySet,#TallPanelName =Tall End Panel,          3.23    Name of a Tall Panel End
+   DisplaySet,#BackPanelName =Back End Panel,          3.24    Name of a Back Panel
+   DisplaySet,#DrawerBoxName =Drawer Box ,          3.25    Name of a Drawer Box
+   DisplaySet,#BasketName =Basket ,          3.26    Name of a Basket
+   DisplaySet,#PulloutName =Pullout ,          3.27    Name of a Pullout
+   DisplaySet,#ClosetPoleName =Closet Rod #ClosetRodType,          3.28    Name of a Closet Pole
+   DisplaySet,#WireShelfName =Wire Shelf ,          3.29    Name of a Wire Shelf
+   DisplaySet,#WireSupportName =Wire Support ,          3.30    Name of a Wire Shelf Support
+   DisplaySet,#ShoeShelfName =Shoe Shelf  #UnitMaterialName - #ShoeFenceType,          3.31    Name of a Shoe Shelf
+   DisplaySet,#ShelfSupportName =Cleat,          3.32    Name of a Shelf Support
+   DisplaySet,#BeltRackName =Belt Rack - #Belttype ,          3.33    Name of a Belt Rack
+   DisplaySet,#TieRackName =Tie Rack - #Tietype ,          3.34    Name of a Tie Rack
+   DisplaySet,#ValetRodName =Valet Rod - #VRodType,          3.35    Name of a Valet Rod
+   DisplaySet,#ScarfRodName =Scarf Rod ,          3.36    Name of a Scarf Rod
+   DisplaySet,#DoubleHookName=Double Hook CHR,          3.37    Name of a Double Hook
+   DisplaySet,#TriplePullDownName=Pull Down Rod,          3.38    Name of a Triple Pull Down Rod
+   DisplaySet,#DetailBaseName =Arched Base,          3.39    Name of a Detailed Base
+   DisplaySet,#LegLevelersName =Leg Levelers ,          3.40    Name of a Leg Leveler
+   DisplaySet,#FillerName =Filler ,          3.41    Name of a Filler
+   DisplaySet,#CubbyVertName =Cubby Hole Vertical ,          3.42    Name of a Cubby Hole Vertical
+   DisplaySet,#CubbyHorzName =Cubby Hole Horizontal ,          3.43    Name of a Cubby Hole Horizontal
+   DisplaySet,#CounterTopName =Counter Top Unit,          3.44    Name of a Counter Top Unit
+   DisplaySet,#FlutedPilasterName =Fluted Pilaster,          3.45    Name of Fluted Pilaster Unit
+   Set,#HalfWallName =Half Wall,          3.46     Name of Half Wall Unit
+   DisplaySet,#CubbyHoleName=Cubby Hole,          3.47     Name of Cubby Hole Unit
+   DisplaySet,#SlatWallName=Slat Wall-Color-,          3.48     Name of Slat Wall
+   DisplaySet,#SlatHookName=Slat Hook,          3.49     Name of Slat Hook
+
+
+}
+,**********************************************************************
+
+
+,**
+,**
+
+
+,**     *****    Full Depth Shelves or Spanners   *****
+DisplaySet,#FullTops =Yes,          4.1     Base Cabinets have Full Tops = Yes  or  Spanners = No [Yes;No]
+
+Do, (#FullTops = "No")|(#DisplayEdit):1
+{
+   DisplaySet,#SpannerWidth =4 ,          4.2     Width of Base Cabinet Horizontal Spanner
+}
+
+DisplaySet,#FullShelf =Yes,          4.3     Base cabinets have Full Depth Fixed Shelves Between Drawers = Yes Or Spanners = No [Yes;No]
+
+Do, (#FullShelf = "No")|(#DisplayEdit):1
+{
+   DisplaySet,#SpannerMidWidth =4,          4.4     Width of mid spanners
+   
+}
+
+,** 
+DisplaySet,#Use3rdBack=Yes,          4.5     Do you need a 3rd side in your L shaped and 45 corner units? [Yes;No]
+
+Do,(#Use3rdBack="Yes")|(#DisplayEdit):1
+{
+
+,V7.2.1 Update - copy start here replace the "Name of 3rd Side" line in franchise A-Set-up.pcb
+Do,(#Use3rdBack="Yes")|(#DisplayEdit):1
+{
+
+DisplaySet,#BackSideName =3rd Panel- #UnitMaterialName,               4.51  Name for 3rd Side
+Displayset,#3rdbacktype=Parallel Panel Depth,               4.52 What Depth 3rd side to you use? [Full;Parallel Panel Depth;Fixed Depth]
+  Do,(#3rdbacktype="Fixed Depth"):1
+  {
+  Displayset, #fixeddepth3rdpanel=8,               4.53 What is the set 3rd panel Depth?  
+  }                         
+}
+,V7.2.1 Update - copy start here
+}
+,**********************************************************************
+
+
+
+,**
+,**
+,**
+
+
+
+DisplaySet, #ShowPrintOrder =Yes, Q...     Show Printing Order [Yes;No]
+
+Do,(#ShowPrintOrder = Yes)|(#DisplayEdit):1
+{
+   ,**     *****   PRINTING ORDER   *****   This is the order that parts will print out - Smallest Number Prints First
+   DisplaySet,#LeftSidePrintOrderNumber =10 ,          5.10    Printing Order number for a Left Side
+   DisplaySet,#RightSidePrintOrderNumber =15,          5.11    Printing Order number for a Right Side
+   DisplaySet,#TopShelfPrintOrderNumber =20 ,          5.12    Printing Order number for a Top Shelf
+   DisplaySet,#MiddleShelfPrintOrderNumber =20 ,          5.13    Printing Order number for a Middle Shelf
+   DisplaySet,#BottomShelfPrintOrderNumber =20 ,          5.14    Printing Order number for a Bottom Shelf
+   DisplaySet,#AdjustableShelfPrintOrderNumber =30 ,          5.15    Printing Order number for an Adjustable Shelf
+   DisplaySet,#BackPrintOrderNumber =40 ,          5.16    Printing Order number for a Back
+   DisplaySet,#KickPrintOrderNumber =50 ,          5.17    Printing Order number for a Kick Board
+   DisplaySet,#TopSpannerPrintOrderNumber =55 ,          5.18    Printing Order number for a Horizontal Top Spanner or Stretcher
+   DisplaySet,#MiddleSpannerPrintOrderNumber =55 ,          5.19    Printing Order number for a Horizontal Middle Spanner or Stretcher
+   DisplaySet,#DividerPrintOrderNumber =60 ,          5.20    Printing Order number for an internal Divider
+   DisplaySet,#DoorPrintOrderNumber =100 ,          5.21    Printing Order number for a Door
+   DisplaySet,#DrawerFrontPrintOrderNumber =110 ,          5.22    Printing Order number for a Drawer Front
+   DisplaySet,#TopPanelPrintOrderNumber =120 ,          5.23    Printing Order number for a Top Panel End
+   DisplaySet,#BasePanelPrintOrderNumber =121 ,          5.24    Printing Order number for a Base Panel End
+   DisplaySet,#TallPanelPrintOrderNumber =122 ,          5.25    Printing Order number for a Tall Panel End
+   DisplaySet,#DrawerBoxPrintOrderNumber =150 ,          5.26    Printing Order number for a Drawer Box
+   DisplaySet,#BasketPrintOrderNumber =160 ,          5.27    Printing Order number for a Basket
+   DisplaySet,#PulloutPrintOrderNumber =170 ,          5.28    Printing Order number for a Pullout
+   DisplaySet,#ClosetPolePrintOrderNumber =190 ,          5.29    Printing Order number for a Closet Pole
+   DisplaySet,#WireShelfPrintOrderNumber =200 ,          5.30    Printing Order number for a Wire Shelf
+   DisplaySet,#WireSupportPrintOrderNumber =205 ,          5.32    Printing Order number for a Wire Shelf Support
+   DisplaySet,#ShoeShelfPrintOrderNumber =210 ,          5.33    Printing Order number for a Shoe Shelf
+   DisplaySet,#ShelfSupportPrintOrderNumber =210 ,          5.34    Printing Order number for a Shelf Support
+   DisplaySet,#BeltRackPrintOrderNumber =225,          5.35    Printing Order number for a Belt Rack
+   DisplaySet,#TieRackPrintOrderNumber =225,          5.36    Printing Order number for a Tie Rack
+   DisplaySet,#ValetRodPrintOrderNumber =225 ,          5.37    Printing Order number for a Valet Rod
+   DisplaySet,#DetailBasePrintOrderNumber =235 ,          5.38    Printing Order number for a Detailed Base
+   DisplaySet,#LegLevelersPrintOrderNumber =240 ,          5.39    Printing Order number for a Leg Leveler
+   DisplaySet,#FillerPrintOrderNumber =245 ,          5.40    Printing Order number for a Filler
+   DisplaySet,#CubbyUnitPrintOrderNumber =250 ,          5.41    Printing Order number for a Cubby Hole Unit
+   DisplaySet,#CounterTopPrintOrderNumber =255 ,          5.42    Printing Order number for a Counter Top Unit
+   DisplaySet,#FlutedPilasterPrintOrderNumber =260,          5.43     Printing Order number for a Fluted Pilaster
+   Displayset,#CallforQuotePrintOrderNumber =261, 5.44     Printing Order number for Unpriced custom items
+   DisplaySet,#HalfWallPrintOrderNumber =265,          5.45     Printing Order number for a Half Wall
+   DisplaySet,#OSPrintOrderNumber =265,          5.46     Printing Order number for Osborne or Adams Library Items
+}
+,**********************************************************************
+
+
+
+,**
+,display these later
+, Miscellaneous Section
+
+Set,#UseDoorCode=No,          6.01     Use Door Codes = Yes Or Door Memo = No [Yes;No]
+
+
+
+,**
+,**
+
+
+,TAKE NOTICE: YOUR DOOR COST IS SET SEPERATLEY IN YOUR DOORCOST.PCB FILE
+
+,Change below after = Set cabinet material type
+,Set,#Material = White Melamine
+
+,Percentage more or less on Material Cost (1 = no increase) 1.10 = 10 percent increase
+Set,#percent=1
+
+
+,                         ######  HARDWARE ######
+
+,Set,#Subtotal1Name =  Handles , --------------- Name
+,Set,#Subtotal1Cost =  [#HandleCount * #HandleCost] , ------- Cost per/handle
+
+,Set,#Subtotal2Name =  Knobs , ----------------- Name
+,Set,#Subtotal2Cost =  [#KnobCount * #KnobCost] , --------- Cost per/knob
+
+,Set,#Subtotal3Name =  Hinges , ---------------- Name
+,Set,#Subtotal3Cost =  [#HingeCount * #HingeCost] , -------- Cost per/hinge
+
+
+,***
+,*** Fees and discounts 
+load, S-Shelf Thicknesses.pcb
+load, H-Discounts and Fees.pcb
+,***
+Load, I-Designer Markup.pcb
+,DisplaySet,#IncludeMolding =1 , ---------------     1=Yes 0=No Include Molding?
+,DisplaySet,#moldingscale=inch, How would you like to price out the molding? [8 foot;inch;foot;metric]
+,DisplaySET,#moldingfudge=0   , waste factor in dollars for molding
+
+
+,ATTETION DO NOT CHANGE BELOW
+,MEMO Initialize subtotals
+Set,  #Subtotal11Cost11=0
+,Full Backsplash
+Set,  #Subtotal12Cost12=0
+,Tile Backsplash
+Set,  #Subtotal13Cost13=0
+
+
+set,#TotalDrawerCost=0
+set,#UnitDrawerCost=0
+
+set,#TotalDrawerNum=0
+Set,#UnitDrawerNum=0
+
+Set, #Cabtotalstd$ = 0
+Set, #Cabtotal=0
+Set, #TotalDoorNum = 0
+Set, #TotalDoorArea = 0
+Set, #UnitDrawerFrtCost = 0
+
+Set, #TotalDoorCost = 0
+Set, #TotalDrawerCost = 0
+Set, #TotalDrawerNum = 0
+Set, #TotalPulloutCost = 0
+Set, #TotalPulloutNum = 0
+Set, #TotalDrawerGuideCost = 0
+Set, #TotalDrawerGuideNum = 0
+Set, #TotalPulloutGuideCost = 0
+Set, #TotalPulloutGuideNum = 0
+set, #TotalSpDrawerCost=0
+set, #TotalSpDrawerNum=0
+Set, #TotalNumDrawerSlides = 0
+Set, #TotalNumPulloutSlides = 0
+set, #TotalWineRackCost=0
+set, #TotalWineRackNum=0
+set, #TotalCabCost=0
+Set, #TotalArchCost = 0
+Set, #TotalArchNum = 0
+set,#TotalFininsideCost=0
+Set, #TotalLaborCost = 0
+Set, #TotalOptionCost = 0
+set, #UnitHangPoleLength=0
+
+Set, #TotalFluteCost = 0
+Set, #TotalFluteNum = 0
+Set, #TotalRosetteNum = 0
+Set, #TotalTurningCost = 0
+Set, #TotalTurningNum = 0
+Set, #TotalHangPoleCost = 0
+Set, #TotalHangPoleLength = 0
+Set, #TotalHangPoleNum = 0
+set, #TotalInstallationCost=0
+Set, #TotalCubbyCost = 0
+Set, #TotalCubbyNum = 0
+set,#TotalBasketNum=0
+set,#TotalBasketCost=0
+set,#TotalPlasticBinNum=0
+set,#TotalPlasticBinCost=0
+set,#TotalWireShelfCost=0
+set,#TotalWireShelfNum=0
+set,#TotalWireShelfLength=0
+set,#TotalWireShelfSquare=0
+set,#TotalWSSCost=0
+set,#TotalWSSNum=0
+set,#TotalFinishedSideCost=0
+set,#TotalShelfCost=0
+set,#TotalShoeShelfCost=0
+set,#TotalFFCost=0
+set,#TotalFFArea=0
+set,#TotalClosetAccCost=0
+
+set,#linealtotal=0
+set,#squaretotal=0
+set,#cubictotal=0
+set,#NumofUnits=0
+
+set,#WallLinealTotal=0
+set,#WallSquareTotal=0
+set,#WallCubicTotal=0
+set,#WallNumofUnits=0
+
+set,#BaseLinealTotal=0
+set,#BaseSquareTotal=0
+set,#BaseCubicTotal=0
+set,#BaseNumofUnits=0
+
+set,#TallLinealTotal=0
+set,#TallSquareTotal=0
+set,#TallCubicTotal=0
+set,#TallNumofUnits=0
+
+set,#OtherLinealTotal=0
+set,#OtherSquareTotal=0
+set,#OtherCubicTotal=0
+set,#OtherNumofUnits=0
+
+set,#PanelLinealTotal=0
+set,#PanelSquareTotal=0
+set,#PanelCubicTotal=0
+set,#PanelNumofUnits=0
+
+set,#WallPanelLinealTotal=0
+set,#WallPanelSquareTotal=0
+set,#WallPanelCubicTotal=0
+set,#WallPanelNumofUnits=0
+
+set,#BasePanelLinealTotal=0
+set,#BasePanelSquareTotal=0
+set,#BasePanelCubicTotal=0
+set,#BasePanelNumofUnits=0
+
+set,#TallPanelLinealTotal=0
+set,#TallPanelSquareTotal=0
+set,#TallPanelCubicTotal=0
+set,#TallPanelNumofUnits=0
+
+set,#AllPanelLinealTotal=0
+set,#AllPanelSquareTotal=0
+set,#AllPanelCubicTotal=0
+set,#AllPanelNumofUnits=0
+
+set,#AllLinealTotal=0
+set,#AllSquareTotal=0
+set,#AllCubicTotal=0
+set,#AllNumofUnits=0
+
+set,#AllClosetLinealTotal=0
+set,#AllClosetSquareTotal=0
+set,#AllClosetCubicTotal=0
+set,#AllClosetNumofUnits=0
+
+set,#ClosetWallHangLinealTotal=0
+set,#ClosetWallHangSquareTotal=0
+set,#ClosetWallHangCubicTotal=0
+set,#ClosetWallHangNumofUnits=0
+
+set,#ClosetShelfLinealTotal=0
+set,#ClosetShelfSquareTotal=0
+set,#ClosetShelfCubicTotal=0
+set,#ClosetShelfNumofUnits=0
+
+set,#ClosetFloorHangLinealTotal=0
+set,#ClosetFloorHangSquareTotal=0
+set,#ClosetFloorHangCubicTotal=0
+set,#ClosetFloorHangNumofUnits=0
+
+set,#ClosetPiecesLinealTotal=0
+set,#ClosetPiecesSquareTotal=0
+set,#ClosetPiecesCubicTotal=0
+set,#ClosetPiecesNumofUnits=0
+
+set,#ClosetBasketLinealTotal=0
+set,#ClosetBasketSquareTotal=0
+set,#ClosetBasketCubicTotal=0
+set,#ClosetBasketNumofUnits=0
+
+set,#ClosetUnitLinealTotal=0
+set,#ClosetUnitSquareTotal=0
+set,#ClosetUnitCubicTotal=0
+set,#ClosetUnitNumofUnits=0
+
+set,#AllCabClosetLinealTotal=0
+set,#AllCabClosetSquareTotal=0
+set,#AllCabClosetCubicTotal=0
+set,#AllCabClosetNumofUnits=0
+
+set,#UnitDoorCost=0
+set,#UnitDoorNum=0
+set,#UnitDoorArea=0
+
+set,#UnitDrawerCost=0
+set,#UnitDrawerNum=0
+set,#UnitPulloutCost=0
+set,#UnitPulloutNum=0
+
+set,#UnitHangPoleNum=0
+set,#UnitHangPoleCost=0
+set,#UnitHangPoleLength=0
+
+set,#UnitCubbyCost=0
+set,#UnitCubbyNum=0
+set,#UnitBasketNum=0
+set,#UnitBasketCost=0
+
+set,#UnitWireShelfNum=0
+set,#UnitWireShelfCost=0
+set,#UnitWireShelfLength=0
+set,#UnitWireShelfSquare=0
+set,#UnitWSSNum=0
+set,#UnitWSSCost=0
+
+set,#UnitShoeShelfCost=0
+
+set,#finishinside=0
+set,#dooronly=0
+
+
+Set, #FinL=+0
+Set, #FinR=+0
+Set, #PanelCost=0
+Set, #DwPan$=0
+Set, #RefPan$=0
+Set, #TrPan$=0
+Set, #SubTotalstd$ = 0
+Set, #SubTotalgrand = 0
+Set, #SubTotal = 0
+Set,  #NumOfUnits = 0
+Set, #LinealFt = 0
+set, #moldlength1=0
+set, #moldlength2=0
+set, #moldlength3=0
+set, #moldlength4=0
+set, #moldlength5=0
+set, #moldlength6=0
+set, #moldlength7=0
+set, #moldlength8=0
+set, #moldlength9=0
+set, #moldlength10=0
+set, #moldlength11=0
+set, #moldlength12=0
+set, #moldlength13=0
+set, #moldlength14=0
+set, #moldlength15=0
+set, #moldlength16=0
+set, #moldlength17=0
+set, #moldlength18=0
+set, #moldlength19=0
+set, #moldlength20=0
+set, #moldlength21=0
+set, #moldlength22=0
+set, #moldlength23=0
+set, #moldlength24=0
+set, #moldlength25=0
+set, #moldlength26=0
+set, #moldlength27=0
+set, #moldlength28=0
+set, #moldlength29=0
+set, #moldlength30=0
+set, #moldlength31=0
+set, #moldlength32=0
+set, #moldlength33=0
+set, #moldlength34=0
+set, #moldlength35=0
+set, #moldlength36=0
+set, #moldlength37=0
+set, #moldlength38=0
+set, #moldlength39=0
+set, #moldlength40=0
+set, #Bmoldlength1=0
+set, #Bmoldlength2=0
+set, #Bmoldlength3=0
+set, #Bmoldlength4=0
+set, #Bmoldlength5=0
+set, #Bmoldlength6=0
+set, #Bmoldlength7=0
+set, #Bmoldlength8=0
+set, #Bmoldlength9=0
+set, #Bmoldlength10=0
+set, #Bmoldlength11=0
+set, #Bmoldlength12=0
+set, #Bmoldlength13=0
+set, #Bmoldlength14=0
+set, #Bmoldlength15=0
+set, #Bmoldlength16=0
+set, #Bmoldlength17=0
+set, #Bmoldlength18=0
+set, #Bmoldlength19=0
+set, #Bmoldlength20=0
+
+
+
+
+set, #Radunit=0
+set,#Sub14Cost=0
+set,#Sub14Name=Extra
+set,#Sub15Cost=0
+set,#Sub15Name=Extra
+set,#Sub16Cost=0
+set,#Sub16Name=Extra
+set,#Sub17Cost=0
+set,#Sub17Name=Extra
+set,#Sub18Cost=0
+set,#Sub18Name=Extra
+
+set,#Sub24Cost=0
+set,#Sub24Name=Extra
+set,#Sub25Cost=0
+set,#Sub25Name=Extra
+set,#Sub26Cost=0
+set,#Sub26Name=Extra
+set,#Sub27Cost=0
+set,#Sub27Name=Extra
+set,#Sub28Cost=0
+set,#Sub28Name=Extra
+set,#FinishedsideCost=0
+
+Set,#Room1Subtotalstandardprice=0
+Set,#Room2Subtotalstandardprice=0
+
+Set,#Room1Subtotal=0
+Set,#Room2Subtotal=0
+Set,#Room3Subtotal=0
+Set,#Room4Subtotal=0
+Set,#Room5Subtotal=0
+Set,#Room6Subtotal=0
+Set,#Room7Subtotal=0
+Set,#Room8Subtotal=0
+Set,#Room9Subtotal=0
+Set,#Room10Subtotal=0
+Set,#Room11Subtotal=0
+Set,#Room12Subtotal=0
+Set,#Room13Subtotal=0
+Set,#Room14Subtotal=0
+Set,#Room15Subtotal=0
+Set,#Room16Subtotal=0
+Set,#Room17Subtotal=0
+Set,#Room18Subtotal=0
+Set,#Room19Subtotal=0
+Set,#Room20Subtotal=0
+Set,#Room21Subtotal=0
+Set,#Room22Subtotal=0
+Set,#Room23Subtotal=0
+Set,#Room24Subtotal=0
+Set,#Room25Subtotal=0
+
+Set,#Room1total=0
+Set,#Room2total=0
+Set,#Room3total=0
+Set,#Room4total=0
+Set,#Room5total=0
+Set,#Room6total=0
+Set,#Room7total=0
+Set,#Room8total=0
+Set,#Room9total=0
+Set,#Room10total=0
+Set,#Room11total=0
+Set,#Room12total=0
+Set,#Room13total=0
+Set,#Room14total=0
+Set,#Room15total=0
+Set,#Room16total=0
+Set,#Room17total=0
+Set,#Room18total=0
+Set,#Room19total=0
+Set,#Room20total=0
+Set,#Room21total=0
+Set,#Room22total=0
+Set,#Room23total=0
+Set,#Room24total=0
+Set,#Room25total=0
+,Set Item Costs by Size Increaments
+
+Set,#Room1DoorHandleCost = 0
+Set,#Room1DoorKnobCost = 0
+Set,#Room2DoorHandleCost = 0
+Set,#Room2DoorKnobCost = 0
+Set,#Room3DoorHandleCost = 0
+Set,#Room3DoorKnobCost = 0
+Set,#Room4DoorHandleCost = 0
+Set,#Room4DoorKnobCost = 0
+Set,#Room5DoorHandleCost = 0
+Set,#Room5DoorKnobCost = 0
+Set,#Room6DoorHandleCost = 0
+Set,#Room6DoorKnobCost = 0
+Set,#Room7DoorHandleCost = 0
+Set,#Room7DoorKnobCost = 0
+Set,#Room8DoorHandleCost = 0
+Set,#Room8DoorKnobCost = 0
+Set,#Room9DoorHandleCost = 0
+Set,#Room9DoorKnobCost = 0
+Set,#Room10DoorHandleCost = 0
+Set,#Room10DoorKnobCost = 0
+Set,#Room11DoorHandleCost = 0
+Set,#Room11DoorKnobCost = 0
+Set,#Room12DoorHandleCost = 0
+Set,#Room12DoorKnobCost = 0
+Set,#Room13DoorHandleCost = 0
+Set,#Room13DoorKnobCost = 0
+Set,#Room14DoorHandleCost = 0
+Set,#Room14DoorKnobCost = 0
+Set,#Room15DoorHandleCost = 0
+Set,#Room15DoorKnobCost = 0
+Set,#Room16DoorHandleCost = 0
+Set,#Room16DoorKnobCost = 0
+Set,#Room17DoorHandleCost = 0
+Set,#Room17DoorKnobCost = 0
+Set,#Room18DoorHandleCost = 0
+Set,#Room18DoorKnobCost = 0
+Set,#Room19DoorHandleCost = 0
+Set,#Room19DoorKnobCost = 0
+Set,#Room20DoorHandleCost = 0
+Set,#Room20DoorKnobCost = 0
+Set,#Room21DoorHandleCost = 0
+Set,#Room21DoorKnobCost = 0
+Set,#Room22DoorHandleCost = 0
+Set,#Room22DoorKnobCost = 0
+Set,#Room23DoorHandleCost = 0
+Set,#Room23DoorKnobCost = 0
+Set,#Room24DoorHandleCost = 0
+Set,#Room24DoorKnobCost = 0
+Set,#Room25DoorHandleCost = 0
+Set,#Room25DoorKnobCost = 0
+
+Set,#Room1DoorHingeCost =0
+Set,#Room2DoorHingeCost =0
+Set,#Room3DoorHingeCost =0
+Set,#Room4DoorHingeCost =0
+Set,#Room5DoorHingeCost =0
+Set,#Room6DoorHingeCost =0
+Set,#Room7DoorHingeCost =0
+Set,#Room8DoorHingeCost =0
+Set,#Room9DoorHingeCost =0
+Set,#Room10DoorHingeCost =0
+Set,#Room11DoorHingeCost =0
+Set,#Room12DoorHingeCost =0
+Set,#Room13DoorHingeCost =0
+Set,#Room14DoorHingeCost =0
+Set,#Room15DoorHingeCost =0
+Set,#Room16DoorHingeCost =0
+Set,#Room17DoorHingeCost =0
+Set,#Room18DoorHingeCost =0
+Set,#Room19DoorHingeCost =0
+Set,#Room20DoorHingeCost =0
+Set,#Room21DoorHingeCost =0
+Set,#Room22DoorHingeCost =0
+Set,#Room23DoorHingeCost =0
+Set,#Room24DoorHingeCost =0
+Set,#Room25DoorHingeCost =0
+
+Set,#Room1CTopCost =0
+Set,#Room2CTopCost =0
+Set,#Room3CTopCost =0
+Set,#Room4CTopCost =0
+Set,#Room5CTopCost =0
+Set,#Room6CTopCost =0
+Set,#Room7CTopCost =0
+Set,#Room8CTopCost =0
+Set,#Room9CTopCost =0
+Set,#Room10CTopCost =0
+Set,#Room11CTopCost =0
+Set,#Room12CTopCost =0
+Set,#Room13CTopCost =0
+Set,#Room14CTopCost =0
+Set,#Room15CTopCost =0
+Set,#Room16CTopCost =0
+Set,#Room17CTopCost =0
+Set,#Room18CTopCost =0
+Set,#Room19CTopCost =0
+Set,#Room20CTopCost =0
+Set,#Room21CTopCost =0
+Set,#Room22CTopCost =0
+Set,#Room23CTopCost =0
+Set,#Room24CTopCost =0
+Set,#Room25CTopCost =0
+
+Set,#UnitDoorHingeCount = 0
+Set,#UnitDoorHandleCount = 0
+Set,#UnitDoorKnobCount = 0
+Set,#UnitDoorHandleCost = 0
+Set,#UnitDoorKnobCost = 0
+Set,#TotalDoorHandleCount=0
+Set,#TotalDoorHingeCount=0
+Set,#TotalDoorKnobCount=0
+Set,#TotalDoorHandleCost=0
+Set,#TotalDoorHingeCost=0
+Set,#TotalDoorKnobCost=0
+
+
+Set, #UnitDoorCost = 0
+Set, #TotalDoorCost = 0
+Set, #TotalNumDoors = 0
+Set, #TotalNumDrawerFrts = 0
+Set, #UnitDrawerFrtCost = 0
+Set, #TotalDrawerCost = 0
+Set, #TotalNumDrawers = 0
+Set, #FinL=+0
+Set, #FinR=+0
+set, #closetnum=0
+set, #closetft=0
+Set, #Yes = 1
+Set, #Subtotal = 0
+
+Set, #CabinetSubtotal = 0
+Set, #TotalCost=0
+Set, #ClosetCost=0
+Set, #Ctopcost=0
+Set, #Ctopname=No Counter Tops
+
+Set, #CtopcostV=0
+Set, #CtopnameV=No Counter Tops
+
+Set, #Splash4Cost=0
+Set, #Splash4Name= 4" Backsplash
+
+Set, #SplashFCost=0
+Set, #SplashFName= Full Backsplash
+
+
+Set, #SplashTCost=0
+Set, #SplashTName= Tile Backsplash
+Set,#MySubtotal=0
+Set,#ZType=0
+Set,#Number=0
+,Set, #DoorW = 0
+,Set, #DoorH = 0
+load,aa-doormemo.pcb
+load,aa-doorcode.pcb
+load,aa-osborne.pcb
+load,aa-adams.pcb
+'MEMO this set the Full name for the STD doors
+Set, #ThisDoor=1
+Load, DoorMemo.pcb
+Set, #TopDoorName=<#MemoDoor>
+
+Set, #ThisDoor=2
+Load, DoorMemo.pcb
+Set, #BaseDoorName=<#MemoDoor>
+
+Set, #ThisDoor=3
+Load, DoorMemo.pcb
+Set, #DrawerName=<#MemoDoor>
+Set,#Closetsubtotal=0
+
+set, #MldLen = 0
+set, #MldCnt = 0
+
+set, #Mld1Len = 0
+set, #Mld1Cnt = 0
+set, #Mld1Cost = 0
+
+set, #Mld2Len = 0
+set, #Mld2Cnt = 0
+set, #Mld2Cost = 0
+
+set, #Mld3Len = 0
+set, #Mld3Cnt = 0
+set, #Mld3Cost = 0
+
+set, #Mld4Len = 0
+set, #Mld4Cnt = 0
+set, #Mld4Cost = 0
+
+set, #Mld5Len = 0
+set, #Mld5Cnt = 0
+set, #Mld5Cost = 0
+
+set, #Mld6Len = 0
+set, #Mld6Cnt = 0
+set, #Mld6Cost = 0
+
+set, #Mld7Len = 0
+set, #Mld7Cnt = 0
+set, #Mld7Cost = 0
+
+set, #Mld8Len = 0
+set, #Mld8Cnt = 0
+set, #Mld8Cost = 0
+
+set, #Mld9Len = 0
+set, #Mld9Cnt = 0
+set, #Mld9Cost = 0
+
+set, #Mld10Len = 0
+set, #Mld10Cnt = 0
+set, #Mld10Cost = 0
+
+set, #Mld11Len = 0
+set, #Mld11Cnt = 0
+set, #Mld11Cost = 0
+
+set, #Mld12Len = 0
+set, #Mld12Cnt = 0
+set, #Mld12Cost = 0
+
+set, #Mld13Len = 0
+set, #Mld13Cnt = 0
+set, #Mld13Cost = 0
+
+set, #Mld14Len = 0
+set, #Mld14Cnt = 0
+set, #Mld14Cost = 0
+
+set, #Mld15Len = 0
+set, #Mld15Cnt = 0
+set, #Mld15Cost = 0
+
+set, #Mld16Len = 0
+set, #Mld16Cnt = 0
+set, #Mld16Cost = 0
+
+set, #Mld17Len = 0
+set, #Mld17Cnt = 0
+set, #Mld17Cost = 0
+
+set, #Mld18Len = 0
+set, #Mld18Cnt = 0
+set, #Mld18Cost = 0
+
+set, #Mld19Len = 0
+set, #Mld19Cnt = 0
+set, #Mld19Cost = 0
+
+set, #Mld20Len = 0
+set, #Mld20Cnt = 0
+set, #Mld20Cost = 0
+
+set, #Mld21Len = 0
+set, #Mld21Cnt = 0
+set, #Mld21Cost = 0
+
+set, #Mld22Len = 0
+set, #Mld22Cnt = 0
+set, #Mld22Cost = 0
+
+set, #Mld23Len = 0
+set, #Mld23Cnt = 0
+set, #Mld23Cost = 0
+
+set, #Mld24Len = 0
+set, #Mld24Cnt = 0
+set, #Mld24Cost = 0
+
+set, #Mld25Len = 0
+set, #Mld25Cnt = 0
+set, #Mld25Cost = 0
+
+set, #Mld26Len = 0
+set, #Mld26Cnt = 0
+set, #Mld26Cost = 0
+
+set, #Mld27Len = 0
+set, #Mld27Cnt = 0
+set, #Mld27Cost = 0
+
+set, #Mld28Len = 0
+set, #Mld28Cnt = 0
+set, #Mld28Cost = 0
+
+set, #Mld29Len = 0
+set, #Mld29Cnt = 0
+set, #Mld29Cost = 0
+
+set, #Mld30Len = 0
+set, #Mld30Cnt = 0
+set, #Mld30Cost = 0
+
+set, #Mld31Len = 0
+set, #Mld31Cnt = 0
+set, #Mld31Cost = 0
+
+set, #Mld32Len = 0
+set, #Mld32Cnt = 0
+set, #Mld32Cost = 0
+
+set, #Mld33Len = 0
+set, #Mld33Cnt = 0
+set, #Mld33Cost = 0
+
+set, #Mld34Len = 0
+set, #Mld34Cnt = 0
+set, #Mld34Cost = 0
+
+set, #Mld35Len = 0
+set, #Mld35Cnt = 0
+set, #Mld35Cost = 0
+
+set, #Mld36Len = 0
+set, #Mld36Cnt = 0
+set, #Mld36Cost = 0
+
+set, #Mld37Len = 0
+set, #Mld37Cnt = 0
+set, #Mld37Cost = 0
+
+set, #Mld38Len = 0
+set, #Mld38Cnt = 0
+set, #Mld38Cost = 0
+
+set, #Mld39Len = 0
+set, #Mld39Cnt = 0
+set, #Mld39Cost = 0
+
+set, #Mld40Len = 0
+set, #Mld40Cnt = 0
+set, #Mld40Cost = 0
+
+
+
+set, #MoldingCost1=0
+set, #MoldingCost2=0
+set, #MoldingCost3=0
+set, #MoldingCost4=0
+set, #MoldingCost5=0
+set, #MoldingCost6=0
+set, #MoldingCost7=0
+set, #MoldingCost8=0
+set, #MoldingCost9=0
+set, #MoldingCost10=0
+set, #MoldingCost11=0
+set, #MoldingCost12=0
+set, #MoldingCost13=0
+set, #MoldingCost14=0
+set, #MoldingCost15=0
+set, #MoldingCost16=0
+set, #MoldingCost17=0
+set, #MoldingCost18=0
+set, #MoldingCost19=0
+set, #MoldingCost20=0
+set, #MoldingCost21=0
+set, #MoldingCost22=0
+set, #MoldingCost23=0
+set, #MoldingCost24=0
+set, #MoldingCost25=0
+set, #MoldingCost26=0
+set, #MoldingCost27=0
+set, #MoldingCost28=0
+set, #MoldingCost29=0
+set, #MoldingCost30=0
+set, #MoldingCost31=0
+set, #MoldingCost32=0
+set, #MoldingCost33=0
+set, #MoldingCost34=0
+set, #MoldingCost35=0
+set, #MoldingCost36=0
+set, #MoldingCost37=0
+set, #MoldingCost38=0
+set, #MoldingCost39=0
+set, #MoldingCost40=0
+
+set, #BMld0Len = 0
+set, #BMld1Len = 0
+set, #BMld2Len = 0
+set, #BMld3Len = 0
+set, #BMld4Len = 0
+set, #BMld5Len = 0
+set, #BMld6Len = 0
+set, #BMld7Len = 0
+set, #BMld8Len = 0
+set, #BMld9Len = 0
+set, #BMld10Len = 0
+set, #BMld11Len = 0
+set, #BMld12Len = 0
+set, #BMld13Len = 0
+set, #BMld14Len = 0
+set, #BMld15Len = 0
+set, #BMld16Len = 0
+set, #BMld17Len = 0
+set, #BMld18Len = 0
+set, #BMld19Len = 0
+set, #BMld20Len = 0
+
+
+set, #Room1MoldLength = 0
+set, #Room2MoldLength = 0
+set, #Room3MoldLength = 0
+set, #Room4MoldLength = 0
+set, #Room5MoldLength = 0
+set, #Room6MoldLength = 0
+set, #Room7MoldLength = 0
+set, #Room8MoldLength = 0
+set, #Room9MoldLength = 0
+set, #Room10MoldLength = 0
+set, #Room11MoldLength = 0
+set, #Room12MoldLength = 0
+set, #Room13MoldLength = 0
+set, #Room14MoldLength = 0
+set, #Room15MoldLength = 0
+set, #Room16MoldLength = 0
+set, #Room17MoldLength = 0
+set, #Room18MoldLength = 0
+set, #Room19MoldLength = 0
+set, #Room20MoldLength = 0
+set, #Room21MoldLength = 0
+set, #Room22MoldLength = 0
+set, #Room23MoldLength = 0
+set, #Room24MoldLength = 0
+set, #Room25MoldLength = 0
+
+set, #Room1BMoldLength = 0
+set, #Room2BMoldLength = 0
+set, #Room3BMoldLength = 0
+set, #Room4BMoldLength = 0
+set, #Room5BMoldLength = 0
+set, #Room6BMoldLength = 0
+set, #Room7BMoldLength = 0
+set, #Room8BMoldLength = 0
+set, #Room9BMoldLength = 0
+set, #Room10BMoldLength = 0
+set, #Room11BMoldLength = 0
+set, #Room12BMoldLength = 0
+set, #Room13BMoldLength = 0
+set, #Room14BMoldLength = 0
+set, #Room15BMoldLength = 0
+set, #Room16BMoldLength = 0
+set, #Room17BMoldLength = 0
+set, #Room18BMoldLength = 0
+set, #Room19BMoldLength = 0
+set, #Room20BMoldLength = 0
+set, #Room21BMoldLength = 0
+set, #Room22BMoldLength = 0
+set, #Room23BMoldLength = 0
+set, #Room24BMoldLength = 0
+set, #Room25BMoldLength = 0
+
+
+
+load, CSVVariables.pcb
+load, ESS-Hanger.pcb
+
+Load,AA-User.pcb
+
+
+
+

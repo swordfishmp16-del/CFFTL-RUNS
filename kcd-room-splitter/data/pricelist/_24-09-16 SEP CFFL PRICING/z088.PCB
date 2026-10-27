@@ -1,0 +1,22 @@
+
+,********** ALL LEG LEVELLERS ********
+
+Load, GB-Garagebasepricing.pcb
+Do,(#gbmethod=0):1
+{
+Set,#AddupTotalnumberofLegs=(Sh1+Sh2+Sh3+Sh4)
+
+
+Price, 1,    RM#Roomnum Leg Levelers-#LegLevelersName,             #CostOfLegLevelers*#AddupTotalnumberofLegs*#universalupcharge,             w, H,          #LegLevelersPrintOrderNumber, 
+}
+
+Do,(#gbmethod=1):1
+{
+set, #shelfwidth=W
+
+set, ((#shelfwidth/#gbsectionsize)-(#shelfwidth\#gbsectionsize)>0):#gbsectioncounttemp=(#shelfwidth\#gbsectionsize)+1:#gbsectioncounttemp=(#shelfwidth/#gbsectionsize)
+set, (#gbsectioncounttemp=0):#gbsectioncount=1:#gbsectioncount=#gbsectioncounttemp
+set, #gbsectioncountdisplay={#gbsectioncount}
+Price,  1,    RM#Roomnum Leg Leveler Set - #LegLevelersName QTY #gbsectioncountdisplay,             ((#CostOfLegLevelers)*(#GBsectioncount))*#universalupcharge,             w, H,          #LegLevelersPrintOrderNumber,
+}             
+,*************************************

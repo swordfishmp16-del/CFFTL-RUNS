@@ -1,0 +1,7 @@
+,CF Prices and counts the middle divider (panel) 
+Set, #Temppanelcount=1
+set, #donttrackdepth=1
+Load, B-Side Cost.Pcb
+load, Countpanels.pcb
+Price, (LE>0):1,   Blind Panel-#Unitmaterialname-#edgebandingtype,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber, 
+set, #donttrackdepth=0    

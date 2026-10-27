@@ -1,0 +1,90 @@
+,CF 2 side-by-side makeup drawers
+,Calculates the price for each part
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+load, Pricesides.pcb     
+,*****************************************
+
+
+
+,********* All VERTICAL DIVIDERS *********
+,Vertical Divider
+Set, #VertH = [DH1]
+Set, #VertD = [D]
+load,Pricedividers.pcb
+
+,*****************************************
+
+
+
+
+,*********** All FIXED SHELVES ***********
+     
+,*****************************************
+
+
+
+
+,*********** TOP SPANNERS OR FULL SHELF **
+Set,(#FullTops="No"):#ShelfDepth=[#SpannerWidth]:#ShelfDepth=[D]
+Set,(#FullTops="No"):#Tops=2:#Tops=1
+set, #ShelfWidth = [(W-LS-RS)]
+Load, Pricefixedshelves.pcb         
+,*****************************************
+
+
+
+
+,************* OTHER PARTS ***************
+set, #Backheight = [H-TR-BR-K]
+
+Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,             
+   
+Price, (K>0):1,      #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,              
+,*****************************************
+
+
+
+
+,******* All DOORS & DRAWER FRONTS *******
+Load, Doors.pcb
+,*****************************************
+
+
+
+
+,*********** All DRAWER BOXES ************
+,Calculates a Drawer cost
+Set, #DrawerOpeningWidth = [(W-LS-RS-MS)/2]
+Set, #DrawerOpeningHeight = DH1
+Set, #DrawerFrontHeight = D1H
+Load, (D1H>0)&(DH1>0):E-Drawer Cost.Pcb
+
+,Calculates a Drawer cost
+Set, #DrawerOpeningWidth = [(W-LS-RS-MS)/2]
+Set, #DrawerOpeningHeight = DH1
+Set, #DrawerFrontHeight = D2H
+Load, (D2H>0)&(DH1>0):E-Drawer Cost.Pcb
+,*****************************************
+
+
+
+
+,************ All PULLOUTS ***************
+Set, #PulloutOpeningWidth = [W-LS-RS]
+,Load, (npo>0): G-Pullout Cost.Pcb
+,*****************************************
+
+
+
+
+
+
+
+
+
+
+

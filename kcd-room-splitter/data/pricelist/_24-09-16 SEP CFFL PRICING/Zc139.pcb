@@ -1,0 +1,39 @@
+,Determine Cost of Belt rack
+
+
+Do,(#UnitFileName="BeltL.cab"):1
+{
+Set, #CostofBeltRack = #CostofStdBeltRack
+Set, #Belttype = Sliding #Unitmaterialname CHR 
+}
+Do,(#UnitFileName="BeltLU1.cab"):1
+{
+Set, #CostofBeltRack = #CostofStdBeltRack
+Set, #Belttype = Sliding #Unitmaterialname BN
+}
+Do,(#UnitFileName="BeltR.cab"):1
+{
+Set, #CostofBeltRack = #CostofStdBeltRack
+Set, #Belttype = Sliding #Unitmaterialname CHR 
+}
+Do,(#UnitFileName="BeltRU1.cab"):1
+{
+Set, #CostofBeltRack = #CostofStdBeltRack
+Set, #Belttype = Sliding #Unitmaterialname BN
+}
+Do,(#UnitFileName="BeltRFixedCR.cab"):1
+{
+Set, #CostofBeltRack = #CostofStdBeltRack
+Set, #Belttype = Wall Mounted #Unitmaterialname CHR
+}
+Do,(#UnitFileName="BeltRFixedBN.cab"):1
+{
+Set, #CostofBeltRack = #CostofStdBeltRack
+Set, #Belttype = Wall Mounted #Unitmaterialname BN
+}
+
+
+
+,******** ALL BELT RACKS ************
+Price, 1,   RM#roomnum #BeltRackName,      #CostOfBeltRack*#universalupcharge,             W, d,          #ValetrodPrintOrderNumber,     
+,************************************

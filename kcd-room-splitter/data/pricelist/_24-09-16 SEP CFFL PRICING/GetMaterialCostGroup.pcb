@@ -1,0 +1,34 @@
+Set,#UnitMaterial=#ExtraUnitText1
+Set,#UnitMaterialName=#ExtraUnitText1
+
+
+,Set to Zero for Default
+Set,#MaterialCostGroup=0
+
+
+,Update V8.0 make 7 characters to remove
+,---------------------------------------------------------------------------
+,Get Material Name (Trim off the right 8 chars leaving the Name only)
+Len, #Size, #ExtraUnitText1
+Left, #UnitMaterialName, #Size-8, #UnitMaterial 
+ 
+,Get Material Mark-Up (Trim off the right 5 chars to get the mark-up)
+Right, #MaterialCostGroup, 5, #UnitMaterial 
+,---------------------------------------------------------------------------
+
+
+Set, #2ndthickmaterial=No
+Do,(#unitmaterialname="*#2ndthickdelimiter*"):1
+{
+,Get Material Name (Trim off the right chars leaving the Name only)
+Len, #Size, #UnitMaterial
+Len, #size2,#2ndthickdelimiter
+Left, #UnitMaterialName, #Size-(8+#size2), #UnitMaterial 
+Set, #2ndthickmaterial=Yes
+}
+
+
+,leave file here
+End 
+
+

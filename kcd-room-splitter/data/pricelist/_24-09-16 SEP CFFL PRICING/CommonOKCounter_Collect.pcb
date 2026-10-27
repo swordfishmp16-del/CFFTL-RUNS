@@ -1,0 +1,109 @@
+'*******************************************************************************************************
+'** Store Outdoor Cabinet Parts - qty and $$
+'**
+'** Pre:  Outdoor Cabinet totaller - collects total of objects and cash total for each tracked object.
+'**       #gName contains the name of the object
+'**       #gQuantity contains the quantity of the object (running total)
+'**       #gTotalCost contains the total cost (running total)
+'**
+'** Post: #gOKTotalsArr contains the total quantity and cost of outdoor Cabinet parts that share the same.
+'**       The size of the #gOKTotalsArr array is #gOKTotalsArrSize.
+'**
+'*******************************************************************************************************
+
+local, #index
+,Array index number we're on...
+local, #Found
+,Whether or not it's in the array already...
+
+
+'Init
+set, #Found = 0
+
+'** Look for Matching Name **
+'Loop through OKTotals Array until you find a matching object name, if you hit the max number it'll jump down and make a new index number.
+Set, #index = [0]
+while, (#index < #gOKTotalsArrSize) & (#Found = 0)
+   
+   'Adds one more to counter each time you loop.
+   Set, #index = [#index + 1]
+
+   '** Trim of the ".00" from the end of the Number ** - KCD adds a .00 when doing +1 in pricing.
+   Len, #Size, #index
+   Set, #Size = [#Size - 3]
+   Left, #index, #Size, #index
+
+   
+   'Looking for name
+   if, #gOKTotalsArr(#index).Name = "#Name"
+   'When successful, set gName variable to name of object.
+      Set, #gName = <#Name>
+   'Pull the quantity stored at that index location
+      Set, #gQuantity = [#gOKTotalsArr(#index).Quantity]
+   'Pull the total cost stored at that index location
+      Set, #gTotalCost = [#gOKTotalsArr(#index).TotalCost]
+   'Now that it's pulled, add 1 to the current object's qty
+     Set, #gOKTotalsArr(#index).Quantity = [#GQuantity + 1]
+   'Add the unit's cost, and then update those totals at that index location.
+     Set, #gOKTotalsArr(#index).TotalCost = [#GTotalCost + #TotalUnitCost]
+
+
+         '** Found Matching Part, success! We can exit this page and move on! **
+         Set, #Found = 1
+      end if
+   end if
+wend
+
+
+'** Check if a Matching Part was Found **
+if, #Found = 0
+   '** Part Not Found:  Add New Part **
+   
+   'Increase array size by 1 here
+   Set, #gOKTotalsArrSize = [#gOKTotalsArrSize + 1]
+
+ 
+   'Resize Array with the new size from the above.
+   Resizeglobal, #gOKTotalsArr(#gOKTotalsArrSize) as CommonOKCounterStruct
+   
+   'Set the Index to the new size from above
+   Set, #Index = <#gOKTotalsArrSize>
+
+   '** Trim of the ".00" from the end of the Number ** - KCD adds a .00 when doing +1 in pricing.
+   Len, #Size, #index
+   Set, #Size = [#Size - 3]
+   Left, #index, #Size, #index
+   
+   'Store New Data - We're storing whatever named variable at that index location on the array. 
+   Set, #gOKTotalsArr(#Index).Name = <#Name>
+   Set, #gOKTotalsArr(#index).Length = [#Length]
+   Set, #gOKTotalsArr(#index).Width = [#Width]
+   Set, #gOKTotalsArr(#index).Depth = [#Depth]
+   ,Set, #gOKTotalsArr(#index).Code = <#Code>
+   Set, #gOKTotalsArr(#Index).Quantity = 1
+   Set, #gOKTotalsArr(#Index).TotalCost = [#TotalUnitCost]
+   'We make use of the G (global) variables here to grab unit specific variables such as name, dimensions, and cost.
+   'The (#index).WhateverVariable refers to the Struct variables we started on _Initialize.pcb
+
+
+
+end if
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

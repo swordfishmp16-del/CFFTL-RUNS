@@ -1,0 +1,703 @@
+,Use Grid
+,*********************** Universal Upcharge applies to all prices
+Displayset, #Universalupcharge=1.00, Q.......Apply an across the board upcharge? Use 1.0 for no charge
+Displayset, #UniversalupchargeOK=1.00,  Q.........Apply an upcharge for Outdoor Cabinets? Use 1.00 for no charge
+,**
+
+,**
+,**
+,****************************************************    TAX AND INSTALLATION CHARGES   ********************************************************
+,Update V7.2.5 start
+DisplaySet,#UseTax=No, ------------------- Do you charge tax? [Yes;No]
+Do,(#UseTax="Yes")|(#DisplayEdit):1
+{
+,   DisplaySet,#Sub21Name=Tax 5 Percent, ---------------------- Name on printed report for tax
+,   DisplaySet,#TaxAmt=0.05, ---------------------- Percent to charge for tax
+   Set,#Sub21Name=#Taxlevel, ---------------------- Name on printed report for tax
+   Set,#TaxAmt=#Taxamount, ---------------------- Percent to charge for tax
+   
+}
+,Update V7.2.5 end
+DisplaySet,#UseInstallation=No, --------------------- Do charge for installation?[Yes;No]
+Do,(#UseInstallation="Yes")|(#DisplayEdit):1
+{
+   DisplaySet,#Sub20Name=Installation, ----------------------- Name on printed report for installation charge
+   DisplaySet,#InstallationTax=Yes, -------------------------- Is your installation charge taxable? (set to yes if you do not charge tax)[Yes;No]
+   DisplaySET,#InstallationNumOfUnits=Total Number of Units,  Choose the total you want to calculate from[Total Number of Units;Total Number of Cabinets/Closets;Total Number of Panels]
+   DisplaySET,#InstallationCostNumOfUnits=10, Amount to charge (amount to multiply for the above total)
+   
+   DisplaySET,#InstallationMeasurement=Lineal Footage of All Units,Choose the length you want to calculate from[Lineal Footage of All Units;Square Footage of All Units;Cubic Footage of All Units;Lineal Footage of All Cabinets/Closets;Square Footage of All Cabinets/Closets;Cubic Footage of All Cabinets/Closets]
+   DisplaySET,#InstallationMeasurementCost=0,Amount to charge(amount to multiply for the above length)
+}
+
+,Update V7.2.5 start
+Do,(#UseTax="Yes")|(#DisplayEdit):1
+{
+,************************************************************ TAX POP-UP ***********************************************************************
+,**
+,**   TAX See Tax question above
+,**   This section will help you create a pop-up Question when running your pricing. Create a choice of tax levels you wish below .05 is 5% 
+
+DisplaySet,#HowManyTaxlevels=0,1.1  How many Tax categories would you like? 0 shuts taxes pop-up off? Use if tax % VARY BY LOCATION or if NOT APPLIED TO ALL JOBS. [0;1;2;3;4;5]
+Do,((#HowManyTaxlevels=0)&(#UseTax="Yes"))|(#DisplayEdit):1
+{
+   DisplaySet,#Taxlevel=Tax 5 Percent, ---------------------- Name on printed report for tax
+   DisplaySet,#Taxamount=0.05, ---------------------- Percent to charge for tax if SAME ON ALL JOBS
+}   
+}
+,**
+Skip,(#HowManyTaxlevels=0):1
+{
+   DisplaySet, #TaxlevelName =Apply Sales Tax?,1.2 --- Customer Tax Question? This will be the pop-question when running pricing
+   
+   ,**
+   Do,(#HowManyTaxlevels=1):1
+   {
+      DisplaySet,#TaxName1=No Tax,1.3 Name of Tax Level 1
+      AskQuestion,#TaxLevel,#TaxName1,#TaxlevelName [#TaxName1]
+      DisplaySet,#TaxLevel1=0.00,1.8   (Tax Level 1) #TaxName1 percentage
+   }
+   
+   Do,(#HowManyTaxlevels=2):1
+   {
+      DisplaySet,#TaxName1=No Tax,1.3 Name of Tax Level 1
+      DisplaySet,#TaxName2=County Tax 3 %,1.4 Name of Tax Level 2
+      AskQuestion,#TaxLevel,#TaxName1,#TaxlevelName [#TaxName1,#TaxName2]
+      DisplaySet,#TaxLevel1=0.00,1.8   (Tax Level 1) #TaxName1 percentage
+      DisplaySet,#TaxLevel2=0.03,1.9   (Tax Level 2) #TaxName2 percentage
+   }
+   
+   Do,(#HowManyTaxlevels=3):1
+   {
+      DisplaySet,#TaxName1=No Tax,1.3 Name of Tax Level 1
+      DisplaySet,#TaxName2=County Tax 3 %,1.4 Name of Tax Level 2
+      DisplaySet,#TaxName3=County Tax  5 %,1.5 Name of Tax Level 3
+      AskQuestion,#TaxLevel,#TaxName1,#TaxlevelName [#TaxName1;#TaxName2;#TaxName3]
+      DisplaySet,#TaxLevel1=0.00,1.8   (Tax Level 1) #TaxName1 percentage
+      DisplaySet,#TaxLevel2=0.03,1.9   (Tax Level 2) #TaxName2 percentage
+      DisplaySet,#TaxLevel3=0.05,1.10   (Tax Level 3) #TaxName3 percentage
+   }
+   
+   Do,(#HowManyTaxlevels=4):1
+   {
+      DisplaySet,#TaxName1=No Tax,1.3 Name of Tax Level 1
+      DisplaySet,#TaxName2=County Tax 6.5%,1.4 Name of Tax Level 2
+      DisplaySet,#TaxName3=County Tax  7.0%,1.5 Name of Tax Level 3
+      DisplaySet,#TaxName4=County Tax  7.5%,1.6 Name of Tax Level 4
+      AskQuestion,#TaxLevel,#TaxName1,#TaxlevelName [#TaxName1;#TaxName2;#TaxName3;#TaxName4]
+      DisplaySet,#TaxLevel1=0.00,1.8   (Tax Level 1) #TaxName1 percentage
+      DisplaySet,#TaxLevel2=0.065,1.9   (Tax Level 2) #TaxName2 percentage
+      DisplaySet,#TaxLevel3=0.070,1.10   (Tax Level 3) #TaxName3 percentage
+      DisplaySet,#TaxLevel4=0.075,1.11   (Tax Level 4) #TaxName4 percentage
+   }
+   
+   Do,(#HowManyTaxlevels=5):1
+   {
+      DisplaySet,#TaxName1=No Tax,1.3 Name of Tax Level 1
+      DisplaySet,#TaxName2=County Tax 3 %,1.4 Name of Tax Level 2
+      DisplaySet,#TaxName3=County Tax  5 %,1.5 Name of Tax Level 3
+      DisplaySet,#TaxName4=County Tax  8 %,1.6 Name of Tax Level 4
+      DisplaySet,#TaxName5=County Tax  10 %,1.7 Name of Tax Level 5
+      AskQuestion,#TaxLevel,#TaxName1,#TaxlevelName [#TaxName1;#TaxName2;#TaxName3;#TaxName4;#TaxName5]
+      DisplaySet,#TaxLevel1=0.00,1.8   (Tax Level 1) #TaxName1 percentage
+      DisplaySet,#TaxLevel2=0.03,1.9   (Tax Level 2) #TaxName2 percentage
+      DisplaySet,#TaxLevel3=0.05,1.10   (Tax Level 3) #TaxName3 percentage
+      DisplaySet,#TaxLevel4=0.08,1.11   (Tax Level 4) #TaxName4 percentage
+      DisplaySet,#TaxLevel5=0.10,1.12   (Tax Level 5) #TaxName5 percentage
+   }
+   
+   Set,(#TaxLevel="#TaxName1"):#Taxamount=#TaxLevel1
+   Set,(#TaxLevel="#TaxName2"):#Taxamount=#TaxLevel2
+   Set,(#TaxLevel="#TaxName3"):#Taxamount=#TaxLevel3
+   Set,(#TaxLevel="#TaxName4"):#Taxamount=#TaxLevel4
+   Set,(#TaxLevel="#TaxName5"):#Taxamount=#TaxLevel5
+   
+   Set,(#TaxLevel="#TaxName1"):#TaxName=#TaxName1
+   Set,(#TaxLevel="#TaxName2"):#TaxName=#TaxName2
+   Set,(#TaxLevel="#TaxName3"):#TaxName=#TaxName3
+   Set,(#TaxLevel="#TaxName4"):#TaxName=#TaxName4
+   Set,(#TaxLevel="#TaxName5"):#TaxName=#TaxName5
+}
+
+,Update V7.2.5 end
+,**
+,**
+,************************************************************    EXTRA CHARGES   ***************************************************************
+,**Here you can set extra charges to your price list. The first 5 are charges that are taxed, the 2nd group of 5 are
+,** not taxed. If you do not do tax, then it won't matter which group you use.
+,**
+,**The first question should be set to yes, this turns on the charge. The next question determines whether the
+,** charge will be added the total or subtracted from the total. The next question is what will print on the subtotal line.
+,**
+,**From there you have 7 questions that determine how the charge is figured. Think of these questions as
+,**3 pairs +1. The first pair works off of dollar totals. The options are SubTotal, SubTotal before extras, SubTotal of
+,**Cabinets, SubTotal of Doors, SubTotal of Drawer Boxes, SubTotal of Pullouts.
+,**
+,**Subtotal is the current subtotal having added everything together right up to this extra charge.
+,**Subtotal before extras the price of all the itemized units, those that would be listed in the contract report. It will
+,**not include handles hinges, doors and drawer boxes (if listed separately).
+,**Subtotal of cabinets includes the total price of cabinets only (no panels, valances etc) NOT including doors,
+,**drawers or other extras.
+,**SubTotal of Doors is the total cost of doors and drawer fronts in the job
+,**SubTotal of Drawer Boxes is the total cost of Drawer Boxes in the job
+,**SubTotal of Pullouts is the total cost of Pullouts in the job.
+,**
+,**Select one of these and then set an amount that total will be multiplied by. If you set the amount to zero it will
+,**have no effect.
+,**
+,**Next Pair deals with lengths. Lineal, Square or Cubic foot amounts.
+,**Lineal Footage of All Units calculates the lineal footage of all the units in the job, Square foots would do the
+,**same except return a square footage amount Cubic would follow accordingly.
+
+,**Total Area of Doors would calculate the Square Footage of Doors and Drawer Fronts
+,**Lineal Footage of Panels calculates the footage of Panels only,
+,**
+,**Type in a price to multiply the selected length by, set to zero for no effect.
+
+,**
+,**The last pair deals with the number, quantity of things.
+,**Total Number of Units, is the self explanatory, everything on the job.
+,**Total Number of Cabinets includes just cabinets no panels or other units
+,**Total Number of Base Cabinets, Wall and Tall Cabinets are again self explanatory.
+,**Then there are Panels, Base, Top and Tall.
+,**Followed by the Total Number of Doors which includes Drawer Fronts, Total Number of Drawer Boxes and Total
+,**Number of Pullouts.
+,**
+,**Set a price for the selected total to be multiplied by. Set to zero for no effect.
+,**
+,**The last question is a flat cost. Whatever you type in gets added to (or subtracted from) the subtotal
+,**
+,**All 3 of these pairs, plus the flate cost are added together to come up with a subtotal that is then added to the
+,**cost of the job. You can set the price of anyone of the pairs or flat cost to zero and it will have no affect in the
+,**calculation of the subtotal.
+
+
+,**
+
+,SAVE FOR POSSIBLE USE for alternative kick calculation
+,Base Cost #BaseType (#KickBaseCost8foottotSections - 8 ft Segments), Label for this Extra Charge on the printed report
+,#Sub1FlatCost=#KickBaseCost8foottotSections*#BaseTypeCostGroup,Amount of Flat Cost (A dollar amount to be added or subtracted)
+
+,**
+,**                  ****  Extra Charge 01  ****   (Taxed)
+DisplaySET,#UseSub1=Yes,   Do you want to use this Extra Charge?  [Yes;No]
+   
+   DisplaySET,#Sub1PosNeg=Yes, Do you want to add this amount to the total? No will will subtract this amount.  [Yes;No]
+   DisplaySET,#Sub1Name=Job Processing Fee, Label for this Extra Charge on the printed report
+   
+   DisplaySET,#Sub1SubTotal=SubTotal, Choose the total you want to calculate from[SubTotal;SubTotal Before Extras;SubTotal of Closets;SubTotal of Doors;SubTotal of Drawer Boxes;SubTotal of Pullouts]
+   
+   DisplaySET,#Sub1SubTotalCost=0, Amount of total charge (amount to multiply for the above total)
+   
+   DisplaySET,#Sub1Length=Total Area of Doors,Choose the Length you want to calculate from[Lineal Footage of All Units;Square Footage of All Units;Cubic Footage of All Units;Lineal Footage of All Cabinets/Closets;Square Footage of All Cabinets/Closets;Cubic Footage of All Cabinets/Closets;Total Area of Doors;Lineal Footage of Panels;Square Footage of Panels;Cubic Footage of Panels]
+   
+   DisplaySET,#Sub1LengthCost=0, Amount of length charge (amount to multiply for the above length)
+   
+   DisplaySET,#Sub1NumOfUnits=Total Number of Panels, Choose the number that you want to calculate from [Total Number of Units;Total Number of Cabinets/Closets;Total Number of Panels;Total Number of Wall Panels;Total Number of Base Panels;Total Number of Tall Panels;Total Number of Doors;Total Number of DrawerBoxes;Total Number of Pullouts]
+   
+   DisplaySET,#Sub1CostNumOfUnits=0, Amount of number charge (amount to multiply for the above number)
+   
+   
+   
+   DisplaySET,#Sub1FlatCost=199,Amount of Flat Cost (A dollar amount to be added or subtracted)
+   
+
+
+
+
+,**
+,**                  ****  Extra Charge 02  ****   (Taxed)
+
+DisplaySET,#UseSub2=No,   Do you want to use this Extra Charge?  [Yes;No]
+   
+   DisplaySET,#Sub2PosNeg=No, Do you want to add this amount to the total? No will will subtract this amount.  [Yes;No]
+   DisplaySET,#Sub2Name=Door Discount , Label for this Extra Charge on the printed report
+   
+   DisplaySET,#Sub2SubTotal=SubTotal of Doors, Choose the total you want to calculate from[SubTotal;SubTotal Before Extras;SubTotal of Closets;SubTotal of Doors;SubTotal of Drawer Boxes;SubTotal of Pullouts]
+   
+   DisplaySET,#Sub2SubTotalCost=.10, Amount of total charge (amount to multiply for the above total)
+   
+   DisplaySET,#Sub2Length=Total Area of Doors,Choose the Length you want to calculate from[Lineal Footage of All Units;Square Footage of All Units;Cubic Footage of All Units;Lineal Footage of All Cabinets/Closets;Square Footage of All Cabinets/Closets;Cubic Footage of All Cabinets/Closets;Total Area of Doors;Lineal Footage of Panels;Square Footage of Panels;Cubic Footage of Panels]
+   
+   
+   DisplaySET,#Sub2LengthCost=0, Amount of length charge (amount to multiply for the above length)
+   
+   DisplaySET,#Sub2NumOfUnits=Total Number of DrawerBoxes, Choose the number that you want to calculate from [Total Number of Units;Total Number of Cabinets/Closets;Total Number of Panels;Total Number of Wall Panels;Total Number of Base Panels;Total Number of Tall Panels;Total Number of Doors;Total Number of DrawerBoxes;Total Number of Pullouts]
+   
+   
+   DisplaySET,#Sub2CostNumOfUnits=10, Amount of number charge (amount to multiply for the above number)
+   
+   
+   
+   DisplaySET,#Sub2FlatCost=0,Amount of Flat Cost (A dollar amount to be added or subtracted)
+   
+
+
+
+
+,**
+,**                  ****  Extra Charge 03  ****   (Taxed)(See pop-up question #2 below)
+
+DisplaySET,#UseSub3=No,   Do you want to use this Extra Charge?  [Yes;No]
+   
+   DisplaySET,#Sub3PosNeg=Yes, Do you want to add this amount to the total? No will will subtract this amount.  [Yes;No]
+   DisplaySET,#Sub3Name=#FeeName, Label for this Extra Charge on the printed report
+   
+   DisplaySET,#Sub3SubTotal=SubTotal, Choose the total you want to calculate from[SubTotal;SubTotal Before Extras;SubTotal of Closets;SubTotal of Doors;SubTotal of Drawer Boxes;SubTotal of Pullouts]
+   
+   
+   DisplaySET,#Sub3SubTotalCost=0, Amount of total charge (amount to multiply for the above total)
+   
+   DisplaySET,#Sub3Length=Total Area of Doors,Choose the Length you want to calculate from[Lineal Footage of All Units;Square Footage of All Units;Cubic Footage of All Units;Lineal Footage of All Cabinets/Closets;Square Footage of All Cabinets/Closets;Cubic Footage of All Cabinets/Closets;Total Area of Doors;Lineal Footage of Panels;Square Footage of Panels;Cubic Footage of Panels]
+   
+   DisplaySET,#Sub3LengthCost=0, Amount of length charge (amount to multiply for the above length)
+   
+   DisplaySET,#Sub3NumOfUnits=Total Number of Panels, Choose the number that you want to calculate from [Total Number of Units;Total Number of Cabinets/Closets;Total Number of Panels;Total Number of Wall Panels;Total Number of Base Panels;Total Number of Tall Panels;Total Number of Doors;Total Number of DrawerBoxes;Total Number of Pullouts]
+   
+   DisplaySET,#Sub3CostNumOfUnits=0 , Amount of number charge (amount to multiply for the above number)
+   
+   
+   
+   DisplaySET,#Sub3FlatCost=#FeeCost,Amount of Flat Cost (A dollar amount to be added or subtracted)
+   
+
+
+
+
+,**
+,**                  ****  Extra Charge 04  ****   (Taxed)
+
+DisplaySET,#UseSub4=No,   Do you want to use this Extra Charge?  [Yes;No]
+   
+   DisplaySET,#Sub4PosNeg=Yes, Do you want to add this amount to the total? No will will subtract this amount.  [Yes;No]
+   DisplaySET,#Sub4Name=Extra Charge, Label for this Extra Charge on the printed report
+   
+   DisplaySET,#Sub4SubTotal=SubTotal of Drawer Boxes, Choose the total you want to calculate from[SubTotal;SubTotal Before Extras;SubTotal of Closets;SubTotal of Doors;SubTotal of Drawer Boxes;SubTotal of Pullouts]
+   
+   DisplaySET,#Sub4SubTotalCost=0, Amount of total charge (amount to multiply for the above total)
+   
+   DisplaySET,#Sub4Length=Total Area of Doors,Choose the Length you want to calculate from[Lineal Footage of All Units;Square Footage of All Units;Cubic Footage of All Units;Lineal Footage of All Cabinets/Closets;Square Footage of All Cabinets/Closets;Cubic Footage of All Cabinets/Closets;Total Area of Doors;Lineal Footage of Panels;Square Footage of Panels;Cubic Footage of Panels]
+   
+   DisplaySET,#Sub4LengthCost=0, Amount of length charge (amount to multiply for the above length)
+   
+   DisplaySET,#Sub4NumOfUnits=Total Number of Panels, Choose the number that you want to calculate from [Total Number of Units;Total Number of Cabinets/Closets;Total Number of Panels;Total Number of Wall Panels;Total Number of Base Panels;Total Number of Tall Panels;Total Number of Doors;Total Number of DrawerBoxes;Total Number of Pullouts]
+   
+   DisplaySET,#Sub4CostNumOfUnits=0, Amount of number charge (amount to multiply for the above number)
+   
+   
+   
+   DisplaySET,#Sub4FlatCost=100,Amount of Flat Cost (A dollar amount to be added or subtracted)
+   
+
+
+
+
+,**
+,**                  ****  Extra Charge 05  ****   (Taxed)(See pop-up question #1 below)
+
+DisplaySET,#UseSub5=No,   Do you want to use this Extra Charge?  [Yes;No]
+   
+   DisplaySET,#Sub5PosNeg=No, Do you want to add this amount to the total? No will will subtract this amount.  [Yes;No]
+   DisplaySET,#Sub5Name=#DiscountName, Label for this Extra Charge on the printed report
+   
+   DisplaySET,#Sub5SubTotal=SubTotal, Choose the total you want to calculate from[SubTotal;SubTotal Before Extras;SubTotal of Closets;SubTotal of Doors;SubTotal of Drawer Boxes;SubTotal of Pullouts]
+   
+   DisplaySET,#Sub5SubTotalCost=#JobDiscount, Amount of total charge (amount to multiply for the above total)
+   
+   DisplaySET,#Sub5Length=Lineal Footage of All Units,Choose the Length you want to calculate from[Lineal Footage of All Units;Square Footage of All Units;Cubic Footage of All Units;Lineal Footage of All Cabinets/Closets;Square Footage of All Cabinets/Closets;Cubic Footage of All Cabinets/Closets;Total Area of Doors;Lineal Footage of Panels;Square Footage of Panels;Cubic Footage of Panels]
+   
+   DisplaySET,#Sub5LengthCost=0, Amount of length charge (amount to multiply for the above length)
+   
+   DisplaySET,#Sub5NumOfUnits=Total Number of Panels, Choose the number that you want to calculate from [Total Number of Units;Total Number of Cabinets/Closets;Total Number of Panels;Total Number of Wall Panels;Total Number of Base Panels;Total Number of Tall Panels;Total Number of Doors;Total Number of DrawerBoxes;Total Number of Pullouts]
+   
+   DisplaySET,#Sub5CostNumOfUnits=0, Amount of number charge (amount to multiply for the above number)
+   
+   
+   
+   DisplaySET,#Sub5FlatCost=0,Amount of Flat Cost (A dollar amount to be added or subtracted)
+   
+
+
+
+
+
+,**
+,**                  ****  Extra Charge 06  ****   (Not Taxed)
+
+DisplaySET,#UseSub6=No,   Do you want to use this Extra Charge?  [Yes;No]
+   
+   DisplaySET,#Sub6PosNeg=Yes   , Do you want to add this amount to the total? No will will subtract this amount.  [Yes;No]
+   DisplaySET,#Sub6Name=Job Processing Fee, Label for this Extra Charge on the printed report
+   
+   DisplaySET,#Sub6SubTotal=SubTotal, Choose the total you want to calculate from[SubTotal;SubTotal Before Extras;SubTotal of Closets;SubTotal of Doors;SubTotal of Drawer Boxes;SubTotal of Pullouts]
+   
+   DisplaySET,#Sub6SubTotalCost=0, Amount of total charge (amount to multiply for the above total)
+   
+   DisplaySET,#Sub6Length=Lineal Footage of All Units,Choose the Length you want to calculate from[Lineal Footage of All Units;Square Footage of All Units;Cubic Footage of All Units;Lineal Footage of All Cabinets/Closets;Square Footage of All Cabinets/Closets;Cubic Footage of All Cabinets/Closets;Total Area of Doors;Lineal Footage of Panels;Square Footage of Panels;Cubic Footage of Panels]
+   
+   DisplaySET,#Sub6LengthCost=0, Amount of length charge (amount to multiply for the above length)
+   
+   DisplaySET,#Sub6NumOfUnits=Total Number of Panels, Choose the number that you want to calculate from [Total Number of Units;Total Number of Cabinets/Closets;Total Number of Panels;Total Number of Wall Panels;Total Number of Base Panels;Total Number of Tall Panels;Total Number of Doors;Total Number of DrawerBoxes;Total Number of Pullouts]
+   
+   DisplaySET,#Sub6CostNumOfUnits=0, Amount of number charge (amount to multiply for the above number)
+   
+   
+   
+   DisplaySET,#Sub6FlatCost=110,Amount of Flat Cost (A dollar amount to be added or subtracted)
+   
+
+
+
+
+
+,**
+,**                  ****  Extra Charge 07  ****   (Not Taxed)
+DisplaySET,#UseSub7=No,   Do you want to use this Extra Charge?  [Yes;No]
+   
+   DisplaySET,#Sub7PosNeg=Yes   , Do you want to add this amount to the total? No will will subtract this amount.  [Yes;No]
+   DisplaySET,#Sub7Name=Extra, Label for this Extra Charge on the printed report
+   
+   DisplaySET,#Sub7SubTotal=SubTotal   , Choose the total you want to calculate from[SubTotal;SubTotal Before Extras;SubTotal of Closets;SubTotal of Doors;SubTotal of Drawer Boxes;SubTotal of Pullouts]
+   
+   DisplaySET,#Sub7SubTotalCost=0, Amount of total charge (amount to multiply for the above total)
+   
+   DisplaySET,#Sub7Length=Lineal Footage of All Units,Choose the Length you want to calculate from[Lineal Footage of All Units;Square Footage of All Units;Cubic Footage of All Units;Lineal Footage of All Cabinets/Closets;Square Footage of All Cabinets/Closets;Cubic Footage of All Cabinets/Closets;Total Area of Doors;Lineal Footage of Panels;Square Footage of Panels;Cubic Footage of Panels]
+   
+   DisplaySET,#Sub7LengthCost=0, Amount of length charge (amount to multiply for the above length)
+   
+   DisplaySET,#Sub7NumOfUnits=Total Number of Panels, Choose the number that you want to calculate from [Total Number of Units;Total Number of Cabinets/Closets;Total Number of Panels;Total Number of Wall Panels;Total Number of Base Panels;Total Number of Tall Panels;Total Number of Doors;Total Number of DrawerBoxes;Total Number of Pullouts]
+   
+   DisplaySET,#Sub7CostNumOfUnits=0 , Amount of number charge (amount to multiply for the above number)
+   
+   
+   
+   DisplaySET,#Sub7FlatCost=100,Amount of Flat Cost (A dollar amount to be added or subtracted)
+   
+
+
+
+
+
+,**
+,**                  ****  Extra Charge 08  ****   (Not Taxed)
+
+DisplaySET,#UseSub8=No,   Do you want to use this Extra Charge?  [Yes;No]
+   
+   DisplaySET,#Sub8PosNeg=Yes   , Do you want to add this amount to the total? No will will subtract this amount.  [Yes;No]
+   DisplaySET,#Sub8Name=Extra, Label for this Extra Charge on the printed report
+   
+   DisplaySET,#Sub8SubTotal=SubTotal   , Choose the total you want to calculate from[SubTotal;SubTotal Before Extras;SubTotal of Closets;SubTotal of Doors;SubTotal of Drawer Boxes;SubTotal of Pullouts]
+   
+   DisplaySET,#Sub8SubTotalCost=0, Amount of total charge (amount to multiply for the above total)
+   
+   DisplaySET,#Sub8Length=Lineal Footage of All Units,Choose the Length you want to calculate from[Lineal Footage of All Units;Square Footage of All Units;Cubic Footage of All Units;Lineal Footage of All Cabinets/Closets;Square Footage of All Cabinets/Closets;Cubic Footage of All Cabinets/Closets;Total Area of Doors;Lineal Footage of Panels;Square Footage of Panels;Cubic Footage of Panels]
+   
+   DisplaySET,#Sub8LengthCost=0, Amount of length charge (amount to multiply for the above length)
+   
+   DisplaySET,#Sub8NumOfUnits=Total Number of Panels, Choose the number that you want to calculate from [Total Number of Units;Total Number of Cabinets/Closets;Total Number of Panels;Total Number of Wall Panels;Total Number of Base Panels;Total Number of Tall Panels;Total Number of Doors;Total Number of DrawerBoxes;Total Number of Pullouts]
+   
+   DisplaySET,#Sub8CostNumOfUnits=0 , Amount of number charge (amount to multiply for the above number)
+   
+   
+   
+   DisplaySET,#Sub8FlatCost=100,Amount of Flat Cost (A dollar amount to be added or subtracted)
+   
+
+
+
+
+
+
+,**
+,**                  ****  Extra Charge 09  ****   (Not Taxed)
+
+DisplaySET,#UseSub9=No,   Do you want to use this Extra Charge?  [Yes;No]
+
+   
+   DisplaySET,#Sub9PosNeg=Yes   , Do you want to add this amount to the total? No will will subtract this amount.  [Yes;No]
+   DisplaySET,#Sub9Name=Extra, Label for this Extra Charge on the printed report
+   
+   DisplaySET,#Sub9SubTotal=SubTotal Before Extras, Choose the total you want to calculate from[SubTotal;SubTotal Before Extras;SubTotal of Closets;SubTotal of Doors;SubTotal of Drawer Boxes;SubTotal of Pullouts]
+   
+   DisplaySET,#Sub9SubTotalCost=0, Amount of total charge (amount to multiply for the above total)
+   
+   DisplaySET,#Sub9Length=Lineal Footage of All Units,Choose the Length you want to calculate from[Lineal Footage of All Units;Square Footage of All Units;Cubic Footage of All Units;Lineal Footage of All Cabinets/Closets;Square Footage of All Cabinets/Closets;Cubic Footage of All Cabinets/Closets;Total Area of Doors;Lineal Footage of Panels;Square Footage of Panels;Cubic Footage of Panels]
+   
+   DisplaySET,#Sub9LengthCost=0, Amount of length charge (amount to multiply for the above length)
+   
+   DisplaySET,#Sub9NumOfUnits=Total Number of Panels, Choose the number that you want to calculate from [Total Number of Units;Total Number of Cabinets/Closets;Total Number of Panels;Total Number of Wall Panels;Total Number of Base Panels;Total Number of Tall Panels;Total Number of Doors;Total Number of DrawerBoxes;Total Number of Pullouts]
+   
+   DisplaySET,#Sub9CostNumOfUnits=0 , Amount of number charge (amount to multiply for the above number)
+   
+   
+   
+   DisplaySET,#Sub9FlatCost=100,Amount of Flat Cost (A dollar amount to be added or subtracted)
+   
+
+
+
+
+,**
+,**                  ****  Extra Charge 10  ****   (Not Taxed)
+
+DisplaySET,#UseSub10=No,   Do you want to use this Extra Charge?  [Yes;No]
+   
+   DisplaySET,#Sub10PosNeg=Yes   , Do you want to add this amount to the total? No will will subtract this amount.  [Yes;No]
+   DisplaySET,#Sub10Name=Extra Charge , Label for this Extra Charge on the printed report
+   
+   DisplaySET,#Sub10SubTotal=SubTotal, Choose the total you want to calculate from[SubTotal;SubTotal Before Extras;SubTotal of Closets;SubTotal of Doors;SubTotal of Drawer Boxes;SubTotal of Pullouts]
+   
+   DisplaySET,#Sub10SubTotalCost=0, Amount of total charge (amount to multiply for the above total)
+   
+   DisplaySET,#Sub10Length=Lineal Footage of All Units,Choose the Length you want to calculate from[Lineal Footage of All Units;Square Footage of All Units;Cubic Footage of All Units;Lineal Footage of All Cabinets/Closets;Square Footage of All Cabinets/Closets;Cubic Footage of All Cabinets/Closets;Total Area of Doors;Lineal Footage of Panels;Square Footage of Panels;Cubic Footage of Panels]
+   
+   DisplaySET,#Sub10LengthCost=0, Amount of length charge (amount to multiply for the above length)
+   
+   DisplaySET,#Sub10NumOfUnits=Total Number of Panels, Choose the number that you want to calculate from [Total Number of Units;Total Number of Cabinets/Closets;Total Number of Panels;Total Number of Wall Panels;Total Number of Base Panels;Total Number of Tall Panels;Total Number of Doors;Total Number of DrawerBoxes;Total Number of Pullouts]
+   
+   DisplaySET,#Sub10CostNumOfUnits=0 , Amount of number charge (amount to multiply for the above number)
+   
+   
+   
+   DisplaySET,#Sub10FlatCost=100,Amount of Flat Cost (A dollar amount to be added or subtracted)
+   
+
+
+
+
+
+
+,**
+,**
+
+,**
+,**   DISCOUNTS See Extra Charge 05 above
+,**   This section will help you create a pop-up Question when running your pricing. Create catagories you wish below .05 is 5% less
+DisplaySet,#HowManyDiscounts=0,1.1  How many discount catogories would you like? 0 shuts discounts off? [0;1;2;3;4;5]
+
+Skip,(#HowManyDiscounts=0):1
+{
+   ,**   To have your Discount show up on your printed report Subtotals go to your A-Setup file near the bottom of the page
+   ,**   you will see your Extra Subtotals Go to Extra Charge 05 and set do you want to use this extra charge and set it to yes
+}
+
+
+,**
+Skip,(#HowManyDiscounts=0):1
+{
+   DisplaySet, #CustomerTierName =Discount,1.2 --- Customer Discount Question? This will be the pop-question when running pricing
+   
+   ,**
+   Do,(#HowManyDiscounts=1):1
+   {
+      DisplaySet,#DiscountName1=Discount,1.3 Name of Discount 1
+      AskQuestion,#CustomerTier,#DiscountName1,#CustomerTierName
+      DisplaySet,#MarkupTier1=0.03,1.4    (Discount 1) #DiscountName1 percentage
+   }
+   
+   Do,(#HowManyDiscounts=2):1
+   {
+      DisplaySet,#DiscountName1=Discount Special,1.3 Name of Discount 1
+      DisplaySet,#DiscountName2=Discount Friends and Family,1.4 Name of Discount 2
+      AskQuestion,#CustomerTier,#DiscountName1,#CustomerTierName [#DiscountName1;#DiscountName2]
+      DisplaySet,#MarkupTier1=0.1,1.5   (Discount 1) #DiscountName1 percentage
+      DisplaySet,#MarkupTier2=0.05,1.6   (Discount 2) #DiscountName2 percentage
+   }
+   
+   Do,(#HowManyDiscounts=3):1
+   {
+      DisplaySet,#DiscountName1=Discount Special,1.3 Name of Discount 1
+      DisplaySet,#DiscountName2=Discount Friends and Family,1.4 Name of Discount 2
+      DisplaySet,#DiscountName3=Discount Contractor,1.5 Name of Discount 3
+      AskQuestion,#CustomerTier,#DiscountName1,#CustomerTierName [#DiscountName1;#DiscountName2;#DiscountName3]
+      DisplaySet,#MarkupTier1=0,1.6   (Discount 1) #DiscountName1 percentage
+      DisplaySet,#MarkupTier2=0.05,1.7   (Discount 2) #DiscountName2 percentage
+      DisplaySet,#MarkupTier3=0.08,1.8   (Discount 3) #DiscountName3 percentage
+   }
+   
+   Do,(#HowManyDiscounts=4):1
+   {
+      DisplaySet,#DiscountName1=Discount Special,1.3 Name of Discount 1
+      DisplaySet,#DiscountName2=Discount Friends and Family,1.4 Name of Discount 2
+      DisplaySet,#DiscountName3=Discount Contractor,1.5 Name of Discount 3
+      DisplaySet,#DiscountName4=Discount Educational,1.6 Name of Discount 4
+      AskQuestion,#CustomerTier,#DiscountName1,#CustomerTierName [#DiscountName1;#DiscountName2;#DiscountName3;#DiscountName4]
+      DisplaySet,#MarkupTier1=0,1.7   (Discount 1) #DiscountName1 percentage
+      DisplaySet,#MarkupTier2=0.05,1.8   (Discount 2) #DiscountName2 percentage
+      DisplaySet,#MarkupTier3=0.08,1.9   (Discount 3) #DiscountName3 percentage
+      DisplaySet,#MarkupTier4=0.12,1.10   (Discount 4) #DiscountName4 percentage
+   }
+   
+   Do,(#HowManyDiscounts=5):1
+   {
+      DisplaySet,#DiscountName1=Discount 0,1.3 Name of Discount 1
+      DisplaySet,#DiscountName2=Discount 3 %,1.4 Name of Discount 2
+      DisplaySet,#DiscountName3=Discount  5 %,1.5 Name of Discount 3
+      DisplaySet,#DiscountName4=Discount  8 %,1.6 Name of Discount 4
+      DisplaySet,#DiscountName5=Discount  10 %,1.7 Name of Discount 5
+      AskQuestion,#CustomerTier,#DiscountName1,#CustomerTierName [#DiscountName1;#DiscountName2;#DiscountName3;#DiscountName4;#DiscountName5]
+      DisplaySet,#MarkupTier1=0.00,1.8   (Discount 1) #DiscountName1 percentage
+      DisplaySet,#MarkupTier2=0.03,1.9   (Discount 2) #DiscountName2 percentage
+      DisplaySet,#MarkupTier3=0.05,1.10   (Discount 3) #DiscountName3 percentage
+      DisplaySet,#MarkupTier4=0.08,1.11   (Discount 4) #DiscountName4 percentage
+      DisplaySet,#MarkupTier5=0.10,1.12   (Discount 5) #DiscountName5 percentage
+   }
+   
+   Set,(#CustomerTier="#DiscountName1"):#JobDiscount=#MarkupTier1
+   Set,(#CustomerTier="#DiscountName2"):#JobDiscount=#MarkupTier2
+   Set,(#CustomerTier="#DiscountName3"):#JobDiscount=#MarkupTier3
+   Set,(#CustomerTier="#DiscountName4"):#JobDiscount=#MarkupTier4
+   Set,(#CustomerTier="#DiscountName5"):#JobDiscount=#MarkupTier5
+   
+   Set,(#CustomerTier="#DiscountName1"):#DiscountName=#DiscountName1
+   Set,(#CustomerTier="#DiscountName2"):#DiscountName=#DiscountName2
+   Set,(#CustomerTier="#DiscountName3"):#DiscountName=#DiscountName3
+   Set,(#CustomerTier="#DiscountName4"):#DiscountName=#DiscountName4
+   Set,(#CustomerTier="#DiscountName5"):#DiscountName=#DiscountName5
+}
+
+,**
+,**  FEE CHOICES See Extra Charge 03 above
+,**   This section will help you create a pop-up Question when running your pricing. Create catagories you wish below
+
+
+DisplaySet,#HowManyFees=0,1.13  How many extra fees do you wish to have? 0 = Skip question [0;1;2;3;4;5;6;7;8]
+,**
+Skip,(#HowManyFees=0):1
+{
+   DisplaySet,#FeeNameQuestion =Extra Fees,1.14 --- Extra Fee Question? This will be the pop-question when running pricing
+   
+   Do,(#HowManyFees=1):1
+   {
+      DisplaySet,#FeeName1=Door and Drawer Face Special,1.15 Name of Fee 1
+      AskQuestion,#FeeSelection,#FeeName1,#FeeNameQuestion [#FeeName1]
+      DisplaySet,#FeeCost1=0,1.16   (Flat Fee 1) #FeeName1 Cost
+   }
+   
+   Do,(#HowManyFees=2):1
+   {
+      DisplaySet,#FeeName1=Doors and Drawer Faces special,1.15 Name of Fee 1
+      DisplaySet,#FeeName2=Drawer Box Special,1.16 Name of Fee 2
+      AskQuestion,#FeeSelection,#FeeName1,#FeeNameQuestion [#FeeName1;#FeeName2]
+      DisplaySet,#FeeCost1=200,1.17   (Flat Fee 1) #FeeName1 Cost
+      DisplaySet,#FeeCost2=300,1.18   (Flat Fee 2) #FeeName2 Cost
+   }
+   
+   Do,(#HowManyFees=3):1
+   {
+      DisplaySet,#FeeName1=No Extra Fee,1.15 Name of Fee 1
+      DisplaySet,#FeeName2=Parking,1.16 Name of Fee 2
+      DisplaySet,#FeeName3=Special Labor  ,1.17 Name of Fee 3
+      AskQuestion,#FeeSelection,#FeeName1,#FeeNameQuestion [#FeeName1;#FeeName2;#FeeName3]
+      DisplaySet,#FeeCost1=0,1.18   (Flat Fee 1) #FeeName1 Cost
+      DisplaySet,#FeeCost2=50,1.19   (Flat Fee 2) #FeeName2 Cost
+      DisplaySet,#FeeCost3=100,1.20   (Flat Fee 3) #FeeName3 Cost
+   }
+   
+   Do,(#HowManyFees=4):1
+   {
+      DisplaySet,#FeeName1=No Tax,1.15 Name of Fee 1
+      DisplaySet,#FeeName2=County 1,1.16 Name of Fee 2
+      DisplaySet,#FeeName3=County 2,1.17 Name of Fee 3
+      DisplaySet,#FeeName4=County3,1.18 Name of Fee 4
+      AskQuestion,#FeeSelection,#FeeName1,#FeeNameQuestion [#FeeName1;#FeeName2;#FeeName3;#FeeName4]
+      DisplaySet,#FeeCost1=0.00,1.19   (Flat Fee 1) #FeeName1 Cost
+      DisplaySet,#FeeCost2=0.065,1.20   (Flat Fee 2) #FeeName2 Cost
+      DisplaySet,#FeeCost3=7,1.21   (Flat Fee 3) #FeeName3 Cost
+      DisplaySet,#FeeCost4=7.5,1.22   (Flat Fee 4) #FeeName4 Cost
+   }
+   
+   Do,(#HowManyFees=5):1
+   {
+      DisplaySet,#FeeName1=Standard Demo separate day,1.15 Name of Fee 1
+      DisplaySet,#FeeName2=Minor Demo same day,1.16 Name of Fee 2
+      DisplaySet,#FeeName3=Minor Demo separate day,1.17 Name of Fee 3
+      DisplaySet,#FeeName4=High Rise Fee  ,1.18 Name of Fee 4
+      DisplaySet,#FeeName5=Parking - Special Labor  ,1.19 Name of Fee 5
+      AskQuestion,#FeeSelection,#FeeName1,#FeeNameQuestion [#FeeName1;#FeeName2;#FeeName3;#FeeName4;#FeeName5]
+      DisplaySet,#FeeCost1=0,1.20   (Flat Fee 1) #FeeName1 Cost
+      DisplaySet,#FeeCost2=10,1.21   (Flat Fee 2) #FeeName2 Cost
+      DisplaySet,#FeeCost3=20,1.22   (Flat Fee 3) #FeeName3 Cost
+      DisplaySet,#FeeCost4=30,1.23   (Flat Fee 4) #FeeName4 Cost
+      DisplaySet,#FeeCost5=60,1.24   (Flat Fee 5) #FeeName5 Cost
+   }
+   
+   Do,(#HowManyFees=6):1
+   {
+      DisplaySet,#FeeName1=No Extra Fee,1.15 Name of Fee 1
+      DisplaySet,#FeeName2=Parking,1.16 Name of Fee 2
+      DisplaySet,#FeeName3=Special Labor  ,1.17 Name of Fee 3
+      DisplaySet,#FeeName4=High Rise Fee  ,1.18 Name of Fee 4
+      DisplaySet,#FeeName5=Parking - Special Labor  ,1.19 Name of Fee 5
+      DisplaySet,#FeeName6=Parking - High Rise Fee  ,1.20 Name of Fee 6
+      AskQuestion,#FeeSelection,#FeeName1,#FeeNameQuestion [#FeeName1;#FeeName2;#FeeName3;#FeeName4;#FeeName5;#FeeName6]
+      DisplaySet,#FeeCost1=0,1.21   (Flat Fee 1) #FeeName1 Cost
+      DisplaySet,#FeeCost2=10,1.22   (Flat Fee 2) #FeeName2 Cost
+      DisplaySet,#FeeCost3=20,1.23   (Flat Fee 3) #FeeName3 Cost
+      DisplaySet,#FeeCost4=30,1.24   (Flat Fee 4) #FeeName4 Cost
+      DisplaySet,#FeeCost5=60,1.25   (Flat Fee 5) #FeeName5 Cost
+      DisplaySet,#FeeCost6=70,1.26   (Flat Fee 6) #FeeName6 Cost
+   }
+   
+   Do,(#HowManyFees=7):1
+   {
+      DisplaySet,#FeeName1=No Extra Fee,1.15 Name of Fee 1
+      DisplaySet,#FeeName2=Parking,1.16 Name of Fee 2
+      DisplaySet,#FeeName3=Special Labor  ,1.17 Name of Fee 3
+      DisplaySet,#FeeName4=High Rise Fee  ,1.18 Name of Fee 4
+      DisplaySet,#FeeName5=Parking - Special Labor  ,1.19 Name of Fee 5
+      DisplaySet,#FeeName6=Parking - High Rise Fee  ,1.20 Name of Fee 6
+      DisplaySet,#FeeName7=Parking - Special Labor - High Rise Fee  ,1.21 Name of Fee 7
+      AskQuestion,#FeeSelection,#FeeName1,#FeeNameQuestion [#FeeName1;#FeeName2;#FeeName3;#FeeName4;#FeeName5;#FeeName6;#FeeName7]
+      DisplaySet,#FeeCost1=0,1.22   (Flat Fee 1) #FeeName1 Cost
+      DisplaySet,#FeeCost2=10,1.23   (Flat Fee 2) #FeeName2 Cost
+      DisplaySet,#FeeCost3=20,1.24   (Flat Fee 3) #FeeName3 Cost
+      DisplaySet,#FeeCost4=30,1.25   (Flat Fee 4) #FeeName4 Cost
+      DisplaySet,#FeeCost5=60,1.26   (Flat Fee 5) #FeeName5 Cost
+      DisplaySet,#FeeCost6=70,1.27   (Flat Fee 6) #FeeName6 Cost
+      DisplaySet,#FeeCost7=120,1.28   (Flat Fee 7) #FeeName7 Cost
+   }
+   
+   Do,(#HowManyFees=8):1
+   {
+      DisplaySet,#FeeName1=No Extra Fee,1.15 Name of Fee 1
+      DisplaySet,#FeeName2=Parking,1.16 Name of Fee 2
+      DisplaySet,#FeeName3=Special Labor  ,1.17 Name of Fee 3
+      DisplaySet,#FeeName4=High Rise Fee  ,1.18 Name of Fee 4
+      DisplaySet,#FeeName5=Parking - Special Labor  ,1.19 Name of Fee 5
+      DisplaySet,#FeeName6=Parking - High Rise Fee  ,1.20 Name of Fee 6
+      DisplaySet,#FeeName7=Parking - Special Labor - High Rise Fee  ,1.20 Name of Fee 7
+      DisplaySet,#FeeName8=Special Labor - High Rise Fee  ,1.21 Name of Fee 8
+      AskQuestion,#FeeSelection,#FeeName1,#FeeNameQuestion [#FeeName1;#FeeName2;#FeeName3;#FeeName4;#FeeName5;#FeeName6;#FeeName7;#FeeName8]
+      DisplaySet,#FeeCost1=1,1.22   (Flat Fee 1) #FeeName1 Cost
+      DisplaySet,#FeeCost2=2,1.23   (Flat Fee 2) #FeeName2 Cost
+      DisplaySet,#FeeCost3=3,1.24   (Flat Fee 3) #FeeName3 Cost
+      DisplaySet,#FeeCost4=4,1.25   (Flat Fee 4) #FeeName4 Cost
+      DisplaySet,#FeeCost5=5,1.26   (Flat Fee 5) #FeeName5 Cost
+      DisplaySet,#FeeCost6=6,1.27   (Flat Fee 6) #FeeName6 Cost
+      DisplaySet,#FeeCost7=7,1.28   (Flat Fee 7) #FeeName7 Cost
+      DisplaySet,#FeeCost8=8,1.29   (Flat Fee 8) #FeeName8 Cost
+   }
+   
+   Set,(#FeeSelection="#FeeName1"):#FeeCost=#FeeCost1
+   Set,(#FeeSelection="#FeeName2"):#FeeCost=#FeeCost2
+   Set,(#FeeSelection="#FeeName3"):#FeeCost=#FeeCost3
+   Set,(#FeeSelection="#FeeName4"):#FeeCost=#FeeCost4
+   Set,(#FeeSelection="#FeeName5"):#FeeCost=#FeeCost5
+   Set,(#FeeSelection="#FeeName6"):#FeeCost=#FeeCost6
+   Set,(#FeeSelection="#FeeName7"):#FeeCost=#FeeCost7
+   Set,(#FeeSelection="#FeeName8"):#FeeCost=#FeeCost8
+   
+   Set,(#FeeSelection="#FeeName1"):#FeeName=#FeeName1
+   Set,(#FeeSelection="#FeeName2"):#FeeName=#FeeName2
+   Set,(#FeeSelection="#FeeName3"):#FeeName=#FeeName3
+   Set,(#FeeSelection="#FeeName4"):#FeeName=#FeeName4
+   Set,(#FeeSelection="#FeeName5"):#FeeName=#FeeName5
+   Set,(#FeeSelection="#FeeName6"):#FeeName=#FeeName6
+   Set,(#FeeSelection="#FeeName7"):#FeeName=#FeeName7
+   Set,(#FeeSelection="#FeeName8"):#FeeName=#FeeName8
+}
+
+,This was moved to I-Designer markup.pcb
+,displaySet,#DesignerMarkup=00, Markup - will NOT be reflected in the UNIT PRICE REPORT answer 01 for 1 percent
+,Set,#notusedhereDesignerMarkup=00, re-doing the markup calculations. no markup

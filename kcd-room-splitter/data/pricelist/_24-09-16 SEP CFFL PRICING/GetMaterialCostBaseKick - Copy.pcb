@@ -1,0 +1,139 @@
+,Set Item Costs for Base Kick Type 8 foot sections
+
+,**
+
+,Calculating subtotals
+
+Set,#noreturnbase=0
+Set,#BaseTypeCostGroup=0
+set,#CostOfKick =#BaseTypeCostGroup
+
+Set,(#BaseType = "#BaseType0"):#BaseTypeCostGroup=#BaseTypeCost0
+Set,(#BaseType = "#BaseType0"):#noreturnbase=1
+Set,(#BaseType = "#BaseType1"):#BaseTypeCostGroup=#BaseTypeCost1
+Set,(#BaseType = "#BaseType1"):#noreturnbase=1
+Set,(#BaseType = "#BaseType2"):#BaseTypeCostGroup=#BaseTypeCost2
+Set,(#BaseType = "#BaseType2"):#use2ndmaterial=1
+Set,(#BaseType = "#BaseType2"):#noreturnbase=1
+Set,(#BaseType = "#BaseType3"):#BaseTypeCostGroup=#BaseTypeCost3
+Set,(#BaseType = "#BaseType4"):#BaseTypeCostGroup=#BaseTypeCost4
+Set,(#BaseType = "#BaseType4"):#use2ndmaterial=1
+Set,(#BaseType = "#BaseType5"):#BaseTypeCostGroup=#BaseTypeCost5
+Set,(#BaseType = "#BaseType6"):#BaseTypeCostGroup=#BaseTypeCost6
+Set,(#BaseType = "#BaseType7"):#BaseTypeCostGroup=#BaseTypeCost7
+Set,(#BaseType = "#BaseType8"):#BaseTypeCostGroup=#BaseTypeCost8
+Set,(#BaseType = "#BaseType9"):#BaseTypeCostGroup=#BaseTypeCost9
+Set,(#BaseType = "#BaseType10"):#BaseTypeCostGroup=#BaseTypeCost10
+Set,(#BaseType = "#BaseType11"):#BaseTypeCostGroup=#BaseTypeCost11
+Set,(#BaseType = "#BaseType12"):#BaseTypeCostGroup=#BaseTypeCost12
+Set,(#BaseType = "#BaseType13"):#BaseTypeCostGroup=#BaseTypeCost13
+Set,(#BaseType = "#BaseType14"):#BaseTypeCostGroup=#BaseTypeCost14
+Set,(#BaseType = "#BaseType15"):#BaseTypeCostGroup=#BaseTypeCost15
+Set,(#BaseType = "#BaseType16"):#BaseTypeCostGroup=#BaseTypeCost16
+Set,(#BaseType = "#BaseType17"):#BaseTypeCostGroup=#BaseTypeCost17
+Set,(#BaseType = "#BaseType18"):#BaseTypeCostGroup=#BaseTypeCost18
+Set,(#BaseType = "#BaseType19"):#BaseTypeCostGroup=#BaseTypeCost19
+Set,(#BaseType = "#BaseType20"):#BaseTypeCostGroup=#BaseTypeCost20
+Set,(#BaseType = "#BaseType21"):#BaseTypeCostGroup=#BaseTypeCost21
+Set,(#BaseType = "#BaseType22"):#BaseTypeCostGroup=#BaseTypeCost22
+Set,(#BaseType = "#BaseType23"):#BaseTypeCostGroup=#BaseTypeCost23
+Set,(#BaseType = "#BaseType24"):#BaseTypeCostGroup=#BaseTypeCost24
+Set,(#BaseType = "#BaseType25"):#BaseTypeCostGroup=#BaseTypeCost25
+Set,(#BaseType = "#BaseType26"):#BaseTypeCostGroup=#BaseTypeCost26
+Set,(#BaseType = "#BaseType27"):#BaseTypeCostGroup=#BaseTypeCost27
+Set,(#BaseType = "#BaseType28"):#BaseTypeCostGroup=#BaseTypeCost28
+Set,(#BaseType = "#BaseType29"):#BaseTypeCostGroup=#BaseTypeCost29
+Set,(#BaseType = "#BaseType30"):#BaseTypeCostGroup=#BaseTypeCost30
+Set,(#BaseType = "#BaseType31"):#BaseTypeCostGroup=#BaseTypeCost31
+Set,(#BaseType = "#BaseType32"):#BaseTypeCostGroup=#BaseTypeCost32
+Set,(#BaseType = "#BaseType33"):#BaseTypeCostGroup=#BaseTypeCost33
+Set,(#BaseType = "#BaseType34"):#BaseTypeCostGroup=#BaseTypeCost34
+Set,(#BaseType = "#BaseType35"):#BaseTypeCostGroup=#BaseTypeCost35
+Set,(#BaseType = "#BaseType36"):#BaseTypeCostGroup=#BaseTypeCost36
+Set,(#BaseType = "#BaseType37"):#BaseTypeCostGroup=#BaseTypeCost37
+Set,(#BaseType = "#BaseType38"):#BaseTypeCostGroup=#BaseTypeCost38
+Set,(#BaseType = "#BaseType39"):#BaseTypeCostGroup=#BaseTypeCost39
+
+
+
+Set,(ulfl=1)|(fl=1):#KickFinishLeft=1:#KickFinishLeft=0
+Set,(urfr=1)|(fr=1):#KickFinishRight=1:#KickFinishRight=0
+
+Set,#unitbaselength=((W+(d*#KickFinishLeft)+(d*#KickFinishRight))/12)
+
+Set,(#BaseTypePricingMethod ="LinFt")&(#BaseType <> "#BaseType1")&(#BaseType <> "#BaseType2"):#CostOfKick =[((W+(d*#KickFinishLeft)+(d*#KickFinishRight))/12)* #BaseTypeCostGroup],        Cost Formula LinFt for a Base
+,Was set to this below prior to adding changes for returns above
+,Set,(#BaseTypePricingMethod ="LinFt")&(#BaseType <> "#BaseType1")&(#BaseType <> "#BaseType2"):#CostOfKick =[((W)/12)* #BaseTypeCostGroup],        Cost Formula LinFt for a Base
+
+Set,(#BaseTypePricingMethod ="Section"):#CostOfKick =#BaseTypeCostGroup,        Cost Formula for a Base Sections
+
+Set,(#BaseType = "#BaseType1")|(#BaseType = "#BaseType2"):#CostOfKick =#BaseTypeCostGroup,        Cost Formula for a Base Sections
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

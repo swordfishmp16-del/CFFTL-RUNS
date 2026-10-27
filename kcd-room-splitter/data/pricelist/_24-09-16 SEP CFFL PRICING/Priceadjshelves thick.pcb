@@ -1,0 +1,20 @@
+,CF Prices and counts the adjustable shelves  
+
+Do, (#tempshelfcount>0):1
+{
+set, (TR<>0):#TH=TR:#TH=H
+Load, C-Shelf Cost.Pcb
+Load, Countshelves.Pcb
+
+Do, ((#TH>#ShelfthickA)&(#frontlip=1)):1
+{
+Set, #TH = {#shelfthicka}
+}
+Set, #TH = {#TH}
+Price,#Tempshelfcount, #AdjustableShelfName-#TH"-#edgebandingtype,  #CostOfAdjustableShelf,  #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber, 
+Price,(#frontlip=1):#Tempshelfcount, #fixedlipname,  #frontlipoptioncost,  #lipheight, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,    
+}  
+
+,Set, (#CostOfAdjustableShelf>0)&(opt=#optRWNotchshelfoptnum):#addRWShelfnotch=#Tempshelfcount
+,Price, (#CostOfAdjustableShelf>0)&(opt=#optRWNotchshelfoptnum):#Tempshelfcount,  #optionRWNotchshelfname cost,  #costtoRWnotchshelves,  , #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+

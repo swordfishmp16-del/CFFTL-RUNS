@@ -1,0 +1,36 @@
+'*********************************************
+'** Initialize Common Outdoor Cabinet Counter Variables
+'**
+'*********************************************
+
+
+'** Structure to keep track of Outdoor Cabinet Parts **
+
+'Future variables will look like this:
+'    #gARRAYNAMEArr(#index).VaribleFromBelowList
+'    G meaning Global, ARRAYNAME in this instance is  OK Totals and Arr meaning Array (#index) means location on array table to set/grab info from.
+Struct, CommonOKCounterStruct
+   Name
+   Quantity
+   Length
+   Width
+   Depth
+   TotalCost
+End Struct
+
+'** Part Variables: Used to pass info into CommonOKCounter files **
+'  These global variables will be used to hold regular variables like #Name or hold retrieved info stored in a particular index location for setting/math.
+global, #gName
+global, #gQuantity
+global, #gTotalCost
+global, #GOKUnitL
+global, #GOKUnitW
+global, #GOKunitD
+,global, #GOKunitCode
+
+
+'** OK Array Variables **
+'   This sets up the size of the array to begin with and the name that we'll be calling from - see ARRAYNAME in the sample line above the struct section
+global, #gOKTotalsArrSize
+global, #gOKTotalsArr(1) as CommonOKCounterStruct
+set, #gOKTotalsArrSize = 0

@@ -1,0 +1,66 @@
+set,#CountertopTypeName = #ExtraUnitText13
+load, CT-setup.pcb
+load, GetCountertopCost.pcb
+
+Set, #CTopName=#CountertopTypeName,Counter Top Type/Name
+,**
+,**                       ######  COUNTER TOP COST ###### 
+
+Set, (#addedge=1):#CTopLF$temp =#Addwoodedgecost:#CTopLF$temp =0,* COUNTER TOP Edge---------- lineal foot/meter cost used for added counter edge
+
+,Set, #CTopSq$temp =#CounterTopcostGroup,* COUNTER TOP ---------- Square foot/meter cost see get countertop cost
+
+
+
+
+
+
+
+
+
+Set, #SplashTLF$ = #SplashTLF$temp/#CTopLinealFactor    ,TILE BACKSPLASH ------ lineal foot/meter cost
+Set, #SplashTSQ$ = #SplashTSQ$temp/#CtopSquareFactor        ,TILE BACKSPLASH------- Square foot/meter cost
+Set, #SplashFLF$ = #SplashFLF$temp/#CTopLinealFactor    ,FULL BACKSPLASH ------ lineal foot/meter cost
+Set, #SplashFSQ$ = #SplashFSQ$temp/#CtopSquareFactor        ,FULL BACKSPLASH ------ Square foot/meter cost
+Set, #Splash4LF$ = #Splash4LF$temp/#CTopLinealFactor  ,4" BACKSPLASH -------- lineal foot/meter cost
+Set, #CTopLF$ = #CTopLF$temp/#CTopLinealFactor     ,* COUNTER TOP ---------- lineal foot cost
+Set, #CTopSq$ = #CTopSq$temp/#CtopSquareFactor    ,* COUNTER TOP ---------- Square foot cost
+
+
+
+,set, (w<H):#ctw=h:#ctw=w
+set, #ctw=w
+,set, (H>d):#ctd=h:#ctd=d
+set, #ctd=d
+Do, (#Name = "Standard C-top"):1
+{
+ set, (w<H):#ctw=h:#ctw=w
+ set, (H>d):#ctd=h:#ctd=d
+} 
+
+Set,(ct>0):#CTopCost = [#CTopCost + ((#ctw+ctl+ctr)*#CTopLF$*Num) + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num)]
+,Set,(ct>0)&(opt<>6);#CTopCost = [#CTopCost + ((w+ctl+ctr)*#CTopLF$*Num) + ((w+ctl+ctr)*(d+ctf+ctb)*#CTopSq$*Num)]
+
+
+Set,(t=991):#Subtotal11Cost = [#Subtotal11Cost+#Splash4Cost + (w*#Splash4LF$)] 
+Set,(t=992):#Subtotal12Cost = [#Subtotal12Cost+#SplashFCost + (w*#SplashFLF$) + ((w*h)*#SplashFSq$)] 
+Set,(t=993):#Subtotal13Cost = [#Subtotal13Cost+#SplashTCost + (w*#SplashTLF$) + ((w*h)*#SplashTSq$)] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,Set,(opt=6): #CTopLFv$ = 30/Ft
+,Set,(opt=6): #CTopSqv$ = 0/SqFt
+,Set,(ct>0)&(opt=6);#CTopCostV = [#CTopCostV + ((w+ctl+ctr)*#CTopLFv$) + ((w+ctl+ctr)*(d+ctf+ctb)*#CTopSqv$)]
+

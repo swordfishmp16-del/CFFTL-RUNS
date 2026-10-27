@@ -1,0 +1,227 @@
+
+Set,#NewHWcount=0
+set, #addhinges=0
+set,#OverlayHingeaddtemp=0
+set,#STDHingeaddtemp=0
+Do,(#DoorHL=11)|(#DoorHL=12)|(#DoorHL=13):1
+{
+,double handles or knobs on drawers
+Do,(#Thisdoor=#DoorDR|#DoorHG=3|(#DoorHG=4)):1
+ {
+  Do,(#DoorHK>1):1
+  {
+   Set,#UnitDoorHandleCount = [2+#UnitDoorHandleCount]
+   Set,#NewHWcount=2
+  },end door handle count
+
+  Do,(#DoorHK=1):1
+  {
+   Set,#UnitDoorKnobCount = [2+#UnitDoorKnobCount]
+   Set,#NewHWcount=2
+  },end door knob count
+ }
+Do,(#Thisdoor<>#DoorDR|#DoorHG=1|(#DoorHG=2)):1
+ {
+  Do,(#DoorHK>1):1
+  {
+   Set,#UnitDoorHandleCount = [1+#UnitDoorHandleCount]
+   Set,#NewHWcount=1
+  },end door handle count
+
+  Do,(#DoorHK=1):1
+  {
+   Set,#UnitDoorKnobCount = [1+#UnitDoorKnobCount]
+   Set,#NewHWcount=1
+  },end door knob count
+ }
+}
+Do,(#DoorHL=21)|(#DoorHL=22)|(#DoorHL=23)|(#DoorHL=31)|(#DoorHL=32)|(#DoorHL=33):1
+{
+  Do,(#DoorHK>1):1
+  {
+   Set,#UnitDoorHandleCount = [1+#UnitDoorHandleCount]
+   Set,#NewHWcount=1
+  },end door handle count
+
+  Do,(#DoorHK=1):1
+  {
+   Set,#UnitDoorKnobCount = [1+#UnitDoorKnobCount]
+   Set,#NewHWcount=1
+  },end door knob count
+}
+Do,(#wallbeddepthtrack=0):1
+{
+Set,(#DoorHG = 0):#HasHinges=0:#HasHinges=1
+Do,(#HasHinges>0):1
+{
+ Do,((#DoorHG=3)|(#DoorHG=4)):1
+ {
+   Set,#UnitDoorHingeCount = [2+#UnitDoorHingeCount]
+   Set, #addhinges=[2]
+   Do,(#DoorW>=H3HT):1
+   {
+      Set,#UnitDoorHingeCount = [1+#UnitDoorHingeCount]
+      Set, #addhinges=[#addhinges+1]
+   },end door has 3 hinges
+   
+   Do,(#DoorW>=H4HT):1
+   {
+      Set,#UnitDoorHingeCount = [1+#UnitDoorHingeCount]
+      Set, #addhinges=[#addhinges+1]
+   },end door has 4 hinges
+   
+   Do,(#DoorW>=H5HT):1
+   {
+      Set,#UnitDoorHingeCount = [1+#UnitDoorHingeCount]
+      Set, #addhinges=[#addhinges+1]
+   },end door has 5 hinges
+ }
+
+ Do,((#DoorHG=1)|(#DoorHG=2)):1
+ {
+   Set,#UnitDoorHingeCount = [2+#UnitDoorHingeCount]
+   Set, #addhinges=[2]
+   Do,(#DoorH>=H3HT):1
+   {
+      Set,#UnitDoorHingeCount = [1+#UnitDoorHingeCount]
+      Set, #addhinges=[#addhinges+1]
+   },end door has 3 hinges
+   
+   Do,(#DoorH>=H4HT):1
+   {
+      Set,#UnitDoorHingeCount = [1+#UnitDoorHingeCount]
+      Set, #addhinges=[#addhinges+1]
+   },end door has 4 hinges
+   
+   Do,(#DoorH>=H5HT):1
+   {
+      Set,#UnitDoorHingeCount = [1+#UnitDoorHingeCount]
+      Set, #addhinges=[#addhinges+1]
+   },end door has 5 hinges
+ }
+}
+
+set, #stophere=1111
+Do, (#Whichdoor="Single"):1
+{ 
+  Do,((#Hingeside=1)):1
+  {
+    Set,((LSRV=STSRV)|(.75-(LSRV*-1)=STSRV)):#StdHingeaddtemp=#addhinges:#OverlayHingeaddtemp=#addhinges
+
+    Set,(#doorsideoverlayshopstandard="Full Overlay"):#overlayhingeadd=#StdHingeaddtemp:#overlayhingeadd=#OverlayHingeaddtemp
+    Set,(#doorsideoverlayshopstandard="Full Overlay"):#Stdhingeadd=#OverlayHingeaddtemp:#Stdhingeadd=#StdHingeaddtemp
+    ,price,(#Standarddoorhingecost>0)&(#StdHingeadd>0): 1, RM#Roomnum Standard Door Hinge, #Standarddoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+    ,price, (#Overlaydoorhingecost>0)&(#OverlayHingeadd>0): 1, RM#Roomnum Overlay Door Hinge, #Overlaydoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+  }
+  Do,((#Hingeside=2)):1
+  {
+    Set,((RSRV=STSRV)|(.75-(RSRV*-1)=STSRV)):#StdHingeaddtemp=#addhinges:#OverlayHingeaddtemp=#addhinges
+
+    Set,(#doorsideoverlayshopstandard="Full Overlay"):#overlayhingeadd=#StdHingeaddtemp:#overlayhingeadd=#OverlayHingeaddtemp
+    Set,(#doorsideoverlayshopstandard="Full Overlay"):#Stdhingeadd=#OverlayHingeaddtemp:#Stdhingeadd=#StdHingeaddtemp
+    ,price, (#Standarddoorhingecost>0)&(#StdHingeadd>0): 1, RM#Roomnum Standard Door Hinge, #Standarddoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber    
+    ,price, (#Overlaydoorhingecost>0)&(#OverlayHingeadd>0): 1, RM#Roomnum Overlay Door Hinge, #Overlaydoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+  }
+  Do,((#Hingeside=3)):1
+  { 
+   Set, #bottomhingeadd=#addhinges
+    ,price, (#tipoutdoorhingecost>0):1, RM#Roomnum Tip-out Door Hinge, #tipoutdoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+
+  }
+  Do,((#Hingeside=4)):1
+  {
+    set, #Tophingeadd=#addhinges
+    ,price,(#Liftupdoorhingecost>0): 1, RM#Roomnum Lift-up Door Hinge #LUHNote, #Liftupdoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+  }
+}
+Do, (#Whichdoor="Pairleft"):1
+{ 
+  Do,((#Hingeside=1)):1
+  {
+    Set,((LSRV=STSRV)|(.75-(LSRV*-1)=STSRV)):#StdHingeaddtemp=#addhinges:#OverlayHingeaddtemp=#addhinges
+
+    Set,(#doorsideoverlayshopstandard="Full Overlay"):#overlayhingeadd=#StdHingeaddtemp:#overlayhingeadd=#OverlayHingeaddtemp
+    Set,(#doorsideoverlayshopstandard="Full Overlay"):#Stdhingeadd=#OverlayHingeaddtemp:#Stdhingeadd=#StdHingeaddtemp
+    ,price, (#Standarddoorhingecost>0)&(#StdHingeadd>0): 1, RM#Roomnum Standard Door Hinge, #Standarddoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+    ,price, (#Overlaydoorhingecost>0)&(#OverlayHingeadd>0): 1, RM#Roomnum Overlay Door Hinge, #Overlaydoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+
+  }
+ , Do,((#Hingeside=2)):1
+ , {
+   , Set,((RSRV=STSRV)|(.75-(RSRV*-1)=STSRV)):#StdHingeadd=#addhinges:#OverlayHingeadd=#addhinges
+   , price, (#Standarddoorhingecost>0)&(#StdHingeadd>0): 1, RM#Roomnum Standard Door Hinge, #Standarddoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+   , price, (#Overlaydoorhingecost>0)&(#OverlayHingeadd>0): 1, RM#Roomnum Overlay Door Hinge, #Overlaydoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+
+,  }
+  Do,((#Hingeside=3)):1
+  { 
+    Set, #bottomhingeadd=#addhinges
+    ,price, 1, RM#Roomnum Tip-out Door Hinge, #tipoutdoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+
+  }
+  Do,((#Hingeside=4)):1
+  { 
+    set, #Tophingeadd=#addhinges 
+    ,price, 1, RM#Roomnum Lift-up Door Hinge #LUHNote, #Liftupdoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+  }
+}
+Do, (#Whichdoor="Pairright"):1
+{ 
+ , Do,((#Hingeside=1)):1
+ , {
+  ,  Set,((LSRV=STSRV)|(.75-(LSRV*-1)=STSRV)):#StdHingeadd=#addhinges:#OverlayHingeadd=#addhinges
+  ,  price, (#Standarddoorhingecost>0)&(#StdHingeadd>0): 1, RM#Roomnum Standard Door Hinge, #Standarddoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+  ,  price, (#Overlaydoorhingecost>0)&(#OverlayHingeadd>0): 1, RM#Roomnum Overlay Door Hinge, #Overlaydoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+
+ , }
+  Do,((#Hingeside=1)):1
+  {
+   Set,((RSRV=STSRV)|(.75-(RSRV*-1)=STSRV)):#StdHingeaddtemp=#addhinges:#OverlayHingeaddtemp=#addhinges
+    Set,(#doorsideoverlayshopstandard="Full Overlay"):#overlayhingeadd=#StdHingeaddtemp:#overlayhingeadd=#OverlayHingeaddtemp
+    Set,(#doorsideoverlayshopstandard="Full Overlay"):#Stdhingeadd=#OverlayHingeaddtemp:#Stdhingeadd=#StdHingeaddtemp
+
+    ,price, (#Standarddoorhingecost>0)&(#StdHingeadd>0): 1, RM#Roomnum Standard Door Hinge, #Standarddoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+   ,price, (#Overlaydoorhingecost>0)&(#OverlayHingeadd>0): 1, RM#Roomnum Overlay Door Hinge, #Overlaydoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+
+  }
+  Do,((#Hingeside=3)):1
+  {
+   Set, #bottomhingeadd=#addhinges 
+   ,price, 1, RM#Roomnum Tip-out Door Hinge, #tipoutdoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+  }
+  Do,((#Hingeside=4)):1
+  { 
+    set, #Tophingeadd=#addhinges 
+    ,price, 1, RM#Roomnum Lift-up Door Hinge #LUHNote, #Liftupdoorhingecost*#addhinges*#universalupcharge,,,#DoorPrintOrderNumber  
+  }
+}
+,end counting wallbed handles and knobs so skip hinges and pricing
+}
+set, #stopextruded=1
+,Price Extruded Handles
+Do,(#codedoor="*extruded*"):1
+{
+ Do,(#Codedoor="extruded pull bot*")|(#Codedoor="extruded pull top*"):1
+ {
+ ,price, (#doorW<=#exthandlesize1):1, RM#Roomnum #exthandlename, #extrudedhandlecost1*#universalupcharge, #doorW,,,#DoorPrintOrderNumber
+ ,price, (#doorW>#exthandlesize1)&(#doorW<=#exthandlesize2):1, RM#Roomnum #exthandlename, #extrudedhandlecost2*#universalupcharge, #doorW,,,#DoorPrintOrderNumber
+ ,price, (#doorW>#exthandlesize2)&(#doorW<=#exthandlesize3):1, RM#Roomnum #exthandlename, #extrudedhandlecost3*#universalupcharge, #doorW,,,#DoorPrintOrderNumber
+ }
+ Do,(#Codedoor="extruded pull Left")|(#Codedoor="extruded pull Right"):1
+ {
+ ,price, (#doorH<=#exthandlesize1):1, RM#Roomnum #exthandlename, #extrudedhandlecost1*#universalupcharge, #doorH,,,#DoorPrintOrderNumber
+ ,price, (#doorH>#exthandlesize1)&(#doorH<=#exthandlesize2):1, RM#Roomnum #exthandlename, #extrudedhandlecost2*#universalupcharge, #doorH,,,#DoorPrintOrderNumber
+ ,price, (#doorH>#exthandlesize2)&(#doorH<=#exthandlesize3):1, RM#Roomnum #exthandlename, #extrudedhandlecost3*#universalupcharge, #DoorH,,,#DoorPrintOrderNumber
+ }
+}
+
+load, Gethehandlenameandcost.pcb
+
+set, #stopextruded=2
+set, #stophere=0
+set, #whichdoor="none"  
+
+
+
+
+

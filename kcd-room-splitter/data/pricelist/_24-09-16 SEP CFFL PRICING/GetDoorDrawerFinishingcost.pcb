@@ -1,0 +1,287 @@
+,Set Item Costs factor for Door Finishing
+
+,**
+
+,Calculating subtotals
+
+
+Set,#DoorDrawerFinishingCostGroup=0
+
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType1"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost1]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType2"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost2]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType3"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost3]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType4"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost4]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType5"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost5]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType6"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost6]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType7"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost7]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType8"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost8]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType9"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost9]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType10"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost10]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType11"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost11]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType12"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost12]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType13"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost13]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType14"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost14]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType15"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost15]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType16"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost16]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType17"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost17]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType18"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost18]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType19"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost19]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType20"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost20]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType21"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost21]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType22"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost22]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType23"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost23]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType24"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost24]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType25"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost25]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType26"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost26]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType27"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost27]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType28"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost28]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType29"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost29]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType30"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost30]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType31"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost31]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType32"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost32]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType33"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost33]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType34"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost34]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType35"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost35]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType36"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost36]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType37"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost37]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType38"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost38]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType39"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost39]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType40"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost40]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType41"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost41]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType42"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost42]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType43"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost43]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType44"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost44]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType45"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost45]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType46"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost46]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType47"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost47]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType48"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost48]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType49"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost49]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType50"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost50]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType51"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost51]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType52"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost52]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType53"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost53]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType54"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost54]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType55"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost55]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType56"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost56]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType57"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost57]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType58"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost58]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType59"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost59]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType60"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost60]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType61"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost61]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType62"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost62]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType63"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost63]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType64"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost64]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType65"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost65]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType66"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost66]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType67"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost67]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType68"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost68]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType69"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost69]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType70"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost70]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType71"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost71]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType72"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost72]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType73"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost73]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType74"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost74]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType75"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost75]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType76"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost76]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType77"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost77]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType78"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost78]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType79"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost79]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType80"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost80]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType81"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost81]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType82"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost82]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType83"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost83]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType84"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost84]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType85"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost85]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType86"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost86]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType87"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost87]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType88"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost88]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType89"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost89]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType90"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost90]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType91"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost91]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType92"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost92]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType93"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost93]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType94"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost94]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType95"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost95]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType96"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost96]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType97"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost97]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType98"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost98]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType99"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost99]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType100"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost100]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType101"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost101]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType102"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost102]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType103"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost103]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType104"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost104]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType105"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost105]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType106"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost106]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType107"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost107]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType108"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost108]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType109"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost109]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType110"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost110]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType111"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost111]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType112"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost112]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType113"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost113]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType114"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost114]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType115"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost115]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType116"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost116]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType117"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost117]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType118"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost118]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType119"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost119]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType120"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost120]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType121"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost121]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType122"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost122]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType123"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost123]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType124"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost124]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType125"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost125]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType126"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost126]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType127"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost127]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType128"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost128]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType129"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost129]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType130"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost130]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType131"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost131]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType132"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost132]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType133"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost133]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType134"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost134]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType135"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost135]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType136"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost136]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType137"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost137]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType138"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost138]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType139"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost139]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType140"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost140]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType141"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost141]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType142"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost142]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType143"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost143]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType144"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost144]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType145"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost145]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType146"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost146]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType147"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost147]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType148"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost148]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType149"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost149]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType150"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost150]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType151"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost151]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType152"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost152]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType153"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost153]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType154"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost154]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType155"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost155]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType156"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost156]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType157"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost157]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType158"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost158]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType159"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost159]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType160"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost160]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType161"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost161]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType162"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost162]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType163"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost163]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType164"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost164]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType165"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost165]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType166"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost166]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType167"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost167]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType168"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost168]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType169"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost169]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType170"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost170]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType171"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost171]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType172"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost172]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType173"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost173]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType174"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost174]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType175"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost175]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType176"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost176]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType177"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost177]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType178"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost178]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType179"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost179]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType180"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost180]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType181"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost181]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType182"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost182]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType183"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost183]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType184"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost184]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType185"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost185]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType186"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost186]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType187"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost187]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType188"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost188]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType189"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost189]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType190"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost190]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType191"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost191]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType192"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost192]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType193"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost193]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType194"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost194]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType195"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost195]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType196"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost196]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType197"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost197]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType198"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost198]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType199"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost199]
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType200"):#DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingTypeCost200]
+
+
+
+
+
+
+
+Set, #DoorDrawerFinishingCostGroup=[#DoorDrawerFinishingCostGroup*#universalupcharge]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

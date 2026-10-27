@@ -1,0 +1,101 @@
+,CF Tall 5 opening
+,Calculates the price for each part
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+Load, Pricesides.pcb   
+,*****************************************
+
+
+
+
+,********* All VERTICAL DIVIDERS *********
+,Top Vertical Divider
+Set, #VertH = [DH1]
+Set, #VertD = [D]
+load, PriceDividers.pcb
+
+,*****************************************
+
+
+
+
+,*********** All FIXED SHELVES ***********
+Set, #ShelfWidth = [(W-LS-RS)]     
+Set, #ShelfDepth = [(D)]
+set, (LMR>0):#lowerspannercount= 1
+Load, Pricefixedshelves.pcb       
+,*****************************************
+
+
+
+
+,*********** All ADJ SHELVES *************
+,Top Adj Shelves
+Set, (MS=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-MS)/2]
+Set, (MS=0):#tempshelfcount=SH1:#tempshelfcount=SH1*2
+load, Priceadjshelves.pcb
+
+,2nd Adj Shelves
+Set, (LMS=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-LMS)/2]
+Set, (LMS=0):#tempshelfcount=SH3:#tempshelfcount=SH3*2
+Set, (MS2=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-ms2)/2]
+Set, (MS2=0):#tempshelfcount=SH3:#tempshelfcount=SH3*2
+load, Priceadjshelves.pcb
+
+,3rd Adj Shelves
+,Set, (LLMS=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-LMS)/2]
+,Set, (LLMS=0):#tempshelfcount=SH4:#tempshelfcount=SH4*2
+,Set, (MS3=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-MS3)/2]
+,Set, (MS3=0):#tempshelfcount=SH4:#tempshelfcount=SH4*2
+,load, Priceadjshelves.pcb
+
+,4th Adj Shelves
+,Set, (ms4=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-ms4)/2]
+,Set, (MS4=0):#tempshelfcount=SH5:#tempshelfcount=SH5*2
+,load, Priceadjshelves.pcb
+
+,Lower Adj Shelves
+Set, (BMS=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-BMS)/2]
+Set, (BMS=0):#tempshelfcount=SH2:#tempshelfcount=SH2*2
+Set, (MS5=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-MS5)/2]
+Set, (MS5=0):#tempshelfcount=SH2:#tempshelfcount=SH2*2
+load, Priceadjshelves.pcb  
+,*****************************************
+
+,*********** RODS ***********      
+set, #ShelfWidth = [(W-LS-RS)]
+Load, Pricerods.pcb
+,*****************************************
+
+
+,************* OTHER PARTS ***************
+set, #Backheight = [H-TR-BR-K]
+set, #ShelfWidth = [(W-LS-RS)]
+Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,           
+Price, (K>0):1,      #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,              
+,*****************************************
+
+
+
+
+,******* All DOORS & DRAWER FRONTS *******
+Load, Doors.pcb
+,*****************************************
+
+
+
+
+,*********** All DRAWER BOXES ************
+Load, Drawers.Pcb
+,*****************************************
+
+
+
+
+,************ All PULLOUTS ***************
+Set, #PulloutOpeningWidth = [W-LS-RS]
+Load, (npo>0): G-Pullout Cost.Pcb
+,*****************************************

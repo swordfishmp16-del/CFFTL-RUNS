@@ -1,0 +1,398 @@
+,Chelsea was here 10-12-21 - This page will match Room Number, Handle/Knob number, and report the correct handle/knob name.
+set, #stophandle=0
+Set, #HandleKnobSelection=[#DoorHKN]
+
+Do, (#RoomNum=1):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1.00):#HKName=#HandleName1Room1
+   Set, (#HandleKnobSelection=2.00):#HKName=#HandleName2Room1
+   Set, (#HandleKnobSelection=3.00):#HKName=#HandleName3Room1
+   Set, (#HandleKnobSelection=4.00):#HKName=#HandleName4Room1
+   Set, (#HandleKnobSelection=5.00):#HKName=#HandleName5Room1
+   Set, (#HandleKnobSelection=6.00):#HKName=#HandleName6Room1
+   Set, (#HandleKnobSelection=7.00):#HKName=#HandleName7Room1
+   Set, (#HandleKnobSelection=8.00):#HKName=#HandleName8Room1
+   Set, (#HandleKnobSelection=9.00):#HKName=#HandleName9Room1
+set, #stophandle=1
+End
+ }
+
+Do, (#RoomNum=2):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room2
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room2
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room2
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room2
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room2
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room2
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room2
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room2
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room2
+End
+ }
+
+Do, (#RoomNum=3):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room3
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room3
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room3
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room3
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room3
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room3
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room3
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room3
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room3
+End
+ }
+
+Do, (#RoomNum=4):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room4
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room4
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room4
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room4
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room4
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room4
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room4
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room4
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room4
+End
+ }
+
+Do, (#RoomNum=5):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room5
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room5
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room5
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room5
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room5
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room5
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room5
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room5
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room5
+End
+ }
+
+Do, (#RoomNum=6):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room6
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room6
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room6
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room6
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room6
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room6
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room6
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room6
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room6
+End
+ }
+
+Do, (#RoomNum=7):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room7
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room7
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room7
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room7
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room7
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room7
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room7
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room7
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room7
+End
+ }
+
+Do, (#RoomNum=8):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room8
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room8
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room8
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room8
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room8
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room8
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room8
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room8
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room8
+End
+ }
+
+Do, (#RoomNum=9):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room9
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room9
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room9
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room9
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room9
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room9
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room9
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room9
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room9
+End
+ }
+
+Do, (#RoomNum=10):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room10
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room10
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room10
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room10
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room10
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room10
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room10
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room10
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room10
+End
+ }
+
+Do, (#RoomNum=11):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room11
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room11
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room11
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room11
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room11
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room11
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room11
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room11
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room11
+End
+ }
+
+Do, (#RoomNum=12):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room12
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room12
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room12
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room12
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room12
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room12
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room12
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room12
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room12
+
+End
+ }
+
+Do, (#RoomNum=13):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room13
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room13
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room13
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room13
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room13
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room13
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room13
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room13
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room13
+
+End
+ }
+
+Do, (#RoomNum=14):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room14
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room14
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room14
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room14
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room14
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room14
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room14
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room14
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room14
+
+End
+ }
+
+Do, (#RoomNum=15):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room15
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room15
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room15
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room15
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room15
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room15
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room15
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room15
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room15
+
+End
+ }
+
+Do, (#RoomNum=16):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room16
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room16
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room16
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room16
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room16
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room16
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room16
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room16
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room16
+
+End
+ }
+
+Do, (#RoomNum=17):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room17
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room17
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room17
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room17
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room17
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room17
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room17
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room17
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room17
+
+End
+ }
+
+Do, (#RoomNum=18):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room18
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room18
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room18
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room18
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room18
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room18
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room18
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room18
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room18
+
+End
+ }
+
+Do, (#RoomNum=19):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room19
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room19
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room19
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room19
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room19
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room19
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room19
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room19
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room19
+
+End
+ }
+
+Do, (#RoomNum=20):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room20
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room20
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room20
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room20
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room20
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room20
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room20
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room20
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room20
+
+End
+ }
+
+Do, (#RoomNum=21):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room21
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room21
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room21
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room21
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room21
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room21
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room21
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room21
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room21
+
+End
+ }
+
+Do, (#RoomNum=22):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room22
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room22
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room22
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room22
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room22
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room22
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room22
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room22
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room22
+
+End
+ }
+
+Do, (#RoomNum=23):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room23
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room23
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room23
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room23
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room23
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room23
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room23
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room23
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room23
+
+End
+ }
+
+Do, (#RoomNum=24):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room24
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room24
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room24
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room24
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room24
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room24
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room24
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room24
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room24
+
+End
+ }
+
+Do, (#RoomNum=25):1
+ {
+   Set, (#HandleKnobSelection=0):#HKName=0
+   Set, (#HandleKnobSelection=1):#HKName=#HandleName1Room25
+   Set, (#HandleKnobSelection=2):#HKName=#HandleName2Room25
+   Set, (#HandleKnobSelection=3):#HKName=#HandleName3Room25
+   Set, (#HandleKnobSelection=4):#HKName=#HandleName4Room25
+   Set, (#HandleKnobSelection=5):#HKName=#HandleName5Room25
+   Set, (#HandleKnobSelection=6):#HKName=#HandleName6Room25
+   Set, (#HandleKnobSelection=7):#HKName=#HandleName7Room25
+   Set, (#HandleKnobSelection=8):#HKName=#HandleName8Room25
+   Set, (#HandleKnobSelection=9):#HKName=#HandleName9Room25
+
+End
+ }
+
+
+
+
+

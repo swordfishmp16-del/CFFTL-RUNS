@@ -1,0 +1,123 @@
+,Set Item Costs for Back Cost PerFoot
+
+,**
+
+,Calculating subtotals
+set, #stopback=1
+
+Set,#BackTypeCostGroup=0
+
+Set,(#BackType = "#BackType0"):#BackTypeCostGroup=#BackTypeCost0
+Set,(#BackType = "#BackType1"):#BackTypeCostGroup=#BackTypeCost1
+Set,(#BackType = "#BackType2"):#BackTypeCostGroup=#BackTypeCost2
+Set,(#BackType = "#BackType2"):#use2ndmaterial=1
+Set,(#BackType = "#BackType3"):#BackTypeCostGroup=#BackTypeCost3
+Set,(#BackType = "#BackType4"):#BackTypeCostGroup=#BackTypeCost4
+Set,(#BackType = "#BackType5"):#BackTypeCostGroup=#BackTypeCost5
+Set,(#BackType = "#BackType6"):#BackTypeCostGroup=#BackTypeCost6
+Set,(#BackType = "#BackType7"):#BackTypeCostGroup=#BackTypeCost7
+Set,(#BackType = "#BackType8"):#BackTypeCostGroup=#BackTypeCost8
+Set,(#BackType = "#BackType9"):#BackTypeCostGroup=#BackTypeCost9
+Set,(#BackType = "#BackType10"):#BackTypeCostGroup=#BackTypeCost10
+Set,(#BackType = "#BackType11"):#BackTypeCostGroup=#BackTypeCost11
+Set,(#BackType = "#BackType12"):#BackTypeCostGroup=#BackTypeCost12
+Set,(#BackType = "#BackType13"):#BackTypeCostGroup=#BackTypeCost13
+Set,(#BackType = "#BackType14"):#BackTypeCostGroup=#BackTypeCost14
+Set,(#BackType = "#BackType15"):#BackTypeCostGroup=#BackTypeCost15
+Set,(#BackType = "#BackType16"):#BackTypeCostGroup=#BackTypeCost16
+Set,(#BackType = "#BackType17"):#BackTypeCostGroup=#BackTypeCost17
+Set,(#BackType = "#BackType18"):#BackTypeCostGroup=#BackTypeCost18
+Set,(#BackType = "#BackType19"):#BackTypeCostGroup=#BackTypeCost19
+Set,(#BackType = "#BackType20"):#BackTypeCostGroup=#BackTypeCost20
+Set,(#BackType = "#BackType21"):#BackTypeCostGroup=#BackTypeCost21
+Set,(#BackType = "#BackType22"):#BackTypeCostGroup=#BackTypeCost22
+Set,(#BackType = "#BackType23"):#BackTypeCostGroup=#BackTypeCost23
+Set,(#BackType = "#BackType24"):#BackTypeCostGroup=#BackTypeCost24
+Set,(#BackType = "#BackType25"):#BackTypeCostGroup=#BackTypeCost25
+Set,(#BackType = "#BackType26"):#BackTypeCostGroup=#BackTypeCost26
+Set,(#BackType = "#BackType27"):#BackTypeCostGroup=#BackTypeCost27
+Set,(#BackType = "#BackType28"):#BackTypeCostGroup=#BackTypeCost28
+Set,(#BackType = "#BackType29"):#BackTypeCostGroup=#BackTypeCost29
+Set,(#BackType = "#BackType30"):#BackTypeCostGroup=#BackTypeCost30
+Set,(#BackType = "#BackType31"):#BackTypeCostGroup=#BackTypeCost31
+Set,(#BackType = "#BackType32"):#BackTypeCostGroup=#BackTypeCost31
+Set,(#BackType = "#BackType33"):#BackTypeCostGroup=#BackTypeCost33
+Set,(#BackType = "#BackType34"):#BackTypeCostGroup=#BackTypeCost34
+Set,(#BackType = "#BackType35"):#BackTypeCostGroup=#BackTypeCost35
+Set,(#BackType = "#BackType36"):#BackTypeCostGroup=#BackTypeCost36
+Set,(#BackType = "#BackType37"):#BackTypeCostGroup=#BackTypeCost37
+Set,(#BackType = "#BackType38"):#BackTypeCostGroup=#BackTypeCost38
+Set,(#BackType = "#BackType39"):#BackTypeCostGroup=#BackTypeCost39
+Set,(#BackType = "#BackType40"):#BackTypeCostGroup=#BackTypeCost40
+Set,(#BackType = "#BackType41"):#BackTypeCostGroup=#BackTypeCost41
+Set,(#BackType = "#BackType42"):#BackTypeCostGroup=#BackTypeCost42
+Set,(#BackType = "#BackType43"):#BackTypeCostGroup=#BackTypeCost43
+Set,(#BackType = "#BackType44"):#BackTypeCostGroup=#BackTypeCost44
+Set,(#BackType = "#BackType45"):#BackTypeCostGroup=#BackTypeCost45
+Set,(#BackType = "#BackType46"):#BackTypeCostGroup=#BackTypeCost46
+Set,(#BackType = "#BackType47"):#BackTypeCostGroup=#BackTypeCost47
+Set,(#BackType = "#BackType48"):#BackTypeCostGroup=#BackTypeCost48
+Set,(#BackType = "#BackType49"):#BackTypeCostGroup=#BackTypeCost49
+
+
+set, #BackTypeCostGroup=[#BackTypeCostGroup*#universalupcharge]
+set, #stopback=2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

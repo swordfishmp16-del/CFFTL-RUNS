@@ -1,0 +1,18 @@
+,Determine Cost of Belt rack
+
+set, #hookcount=[D\6]
+
+Set, #hookcountnote={#hookcount}
+
+Set,(#UnitFileName="HooksRFixedMG*"): #Note=#hookcountnote Economy Hook Matte Gold 845.01.540 
+Set,(#UnitFileName="HooksRFixedMB*"): #Note=#hookcountnote Economy Hook Matte Black 845.01.340
+Set,(#UnitFileName="HooksRFixedMNL*"): #Note=#hookcountnote Economy Hook Matte Nickel 845.01.600
+Set,(#UnitFileName="HooksRFixedCHR*"): #Note=#hookcountnote Economy Hook Chrome 885.06.209
+
+set, #hookcount=[D\6]
+
+set, #costofhookrack=#Costofhooksoncleat*#hookcount
+
+,******** ALL BELT RACKS ************
+Price, 1,   RM#roomnum Wall Cleat base with #note ,      #CostOfHookRack*#universalupcharge,             W, d,          #ValetrodPrintOrderNumber,     
+,************************************

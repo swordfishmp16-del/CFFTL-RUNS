@@ -1,0 +1,481 @@
+Set, #stopxxafterOK=1
+
+Do(#unitfilename="*OK-*"):1
+{
+
+ Do,(#RoomNum = 1):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room1toekicklength=[#Room1toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room1fillerlength=[#Room1fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room1fillertoekicktotallength=[#Room1toekicklength+#Room1fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room1fillertoekickcount96=[#Room1fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room1fillertoekickremainder=[(#Room1fillertoekicktotallength/96)-(#Room1fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room1Baseendpanellength=[#Room1Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room1Backendpanellength=[#Room1Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room1endpaneltotallength=[#Room1Baseendpanellength+#Room1Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room1endpanelsetcount=[#Room1endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room1endpanelsetremainder=[(#Room1endpaneltotallength/2)-(#Room1endpaneltotallength\2)]
+  set, #Room1endpanelsetremainder=0
+  set,(#haslegs="Yes"): #room1legsetcount=[#Room1legsetcount+1]
+ }
+
+ Do,(#RoomNum = 2):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room2toekicklength=[#Room2toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room2fillerlength=[#Room2fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room2fillertoekicktotallength=[#Room2toekicklength+#Room2fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room2fillertoekickcount96=[#Room2fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room2fillertoekickremainder=[(#Room2fillertoekicktotallength/96)-(#Room2fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room2Baseendpanellength=[#Room2Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room2Backendpanellength=[#Room2Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room2endpaneltotallength=[#Room2Baseendpanellength+#Room2Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room2endpanelsetcount=[#Room2endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room2endpanelsetremainder=[(#Room2endpaneltotallength/2)-(#Room2endpaneltotallength\2)]
+  set, #Room2endpanelsetremainder=0
+  set,(#haslegs="Yes"): #Room2legsetcount=[#Room2legsetcount+1]
+ }
+
+ Do,(#RoomNum = 3):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room3toekicklength=[#Room3toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room3fillerlength=[#Room3fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room3fillertoekicktotallength=[#Room3toekicklength+#Room3fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room3fillertoekickcount96=[#Room3fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room3fillertoekickremainder=[(#Room3fillertoekicktotallength/96)-(#Room3fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room3Baseendpanellength=[#Room3Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room3Backendpanellength=[#Room3Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room3endpaneltotallength=[#Room3Baseendpanellength+#Room3Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room3endpanelsetcount=[#Room3endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room3endpanelsetremainder=[(#Room3endpaneltotallength/2)-(#Room3endpaneltotallength\2)]
+  set, #Room3endpanelsetremainder=0
+  set,(#haslegs="Yes"): #Room3legsetcount=[#Room3legsetcount+1]
+ }
+
+ Do,(#RoomNum = 4):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room4toekicklength=[#Room4toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room4fillerlength=[#Room4fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room4fillertoekicktotallength=[#Room4toekicklength+#Room4fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room4fillertoekickcount96=[#Room4fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room4fillertoekickremainder=[(#Room4fillertoekicktotallength/96)-(#Room4fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room4Baseendpanellength=[#Room4Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room4Backendpanellength=[#Room4Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room4endpaneltotallength=[#Room4Baseendpanellength+#Room4Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room4endpanelsetcount=[#Room4endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room4endpanelsetremainder=[(#Room4endpaneltotallength/2)-(#Room4endpaneltotallength\2)]
+  set, #Room4endpanelsetremainder=0
+  set,(#haslegs="Yes"): #Room4legsetcount=[#Room4legsetcount+1]
+ }
+
+ Do,(#RoomNum = 5):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room5toekicklength=[#Room5toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room5fillerlength=[#Room5fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room5fillertoekicktotallength=[#Room5toekicklength+#Room5fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room5fillertoekickcount96=[#Room5fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room5fillertoekickremainder=[(#Room5fillertoekicktotallength/96)-(#Room5fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room5Baseendpanellength=[#Room5Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room5Backendpanellength=[#Room5Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room5endpaneltotallength=[#Room5Baseendpanellength+#Room5Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room5endpanelsetcount=[#Room5endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room5endpanelsetremainder=[(#Room5endpaneltotallength/2)-(#Room5endpaneltotallength\2)]
+  set, #Room5endpanelsetremainder=0
+  set,(#haslegs="Yes"): #Room5legsetcount=[#Room5legsetcount+1]
+ }
+
+ Do,(#RoomNum = 6):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room6toekicklength=[#Room6toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room6fillerlength=[#Room6fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room6fillertoekicktotallength=[#Room6toekicklength+#Room6fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room6fillertoekickcount96=[#Room6fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room6fillertoekickremainder=[(#Room6fillertoekicktotallength/96)-(#Room6fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room6Baseendpanellength=[#Room6Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room6Backendpanellength=[#Room6Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room6endpaneltotallength=[#Room6Baseendpanellength+#Room6Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room6endpanelsetcount=[#Room6endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room6endpanelsetremainder=[(#Room6endpaneltotallength/2)-(#Room6endpaneltotallength\2)]
+  set, #Room6endpanelsetremainder=0
+  set,(#haslegs="Yes"): #Room6legsetcount=[#Room6legsetcount+1]
+ }
+
+ Do,(#RoomNum = 7):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room7toekicklength=[#Room7toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room7fillerlength=[#Room7fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room7fillertoekicktotallength=[#Room7toekicklength+#Room7fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room7fillertoekickcount96=[#Room7fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room7fillertoekickremainder=[(#Room7fillertoekicktotallength/96)-(#Room7fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room7Baseendpanellength=[#Room7Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room7Backendpanellength=[#Room7Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room7endpaneltotallength=[#Room7Baseendpanellength+#Room7Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room7endpanelsetcount=[#Room7endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room7endpanelsetremainder=[(#Room7endpaneltotallength/2)-(#Room7endpaneltotallength\2)]
+  set, #Room7endpanelsetremainder=0
+  set,(#haslegs="Yes"): #room7legsetcount=[#Room7legsetcount+1]
+ }
+
+ Do,(#RoomNum = 8):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room8toekicklength=[#Room8toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room8fillerlength=[#Room8fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room8fillertoekicktotallength=[#Room8toekicklength+#Room8fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room8fillertoekickcount96=[#Room8fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room8fillertoekickremainder=[(#Room8fillertoekicktotallength/96)-(#Room8fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room8Baseendpanellength=[#Room8Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room8Backendpanellength=[#Room8Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room8endpaneltotallength=[#Room8Baseendpanellength+#Room8Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room8endpanelsetcount=[#Room8endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room8endpanelsetremainder=[(#Room8endpaneltotallength/2)-(#Room8endpaneltotallength\2)]
+  set, #Room8endpanelsetremainder=0
+  set,(#haslegs="Yes"): #room8legsetcount=[#Room8legsetcount+1]
+ }
+
+ Do,(#RoomNum = 9):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room9toekicklength=[#Room9toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room9fillerlength=[#Room9fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room9fillertoekicktotallength=[#Room9toekicklength+#Room9fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room9fillertoekickcount96=[#Room9fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room9fillertoekickremainder=[(#Room9fillertoekicktotallength/96)-(#Room9fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room9Baseendpanellength=[#Room9Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room9Backendpanellength=[#Room9Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room9endpaneltotallength=[#Room9Baseendpanellength+#Room9Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room9endpanelsetcount=[#Room9endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room9endpanelsetremainder=[(#Room9endpaneltotallength/2)-(#Room9endpaneltotallength\2)]
+  set, #Room9endpanelsetremainder=0
+  set,(#haslegs="Yes"): #room9legsetcount=[#Room9legsetcount+1]
+ }
+
+ Do,(#RoomNum = 10):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room10toekicklength=[#Room10toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room10fillerlength=[#Room10fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room10fillertoekicktotallength=[#Room10toekicklength+#Room10fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room10fillertoekickcount96=[#Room10fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room10fillertoekickremainder=[(#Room10fillertoekicktotallength/96)-(#Room10fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room10Baseendpanellength=[#Room10Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room10Backendpanellength=[#Room10Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room10endpaneltotallength=[#Room10Baseendpanellength+#Room10Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room10endpanelsetcount=[#Room10endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room10endpanelsetremainder=[(#Room10endpaneltotallength/2)-(#Room10endpaneltotallength\2)]
+  set, #Room10endpanelsetremainder=0
+  set,(#haslegs="Yes"): #room10legsetcount=[#Room10legsetcount+1]
+ }
+
+ Do,(#RoomNum = 11):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room11toekicklength=[#Room11toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room11fillerlength=[#Room11fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room11fillertoekicktotallength=[#Room11toekicklength+#Room11fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room11fillertoekickcount96=[#Room11fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room11fillertoekickremainder=[(#Room11fillertoekicktotallength/96)-(#Room11fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room11Baseendpanellength=[#Room11Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room11Backendpanellength=[#Room11Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room11endpaneltotallength=[#Room11Baseendpanellength+#Room11Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room11endpanelsetcount=[#Room11endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room11endpanelsetremainder=[(#Room11endpaneltotallength/2)-(#Room11endpaneltotallength\2)]
+  set, #Room11endpanelsetremainder=0
+  set,(#haslegs="Yes"): #room11legsetcount=[#Room11legsetcount+1]
+ }
+
+ Do,(#RoomNum = 12):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room12toekicklength=[#Room12toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room12fillerlength=[#Room12fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room12fillertoekicktotallength=[#Room12toekicklength+#Room12fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room12fillertoekickcount96=[#Room12fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room12fillertoekickremainder=[(#Room12fillertoekicktotallength/96)-(#Room12fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room12Baseendpanellength=[#Room12Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room12Backendpanellength=[#Room12Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room12endpaneltotallength=[#Room12Baseendpanellength+#Room12Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room12endpanelsetcount=[#Room12endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room12endpanelsetremainder=[(#Room12endpaneltotallength/2)-(#Room12endpaneltotallength\2)]
+  set, #Room12endpanelsetremainder=0
+  set,(#haslegs="Yes"): #room12legsetcount=[#Room12legsetcount+1]
+ }
+
+ Do,(#RoomNum = 13):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room13toekicklength=[#Room13toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room13fillerlength=[#Room13fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room13fillertoekicktotallength=[#Room13toekicklength+#Room13fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room13fillertoekickcount96=[#Room13fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room13fillertoekickremainder=[(#Room13fillertoekicktotallength/96)-(#Room13fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room13Baseendpanellength=[#Room13Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room13Backendpanellength=[#Room13Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room13endpaneltotallength=[#Room13Baseendpanellength+#Room13Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room13endpanelsetcount=[#Room13endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room13endpanelsetremainder=[(#Room13endpaneltotallength/2)-(#Room13endpaneltotallength\2)]
+  set, #Room13endpanelsetremainder=0
+  set,(#haslegs="Yes"): #room13legsetcount=[#Room13legsetcount+1]
+ }
+
+ Do,(#RoomNum = 14):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room14toekicklength=[#Room14toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room14fillerlength=[#Room14fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room14fillertoekicktotallength=[#Room14toekicklength+#Room14fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room14fillertoekickcount96=[#Room14fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room14fillertoekickremainder=[(#Room14fillertoekicktotallength/96)-(#Room14fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room14Baseendpanellength=[#Room14Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room14Backendpanellength=[#Room14Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room14endpaneltotallength=[#Room14Baseendpanellength+#Room14Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room14endpanelsetcount=[#Room14endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room14endpanelsetremainder=[(#Room14endpaneltotallength/2)-(#Room14endpaneltotallength\2)]
+  set, #Room14endpanelsetremainder=0
+  set,(#haslegs="Yes"): #room14legsetcount=[#Room14legsetcount+1]
+ }
+
+ Do,(#RoomNum = 15):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room15toekicklength=[#Room15toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room15fillerlength=[#Room15fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room15fillertoekicktotallength=[#Room15toekicklength+#Room15fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room15fillertoekickcount96=[#Room15fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room15fillertoekickremainder=[(#Room15fillertoekicktotallength/96)-(#Room15fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room15Baseendpanellength=[#Room15Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room15Backendpanellength=[#Room15Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room15endpaneltotallength=[#Room15Baseendpanellength+#Room15Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room15endpanelsetcount=[#Room15endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room15endpanelsetremainder=[(#Room15endpaneltotallength/2)-(#Room15endpaneltotallength\2)]
+  set, #Room15endpanelsetremainder=0
+  set,(#haslegs="Yes"): #room15legsetcount=[#Room15legsetcount+1]
+ }
+
+ Do,(#RoomNum = 16):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room16toekicklength=[#Room16toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room16fillerlength=[#Room16fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room16fillertoekicktotallength=[#Room16toekicklength+#Room16fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room16fillertoekickcount96=[#Room16fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room16fillertoekickremainder=[(#Room16fillertoekicktotallength/96)-(#Room16fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room16Baseendpanellength=[#Room16Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room16Backendpanellength=[#Room16Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room16endpaneltotallength=[#Room16Baseendpanellength+#Room16Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room16endpanelsetcount=[#Room16endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room16endpanelsetremainder=[(#Room16endpaneltotallength/2)-(#Room16endpaneltotallength\2)]
+
+  set,(#haslegs="Yes"): #room16legsetcount=[#Room16legsetcount+1]
+ }
+
+ Do,(#RoomNum = 17):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room17toekicklength=[#Room17toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room17fillerlength=[#Room17fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room17fillertoekicktotallength=[#Room17toekicklength+#Room17fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room17fillertoekickcount96=[#Room17fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room17fillertoekickremainder=[(#Room17fillertoekicktotallength/96)-(#Room17fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room17Baseendpanellength=[#Room17Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room17Backendpanellength=[#Room17Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room17endpaneltotallength=[#Room17Baseendpanellength+#Room17Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room17endpanelsetcount=[#Room17endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room17endpanelsetremainder=[(#Room17endpaneltotallength/2)-(#Room17endpaneltotallength\2)]
+
+  set,(#haslegs="Yes"): #room17legsetcount=[#Room17legsetcount+1]
+ }
+
+ Do,(#RoomNum = 18):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room18toekicklength=[#Room18toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room18fillerlength=[#Room18fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room18fillertoekicktotallength=[#Room18toekicklength+#Room18fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room18fillertoekickcount96=[#Room18fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room18fillertoekickremainder=[(#Room18fillertoekicktotallength/96)-(#Room18fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room18Baseendpanellength=[#Room18Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room18Backendpanellength=[#Room18Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room18endpaneltotallength=[#Room18Baseendpanellength+#Room18Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room18endpanelsetcount=[#Room18endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room18endpanelsetremainder=[(#Room18endpaneltotallength/2)-(#Room18endpaneltotallength\2)]
+
+  set,(#haslegs="Yes"): #room18legsetcount=[#Room18legsetcount+1]
+ }
+
+ Do,(#RoomNum = 19):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room19toekicklength=[#Room19toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room19fillerlength=[#Room19fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room19fillertoekicktotallength=[#Room19toekicklength+#Room19fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room19fillertoekickcount96=[#Room19fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room19fillertoekickremainder=[(#Room19fillertoekicktotallength/96)-(#Room19fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room19Baseendpanellength=[#Room19Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room19Backendpanellength=[#Room19Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room19endpaneltotallength=[#Room19Baseendpanellength+#Room19Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room19endpanelsetcount=[#Room19endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room19endpanelsetremainder=[(#Room19endpaneltotallength/2)-(#Room19endpaneltotallength\2)]
+
+  set,(#haslegs="Yes"): #room19legsetcount=[#Room19legsetcount+1]
+ }
+
+ Do,(#RoomNum = 20):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room20toekicklength=[#Room20toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room20fillerlength=[#Room20fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room20fillertoekicktotallength=[#Room20toekicklength+#Room20fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room20fillertoekickcount96=[#Room20fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room20fillertoekickremainder=[(#Room20fillertoekicktotallength/96)-(#Room20fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room20Baseendpanellength=[#Room20Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room20Backendpanellength=[#Room20Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room20endpaneltotallength=[#Room20Baseendpanellength+#Room20Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room20endpanelsetcount=[#Room20endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room20endpanelsetremainder=[(#Room20endpaneltotallength/2)-(#Room20endpaneltotallength\2)]
+
+  set,(#haslegs="Yes"): #room20legsetcount=[#Room20legsetcount+1]
+ }
+ Do,(#RoomNum = 21):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room21toekicklength=[#Room21toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room21fillerlength=[#Room21fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room21fillertoekicktotallength=[#Room21toekicklength+#Room21fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room21fillertoekickcount96=[#Room21fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room21fillertoekickremainder=[(#Room21fillertoekicktotallength/96)-(#Room21fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room21Baseendpanellength=[#Room21Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room21Backendpanellength=[#Room21Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room21endpaneltotallength=[#Room21Baseendpanellength+#Room21Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room21endpanelsetcount=[#Room21endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room21endpanelsetremainder=[(#Room21endpaneltotallength/2)-(#Room21endpaneltotallength\2)]
+
+  set,(#haslegs="Yes"): #room21legsetcount=[#Room21legsetcount+1]
+ }
+
+ Do,(#RoomNum = 22):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room22toekicklength=[#Room22toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room22fillerlength=[#Room22fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room22fillertoekicktotallength=[#Room22toekicklength+#Room22fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room22fillertoekickcount96=[#Room22fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room22fillertoekickremainder=[(#Room22fillertoekicktotallength/96)-(#Room22fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room22Baseendpanellength=[#Room22Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room22Backendpanellength=[#Room22Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room22endpaneltotallength=[#Room22Baseendpanellength+#Room22Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room22endpanelsetcount=[#Room22endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room22endpanelsetremainder=[(#Room22endpaneltotallength/2)-(#Room22endpaneltotallength\2)]
+
+  set,(#haslegs="Yes"): #room22legsetcount=[#Room22legsetcount+1]
+ }
+
+ Do,(#RoomNum = 23):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room23toekicklength=[#Room23toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room23fillerlength=[#Room23fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room23fillertoekicktotallength=[#Room23toekicklength+#Room23fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room23fillertoekickcount96=[#Room23fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room23fillertoekickremainder=[(#Room23fillertoekicktotallength/96)-(#Room23fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room23Baseendpanellength=[#Room23Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room23Backendpanellength=[#Room23Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room23endpaneltotallength=[#Room23Baseendpanellength+#Room23Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room23endpanelsetcount=[#Room23endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room23endpanelsetremainder=[(#Room23endpaneltotallength/2)-(#Room23endpaneltotallength\2)]
+
+  set,(#haslegs="Yes"): #room23legsetcount=[#Room23legsetcount+1]
+ }
+
+ Do,(#RoomNum = 24):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room24toekicklength=[#Room24toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room24fillerlength=[#Room24fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room24fillertoekicktotallength=[#Room24toekicklength+#Room24fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room24fillertoekickcount96=[#Room24fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room24fillertoekickremainder=[(#Room24fillertoekicktotallength/96)-(#Room24fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room24Baseendpanellength=[#Room24Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room24Backendpanellength=[#Room24Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room24endpaneltotallength=[#Room24Baseendpanellength+#Room24Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room24endpanelsetcount=[#Room24endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room24endpanelsetremainder=[(#Room24endpaneltotallength/2)-(#Room24endpaneltotallength\2)]
+
+  set,(#haslegs="Yes"): #room24legsetcount=[#Room24legsetcount+1]
+ }
+
+ Do,(#RoomNum = 25):1
+ {
+
+
+  set,(#unitfilename="*ToeKick*"):#Room25toekicklength=[#Room25toekicklength+(W+(D*2))]
+  set,(#unitfilename="*Filler*"):#Room25fillerlength=[#Room25fillerlength+H]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"): #Room25fillertoekicktotallength=[#Room25toekicklength+#Room25fillerlength]
+  set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room25fillertoekickcount96=[#Room25fillertoekicktotallength\96]
+  Set,(#unitfilename="*ToeKick*")|(#unitfilename="*Filler*"):#Room25fillertoekickremainder=[(#Room25fillertoekicktotallength/96)-(#Room25fillertoekicktotallength\96)]
+
+  set, (#unitfilename="*Baseendpanel*"):#Room25Baseendpanellength=[#Room25Baseendpanellength+1]
+  set, (#unitfilename="*Backendpanel*"):#Room25Backendpanellength=[#Room25Backendpanellength+1]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room25endpaneltotallength=[#Room25Baseendpanellength+#Room25Backendpanellength]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room25endpanelsetcount=[#Room25endpaneltotallength\2]
+  set, (#unitfilename="*Baseendpanel*")|(#unitfilename="*Backendpanel*"):#Room25endpanelsetremainder=[(#Room25endpaneltotallength/2)-(#Room25endpaneltotallength\2)]
+
+  set,(#haslegs="Yes"): #room25legsetcount=[#Room25legsetcount+1]
+ }
+
+
+}

@@ -1,0 +1,186 @@
+This is a KCD system file. Do NOT change it in any way!
+
+
+Set, #UnitDoorCost = 0
+Set, #UnitDrawerFrtCost = 0
+
+,Set, #TotalNumDoors = 0
+,Set, #TotalNumDrawers = 0
+
+
+Set, #Door=D1
+set, #DoorH=D1H
+Set, #DoorHL=D1HL
+Set, #DoorHK=D1HK
+Set, #DoorHG=D1HG
+Set, #DoorHKN=D1HKN
+Set, (D1HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D1HG
+Set, (D1DR>0):#drawerfacenumber=1:#drawerfacenumber=0
+set, #nodrawerbox=0
+Set, ((#unitfilename="*Sink*")&(#drawerfacenumber=1)):#nodrawerbox=1
+Load, (D1T>0)&(D1H>2)&(D1W>2):Door.pcb
+Set, #HasHinges=0
+
+Set, #Door=D2
+set, #DoorH=D2H
+Set, #DoorHL=D2HL
+Set, #DoorHK=D2HK
+Set, #DoorHG=D2HG
+Set, #DoorHKN=D2HKN
+Set, (D2HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D2HG
+Set, (D1DR>0):#drawerfacenumber=2:#drawerfacenumber=1
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw2NDB)&(#drawerfacenumber=2)):#nodrawerbox=1
+Set, ((Opt=#OptDrw1NDB)&(#drawerfacenumber=1)):#nodrawerbox=1
+Load, (D2T>0)&(D2H>2)&(D2W>2):Door.pcb
+Set, #HasHinges=0
+
+Set, #Door=D3
+set, #DoorH=D3H
+Set, #DoorHL=D3HL
+Set, #DoorHK=D3HK
+Set, #DoorHG=D3HG
+Set, #DoorHKN=D3HKN
+Set, (D3HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D3HG
+Set, (D1DR>0):#drawerfacenumber=3:#drawerfacenumber=2
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw3NDB)&(#drawerfacenumber=3)):#nodrawerbox=1
+Set, ((Opt=#OptDrw2NDB)&(#drawerfacenumber=2)):#nodrawerbox=1
+Load, (D3T>0)&(D3H>2)&(D3W>2):Door.pcb
+Set, #HasHinges=0
+
+Set, #Door=D4
+set, #DoorH=D4H
+Set, #DoorHL=D4HL
+Set, #DoorHK=D4HK
+Set, #DoorHG=D4HG
+Set, #DoorHKN=D4HKN
+Set, (D4HG<>0): #HasHinges=1:#HasHinges=0 
+Set, #Hingeside=D4HG
+Set, (D1DR>0):#drawerfacenumber=4:#drawerfacenumber=3
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw4NDB)&(#drawerfacenumber=4)):#nodrawerbox=1
+Set, ((Opt=#OptDrw3NDB)&(#drawerfacenumber=3)):#nodrawerbox=1
+Load, (D4T>0)&(D4H>2)&(D4W>2):Door.pcb
+Set, #HasHinges=0
+
+Set, #Door=D5
+set, #DoorH=D5H
+Set, #DoorHL=D5HL
+Set, #DoorHK=D5HK
+Set, #DoorHG=D5HG
+Set, #DoorHKN=D5HKN
+Set, (D5HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D5HG
+Set, (D1DR>0):#drawerfacenumber=5:#drawerfacenumber=4
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw5NDB)&(#drawerfacenumber=5)):#nodrawerbox=1
+Set, ((Opt=#OptDrw4NDB)&(#drawerfacenumber=4)):#nodrawerbox=1
+Load, (D5T>0)&(D5H>2)&(D5W>2):Door.pcb
+Set, #HasHinges=0
+
+Set, #Door=D6
+set, #DoorH=D6H
+Set, #DoorHL=D6HL
+Set, #DoorHK=D6HK
+Set, #DoorHG=D6HG
+Set, #DoorHKN=D6HKN
+Set, (D6HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D6HG
+Set, (D1DR>0):#drawerfacenumber=6:#drawerfacenumber=5
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw6NDB)&(#drawerfacenumber=6)):#nodrawerbox=1
+Set, ((Opt=#OptDrw5NDB)&(#drawerfacenumber=5)):#nodrawerbox=1
+Load, (D6T>0)&(D6H>2)&(D6W>2):Door.pcb
+Set, #HasHinges=0
+
+Set, #Door=D7
+set, #DoorH=D7H
+Set, #DoorHL=D7HL
+Set, #DoorHK=D7HK
+Set, #DoorHG=D7HG
+Set, #DoorHKN=D7HKN
+Set, (D7HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D7HG
+Set, (D1DR>0):#drawerfacenumber=7:#drawerfacenumber=6
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw7NDB)&(#drawerfacenumber=7)):#nodrawerbox=1
+Set, ((Opt=#OptDrw6NDB)&(#drawerfacenumber=6)):#nodrawerbox=1
+Load, (D7T>0)&(D7H>2)&(D7W>2):Door.pcb
+Set, #HasHinges=0
+
+Set, #Door=D8
+set, #DoorH=D8H
+Set, #DoorHL=D8HL
+Set, #DoorHK=D8HK
+Set, #DoorHG=D8HG
+Set, #DoorHKN=D8HKN
+Set, (D8HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D8HG
+Set, (D1DR>0):#drawerfacenumber=8:#drawerfacenumber=7
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw8NDB)&(#drawerfacenumber=8)):#nodrawerbox=1
+Set, ((Opt=#OptDrw7NDB)&(#drawerfacenumber=7)):#nodrawerbox=1
+Load, (D8T>0)&(D8H>2)&(D8W>2):Door.pcb
+Set, #HasHinges=0
+
+Set, #Door=D9
+set, #DoorH=D9H
+Set, #DoorHL=D9HL
+Set, #DoorHK=D9HK
+Set, #DoorHG=D9HG
+Set, #DoorHKN=D9HKN
+Set, (D8HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D9HG
+Set, (D1DR>0):#drawerfacenumber=9:#drawerfacenumber=8
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw9NDB)&(#drawerfacenumber=9)):#nodrawerbox=1
+Set, ((Opt=#OptDrw8NDB)&(#drawerfacenumber=8)):#nodrawerbox=1
+Load, (D9T>0)&(D9H>2)&(D9W>2):Door.pcb
+Set, #HasHinges=0
+
+Set, #Door=D10
+set, #DoorH=D10H
+Set, #DoorHL=D10HL
+Set, #DoorHK=D10HK
+Set, #DoorHG=D10HG
+Set, #DoorHKN=D10HKN
+Set, (D10HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D10HG
+Set, (D1DR>0):#drawerfacenumber=10:#drawerfacenumber=9
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw9NDB)&(#drawerfacenumber=9)):#nodrawerbox=1
+Load, (D10T>0)&(D10H>2)&(D10W>2):Door.pcb
+Set, #HasHinges=0
+
+Set, #Door=D11
+set, #DoorH=D11H
+Set, #DoorHL=D11HL
+Set, #DoorHK=D11HK
+Set, #DoorHG=D11HG
+Set, #DoorHKN=D11HKN
+Set, (D11HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D11HG
+set, #nodrawerbox=0
+Load, (D11T>0)&(D11H>2)&(D11W>2):Door.pcb
+Set, #HasHinges=0
+
+Set, #Door=D12
+set, #DoorH=D12H
+Set, #DoorHL=D12HL
+Set, #DoorHK=D12HK
+Set, #DoorHG=D12HG
+Set, #DoorHKN=D12HKN
+Set, (D12HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D12HG
+set, #nodrawerbox=0
+Load, (D12T>0)&(D12H>2)&(D12W>2):Door.pcb
+Set, #HasHinges=0
+
+
+
+
+End of 'DOORS.PCB' KCD system file

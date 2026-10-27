@@ -1,0 +1,11 @@
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+set, #justapanelL=0
+set, #justapanelR=1
+load, Pricesides.pcb
+set, #justapanelR=0  
+
+    
+,*****************************************
+

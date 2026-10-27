@@ -1,0 +1,16 @@
+,Valance Shaker
+
+Set, #ztype=1119
+set,#unitlineal=w
+set,#unitsquare=w*h
+set,#unitcubic=w*h*d
+set,#squareamt=h*w
+
+
+Load,GetMaterialCostBaseKick.pcb
+
+,******** ALL FILLERS *********
+Price,       1,    Valance-#BaseType,           #BaseTypeCostGroup,           w, h,          #FillerPrintOrderNumber,              
+,******************************
+
+

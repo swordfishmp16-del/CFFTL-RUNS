@@ -1,0 +1,83 @@
+
+,Set PullOut Width
+Set, #PullOutWidth = [#PullOutOpeningWidth -1]
+
+
+,Set Drawer Box Depth
+Set, (D < 12):#PullOutDepth = 0
+Set, (D >= 12):#PullOutDepth = 10
+Set, (D >= 14):#PullOutDepth = 12
+Set, (D >= 16):#PullOutDepth = 14
+Set, (D >= 18):#PullOutDepth = 16
+Set, (D >= 20):#PullOutDepth = 18
+Set, (D >= 22):#PullOutDepth = 20
+Set, (D >= 24):#PullOutDepth = 22
+Set, (D >= 26):#PullOutDepth = 24
+
+
+,Set PullOut Height
+Set, (#PullOutOpeningHeight < 2):#PullOutHeight = 0
+Set, (#PullOutOpeningHeight >= 2):#PullOutHeight = 1
+Set, (#PullOutOpeningHeight >= 3):#PullOutHeight = 2
+Set, (#PullOutOpeningHeight >= 4):#PullOutHeight = 3
+Set, (#PullOutOpeningHeight >= 5):#PullOutHeight = 4
+Set, (#PullOutOpeningHeight >= 6):#PullOutHeight = 5
+Set, (#PullOutOpeningHeight >= 7):#PullOutHeight = 6
+Set, (#PullOutOpeningHeight >= 8):#PullOutHeight = 7
+Set, (#PullOutOpeningHeight >= 9):#PullOutHeight = 8
+Set, (#PullOutOpeningHeight >= 10):#PullOutHeight = 9
+Set, (#PullOutOpeningHeight >= 11):#PullOutHeight = 10
+Set, (#PullOutOpeningHeight >= 12):#PullOutHeight = 11
+Set, (#PullOutOpeningHeight >= 13):#PullOutHeight = 12
+Set, (#PullOutOpeningHeight >= 14):#PullOutHeight = 13
+Set, (#PullOutOpeningHeight >= 15):#PullOutHeight = 14
+
+
+
+,Set Cost for each PullOut Size 
+Do,(#PullOutHeight=3):#Yes
+{
+Set, (#PullOutWidth = 21):#CostOfPullOut=21.03
+Set, (#PullOutWidth = 24):#CostOfPullOut=24.03
+Set, (#PullOutWidth = 27):#CostOfPullOut=27.03
+Set, (#PullOutWidth = 30):#CostOfPullOut=30.03
+}
+Do,(#PullOutHeight=4):#Yes
+{
+Set, (#PullOutWidth = 21):#CostOfPullOut=21.04
+Set, (#PullOutWidth = 24):#CostOfPullOut=24.04
+Set, (#PullOutWidth = 27):#CostOfPullOut=27.04
+Set, (#PullOutWidth = 30):#CostOfPullOut=30.04
+}
+Do,(#PullOutHeight=5):#Yes
+{
+Set, (#PullOutWidth = 21):#CostOfPullOut=21.05
+Set, (#PullOutWidth = 24):#CostOfPullOut=24.05
+Set, (#PullOutWidth = 27):#CostOfPullOut=27.05
+Set, (#PullOutWidth = 30):#CostOfPullOut=30.05
+}
+Do,(#PullOutHeight=6):#Yes
+{
+Set, (#PullOutWidth = 21):#CostOfPullOut=21.06
+Set, (#PullOutWidth = 24):#CostOfPullOut=24.06
+Set, (#PullOutWidth = 27):#CostOfPullOut=27.06
+Set, (#PullOutWidth = 30):#CostOfPullOut=30.06
+}
+Do,(#PullOutHeight=7):#Yes
+{
+Set, (#PullOutWidth = 21):#CostOfPullOut=21.07
+Set, (#PullOutWidth = 24):#CostOfPullOut=24.07
+Set, (#PullOutWidth = 27):#CostOfPullOut=27.07
+Set, (#PullOutWidth = 30):#CostOfPullOut=30.07
+}
+Do,(#PullOutHeight=8):#Yes
+{
+Set, (#PullOutWidth = 21):#CostOfPullOut=21.08
+Set, (#PullOutWidth = 24):#CostOfPullOut=24.08
+Set, (#PullOutWidth = 27):#CostOfPullOut=27.08
+Set, (#PullOutWidth = 30):#CostOfPullOut=30.08
+}
+
+
+'Price PullOut
+Price, (#PullOutHeight>0):1, #PullOutHeight" #PullOutName, #CostOfPullOut, #PullOutWidth, #PullOutDepth, #PullOutPrintOrderNumber,   

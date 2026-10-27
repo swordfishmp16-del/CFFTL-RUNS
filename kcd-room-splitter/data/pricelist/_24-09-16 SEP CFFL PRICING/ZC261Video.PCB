@@ -1,0 +1,20 @@
+,CF Library - closet Pieces
+,******** Video Drawer *************
+Set, #PulloutOpeningWidth = W
+,Load, (npo>0): G-Pullout Cost.Pcb
+
+,**
+'Price Pullout Box
+
+Set, #W = [(#PulloutOpeningWidth/NDiv) -1]
+Set, #H = H
+Set, #D = [D]
+
+
+Set, #H = {#H}
+set, #pullout=1
+Price, (H<=4):1,    RM#roomnum #PulloutName Video #H"    ,  #videoinsertcost*#universalupcharge,   D,   W,   #PulloutPrintOrderNumber,
+Price, (H>4):1,   RM#roomnum #PulloutName Video #H"  ,   #videoinsertcost*#universalupcharge,   D,   W,   #PulloutPrintOrderNumber,
+set, #pullout=0
+,***********************************
+

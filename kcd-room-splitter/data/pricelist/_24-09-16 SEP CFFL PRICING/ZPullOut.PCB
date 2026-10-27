@@ -1,0 +1,6 @@
+
+,******** ALL PULLOUTS *************
+Set, #PulloutOpeningWidth = W
+Load, (npo>0): G-Pullout Cost.Pcb
+,***********************************
+

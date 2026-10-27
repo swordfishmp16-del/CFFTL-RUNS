@@ -1,0 +1,59 @@
+,
+,Use Grid
+
+,** Set COST for Wine Lattice Grid
+DisplaySet,#winegrid2342cost =300,1.0  Cost for 23"x42" Wine Lattice Grid Set
+DisplaySet,#winegrid2329cost =250,2.0  Cost for 23"x29" Wine Lattice Grid Set
+DisplaySet,#winegrid1736cost =225,3.0  Cost for 17"x36" Wine Lattice Grid Set
+DisplaySet,#winegrid1729cost =200,4.0  Cost for 17"x29" Wine Lattice Grid Set
+,**
+,Update V8.0 start
+,**Set COST for CF manufactured wine X with matching material.
+Displayset, #CFwinexcost=100, 5.0  Cost for matching material wine X.
+Displayset, #CFwinexcost2nd=150, 5.0  Cost for 2nd material wine X.
+,Update V8.0 end
+,**
+,**
+,**  Determine COSTS FOR Wine Grid XXX
+,** 
+,**
+ 
+Set, #wineGridxxxcost=0
+,Set,((#Shelfwidth<=42)&(#GridHeight<=23)):#WineGridxxxCost = #winegrid2342cost
+Set,((#Shelfwidth<=36)&(#GridHeight<=17)):#WineGridxxxCost = #winegrid1736cost
+Set,((#Shelfwidth<=29)&(#GridHeight<=23)):#WineGridxxxCost = #winegrid2329cost
+Set,((#Shelfwidth<=29)&(#GridHeight<=17)):#WineGridxxxCost = #winegrid1729cost
+Set,((#Shelfwidth<=23)&(#Gridheight<=42)):#WineGridxxxCost = #winegrid2342cost
+Set,((#Shelfwidth<=23)&(#Gridheight<=29)):#WineGridxxxCost = #winegrid2329cost
+Set,((#Shelfwidth<=17)&(#Gridheight<=36)):#WineGridxxxCost = #winegrid1736cost
+Set,((#Shelfwidth<=17)&(#Gridheight<=29)):#WineGridxxxCost = #winegrid1729cost
+
+,Update V8.0 start
+set, (#UnitFileName="*melx.cab"):#WineGridxxxCost=#CFwinexcost
+set, (#UnitFileName="*melx-2nd.cab"):#WineGridxxxCost=#CFwinexcost2nd
+
+
+
+
+Price, (#Winegridxxxcost>0)&(#UnitFileName<>"*melx*"):1,RM#Roomnum Wine Lattice Set,  #winegridxxxcost,  #Shelfwidth,#Gridheight,  #ClosetPolePrintOrderNumber,
+set,(#UnitFileName<>"*melx*"): #name= Wine Lattice Set
+Price, (#Winegridxxxcost>0)&(#UnitFileName="*melx.cab"):1,RM#Roomnum Wine X #Unitmaterialname,  #winegridxxxcost,  #Shelfwidth,#Gridheight,  #ClosetPolePrintOrderNumber,
+set,(#UnitFileName="*melx.cab"): #name= Wine X
+Price, (#Winegridxxxcost>0)&(#UnitFileName="*melx-2nd.cab"):1,RM#Roomnum Wine X #Contrastmaterialname,  #winegridxxxcost,  #Shelfwidth,#Gridheight,  #ClosetPolePrintOrderNumber,
+set,(#UnitFileName="*melx-2nd.cab"): #name= Wine X
+
+Load,  (#Winegridxxxcost=0):eachunit.pcb
+  
+,Update V8.0 end
+
+
+
+
+
+                       
+
+
+,**
+,**
+
+

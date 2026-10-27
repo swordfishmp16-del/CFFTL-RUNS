@@ -1,0 +1,20 @@
+,**Bottom fluted column include panels
+
+Set, #VertH = [H]
+Set, #VertD = [D-.75]
+
+set, #sideTH = W
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH = {W}
+Load, GetFlutedPilasterCost.pcb
+
+,Price, 1, RM#roomnum #Unitmaterialname Column #SideTH" with #name #FlutedPilasterStyleName,         #CostOfSide+#CostOfFlutedPilaster,             D, #VertH,          #LeftSidePrintOrderNumber,
+
+set, #flutecount={nfl}
+
+
+Price, (#flutecount=0): 1, RM#Roomnum #Unitmaterialname Base Column #sideTHin with Flat Face #FlutedPilasterStyleName,         #CostOfSide+#CostOfFlutedPilaster,             D, #VertH,          #LeftSidePrintOrderNumber,
+
+Price, (#flutecount>0): 1, RM#Roomnum #Unitmaterialname Base Column #sideTHin with #flutecount Flutes on Face #FlutedPilasterStyleName,         #CostOfSide+#CostOfFlutedPilaster,             D, #VertH,          #LeftSidePrintOrderNumber
+

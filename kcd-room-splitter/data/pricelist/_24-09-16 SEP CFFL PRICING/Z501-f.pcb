@@ -1,0 +1,8 @@
+,*****Decorative Back Panel priced as Selected door
+
+
+Set, #EndpanelH = H
+Set, #EndpanelW = W
+Set, #DecorativePanelName = #BasePanelName
+Load, Endpanels.pcb
+,*****************************************

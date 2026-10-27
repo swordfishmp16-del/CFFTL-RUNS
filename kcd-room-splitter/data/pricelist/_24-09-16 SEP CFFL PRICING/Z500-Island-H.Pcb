@@ -1,0 +1,17 @@
+, CF Island H Panel unit
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+Set, #ShelfWidth=[W-LS-RS]
+Load, Pricesides.pcb
+         
+           
+set, #Backheight = [H]
+
+Price, 1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,     
+             
+
+,******************************************
+

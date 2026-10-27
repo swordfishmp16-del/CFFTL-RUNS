@@ -1,0 +1,113 @@
+,
+,Use Grid
+
+
+,**
+,**
+,** SET COSTS FOR TAG SYMPHONY ACCESSORIES
+,** 
+,**
+,**  
+,** COSTS SYMPHONY ACCESSORIES
+DisplaySet, #S-triple=28, 1.0 Cost for Symphony Triple Hook
+DisplaySet,  #S-coat =40, 1.1 Cost for Symphony Coat Hook
+DisplaySet,  #S-shoe=40, 1.2 Cost for Symphony Shoe Hook
+,** 
+,** COSTS SYMPHONY ORGANIZERS
+,** 
+DisplaySet,  #S-19hx13W=450, 2.0 Cost for Symphony 19Hx13W
+DisplaySet,  #S-19hx23W=540, 2.1 Cost for Symphony 19Hx23W
+DisplaySet,  #S-19hx35W=625, 2.2 Cost for Symphony 19Hx35W
+DisplaySet,  #S-19hx47W=725, 2.3 Cost for Symphony 19Hx47W
+DisplaySet,  #S-42hx13W=820, 2.4 Cost for Symphony 42Hx13W
+DisplaySet,  #S-42hx23W=975, 2.5 Cost for Symphony 42Hx23W
+DisplaySet,  #S-42hx35W=1166, 2.6 Cost for Symphony 42Hx35W
+DisplaySet,  #S-42hx47W=1340, 2.7 Cost for Symphony 42Hx47W
+DisplaySet,  #S-66hx13W=1145, 2.8 Cost for Symphony 66Hx13W
+DisplaySet,  #S-66hx23W=1400, 2.9 Cost for Symphony 66Hx23W
+DisplaySet,  #S-66hx35W=1665, 2.10 Cost for Symphony 66Hx35W
+DisplaySet,  #S-66hx47W=1925, 2.11 Cost for Symphony 66Hx47W
+
+
+,**
+,** SET COSTS FOR SYMPHONY OFFICE ACCESSORIES
+,** 
+Displayset, #S-pencilbox=55, 3.0 Cost for Symphony Office Pencil Box
+DisplaySet, #S-penciltray=70, 3.1 Cost for Symphony Office Pencil Tray
+DisplaySet, #S-papertray=150, 3.2 Cost for Symphony Office Paper Tray
+DisplaySet, #S-tabletstand=55, 3.3 Cost for Symphony Office Tablet Stand
+,**
+,** SET COSTS FOR SYMPHONY OFFICE ORGANIZERS
+,** 
+DisplaySet, #SO-19hx13W=500, 4.0 Cost for Symphony Office Organizer 19hx13W
+DisplaySet, #SO-19hx23W=510, 4.1 Cost for Symphony Office Organizer 19hx23W
+DisplaySet, #SO-19hx35W=675, 4.2 Cost for Symphony Office Organizer 19hx35W
+DisplaySet, #SO-19hx47W=775, 4.3 Cost for Symphony Office Organizer 19hx47W
+DisplaySet, #SO-42hx13W=870, 4.4 Cost for Symphony Office Organizer 42hx13W
+DisplaySet, #SO-42hx23W=1025, 4.5 Cost for Symphony Office Organizer 42hx23W
+DisplaySet, #SO-42hx35W=1216, 4.6 Cost for Symphony Office Organizer 42hx35W
+DisplaySet, #SO-42hx47W=1390, 4.7 Cost for Symphony Office Organizer 42hx47W
+DisplaySet, #SO-66hx13W=1195, 4.8 Cost for Symphony Office Organizer 66hx13W
+DisplaySet, #SO-66hx23W=1450, 4.9 Cost for Symphony Office Organizer 66hx23W
+DisplaySet, #SO-66hx35W=1715, 4.10 Cost for Symphony Office Organizer 66hx35W
+DisplaySet, #SO-66hx47W=1975, 4.11 Cost for Symphony Office Organizer 66hx47W
+,**
+,** SET COSTS FOR SYMPHONY OFFICE TABLE MOUNTED ORGANIZERS
+,** 
+DisplaySet, #SOT-24hx13W=550, 5.0 Cost for Symphony Office Table Organizer 24hx13W
+DisplaySet, #SOT-24hx23W=650, 5.1 Cost for Symphony Office Table Organizer 24hx23W
+DisplaySet, #SOT-24hx35W=725, 5.2 Cost for Symphony Office Table Organizer 24hx35W
+DisplaySet, #SOT-24hx47W=825, 5.3 Cost for Symphony Office Table Organizer 24hx47W
+
+
+
+
+
+
+
+Set,(#Name = "*triple*"): #Sprice = #S-triple
+Set,(#Name = "*coat*"): #Sprice = #S-coat 
+Set,(#Name = "*shoe*") : #Sprice = #S-shoe
+Set,(#Name = "*Pencil Box*"): #Sprice = #S-pencilbox
+Set,(#Name = "*Pencil Tray*"): #Sprice = #S-penciltray 
+Set,(#Name = "*Paper Tray*") : #Sprice = #S-papertray
+Set,(#Name = "*Tablet Stand*") : #Sprice = #S-tabletstand
+
+Do,(#name<>"*Office*"):1
+{
+Set,(#Name = "*19H x 13W SYMPHONY*"): #Sprice =#S-19hx13W
+Set,(#Name = "*19H x 23W SYMPHONY*"): #Sprice =#S-19hx23W
+Set,(#Name = "*19H x 35W SYMPHONY*"): #Sprice =#S-19hx35W
+Set,(#Name = "*19H x 47W SYMPHONY*"): #Sprice =#S-19hx47W
+Set,(#Name = "*42H x 13W SYMPHONY*"): #Sprice =#S-42hx13W
+Set,(#Name = "*42H x 23W SYMPHONY*"): #Sprice =#S-42hx23W
+Set,(#Name = "*42H x 35W SYMPHONY*"): #Sprice =#S-42hx35W
+Set,(#Name = "*42H x 47W SYMPHONY*"): #Sprice =#S-42hx47W
+Set,(#Name = "*66H x 13W SYMPHONY*"): #Sprice =#S-66hx13W
+Set,(#Name = "*66H x 23W SYMPHONY*"): #Sprice =#S-66hx23W
+Set,(#Name = "*66H x 35W SYMPHONY*"): #Sprice =#S-66hx35W
+Set,(#Name = "*66H x 47W SYMPHONY*"): #Sprice =#S-66hx47W
+}
+Do,(#name="*Office*")&(#name<>"*Table*"):1
+{
+Set,(#Name = "*19H x 13W SYMPHONY OFFICE*"): #Sprice =#SO-19hx13W
+Set,(#Name = "*19H x 23W SYMPHONY OFFICE*"): #Sprice =#SO-19hx23W
+Set,(#Name = "*19H x 35W SYMPHONY OFFICE*"): #Sprice =#SO-19hx35W
+Set,(#Name = "*19H x 47W SYMPHONY OFFICE*"): #Sprice =#SO-19hx47W
+Set,(#Name = "*42H x 13W SYMPHONY OFFICE*"): #Sprice =#SO-42hx13W
+Set,(#Name = "*42H x 23W SYMPHONY OFFICE*"): #Sprice =#SO-42hx23W
+Set,(#Name = "*42H x 35W SYMPHONY OFFICE*"): #Sprice =#SO-42hx35W
+Set,(#Name = "*42H x 47W SYMPHONY OFFICE*"): #Sprice =#SO-42hx47W
+Set,(#Name = "*66H x 13W SYMPHONY OFFICE*"): #Sprice =#SO-66hx13W
+Set,(#Name = "*66H x 23W SYMPHONY OFFICE*"): #Sprice =#SO-66hx23W
+Set,(#Name = "*66H x 35W SYMPHONY OFFICE*"): #Sprice =#SO-66hx35W
+Set,(#Name = "*66H x 47W SYMPHONY OFFICE*"): #Sprice =#SO-66hx47W
+}
+Do,(#name="*Office*")&(#name="*Table*"):1
+{
+Set,(#Name = "*24H x 13W SYMPHONY OFFICE TABLE*"): #Sprice =#SOT-24hx13W
+Set,(#Name = "*24H x 23W SYMPHONY OFFICE TABLE*"): #Sprice =#SOT-24hx23W
+Set,(#Name = "*24H x 35W SYMPHONY OFFICE TABLE*"): #Sprice =#SOT-24hx35W
+Set,(#Name = "*24H x 47W SYMPHONY OFFICE TABLE*"): #Sprice =#SOT-24hx47W
+}
+Price, 1, RM#Roomnum #Name #Code,#SPrice*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 

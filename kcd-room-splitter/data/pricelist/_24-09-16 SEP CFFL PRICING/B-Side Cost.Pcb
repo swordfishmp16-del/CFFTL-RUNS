@@ -1,0 +1,1016 @@
+,Use Grid
+
+,**            ***** Go back to A-Setup to change the method of pricing Vertical Sides *****
+,**
+
+
+Set, #CostOfVertical = 0, Default Cost
+
+
+
+Do,(#SideCostMethod="SqFt"):1
+{
+  ,**
+  ,*************************************************** VERTICAL SIDE PRICE METHOD = PRICE BY SqFt *****************************************************************
+  ,**
+
+  ,**     This Vertical Side pricing method prices ALL Verticals by the Square Foot
+  DisplaySet,#SideCostPerSqFtTemp =10.00,     1.01      Cost of Material per Square Foot
+  Set, #SideCostPerSqFt = #SideCostPerSqFtTemp/144
+  DisplaySet,#SideCostFormula =#VertH * #VertD * #SideCostPerSqFt ,     1.02      Cost Formula for a Side
+
+  Set, #CostOfVertical = [#SideCostFormula], Set the Cost of This Side
+}
+
+
+
+
+
+Do,(#SideCostMethod="List"):1
+{
+  ,**
+  ,*************************************************** VERTICAL SIDE PRICE METHOD = PRICE FROM LIST *****************************************************************
+  ,**
+       Displayset,#panelpricemultiplier=1.10,  Q...panel price multiplier (1.00 for no change)
+
+  ,**              Set the cost of your Vertical Sides by the following ranges.
+  ,**              Start with your smallest Vertical Side.
+  ,**              Set progressively larger ones as you go down the list
+  ,**              Each price applies to sides of that size or less.
+  DisplaySet, #NumSideThick=3, Q...     HOW MANY DIFFERENT SIDE THICKNESSES DO YOU USE?  [1;2;3]
+  ,**              Example:  3 different sizes
+  ,**                  (Side Thickness Equal to 3/4")
+  ,**                  (Side Thickness Equal to 1 1/2"") 
+  ,**                  (Side Thickness Equal or Greater than 2 1/4")
+  ,**                   
+  ,**
+  Do, (#NumSideThick >0):1
+  {
+  DisplaySet, #SideThickA =.75, 1 Q...     WHAT IS THE THICKNESS OF YOUR 1st VERTICAL SIDE? (THINNEST), 
+
+  DisplaySet, #NumSideDepth=6, Q...     HOW MANY DIFFERENT SIDE DEPTHS DO YOU USE?  [1;2;3;4;5;6;7;8;9;10]
+  ,**              Example:  6 different sizes
+  ,**                  (Sides Depth Smaller than 12")
+  ,**                  (Sides Depth Equal to 12") 
+  ,**                  (Sides Depth Larger than 12" & Smaller than 16")
+  ,**                  (Sides Depth Equal to 16")
+  ,**                  (Sides Depth Larger than 16" & Smaller than 24")
+  ,**                  (Sides Depth Equal to 24") 
+  ,**
+ , Do, (#sideTH = #SideThickA):1
+ , {
+  Do,  (#NumSideDepth>0):1
+  {
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    DisplaySet, #SideDepthA =12, 1 Q...     WHAT IS THE DEPTH OF YOUR 1st VERTICAL SIDE? (SMALLEST), SideDepth.Bmp
+    
+    DisplaySet, #NumSideHeightA=4, 1 Q...     HOW MANY DIFFERENT HEIGHTS DO YOU USE FOR THIS SIDE DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumSideHeightA>0):1
+      {
+      DisplaySet, #SideHeight1A =24,          1.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost1A =84*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthA" deep)   by   (up to #SideHeight1A" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost1A ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1A) & (#VertD>0)&(#VertD<=#SideDepthA): #addpanel = 1 ,panel count
+      }
+
+    Do, (#NumSideHeightA>1):1
+      {
+      DisplaySet, #SideHeight2A =48.63,          2.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost2A =107*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthA" deep)   by   (up to #SideHeight2A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1A)&(#VertH<=#SideHeight2A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost2A , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1A)&(#VertH<=#SideHeight2A) & (#VertD>0)&(#VertD<=#SideDepthA): #addpanel=2, panel count
+      }
+
+    Do, (#NumSideHeightA>2):1
+      {
+      DisplaySet, #SideHeight3A =96,          3.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost3A =147*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthA" deep)   by   (up to #SideHeight3A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2A)&(#VertH<=#SideHeight3A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost3A , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2A)&(#VertH<=#SideHeight3A) & (#VertD>0)&(#VertD<=#SideDepthA):#addpanel=3, panel count
+      }
+
+    Do, (#NumSideHeightA>3):1
+      {
+      DisplaySet, #SideHeight4A =120,          4.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost4A =177*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthA" deep)   by   (up to #SideHeight4A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3A)&(#VertH<=#SideHeight4A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost4A , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3A)&(#VertH<=#SideHeight4A) & (#VertD>0)&(#VertD<=#SideDepthA): #addpanel=4, panelcount
+      }
+
+    Do, (#NumSideHeightA>4):1
+      {
+      DisplaySet, #SideHeight5A =60,          5.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost5A =60.11,                   Cost of a Side   (up to #SideDepthA" deep)   by   (up to #SideHeight5A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4A)&(#VertH<=#SideHeight5A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost5A , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightA>5):1
+      {
+      DisplaySet, #SideHeight6A =72,          6.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost6A =72.11,                   Cost of a Side   (up to #SideDepthA" deep)   by   (up to #SideHeight6A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5A)&(#VertH<=#SideHeight6A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost6A , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightA>6):1
+      {
+      DisplaySet, #SideHeight7A =84,          7.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost7A =84.11,                   Cost of a Side   (up to #SideDepthA" deep)   by   (up to #SideHeight7A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6A)&(#VertH<=#SideHeight7A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost7A , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightA>7):1
+      {
+      DisplaySet, #SideHeight8A =96,          8.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost8A =96.11,                    Cost of a Side   (up to #SideDepthA" deep)   by   (up to #SideHeight8A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7A)&(#VertH<=#SideHeight8A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost8A , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightA>8):1
+      {
+      DisplaySet, #SideHeight9A =0 ,          9.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost9A =0   ,                    Cost of a Side   (up to #SideDepthA" deep)   by   (up to #SideHeight9A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8A)&(#VertH<=#SideHeight9A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost9A , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightA>9):1
+      {
+      DisplaySet, #SideHeight10A =0,          10. Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost10A =0  ,                    Cost of a Side   (up to #SideDepthA" deep)   by   (up to #SideHeight10A" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9A)&(#VertH<=#SideHeight10A) & (#VertD>0)&(#VertD<=#SideDepthA): #CostOfVertical = #SideCost10A , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+  Do,  (#NumSideDepth>1):1
+  {
+    DisplaySet, #SideDepthB =16, 2 Q...     WHAT IS THE DEPTH OF YOUR 2nd VERTICAL SIDE? , SideDepth.Bmp
+    
+    DisplaySet, #NumSideHeightB=4, 2 Q...     HOW MANY DIFFERENT HEIGHTS DO YOU USE FOR THIS SIDE DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumSideHeightB>0):1
+      {
+      DisplaySet, #SideHeight1B =24,          1.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost1B =96*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthB" deep)   by   (up to #SideHeight1B" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost1B ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB):#addpanel = 5 ,panel count
+      }
+
+    Do, (#NumSideHeightB>1):1
+      {
+      DisplaySet, #SideHeight2B =48.63,          2.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost2B =118*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthB" deep)   by   (up to #SideHeight2B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1B)&(#VertH<=#SideHeight2B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost2B , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1B)&(#VertH<=#SideHeight2B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB):#addpanel = 6, panel count
+      }
+
+    Do, (#NumSideHeightB>2):1
+      {
+      DisplaySet, #SideHeight3B =96,          3.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost3B =182*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthB" deep)   by   (up to #SideHeight3B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2B)&(#VertH<=#SideHeight3B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost3B , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2B)&(#VertH<=#SideHeight3B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB):#addpanel = 7, panel count
+      }
+
+    Do, (#NumSideHeightB>3):1
+      {
+      DisplaySet, #SideHeight4B =120,          4.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost4B =218*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthB" deep)   by   (up to #SideHeight4B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3B)&(#VertH<=#SideHeight4B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost4B , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3B)&(#VertH<=#SideHeight4B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB):#addpanel = 8, panelcount
+      }
+
+    Do, (#NumSideHeightB>4):1
+      {
+      DisplaySet, #SideHeight5B =60,          5.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost5B =60.12,                   Cost of a Side   (up to #SideDepthB" deep)   by   (up to #SideHeight5B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4B)&(#VertH<=#SideHeight5B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost5B , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightB>5):1
+      {
+      DisplaySet, #SideHeight6B =72,          6.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost6B =72.12,                   Cost of a Side   (up to #SideDepthB" deep)   by   (up to #SideHeight6B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5B)&(#VertH<=#SideHeight6B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost6B , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightB>6):1
+      {
+      DisplaySet, #SideHeight7B =84,          7.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost7B =84.12,                   Cost of a Side   (up to #SideDepthB" deep)   by   (up to #SideHeight7B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6B)&(#VertH<=#SideHeight7B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost7B , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightB>7):1
+      {
+      DisplaySet, #SideHeight8B =96,          8.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost8B =96.12,                    Cost of a Side   (up to #SideDepthB" deep)   by   (up to #SideHeight8B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7B)&(#VertH<=#SideHeight8B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost8B , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightB>8):1
+      {
+      DisplaySet, #SideHeight9B =0 ,          9.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost9B =0   ,                    Cost of a Side   (up to #SideDepthB" deep)   by   (up to #SideHeight9B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8B)&(#VertH<=#SideHeight9B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost9B , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightB>9):1
+      {
+      DisplaySet, #SideHeight10B =0,          10. Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost10B =0  ,                    Cost of a Side   (up to #SideDepthB" deep)   by   (up to #SideHeight10B" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9B)&(#VertH<=#SideHeight10B) & (#VertD>#SideDepthA)&(#VertD<=#SideDepthB): #CostOfVertical = #SideCost10B , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+  
+
+
+
+
+  Do,  (#NumSideDepth>2):1
+  {
+    DisplaySet, #SideDepthC =18, 3 Q...     WHAT IS THE DEPTH OF YOUR 3rd VERTICAL SIDE? , SideDepth.Bmp
+    
+    DisplaySet, #NumSideHeightC=4, 3 Q...     HOW MANY DIFFERENT HEIGHTS DO YOU USE FOR THIS SIDE DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumSideHeightC>0):1
+      {
+      DisplaySet, #SideHeight1C =24,          1.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost1C =107*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthC" deep)   by   (up to #SideHeight1C" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost1C ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #addpanel = 9, panelcount
+      }
+
+    Do, (#NumSideHeightC>1):1
+      {
+      DisplaySet, #SideHeight2C =48.63,          2.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost2C =130*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthC" deep)   by   (up to #SideHeight2C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1C)&(#VertH<=#SideHeight2C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost2C , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1C)&(#VertH<=#SideHeight2C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #addpanel = 10, panel count
+      }
+
+    Do, (#NumSideHeightC>2):1
+      {
+      DisplaySet, #SideHeight3C =96,          3.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost3C =205*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthC" deep)   by   (up to #SideHeight3C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2C)&(#VertH<=#SideHeight3C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost3C , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2C)&(#VertH<=#SideHeight3C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #addpanel = 11, panel count
+      }
+
+    Do, (#NumSideHeightC>3):1
+      {
+      DisplaySet, #SideHeight4C =120,          4.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost4C =246*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthC" deep)   by   (up to #SideHeight4C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3C)&(#VertH<=#SideHeight4C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost4C , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3C)&(#VertH<=#SideHeight4C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #addpanel = 12, panel count
+      }
+
+    Do, (#NumSideHeightC>4):1
+      {
+      DisplaySet, #SideHeight5C =60,          5.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost5C =60.13,                   Cost of a Side   (up to #SideDepthC" deep)   by   (up to #SideHeight5C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4C)&(#VertH<=#SideHeight5C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost5C , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightC>5):1
+      {
+      DisplaySet, #SideHeight6C =72,          6.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost6C =72.13,                   Cost of a Side   (up to #SideDepthC" deep)   by   (up to #SideHeight6C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5C)&(#VertH<=#SideHeight6C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost6C , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightC>6):1
+      {
+      DisplaySet, #SideHeight7C =84,          7.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost7C =84.13,                   Cost of a Side   (up to #SideDepthC" deep)   by   (up to #SideHeight7C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6C)&(#VertH<=#SideHeight7C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost7C , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightC>7):1
+      {
+      DisplaySet, #SideHeight8C =96,          8.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost8C =96.13,                    Cost of a Side   (up to #SideDepthC" deep)   by   (up to #SideHeight8C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7C)&(#VertH<=#SideHeight8C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost8C , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightC>8):1
+      {
+      DisplaySet, #SideHeight9C =0 ,          9.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost9C =0   ,                    Cost of a Side   (up to #SideDepthC" deep)   by   (up to #SideHeight9C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8C)&(#VertH<=#SideHeight9C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost9C , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightC>9):1
+      {
+      DisplaySet, #SideHeight10C =0,          10. Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost10C =0  ,                    Cost of a Side   (up to #SideDepthC" deep)   by   (up to #SideHeight10C" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9C)&(#VertH<=#SideHeight10C) & (#VertD>#SideDepthB)&(#VertD<=#SideDepthC): #CostOfVertical = #SideCost10C , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+ 
+
+
+
+
+  Do,  (#NumSideDepth>3):1
+  {
+    DisplaySet, #SideDepthD =24, 4 Q...     WHAT IS THE DEPTH OF YOUR 4th VERTICAL SIDE? , SideDepth.Bmp
+    
+    DisplaySet, #NumSideHeightD=4, 4 Q...     HOW MANY DIFFERENT HEIGHTS DO YOU USE FOR THIS SIDE DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumSideHeightd>0):1
+      {
+      DisplaySet, #SideHeight1D =24,          1.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost1D =118*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthD" deep)   by   (up to #SideHeight1D" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost1D ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #addpanel = 13, panel count
+      }
+
+    Do, (#NumSideHeightD>1):1
+      {
+      DisplaySet, #SideHeight2D =48.63,          2.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost2D =159*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthD" deep)   by   (up to #SideHeight2D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1D)&(#VertH<=#SideHeight2D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost2D , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1D)&(#VertH<=#SideHeight2D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #addpanel = 14, panel count
+      }
+
+    Do, (#NumSideHeightD>2):1
+      {
+      DisplaySet, #SideHeight3D =96,          3.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost3D =222*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthD" deep)   by   (up to #SideHeight3D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2D)&(#VertH<=#SideHeight3D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost3D , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2D)&(#VertH<=#SideHeight3D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD):#addpanel= 15, panel count
+      }
+
+    Do, (#NumSideHeightD>3):1
+      {
+      DisplaySet, #SideHeight4D =120,          4.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost4D =266*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthD" deep)   by   (up to #SideHeight4D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3D)&(#VertH<=#SideHeight4D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost4D , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3D)&(#VertH<=#SideHeight4D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #addpanel = 16, panel count
+      }
+
+    Do, (#NumSideHeightD>4):1
+      {
+      DisplaySet, #SideHeight5D =60,          5.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost5D =60.14,                   Cost of a Side   (up to #SideDepthD" deep)   by   (up to #SideHeight5D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4D)&(#VertH<=#SideHeight5D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost5D , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightD>5):1
+      {
+      DisplaySet, #SideHeight6D =72,          6.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost6D =72.14,                   Cost of a Side   (up to #SideDepthD" deep)   by   (up to #SideHeight6D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5D)&(#VertH<=#SideHeight6D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost6D , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightD>6):1
+      {
+      DisplaySet, #SideHeight7D =84,          7.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost7D =84.14,                   Cost of a Side   (up to #SideDepthD" deep)   by   (up to #SideHeight7D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6D)&(#VertH<=#SideHeight7D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost7D , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightD>7):1
+      {
+      DisplaySet, #SideHeight8D =96,          8.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost8D =96.14,                    Cost of a Side   (up to #SideDepthD" deep)   by   (up to #SideHeight8D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7D)&(#VertH<=#SideHeight8D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost8D , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightD>8):1
+      {
+      DisplaySet, #SideHeight9D =0 ,          9.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost9D =0   ,                    Cost of a Side   (up to #SideDepthD" deep)   by   (up to #SideHeight9D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8D)&(#VertH<=#SideHeight9D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost9D , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightD>9):1
+      {
+      DisplaySet, #SideHeight10D =0,          10. Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost10D =0  ,                    Cost of a Side   (up to #SideDepthD" deep)   by   (up to #SideHeight10D" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9D)&(#VertH<=#SideHeight10D) & (#VertD>#SideDepthC)&(#VertD<=#SideDepthD): #CostOfVertical = #SideCost10D , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>4):1
+  {
+    DisplaySet, #SideDepthE =32, 5 Q...     WHAT IS THE DEPTH OF YOUR 5th VERTICAL SIDE? , SideDepth.Bmp
+    
+    DisplaySet, #NumSideHeightE=4, 5 Q...     HOW MANY DIFFERENT HEIGHTS DO YOU USE FOR THIS SIDE DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumSideHeightE>0):1
+      {
+      DisplaySet, #SideHeight1E =24,          1.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost1E =148*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthE" deep)   by   (up to #SideHeight1E" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost1E ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #addpanel = 17, panel count
+      }
+
+    Do, (#NumSideHeightE>1):1
+      {
+      DisplaySet, #SideHeight2E =48.63,          2.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost2E =170*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthE" deep)   by   (up to #SideHeight2E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1E)&(#VertH<=#SideHeight2E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost2E , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1E)&(#VertH<=#SideHeight2E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #addpanel = 18, panel count
+      }
+
+    Do, (#NumSideHeightE>2):1
+      {
+      DisplaySet, #SideHeight3E =96,          3.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost3E =297*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthE" deep)   by   (up to #SideHeight3E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2E)&(#VertH<=#SideHeight3E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost3E , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2E)&(#VertH<=#SideHeight3E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE):#addpanel = 19, panel count
+      }
+
+    Do, (#NumSideHeightE>3):1
+      {
+      DisplaySet, #SideHeight4E =120,          4.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost4E =356*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthE" deep)   by   (up to #SideHeight4E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3E)&(#VertH<=#SideHeight4E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost4E , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3E)&(#VertH<=#SideHeight4E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #addpanel = 20, panel count
+      }
+
+    Do, (#NumSideHeightE>4):1
+      {
+      DisplaySet, #SideHeight5E =60,          5.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost5E =60.15,                   Cost of a Side   (up to #SideDepthE" deep)   by   (up to #SideHeight5E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4E)&(#VertH<=#SideHeight5E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost5E , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightE>5):1
+      {
+      DisplaySet, #SideHeight6E =72,          6.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost6E =72.15,                   Cost of a Side   (up to #SideDepthE" deep)   by   (up to #SideHeight6E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5E)&(#VertH<=#SideHeight6E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost6E , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightE>6):1
+      {
+      DisplaySet, #SideHeight7E =84,          7.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost7E =84.15,                   Cost of a Side   (up to #SideDepthE" deep)   by   (up to #SideHeight7E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6E)&(#VertH<=#SideHeight7E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost7E , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightE>7):1
+      {
+      DisplaySet, #SideHeight8E =96,          8.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost8E =96.15,                    Cost of a Side   (up to #SideDepthE" deep)   by   (up to #SideHeight8E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7E)&(#VertH<=#SideHeight8E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost8E , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightE>8):1
+      {
+      DisplaySet, #SideHeight9E =0 ,          9.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost9E =0   ,                    Cost of a Side   (up to #SideDepthE" deep)   by   (up to #SideHeight9E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8E)&(#VertH<=#SideHeight9E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost9E , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightE>9):1
+      {
+      DisplaySet, #SideHeight10E =0,          10. Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost10E =0  ,                    Cost of a Side   (up to #SideDepthE" deep)   by   (up to #SideHeight10E" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9E)&(#VertH<=#SideHeight10E) & (#VertD>#SideDepthD)&(#VertD<=#SideDepthE): #CostOfVertical = #SideCost10E , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>5):1
+  {
+    DisplaySet, #SideDepthF =48, 6 Q...     WHAT IS THE DEPTH OF YOUR 6th VERTICAL SIDE? , SideDepth.Bmp
+    
+    DisplaySet, #NumSideHeightF=4, 6 Q...     HOW MANY DIFFERENT HEIGHTS DO YOU USE FOR THIS SIDE DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumSideHeightF>0):1
+      {
+      DisplaySet, #SideHeight1F =24,          1.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost1F =168*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthF" deep)   by   (up to #SideHeight1F" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost1F ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #addpanel= 21, panel count
+      }
+
+    Do, (#NumSideHeightF>1):1
+      {
+      DisplaySet, #SideHeight2F =48.63,          2.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost2F =240*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthF" deep)   by   (up to #SideHeight2F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1F)&(#VertH<=#SideHeight2F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost2F , Set the Cost of This Side
+     Set, (#VertH>#SideHeight1F)&(#VertH<=#SideHeight2F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #addpanel = 22, panel count
+      }
+
+    Do, (#NumSideHeightF>2):1
+      {
+      DisplaySet, #SideHeight3F =96,          3.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost3F =394*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthF" deep)   by   (up to #SideHeight3F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2F)&(#VertH<=#SideHeight3F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost3F , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2F)&(#VertH<=#SideHeight3F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #addpanel = 23, panel count
+      }
+
+    Do, (#NumSideHeightF>3):1
+      {
+      DisplaySet, #SideHeight4F =120,          4.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost4F =473*#panelpricemultiplier,                   Cost of a Side   (up to #SideDepthF" deep)   by   (up to #SideHeight4F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3F)&(#VertH<=#SideHeight4F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost4F , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3F)&(#VertH<=#SideHeight4F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #addpanel = 24, panel count
+      }
+
+    Do, (#NumSideHeightF>4):1
+      {
+      DisplaySet, #SideHeight5F =60,          5.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost5F =60.16,                   Cost of a Side   (up to #SideDepthF" deep)   by   (up to #SideHeight5F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4F)&(#VertH<=#SideHeight5F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost5F , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightF>5):1
+      {
+      DisplaySet, #SideHeight6F =72,          6.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost6F =72.16,                   Cost of a Side   (up to #SideDepthF" deep)   by   (up to #SideHeight6F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5F)&(#VertH<=#SideHeight6F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost6F , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightF>6):1
+      {
+      DisplaySet, #SideHeight7F =84,          7.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost7F =84.16,                   Cost of a Side   (up to #SideDepthF" deep)   by   (up to #SideHeight7F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6F)&(#VertH<=#SideHeight7F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost7F , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightF>7):1
+      {
+      DisplaySet, #SideHeight8F =96,          8.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost8F =96.16,                    Cost of a Side   (up to #SideDepthF" deep)   by   (up to #SideHeight8F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7F)&(#VertH<=#SideHeight8F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost8F , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightF>8):1
+      {
+      DisplaySet, #SideHeight9F =0 ,          9.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost9F =0   ,                    Cost of a Side   (up to #SideDepthF" deep)   by   (up to #SideHeight9F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8F)&(#VertH<=#SideHeight9F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost9F , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightF>9):1
+      {
+      DisplaySet, #SideHeight10F =0,          10. Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost10F =0  ,                    Cost of a Side   (up to #SideDepthF" deep)   by   (up to #SideHeight10F" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9F)&(#VertH<=#SideHeight10F) & (#VertD>#SideDepthE)&(#VertD<=#SideDepthF): #CostOfVertical = #SideCost10F , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>6):1
+  {
+    DisplaySet, #SideDepthG =48.125, 7 Q...     WHAT IS THE DEPTH OF YOUR 7th VERTICAL SIDE? , SideDepth.Bmp
+    
+    DisplaySet, #NumSideHeightG=4, 7 Q...     HOW MANY DIFFERENT HEIGHTS DO YOU USE FOR THIS SIDE DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumSideHeightG>0):1
+      {
+      DisplaySet, #SideHeight1G =24,          1.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost1G =138,                   Cost of a Side   (up to #SideDepthG" deep)   by   (up to #SideHeight1G" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost1G ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG):#addpanel = 25, panel count
+      }
+
+    Do, (#NumSideHeightG>1):1
+      {
+      DisplaySet, #SideHeight2G =48,          2.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost2G =168,                   Cost of a Side   (up to #SideDepthG" deep)   by   (up to #SideHeight2G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1G)&(#VertH<=#SideHeight2G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost2G , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1G)&(#VertH<=#SideHeight2G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG):#addpanel = 26, panel count
+      }
+
+    Do, (#NumSideHeightG>2):1
+      {
+      DisplaySet, #SideHeight3G =96,          3.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost3G =253,                   Cost of a Side   (up to #SideDepthG" deep)   by   (up to #SideHeight3G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2G)&(#VertH<=#SideHeight3G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost3G , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2G)&(#VertH<=#SideHeight3G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG):#addpanel = 27, panel count
+      }
+
+    Do, (#NumSideHeightG>3):1
+      {
+      DisplaySet, #SideHeight4G =120,          4.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost4G =(253+60),                   Cost of a Side   (up to #SideDepthG" deep)   by   (up to #SideHeight4G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3G)&(#VertH<=#SideHeight4G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost4G , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3G)&(#VertH<=#SideHeight4G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG):#addpanel = 28, panel count
+      }
+
+    Do, (#NumSideHeightG>4):1
+      {
+      DisplaySet, #SideHeight5G =0,          5.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost5G =0,                   Cost of a Side   (up to #SideDepthG" deep)   by   (up to #SideHeight5G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4G)&(#VertH<=#SideHeight5G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost5G , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightG>5):1
+      {
+      DisplaySet, #SideHeight6G =0,          6.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost6G =0,                   Cost of a Side   (up to #SideDepthG" deep)   by   (up to #SideHeight6G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6G)&(#VertH<=#SideHeight6G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost6G , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightG>6):1
+      {
+      DisplaySet, #SideHeight7G =0,          7.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost7G =0,                   Cost of a Side   (up to #SideDepthG" deep)   by   (up to #SideHeight7G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6G)&(#VertH<=#SideHeight7G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost7G , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightG>7):1
+      {
+      DisplaySet, #SideHeight8G =0 ,          8.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost8G =0   ,                    Cost of a Side   (up to #SideDepthG" deep)   by   (up to #SideHeight8G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7G)&(#VertH<=#SideHeight8G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost8G , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightG>8):1
+      {
+      DisplaySet, #SideHeight9G =0 ,          9.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost9G =0   ,                    Cost of a Side   (up to #SideDepthG" deep)   by   (up to #SideHeight9G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8G)&(#VertH<=#SideHeight9G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost9G , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightG>9):1
+      {
+      DisplaySet, #SideHeight10G =0,          10. Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost10G =0  ,                    Cost of a Side   (up to #SideDepthG" deep)   by   (up to #SideHeight10G" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9G)&(#VertH<=#SideHeight10G) & (#VertD>#SideDepthF)&(#VertD<=#SideDepthG): #CostOfVertical = #SideCost10G , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>7):1
+  {
+    DisplaySet, #SideDepthH =0, 8 Q...     WHAT IS THE DEPTH OF YOUR 8th VERTICAL SIDE? , SideDepth.Bmp
+    
+    DisplaySet, #NumSideHeightH=4, 8 Q...     HOW MANY DIFFERENT HEIGHTS DO YOU USE FOR THIS SIDE DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumSideHeightH>0):1
+      {
+      DisplaySet, #SideHeight1H =0,          1.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost1H =0,                   Cost of a Side   (up to #SideDepthH" deep)   by   (up to #SideHeight1H" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost1H ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #addpanel = 29, panel count
+      }
+
+    Do, (#NumSideHeightH>1):1
+      {
+      DisplaySet, #SideHeight2H =0,          2.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost2H =0,                   Cost of a Side   (up to #SideDepthH" deep)   by   (up to #SideHeight2H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1H)&(#VertH<=#SideHeight2H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost2H , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1H)&(#VertH<=#SideHeight2H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH):#addpanel = 30, panel count
+      }
+
+    Do, (#NumSideHeightH>2):1
+      {
+      DisplaySet, #SideHeight3H =0,          3.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost3H =0,                   Cost of a Side   (up to #SideDepthH" deep)   by   (up to #SideHeight3H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2H)&(#VertH<=#SideHeight3H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost3H , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2H)&(#VertH<=#SideHeight3H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH):#addpanel = 31, panel count
+      }
+
+    Do, (#NumSideHeightH>3):1
+      {
+      DisplaySet, #SideHeight4H =0,          4.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost4H =0,                   Cost of a Side   (up to #SideDepthH" deep)   by   (up to #SideHeight4H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3H)&(#VertH<=#SideHeight4H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost4H , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3H)&(#VertH<=#SideHeight4H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH):#addpanel = 32, panel count
+      }
+
+    Do, (#NumSideHeightH>4):1
+      {
+      DisplaySet, #SideHeight5H =0,          5.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost5H =0,                   Cost of a Side   (up to #SideDepthH" deep)   by   (up to #SideHeight5H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4H)&(#VertH<=#SideHeight5H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost5H , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightH>5):1
+      {
+      DisplaySet, #SideHeight6H =0,          6.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost6H =0,                   Cost of a Side   (up to #SideDepthH" deep)   by   (up to #SideHeight6H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5H)&(#VertH<=#SideHeight6H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost6H , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightH>6):1
+      {
+      DisplaySet, #SideHeight7H =0,          7.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost7H =0,                   Cost of a Side   (up to #SideDepthH" deep)   by   (up to #SideHeight7H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6H)&(#VertH<=#SideHeight7H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost7H , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightH>7):1
+      {
+      DisplaySet, #SideHeight8H =0 ,          8.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost8H =0   ,                    Cost of a Side   (up to #SideDepthH" deep)   by   (up to #SideHeight8H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7H)&(#VertH<=#SideHeight8H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost8H , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightH>8):1
+      {
+      DisplaySet, #SideHeight9H =0 ,          9.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost9H =0   ,                    Cost of a Side   (up to #SideDepthH" deep)   by   (up to #SideHeight9H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8H)&(#VertH<=#SideHeight9H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost9H , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightH>9):1
+      {
+      DisplaySet, #SideHeight10H =0,          10. Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost10H =0  ,                    Cost of a Side   (up to #SideDepthH" deep)   by   (up to #SideHeight10H" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9H)&(#VertH<=#SideHeight10H) & (#VertD>#SideDepthG)&(#VertD<=#SideDepthH): #CostOfVertical = #SideCost10H , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>8):1
+  {
+    DisplaySet, #SideDepthI =0, 9 Q...     WHAT IS THE DEPTH OF YOUR 9th VERTICAL SIDE? , SideDepth.Bmp
+    
+    DisplaySet, #NumSideHeightI=4, 9 Q...     HOW MANY DIFFERENT HEIGHTS DO YOU USE FOR THIS SIDE DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumSideHeightI>0):1
+      {
+      DisplaySet, #SideHeight1I =0,          1.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost1I =0,                   Cost of a Side   (up to #SideDepthI" deep)   by   (up to #SideHeight1I" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost1I ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI):#addpanel = 33, panel count
+      }
+
+    Do, (#NumSideHeightI>1):1
+      {
+      DisplaySet, #SideHeight2I =0,          2.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost2I =0,                   Cost of a Side   (up to #SideDepthI" deep)   by   (up to #SideHeight2I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1I)&(#VertH<=#SideHeight2I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost2I , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1I)&(#VertH<=#SideHeight2I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI):#addpanel = 34, panel count
+      }
+
+    Do, (#NumSideHeightI>2):1
+      {
+      DisplaySet, #SideHeight3I =0,          3.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost3I =0,                   Cost of a Side   (up to #SideDepthI" deep)   by   (up to #SideHeight3I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2I)&(#VertH<=#SideHeight3I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost3I , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2I)&(#VertH<=#SideHeight3I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #addpanel = 35, panel count
+     }
+
+    Do, (#NumSideHeightI>3):1
+      {
+      DisplaySet, #SideHeight4I =0,          4.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost4I =0,                   Cost of a Side   (up to #SideDepthI" deep)   by   (up to #SideHeight4I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3I)&(#VertH<=#SideHeight4I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost4I , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3I)&(#VertH<=#SideHeight4I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI):#addpanel = 36, panel count
+      }
+
+    Do, (#NumSideHeightI>4):1
+      {
+      DisplaySet, #SideHeight5I =0,          5.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost5I =0,                   Cost of a Side   (up to #SideDepthI" deep)   by   (up to #SideHeight5I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4I)&(#VertH<=#SideHeight5I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost5I , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightI>5):1
+      {
+      DisplaySet, #SideHeight6I =0,          6.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost6I =0,                   Cost of a Side   (up to #SideDepthI" deep)   by   (up to #SideHeight6I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5I)&(#VertH<=#SideHeight6I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost6I , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightI>6):1
+      {
+      DisplaySet, #SideHeight7I =0,          7.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost7I =0,                   Cost of a Side   (up to #SideDepthI" deep)   by   (up to #SideHeight7I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6I)&(#VertH<=#SideHeight7I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost7I , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightI>7):1
+      {
+      DisplaySet, #SideHeight8I =0 ,          8.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost8I =0   ,                    Cost of a Side   (up to #SideDepthI" deep)   by   (up to #SideHeight8I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7I)&(#VertH<=#SideHeight8I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost8I , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightI>8):1
+      {
+      DisplaySet, #SideHeight9I =0 ,          9.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost9I =0   ,                    Cost of a Side   (up to #SideDepthI" deep)   by   (up to #SideHeight9I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8I)&(#VertH<=#SideHeight9I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost9I , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightI>9):1
+      {
+      DisplaySet, #SideHeight10I =0,          10. Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost10I =0  ,                    Cost of a Side   (up to #SideDepthI" deep)   by   (up to #SideHeight10I" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9I)&(#VertH<=#SideHeight10I) & (#VertD>#SideDepthH)&(#VertD<=#SideDepthI): #CostOfVertical = #SideCost10I , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumSideDepth>9):1
+  {
+    DisplaySet, #SideDepthJ =0, 10 Q...     WHAT IS THE DEPTH OF YOUR 10th VERTICAL SIDE? , SideDepth.Bmp
+    
+    DisplaySet, #NumSideHeightJ=4, 10 Q...     HOW MANY DIFFERENT HEIGHTS DO YOU USE FOR THIS SIDE DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumSideHeightJ>0):1
+      {
+      DisplaySet, #SideHeight1J =0,          1.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost1J =0,                   Cost of a Side   (up to #SideDepthJ" deep)   by   (up to #SideHeight1J" high), SideHeightDepth.Bmp
+      Set, (#VertH>0)&(#VertH<=#SideHeight1J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost1J ,Set the Cost of This Side
+      Set, (#VertH>0)&(#VertH<=#SideHeight1J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ):#addpanel = 37, panel count
+      }
+
+    Do, (#NumSideHeightJ>1):1
+      {
+      DisplaySet, #SideHeight2J =0,          2.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost2J =0,                   Cost of a Side   (up to #SideDepthJ" deep)   by   (up to #SideHeight2J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight1J)&(#VertH<=#SideHeight2J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost2J , Set the Cost of This Side
+      Set, (#VertH>#SideHeight1J)&(#VertH<=#SideHeight2J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ):#addpanel = 38, panel count
+      }
+
+    Do, (#NumSideHeightJ>2):1
+      {
+      DisplaySet, #SideHeight3J =0,          3.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost3J =0,                   Cost of a Side   (up to #SideDepthJ" deep)   by   (up to #SideHeight3J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight2J)&(#VertH<=#SideHeight3J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost3J , Set the Cost of This Side
+      Set, (#VertH>#SideHeight2J)&(#VertH<=#SideHeight3J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ):#addpanel = 39, panel count
+      }
+
+    Do, (#NumSideHeightA>3):1
+      {
+      DisplaySet, #SideHeight4J =0,          4.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost4J =0,                   Cost of a Side   (up to #SideDepthJ" deep)   by   (up to #SideHeight4J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight3J)&(#VertH<=#SideHeight4J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost4J , Set the Cost of This Side
+      Set, (#VertH>#SideHeight3J)&(#VertH<=#SideHeight4J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ):#addpanel = 40, panel count
+      }
+
+    Do, (#NumSideHeightJ>4):1
+      {
+      DisplaySet, #SideHeight5J =0,          5.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost5J =0,                   Cost of a Side   (up to #SideDepthJ" deep)   by   (up to #SideHeight5J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight4J)&(#VertH<=#SideHeight5J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost5J , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightJ>5):1
+      {
+      DisplaySet, #SideHeight6J =0,          6.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost6J =0,                   Cost of a Side   (up to #SideDepthJ" deep)   by   (up to #SideHeight6J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight5J)&(#VertH<=#SideHeight6J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost6J , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightJ>6):1
+      {
+      DisplaySet, #SideHeight7J =0,          7.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost7J =0,                   Cost of a Side   (up to #SideDepthJ" deep)   by   (up to #SideHeight7J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight6J)&(#VertH<=#SideHeight7J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost7J , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightJ>7):1
+      {
+      DisplaySet, #SideHeight8J =0 ,          8.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost8J =0   ,                    Cost of a Side   (up to #SideDepthJ" deep)   by   (up to #SideHeight8J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight7J)&(#VertH<=#SideHeight8J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost8J , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightJ>8):1
+      {
+      DisplaySet, #SideHeight9J =0 ,          9.  Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost9J =0   ,                    Cost of a Side   (up to #SideDepthJ" deep)   by   (up to #SideHeight9J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight8J)&(#VertH<=#SideHeight9J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost9J , Set the Cost of This Side
+      }
+
+    Do, (#NumSideHeightJ>9):1
+      {
+      DisplaySet, #SideHeight10J =0,          10. Vertical Side Height is Less than or Equal to, SideHeight.Bmp
+      DisplaySet, #SideCost10J =0  ,                    Cost of a Side   (up to #SideDepthJ" deep)   by   (up to #SideHeight10J" high), SideHeightDepth.Bmp
+      Set, (#VertH>#SideHeight9J)&(#VertH<=#SideHeight10J) & (#VertD>#SideDepthI)&(#VertD<=#SideDepthJ): #CostOfVertical = #SideCost10J , Set the Cost of This Side
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+  ,**
+ ,end of 1 panel thickness panels
+ ,}
+ }
+ Do, (#NumSideThick >1):1
+ {
+  DisplaySet, #SideThickB =1.5, 1 Q...     WHAT IS THE THICKNESS OF YOUR 2nd VERTICAL SIDE? (NEXT THICKEST)
+  Do, (#sideTH >= #SideThickB):1
+  {
+  Load, B-Sidecostdoublethick.pcb
+  }
+ }
+Do, (#NumSideThick >2):1
+ {
+  DisplaySet, #SideThickC =2.25, 1 Q...     WHAT IS THE THICKNESS OF YOUR 3rd VERTICAL SIDE? (THICKEST)
+  Do, (#sideTH >= #SideThickC):1
+  {
+  Load, B-Sidecosttriplethick.pcb
+  }
+ }
+
+}
+
+
+,**
+,**
+,******************************* Side Hardware Costs ************************************
+DisplaySet, #CostAddedToSides =+0,          1.   Cost added to each Side for hardware.
+
+,Set the Cost of Each Type of Vertical
+,Set, #CostOfSide =  [(#CostOfVertical + #CostAddedToSides)]
+
+,KF
+Set,#CostOfSide=[(#CostofVertical#CostAddedToSides)]
+Load,GetMaterialCostSide.pcb
+
+set, (#wallbeddepthtrack=1): #addpanel=15
+set, (#wallbeddepthtrack=1): #temppanelcount=0
+load, countsides.pcb
+
+,Calculates the Name of All Verticals
+Load,(#UsePartNames=No):  J-VerticalNames.Pcb
+
+
+
+,**
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+,Blank Lines at the end of the Grid (for Looks Only)
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**

@@ -1,0 +1,125 @@
+,Set Item Costs of Closet Rods per rod
+
+,**
+
+,Calculating subtotals
+
+
+Set,#ClosetRodCostGroup=0
+
+Set,(#ClosetRodType = "#ClosetRodType0"):#ClosetRodCostGroup=#ClosetRodTypeCost0
+Set,(#ClosetRodType = "#ClosetRodType1"):#ClosetRodCostGroup=#ClosetRodTypeCost1
+Set,(#ClosetRodType = "#ClosetRodType2"):#ClosetRodCostGroup=#ClosetRodTypeCost2
+Set,(#ClosetRodType = "#ClosetRodType3"):#ClosetRodCostGroup=#ClosetRodTypeCost3
+Set,(#ClosetRodType = "#ClosetRodType4"):#ClosetRodCostGroup=#ClosetRodTypeCost4
+Set,(#ClosetRodType = "#ClosetRodType5"):#ClosetRodCostGroup=#ClosetRodTypeCost5
+Set,(#ClosetRodType = "#ClosetRodType6"):#ClosetRodCostGroup=#ClosetRodTypeCost6
+Set,(#ClosetRodType = "#ClosetRodType7"):#ClosetRodCostGroup=#ClosetRodTypeCost7
+Set,(#ClosetRodType = "#ClosetRodType8"):#ClosetRodCostGroup=#ClosetRodTypeCost8
+Set,(#ClosetRodType = "#ClosetRodType9"):#ClosetRodCostGroup=#ClosetRodTypeCost9
+Set,(#ClosetRodType = "#ClosetRodType10"):#ClosetRodCostGroup=#ClosetRodTypeCost10
+Set,(#ClosetRodType = "#ClosetRodType11"):#ClosetRodCostGroup=#ClosetRodTypeCost11
+Set,(#ClosetRodType = "#ClosetRodType12"):#ClosetRodCostGroup=#ClosetRodTypeCost12
+Set,(#ClosetRodType = "#ClosetRodType13"):#ClosetRodCostGroup=#ClosetRodTypeCost13
+Set,(#ClosetRodType = "#ClosetRodType14"):#ClosetRodCostGroup=#ClosetRodTypeCost14
+Set,(#ClosetRodType = "#ClosetRodType15"):#ClosetRodCostGroup=#ClosetRodTypeCost15
+Set,(#ClosetRodType = "#ClosetRodType16"):#ClosetRodCostGroup=#ClosetRodTypeCost16
+Set,(#ClosetRodType = "#ClosetRodType17"):#ClosetRodCostGroup=#ClosetRodTypeCost17
+Set,(#ClosetRodType = "#ClosetRodType18"):#ClosetRodCostGroup=#ClosetRodTypeCost18
+Set,(#ClosetRodType = "#ClosetRodType19"):#ClosetRodCostGroup=#ClosetRodTypeCost19
+Set,(#ClosetRodType = "#ClosetRodType20"):#ClosetRodCostGroup=#ClosetRodTypeCost20
+Set,(#ClosetRodType = "#ClosetRodType21"):#ClosetRodCostGroup=#ClosetRodTypeCost21
+Set,(#ClosetRodType = "#ClosetRodType22"):#ClosetRodCostGroup=#ClosetRodTypeCost22
+Set,(#ClosetRodType = "#ClosetRodType23"):#ClosetRodCostGroup=#ClosetRodTypeCost23
+Set,(#ClosetRodType = "#ClosetRodType24"):#ClosetRodCostGroup=#ClosetRodTypeCost24
+Set,(#ClosetRodType = "#ClosetRodType25"):#ClosetRodCostGroup=#ClosetRodTypeCost25
+Set,(#ClosetRodType = "#ClosetRodType26"):#ClosetRodCostGroup=#ClosetRodTypeCost26
+Set,(#ClosetRodType = "#ClosetRodType27"):#ClosetRodCostGroup=#ClosetRodTypeCost27
+Set,(#ClosetRodType = "#ClosetRodType28"):#ClosetRodCostGroup=#ClosetRodTypeCost28
+Set,(#ClosetRodType = "#ClosetRodType29"):#ClosetRodCostGroup=#ClosetRodTypeCost29
+Set,(#ClosetRodType = "#ClosetRodType30"):#ClosetRodCostGroup=#ClosetRodTypeCost30
+Set,(#ClosetRodType = "#ClosetRodType31"):#ClosetRodCostGroup=#ClosetRodTypeCost31
+Set,(#ClosetRodType = "#ClosetRodType32"):#ClosetRodCostGroup=#ClosetRodTypeCost32
+Set,(#ClosetRodType = "#ClosetRodType33"):#ClosetRodCostGroup=#ClosetRodTypeCost33
+Set,(#ClosetRodType = "#ClosetRodType34"):#ClosetRodCostGroup=#ClosetRodTypeCost34
+Set,(#ClosetRodType = "#ClosetRodType35"):#ClosetRodCostGroup=#ClosetRodTypeCost35
+Set,(#ClosetRodType = "#ClosetRodType36"):#ClosetRodCostGroup=#ClosetRodTypeCost36
+Set,(#ClosetRodType = "#ClosetRodType37"):#ClosetRodCostGroup=#ClosetRodTypeCost37
+Set,(#ClosetRodType = "#ClosetRodType38"):#ClosetRodCostGroup=#ClosetRodTypeCost38
+Set,(#ClosetRodType = "#ClosetRodType39"):#ClosetRodCostGroup=#ClosetRodTypeCost39
+Set,(#ClosetRodType = "#ClosetRodType40"):#ClosetRodCostGroup=#ClosetRodTypeCost40
+
+Set,#CostOfClosetPoleTemp =#ClosetRodCostGroup*#universalupcharge ,      Cost of Each Closet Pole per Lineal Foot
+Set,#CostOfClosetPole = (#CostOfClosetPoleTemp)
+
+Set,#closetpolecost=#CostOfClosetPole,        Cost Formula for a Closet Pole
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

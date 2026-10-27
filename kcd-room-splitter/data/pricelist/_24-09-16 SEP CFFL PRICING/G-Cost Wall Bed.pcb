@@ -1,0 +1,55 @@
+, This version of wall bed pricing is not longer used
+, This file can be deleted
+,Use Grid
+
+
+,**
+,**
+,** SET COSTS FOR WALL BED CABINETRY BELOW
+,** UPCHARGE FOR DIFFERENT DOOR STYLES WILL BE APPLIED AFTER
+,**
+Set,#CostOfMurphyBed = 1000, set default cost for murphy bed 
+
+,** COSTS FOR TWIN WALL BED CABINETRY 
+DisplaySet,#TwinRange =46,1.0  If the width of the wall bed is equal to or less than this amount it will be considered a twin size bed
+DisplaySet,#MurphyBedTwin =600*#MaterialCostGroup,1.1  Cost for Twin wall Bed 
+
+,**
+,** COSTS FOR FULL WALL BED CABINETRY 
+DisplaySet,#FullRange =61,2.0  If the width of the wall bed is equal to or less than this amount it will be considered a full size bed
+DisplaySet,#FullHeightRange =66.5,2.0a  If the height of the wall bed is equal to or less than this amount it will be considered a full size bed
+DisplaySet,#FullRangeSideFold =79,2.0b  If the width of the SideFold wall bed is equal to or less than this amount it will be considered a full size bed
+DisplaySet,#MurphyBedFull =800*#MaterialCostGroup,2.1  Cost for Full wall Bed 
+
+,**
+,** COSTS FOR QUEEN WALL BED CABINETRY 
+DisplaySet,#QueenRange =67,3.0  If the width of the wall bed is equal to or less than this amount it will be considered a queen size bed
+DisplaySet,#QueenHeightRange =72.5,3.0a  If the height of the wall bed is equal to or less than this amount it will be considered a queen size bed
+DisplaySet,#QueenRangeSideFold =84,3.0b  If the width of the SideFold wall bed is equal to or less than this amount it will be considered a queen size bed
+DisplaySet,#MurphyBedQueen =800*#MaterialCostGroup,3.1  Cost for Queen wall Bed 
+,**
+,** COSTS FOR KING WALL BED CABINETRY 
+DisplaySet,#KingRange =83,4.0  If the width of the wall bed is equal to or less than this amount it will be considered a king size bed
+DisplaySet,#MurphyBedKing =1300*#MaterialCostGroup,4.1  Cost for King wall Bed
+
+,**
+
+,,** MISCELLANEOUS WALL BED CABINETRY QUESTIONS
+,DisplaySet, #MurphyBedShelfDepth=10,         3.1      Depth of adjustable shelves and middle par for zoom room 
+,DisplaySet, #MurphyBedBackHeight=(DH1+TR+MR),         3.2      Height of back in zoom room unit 
+
+
+
+
+Set,(w<=#TwinRange):#CostOfMurphyBed = #MurphyBedTwin 
+Set, (w>#TwinRange)&(w<=#FullRange):#CostOfMurphyBed = #MurphyBedFull 
+Set, (w>#FullRange)&(w<=#FullRangeSideFold)&(h<=#FullHeightRange):#CostOfMurphyBed = #MurphyBedFull 
+Set, (w>#FullRange)&(w<=#QueenRange)&(h>#FullHeightRange):#CostOfMurphyBed = #MurphyBedQueen 
+Set, (w>#FullRange)&(w<=#QueenRangeSideFold)&(h<=#QueenHeightRange):#CostOfMurphyBed = #MurphyBedQueen 
+Set, (w>#QueenRange)&(w<=#KingRange)&(h>#QueenHeightRange):#CostOfMurphyBed = #MurphyBedKing 
+
+,**
+,**
+,**
+
+

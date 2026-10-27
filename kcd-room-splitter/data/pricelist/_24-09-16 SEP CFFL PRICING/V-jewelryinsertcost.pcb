@@ -1,0 +1,75 @@
+,Use Grid
+
+
+,**
+,**
+,** SET COSTS FOR Jewelry Inserts
+,** 
+,**
+ 
+,** 
+
+
+DisplaySet,#Velvetlinercost =83,1.0  Cost for Custom Velvet Bottom Liner
+,**Name your PRE-DESIGNED insert styles and enter the cost
+DisplaySet,#PrefabAname =Flat Liner,2.0 Drawer Insert name 
+DisplaySet,#PrefabAcost =80,2.1  Cost for #PrefabAname
+DisplaySet,#PrefabBname =Standard,3.0 Drawer Insert name
+DisplaySet,#PrefabBcost =175,3.1  Cost for #PrefabBname
+DisplaySet,#PrefabCname =Standard  w/ Earrings,4.0 Drawer Insert name
+DisplaySet,#PrefabCcost =298,4.1  Cost for #PrefabCname
+DisplaySet,#PrefabDname =Earring,5.0 Drawer Insert name 
+DisplaySet,#PrefabDcost =325,5.1  Cost for #PrefabDname
+DisplaySet,#PrefabEname =Valet,6.0 Drawer Insert name
+DisplaySet,#PrefabEcost =175,6.1  Cost for #PrefabEname
+DisplaySet,#PrefabFname =Watch,7.0 Drawer Insert name
+DisplaySet,#PrefabFcost =298,7.1  Cost for #PrefabFname
+DisplaySet,#PrefabGname =Ties and Belts,8.0 Drawer Insert name 
+DisplaySet,#PrefabGcost =298,8.1  Cost for #PrefabGname
+DisplaySet,#PrefabHname =Sunglasses,9.0 Drawer Insert name
+DisplaySet,#PrefabHcost =298,9.1  Cost for #PrefabHname
+DisplaySet,#PrefabIname =Plain,10.0 Drawer Insert name
+DisplaySet,#PrefabIcost =125,10.1  Cost for #PrefabIname
+DisplaySet,#PrefabXname =,11.0 Drawer Insert name
+DisplaySet,#PrefabXcost =,11.1  Cost for #PrefabXname
+DisplaySet,#PrefabYname =Necklaces,12.0 Drawer Insert name
+DisplaySet,#PrefabYcost =298,12.1  Cost for #PrefabYname
+DisplaySet,#PrefabZname =Strip of Hooks,13.0 Drawer Insert name
+DisplaySet,#PrefabZcost =,13.1  Cost for #PrefabZname
+
+,** 
+,**Name your CUSTOM insert styles and enter the cost
+DisplaySet,#Custom1name =Suede Flat Liner, 14.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom1cost =166, 14.1 Cost for #Custom1name
+DisplaySet,#Custom2name =Suede Standard, 15.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom2cost =386, 15.1  Cost for #Custom2name
+DisplaySet,#Custom3name =Suede Standard  w/ Earrings, 16.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom3cost =628, 16.1  Cost for #Custom3name
+DisplaySet,#Custom4name =Suede Amatista, 17.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom4cost =694, 17.1  Cost for #Custom4name
+DisplaySet,#Custom5name =Suede Valet, 18.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom5cost =364, 18.1  Cost for #Custom5name
+DisplaySet,#Custom6name =Suede Watch, 19.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom6cost =704, 19.1 Cost for #Custom6name
+DisplaySet,#Custom7name =Suede Ties and Belts, 20.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom7cost =770, 20.1  Cost for #Custom7name
+DisplaySet,#Custom8name =Suede Sunglasses, 21.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom8cost =606, 21.1  Cost for #Custom8name
+DisplaySet,#Custom9name =Suede Plain, 22.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom9cost =264, 22.1  Cost for #Custom9name
+DisplaySet,#Custom10name =Suede Diamond, 23.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom10cost =628, 23.1  Cost for #Custom10name
+DisplaySet,#Custom11name =Suede Necklaces, 24.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom11cost =726, 24.1  Cost for #Custom11name
+DisplaySet,#Custom12name =Suede Strip of Hooks, 25.0  Cost for Custom Velvet Insert 
+DisplaySet,#Custom12cost =166, 25.1  Cost for #Custom12name
+
+DisplaySet,#ChargeOversizeinsert=Yes, ------------------- Do you upcharge for oversize custom insert sizes[Yes;No]
+Do,(#ChargeOversizeinsert="Yes")|(#DisplayEdit):1
+{
+   DisplaySet,#ChargeOversizeinsertupsizew=36, ---------------------- Max width for no-upcharge (wider will be charged)?
+   DisplaySet,#ChargeOversizeinsertpercentw=.25, ---------------------- Percent to upcharge for oversize custom insert.
+   DisplaySet,#ChargeOversizeinsertupsized=24, ---------------------- Max depth for no-upcharge (deeper will be charged)?
+   DisplaySet,#ChargeOversizeinsertpercentd=.25, ---------------------- Percent to upcharge for oversize custom insert.
+}
+ 

@@ -1,0 +1,25 @@
+Set,#ContrastMaterial=#ExtraUnitText12
+Set,#ContrastMaterialName=#ExtraUnitText12
+Set,("ContrastmaterialName <> "None*"):#use2ndmaterial=1:#Use2ndmaterial=0
+
+,Set to Zero for Default
+Set,#ContrastMaterialCostGroup=0
+
+
+
+,---------------------------------------------------------------------------
+,Get Material Name (Trim off the right 8 chars leaving the Name only)
+Len, #Size, #ExtraUnitText12
+Left, #ContrastMaterialName, #Size-8, #ContrastMaterial 
+
+
+,Get Material Mark-Up (Trim off the right 5 chars to get the mark-up)
+Right, #ContrastMaterialCostGroup, 5, #ContrastMaterial 
+,---------------------------------------------------------------------------
+
+
+
+,leave file here
+End 
+
+

@@ -78,6 +78,7 @@ import hashlib
 import json
 import os
 import shutil
+import subprocess
 import re
 import sys
 import traceback
@@ -1084,7 +1085,9 @@ def in_short(args, ap, split_res, rooms, books, checks, not_done, shorts, split_
         if 'Doormark A1' in tabs:
             filled.append('the Doormark design' + (' and colour' if any(r == 'EM41' for b in books for _, r, _, _ in b['cells']) else ''))
         still = []
-        if not all(b['priced'] for b in books):
+        if all(b['priced'] for b in books):
+            filled.append('the price lines' + ((' (from the list %s)' % ', '.join(os.path.basename(os.path.normpath(d)) for d in args.pricelist)) if args.pricelist else ''))
+        else:
             still.append('the price lines')
         missing = [w for c, w in (('F1', 'the designer'), ('B1', 'install date'), ('B27', 'sold price')) if c not in cells]
         if missing:
@@ -1196,6 +1199,9 @@ def write_run_report(args, out_dir, client, test_no, ap, split_res, rooms, books
         b = next((x for x in books if x['job'] == room['path'] and x['room'] == room['name']), None)
         if b:
             L.append('  %s  (its workbook)' % rel(b['xlsm'], out_dir))
+            tsv = next((p for r, p in args.prices if key(r) and key(r) in key(room['name'])), None)
+            if tsv and os.path.isfile(tsv):
+                L.append('  %s  (its price lines, like KCD\'s price review)' % rel(tsv, out_dir))
     if split_res and split_res.get('report'):
         L.append('  %s  (the splitter\'s own check)' % rel(split_res['report'], out_dir))
     L.append('  %s  (this report)' % rel(rp, out_dir))
@@ -1290,6 +1296,8 @@ def parse_args(argv):
     ap.add_argument('--workbooks-only', action='store_true', help='only the workbook step: no remeasure, no filler check, no split')
     ap.add_argument('--template', default=kcdbook.DEFAULT_TEMPLATE, help='the pricing workbook template (.xltm); default: the bundled one')
     ap.add_argument('--price', action='append', default=[], metavar='ROOM=TSV', help='a kcdprice.py TSV for one room, matched by room name (contains, any case)')
+    ap.add_argument('--pricelist', action='append', default=[], metavar='DIR',
+                    help="price every room with KCD's price scripts from this folder (repeat for update packs, later ones win), e.g. the current month's C:\\KCD23-STDPLIST folder; data/pricelist holds the Sept 2024 list, for tests only")
     ap.add_argument('--entry', action='append', default=[], metavar='CELL=VALUE', help='a Data Entry answer (B1=2026-11-04) or a tab cell ("Purchase Order!K19=AMEROCK"); wins over everything')
     ap.add_argument('--designer', help='the designer, as the workbook list spells it')
     ap.add_argument('--install', help='the install date, YYYY-MM-DD')
@@ -1535,6 +1543,29 @@ def main(argv=None):
         for lvl, msg in room.get('flags', []):
             if lvl == CHECK:
                 checks.append('%s: %s' % (room['name'], msg))
+
+    # step 2b: price every room with the given price-list folders (kcdprice.py prints the TSV kcdbook reads)
+    if args.pricelist and rooms:
+        for room in rooms:
+            if not room.get('md5') or not room.get('path'):
+                continue
+            tsv = os.path.join(out_dir, room['base'] + ' PRICE LINES.txt')
+            cmd = [sys.executable, os.path.join(HERE, 'kcdprice.py'), room['path']]
+            for d in args.pricelist:
+                cmd += ['--pricelist', d]
+            try:
+                res = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
+            except (OSError, subprocess.TimeoutExpired) as e:
+                not_done.append('%s was not priced: the price engine did not run (%s).' % (room['name'], one_line(e)))
+                continue
+            if res.returncode != 0 or not res.stdout.strip():
+                not_done.append('%s was not priced: the price engine stopped (%s).' % (room['name'], one_line(res.stderr.strip().splitlines()[-1] if res.stderr.strip() else 'no output')))
+                continue
+            with open(tsv, 'w', encoding='utf-8') as fh:
+                fh.write(res.stdout)
+            args.prices.append((room['name'], tsv))
+        lists = ', '.join(os.path.basename(os.path.normpath(d)) for d in args.pricelist)
+        checks.append('Prices come from the price list folder(s) %s. If this job was sold on another month\'s list, price it again with that list.' % lists)
 
     # step 3
     if args.no_workbooks:

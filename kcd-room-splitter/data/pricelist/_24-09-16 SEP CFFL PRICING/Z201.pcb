@@ -1,0 +1,12 @@
+,KCDw SYSTEM FILE DO NOT CHANGE
+,BASE CABINET 1 OPENING
+Set,#xNo=1
+Set,#xOp=Fw-ls-rs
+Set,#DrawerW=#xOp
+Set,#DrawerH=DH1
+Load,(DRH>0):DrawerCost.pcb
+Set,#TotalDrawerAmt = [#TotalDrawerAmt+#DrawerAmt]
+Set,#LCode=Closet
+Set,#UCode=Base
+Set,#PCode=B
+Load, Eachunit.pcb

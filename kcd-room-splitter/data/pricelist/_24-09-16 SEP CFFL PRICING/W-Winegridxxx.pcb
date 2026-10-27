@@ -1,0 +1,119 @@
+,Use Grid
+
+set, #winegridwidth1=0,  
+set, #winegridheight1=0, 
+Set,#winegrid1cost =0, 
+set, #winegridwidth2=0,  
+set, #winegridheight2=0, 
+Set,#winegrid2cost =0, 
+set, #winegridwidth3=0,  
+set, #winegridheight3=0, 
+Set,#winegrid3cost =0, 
+set, #winegridwidth4=0,  
+set, #winegridheight4=0, 
+Set,#winegrid4cost =0, 
+
+
+,** Set COST for Wine Lattice Grid
+Displayset, #winegridcount=1, -----How Many wine grid sizes are there?[1;2;3;4]
+Do, (#winegridcount>0):1
+{
+,**Grid Size 1
+Displayset, #winegridwidth1=36,  Width of wine grid 1  
+Displayset, #winegridheight1=42, Height of wine grid 1  
+DisplaySet,#winegrid1cost =450, Cost for #winegridwidth1x#winegridheight1 Grid Set
+DisplaySet,#winegrid1PN =, Part # for #winegridwidth1x#winegridheight1 Grid Set
+ 
+}
+Do, (#winegridcount>1):1
+{
+,**Grid Size 2
+Displayset, #winegridwidth2=23, Width of wine grid 2
+Displayset, #winegridheight2=29, Height of wine grid 2
+DisplaySet,#winegrid2cost =250, Cost for #winegridwidth2x#winegridheight2 Grid Set
+DisplaySet,#winegrid2PN =541.98.172, Part # for #winegridwidth2x#winegridheight2 Grid Set
+
+}
+Do, (#winegridcount>2):1
+{
+,**Grid Size 3
+Displayset, #winegridwidth3=17, Width of wine grid 3
+Displayset, #winegridheight3=36, Height of wine grid 1
+DisplaySet,#winegrid3cost =225, Cost for #winegridwidth3x#winegridheight3 Grid Set
+DisplaySet,#winegrid3PN =541.98.171, Part # for #winegridwidth3x#winegridheight3 Grid Set
+}
+Do, (#winegridcount>3):1
+{
+,**Grid Size 4
+Displayset, #winegridwidth4=17, Width of wine grid 4
+Displayset, #winegridheight4=29, Height of wine grid 4
+DisplaySet,#winegrid4cost =200, Cost for #winegridwidth4x#winegridheight4 Grid Set
+DisplaySet,#winegrid4PN =541.98.170, Part # for #winegridwidth4x#winegridheight4 Grid Set
+}
+
+,**
+,Update V8.0 start
+,**Set COST for CF manufactured wine X with matching material.
+Displayset, #CFwinexcost=300, 5.0  Cost for matching material wine X.
+Displayset, #CFwinexcost2nd=300, 5.0  Cost for 2nd material wine X.
+,Update V8.0 end
+,**
+,**
+, Determine COSTS FOR Wine Grid XXX
+,** 
+,**
+Set, #wineGridxxxcost=0
+set, #WineGridxxxPN=0
+
+Set,((#Shelfwidth<=#winegridwidth1)&(#GridHeight<=#winegridheight1)):#WineGridxxxCost = #winegrid1cost
+Set,((#Shelfwidth<=#winegridheight1)&(#GridHeight<=#winegridwidth1)):#WineGridxxxCost = #winegrid1cost
+Set,((#Shelfwidth<=#winegridwidth1)&(#GridHeight<=#winegridheight1)):#WineGridxxxPN = #winegrid1PN
+Set,((#Shelfwidth<=#winegridheight1)&(#GridHeight<=#winegridwidth1)):#WineGridxxxPN = #winegrid1PN
+
+Set,((#Shelfwidth<=#winegridwidth2)&(#GridHeight<=#winegridheight2)):#WineGridxxxCost = #winegrid2cost
+Set,((#Shelfwidth<=#winegridheight2)&(#GridHeight<=#winegridwidth2)):#WineGridxxxCost = #winegrid2cost
+Set,((#Shelfwidth<=#winegridwidth2)&(#GridHeight<=#winegridheight2)):#WineGridxxxPN = #winegrid2PN
+Set,((#Shelfwidth<=#winegridheight2)&(#GridHeight<=#winegridwidth2)):#WineGridxxxPN = #winegrid2PN
+
+Set,((#Shelfwidth<=#winegridwidth3)&(#GridHeight<=#winegridheight3)):#WineGridxxxCost = #winegrid3cost
+Set,((#Shelfwidth<=#winegridheight3)&(#GridHeight<=#winegridwidth3)):#WineGridxxxCost = #winegrid3cost
+Set,((#Shelfwidth<=#winegridwidth3)&(#GridHeight<=#winegridheight3)):#WineGridxxxPN = #winegrid3PN
+Set,((#Shelfwidth<=#winegridheight3)&(#GridHeight<=#winegridwidth3)):#WineGridxxxPN = #winegrid3PN
+
+Set,((#Shelfwidth<=#winegridwidth4)&(#GridHeight<=#winegridheight4)):#WineGridxxxCost = #winegrid4cost
+Set,((#Shelfwidth<=#winegridheight4)&(#GridHeight<=#winegridwidth4)):#WineGridxxxCost = #winegrid4cost
+Set,((#Shelfwidth<=#winegridwidth4)&(#GridHeight<=#winegridheight4)):#WineGridxxxPN = #winegrid4PN
+Set,((#Shelfwidth<=#winegridheight4)&(#GridHeight<=#winegridwidth4)):#WineGridxxxPN = #winegrid4PN
+
+
+
+
+,Update V8.0 start
+set, (#UnitFileName="*melx.cab"):#WineGridxxxCost=#CFwinexcost
+set, (#UnitFileName="*melx-2nd.cab"):#WineGridxxxCost=#CFwinexcost2nd
+
+
+
+
+Price, (#Winegridxxxcost>0)&(#UnitFileName<>"*melx*"):1,RM#Roomnum Wine Lattice Set #WineGridxxxPN ,  #winegridxxxcost,  #Shelfwidth,#Gridheight,  #ClosetPolePrintOrderNumber,
+set,(#UnitFileName<>"*melx*"): #name= Wine Lattice Set
+Price, (#Winegridxxxcost>0)&(#UnitFileName="*melx.cab"):1,RM#Roomnum Wine X #Unitmaterialname,  #winegridxxxcost,  #Shelfwidth,#Gridheight,  #ClosetPolePrintOrderNumber,
+set,(#UnitFileName="*melx.cab"): #name= Wine X
+Price, (#Winegridxxxcost>0)&(#UnitFileName="*melx-2nd.cab"):1,RM#Roomnum Wine X #Contrastmaterialname,  #winegridxxxcost,  #Shelfwidth,#Gridheight,  #ClosetPolePrintOrderNumber,
+set,(#UnitFileName="*melx-2nd.cab"): #name= Wine X
+
+Load,  (#Winegridxxxcost=0):eachunit.pcb
+  
+,Update V8.0 end
+
+
+
+
+
+                       
+
+
+,**
+,**
+
+

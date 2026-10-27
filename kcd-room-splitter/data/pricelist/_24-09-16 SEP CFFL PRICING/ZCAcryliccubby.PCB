@@ -1,0 +1,7 @@
+,****Divider "Cubby" Acrylic Vertcal
+,********* All VERTICAL DIVIDERS *********
+,Vertical Divider
+Set, #VertH = [H]
+Set, #VertD = [D]
+Price, 1,           RM#Roomnum Acrylic Divider,       #AcrylicDividerCost*#universalupcharge,         H, .25,  #ClosetPolePrintOrderNumber,            
+,*****************************************

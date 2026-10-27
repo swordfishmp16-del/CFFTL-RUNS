@@ -1,0 +1,138 @@
+, CF Mirror or other backing  - Closet Pieces
+,Determine if Mirror or standard backing pieces
+
+
+Set, #TempCostBackPerSqFt=0
+
+
+Do,(#UnitFileName="mirrorbacking.cab")|(#UnitFileName="mirrorbackingcutbetween.cab")|(#unitfilename="MirrorBackingwCT.cab")|(#UnitFileName="500-backingmirrorcutbetween.cab")|(#UnitFileName="500-backingmirror.cab")|(#unitfilename="500-backingMirrorwCT.cab"):1
+{
+Set, #TempCostBackPerSqFt=#CostMirrorBackPerSqFt
+,******** BACKING *******
+set, #specialback=1
+
+Price, 1, RM#Roomnum Mirror Back,         ((W*H)/144)*#TempCostBackPerSqFt*#universalupcharge,             w, h,          #BackPrintOrderNumber,             
+,*********************************
+
+}
+Do,(#UnitFileName="mirrorbackingantique.cab")|(#UnitFileName="mirrorbackingcutbetweenantique.cab")|(#unitfilename="MirrorBackingwCTantique.cab")|(#UnitFileName="500-backingmirrorcutbetweenantique.cab")|(#UnitFileName="500-backingmirrorantique.cab")|(#unitfilename="500-backingMirrorwCTantique.cab"):1
+{
+Set, #TempCostBackPerSqFt=#costofantiquemirrorpersqfoot
+,******** BACKING *******
+set, #specialback=1
+
+Price, 1, RM#Roomnum Antique Mirror Back,         ((W*H)/144)*#TempCostBackPerSqFt*#universalupcharge,             w, h,          #BackPrintOrderNumber,             
+,*********************************
+
+}
+
+Do,(#UnitFileName="FramedMirror.cab"):1
+{
+Set, #TempCostBackPerSqFt=#CostMirrorBackPerSqFt
+,******** BACKING *******
+set, #specialback=1
+
+
+Price, 1,  RM#Roomnum Framed Mirror Back,         ((((W*H)/144)*#TempCostBackPerSqFt)+(#Framecost))*#universalupcharge,             w, h,          #BackPrintOrderNumber,  
+           
+,*********************************
+
+}
+
+Do,(#UnitFileName="500-Backing.cab")|(#UnitFileName="500-Backingcutbetween.cab")|(#UnitFileName="Flex-backing.cab")|(#UnitFileName="500-BackingwCT.cab"):1
+{
+Set, #CostBackPerSqFt=#BackTypeCostGroup,******** BACKING *******
+set, #specialback=1
+
+,Price, 1,   #BackName,         ((W*H)/144)*#TempCostBackPerSqFt,             w, h,          #BackPrintOrderNumber,   
+
+
+set, #Backheight = [H]
+set, #ShelfWidth = [W]
+,set, #backcolor=
+,set, (#backname="*2nd*"):#backcolor= -#ContrastMaterialname:#backcolor= -#UnitMaterialname
+,Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,     
+Price, 1,   RM#Roomnum #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,                 
+,*********************************
+}
+
+Do,(#UnitFileName="500-Beaded-Backing.cab")|(#UnitFileName="500-Beaded-backingcutbetween.cab")|(#UnitFileName="500-Beaded-BackingwCT.cab"):1
+{
+Set, #TempCostBackPerSqFt=#CostUnfinishedbeadboardPerSqFt 
+,******** BACKING *******
+set, #specialback=1
+
+  
+set, #Backheight = [H]
+set, #ShelfWidth = [W]
+,Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,     
+,Price, 1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,   
+Price, 1,   RM#Roomnum Unfinished Beadboard Back,           ((W*H)/144)*#TempCostBackPerSqFt*#universalupcharge,                    w,h,         #BackPrintOrderNumber,
+,*********************************
+}
+
+Do,(#UnitFileName="500-Beaded-Backing Painted.cab")|(#UnitFileName="500-Beaded-Backing Paintedcutbetween.cab")|(#UnitFileName="500-Beaded-Backing PaintedwCT.cab"):1
+{
+Set, #TempCostBackPerSqFt=#CostPaintedbeadboardPerSqFt
+,******** BACKING *******
+
+set, #specialback=1
+  
+set, #Backheight = [H]
+set, #ShelfWidth = [W]
+,Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,     
+,Price, 1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber, 
+,Price, 1,   Mounting Frame-included,      #costofbeadboardframe ,             w,h,  #BackPrintOrderNumber,
+Price, 1,   RM#Roomnum Painted Beadboard Back,           ((W*H)/144)*#TempCostBackPerSqFt*#universalupcharge,                    w,h,         #BackPrintOrderNumber,
+,*********************************
+}
+
+Do,(#UnitFileName="500-Beaded-Backing Glazed.cab")|(#UnitFileName="500-Beaded-Backing Glazedcutbetween.cab")|(#UnitFileName="500-Beaded-Backing GlazedwCT.cab"):1
+{
+Set, #TempCostBackPerSqFt=#CostGlazedbeadboardPerSqFt
+,******** BACKING *******
+set, #specialback=1
+  
+set, #Backheight = [H]
+set, #ShelfWidth = [W]
+Price, 1,   RM#Roomnum Glazed BeadBoard Back,          ((W*H)/144)*#TempCostBackPerSqFt*#universalupcharge,                    w,h,         #BackPrintOrderNumber,
+,*********************************
+}
+
+Do,(#UnitFileName="500-Beaded-Backing RTF.cab")|(#UnitFileName="500-Beaded-Backing RTFcutbetween.cab")|(#UnitFileName="500-Beaded-Backing RTFwCT.cab"):1
+{
+Set, #TempCostBackPerSqFt=#CostRTFbeadboardPerSqFt
+,******** BACKING *******
+set, #specialback=1
+  
+set, #Backheight = [H]
+set, #ShelfWidth = [W]
+Price, 1,   RM#Roomnum RTF BeadBoard Back,          ((W*H)/144)*#TempCostBackPerSqFt*#universalupcharge,                    w,h,         #BackPrintOrderNumber,
+,*********************************
+}
+
+Do,(#UnitFileName="500-BackingTackboard.cab")|(#UnitFileName="500-BackingTackboard.cab")|(#UnitFileName="500-BackingTackboardwCT.cab"):1
+{
+Set, #TempCostBackPerSqFt=#CostofCorkTackboardpersqft
+,******** BACKING *******
+set, #specialback=1
+  
+set, #Backheight = [H]
+set, #ShelfWidth = [W]
+Price, 1,   RM#Roomnum Cork TackBoard Back,          ((W*H)/144)*#TempCostBackPerSqFt*#universalupcharge,                    w,h,         #BackPrintOrderNumber,
+,*********************************
+}
+
+Do,(#UnitFileName="500-qtr-backing.cab"):1
+{
+Set, #TempCostBackPerSqFt=#CostqtrinBackingpersqft
+,******** BACKING *******
+set, #specialback=1
+  
+set, #Backheight = [H]
+set, #ShelfWidth = [W]
+Price, 1,   RM#Roomnum 1/4" Back,          ((W*H)/144)*#TempCostBackPerSqFt*#universalupcharge,                    w,h,         #BackPrintOrderNumber,
+,*********************************
+}
+
+ 

@@ -1,0 +1,54 @@
+,Use Grid
+
+
+,**
+,**
+,** SET COSTS FOR PANTS RACKS
+,** 
+,**
+ 
+
+,** COSTS FOR Synergy Sliding Pant Racks 
+DisplaySet,#Pantrack18 =402,1.0  Cost for 18" Sliding Pant Rack
+Displayset,#pantrack18PN=PSC1814CR, Part Number for 18" Sliding Pant Rack
+DisplaySet,#Pantrack24 =402,2.0  Cost for 24" Sliding Pant Rack
+Displayset,#pantrack24PN=PSC2414CR, Part Number for 24" Sliding Pant Rack
+DisplaySet,#Pantrack30 =402,3.0  Cost for 30" Sliding Pant Rack
+Displayset,#pantrack30PN=PSC3014CR, Part Number for 30" Sliding Pant Rack
+
+
+, COSTS FOR Engage Sliding Pant Organizers
+,DisplaySet,#Pantorganizer18 =340,4.0  Cost for 18" Sliding Pant Organizer
+,DisplaySet,#Pantorganizer24 =400,5.0  Cost for 24" Sliding Pant Organizer
+,DisplaySet,#Pantorganizer30 =465,6.0  Cost for 30" Sliding Pant Organizer
+,DisplaySet,#Pantorganizer36 =495,7.0  Cost for 36" Sliding Pant Organizer
+
+Do, (#Name = "*Pant Rack*"):1
+{
+set,#DisplayPN = Invalid Size
+Set,(w<18.25):#CostOfPantRack = #Pantrack18
+Set,(w>23.75)&(w<=24.25):#CostOfPantRack = #Pantrack24  
+Set,(w>29.75)&(w<=30.5):#CostOfPantRack = #Pantrack30 
+Set,(w<18.25):#DisplayPN = #Pantrack18PN
+Set,(w>23.75)&(w<=24.25):#DisplayPN = #Pantrack24PN
+Set,(w>29.75)&(w<=30.5):#DisplayPN = #Pantrack30PN
+
+Set, W={W}
+Price, 1, RM#roomnum #Name #displayPN ,(#CostofPantRack)*#universalupcharge,W , ,#ClosetPolePrintOrderNumber, 
+}
+
+Do, (#Name = "*Pant Organizer*"):1
+{
+Set,(w<=18):#CostOfPantRack = #Pantorganizer18 
+Set,(w>18)&(w<=24):#CostOfPantRack = #Pantorganizer24  
+Set,(w>24)&(w<=30):#CostOfPantRack = #Pantorganizer30
+Set,(w>30)&(w<=36):#CostOfPantRack = #Pantorganizer36
+
+Set, W={W}
+Price, 1, RM#roomnum Engage #Name #code ,(#CostofPantRack)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+
+,**
+,**
+
+

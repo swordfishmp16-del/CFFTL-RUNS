@@ -1,0 +1,384 @@
+Set, #stopfinaless=1
+
+
+
+Do,((#Room1raillength>0)|(#Room1railcoverlength>0)):1
+ {
+ set, (#Room1raillengthcountremainder>0):#Room1raillengthcount=[#Room1raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room1raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname1
+ Price, (#Room1raillengthcount>0):1,RM1 #hangrailName #ESSPNhangrail Qty #Room1raillengthcount ,#hangrailcost*#Room1raillengthcount, ,#Room1raillength,0,
+
+ set, (#Room1railcoverlengthcountremainder>0):#Room1railcoverlengthcount=[#Room1railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room1railcoverlengthcount
+ Price, (#Room1railcoverlengthcount>0):1,RM1 #hangrailcoverName #ESSPNhangrailcover Qty #Room1railcoverlengthcount ,#hangrailcovercost*#Room1railcoverlengthcount, ,#Room1railcoverlength,0,
+ }
+ 
+
+Do,((#Room2raillength>0)|(#Room2railcoverlength>0)):1
+ {
+ set, (#Room2raillengthcountremainder>0):#Room2raillengthcount=[#Room2raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room2raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname2
+ Price, (#Room2raillengthcount>0):1,RM2 #hangrailName #ESSPNhangrail Qty #Room2raillengthcount ,#hangrailcost*#Room2raillengthcount, ,#Room2raillength,0,
+
+ set, (#Room2railcoverlengthcountremainder>0):#Room2railcoverlengthcount=[#Room2railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room2railcoverlengthcount
+ Price, (#Room2railcoverlengthcount>0):1,RM2 #hangrailcoverName #ESSPNhangrailcover Qty #Room2railcoverlengthcount ,#hangrailcovercost*#Room2railcoverlengthcount, ,#Room2railcoverlength,0,
+ }
+
+Do,((#Room3raillength>0)|(#Room3railcoverlength>0)):1
+ {
+ set, (#Room3raillengthcountremainder>0):#Room3raillengthcount=[#Room3raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room3raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname3
+ Price, (#Room3raillengthcount>0):1,RM3 #hangrailName #ESSPNhangrail Qty #Room3raillengthcount ,#hangrailcost*#Room3raillengthcount, ,#Room3raillength,0,
+
+ set, (#Room3railcoverlengthcountremainder>0):#Room3railcoverlengthcount=[#Room3railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room3railcoverlengthcount
+ Price, (#Room3railcoverlengthcount>0):1,RM3 #hangrailcoverName #ESSPNhangrailcover Qty #Room3railcoverlengthcount ,#hangrailcovercost*#Room3railcoverlengthcount, ,#Room3railcoverlength,0,
+ }
+
+Do,((#Room4raillength>0)|(#Room4railcoverlength>0)):1
+ {
+ set, (#Room4raillengthcountremainder>0):#Room4raillengthcount=[#Room4raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room4raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname4
+ Price, (#Room4raillengthcount>0):1,RM4 #hangrailName #ESSPNhangrail Qty #Room4raillengthcount ,#hangrailcost*#Room4raillengthcount, ,#Room4raillength,0,
+
+ set, (#Room4railcoverlengthcountremainder>0):#Room4railcoverlengthcount=[#Room4railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room4railcoverlengthcount
+ Price, (#Room4railcoverlengthcount>0):1,RM4 #hangrailcoverName #ESSPNhangrailcover Qty #Room4railcoverlengthcount ,#hangrailcovercost*#Room4railcoverlengthcount, ,#Room4railcoverlength,0,
+ }
+
+Do,((#Room5raillength>0)|(#Room5railcoverlength>0)):1
+ {
+ set, (#Room5raillengthcountremainder>0):#Room5raillengthcount=[#Room5raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room5raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname5
+ Price, (#Room5raillengthcount>0):1,RM5 #hangrailName #ESSPNhangrail Qty #Room5raillengthcount ,#hangrailcost*#Room5raillengthcount, ,#Room5raillength,0,
+
+ set, (#Room5railcoverlengthcountremainder>0):#Room5railcoverlengthcount=[#Room5railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room5railcoverlengthcount
+ Price, (#Room5railcoverlengthcount>0):1,RM5 #hangrailcoverName #ESSPNhangrailcover Qty #Room5railcoverlengthcount ,#hangrailcovercost*#Room5railcoverlengthcount, ,#Room5railcoverlength,0,
+ }
+
+Do,((#Room6raillength>0)|(#Room6railcoverlength>0)):1
+ {
+ set, (#Room6raillengthcountremainder>0):#Room6raillengthcount=[#Room6raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room6raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname6
+ Price, (#Room6raillengthcount>0):1,RM6 #hangrailName #ESSPNhangrail Qty #Room6raillengthcount ,#hangrailcost*#Room6raillengthcount, ,#Room6raillength,0,
+
+ set, (#Room6railcoverlengthcountremainder>0):#Room6railcoverlengthcount=[#Room6railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room6railcoverlengthcount
+ Price, (#Room6railcoverlengthcount>0):1,RM6 #hangrailcoverName #ESSPNhangrailcover Qty #Room6railcoverlengthcount ,#hangrailcovercost*#Room6railcoverlengthcount, ,#Room6railcoverlength,0,
+ }
+
+Do,((#Room7raillength>0)|(#Room7railcoverlength>0)):1
+ {
+ set, (#Room7raillengthcountremainder>0):#Room7raillengthcount=[#Room7raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room7raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname7
+ Price, (#Room7raillengthcount>0):1,RM7 #hangrailName #ESSPNhangrail Qty #Room7raillengthcount ,#hangrailcost*#Room7raillengthcount, ,#Room7raillength,0,
+
+ set, (#Room7railcoverlengthcountremainder>0):#Room7railcoverlengthcount=[#Room7railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room7railcoverlengthcount
+ Price, (#Room7railcoverlengthcount>0):1,RM7 #hangrailcoverName #ESSPNhangrailcover Qty #Room7railcoverlengthcount ,#hangrailcovercost*#Room7railcoverlengthcount, ,#Room7railcoverlength,0,
+ }
+
+Do,((#Room8raillength>0)|(#Room8railcoverlength>0)):1
+ {
+ set, (#Room8raillengthcountremainder>0):#Room8raillengthcount=[#Room8raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room8raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname8
+ Price, (#Room8raillengthcount>0):1,RM8 #hangrailName #ESSPNhangrail Qty #Room8raillengthcount ,#hangrailcost*#Room8raillengthcount, ,#Room8raillength,0,
+
+ set, (#Room8railcoverlengthcountremainder>0):#Room8railcoverlengthcount=[#Room8railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room8railcoverlengthcount
+ Price, (#Room8railcoverlengthcount>0):1,RM8 #hangrailcoverName #ESSPNhangrailcover Qty #Room8railcoverlengthcount ,#hangrailcovercost*#Room8railcoverlengthcount, ,#Room8railcoverlength,0,
+ }
+
+Do,((#Room9raillength>0)|(#Room9railcoverlength>0)):1
+ {
+ set, (#Room9raillengthcountremainder>0):#Room9raillengthcount=[#Room9raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room9raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname9
+ Price, (#Room9raillengthcount>0):1,RM9 #hangrailName #ESSPNhangrail Qty #Room9raillengthcount ,#hangrailcost*#Room9raillengthcount, ,#Room9raillength,0,
+
+ set, (#Room9railcoverlengthcountremainder>0):#Room9railcoverlengthcount=[#Room9railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room9railcoverlengthcount
+ Price, (#Room9railcoverlengthcount>0):1,RM9 #hangrailcoverName #ESSPNhangrailcover Qty #Room9railcoverlengthcount ,#hangrailcovercost*#Room9railcoverlengthcount, ,#Room9railcoverlength,0,
+ }
+
+Do,((#Room10raillength>0)|(#Room10railcoverlength>0)):1
+ {
+ set, (#Room10raillengthcountremainder>0):#Room10raillengthcount=[#Room10raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room10raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname10
+ Price, (#Room10raillengthcount>0):1,RM10 #hangrailName #ESSPNhangrail Qty #Room10raillengthcount ,#hangrailcost*#Room10raillengthcount, ,#Room10raillength,0,
+
+ set, (#Room10railcoverlengthcountremainder>0):#Room10railcoverlengthcount=[#Room10railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room10railcoverlengthcount
+ Price, (#Room10railcoverlengthcount>0):1,RM10 #hangrailcoverName #ESSPNhangrailcover Qty #Room10railcoverlengthcount ,#hangrailcovercost*#Room10railcoverlengthcount, ,#Room10railcoverlength,0,
+ }
+
+Do,((#Room11raillength>0)|(#Room11railcoverlength>0)):1
+ {
+ set, (#Room11raillengthcountremainder>0):#Room11raillengthcount=[#Room11raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room11raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname11
+ Price, (#Room11raillengthcount>0):1,RM11 #hangrailName #ESSPNhangrail Qty #Room11raillengthcount ,#hangrailcost*#Room11raillengthcount, ,#Room11raillength,0,
+
+ set, (#Room11railcoverlengthcountremainder>0):#Room11railcoverlengthcount=[#Room11railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room11railcoverlengthcount
+ Price, (#Room11railcoverlengthcount>0):1,RM11 #hangrailcoverName #ESSPNhangrailcover Qty #Room11railcoverlengthcount ,#hangrailcovercost*#Room11railcoverlengthcount, ,#Room11railcoverlength,0,
+ }
+
+Do,((#Room12raillength>0)|(#Room12railcoverlength>0)):1
+ {
+ set, (#Room12raillengthcountremainder>0):#Room12raillengthcount=[#Room12raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room12raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname12
+ Price, (#Room12raillengthcount>0):1,RM12 #hangrailName #ESSPNhangrail Qty #Room12raillengthcount ,#hangrailcost*#Room12raillengthcount, ,#Room12raillength,0,
+
+ set, (#Room12railcoverlengthcountremainder>0):#Room12railcoverlengthcount=[#Room12railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room12railcoverlengthcount
+ Price, (#Room12railcoverlengthcount>0):1,RM12 #hangrailcoverName #ESSPNhangrailcover Qty #Room12railcoverlengthcount ,#hangrailcovercost*#Room12railcoverlengthcount, ,#Room12railcoverlength,0,
+ }
+
+Do,((#Room13raillength>0)|(#Room13railcoverlength>0)):1
+ {
+ set, (#Room13raillengthcountremainder>0):#Room13raillengthcount=[#Room13raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room13raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname13
+ Price, (#Room13raillengthcount>0):1,RM13 #hangrailName #ESSPNhangrail Qty #Room13raillengthcount ,#hangrailcost*#Room13raillengthcount, ,#Room13raillength,0,
+
+ set, (#Room13railcoverlengthcountremainder>0):#Room13railcoverlengthcount=[#Room13railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room13railcoverlengthcount
+ Price, (#Room13railcoverlengthcount>0):1,RM13 #hangrailcoverName #ESSPNhangrailcover Qty #Room13railcoverlengthcount ,#hangrailcovercost*#Room13railcoverlengthcount, ,#Room13railcoverlength,0,
+ }
+
+Do,((#Room14raillength>0)|(#Room14railcoverlength>0)):1
+ {
+ set, (#Room14raillengthcountremainder>0):#Room14raillengthcount=[#Room14raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room14raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname14
+ Price, (#Room14raillengthcount>0):1,RM14 #hangrailName #ESSPNhangrail Qty #Room14raillengthcount ,#hangrailcost*#Room14raillengthcount, ,#Room14raillength,0,
+
+ set, (#Room14railcoverlengthcountremainder>0):#Room14railcoverlengthcount=[#Room14railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room14railcoverlengthcount
+ Price, (#Room14railcoverlengthcount>0):1,RM14 #hangrailcoverName #ESSPNhangrailcover Qty #Room14railcoverlengthcount ,#hangrailcovercost*#Room14railcoverlengthcount, ,#Room14railcoverlength,0,
+ }
+
+Do,((#Room15raillength>0)|(#Room15railcoverlength>0)):1
+ {
+ set, (#Room15raillengthcountremainder>0):#Room15raillengthcount=[#Room15raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room15raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname15
+ Price, (#Room15raillengthcount>0):1,RM15 #hangrailName #ESSPNhangrail Qty #Room15raillengthcount ,#hangrailcost*#Room15raillengthcount, ,#Room15raillength,0,
+
+ set, (#Room15railcoverlengthcountremainder>0):#Room15railcoverlengthcount=[#Room15railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room15railcoverlengthcount
+ Price, (#Room15railcoverlengthcount>0):1,RM15 #hangrailcoverName #ESSPNhangrailcover Qty #Room15railcoverlengthcount ,#hangrailcovercost*#Room15railcoverlengthcount, ,#Room15railcoverlength,0,
+ }
+
+Do,((#Room16raillength>0)|(#Room16railcoverlength>0)):1
+ {
+ set, (#Room16raillengthcountremainder>0):#Room16raillengthcount=[#Room16raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room16raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname16
+ Price, (#Room16raillengthcount>0):1,RM16 #hangrailName #ESSPNhangrail Qty #Room16raillengthcount ,#hangrailcost*#Room16raillengthcount, ,#Room16raillength,0,
+
+ set, (#Room16railcoverlengthcountremainder>0):#Room16railcoverlengthcount=[#Room16railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room16railcoverlengthcount
+ Price, (#Room16railcoverlengthcount>0):1,RM16 #hangrailcoverName #ESSPNhangrailcover Qty #Room16railcoverlengthcount ,#hangrailcovercost*#Room16railcoverlengthcount, ,#Room16railcoverlength,0,
+ }
+
+Do,((#Room17raillength>0)|(#Room17railcoverlength>0)):1
+ {
+ set, (#Room17raillengthcountremainder>0):#Room17raillengthcount=[#Room17raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room17raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname17
+ Price, (#Room17raillengthcount>0):1,RM17 #hangrailName #ESSPNhangrail Qty #Room17raillengthcount ,#hangrailcost*#Room17raillengthcount, ,#Room17raillength,0,
+
+ set, (#Room17railcoverlengthcountremainder>0):#Room17railcoverlengthcount=[#Room17railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room17railcoverlengthcount
+ Price, (#Room17railcoverlengthcount>0):1,RM17 #hangrailcoverName #ESSPNhangrailcover Qty #Room17railcoverlengthcount ,#hangrailcovercost*#Room17railcoverlengthcount, ,#Room17railcoverlength,0,
+ }
+
+Do,((#Room18raillength>0)|(#Room18railcoverlength>0)):1
+ {
+ set, (#Room18raillengthcountremainder>0):#Room18raillengthcount=[#Room18raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room18raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname18
+ Price, (#Room18raillengthcount>0):1,RM18 #hangrailName #ESSPNhangrail Qty #Room18raillengthcount ,#hangrailcost*#Room18raillengthcount, ,#Room18raillength,0,
+
+ set, (#Room18railcoverlengthcountremainder>0):#Room18railcoverlengthcount=[#Room18railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room18railcoverlengthcount
+ Price, (#Room18railcoverlengthcount>0):1,RM18 #hangrailcoverName #ESSPNhangrailcover Qty #Room18railcoverlengthcount ,#hangrailcovercost*#Room18railcoverlengthcount, ,#Room18railcoverlength,0,
+ }
+
+Do,((#Room19raillength>0)|(#Room19railcoverlength>0)):1
+ {
+ set, (#Room19raillengthcountremainder>0):#Room19raillengthcount=[#Room19raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room19raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname19
+ Price, (#Room19raillengthcount>0):1,RM19 #hangrailName #ESSPNhangrail Qty #Room19raillengthcount ,#hangrailcost*#Room19raillengthcount, ,#Room19raillength,0,
+
+ set, (#Room19railcoverlengthcountremainder>0):#Room19railcoverlengthcount=[#Room19railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room19railcoverlengthcount
+ Price, (#Room19railcoverlengthcount>0):1,RM19 #hangrailcoverName #ESSPNhangrailcover Qty #Room19railcoverlengthcount ,#hangrailcovercost*#Room19railcoverlengthcount, ,#Room19railcoverlength,0,
+ }
+
+Do,((#Room20raillength>0)|(#Room20railcoverlength>0)):1
+ {
+ set, (#Room20raillengthcountremainder>0):#Room20raillengthcount=[#Room20raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room20raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname20
+ Price, (#Room20raillengthcount>0):1,RM20 #hangrailName #ESSPNhangrail Qty #Room20raillengthcount ,#hangrailcost*#Room20raillengthcount, ,#Room20raillength,0,
+
+ set, (#Room20railcoverlengthcountremainder>0):#Room20railcoverlengthcount=[#Room20railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room20railcoverlengthcount
+ Price, (#Room20railcoverlengthcount>0):1,RM20 #hangrailcoverName #ESSPNhangrailcover Qty #Room20railcoverlengthcount ,#hangrailcovercost*#Room20railcoverlengthcount, ,#Room20railcoverlength,0,
+ }
+
+Do,((#Room21raillength>0)|(#Room21railcoverlength>0)):1
+ {
+ set, (#Room21raillengthcountremainder>0):#Room21raillengthcount=[#Room21raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room21raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname21
+ Price, (#Room21raillengthcount>0):1,RM21 #hangrailName #ESSPNhangrail Qty #Room21raillengthcount ,#hangrailcost*#Room21raillengthcount, ,#Room21raillength,0,
+
+ set, (#Room21railcoverlengthcountremainder>0):#Room21railcoverlengthcount=[#Room21railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room21railcoverlengthcount
+ Price, (#Room21railcoverlengthcount>0):1,RM21 #hangrailcoverName #ESSPNhangrailcover Qty #Room21railcoverlengthcount ,#hangrailcovercost*#Room21railcoverlengthcount, ,#Room21railcoverlength,0,
+ }
+
+Do,((#Room22raillength>0)|(#Room22railcoverlength>0)):1
+ {
+ set, (#Room22raillengthcountremainder>0):#Room22raillengthcount=[#Room22raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room22raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname22
+ Price, (#Room22raillengthcount>0):1,RM22 #hangrailName #ESSPNhangrail Qty #Room22raillengthcount ,#hangrailcost*#Room22raillengthcount, ,#Room22raillength,0,
+
+ set, (#Room22railcoverlengthcountremainder>0):#Room22railcoverlengthcount=[#Room22railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room22railcoverlengthcount
+ Price, (#Room22railcoverlengthcount>0):1,RM22 #hangrailcoverName #ESSPNhangrailcover Qty #Room22railcoverlengthcount ,#hangrailcovercost*#Room22railcoverlengthcount, ,#Room22railcoverlength,0,
+ }
+
+Do,((#Room23raillength>0)|(#Room23railcoverlength>0)):1
+ {
+ set, (#Room23raillengthcountremainder>0):#Room23raillengthcount=[#Room23raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room23raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname23
+ Price, (#Room23raillengthcount>0):1,RM23 #hangrailName #ESSPNhangrail Qty #Room23raillengthcount ,#hangrailcost*#Room23raillengthcount, ,#Room23raillength,0,
+
+ set, (#Room23railcoverlengthcountremainder>0):#Room23railcoverlengthcount=[#Room23railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room23railcoverlengthcount
+ Price, (#Room23railcoverlengthcount>0):1,RM23 #hangrailcoverName #ESSPNhangrailcover Qty #Room23railcoverlengthcount ,#hangrailcovercost*#Room23railcoverlengthcount, ,#Room23railcoverlength,0,
+ }
+
+Do,((#Room24raillength>0)|(#Room24railcoverlength>0)):1
+ {
+ set, (#Room24raillengthcountremainder>0):#Room24raillengthcount=[#Room24raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room24raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname24
+ Price, (#Room24raillengthcount>0):1,RM24 #hangrailName #ESSPNhangrail Qty #Room24raillengthcount ,#hangrailcost*#Room24raillengthcount, ,#Room24raillength,0,
+
+ set, (#Room24railcoverlengthcountremainder>0):#Room24railcoverlengthcount=[#Room24railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room24railcoverlengthcount
+ Price, (#Room24railcoverlengthcount>0):1,RM24 #hangrailcoverName #ESSPNhangrailcover Qty #Room24railcoverlengthcount ,#hangrailcovercost*#Room24railcoverlengthcount, ,#Room24railcoverlength,0,
+ }
+
+Do,((#Room25raillength>0)|(#Room25railcoverlength>0)):1
+ {
+ set, (#Room25raillengthcountremainder>0):#Room25raillengthcount=[#Room25raillengthcount+1]
+ set, #note =#ESSPNhangrail
+ set, #qty=#Room25raillengthcount
+ set, #unitnumber=
+ Set, #Roomname=#roomname25
+ Price, (#Room25raillengthcount>0):1,RM25 #hangrailName #ESSPNhangrail Qty #Room25raillengthcount ,#hangrailcost*#Room25raillengthcount, ,#Room25raillength,0,
+
+ set, (#Room25railcoverlengthcountremainder>0):#Room25railcoverlengthcount=[#Room25railcoverlengthcount+1]
+ set, #note =#ESSPNhangrailcover
+ set, #qty=#Room25railcoverlengthcount
+ Price, (#Room25railcoverlengthcount>0):1,RM25 #hangrailcoverName #ESSPNhangrailcover Qty #Room25railcoverlengthcount ,#hangrailcovercost*#Room25railcoverlengthcount, ,#Room25railcoverlength,0,
+ }
+
+Set, #stopfinaless=2
+
+
+

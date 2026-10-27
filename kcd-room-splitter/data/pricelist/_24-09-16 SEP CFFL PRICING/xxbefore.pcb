@@ -1,0 +1,788 @@
+,XXXXXXXXXXXXXXXXXXXXXXXXXXX
+set, #thisshelfTH=0
+set, #whichdoor=0
+set, #drawernumber=0
+set, #stdrodcnt=0 
+set, #hasbkyn = 0
+set, #mirrorback = 0
+set, #ShoeFenceType = None
+Set, #ledFpaneladd = 0
+set, #ledHpaneladd = 0
+set, #ledBOpaneladd = 0
+set, #dogearadd = 0
+Set, #addfrontlips=0
+Set, #addcchannel1=0
+Set, #addcchannel2=0
+Set, #addadjtothickshelf=0
+set, #addadjtoeuroshelf=0
+Set, #addledshelf=0
+Set, #Waddledshelf=0
+set, #wbusbaradd=0
+set, #wledshelfadd=0
+set, #Specialback=0
+set, #Shelfnum=0 
+set, #lowerspannercount=0
+Set,#wBusbaradd=0
+Set,#wLEDshelfadd=0
+Set, #TopEBadd=0
+Set,#BackEBadd=0
+set, #addRWShelfnotch=0
+set, #doorhkn=0
+set, #bottombasketdepthadj=0
+,This was added below to work on xxafter.prt room subtotals
+Set,#ClosetHardwaretype=#ExtraUnitText11
+set,#unitHWcost=0
+set, #tagpricedone=0
+
+,Get base notch if with shoe (Trim off the right defined number chars leaving the Name only)
+Do,(#ExtraUnittext9="*shoe*"):1
+{
+Len, #Size, #ExtraUnitText9
+Left,#numberinextraunittextnine, #Size-5, #Extraunittext9
+Len, #size, #numberinextraunittextnine
+set, #notchdepth=#numberinextraunittextnine
+set, #notchheight=#ExtraUnitText10
+set, #notchdepthhasshoe=1
+}
+Do,(#ExtraUnittext9<>"*shoe*"):1
+{
+set, #notchdepthtemp=#ExtraUnittext9
+set, #notchheighttemp=#ExtraUnitText10
+
+set, #notchdepth=#ExtraUnitText9
+set,#notchheight=#ExtraUnitText10
+set, #notchdepthhasshoe=0
+
+}
+
+
+
+load, GetHandleKnobCost.pcb
+
+Load, GetMaterialCostGroup.Pcb
+
+,Check and set edgebandcostfactor on shelves and panels
+Load,GetMaterialCostEdgeBanding.pcb
+
+,***Added finish to material
+,Check and set Finishing costfactor on shelves and panels
+,Load,GetMaterialCostFinishing.pcb
+
+,***Second contrasting material
+Load, GetContrastMaterialCostGroup.Pcb
+
+
+,Check and Set Closet Rod Price
+Load,GetMaterialCostRod.pcb
+
+,Check and Set Cost for Base Kick Type and material
+Load,GetMaterialCostBaseKick.pcb
+
+Load, GetBaseLength.pcb
+
+
+Load,GetMaterialCostBacking.pcb
+
+,Check and Set Cost for Crown Molding Type and material
+Load,GetMaterialCostCrownMolding.pcb
+
+,Load,GetFlutedPilasterCost.pcb
+
+,Load,GetDrawerBoxCost.pcb
+
+
+,Load, GetMaterialCostGroup.Pcb
+
+
+,Build Molding Info
+Do, ((I70+I71+I72+I73)>0):1  ,Unit has molding
+{
+   ,calc Molding length and add to unit count (if wide enough)
+   ,set, #MldLen = [(I70*W + I71*(D+6) + I72*(D+6) + I73*(W+6))/12]
+set, #MldLen = [(I70*W + I71*(D+6) + I72*(D+6) + I73*(W+6))]
+,   set, (W>#SecMinSize): #MldCnt = 1: #MldCnt = 0
+,    Set, (w>#Secmaxsize): #MldCnt = [W/#Secmaxsize]
+
+      Set, (W>#secMinSize)&(W<=#secMaxSize)&(T<>550):#Mldcnt=1:#Mldcnt=0
+      Set, (W>#secMaxSize)&(T<>550):#MldCnt=[#MldCnt+[W\#secMaxSize]]
+      Set, (W>#secMaxSize)&((W/#secMaxSize)-(W\#secMaxSize)>0):#MldCnt=[#MldCnt+1]  
+      Set,(#moldingscale<>"Section"):#MldCnt=1  
+  
+   Do, (#CrownMoldingType = "#CrownMoldingType1"):1
+   {
+      set, #Mld1Name = <#CrownMoldingType>
+      ,set, #Mld1Len = [#Mld1Len + (#MldLen*12)]
+      set, #Mld1Len = [#Mld1Len + (#MldLen)]
+      set, #Mld1Cnt = [#Mld1Cnt + #MldCnt]
+      set, #Mld1Cost = [#Mld1Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType2"):1
+   {
+      set, #Mld2Name = <#CrownMoldingType>
+      set, #Mld2Len = [#Mld2Len + (#MldLen)]
+      set, #Mld2Cnt = [#Mld2Cnt + #MldCnt]
+      set, #Mld2Cost = [#Mld2Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType3"):1
+   {
+      set, #Mld3Name = <#CrownMoldingType>
+      set, #Mld3Len = [#Mld3Len + (#MldLen)]
+      set, #Mld3Cnt = [#Mld3Cnt + #MldCnt]
+      set, #Mld3Cost = [#Mld3Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType4"):1
+   {
+      set, #Mld4Name = <#CrownMoldingType>
+      set, #Mld4Len = [#Mld4Len + (#MldLen)]
+      set, #Mld4Cnt = [#Mld4Cnt + #MldCnt]
+      set, #Mld4Cost = [#Mld4Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType5"):1
+   {
+      set, #Mld5Name = <#CrownMoldingType>
+      set, #Mld5Len = [#Mld5Len + (#MldLen)]
+      set, #Mld5Cnt = [#Mld5Cnt + #MldCnt]
+      set, #Mld5Cost = [#Mld5Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType6"):1
+   {
+      set, #Mld6Name = <#CrownMoldingType>
+      set, #Mld6Len = [#Mld6Len + (#MldLen)]
+      set, #Mld6Cnt = [#Mld6Cnt + #MldCnt]
+      set, #Mld6Cost = [#Mld6Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType7"):1
+   {
+      set, #Mld7Name = <#CrownMoldingType>
+      set, #Mld7Len = [#Mld7Len + (#MldLen)]
+      set, #Mld7Cnt = [#Mld7Cnt + #MldCnt]
+      set, #Mld7Cost = [#Mld7Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType8"):1
+   {
+      set, #Mld8Name = <#CrownMoldingType>
+      set, #Mld8Len = [#Mld8Len + (#MldLen)]
+      set, #Mld8Cnt = [#Mld8Cnt + #MldCnt]
+      set, #Mld8Cost = [#Mld8Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType9"):1
+   {
+      set, #Mld9Name = <#CrownMoldingType>
+      set, #Mld9Len = [#Mld9Len + (#MldLen)]
+      set, #Mld9Cnt = [#Mld9Cnt + #MldCnt]
+      set, #Mld9Cost = [#Mld9Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType10"):1
+   {
+      set, #Mld10Name = <#CrownMoldingType>
+      set, #Mld10Len = [#Mld10Len + (#MldLen)]
+      set, #Mld10Cnt = [#Mld10Cnt + #MldCnt]
+      set, #Mld10Cost = [#Mld10Cost + #CrownMoldingTypeCostGroup]
+   }
+  Do, (#CrownMoldingType = "#CrownMoldingType11"):1
+   {
+      set, #Mld11Name = <#CrownMoldingType>
+      set, #Mld11Len = [#Mld11Len + (#MldLen)]
+      set, #Mld11Cnt = [#Mld11Cnt + #MldCnt]
+      set, #Mld11Cost = [#Mld11Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType12"):1
+   {
+      set, #Mld12Name = <#CrownMoldingType>
+      set, #Mld12Len = [#Mld12Len + (#MldLen)]
+      set, #Mld12Cnt = [#Mld12Cnt + #MldCnt]
+      set, #Mld12Cost = [#Mld12Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType13"):1
+   {
+      set, #Mld13Name = <#CrownMoldingType>
+      set, #Mld13Len = [#Mld13Len + (#MldLen)]
+      set, #Mld13Cnt = [#Mld13Cnt + #MldCnt]
+      set, #Mld13Cost = [#Mld13Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType14"):1
+   {
+      set, #Mld14Name = <#CrownMoldingType>
+      set, #Mld14Len = [#Mld14Len + (#MldLen)]
+      set, #Mld14Cnt = [#Mld14Cnt + #MldCnt]
+      set, #Mld14Cost = [#Mld14Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType15"):1
+   {
+      set, #Mld15Name = <#CrownMoldingType>
+      set, #Mld15Len = [#Mld15Len + (#MldLen)]
+      set, #Mld15Cnt = [#Mld15Cnt + #MldCnt]
+      set, #Mld15Cost = [#Mld15Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType16"):1
+   {
+      set, #Mld16Name = <#CrownMoldingType>
+      set, #Mld16Len = [#Mld16Len + (#MldLen)]
+      set, #Mld16Cnt = [#Mld16Cnt + #MldCnt]
+      set, #Mld16Cost = [#Mld16Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType17"):1
+   {
+      set, #Mld17Name = <#CrownMoldingType>
+      set, #Mld17Len = [#Mld17Len + (#MldLen)]
+      set, #Mld17Cnt = [#Mld17Cnt + #MldCnt]
+      set, #Mld17Cost = [#Mld17Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType18"):1
+   {
+      set, #Mld18Name = <#CrownMoldingType>
+      set, #Mld18Len = [#Mld18Len + (#MldLen)]
+      set, #Mld18Cnt = [#Mld18Cnt + #MldCnt]
+      set, #Mld18Cost = [#Mld18Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType19"):1
+   {
+      set, #Mld19Name = <#CrownMoldingType>
+      set, #Mld19Len = [#Mld19Len + (#MldLen)]
+      set, #Mld19Cnt = [#Mld19Cnt + #MldCnt]
+      set, #Mld19Cost = [#Mld19Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType20"):1
+   {
+      set, #Mld20Name = <#CrownMoldingType>
+      set, #Mld20Len = [#Mld20Len + (#MldLen)]
+      set, #Mld20Cnt = [#Mld20Cnt + #MldCnt]
+      set, #Mld20Cost = [#Mld20Cost + #CrownMoldingTypeCostGroup]
+   } 
+   Do, (#CrownMoldingType = "#CrownMoldingType21"):1
+   {
+      set, #Mld21Name = <#CrownMoldingType>
+      set, #Mld21Len = [#Mld21Len + (#MldLen)]
+      set, #Mld21Cnt = [#Mld21Cnt + #MldCnt]
+      set, #Mld21Cost = [#Mld21Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType22"):1
+   {
+      set, #Mld22Name = <#CrownMoldingType>
+      set, #Mld22Len = [#Mld22Len + (#MldLen)]
+      set, #Mld22Cnt = [#Mld22Cnt + #MldCnt]
+      set, #Mld22Cost = [#Mld22Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType23"):1
+   {
+      set, #Mld23Name = <#CrownMoldingType>
+      set, #Mld23Len = [#Mld23Len + (#MldLen)]
+      set, #Mld23Cnt = [#Mld23Cnt + #MldCnt]
+      set, #Mld23Cost = [#Mld23Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType24"):1
+   {
+      set, #Mld24Name = <#CrownMoldingType>
+      set, #Mld24Len = [#Mld24Len + (#MldLen)]
+      set, #Mld24Cnt = [#Mld24Cnt + #MldCnt]
+      set, #Mld24Cost = [#Mld24Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType25"):1
+   {
+      set, #Mld25Name = <#CrownMoldingType>
+      set, #Mld25Len = [#Mld25Len + (#MldLen)]
+      set, #Mld25Cnt = [#Mld25Cnt + #MldCnt]
+      set, #Mld25Cost = [#Mld25Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType26"):1
+   {
+      set, #Mld26Name = <#CrownMoldingType>
+      set, #Mld26Len = [#Mld26Len + (#MldLen)]
+      set, #Mld26Cnt = [#Mld26Cnt + #MldCnt]
+      set, #Mld26Cost = [#Mld26Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType27"):1
+   {
+      set, #Mld27Name = <#CrownMoldingType>
+      set, #Mld27Len = [#Mld27Len + (#MldLen)]
+      set, #Mld27Cnt = [#Mld27Cnt + #MldCnt]
+      set, #Mld27Cost = [#Mld27Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType28"):1
+   {
+      set, #Mld28Name = <#CrownMoldingType>
+      set, #Mld28Len = [#Mld28Len + (#MldLen)]
+      set, #Mld28Cnt = [#Mld28Cnt + #MldCnt]
+      set, #Mld28Cost = [#Mld28Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType29"):1
+   {
+      set, #Mld29Name = <#CrownMoldingType>
+      set, #Mld29Len = [#Mld29Len + (#MldLen)]
+      set, #Mld29Cnt = [#Mld29Cnt + #MldCnt]
+      set, #Mld29Cost = [#Mld29Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType30"):1
+   {
+      set, #Mld30Name = <#CrownMoldingType>
+      set, #Mld30Len = [#Mld30Len + (#MldLen)]
+      set, #Mld30Cnt = [#Mld30Cnt + #MldCnt]
+      set, #Mld30Cost = [#Mld30Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType31"):1
+   {
+      set, #Mld31Name = <#CrownMoldingType>
+      set, #Mld31Len = [#Mld31Len + (#MldLen)]
+      set, #Mld31Cnt = [#Mld31Cnt + #MldCnt]
+      set, #Mld31Cost = [#Mld31Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType32"):1
+   {
+      set, #Mld32Name = <#CrownMoldingType>
+      set, #Mld32Len = [#Mld32Len + (#MldLen)]
+      set, #Mld32Cnt = [#Mld32Cnt + #MldCnt]
+      set, #Mld32Cost = [#Mld32Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType33"):1
+   {
+      set, #Mld33Name = <#CrownMoldingType>
+      set, #Mld33Len = [#Mld33Len + (#MldLen)]
+      set, #Mld33Cnt = [#Mld33Cnt + #MldCnt]
+      set, #Mld33Cost = [#Mld33Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType34"):1
+   {
+      set, #Mld34Name = <#CrownMoldingType>
+      set, #Mld34Len = [#Mld34Len + (#MldLen)]
+      set, #Mld34Cnt = [#Mld34Cnt + #MldCnt]
+      set, #Mld34Cost = [#Mld34Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType35"):1
+   {
+      set, #Mld35Name = <#CrownMoldingType>
+      set, #Mld35Len = [#Mld35Len + (#MldLen)]
+      set, #Mld35Cnt = [#Mld35Cnt + #MldCnt]
+      set, #Mld35Cost = [#Mld35Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType36"):1
+   {
+      set, #Mld36Name = <#CrownMoldingType>
+      set, #Mld36Len = [#Mld36Len + (#MldLen)]
+      set, #Mld36Cnt = [#Mld36Cnt + #MldCnt]
+      set, #Mld36Cost = [#Mld36Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType37"):1
+   {
+      set, #Mld37Name = <#CrownMoldingType>
+      set, #Mld37Len = [#Mld37Len + (#MldLen)]
+      set, #Mld37Cnt = [#Mld37Cnt + #MldCnt]
+      set, #Mld37Cost = [#Mld37Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType38"):1
+   {
+      set, #Mld38Name = <#CrownMoldingType>
+      set, #Mld38Len = [#Mld38Len + (#MldLen)]
+      set, #Mld38Cnt = [#Mld38Cnt + #MldCnt]
+      set, #Mld38Cost = [#Mld38Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType39"):1
+   {
+      set, #Mld39Name = <#CrownMoldingType>
+      set, #Mld39Len = [#Mld39Len + (#MldLen)]
+      set, #Mld39Cnt = [#Mld39Cnt + #MldCnt]
+      set, #Mld39Cost = [#Mld39Cost + #CrownMoldingTypeCostGroup]
+   }
+   Do, (#CrownMoldingType = "#CrownMoldingType40"):1
+   {
+      set, #Mld40Name = <#CrownMoldingType>
+      set, #Mld40Len = [#Mld40Len + (#MldLen)]
+      set, #Mld40Cnt = [#Mld40Cnt + #MldCnt]
+      set, #Mld40Cost = [#Mld40Cost + #CrownMoldingTypeCostGroup]
+   }
+   
+   
+   ,add molding to the proper room cost
+   Do, (#RoomNum=1):1
+   {
+      set, #Rm1MldName = <#CrownMoldingType>
+      set, #Rm1MldCost = [#Rm1MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm1MldCnt  = [#Rm1MldCnt+#Mldcnt]
+      set, #RM1MldLen = [#RM1MldLen+(#MldLen)]
+      
+      
+   }
+   
+   Do, (#RoomNum=2):1
+   {
+      set, #Rm2MldName = <#CrownMoldingType>
+      set, #Rm2MldCost = [#Rm2MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm2MldCnt  = [#Rm2MldCnt+#Mldcnt]
+      set, #RM2MldLen = [#RM2MldLen+(#MldLen)]
+      ,set, #RM2MldLenft = #RM2MldLen/12
+   }
+   
+   
+   Do, (#RoomNum=3):1
+   {
+      set, #Rm3MldName = <#CrownMoldingType>
+      set, #Rm3MldCost = [#Rm3MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm3MldCnt  = [#Rm3MldCnt+#Mldcnt]
+      set, #RM3MldLen = [#RM3MldLen+(#MldLen)]
+      ,set, #Rm3MldCnt = [#Rm3MldCost/#CrownMoldingTypeCostGroup]
+   }
+   
+   
+   Do, (#RoomNum=4):1
+   {
+      set, #Rm4MldName = <#CrownMoldingType>
+      set, #Rm4MldCost = [#Rm4MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm4MldCnt  = [#Rm4MldCnt+#Mldcnt]
+      set, #RM4MldLen = [#RM4MldLen+(#MldLen)]
+      ,set, #Rm4MldCnt = [#Rm4MldCost/#CrownMoldingTypeCostGroup]
+   }
+   
+   
+   Do, (#RoomNum=5):1
+   {
+      set, #Rm5MldName = <#CrownMoldingType>
+      set, #Rm5MldCost = [#Rm5MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm5MldCnt  = [#Rm5MldCnt+#Mldcnt]
+      set, #RM5MldLen = [#RM5MldLen+(#MldLen)]
+      ,set, #Rm5MldCnt = [#Rm5MldCost/#CrownMoldingTypeCostGroup]
+   }
+   
+   
+   Do, (#RoomNum=6):1
+   {
+      set, #Rm6MldName = <#CrownMoldingType>
+      set, #Rm6MldCost = [#Rm6MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm6MldCnt  = [#Rm6MldCnt+#Mldcnt]
+      set, #RM6MldLen = [#RM6MldLen+(#MldLen)]
+      ,set, #Rm6MldCnt = [#Rm6MldCost/#CrownMoldingTypeCostGroup]
+   }
+   
+   
+   Do, (#RoomNum=7):1
+   {
+      set, #Rm7MldName = <#CrownMoldingType>
+      set, #Rm7MldCost = [#Rm7MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm7MldCnt  = [#Rm7MldCnt+#Mldcnt]
+      set, #RM7MldLen = [#RM7MldLen+(#MldLen)]
+      ,set, #Rm7MldCnt = [#Rm7MldCost/#CrownMoldingTypeCostGroup]
+   }
+   
+   
+   Do, (#RoomNum=8):1
+   {
+      set, #Rm8MldName = <#CrownMoldingType>
+      set, #Rm8MldCost = [#Rm8MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm8MldCnt  = [#Rm8MldCnt+#Mldcnt]
+      set, #RM8MldLen = [#RM8MldLen+(#MldLen)]
+      ,set, #Rm8MldCnt = [#Rm8MldCost/#CrownMoldingTypeCostGroup]
+   }
+   
+   
+   Do, (#RoomNum=9):1
+   {
+      set, #Rm9MldName = <#CrownMoldingType>
+      set, #Rm9MldCost = [#Rm9MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm9MldCnt  = [#Rm9MldCnt+#Mldcnt]
+      set, #RM9MldLen = [#RM9MldLen+(#MldLen)]
+      ,set, #Rm9MldCnt = [#Rm9MldCost/#CrownMoldingTypeCostGroup]
+   }
+   
+   
+   Do, (#RoomNum=10):1
+   {
+      set, #Rm10MldName = <#CrownMoldingType>
+      set, #Rm10MldCost = [#Rm10MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm10MldCnt  = [#Rm10MldCnt+#Mldcnt]
+      set, #RM10MldLen = [#RM10MldLen+(#MldLen)]
+      ,set, #Rm10MldCnt = [#Rm10MldCost/#CrownMoldingTypeCostGroup]
+   }
+   
+   
+   Do, (#RoomNum=11):1
+   {
+      set, #Rm11MldName = <#CrownMoldingType>
+      set, #Rm11MldCost = [#Rm11MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm11MldCnt  = [#Rm11MldCnt+#Mldcnt]
+      set, #RM11MldLen = [#RM11MldLen+(#MldLen)]
+      ,set, #Rm11MldCnt = [#Rm11MldCost/#CrownMoldingTypeCostGroup]
+   }
+   
+   
+   Do, (#RoomNum=12):1
+   {
+      set, #Rm12MldName = <#CrownMoldingType>
+      set, #Rm12MldCost = [#Rm12MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm12MldCnt  = [#Rm12MldCnt+#Mldcnt]
+      set, #RM12MldLen = [#RM12MldLen+(#MldLen)]
+      ,set, #Rm1MldCnt = [#Rm1MldCost/#CrownMoldingTypeCostGroup]
+   }
+   
+   
+   Do, (#RoomNum=13):1
+   {
+      set, #Rm13MldName = <#CrownMoldingType>
+      set, #Rm13MldCost = [#Rm13MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm13MldCnt  = [#Rm13MldCnt+#Mldcnt]
+      set, #RM13MldLen = [#RM13MldLen+(#MldLen)]
+   }
+   
+   
+   Do, (#RoomNum=14):1
+   {
+      set, #Rm14MldName = <#CrownMoldingType>
+      set, #Rm14MldCost = [#Rm14MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm14MldCnt  = [#Rm14MldCnt+#Mldcnt]
+      set, #RM14MldLen = [#RM14MldLen+(#MldLen)]
+   }
+   
+   
+   Do, (#RoomNum=15):1
+   {
+      set, #Rm15MldName = <#CrownMoldingType>
+      set, #Rm15MldCost = [#Rm15MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm15MldCnt  = [#Rm15MldCnt+#Mldcnt]
+      set, #RM15MldLen = [#RM15MldLen+(#MldLen)]
+   }
+
+    Do, (#RoomNum=16):1
+   {
+      set, #Rm16MldName = <#CrownMoldingType>
+      set, #Rm16MldCost = [#Rm16MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm16MldCnt  = [#Rm16MldCnt+#Mldcnt]
+      set, #RM16MldLen = [#RM16MldLen+(#MldLen)]
+   }
+
+    Do, (#RoomNum=17):1
+   {
+      set, #Rm17MldName = <#CrownMoldingType>
+      set, #Rm17MldCost = [#Rm17MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm17MldCnt  = [#Rm17MldCnt+#Mldcnt]
+      set, #RM17MldLen = [#RM17MldLen+(#MldLen)]
+   }
+
+   Do, (#RoomNum=18):1
+   {
+      set, #Rm18MldName = <#CrownMoldingType>
+      set, #Rm18MldCost = [#Rm18MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm18MldCnt  = [#Rm18MldCnt+#Mldcnt]
+      set, #RM18MldLen = [#RM18MldLen+(#MldLen)]
+   }
+
+    Do, (#RoomNum=19):1
+   {
+      set, #Rm19MldName = <#CrownMoldingType>
+      set, #Rm19MldCost = [#Rm19MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm19MldCnt  = [#Rm19MldCnt+#Mldcnt]
+      set, #RM19MldLen = [#RM19MldLen+(#MldLen)]
+   }
+
+    Do, (#RoomNum=20):1
+   {
+      set, #Rm20MldName = <#CrownMoldingType>
+      set, #Rm20MldCost = [#Rm20MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm20MldCnt  = [#Rm20MldCnt+#Mldcnt]
+      set, #RM20MldLen = [#RM20MldLen+(#MldLen)]
+   }
+
+    Do, (#RoomNum=21):1
+   {
+      set, #Rm21MldName = <#CrownMoldingType>
+      set, #Rm21MldCost = [#Rm21MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm21MldCnt  = [#Rm21MldCnt+#Mldcnt]
+      set, #RM21MldLen = [#RM21MldLen+(#MldLen)]
+   }
+
+    Do, (#RoomNum=22):1
+   {
+      set, #Rm22MldName = <#CrownMoldingType>
+      set, #Rm22MldCost = [#Rm22MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm22MldCnt  = [#Rm22MldCnt+#Mldcnt]
+      set, #RM22MldLen = [#RM22MldLen+(#MldLen)]
+   }
+
+    Do, (#RoomNum=23):1
+   {
+      set, #Rm23MldName = <#CrownMoldingType>
+      set, #Rm23MldCost = [#Rm23MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm23MldCnt  = [#Rm23MldCnt+#Mldcnt]
+      set, #RM23MldLen = [#RM23MldLen+(#MldLen)]
+   }
+
+    Do, (#RoomNum=24):1
+   {
+      set, #Rm24MldName = <#CrownMoldingType>
+      set, #Rm24MldCost = [#Rm24MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm24MldCnt  = [#Rm24MldCnt+#Mldcnt]
+      set, #RM24MldLen = [#RM24MldLen+(#MldLen)]
+   }
+
+    Do, (#RoomNum=25):1
+   {
+      set, #Rm25MldName = <#CrownMoldingType>
+      set, #Rm25MldCost = [#Rm25MldCost + #CrownMoldingTypeCostGroup]
+      set, #Rm25MldCnt  = [#Rm25MldCnt+#Mldcnt]
+      set, #RM25MldLen = [#RM25MldLen+(#MldLen)]
+   }
+}
+
+
+End
+
+
+
+
+
+
+Do,(MldNum>0):1
+{
+   Do, (#CrownMoldingType = "#CrownMoldingType1"):1
+   {
+      ,Set,#ThisMld=MoldingName1
+      ,Load,MoldCostFormula.pcb
+      set, #Mld1Name = <#CrownMoldingType>
+      set, #Mld1Len = [#Mld1Len + (#MldLen*12)]
+      set, #Mld1Cnt = [#Mld1Cnt + #MldCnt]
+      set, #Mld1Cost = [#Mld1Cost + #CrownMoldingTypeCostGroup]
+   }
+}
+
+
+Do,(MldNum>1):1
+{
+   Do, (#CrownMoldingType = "#CrownMoldingType2"):1
+   {
+      ,Set,#ThisMld=MoldingName2
+      ,Load,MoldCostFormula.pcb
+      set, #Mld2Name = <#CrownMoldingType>
+      set, #Mld2Len = [#Mld2Len + (#MldLen*12)]
+      set, #Mld2Cnt = [#Mld2Cnt + #MldCnt]
+      set, #Mld2Cost = [#Mld2Cost + #CrownMoldingTypeCostGroup]
+   }
+}
+
+
+Do,(MldNum>2):1
+{
+   Do, (#CrownMoldingType = "#CrownMoldingType3"):1
+   {
+      ,Set,#ThisMld=MoldingName3
+      ,Load,MoldCostFormula.pcb
+      set, #Mld3Name = <#CrownMoldingType>
+      set, #Mld3Len = [#Mld3Len + (#MldLen*12)]
+      set, #Mld3Cnt = [#Mld3Cnt + #MldCnt]
+      set, #Mld3Cost = [#Mld3Cost + #CrownMoldingTypeCostGroup]
+   }
+}
+
+
+Do,(MldNum>3):1
+{
+   Do, (MoldingName4 = #UnitMoldingName ):1
+   {
+      ,Set,#ThisMld=MoldingName4
+      ,Load,MoldCostFormula.pcb
+      set, #Mld4Name = <#CrownMoldingType>
+      set, #Mld4Len = [#Mld4Len + (#MldLen*12)]
+      set, #Mld4Cnt = [#Mld4Cnt + #MldCnt]
+      set, #Mld4Cost = [#Mld4Cost + #CrownMoldingTypeCostGroup]
+   }
+}
+
+
+Do,(MldNum>4):1
+{
+   Do, (MoldingName5 = #UnitMoldingName ):1
+   {
+      set, #Mld5Name = <#CrownMoldingType>
+      set, #Mld5CostFormula = <#CrownMoldingTypeCostGroup>
+      set, #Mld5Len = [#Mld5Len + (#MldLen*12)]
+      set, #Mld5Cnt = [#Mld5Cnt + #MldCnt]
+      set, #Mld5Cost = [#Mld5Cost + #Mld5CostFormula]
+   }
+}
+
+
+Do,(MldNum>5):1
+{
+   Do, (MoldingName6 = #UnitMoldingName ):1
+   {
+      set, #Mld6Name = <#CrownMoldingType>
+      set, #Mld6CostFormula = <#CrownMoldingTypeCostGroup>
+      set, #Mld6Len = [#Mld6Len + (#MldLen*12)]
+      set, #Mld6Cnt = [#Mld6Cnt + #MldCnt]
+      set, #Mld6Cost = [#Mld6Cost + #Mld6CostFormula]
+   }
+}
+
+
+Do,(MldNum>6):1
+{
+   Do, (MoldingName7 = #UnitMoldingName ):1
+   {
+      set, #Mld7Name = <#CrownMoldingType>
+      set, #Mld7CostFormula = <#CrownMoldingTypeCostGroup>
+      set, #Mld7Len = [#Mld7Len + (#MldLen*12)]
+      set, #Mld7Cnt = [#Mld7Cnt + #MldCnt]
+      set, #Mld7Cost = [#Mld7Cost + #Mld7CostFormula]
+   }
+}
+
+
+Do,(MldNum>7):1
+{
+   Do, (MoldingName8 = #UnitMoldingName ):1
+   {
+      set, #Mld8Name = <#CrownMoldingType>
+      set, #Mld8CostFormula = <#CrownMoldingTypeCostGroup>
+      set, #Mld8Len = [#Mld8Len + (#MldLen*12)]
+      set, #Mld8Cnt = [#Mld8Cnt + #MldCnt]
+      set, #Mld8Cost = [#Mld8Cost + #Mld8CostFormula]
+   }
+}
+
+
+Do,(MldNum>8):1
+{
+   Do, (MoldingName9 = #UnitMoldingName ):1
+   {
+      set, #Mld9Name = <#CrownMoldingType>
+      set, #Mld9CostFormula = <#CrownMoldingTypeCostGroup>
+      set, #Mld9Len = [#Mld9Len + (#MldLen*12)]
+      set, #Mld9Cnt = [#Mld9Cnt + #MldCnt]
+      set, #Mld9Cost = [#Mld9Cost + #Mld9CostFormula]
+   }
+}
+
+
+
+,add molding to the proper room
+,Do, (#RoomNum=1):1
+,{
+,   set, #Rm1MldName = <#UnitMoldingName>
+,   set, #Rm1CostFormula = #CrownMoldingTypeCostGroup
+,   set, #Rm1MldLen = [#Rm1MldLen + (#MldLen*12)]
+,   set, #Rm1MldCnt = [#Rm1MldCnt + #MldCnt]
+,   set, #Rm1MldCost = [#Rm1MldCost + #Rm1CostFormula]
+,}
+
+,Do, (#RoomNum=2):1
+,{
+,   set, #Rm2MldName = <#UnitMoldingName>
+,   set, #Rm2CostFormula = #CrownMoldingTypeCostGroup
+,   set, #Rm2MldLen = [#Rm2MldLen + (#MldLen*12)]
+,   set, #Rm2MldCnt = [#Rm2MldCnt + #MldCnt]
+,   set, #Rm2MldCost = [#Rm2MldCost + #Rm2CostFormula
+,}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

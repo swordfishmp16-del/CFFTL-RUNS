@@ -1,0 +1,8 @@
+,KCDw SYSTEM FILE DO NOT CHANGE
+,TOP 2 OPENING EXTENDED SIDES
+Set,#xNo=2
+Set,#xOp=(Fw-ls-rs-ms)/2
+Set,#LCode=Closet
+Set,#UCode=Wall
+Set,#PCode=WEXT
+Load, Eachunit.pcb

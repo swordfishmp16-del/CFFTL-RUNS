@@ -1,0 +1,44 @@
+,CF Prices and counts the fixed shelves  
+set, (TR<>0):#TH=TR:#TH=H
+Load, C-Shelf Cost.Pcb
+Set, #TH = {#TH}
+set, #tempshelfcount=1
+Do, (TR>0):1
+{
+Set,(#FullTops="No"):#Tops=2:#Tops=1
+Price, #Tops, (#FullTops="No"):#TopSpannerName:#TopShelfName-#EdgeBandingType,         #CostOfTopShelf,         #ShelfDepth, #ShelfWidth,  #TopShelfPrintOrderNumber,          
+load, countshelves.pcb
+}
+Do,((TR>0)&((lcb<>0) | (rcb<>0))):1
+{
+Price, 1,   Special Cut,         #costforspecialcuts,          ,,          #AdjustableShelfPrintOrderNumber,
+}
+Do, (MR>0):1
+{
+Price, (MR>0):1, (#FullShelf="No"):#MiddleSpannerName : #MiddleShelfName-#EdgeBandingType,         #CostOfMiddleShelf,        #ShelfDepth, #ShelfWidth,  #MiddleShelfPrintOrderNumber,      
+load, countshelves.pcb
+}
+Do,((MR>0)&((lcb<>0) | (rcb<>0))):1
+{
+Price, 1,   Special Cut,         #costforspecialcuts,          ,,          #AdjustableShelfPrintOrderNumber,
+}
+Do, (LMR>0):1
+{
+Price, (LMR>0):#lowerspannercount, (#FullShelf="No"):#MiddleSpannerName : #MiddleShelfName-#EdgeBandingType,         #CostOfMiddleShelf,        #ShelfDepth, #ShelfWidth,  #MiddleShelfPrintOrderNumber,
+set, #tempshelfcount=#lowerspannercount      
+load, countshelves.pcb
+}
+Do,((LMR>0)&((lcb<>0) | (rcb<>0))):1
+{
+Price, #lowerspannercount,   Special Cut,         #costforspecialcuts,          ,,          #AdjustableShelfPrintOrderNumber,
+}
+Do, (BR>0):1
+{
+Price, 1,     #BottomShelfName-#EdgeBandingType,      #CostOfBottomShelf,      #ShelfDepth, #ShelfWidth,  #BottomShelfPrintOrderNumber,
+set, #tempshelfcount=1       
+load, countshelves.pcb
+}
+Do,((BR>0)&((lcb<>0) | (rcb<>0))):1
+{
+Price, 1,   Special Cut,         #costforspecialcuts,          ,,          #AdjustableShelfPrintOrderNumber,
+}

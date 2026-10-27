@@ -1,0 +1,129 @@
+,Set Item Costs factor for Shoe Fence
+
+,**
+
+,Calculating subtotals
+
+Set,#ShoeFenceCostGroup=0
+
+,Set,(#ShoeFenceType = "#ShoeFenceType0"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost0]
+,Set,(opt=#Toestopopt1):#ShoeFenceType = #ShoeFenceType1
+,Set,(opt=#Toestopopt1):#ShoeFenceCostGroup=[#ShoeFenceTypeCost1]
+,Set,(opt=#Toestopopt2):#ShoeFenceType = #ShoeFenceType2
+,Set,(opt=#Toestopopt2):#ShoeFenceCostGroup=[#ShoeFenceTypeCost2]
+,Set,(opt=#Toestopopt2):#use2ndmaterial=1
+,Set,(opt=#Toestopopt3):#ShoeFenceType = #ShoeFenceType3
+,Set,(opt=#Toestopopt3):#ShoeFenceCostGroup=[#ShoeFenceTypeCost3]
+,Set,(opt=#Toestopopt4):#ShoeFenceType = #ShoeFenceType4
+,Set,(opt=#Toestopopt4):#ShoeFenceCostGroup=[#ShoeFenceTypeCost4]
+,Set,(opt=#Toestopopt5):#ShoeFenceType = #ShoeFenceType5
+,Set,(opt=#Toestopopt5):#ShoeFenceCostGroup=[#ShoeFenceTypeCost5]
+,Set,(opt=#Toestopopt6):#ShoeFenceType = #ShoeFenceType6
+,Set,(opt=#Toestopopt6):#ShoeFenceCostGroup=[#ShoeFenceTypeCost6]
+,Set,(opt=#Toestopopt7):#ShoeFenceType = #ShoeFenceType7
+,Set,(opt=#Toestopopt7):#ShoeFenceCostGroup=[#ShoeFenceTypeCost7]
+,Set,(opt=#Toestopopt8):#ShoeFenceType = #ShoeFenceType8
+,Set,(opt=#Toestopopt8):#ShoeFenceCostGroup=[#ShoeFenceTypeCost8]
+,Set,(opt=#Toestopopt9):#ShoeFenceType = #ShoeFenceType9
+,Set,(opt=#Toestopopt9):#ShoeFenceCostGroup=[#ShoeFenceTypeCost9]
+
+
+,Set,(#ShoeFenceType = "#ShoeFenceType0"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost0]
+,Set,(#ShoeFenceType = "#ShoeFenceType1"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost1]
+,Set,(#ShoeFenceType = "#ShoeFenceType1"):#use2ndmaterial=1
+,Set,(#ShoeFenceType = "#ShoeFenceType2"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost2]
+,Set,(#ShoeFenceType = "#ShoeFenceType3"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost3]
+,Set,(#ShoeFenceType = "#ShoeFenceType4"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost4]
+,Set,(#ShoeFenceType = "#ShoeFenceType5"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost5]
+,Set,(#ShoeFenceType = "#ShoeFenceType6"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost6]
+,Set,(#ShoeFenceType = "#ShoeFenceType7"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost7]
+,Set,(#ShoeFenceType = "#ShoeFenceType8"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost8]
+
+set,#shoefencefinish=-Finish-
+Set,(#Unitfilename="*Match*"):#ShoeFenceType = #ShoeFenceType1
+Set,(#Unitfilename="*Match*"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost1]
+set,(#Unitfilename="*Match*"):#shoefencefinish=-#Unitmaterialname
+Set,(#Unitfilename="*2nd*"):#ShoeFenceType = #ShoeFenceType2
+Set,(#Unitfilename="*2nd*"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost2]
+Set,(#Unitfilename="*2nd*"):#use2ndmaterial=1
+set,(#Unitfilename="*2nd*"):#shoefencefinish=-#contrastmaterialname
+Set,(#Unitfilename="*clacrylic*"):#ShoeFenceType = #ShoeFenceType3
+Set,(#Unitfilename="*clacrylic*"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost3]
+Set,(#Unitfilename="*clacrylic*"):#ShoeFencefinish=
+Set,(#Unitfilename="*mtacrylic*"):#ShoeFenceType = #ShoeFenceType4
+Set,(#Unitfilename="*mtacrylic*"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost4]
+Set,(#Unitfilename="*mtacrylic*"):#ShoeFencefinish=
+Set,(#Unitfilename="*fence*"):#ShoeFenceType = #ShoeFenceType5
+Set,(#Unitfilename="*fence*"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost5]
+Set,(#Unitfilename="*band*"):#ShoeFenceType = #ShoeFenceType6
+Set,(#Unitfilename="*band*"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost6]
+Set,(#Unitfilename="*painted*"):#ShoeFenceType = #ShoeFenceType7
+Set,(#Unitfilename="*painted*"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost7]
+Set,(#Unitfilename="*stained*"):#ShoeFenceType = #ShoeFenceType8
+Set,(#Unitfilename="*stained*"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost8]
+Set,(#Unitfilename="*glazed*"):#ShoeFenceType = #ShoeFenceType9
+Set,(#Unitfilename="*glazed*"):#ShoeFenceCostGroup=[#ShoeFenceTypeCost9]
+
+
+set, #ShoeFenceCostGroup=[#ShoeFenceCostGroup*#universalupcharge]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+Set, (#unitfilename="*cover.cab"):#ESSrailcost=#hangrailwcover
+Set, (#unitfilename="*cover.cab"):#ESSrailPN=#ESSPNhangrailwcover
+Set, (#unitfilename="*rail.cab"):#ESSrailcost=#hangrail
+Set, (#unitfilename="*rail.cab"):#ESSrailPN=#ESSPNhangrail
+
+
+
+Load, countparts-ESS.pcb

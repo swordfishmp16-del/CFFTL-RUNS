@@ -1,0 +1,164 @@
+,Calculates the price for each Cubby part
+
+
+Set, (#horizontalpricechoice="Fixed Cost"):#W = [(#CubbyWidth-(0.75*(#NumVertCubby-1))) / #NumVertCubby] :#W=#Cubbywidth ,Width of each shelf
+Set, #D = [D]
+Set, (#panelorshelfcubby="Shelves"):#H = [(#CubbyHeight-(0.75*(#NumHorzCubby-1))) / #NumHorzCubby]:#H = [#CubbyHeight]
+Set, (#panelorshelfcubby="Shelves"):#NumH = [(#NumHorzCubby-1)]:#NumH = [(#NumHorzCubby-1)*#NumvertCubby]
+Set, (#panelorshelfcubby="Shelves"):#NumV = [(#NumvertCubby-1)*#NumHorzCubby]:#NumV = [(#NumvertCubby-1)]
+set, #roomtag= 
+
+set, ((#cubbycostmethod="Hole")|(#Cubbycostmethod="Cost")):#CostOfCubbyUnit =[#CostOfCubbyUnit *#universalupcharge]
+Price, (#CubbyCostMethod="Hole"):1,    #CubbyHoleName,        #CostOfCubbyUnit*#NumVertCubby*#NumHorzCubby,    #D,  #H,  #CubbyUnitPrintOrderNumber,  
+Price, (#CubbyCostMethod="Cost"):1,    #CubbyHoleName,        #CostOfCubbyUnit,    #D,  #H,  #CubbyUnitPrintOrderNumber,  
+
+Do,(#CubbyCostMethod="Pieces"):1
+{
+Set,#CostOfCubbyUnit =0.00,    Cost of Each Cubby Hole Unit
+set, #shelfwidth=W-LS-RS
+set, #shelfdepth=D
+load, Pricefixedshelves.pcb
+
+,Calc all Costs for Cubby Verticals
+Set, #VertH = [#H]
+Set, #VertD = [#D]
+
+set, #temppanelcount=#NumV
+Do, (#verticalpricechoice="Panel"):1
+{
+Load, B-Side Cost.Pcb
+Set, #CostOfCubbyVertical = [#CostOfSide]
+set, #displaythickness={#sideTH}
+set, #roomtag=#DividerName-#displaythickness"-#EdgeBandingType 
+}
+Do, (#verticalpricechoice="Fixed Cost"):1
+{
+Set, ((#VertH>#MaxcubbyVheight)|(#VertD>#MaxcubbyVdepth)):#CostOfCubbyVertical = [#CostofcubbyVunit*#oversizeVcubbycharge]:#CostOfCubbyVertical = [#CostofcubbyVunit]
+set, #roomtag=RM#roomnum #CubbyVertName-#UnitMaterialName-3/4"-#EdgeBandingType 
+set, #CostOfCubbyVertical =[#CostOfCubbyVertical *#universalupcharge]
+}
+
+
+Price, (#NumV>0):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>1):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>2):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>3):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>4):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>5):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>6):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>7):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>8):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>9):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>10):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>11):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>12):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>13):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>14):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>15):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>16):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>17):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>18):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>19):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>20):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>21):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>22):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>23):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>24):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>25):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>26):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>27):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>28):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>29):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>30):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>31):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>32):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>33):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>34):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>35):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>36):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>37):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>38):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>39):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>40):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>41):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>42):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>43):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>44):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>45):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>46):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>47):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>48):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>49):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+Price, (#NumV>50):1,   #roomtag ,        #CostOfCubbyVertical,    #D,  #H,  #CubbyUnitPrintOrderNumber,         
+
+
+,Calc all Costs for Cubby Horizontals
+Set, #ShelfWidth = [#W]
+Do, (#horizontalpricechoice="Shelf"):1
+{
+Load, C-Shelf Cost.Pcb
+set, #tempshelfcount=#NumH
+load, countshelves.pcb
+set, #displaythickness={#sideTH}
+set, #roomtag=#MiddleShelfName-#displaythickness"-#EdgeBandingType
+}
+Do, (#horizontalpricechoice="Fixed Cost"):1
+{
+Set, ((#ShelfWidth>#MaxcubbyHWidth)|(#VertD>#MaxcubbyHdepth)):#CostOfCubbyShelf = [#CostofcubbyHunit*#oversizeHcubbycharge]:#CostOfCubbyShelf = [#CostofcubbyHunit]
+set, #roomtag=RM#roomnum #CubbyHorzName-#UnitMaterialName-3/4"-#EdgeBandingType 
+set, #CostOfCubbyShelf =[#CostOfCubbyShelf *#universalupcharge]
+}  
+Price, (#NumH>0):1,    #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>1):1,    #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>2):1,    #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>3):1,    #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>4):1,    #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>5):1,    #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>6):1,    #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>7):1,    #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>8):1,    #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>9):1,    #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>10):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>11):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>12):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>13):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>14):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>15):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>16):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>17):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>18):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>19):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>20):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>21):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>22):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>23):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>24):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>25):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>26):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>27):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>28):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>29):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>30):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>31):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>32):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>33):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>34):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>35):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>36):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>37):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>38):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>39):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>40):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>41):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>42):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>43):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>44):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>45):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>46):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>47):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>48):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>49):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+Price, (#NumH>50):1,   #roomtag ,        #CostOfCubbyShelf,       #D,  #W,  #CubbyUnitPrintOrderNumber+1,       
+}
+set,#UnitCubbyCost = [(#NumV*#CostOfCubbyVertical)+(#NumH*#CostOfCubbyShelf)]
+set,#UnitCubbyNum = [#NumVertCubby * #NumHorzCubby]

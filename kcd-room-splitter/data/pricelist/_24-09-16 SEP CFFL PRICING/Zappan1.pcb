@@ -1,0 +1,20 @@
+,APPLIANCE PANELS USE YOUR DOORCOST.PCB FILE FOR PRICING
+
+,ADD ON FOR DISWASHER PANELS
+Set, #DwPan$=0
+,ADD ON FOR REFRIDGERATOR PANELS
+Set, #RefPan$=0
+,ADD ON FOR TRASH COMPACTOR PANELS
+Set, #TrPan$=0
+
+
+Load,(ap1w>0):zappan.pcb
+
+Load,(ap2w>0):zappan.pcb
+
+Load,(ap3w>0):zappan.pcb
+
+
+Price ,(CodePre=DW-PAN):1    ,Dishwasher Panels,                                              #UnitDoorCost + #UnitDrawerFrtCost + #DwPan$        ,,,, 
+Price ,(CodePre=REF-PAN):1   ,Refridgerator Panels,                                           #UnitDoorCost + #UnitDrawerFrtCost + #RefPan$       ,,,, 
+Price ,(CodePre=TC-PAN):1    ,Trash Compactor Panels,                                         #UnitDoorCost + #UnitDrawerFrtCost + #TrPan$        ,,,, 

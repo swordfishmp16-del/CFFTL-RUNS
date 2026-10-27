@@ -1,0 +1,600 @@
+,use grid
+,** 
+,** Enter name for Options - should be the same as your Unit Library Options.dat list names
+,** ALL OPTIONS IMPACT PRODUCTION 
+,** 
+,**
+set, #stopsetoptions=1
+,**
+Displayset,#CutToFitoptnum=2, 1.0 -----  WHAT OPTION NUMBER IS USED FOR Cut To Fit on horizontal shelves & rods.
+displayset,#cuttofitoptionname=Opt-Cut To Fit Section ,Option Name
+Displayset,#Wallwidthadj=102mm, 1.1 -----  What is the extra width for the Horizontal shelves & rods for cut to fit.
+,**
+Displayset,#dogearoption=3, 2.0 ----- WHAT OPTION NUMBER IS USED FOR Dog ear panels?
+displayset,#dogearoptionname=Opt-Dog Ear Panels,Option Name
+Displayset,#Dogearpanelcost=20*(#universalupcharge),        2.1    Cost to dogear cut a panel
+Displayset,#FinaldogearDepth=304.8MM, 2.2----- Depth of Top piece when dog ear top clip option activated?
+,**
+DisplaySet,#ExtrusionName=Opt-Shelf-Stiffeners, 3.0 -----  What is the name for shelf support extrusions?
+Displayset,#2CChannelsoption=4, 3.1 ----- WHAT OPTION NUMBER IS USED FOR 2 shelf stiffeners (front and back) shelf support?
+Set,#Extrustion2Name=#extrusionname 2 sides, 3.1a -----  What is the name for the 2 shelf support extrusions?
+Displayset,#extrusionoptioncost=17*(#universalupcharge), 3.2 ----- What is the cost of a single self support extrusion?
+,**
+Displayset,#1CChannelsoption=5, 4.0 ----- WHAT OPTION NUMBER IS USED FOR Front shelf stiffener (front) shelf support?
+Set,#Extrustion1Name=#extrusionname Front side, 4.1 -----  What is the name for the front shelf support extrusions?
+,**
+Displayset,#adjtodoublethickoption=6,5.0 ----- WHAT OPTION NUMBER IS USED FOR making adj shelves double thick?
+DisplaySet,#doublethickName=Opt-Adj shelves to Double Thick, 5.1 -----  What is the name for the Adjustable to Double Thick?
+,**
+DisplaySet,#adjfrontlipoption =7, 6.0 ----- WHAT OPTION NUMBER IS USED FOR FRONT LIP ON Adjustable SHELF?
+DisplaySet,#frontlipoptioncost =15*(#universalupcharge), 6.1 ----- WHAT IS THE COST FOR FRONT LIP ON SHELF?
+DisplaySet,#FixedLipName=Opt-Shelf-Front Lip ,6.2 ----- What is the name of the shelf lip piece?    
+DisplaySet,#LipHeight=1.5,6.3 ----- What is the height of the shelf lip piece?
+,** 
+DisplaySet,#eurofrontlipoption =8, 6.4----- WHAT OPTION NUMBER IS USED FOR FRONT LIP ON Euro SHELF? (show double thick) 
+,**
+Displayset,#alladjtoeurooption=9, 7.0 ----- WHAT OPTION NUMBER IS USED FOR making ALL adj shelves euro?
+displayset,#alladjtoeuroname=Opt-All Adj to Euro,7.1 Option ALL adj shelves euro Name
+
+,**Options 
+displayset,#Scarcleatoptnum=10 ,8.0 ----- WHAT OPTION NUMBER IS USED FOR Scar Cleat
+displayset,#Scarcleatoptname=Opt-Scar Cleat , 8.1 Name of Scar cleat Option
+,**
+displayset,#CenterBackBoreoptnum=11 ,9.0 ----- WHAT OPTION NUMBER IS USED FOR Center back boreline option
+displayset,#CenterBackBoreoptname=Opt-Backing Center Bore ,9.1 Name of Center Back Bore Option
+,**
+,**
+displayset,#DBLBackBoreoptnum=205 ,9.2 ----- WHAT OPTION NUMBER IS USED FOR Double back boreline option
+displayset,#DBLBackBoreoptname=Opt-Backing Double Bore ,9.3 Name of Double Back Bore Option
+,**
+
+displayset,#Setholescustomoptnum=12 ,10.0 ----- WHAT OPTION NUMBER IS USED FOR Set Holes Custom option
+displayset,#Setholescustomoptname=Opt-Set Holes Custom,10.1 Name of Set Custom Hole Option
+,**
+displayset,#adjholescustomoptnum=13 ,11.0 ----- WHAT OPTION NUMBER IS USED FOR 3 Holes Adjustable Holes Custom option
+displayset,#adjholescustomoptname=Opt-3 Hole Adjustable Custom,11.1 Name for 3 Holes Adjustable Holes Custom option
+,**
+displayset,#noholesdrillonsiteoptnum=14 ,12.0 ----- WHAT OPTION NUMBER IS USED FOR No Holes Drill on site option
+displayset,#noholesdrillonsiteoptname=Opt-No Holes Drill On Site,12.1 Name for No Holes drill on site option
+,**
+displayset,#SlantedHeadboardoptnum=15 ,13.0 ----- WHAT OPTION NUMBER IS USED FOR Slanted Head Board option
+displayset,#SlantedHeadboardoptname=Opt-Slanted Headboard,13.1 Name for Slanted Headboard Option
+,**
+displayset,#Singledoorcleatoptnum=17 ,14.0 ----- WHAT OPTION NUMBER IS USED FOR Single Door Cleat option
+displayset,#Singledoorcleatoptname=Opt-Single door cleat ,14.1 Name for Single Door Cleat option
+,**
+displayset,#Dbldoorcleatoptnum=18 ,15.0 ----- WHAT OPTION NUMBER IS USED FOR Double Door Cleat option
+displayset,#Dbldoorcleatoptname=Opt-Pair Door cleats ,15.1 Name for Double Door Cleat option
+,**
+displayset,#1pairslidingdoorsoptnum=19 ,16.0 ----- WHAT OPTION NUMBER IS USED FOR 1st Opening Sliding doors option
+displayset,#slidingdoorsoptname=Opt-Sliding Door Conversion,16.1 Name for Sliding doors option
+,**
+displayset,#2pairslidingdoorsoptnum=20 ,17.0 ----- WHAT OPTION NUMBER IS USED FOR 2nd Opening Sliding doors option
+,**
+displayset,#3pairslidingdoorsoptnum=21 ,18.0 ----- WHAT OPTION NUMBER IS USED FOR 3rd Opening Sliding doors option
+,**
+displayset,#4pairslidingdoorsoptnum=22 ,19.0 ----- WHAT OPTION NUMBER IS USED FOR 4th Opening Sliding doors option
+,**
+displayset,#5pairslidingdoorsoptnum=23 ,20.0 ----- WHAT OPTION NUMBER IS USED FOR 5th Opening Sliding doors option
+,**
+displayset,#6pairslidingdoorsoptnum=24 ,21.0 ----- WHAT OPTION NUMBER IS USED FOR 6th Opening Sliding doors option
+,**
+displayset,#Drw1falsebottomoptnum=26 ,22.0 ----- WHAT OPTION NUMBER IS USED FOR 1st drawer False Bottom option
+displayset,#Falsebottomoptname=Opt-Dwr has False Bottom,22.1 Name for False Bottom Option
+,**
+displayset,#Drw2falsebottomoptnum=27 ,23.0 ----- WHAT OPTION NUMBER IS USED FOR 2nd drawer False Bottom option
+,**
+displayset,#Drw3falsebottomoptnum=28 ,24.0 ----- WHAT OPTION NUMBER IS USED FOR 3rd drawer False Bottom option
+,**
+displayset,#Drw4falsebottomoptnum=29 ,25.0 ----- WHAT OPTION NUMBER IS USED FOR 4th drawer False Bottom option
+,**
+displayset,#Drw5falsebottomoptnum=30 ,26.0 ----- WHAT OPTION NUMBER IS USED FOR 5th drawer False Bottom option
+,**
+displayset,#Drw6falsebottomoptnum=31 ,27.0 ----- WHAT OPTION NUMBER IS USED FOR 6th drawer False Bottom option
+,**
+displayset,#Drw7falsebottomoptnum=32 ,28.0 ----- WHAT OPTION NUMBER IS USED FOR 7th drawer False Bottom option
+,**
+displayset,#Drw8falsebottomoptnum=33 ,29.0 ----- WHAT OPTION NUMBER IS USED FOR 8th drawer False Bottom option
+,**
+displayset,#Drw9falsebottomoptnum=34 ,30.0 ----- WHAT OPTION NUMBER IS USED FOR 9th drawer False Bottom option
+
+
+,**
+displayset,#Drw1DoubleDeckeroptnum=36 ,31.0 ----- WHAT OPTION NUMBER IS USED FOR 1st drawer Double Decker option
+displayset,#DoubleDeckeroptname=Opt-Dwr allows Double Decker,36.1 Name for Double Decker Option
+,**
+displayset,#Drw2DoubleDeckeroptnum=37 ,32.0 ----- WHAT OPTION NUMBER IS USED FOR 2nd drawer Double Decker option
+,**
+displayset,#Drw3DoubleDeckeroptnum=38 ,33.0 ----- WHAT OPTION NUMBER IS USED FOR 3rd drawer Double Decker option
+,**
+displayset,#Drw4DoubleDeckeroptnum=39 ,34.0 ----- WHAT OPTION NUMBER IS USED FOR 4th drawer Double Decker option
+,**
+displayset,#Drw5DoubleDeckeroptnum=40 ,35.0 ----- WHAT OPTION NUMBER IS USED FOR 5th drawer Double Decker option
+,**
+displayset,#Drw6DoubleDeckeroptnum=41 ,36.0 ----- WHAT OPTION NUMBER IS USED FOR 6th drawer Double Decker option
+,**
+displayset,#Drw7DoubleDeckeroptnum=42 ,37.0 ----- WHAT OPTION NUMBER IS USED FOR 7th drawer Double Decker option
+,**
+displayset,#Drw8DoubleDeckeroptnum=43 ,38.0 ----- WHAT OPTION NUMBER IS USED FOR 8th drawer Double Decker option
+,**
+displayset,#Drw9DoubleDeckeroptnum=44 ,39.0 ----- WHAT OPTION NUMBER IS USED FOR 9th drawer Double Decker option
+
+,**
+displayset,#Drw1with34bottomoptnum=46 ,40.0 ----- WHAT OPTION NUMBER IS USED FOR 1st drawer 3/4" bottom option
+displayset,#34bottomoptname=Opt-Dwr is 3/4in Bottom,40.1 Name fordrawer 3/4" bottom Option
+,**
+displayset,#Drw2with34bottomoptnum=47 ,41.0 ----- WHAT OPTION NUMBER IS USED FOR 2nd drawer 3/4" bottom option
+,**
+displayset,#Drw3with34bottomoptnum=48 ,42.0 ----- WHAT OPTION NUMBER IS USED FOR 3rd drawer 3/4" bottom option
+,**
+displayset,#Drw4with34bottomoptnum=49 ,43.0 ----- WHAT OPTION NUMBER IS USED FOR 4th drawer 3/4" bottom option
+,**
+displayset,#Drw5with34bottomoptnum=50 ,44.0 ----- WHAT OPTION NUMBER IS USED FOR 5th drawer 3/4" bottom option
+,**
+displayset,#Drw6with34bottomoptnum=51 ,45.0 ----- WHAT OPTION NUMBER IS USED FOR 6th drawer 3/4" bottom option
+,**
+displayset,#Drw7with34bottomoptnum=52 ,45.0 ----- WHAT OPTION NUMBER IS USED FOR 7th drawer 3/4" bottom option
+,**
+displayset,#Drw8with34bottomoptnum=53 ,46.0 ----- WHAT OPTION NUMBER IS USED FOR 8th drawer 3/4" bottom option
+,**
+displayset,#Drw9with34bottomoptnum=54 ,47.0 ----- WHAT OPTION NUMBER IS USED FOR 9th drawer 3/4" bottom option
+
+
+,**
+displayset,#optdrw1SG=56 ,48.0 ----- WHAT OPTION NUMBER IS USED FOR 1st drawer switch to sidemount glide option
+displayset,#switchtosidemountoptname=Opt-Dwr glides switch to sidemount,48.1 Name for switch to sidemount glide Option
+,**
+displayset,#optdrw2SG=57 ,49.0 ----- WHAT OPTION NUMBER IS USED FOR 2nd drawer switch to sidemount glide option
+,**
+displayset,#optdrw3SG=58 ,50.0 ----- WHAT OPTION NUMBER IS USED FOR 3rd drawer switch to sidemount glide option
+,**
+displayset,#optdrw4SG=59 ,51.0 ----- WHAT OPTION NUMBER IS USED FOR 4th drawer switch to sidemount glide option
+,**
+displayset,#optdrw5SG=60 ,52.0 ----- WHAT OPTION NUMBER IS USED FOR 5th drawer switch to sidemount glide option
+,**
+displayset,#optdrw6SG=61 ,53.0 ----- WHAT OPTION NUMBER IS USED FOR 6th drawer switch to sidemount glide option
+,**
+displayset,#optdrw7SG=62 ,54.0 ----- WHAT OPTION NUMBER IS USED FOR 7th drawer switch to sidemount glide option
+,**
+displayset,#optdrw8SG=63 ,55.0 ----- WHAT OPTION NUMBER IS USED FOR 8th drawer switch to sidemount glide option
+,**
+displayset,#optdrw9SG=64 ,56.0 ----- WHAT OPTION NUMBER IS USED FOR 9th drawer switch to sidemount glide option
+
+,**
+displayset,#Drw1Fileframecutdownoptnum=66 ,57.0 ----- WHAT OPTION NUMBER IS USED FOR 1st drawer File frame drawer box cutdown option
+displayset,#Fileframecutdownoptname=Opt-Dwr box cut for File Frame,57.1 Name for File frame drawer box cutdown Option
+,**
+displayset,#Drw2Fileframecutdownoptnum=67 ,58.0 ----- WHAT OPTION NUMBER IS USED FOR 2nd drawer File frame drawer box cutdown option
+,**
+displayset,#Drw3Fileframecutdownoptnum=68 ,59.0 ----- WHAT OPTION NUMBER IS USED FOR 3rd drawer File frame drawer box cutdown option
+,**
+displayset,#Drw4Fileframecutdownoptnum=69 ,60.0 ----- WHAT OPTION NUMBER IS USED FOR 4th drawer File frame drawer box cutdown option
+,**
+displayset,#Drw5Fileframecutdownoptnum=70 ,61.0 ----- WHAT OPTION NUMBER IS USED FOR 5th drawer File frame drawer box cutdown option
+,**
+displayset,#Drw6Fileframecutdownoptnum=71 ,62.0 ----- WHAT OPTION NUMBER IS USED FOR 6th drawer File frame drawer box cutdown option
+,**
+displayset,#Drw7Fileframecutdownoptnum=72 ,63.0 ----- WHAT OPTION NUMBER IS USED FOR 7th drawer File frame drawer box cutdown option
+,**
+displayset,#Drw8Fileframecutdownoptnum=73 ,64.0 ----- WHAT OPTION NUMBER IS USED FOR 8th drawer File frame drawer box cutdown option
+,**
+displayset,#Drw9Fileframecutdownoptnum=74 ,65.0 ----- WHAT OPTION NUMBER IS USED FOR 9th drawer File frame drawer box cutdown option
+
+,**
+displayset,#OptionlockDR1=76 ,66.0 ----- WHAT OPTION NUMBER IS USED FOR 1st drawer Lock notch option
+displayset,#Locknotchoptname=Opt-Dwr has Lock notch,66.1 Name for Lock notch Option
+,**
+displayset,#OptionlockDR2=77 ,67.0 ----- WHAT OPTION NUMBER IS USED FOR 2nd drawer Lock notch option
+,**
+displayset,#OptionlockDR3=78 ,68.0 ----- WHAT OPTION NUMBER IS USED FOR 3rd drawer Lock notch option
+,**
+displayset,#OptionlockDR4=79 ,69.0 ----- WHAT OPTION NUMBER IS USED FOR 4th drawer Lock notch option
+,**
+displayset,#OptionlockDR5=80 ,70.0 ----- WHAT OPTION NUMBER IS USED FOR 5th drawer Lock notch option
+,**
+displayset,#OptionlockDR6=81 ,71.0 ----- WHAT OPTION NUMBER IS USED FOR 6th drawer Lock notch option
+,**
+displayset,#OptionlockDR7=82 ,72.0 ----- WHAT OPTION NUMBER IS USED FOR 7th drawer Lock notch option
+,**
+displayset,#OptionlockDR8=83 ,73.0 ----- WHAT OPTION NUMBER IS USED FOR 8th drawer Lock notch option
+,**
+displayset,#OptionlockDR9=84 ,74.0 ----- WHAT OPTION NUMBER IS USED FOR 9th drawer Lock notch option
+
+,**
+displayset,#Drw1with25cedarbotoptnum=86 ,75.0 ----- WHAT OPTION NUMBER IS USED FOR 1st drawer with .25in cedar bottom option
+displayset,#with25cedarbotoptname=Opt-Dwr is 1/4in Cedar Bottom,75.1 Name for with .25in cedar bottom Option
+,**
+displayset,#Drw2with25cedarbotoptnum=87 ,76.0 ----- WHAT OPTION NUMBER IS USED FOR 2nd drawer with .25in cedar bottom option
+,**
+displayset,#Drw3with25cedarbotoptnum=88 ,77.0 ----- WHAT OPTION NUMBER IS USED FOR 3rd drawer with .25in cedar bottom option
+,**
+displayset,#Drw4with25cedarbotoptnum=89 ,78.0 ----- WHAT OPTION NUMBER IS USED FOR 4th drawer with .25in cedar bottom option
+,**
+displayset,#Drw5with25cedarbotoptnum=90 ,79.0 ----- WHAT OPTION NUMBER IS USED FOR 5th drawer with .25in cedar bottom option
+,**
+displayset,#Drw6with25cedarbotoptnum=91 ,80.0 ----- WHAT OPTION NUMBER IS USED FOR 6th drawer with .25in cedar bottom option
+,**
+displayset,#Drw7with25cedarbotoptnum=92 ,81.0 ----- WHAT OPTION NUMBER IS USED FOR 7th drawer with .25in cedar bottom option
+,**
+displayset,#Drw8with25cedarbotoptnum=93 ,82.0 ----- WHAT OPTION NUMBER IS USED FOR 8th drawer with .25in cedar bottom option
+,**
+displayset,#Drw9with25cedarbotoptnum=94 ,83.0 ----- WHAT OPTION NUMBER IS USED FOR 9th drawer with .25in cedar bottom option
+
+,**
+displayset,#Drw1boxcutbackoptnum=190 ,84.0 ----- WHAT OPTION NUMBER IS USED FOR 1st drawer box cut back option
+displayset,#boxcutbackoptname=Opt-Dwr box is cut back,84.1 Name for box cut back Option
+,**
+displayset,#Drw2boxcutbackoptnum=191 ,85.0 ----- WHAT OPTION NUMBER IS USED FOR 2nd drawer box cut back option
+,**
+displayset,#Drw3boxcutbackoptnum=192 ,86.0 ----- WHAT OPTION NUMBER IS USED FOR 3rd drawer box cut back option
+,**
+displayset,#Drw4boxcutbackoptnum=193 ,87.0 ----- WHAT OPTION NUMBER IS USED FOR 4th drawer box cut back option
+,**
+displayset,#Drw5boxcutbackoptnum=194 ,88.0 ----- WHAT OPTION NUMBER IS USED FOR 5th drawer box cut back option
+,**
+displayset,#Drw6boxcutbackoptnum=195 ,89.0 ----- WHAT OPTION NUMBER IS USED FOR 6th drawer box cut back option
+,**
+displayset,#Drw7boxcutbackoptnum=196 ,90.0 ----- WHAT OPTION NUMBER IS USED FOR 7th drawer box cut back option
+,**
+displayset,#Drw8boxcutbackoptnum=197 ,91.0 ----- WHAT OPTION NUMBER IS USED FOR 8th drawer box cut back option
+,**
+displayset,#Drw9boxcutbackoptnum=198 ,92.0 ----- WHAT OPTION NUMBER IS USED FOR 9th drawer box cut back option
+
+
+
+
+,** 3.75 PENCIL DRAWER TO SHELF
+
+Displayset, #optDrw1boxtoshelf=96, 93.0 ----- WHAT OPTION NUMBER IS USED FOR Switch 1st box to shelf (3.75 face only)?
+displayset,#optionboxtoshelfname=Opt-Top Drw Box to Shelf,93.1 Name for Switching box to shelf (3.75 face only)?
+
+,**LIGHTING OPTIONS set prices as required here and in options.dat. Or use accessory pricing and set these and options.dat to 0.
+Displayset,#OptLEDFpanel=100, ----- WHAT OPTION NUMBER IS USED FOR LED strip lights on Tall Panels?
+displayset,#optionLEDFpanelname=Opt-LED Routed Full Panel Strips,----Name for LED strip lights on Tall Panels
+
+Displayset,#OptLEDHpanel=101, 97.0 ----- WHAT OPTION NUMBER IS USED FOR LED strip lights on Half Panels?
+displayset,#optionLEDHpanelname=Opt-LED Routed Half Panel Strips,----Name for LED strip lights on Half Panels
+
+displayset,#optionLEDshelfname=Opt-LED Routed Shelf Strips,----Name for LED strip lights on SHELVES
+DisplaySet,#OptLEDTopshelf =104, ----- WHAT OPTION NUMBER IS USED FOR LED strip lights on Top Euro SHELVES?
+DisplaySet,#OptLEDMidshelf =105,  ----- WHAT OPTION NUMBER IS USED FOR LED strip lights on Mid Euro SHELVES?
+,**Lower Mid Routed LED
+DisplaySet,#OptLEDLowerMidshelf =106, 101.0 ----- WHAT OPTION NUMBER IS USED FOR LED strip lights on Lower Mid Euro SHELVES?
+Displayset,#OptLEDLowerMidShelfcost=10,101.2 ----- Cost FOR LED strip light per Lower Mid Euro SHELF?
+displayset,#optionLEDLowermidshelfname=Opt-LED Routed Lower Mid Euro Shelf Strips,----Name for LED strip lights on Lower Mid Euro SHELVES
+
+,**Adjustable Routed LED
+DisplaySet,#OptLEDAdjshelf =107, 102.0 ----- WHAT OPTION NUMBER IS USED FOR LED strip lights on Adjustable SHELVES (will make euro)?
+Displayset,#OptLEDAdjshelfcost=10, 102.1 ----- Cost FOR LED strip light per Adjustable SHELF (will make euro)?
+displayset,#optionLEDadjtoeuroshelfname=Opt-LED Routed Adj to Euro Shelf Strips,----Name for LED strip lights on Adj to Euro SHELVES
+
+,**
+DisplaySet,#OptLEDUpperbottomshelf =109, 103.0 ----- WHAT OPTION NUMBER IS USED FOR LED strip lights on Upper Bottom Shelf?
+
+displayset,#optionRoutedPuckshelfname=Opt-Routed Pucks LED,----Name for Routed Pucks summary
+displayset,#optionRouted1Puckshelfname=Opt-1-LED Puck Routed ,----Name for Route Shelf for 1 Puck
+Displayset,#OptRoutedPuckTopshelf=111, ----- Number of OPTION to Route Top Shelf for 1 Puck
+,**
+Displayset,#OptRoutedPuckMidshelf=112, ----- Number of OPTION to Route Mid Shelf for 1 Puck
+,displayset,#optionRoutedPuckMidshelfname=Opt-Mid Euro LED Puck Routed,----Name for Route Mid Shelf for 1 Puck
+,**Lower Mid 1 Routed Puck
+Displayset,#OptRoutedPuckLowerMidshelf=113, ----- Number of OPTION to Route Lower Mid Shelf for 1 Puck
+Displayset,#OptRoutedPuckLowerMidshelfcost=0, ----- Cost FOR 1 Routed Puck light per Lower Mid Euro SHELF?
+displayset,#optionRoutedPuckLowerMidshelfname=Opt-Lower Mid Euros LED Puck Routed,----Name for Route Lower Mid Shelf for 1 Puck
+,**Adjustable 1 Routed Puck
+Displayset,#OptRoutedPuckAdjshelf=114, ----- Number of OPTION to Route Adj Shelves for 1 Puck
+Displayset,#OptRoutedPuckAdjShelfcost=0, ----- Cost FOR 1 Routed Puck light per Adjustable SHELF (will make euro)?
+,displayset,#optionRoutedPuckAdjshelfname=Opt-Adj to Euros LED Puck Routed,----Name forRoute Adj Shelves for 1 Puck
+,**
+Displayset,#OptRoutedPuckUpperBottomshelf=115, ----- Number of OPTION to Route Upper Bottom Shelf for 1 Puck
+,displayset,#optionRoutedPuckUpperBottomshelfname=Opt-Upper Bottom LED Puck Routed,----Name for Route Upper Bottom Shelf for 1 Puck
+,**
+
+displayset,#optionRouted2Puckshelfname=Opt-2-LED Pucks Routed ,----Name for Route Shelf for 2 Pucks
+Displayset,#OptRouted2PuckTopshelf=116, ----- Number of OPTION to Route Top Shelf for 2 Pucks
+,**
+Displayset,#OptRouted2PuckMidshelf=117, ----- Number of OPTION to Route Mid Shelf for 2 Pucks
+,displayset,#optionRouted2PuckMidshelfname=Opt-2-Mid Euro LED Puck Routed,Name for Route Mid Shelf for 2 Pucks
+,**Lower Mid 2 Routed Pucks
+Displayset,#OptRouted2PuckLowerMidshelf=118, ----- Number of OPTION to Route Lower Mid Shelf for 2 Pucks
+Displayset,#OptRouted2PuckLowerMidshelfcost=0, ----- Cost FOR 2 Routed Pucks light per Lower Mid Euro SHELF?
+displayset,#optionRouted2PuckLowerMidshelfname=Opt-2-Lower Mid Euros LED Puck Routed,----Name for Route Lower Mid Shelf for 2 Pucks
+,**Adjustable 2 Routed Pucks
+Displayset,#OptRouted2PuckAdjshelf=119, ----- Number of OPTION to Route Adj Shelves for 2 Pucks
+Displayset,#OptRouted2PuckAdjShelfcost=0, ----- Cost FOR 2 Routed Pucks light per Adjustable SHELF (will make euro)?
+,displayset,#optionRouted2PuckAdjshelfname=Opt-2-Adj to Euros LED Puck Routed,----Name for Route Adj Shelves for 2 Pucks
+,**
+Displayset,#OptRouted2PuckUpperBottomshelf=120, ----- Number of OPTION to Route Upper Bottom Shelf for 2 Pucks
+,displayset,#optionRouted2PuckUpperBottomshelfname=Opt-2-Upper Bottom LED Puck Routed,----Name for Route Upper Bottom Shelf for 2 Pucks
+,**
+
+displayset,#optionRouted3Puckshelfname=Opt-3-LED Pucks Routed ,----Name for Route Shelf for 3 Pucks
+Displayset,#OptRouted3PuckTopshelf=121, ----- Number of OPTION to Route Top Shelf for 3 Pucks
+,**
+Displayset,#OptRouted3PuckMidshelf=122, ----- Number of OPTION to Route Mid Shelf for 3 Pucks
+,displayset,#optionRouted3PuckMidshelfname=Opt-3-Mid Euro LED Puck Routed,----Name for Route Mid Shelf for 3 Pucks
+,**Lower Mid 3 Routed Pucks
+Displayset,#OptRouted3PuckLowerMidshelf=123, ----- Number of OPTION to Route Lower Mid Shelf for 3 Pucks
+Displayset,#OptRouted3PuckLowerMidshelfcost=0, ----- Cost FOR 3 Routed Pucks light per Lower Mid Euro SHELF?
+displayset,#optionRouted3PuckLowerMidshelfname=Opt-3-Lower Mid Euros LED Puck Routed,----Name for Route Lower Mid Shelf for 3 Pucks
+,**Adjustable 3 Routed Pucks
+Displayset,#OptRouted3PuckAdjshelf=124, ----- Number of OPTION to Route Adj Shelves for 3 Pucks
+Displayset,#OptRouted3PuckAdjShelfcost=0, ----- Cost FOR 3 Routed Pucks light per Adjustable SHELF (will make euro)?
+,displayset,#optionRouted3PuckAdjshelfname=Opt-3-Adj to Euros LED Puck Routed,----Name for Route Adj Shelves for 3 Pucks
+,**
+Displayset,#OptRouted3PuckUpperBottomshelf=125, ----- Number of OPTION to Route Upper Bottom Shelf for 3 Pucks
+,displayset,#optionRouted3PuckUpperBottomshelfname=Opt-3-Upper Bottom Euro LED Puck Routed,----Name for Route Upper Bottom Shelf for 3 Pucks
+,**
+
+
+displayset,#optionSurfacePuckshelfname=Opt-LED Puck Surface,----Name for Surface Mount Shelf for 1 Puck
+Displayset,#OptSurfacePuckTopshelf=127, ----- Number of OPTION to Surface Mount Top Shelf for 1 Puck
+,**
+Displayset,#OptSurfacePuckMidshelf=128, ----- Number of OPTION to Surface Mount Mid Shelf for 1 Puck
+,displayset,#optionSurfacePuckMidshelfname=Opt-Mid Euro LED Puck Surface,----Name for Surface Mount Mid Shelf for 1 Puck
+,**Lower Mid 1 Surface Puck
+Displayset,#OptSurfacePuckLowerMidshelf=129, ----- Number of OPTION to Surface Mount Lower Mid Shelf for 1 Puck
+Displayset,#OptSurfacePuckLowerMidshelfcost=0, ----- Cost FOR 1 Surface Mount Puck light per Lower Mid Euro SHELF?
+displayset,#optionSurfacePuckLowerMidshelfname=Opt-Lower Mid Euros LED Puck Surface,----Name for Surface Mount Lower Mid Shelf for 1 Puck
+,**Adjustable 1 Surface Puck
+Displayset,#OptSurfacePuckAdjShelf=130, ----- Number of OPTION to Surface Mount Adj Shelves for 1 Puck
+Displayset,#OptSurfacePuckAdjshelfcost=0, ----- Cost FOR 1 Surface Mount Puck light per Adj SHELF?
+displayset,#optionSurfacePuckAdjShelfname=Opt-Adj to Euros LED Puck Surface,----Name for Surface Mount Adj Shelves for 1 Puck
+,**
+Displayset,#OptSurfacePuckUpperBottomShelf=131, ----- Number of OPTION to Surface Mount Upper Bottom Shelf for 1 Puck
+,displayset,#optionSurfacePuckUpperBottomShelfname=Opt-Upper Bottom Euro LED Puck Surface,----Name for Surface Mount Upper Bottom Shelf for 1 Puck
+,**
+
+displayset,#optionSurface2Puckshelfname=Opt-2-LED Pucks Surface,----Name for Surface Mount Shelf for 2 Pucks
+Displayset,#OptSurface2PuckTopshelf=132, ----- Number of OPTION to Surface Mount Top Shelf for 2 Pucks
+,**
+Displayset,#OptSurface2PuckMidShelf=133, ----- Number of OPTION to Surface Mount Mid Shelf for 2 Pucks
+,displayset,#optionSurface2PuckMidShelfname=Opt-2-Mid Euro LED Puck Surface,----Name for Surface Mount Mid Shelf for 2 Pucks
+,**Lower Mid 2 Surface Pucks
+Displayset,#OptSurface2PuckLowerMidshelf=134, ----- Number of OPTION to Surface Mount Lower Mid Shelf for 2 Pucks
+Displayset,#OptSurface2PuckLowerMidshelfcost=0, ----- Cost FOR 2 Surface Mount Puck lights per Lower Mid Euro SHELF?
+displayset,#optionSurface2PuckLowerMidshelfname=Opt-2-Lower Mid Euros LED Puck Surface,----Name for Surface Mount Lower Mid Shelf for 2 Pucks
+,**Adjustable 2 Surface Pucks
+Displayset,#OptSurface2PuckAdjShelf=135, ----- Number of OPTION to Surface Mount Adj Shelves for 2 Pucks
+Displayset,#OptSurface2PuckAdjshelfcost=0, ----- Cost FOR 2 Surface Mount Puck lights per Adj SHELF?
+displayset,#optionSurface2PuckAdjShelfname=Opt-2-Adj to Euros LED Puck Surface,----Name for Surface Mount Adj Shelves for 2 Pucks
+,**
+Displayset,#OptSurface2PuckUpperBottomShelf=136, ----- Number of OPTION to Surface Mount Upper Bottom Shelf for 2 Pucks
+,displayset,#optionSurface2PuckUpperBottomShelfname=Opt-2-Upper Bottom Euro LED Puck Surface,----Name for Surface Mount Upper Bottom Shelf for 2 Pucks
+,**
+
+displayset,#optionSurface3Puckshelfname=Opt-3-LED Pucks Surface,----Name for Surface Mount Shelf for 3 Pucks
+Displayset,#OptSurface3PuckTopshelf=137, ----- Number of OPTION to Surface Mount Top Shelf for 3 Pucks
+,**
+Displayset,#OptSurface3PuckMidShelf=138, ----- Number of OPTION to Surface Mount Mid Shelf for 3 Pucks
+,displayset,#optionSurface3PuckMidShelfname=Opt-3-Mid Euro LED Puck Surface,----Name for Surface Mount Mid Shelf for 3 Pucks
+,**Lower Mid 3 Surface Pucks
+Displayset,#OptSurface3PuckLowerMidshelf=139, ----- Number of OPTION to Surface Mount Lower Mid Shelf for 3 Pucks
+Displayset,#OptSurface3PuckLowerMidshelfcost=0, ----- Cost FOR 3 Surface Mount Puck lights per Lower Mid Euro SHELF?
+displayset,#optionSurface3PuckLowerMidshelfname=Opt-3-Lower Mid Euros LED Puck Surface,---Name for Surface Mount Lower Mid Shelf for 3 Pucks
+,**Adjustable 3 Surface Pucks
+Displayset,#OptSurface3PuckAdjShelf=140, ----- Number of OPTION to Surface Mount Adj Shelves for 3 Pucks
+Displayset,#OptSurface3PuckAdjshelfcost=0, ----- Cost FOR 3 Surface Mount Puck lights per Adj SHELF?
+displayset,#optionSurface3PuckAdjShelfname=Opt-3-Adj to Euros LED Puck Surface,----Name Surface Mount Adj Shelves for 3 Pucks
+,**
+Displayset,#OptSurface3PuckUpperBottomShelf=141, ----- Number of OPTION to Surface Mount Upper Bottom Shelf for 3 Pucks
+,displayset,#optionSurface3PuckUpperBottomShelfname=Opt-3-Upper Bottom Euro LED Puck Surface,----Name for Surface Mount Upper Bottom Shelf for 3 Pucks
+
+
+
+,**Wireless Lighting
+Displayset, #WirelessLEDBusbarName=Panel Busbar,----name for wireless LED PanelBus Bar
+Displayset, #optionWirelessLEDShelfname=Opt-Wireless LED Routed Shelf,----name for wireless LED Shelf
+Displayset,#OptWirelessLEDTopShelf=144, ----- Number of OPTION wireless LED Top Shelf
+displayset,#optionWirelessLEDTopShelfname=Opt-Top Euro Wireless LED Routed,----name for wireless LED Top Shelf
+,**
+Displayset,#OptWirelessLEDMidShelf=145, ----- ----- Number of OPTION wireless LED Mid Shelf
+displayset,#optionWirelessLEDMidShelfname=Opt-Mid Euro Wireless LED Routed,----Name for wireless LED Mid Shelf
+,**Lower Mid Wireless Lighting 
+Displayset,#OptWirelessLEDLowerMidShelf=146, ----- ----- Number of OPTION wireless LED Lower Mid Shelf
+Displayset,#OptWirelessLEDLowerMidShelfcost=0, ----- Cost FOR wirless Mid Euro SHELF?
+displayset,#optionWirelessLEDLowerMidShelfname=Opt-Lower Mid Euro Wireless LED Routed,----Name for wireless LED Lower Mid Shelf
+,**Adjustable Wireless Lighting
+Displayset,#OptWirelessLEDAdjShelf=147, ----- Number of OPTION Adj Wireless LED Routed
+Displayset,#OptWirelessLEDAdjShelfcost=0 ,----- Cost FOR 1 Wireless LED Routed Adj SHELF?
+displayset,#optionWirelessLEDAdjShelfname=Opt-Adj Wireless LED Routed,----Name for Adj Wireless LED Routed
+,**
+Displayset,#OptWirelessLEDUpperbottomShelf=149, ----- Number of OPTION to Wireless LED Upper Bottom Shelf 
+displayset,#optionWirelessLEDUpperbottomShelfname=Opt-Upper Bottom Euro WirelessLED,----Name for Wireless LED Upper Bottom Shelf 
+,**
+displayset,#optionSurface12intaskname=Opt-Surface 12in Task Light,----Name for Surface Mount 12in Task Light 
+displayset,#OptSurface12intaskTopShelf=159, ----- Number of OPTION to Surface Mount 12in Task Light Top Shelf
+displayset,#optionSurface12intaskTopShelfname=Opt-Top Euro Surface 12in Task Light,----Name for Surface Mount 12in Task Light Top Shelf
+,**
+displayset,#OptSurface12intaskMidShelf=160, ----- Number of OPTION to Surface Mount 12in Task Light Mid Shelf
+displayset,#option160name=Opt-Mid Euro Surface 12in Task Light,----Name of Surface Mount 12in Task Light Mid Shelf
+,**Lower Mid 12in Task Light
+Displayset,#OptSurface12intaskLowerMidShelf=161, ----- Number of OPTION to Surface Mount 12in Task Light Lower Mid Shelf
+Displayset,#OptSurface12inTaskLowerMidShelfcost=0 ,----- Cost FOR Surface Mount 12in task light per Lower Mid Euro SHELF?
+displayset,#optionSurface12intaskLowerMidShelfname=Opt-Lower Mid Euro Surface 12in Task Light,----Name for Surface Mount 12in Task Light Lower Mid Shelf
+,**Adjustable 12in Task Light
+Displayset,#OptSurface12intaskAdjShelf=162, ----- Number of OPTION to Surface Mount 12in Task Light Adj Shelf
+Displayset,#OptSurface12inTaskAdjShelfcost=0 ,----- Cost FOR Surface Mount 12in task light per Adj SHELF?
+displayset,#optionSurface12intaskAdjShelfname=Opt-Adj to Euros Surface 12in Task Light,----Name for Surface Mount 12in Task Light Adj Shelf
+,**
+Displayset,#OptSurface12intaskUpperbottomShelf=163, ----- Number of OPTION to Surface Mount 12in Task Light Upper Bottom Shelf
+displayset,#optionSurface12intaskUpperbottomShelfname=Opt-Upper Bottom Euro Surface 12in Task Light,----Name for Surface Mount 12in Task Light Upper Bottom Shelf
+,**
+displayset,#optionSurface24intaskname=Opt-Surface 24in Task Light,----Name for Surface Mount 24in Task Light 
+displayset,#OptSurface24intaskTopShelf=164, ----- Number of OPTION to Surface Mount 24in Task Light Top Shelf
+displayset,#optionSurface24intaskTopShelfname=Opt-Top Euro Surface 24in Task Light,----Name for Surface Mount 24in Task Light Top Shelf
+,**
+displayset,#OptSurface24intaskMidShelf=165, ----- Number of OPTION to Surface Mount 24in Task Light Mid Shelf
+displayset,#optionSurface24intaskMidShelfname=Opt-Mid Euro Surface 24in Task Light,----Name for Surface Mount 24in Task Light Mid Shelf
+,**Lower Mid 24in Task Light
+Displayset,#OptSurface24intaskLowerMidShelf=166, ----- Number of OPTION to Surface Mount 24in Task Light Lower Mid Shelf
+Displayset,#OptSurface24inTaskLowerMidShelfcost=0 ,----- Cost FOR Surface Mount 24in task light per Lower Mid Euro SHELF?
+displayset,#optionSurface24intaskLowerMidShelfname=Opt-Lower Mid Euro Surface 24in Task Light,----Name for Surface Mount 24in Task Light Lower Mid Shelf
+,**Adjustable 24in Task Light
+Displayset,#OptSurface24intaskAdjShelf=167, ----- Number of OPTION to Surface Mount 24in Task Light Adj Shelf
+Displayset,#OptSurface24inTaskAdjShelfcost=0 ,----- Cost FOR Surface Mount 24in task light per Adj SHELF?
+displayset,#optionSurface24intaskAdjShelfname=Opt-Adj to Euros Surface 24in Task Light,Name for Surface Mount 24in Task Light Adj Shelf
+,**
+Displayset,#OptSurface24intaskUpperbottomShelf=168, ----- Number of OPTION to Surface Mount 24in Task Light Upper Bottom Shelf
+displayset,#optionSurface24intaskUpperbottomShelfname=Opt-Upper Bottom Euro Surface 24in Task Light,----Name for Surface Mount 24in Task Light Upper Bottom Shelf
+,**
+displayset,#optionSurface30intaskname=Opt-Surface 30in Task Light,----Name for Surface Mount 30in Task Light 
+displayset,#OptSurface30intaskTopShelf=169, ----- Number of OPTION to Surface Mount 30in Task Light Top Shelf
+displayset,#optionSurface30intaskTopShelfname=Opt-Top Euro Surface 30in Task Light,----Name for  Surface Mount 30in Task Light Top Shelf
+,**
+displayset,#OptSurface30intaskMidShelf=170, ----- Number of OPTION to Surface Mount 30in Task Light Mid Shelf
+displayset,#optionSurface30intaskMidShelfname=Opt-Mid Euro Surface 30in Task Light,----Name for Surface Mount 30in Task Light Mid Shelf
+,**Lower Mid 30in Task Light
+Displayset,#OptSurface30intaskLowerMidShelf=171, ----- Number of OPTION to Surface Mount 30in Task Light Lower Mid Shelf
+Displayset,#OptSurface30inTaskLowerMidShelfcost=0 ,----- Cost FOR Surface Mount 30in task light per Lower Mid Euro SHELF?
+displayset,#optionSurface30intaskLowerMidShelfname=Opt-Lower Mid Euro Surface 30in Task Light,----Name for Surface Mount 30in Task Light Lower Mid Shelf
+,**Adjustable 30in Task Light
+Displayset,#OptSurface30intaskAdjShelf=172, ----- Number of OPTION to Surface Mount 30in Task Light Adj Shelf
+Displayset,#OptSurface30inTaskAdjShelfcost=0 ,----- Cost FOR Surface Mount 30in task light per Adj SHELF?
+displayset,#optionSurface30intaskAdjShelfname=Opt-Adj to Euros Surface 30in Task Light,----Name for Surface Mount 30in Task Light Adj Shelf
+,**
+Displayset,#OptSurface30intaskUpperbottomShelf=173, ----- Number of OPTION to Surface Mount 30in Task Light Upper Bottom Shelf
+displayset,#optionSurface30intaskUpperbottomShelfname=Opt-Upper Bottom Euro Surface 30in Task Light,----Name for Surface Mount 30in Task Light Upper Bottom Shelf
+,**
+displayset,#optionSurface36intaskname=Opt-Surface 36in Task Light,----Name for Surface Mount 36in Task Light 
+displayset,#OptSurface36intaskTopShelf=174, ----- Number of OPTION to Surface Mount 36in Task Light Top Shelf
+displayset,#optionSurface36intaskTopShelfname=Opt-Top Euro Surface 36in Task Light,----Name for Surface Mount 36in Task Light Top Shelf
+,**
+displayset,#OptSurface36intaskMidShelf=175, ----- Number of OPTION to Surface Mount 36in Task Light Mid Shelf
+displayset,#optionSurface36intaskMidShelfname=Opt-Mid Euro Surface 36in Task Light,----Name for Surface Mount 36in Task Light Mid Shelf
+,**Lower Mid 36in Task Light
+Displayset,#OptSurface36intaskLowerMidShelf=176, ----- Number of OPTION to Surface Mount 36in Task Light Lower Mid Shelf
+Displayset,#OptSurface36inTaskLowerMidShelfcost=0 ,----- Cost FOR Surface Mount 36in task light per Lower Mid Euro SHELF?
+displayset,#optionSurface36intaskLowerMidShelfname=Opt-Lower Mid Euro Surface 36in Task Light,----Name for Surface Mount 36in Task Light Lower Mid Shelf
+,**Adjustable 36in Task Light
+Displayset,#OptSurface36intaskAdjShelf=177, ----- Number of OPTION to Surface Mount 36in Task Light Adj Shelf
+Displayset,#OptSurface36inTaskAdjShelfcost=0 ,----- Cost FOR Surface Mount 36in task light per Adj SHELF?
+displayset,#optionSurface36intaskAdjShelfname=Opt-Adj to Euros Surface 36in Task Light,----Name for Surface Mount 36in Task Light Adj Shelf
+,**
+Displayset,#OptSurface36intaskUpperbottomShelf=178, ----- Number of OPTION to Surface Mount 36in Task Light Upper Bottom Shelf
+displayset,#optionSurface36intaskUpperbottomShelfname=Opt-Upper Bottom Euro Surface 36in Task Light,---Name for Surface Mount 36in Task Light Upper Bottom Shelf
+,**
+displayset,#optionSurface42intaskname=Opt-Surface 42in Task Light,----Name for Surface Mount 42in Task Light 
+displayset,#OptSurface42intaskTopShelf=179, ----- Number of OPTION to Surface Mount 42in Task Light Top Shelf
+displayset,#optionSurface42intaskTopShelfname=Opt-Top Euro Surface 42in Task Light,----Name for Surface Mount 42in Task Light Top Shelf
+,**
+displayset,#OptSurface42intaskMidShelf=180, ----- Number of OPTION to Surface Mount 42in Task Light Mid Shelf
+displayset,#optionSurface42intaskMidShelfname=Opt-Mid Euro Surface 42in Task Light,---Name for Surface Mount 42in Task Light Mid Shelf
+,**Lower Mid 42in Task Light
+Displayset,#OptSurface42intaskLowerMidShelf=181, ----- Number of OPTION to Surface Mount 42in Task Light Lower Mid Shelf
+Displayset,#OptSurface42inTaskLowerMidShelfcost=0 ,----- Cost FOR Surface Mount 42in task light per Lower Mid Euro SHELF?
+displayset,#optionSurface42intaskLowerMidShelfname=Opt-Lower Mid Euro Surface 42in Task Light,----Name for Surface Mount 42in Task Light Lower Mid Shelf
+,**Adjustable 42in Task Light
+Displayset,#OptSurface42intaskAdjShelf=182, ----- Number of OPTION to Surface Mount 42in Task Light Adj Shelf
+Displayset,#OptSurface42inTaskAdjShelfcost=0,----- Cost FOR Surface Mount 42in task light per Adj SHELF?
+displayset,#optionSurface42intaskAdjShelfname=Opt-Adj to Euros Surface 42in Task Light,----Name for Surface Mount 42in Task Light Adj Shelf
+,**
+Displayset,#OptSurface42intaskUpperbottomShelf=183, ----- Number of OPTION to Surface Mount 42in Task Light Upper Bottom Shelf
+displayset,#optionSurface42intaskUpperbottomShelfname=Opt-Upper Bottom Euro Surface 42in Task Light,----Name for Surface Mount 42in Task Light Upper Bottom Shelf
+,**
+displayset,#optionSurface45intaskname=Opt-Surface 45in Task Light,----Name for Surface Mount 45in Task Light 
+displayset,#OptSurface45intaskTopShelf=184, ----- Number of OPTION to Surface Mount 45in Task Light Top Shelf
+displayset,#optionSurface45intaskTopShelfname=Opt-Top Euro Surface 45in Task Light,----Name for Surface Mount 45in Task Light Top Shelf
+,**
+displayset,#OptSurface45intaskMidShelf=185, ----- Number of OPTION to Surface Mount 45in Task Light Mid Shelf
+displayset,#optionSurface45intaskMidShelfname=Opt-Mid Euro Surface 45in Task Light,----Name for Surface Mount 45in Task Light Mid Shelf
+,**Lower Mid 45in Task Light
+Displayset,#OptSurface45intaskLowerMidShelf=186, ----- Number of OPTION to Surface Mount 45in Task Light Lower Mid Shelf
+Displayset,#OptSurface45inTaskLowerMidShelfcost=0 ,----- Cost FOR Surface Mount 45in task light per Lower Mid Euro SHELF?
+displayset,#optionSurface45intaskLowerMidShelfname=Opt-Lower Mid Euro Surface 45in Task Light,----Name for Surface Mount 45in Task Light Lower Mid Shelf
+,**Adjustable 45in Task Light
+Displayset,#OptSurface45intaskAdjShelf=187, ----- Number of OPTION to Surface Mount 45in Task Light Adj Shelf
+Displayset,#OptSurface45inTaskAdjShelfcost=0 ,----- Cost FOR Surface Mount 45in task light per Adj SHELF?
+displayset,#optionSurface45intaskAdjShelfname=Opt-Adj to Euros Surface 45in Task Light,----Name for Surface Mount 45in Task Light Adj Shelf
+,** 
+Displayset,#OptSurface45intaskUpperbottomShelf=188, ----- Number of OPTION to Surface Mount 45in Task Light Upper Bottom Shelf
+displayset,#optionSurface45intaskUpperbottomShelfname=Opt-Upper Bottom Euro Surface 45in Task Light,----Name for Surface Mount 45in Task Light Upper Bottom Shelf
+
+
+,** Panel Options Edgeband and Raceway
+Displayset,#optEBtopofPanel=200, ----- WHAT OPTION NUMBER IS USED FOR Edgebanding top of panels?
+displayset,#optionEBtopofPanelname=Opt-Edgeband Panel Top,----Name for Option Edgebanding top of panels
+Displayset,#EBtopofpanelcost=20,        ----    Cost to Edgeband Top of panel
+,**
+Displayset,#optEBBackofPanel=201, ----- WHAT OPTION NUMBER IS USED FOR Edgebanding Back of panels?
+displayset,#optionEBBackofPanelname=Opt-Edgeband Panel Back,----Nam for Option Edgebanding Back of panels
+Displayset,#EBBackofpanelcost=40,        ----    Cost to Edgeband Back of panel
+,**
+displayset,#optionRWNotchname=Opt-Raceway Notch,----Name for Option Raceway Notch
+Displayset,#optRWNotchLoptnum=202, ----- WHAT OPTION NUMBER IS USED FOR Raceway Notch Left?
+set,#optionRWNotchLname=#optionRWNotchname L,----Name for Option Raceway Notch Left
+Displayset,#optRWNotchRoptnum=203, ----- WHAT OPTION NUMBER IS USED FOR Raceway Notch Right?
+set,#optionRWNotchRname=#optionRWNotchname R,----Name for Option Raceway Notch Right
+Displayset,#optRWNotchshelfoptnum=204, ----- WHAT OPTION NUMBER IS USED FOR Raceway Notch on shelves?
+set,#optionRWNotchshelfname=#optionRWNotchname Shelf,----Name for Option Raceway Notch shelf
+Displayset,#costtoRWnotchshelves=10, ---Cost to Racewaynotch Shelves when needed.
+set, #stopsetoptions=2
+
+
+
+
+,**Face only deleted from use
+set, #optDrw1NDB=NA, Drawer 1 Box File Frame Cut Down Option Number
+set, #optDrw2NDB=NA, Drawer 2 Box File Frame Cut Down Option Number
+set, #optDrw3NDB=NA, Drawer 3 Box File Frame Cut Down Option Number
+set, #optDrw4NDB=NA, Drawer 4 Box File Frame Cut Down Option Number
+set, #optDrw5NDB=NA, Drawer 5 Box File Frame Cut Down Option Number
+set, #optDrw6NDB=NA, Drawer 6 Box File Frame Cut Down Option Number
+set, #optDrw7NDB=NA, Drawer 7 Box File Frame Cut Down Option Number
+set, #optDrw8NDB=NA, Drawer 8 Box File Frame Cut Down Option Number
+set, #optDrw9NDB=NA, Drawer 9 Box File Frame Cut Down Option Number
+
+,**XLPucks deleted from use
+set,#OptSurfaceXLPuckShelfname=NA, ----- Name of OPTION to Surface Mount Shelf for XL Pucks
+,**
+set,#OptSurfaceXLPuckTopShelf=NA, ----- Number of OPTION to Surface Mount Top Shelf for 1 XL Puck
+set,#OptSurfaceXLPuckTopShelfname=NA, ----- Name of OPTION to Surface Mount Top Shelf for 1 XL Puck
+,**
+set,#OptSurfaceXLPuckMidShelf=NA, ----- Number of OPTION to Surface Mount Mid Shelf for 1 XL Puck
+set,#OptSurfaceXLPuckMidShelfname=NA, ----- Name of OPTION to Surface Mount Mid Shelf for 1 XL Puck
+,**Lower Mid 1 Surface XL Puck 
+set,#OptSurfaceXLPuckLowerMidShelf=NA, ----- Number of OPTION to Surface Mount Lower Mid Shelf for 1 XL Puck
+set,#OptSurfaceXLPuckLowerMidShelfcost=0, ----- Cost of OPTION to Surface Mount Lower Mid Shelf for 1 XL Puck
+set,#OptSurfaceXLPuckLowerMidShelfname=NA, ----- Name of OPTION to Surface Mount Lower Mid Shelf for 1 XL Puck
+,**Adj to Euro 1 Surface XL Puck 
+set,#OptSurfaceXLPuckAdjShelf=NA, ----- Number of OPTION to Surface Mount Adj Shelf for 1 XL Puck
+set,#OptSurfaceXLPuckAdjShelfcost=0, ----- Cost of OPTION to Surface Mount Adj Shelf for 1 XL Puck
+set,#OptSurfaceXLPuckAdjShelfname=NA, ----- Name of OPTION to Surface Mount Adj Shelf for 1 XL Puck
+,**
+set,#OptSurfaceXLPuckUpperbottomShelf=NA, ----- Number of OPTION to Surface Mount Upper Bottom Shelf for 1 XL Puck
+set,#OptSurfaceXLPuckUpperbottomShelfname=NA, ----- Name of OPTION to Surface Mount Upper Bottom Shelf for 1 XL Puck
+,**
+set,#OptSurface2XLPuckTopShelf=NA, ----- Number of OPTION to Surface Mount Top Shelf for 2 XL Pucks
+set,#OptSurface2XLPuckTopShelfName=NA, ----- Name of OPTION to Surface Mount Top Shelf for 2 XL Pucks
+,**
+set,#OptSurface2XLPuckMidShelf=NA, ----- Number of OPTION to Surface Mount Mid Shelf for 2 XL Pucks
+set,#OptSurface2XLPuckMidShelfname=NA, ----- Name of OPTION to Surface Mount Mid Shelf for 2 XL Pucks
+,**Lower Mid 2XL Pucks
+set,#OptSurface2XLPuckLowerMidShelf=NA, ----- Number of OPTION to Surface Mount Lower Mid Shelf for 2 XL Pucks
+set,#OptSurface2XLPuckLowerMidShelfcost=0, ----- Cost of OPTION to Surface Mount Lower Mid Shelf for 2 XL Pucks
+set,#OptSurface2XLPuckLowerMidShelfname=NA, ----- Name of OPTION to Surface Mount Lower Mid Shelf for 2 XL Pucks
+,Adj to Euro 2XL Pucks
+set,#OptSurface2XLPuckAdjShelf=NA, ----- Number of OPTION to Surface Mount Adj Shelf for 2 XL Pucks
+set,#OptSurface2XLPuckAdjShelfcost=0, ----- Cost of OPTION to Surface Mount Adj Shelf for 2 XL Pucks
+set,#OptSurface2XLPuckAdjShelfName=NA, ----- Name of OPTION to Surface Mount Adj Shelf for 2 XL Pucks
+,**
+set,#OptSurface2XLPuckUpperbottomShelf=NA, ----- Number of OPTION to Surface Mount Upper Bottom Shelf for 2 XL Pucks
+set,#OptSurface2XLPuckUpperbottomShelfname=NA, ----- Name of OPTION to Surface Mount Upper Bottom Shelf for 2 XL Pucks
+,**
+set,#OptSurface3XLPuckTopShelf=NA, ----- Number of OPTION to Surface Mount Top Shelf for 3 XL Pucks
+set,#OptSurface3XLPuckTopShelfname=NA, ----- Name of OPTION to Surface Mount Top Shelf for 3 XL Pucks
+,**
+set,#OptSurface3XLPuckMidShelf=NA, ----- Number of OPTION to Surface Mount Mid Shelf for 3 XL Pucks
+set,#OptSurface3XLPuckMidShelfName=NA, ----- Name of OPTION to Surface Mount Mid Shelf for 3 XL Pucks
+,**Lower Mid 3 XL Pucks
+set,#OptSurface3XLPuckLowerMidShelf=NA, ----- Number of OPTION to Surface Mount Lower Mid Shelf for 3 XL Pucks
+set,#OptSurface3XLPuckLowerMidShelfcost=NA, ----- Cost of OPTION to Surface Mount Lower Mid Shelf for 3 XL Pucks
+set,#OptSurface3XLPuckLowerMidShelfname=NA, ----- Name of OPTION to Surface Mount Lower Mid Shelf for 3 XL Pucks
+,** Ajd to Euro 3 XL Pucks
+set,#OptSurface3XLPuckAdjShelf=NA, ----- Number of OPTION to Surface Mount Adj Shelf for 3 XL Pucks
+set,#OptSurface3XLPuckAdjShelfcost=0, ----- Cost of OPTION to Surface Mount Adj Shelf for 3 XL Pucks
+set,#OptSurface3XLPuckAdjShelfname=NA, ----- Name of OPTION to Surface Mount Adj Shelf for 3 XL Pucks
+,**
+set,#OptSurface3XLPuckUpperbottomShelf=NA, ----- Number of OPTION to Surface Mount Upper Bottom Shelf for 3 XL Pucks
+set,#OptSurface3XLPuckUpperbottomShelfname=NA, ----- Name of OPTION to Surface Mount Upper Bottom Shelf for 3 XL Pucks
+

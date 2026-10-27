@@ -1,0 +1,129 @@
+,
+,Use Grid
+
+
+,**
+,**
+,** SET COSTS FOR ELITE CLEAT MOUNT HOOKS AND HOLDERS
+,** 
+,**
+,**ELITE  
+,** COSTS FOR BELT HOOK
+DisplaySet,#EBelthook =45,1.0  Cost for ELITE Cleat mounted Belt Hook
+
+,** COSTS FOR TIE HOOK
+DisplaySet,#ETiehook =50,2.0  Cost for ELITE Cleat mounted Tie Hook
+
+,** COSTS FOR DOUBLE HOOK 
+DisplaySet,#EDoublehook =35,3.0  Cost for ELITE Cleat mounted Double Hook
+
+,** COSTS FOR COAT HOOK
+DisplaySet,#ECoathook =60,4.0  Cost for ELITE Cleat mounted Coat Hook
+
+,** COSTS FOR BROOM HOLDER
+DisplaySet,#EBroomholder =50,5.0  Cost for ELITE Cleat mounted broom holder
+
+,** COST FOR ELITE BELT RACKS
+DisplaySet,#EBeltRack12 =90,6.0  Cost for ELITE 12" Belt Rack
+DisplaySet,#EBeltRack14 =90,6.1  Cost for ELITE 14" Belt Rack
+DisplaySet,#EBeltRack18 =110,6.2  Cost for ELITE 18" Belt Rack
+
+,** COST FOR ELITE TIE RACKS
+DisplaySet,#ETieRack12 =90,7.0  Cost for ELITE 12" Tie Rack
+DisplaySet,#ETieRack14 =90,7.1  Cost for ELITE 14" Tie Rack
+DisplaySet,#ETieRack18 =110,7.2  Cost for ELITE 18" Tie Rack
+
+,** COST FOR ELITE SCARF RACKS
+DisplaySet,#EScarfRack12 =90,8.0  Cost for ELITE 12" Scarf Rack
+DisplaySet,#EScarfRack14 =90,8.1  Cost for ELITE 14" Scarf Rack
+DisplaySet,#EScarfRack18 =110,8.2 Cost for ELITE 18" Scarf Rack
+
+,** COST FOR ELITE VALET ROD
+DisplaySet,#EValetRod12 =80,9.0  Cost for ELITE 12" Valet Rod
+DisplaySet,#EValetRod14 =80,9.1 Cost for ELITE 14" Valet Rod
+
+,** COST FOR ELITE VALET Pin
+DisplaySet,#EValetPin =50,10.0  Cost for ELITE 12" Valet Pin
+
+,** COST FOR ELITE WATERFALL HOOK
+DisplaySet,#EWaterfallhook =50,11.0  Cost for ELITE WaterFall Hook
+
+Do, (#Name = "*Belt Hook*"):1
+{
+Set, #CostOfTAG = #EBelthook
+
+Price, 1, RM#Roomnum #Name #Code,#CostofTAG*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Tie Hook*"):1
+{
+Set, #CostOfTAG = #ETiehook
+
+Price, 1, RM#Roomnum #Name #Code,#CostofTAG*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Double Hook*"):1
+{
+Set, #CostOfTAG = #EDoublehook
+
+Price, 1, RM#Roomnum #Name #Code,#CostofTAG*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Coat Hook*"):1
+{
+Set, #CostOfTAG = #ECoathook
+
+Price, 1, RM#Roomnum #Name #Code,#CostofTAG*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Broom*"):1
+{
+Set, #CostOfTAG = #EBroomholder
+
+Price, 1, RM#Roomnum #Name #Code,#CostofTAG*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+
+Do, (#Name = "*Tie Rack*"):1
+{
+Set,(D<=12.5):#CostOfTAG = #ETieRack12
+Set,(D>12.5)&(D<17):#CostOfTAG = #ETieRack14 
+Set,(D>17):#CostOfTAG = #ETieRack18 
+
+Price, 1, RM#Roomnum #Name #Code,#CostofTAG*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Belt Rack*"):1
+{
+Set,(D<=12.5):#CostOfTAG = #EBeltRack12
+Set,(D>12.5)&(D<=17):#CostOfTAG = #EBeltRack14 
+Set,(D>17):#CostOfTAG = #EBeltRack18 
+
+Price, 1, RM#Roomnum #Name #Code,#CostofTAG*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Scarf Rack*"):1
+{
+Set,(D<=12.5):#CostOfTAG = #EScarfRack12
+Set,(D>12.5)&(D<=17):#CostOfTAG = #EScarfRack14 
+Set,(D>17):#CostOfTAG = #EScarfRack18 
+
+Price, 1, RM#Roomnum #Name #Code,#CostofTAG*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Valet Rack*"):1
+{
+Set,(D<=12.5):#CostOfTAG = #EValetRod12
+Set,(D>12.5)&(D<=17):#CostOfTAG = #EValetRod14 
+
+Price, 1, RM#Roomnum #Name #Code,#CostofTAG*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+
+Do, (#Name = "*Valet Pin*"):1
+{
+Set,#CostOfTAG = #EValetPin
+Price, 1, RM#Roomnum #Name #Code,#CostofTAG*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+
+Do, (#Name = "*Waterfall*"):1
+{
+Set, #CostOfTAG = #EWaterfallhook
+
+Price, 1, RM#Roomnum #Name #Code,#CostofTAG*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+,**
+,**
+
+

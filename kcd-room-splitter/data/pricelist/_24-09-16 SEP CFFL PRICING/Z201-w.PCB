@@ -1,0 +1,52 @@
+,CF Base with no drawer wine grid
+,Calculates the price for each part
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+load, Pricesides.pcb      
+,*****************************************
+
+
+,*********** TOP SPANNERS OR FULL SHELF Base Cabinet and OTHER FIXED SHELVES**
+Set, #ShelfWidth = [(W-LS-RS)]
+Set,(#FullTops="No"):#ShelfDepth=[#SpannerWidth]:#ShelfDepth=[D]
+load, Pricefixedshelves.pcb
+,*****************************************
+
+
+
+,*********** All ADJ SHELVES *************
+,Top Adj Shelves
+Set, (MS=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-MS)/2]
+Set, #ShelfDepth = [(D)]
+Set, (MS=0):#Tempshelfcount=SH:#Tempshelfcount=SH*2
+Load, Priceadjshelves.pcb
+}
+,*****************************************
+
+
+
+,************* OTHER PARTS ***************
+set, #Backheight = [H-TR-BR-K]
+set, #ShelfWidth = [(W-LS-RS)]
+Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber, 
+
+Price, (K>0):1,      #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber, 
+set, #Gridheight = #BackHeight
+,Wine Grid xxx
+load, W-Winegridxxx.pcb
+             
+,*****************************************
+
+
+
+
+
+
+
+
+
+
+

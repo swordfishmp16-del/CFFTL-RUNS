@@ -1,0 +1,23 @@
+,CF Individual Left Panels
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+set, #sideTH=[W]
+set, #justapanelR=0
+set, #justapanelL=1
+Do, (#pricefilleraspanel="Yes"):1
+{
+ load,B-Side cost.pcb
+ Price, 1,   #nameforesspanelfiller-#sideTH"-#EdgeBandingType,        (#CostOfSide),             #VertD, #VertH,          #RightSidePrintOrderNumber,
+}
+Do, (#pricefilleraspanel="No"):1
+{
+load,B-Side cost.pcb
+Set, (W>#sidethickA):#essfillercount=2:#essfillercount=1
+  Price, 1,   #nameforesspanelfiller-#sideTH"-#EdgeBandingType,        (#costofESSpanelfiller*#essfillercount),             #VertD, #VertH,          #RightSidePrintOrderNumber,
+}
+
+,load, Pricesides.pcb
+set, #justapanelL=0 
+,*****************************************
+

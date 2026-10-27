@@ -1,0 +1,59 @@
+,**********Initial options Room23************************
+
+
+
+set,#Room23hasoptions=0
+set, #Room23cedarbottomcount=0
+set, #Room23falsebottomcount=0
+set, #Room23doubledeckercount=0
+set, #Room23locknotchcount=0
+set, #Room23slidingdoorcount=0
+set, #Room23drawerfaceonlycount=0
+set, #Room23drawerFileFrameboxcount=0
+set, #Room23Bot75count=0
+set, #Room23CedarBot25count=0
+set, #Room23switchglidescount=0
+Set,#Room23Routedpuckshelfcount=0
+Set,#Room23Surfacepuckshelfcount=0
+
+Set,#Room23SurfaceXLpuckshelfcount=0
+Set,#Room23task12inshelfcount=0
+Set,#Room23task24inshelfcount=0
+Set,#Room23task30inshelfcount=0
+Set,#Room23task36inshelfcount=0
+Set,#Room23task42inshelfcount=0
+Set,#Room23task45inshelfcount=0
+Set, #Room23CuttoFitcount=0
+set, #Room23scarcleatcount=0
+set, #Room23CenterBackborecount=0
+set, #Room23DBLBackborecount=0
+set, #Room23setholescustomcount=0
+set, #Room23adjholescustomcount=0
+set, #Room23noholesdrillonsitecount=0
+set, #Room23SlantedHeadboardcount=0
+
+set, #Room23Singledoorcleatcount=0
+set, #Room23Dbldoorcleatcount=0
+
+set, #Room23SlidingdoorCount=0
+
+set, #Room23FalsebottomDrwCount=0
+set, #Room23DoubleDeckerDrwCount=0
+set, #Room23with34bottomDrwCount=0
+set, #Room23switchtosidemountDrwCount=0
+set, #Room23FileframecutdownDrwCount=0
+set, #Room23LocknotchDrwCount=0
+set, #Room23with25cedarbotDrwCount=0
+set, #Room23boxcutbackDrwCount=0
+set, #Room23Drwboxtoshelfcount=0
+set, #Room23EBTopofPanelcount=0
+set, #Room23EBBackofPanelcount=0
+set, #Room23RWNotchcount=0
+Set,#Room23RWshelfcount=0
+
+Set,#Room23Wbusbarcount=0
+Set,#Room23WLEDshelfcount=0
+
+set,#Room23LeftHangercount=0
+set,#Room23RightHangercount=0
+

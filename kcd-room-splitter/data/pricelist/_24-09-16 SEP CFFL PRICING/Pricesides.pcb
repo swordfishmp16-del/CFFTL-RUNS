@@ -1,0 +1,130 @@
+,CF Prices and counts the left and right (panels) sides
+
+Do, (#PartFileName<>"ZCustomPanelLeft.prt")&(#PartFileName<>"ZCustomPanelRight.prt")&(#PartFileName<>"ZFixedShelfPanelLeft.prt")&(#PartFileName<>"ZFixedShelfPanelRight.prt"):1
+{
+Do,(LS>0):1
+{
+set, #sideTH = LS
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH = {LS}
+Set,(ul=1)&(LS>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+
+Do,(#wallbeddepthtrack=0):1
+{
+Price, (LS>0):1, #LeftSideName-#sideTH"-#EdgeBandingType,         (#CostOfSide+#UsePanelTouchingWallCost),             #VertD, #VertH,          #LeftSidePrintOrderNumber,
+Set,   ((#Vertd>#FinaldogearDepth)&(LS>0)&(opt=#dogearoption)):#dogearadd=[#dogearadd+1]
+Price, ((#Vertd>#FinaldogearDepth)&(LS>0)&(opt=#dogearoption)):1, #dogearoptionname Cost, #Dogearpanelcost*#universalupcharge, ,,#LeftSidePrintOrderNumber,
+,Set, ((LS>0)&(opt=#OptLEDFpanel)):#ledFpaneladd=[#ledFpaneladd+1]
+,Price, ((LS>0)&(#ledroutedFpanel=1)):1, Routed LED Strip Full Panel, #FullLEDPanelStripcost*#universalupcharge, ,#VertH,#LeftSidePrintOrderNumber,
+,Set, ((LS>0)&(opt=#OptLEDHpanel)):#ledHpaneladd=[#ledHpaneladd+1]
+,Price, ((LS>0)&(#ledroutedHpanel=1)):1, Routed LED Strip Half Panel, #HalfLEDPanelStripcost*#universalupcharge, ,#VertH,#LeftSidePrintOrderNumber,
+Price, ((LS>0)&(#Hutchpanel=1)):1,  #hutchchargename, #Hutchpanelcharge*#universalupcharge, ,,#LeftSidePrintOrderNumber,
+Price, (#notchheight>0)|(#Notchdepth>0):1,#Notchforroombasename-Left Panel,#Notchforroombasecost*#universalupcharge,,,#LeftSidePrintOrderNumber,
+
+Set,   ((LS>0)&(opt=#optEBtopofPanel)):#topEBadd=[#TopEBadd+1]
+Price, ((LS>0)&(opt=#optEBtopofPanel)):1, #optionEBtopofPanelname Cost, #EBtopofpanelcost*#universalupcharge, ,,#LeftSidePrintOrderNumber,
+Set,   ((LS>0)&(opt=#optEBBackofPanel)):#BackEBadd=[#BackEBadd+1]
+Price, ((LS>0)&(opt=#optEBBackofPanel)):1, #optionEBBackofPanelname Cost, #EBBackofpanelcost*#universalupcharge, ,,#LeftSidePrintOrderNumber,
+
+}
+}
+Do,(RS>0):1
+{
+set, #sideTH = RS
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb 
+set, #sideTH = {RS} 
+Set,(ur=1)&(RS>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+
+Do,(#wallbeddepthtrack=0):1
+{        
+Price, (RS>0):1,   #RightSideName-#sideTH"-#EdgeBandingType,        (#CostOfSide+#UsePanelTouchingWallCost),             #VertD, #VertH,          #RightSidePrintOrderNumber,
+Set,   ((#Vertd>#FinaldogearDepth)&(RS>0)&(opt=#dogearoption)):#dogearadd=[#dogearadd+1]
+Price, ((#Vertd>#FinaldogearDepth)&(RS>0)&(opt=#dogearoption)):1, #dogearoptionname Cost, #Dogearpanelcost*#universalupcharge, ,,#RightSidePrintOrderNumber,
+,Set, ((RS>0)&(opt=#OptLEDFpanel)):#ledFpaneladd=[#ledFpaneladd+1]
+,Price, ((RS>0)&(#ledroutedFpanel=1)):1, Routed LED Strip Full Panel, #FullLEDPanelStripcost*#universalupcharge, ,#VertH,#RightSidePrintOrderNumber,
+,Set, ((RS>0)&(opt=#OptLEDHpanel)):#ledHpaneladd=[#ledHpaneladd+1]
+,Price, ((RS>0)&(#ledroutedHpanel=1)):1, Routed LED Strip Half Panel, #HalfLEDPanelStripcost*#universalupcharge, ,#VertH,#RightSidePrintOrderNumber,
+Price, ((RS>0)&(#Hutchpanel=1)):1, #hutchchargename, #Hutchpanelcharge*#universalupcharge, ,,#LeftSidePrintOrderNumber,
+Price, (#notchheight>0)|(#Notchdepth>0):1,#Notchforroombasename-Right Panel,#Notchforroombasecost*#universalupcharge,,,#LeftSidePrintOrderNumber,
+
+Set,   ((RS>0)&(opt=#optEBtopofPanel)):#topEBadd=[#TopEBadd+1]
+Price, ((RS>0)&(opt=#optEBtopofPanel)):1, #optionEBtopofPanelname Cost, #EBtopofpanelcost*#universalupcharge, ,,#LeftSidePrintOrderNumber,
+Set,   ((RS>0)&(opt=#optEBBackofPanel)):#BackEBadd=[#BackEBadd+1]
+Price, ((RS>0)&(opt=#optEBBackofPanel)):1, #optionEBBackofPanelname Cost, #EBBackofpanelcost*#universalupcharge, ,,#LeftSidePrintOrderNumber,
+
+}
+}  
+Set, (opt=#OptLEDFpanel):#ledFpaneladd=[#ledFpaneladd+2]
+Set, (opt=#OptLEDHpanel):#ledHpaneladd=[#ledHpaneladd+2]
+
+
+set, ((opt=#OptWirelessLEDTopShelf)|(opt=#OptWirelessLEDMidShelf)|(opt=#OptWirelessLEDLowerMidShelf)|(opt=#OptWirelessLEDAdjShelf)|(opt=#OptWirelessLEDUpperbottomShelf)):#wBusbaradd=[#wbusbaradd+2]
+
+
+
+}
+  
+Do, (#justapanelR=1):1
+{
+set, #sideTH=W
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH={W}  
+Set,(ur=1)&(w>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+        
+Price, (w>0):1,   #RightSideName-#sideTH"-#EdgeBandingType,        (#CostOfSide+#UsePanelTouchingWallCost),             #VertD, #VertH,          #RightSidePrintOrderNumber,
+Set, ((#Vertd>#FinaldogearDepth)&(w>0)&(opt=#dogearoption)):#dogearadd=[#dogearadd+1]
+Price, ((#Vertd>#FinaldogearDepth)&(w>0)&(opt=#dogearoption)):1, #dogearoptionname Cost, #Dogearpanelcost*#universalupcharge, ,,#RightSidePrintOrderNumber,
+,Set, ((w>0)&(opt=#OptLEDFpanel)):#ledFpaneladd=[#ledFpaneladd+1]
+,Price, ((w>0)&(#ledroutedFpanel=1)):1, Routed LED Strip Full Panel, #FullLEDPanelStripcost*#universalupcharge, ,#VertH,#RightSidePrintOrderNumber,
+,Set, ((w>0)&(opt=#OptLEDHpanel)):#ledHpaneladd=[#ledHpaneladd+1]
+,Price, ((w>0)&(#ledroutedHpanel=1)):1, Routed LED Strip Half Panel, #HalfLEDPanelStripcost*#universalupcharge, ,#VertH,#RightSidePrintOrderNumber,
+Price, (#notchheight>0)|(#Notchdepth>0):1,#Notchforroombasename-Right Panel,#Notchforroombasecost*#universalupcharge,,,#LeftSidePrintOrderNumber,
+
+Set,   ((W>0)&(opt=#optEBtopofPanel)):#topEBadd=[#TopEBadd+1]
+Price, ((W>0)&(opt=#optEBtopofPanel)):1, #optionEBtopofPanelname Cost, #EBtopofpanelcost*#universalupcharge, ,,#LeftSidePrintOrderNumber,
+Set,   ((W>0)&(opt=#optEBBackofPanel)):#BackEBadd=[#BackEBadd+1]
+Price, ((W>0)&(opt=#optEBBackofPanel)):1, #optionEBBackofPanelname Cost, #EBBackofpanelcost*#universalupcharge, ,,#LeftSidePrintOrderNumber,
+
+
+Set, (opt=#OptLEDFpanel):#ledFpaneladd=[#ledFpaneladd+1]
+Set, (opt=#OptLEDHpanel):#ledHpaneladd=[#ledHpaneladd+1]
+
+
+set, ((opt=#OptWirelessLEDTopShelf)|(opt=#OptWirelessLEDMidShelf)|(opt=#OptWirelessLEDLowerMidShelf)|(opt=#OptWirelessLEDAdjShelf)|(opt=#OptWirelessLEDUpperbottomShelf)):#wBusbaradd=[#wbusbaradd+1]
+
+
+
+} 
+Do, (#justapanelL=1):1
+{
+set, #sideTH=W
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb 
+set, #sideTH={W} 
+Set,(ur=1)&(w>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+        
+Price, (w>0):1,   #LeftSideName-#sideTH"-#EdgeBandingType,        (#CostOfSide+#UsePanelTouchingWallCost),             #VertD, #VertH,          #LeftSidePrintOrderNumber,
+Set, ((#Vertd>#FinaldogearDepth)&(w>0)&(opt=#dogearoption)):#dogearadd=[#dogearadd+1]
+Price, ((#Vertd>#FinaldogearDepth)&(w>0)&(opt=#dogearoption)):1, #dogearoptionname Cost, #Dogearpanelcost*#Universalupcharge, ,,#LeftSidePrintOrderNumber,
+,Set, ((w>0)&(opt=#OptLEDFpanel)):#ledFpaneladd=[#ledFpaneladd+1]
+,Price, ((w>0)&(#ledroutedFpanel=1)):1, Routed LED Strip Full Panel, #FullLEDPanelStripcost*#universalupcharge, ,#VertH,#LeftSidePrintOrderNumber,
+,Set, ((w>0)&(opt=#OptLEDHpanel)):#ledHpaneladd=[#ledHpaneladd+1]
+,Price, ((w>0)&(#ledroutedHpanel=1)):1, Routed LED Strip Half Panel, #HalfLEDPanelStripcost*#universalupcharge, ,#VertH,#LeftSidePrintOrderNumber,
+Price, (#notchheight>0)|(#Notchdepth>0):1,#Notchforroombasename-Left Panel,#Notchforroombasecost*#universalupcharge,,,#LeftSidePrintOrderNumber,
+
+Set,   ((W>0)&(opt=#optEBtopofPanel)):#topEBadd=[#TopEBadd+1]
+Price, ((W>0)&(opt=#optEBtopofPanel)):1, #optionEBtopofPanelname Cost, #EBtopofpanelcost*#universalupcharge, ,,#LeftSidePrintOrderNumber,
+Set,   ((W>0)&(opt=#optEBBackofPanel)):#BackEBadd=[#BackEBadd+1]
+Price, ((W>0)&(opt=#optEBBackofPanel)):1, #optionEBBackofPanelname Cost, #EBBackofpanelcost*#universalupcharge, ,,#LeftSidePrintOrderNumber,
+
+
+Set, (opt=#OptLEDFpanel):#ledFpaneladd=[#ledFpaneladd+1]
+Set, (opt=#OptLEDHpanel):#ledHpaneladd=[#ledHpaneladd+1]
+
+
+set, ((opt=#OptWirelessLEDTopShelf)|(opt=#OptWirelessLEDMidShelf)|(opt=#OptWirelessLEDLowerMidShelf)|(opt=#OptWirelessLEDAdjShelf)|(opt=#OptWirelessLEDUpperbottomShelf)):#wBusbaradd=[#wbusbaradd+1]
+
+} 

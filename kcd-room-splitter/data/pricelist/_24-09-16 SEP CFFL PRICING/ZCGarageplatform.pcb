@@ -1,0 +1,41 @@
+,****Shelf
+
+,*********** All ADJ SHELVES *************
+,Adj Shelves
+Set,#ShelfWidth = [(W)]
+Set,#ShelfDepth = [d]
+Set, #ThisshelfTH=[H]
+Set, #tempshelfcount=1
+load, GB-Garagebasepricing.pcb
+set, #Garageplatformcost = 0
+Set, #gbmaxsizedisplay={#gbmaxsize}
+
+
+Do ,(#gbmethod=0)&(#setplatformcost=1):1
+{
+
+set, #Garageplatformcost = #garageplatformsqftprice*((#ShelfWidth*#ShelfDepth)/144)*#universalupcharge
+}
+Do, (#gbmethod=0)&(#setplatformcost=0):1
+{
+set, #Garageplatform=1
+load, Priceadjshelves.pcb
+set, #Garageplatform=0
+}
+
+Do, (#setplatformcost=1):1
+{
+Price, (#shelfwidth<=#GBmaxsize)&(#Garageplatformcost>0)&(#setplatformcost=1):1,   #Adjustableshelfname-#edgebandingtype-Platform,            #Garageplatformcost,             d, w,          #LegLevelersPrintOrderNumber,
+Price, (#shelfwidth>#GBmaxsize):1,   !*!*!*     PLATFORM MUST BE LESS THAN #gbmaxsizedisplay IN        *!*!*! ,            #Garageplatformcost,             d, w,          #LegLevelersPrintOrderNumber,
+}
+
+
+Price, (#shelfwidth<=#GBmaxsize)&(#gbmethod=1)&(#Garageplatformcost=0):1,    #Adjustableshelfname-#edgebandingtype-included Platform,            #Garageplatformcost,             d, w,          #LegLevelersPrintOrderNumber,
+Price, (#shelfwidth>#GBmaxsize)&(#gbmethod=1)&(#Garageplatformcost=0):1,    !*!*!*     PLATFORM MUST BE LESS THAN #gbmaxsizedisplay IN        *!*!*! ,            #Garageplatformcost,             d, w,          #LegLevelersPrintOrderNumber,
+
+**************************************
+
+
+
+
+

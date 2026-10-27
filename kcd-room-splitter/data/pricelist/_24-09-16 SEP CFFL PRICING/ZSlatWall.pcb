@@ -1,0 +1,9 @@
+
+
+
+,************ ALL WIRE SHELVES ***********
+Load, PVC_Slatwall Cost.pcb
+set, #slatwallcost = ((W*H)/144)*#CostSlatWallPerSqFt  
+Price, 1,    RM#Roomnum PVC Slatwall Panel #SlatWallName ,       #slatwallcost*#universalupcharge,           W, h,          #TopShelfPrintOrderNumber,      
+,*****************************************
+

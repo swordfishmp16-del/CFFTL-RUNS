@@ -1,0 +1,18 @@
+,Valance Arch
+
+Set, #ztype=1116
+
+set,#unitlineal=w
+set,#unitsquare=w*h
+set,#unitcubic=w*h*d
+set,#squareamt=h*w
+
+
+Load,GetDoorDrawerFinishingcost.pcb
+load,VAL-ValanceCost.pcb 
+,******** ALL FILLERS *********
+,load, Eachunit.pcb
+Price,       1,    RM#Roomnum #Valancetype,           #valancecost,           w, h,          #FillerPrintOrderNumber,              
+,******************************
+
+

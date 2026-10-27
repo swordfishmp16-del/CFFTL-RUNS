@@ -1,0 +1,110 @@
+,Use Grid
+,****Floating Shelf
+
+,*********** *************
+,Adj Shelves
+Set,#ShelfWidth = [(W)]
+Set,#ShelfDepth = [d]
+Set, #ThisshelfTH={H}
+Set, #tempshelfcount=1
+
+
+DisplaySet,#fsmethod=1, Do you price floating shelves per piece=0 by linear foot=1 or with standard shelf pricing=2? [0;1;2]
+DisplaySet,#fscleatmethod=0, Do you price a cleat or bracket per floating shelf? none=0 by piece=1 or by linear foot=2? [0;1;2]
+Do ,(#fsmethod=0):1 
+{
+Displayset, #fspiececount=3, How many Floating shelf pieces do you have?, [1;2;3;4]
+   Do, (#fspiececount>0):1
+   {
+   Displayset, #fspiecenameA=Classic, What is the name of your 1st shelf?
+   Displayset,#fspiececostA=300, What is the cost for #fspiecenameA per piece? 
+   set,#costofshelf=#fspiececostA
+   Price,(#Unitfilename="Csetshfloattype1.cab"):1, RM#Roomnum #ThisshelfTH" floating Shelf-#fspiecenameA,         #CostOfShelf,         #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+   } 
+   Do, (#fspiececount>1):1
+   {
+   Displayset, #fspiecenameB=Retro, What is the name of your 2nd shelf?
+   Displayset,#fspiececostB=400, What is the cost for #fspiecenameB per piece? 
+   set,#costofshelf=#fspiececostB
+   Price,(#Unitfilename="Csetshfloattype2.cab"):1, RM#Roomnum #ThisshelfTH" floating Shelf-#fspiecenameB,         #CostOfShelf,         #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+   }
+   Do, (#fspiececount>2):1
+   {
+   Displayset, #fspiecenameC=Custom, What is the name of your 3rd shelf?
+   Displayset,#fspiececostC=500, What is the cost for #fspiecenameC per piece? 
+   set,#costofshelf=#fspiececostC
+   Price,(#Unitfilename="Csetshfloattype3.cab"):1, RM#Roomnum #ThisshelfTH" floating Shelf-#fspiecenameC,         #CostOfShelf,         #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+   } 
+   Do, (#fspiececount>3):1
+   {
+   Displayset, #fspiecenameD=High Gloss, What is the name of your 4th shelf?
+   Displayset,#fspiececostD=400, What is the cost for #fspiecenameD per piece? 
+   set,#costofshelf=#fspiececostD
+   Price,(#Unitfilename="Csetshfloattype4.cab"):1, RM#Roomnum #ThisshelfTH" floating Shelf-#fspiecenameD,         #CostOfShelf,         #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+   }            
+}
+
+
+Do, (#fsmethod=1):1
+{
+Displayset, #fslinftcount=4, How many Floating shelf linear foot prices do you have?, [1;2;3;4]
+   Do, (#fslinftcount>0):1
+   {
+   Displayset, #fslinftnameA=Mica-Color-, What is the name of your 1st shelf?
+   Displayset,#fslinftcostA=120, What is the cost for #fslinftnameA per linear foot? 
+   set,#costofshelf=#fslinftcostA*(#Shelfwidth/12)
+   Price,(#Unitfilename="Csetshfloattype1.cab"):1, RM#Roomnum #ThisshelfTH" floating Shelf-#fslinftnameA,         #CostOfShelf,         #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+   } 
+   Do, (#fslinftcount>1):1
+   {
+   Displayset, #fslinftnameB=Bridge Shelf, What is the name of your 2nd shelf?
+   Displayset,#fslinftcostB=120, What is the cost for #fslinftnameB per linear foot? 
+   set,#costofshelf=#fslinftcostB*(#Shelfwidth/12)
+   Price,(#Unitfilename="Csetshfloattype2.cab"):1, RM#Roomnum #ThisshelfTH" floating Shelf-#fslinftnameB,         #CostOfShelf,         #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+   }
+   Do, (#fslinftcount>2):1
+   {
+   Displayset, #fslinftnameC=Ladder-Color-, What is the name of your 3rd shelf?
+   Displayset,#fslinftcostC=130, What is the cost for #fslinftnameC per linear foot? 
+   set,#costofshelf=#fslinftcostC*(#Shelfwidth/12)
+   Price,(#Unitfilename="Csetshfloattype3.cab"):1, RM#Roomnum #ThisshelfTH" floating Shelf-#fslinftnameC,         #CostOfShelf,         #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+   } 
+   Do, (#fslinftcount>3):1
+   {
+   Displayset, #fslinftnameD=Wood-Color-, What is the name of your 4th shelf?
+   Displayset,#fslinftcostD=130, What is the cost for #fslinftnameD per linear foot? 
+   set,#costofshelf=#fslinftcostD*(#Shelfwidth/12)
+   Price,(#Unitfilename="Csetshfloattype4.cab"):1, RM#Roomnum #ThisshelfTH" floating Shelf-#fslinftnameD,         #CostOfShelf,         #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+   }        
+}
+
+Do, (#fsmethod=2):1
+{
+load, Priceadjshelves.pcb
+}
+
+set,#floatingshelfcleatcost=0
+Do, (#fscleatmethod=1):1
+{
+Displayset,#floatingshelfcleatpiececost=75, What is your floating shelf cleat or bracket cost per piece?
+set, #FSCleatcost=#floatingshelfcleatpiececost
+Price,1, RM#Roomnum Floating Shelf bracket,         #FSCleatcost,         , ,  #AdjustableShelfPrintOrderNumber,          
+}
+Do, (#fscleatmethod=2):1
+{
+Displayset,#floatingshelfcleatfootcost=25, What is your floating shelf cleat or bracket cost per foot?
+set, #FSCleatcost=#floatingshelfcleatfootcost*(#ShelfWidth/12)
+Price,1, RM#Roomnum Floating Shelf bracket,         #FSCleatcost,         , ,  #AdjustableShelfPrintOrderNumber,          
+}
+
+set, #ThisshelfTH=0
+          
+
+
+
+**************************************
+
+
+
+
+

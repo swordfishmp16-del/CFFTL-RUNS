@@ -1,0 +1,30 @@
+,Calc all Costs for Sides
+Set, #VertH = [H]
+Set, #VertD = [D]
+Load, B-Side Cost.Pcb
+
+
+,Load,  CalcSides.Pcb
+Set, #ShelfWidth = [(W-LS-RS)]     
+Set, #ShelfDepth = [(D)]
+Load, C-Shelf Cost.Pcb
+
+
+
+,Calculate the Cubby Hole Unit
+Set, #NumVertCubby = PT
+Set, #NumHorzCubby = PN
+Set, #CubbyHeight = DH2
+Set, #CubbyWidth = (W-LS-RS)
+
+
+
+
+
+Load, CubbyUnit.Pcb
+
+
+
+
+,Calculated each Door and Drawer Front cost
+Load, Doors.pcb

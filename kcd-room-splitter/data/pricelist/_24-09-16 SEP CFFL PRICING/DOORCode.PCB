@@ -1,0 +1,389 @@
+,This File Sets The Door NAME For The Code
+set, #stopdoorcode=0
+SetOnly, (#ThisDoor=@ARP):    #CodeDoor=#ARPCodeDoor
+SetOnly, (#ThisDoor=@SRP):    #CodeDoor=#SRPCodeDoor
+SetOnly, (#ThisDoor=@RDR):    #CodeDoor=#RDRCodeDoor
+
+SetOnly, (#ThisDoor=@AAFP):   #CodeDoor=#AAFPCodeDoor
+SetOnly, (#ThisDoor=@AAGP):   #CodeDoor=#AAGPCodeDoor
+SetOnly, (#ThisDoor=@AARP):   #CodeDoor=#AARPCodeDoor
+SetOnly, (#ThisDoor=@ADOBE):  #CodeDoor=#ADOBECodeDoor
+SetOnly, (#ThisDoor=@AFP):    #CodeDoor=#AFPCodeDoor
+SetOnly, (#ThisDoor=@AF2P):   #CodeDoor=#AFPCodeDoor
+SetOnly, (#ThisDoor=@AF2P7-3):#CodeDoor=#AFPCodeDoor
+SetOnly, (#ThisDoor=@AF6-4P): #CodeDoor=#AF6-4PCodeDoor
+SetOnly, (#ThisDoor=@AGP):    #CodeDoor=#AGPCodeDoor
+SetOnly, (#ThisDoor=@AG2P7-3):#CodeDoor=#AG2P7-3CodeDoor
+SetOnly, (#ThisDoor=@AG4P):   #CodeDoor=#AG4PCodeDoor
+SetOnly, (#ThisDoor=@AG6-4P): #CodeDoor=#AG6-4PCodeDoor
+SetOnly, (#ThisDoor=@AG6P):   #CodeDoor=#AG6PCodeDoor
+SetOnly, (#ThisDoor=@AG8P):   #CodeDoor=#AG8PCodeDoor
+SetOnly, (#ThisDoor=@AR2P):   #CodeDoor=#AR2PCodeDoor
+SetOnly, (#ThisDoor=@AR2P7-3):#CodeDoor=#AR2P7-3CodeDoor
+SetOnly, (#ThisDoor=@AR6-4P): #CodeDoor=#AR6-4PCodeDoor
+SetOnly, (#ThisDoor=@AVGP):   #CodeDoor=#AVGPCodeDoor
+SetOnly, (#ThisDoor=@AVGRP):   #CodeDoor=#AVGRPCodeDoor
+SetOnly, (#ThisDoor=@AGRV):   #CodeDoor=#AGRVCodeDoor
+SetOnly, (#ThisDoor=@BATTEN): #CodeDoor=#BATTENCodeDoor
+SetOnly, (#ThisDoor=@BOTPUL): #CodeDoor=#BOTPULCodeDoor
+SetOnly, (#ThisDoor=@CCFP):   #CodeDoor=#CCFPCodeDoor
+SetOnly, (#ThisDoor=@CCGP):   #CodeDoor=#CCGPCodeDoor
+SetOnly, (#ThisDoor=@CCRP):   #CodeDoor=#CCRPCodeDoor
+SetOnly, (#ThisDoor=@CFP):    #CodeDoor=#CFPCodeDoor
+SetOnly, (#ThisDoor=@CF2P):   #CodeDoor=#CF2PCodeDoor
+SetOnly, (#ThisDoor=@CF2P7):  #CodeDoor=#CF2P7CodeDoor
+SetOnly, (#ThisDoor=@CF2P7-3):#CodeDoor=#CF2P7-3CodeDoor
+SetOnly, (#ThisDoor=@CF6-4P): #CodeDoor=#CF6-4PCodeDoor
+SetOnly, (#ThisDoor=@CGP):    #CodeDoor=#CGPCodeDoor
+SetOnly, (#ThisDoor=@CG2P):   #CodeDoor=#CG2PCodeDoor
+SetOnly, (#ThisDoor=@CG2P7):  #CodeDoor=#CG2P7CodeDoor
+SetOnly, (#ThisDoor=@CG2P7-3):#CodeDoor=#CG2P7-3CodeDoor
+SetOnly, (#ThisDoor=@CG4P):   #CodeDoor=#CG4PCodeDoor
+SetOnly, (#ThisDoor=@CG6P):   #CodeDoor=#CG6PCodeDoor
+SetOnly, (#ThisDoor=@CG6-4P): #CodeDoor=#CG6-4PCodeDoor
+SetOnly, (#ThisDoor=@CG8P):   #CodeDoor=#CG8PCodeDoor
+SetOnly, (#ThisDoor=@CRP):    #CodeDoor=#CRPCodeDoor
+SetOnly, (#ThisDoor=@CR2P):   #CodeDoor=#CR2PCodeDoor
+SetOnly, (#ThisDoor=@CR2P7):  #CodeDoor=#CR2P7CodeDoor
+SetOnly, (#ThisDoor=@CR2P7-3):#CodeDoor=#CR2P7-3CodeDoor
+SetOnly, (#ThisDoor=@CR6-4P): #CodeDoor=#CR6-4PCodeDoor
+SetOnly, (#ThisDoor=@CRVGRV): #CodeDoor=#CRVGRVCodeDoor
+SetOnly, (#ThisDoor=@CVGP):   #CodeDoor=#CVGPCodeDoor
+SetOnly, (#ThisDoor=@DCFP):   #CodeDoor=#DCFPCodeDoor
+SetOnly, (#ThisDoor=@DCGP):   #CodeDoor=#DCGPCodeDoor
+SetOnly, (#ThisDoor=@DCG4P):  #CodeDoor=#DCG4PCodeDoor
+SetOnly, (#ThisDoor=@DCG6P):  #CodeDoor=#DCG6PCodeDoor
+SetOnly, (#ThisDoor=@DCG8P):  #CodeDoor=#DCG8PCodeDoor
+SetOnly, (#ThisDoor=@DCRP):   #CodeDoor=#DCRPCodeDoor
+SetOnly, (#ThisDoor=@Finger Pull):   #CodeDoor=#FingerCodedoor
+SetOnly, (#ThisDoor=@FLAT):   #CodeDoor=#FLATCodeDoor
+SetOnly, (#ThisDoor=@FLATDR): #CodeDoor=#FLATDRCodeDoor
+SetOnly, (#ThisDoor=@FLTDR):  #CodeDoor=#FLTDRCodeDoor
+SetOnly, (#ThisDoor=@MISSION):#CodeDoor=#MISSIONCodeDoor
+SetOnly, (#ThisDoor=@MSF2P):   #CodeDoor=#MSF2PCodeDoor
+SetOnly, (#ThisDoor=@MSF2VP):  #CodeDoor=#MSF2VPCodeDoor
+SetOnly, (#ThisDoor=@MSFP):    #CodeDoor=#MSFPCodeDoor
+SetOnly, (#ThisDoor=@MSF2P7-3):#CodeDoor=#MSF2P7-3CodeDoor
+SetOnly, (#ThisDoor=@MSF6-4P): #CodeDoor=#MSF6-4PCodeDoor
+SetOnly, (#ThisDoor=@MSGP):    #CodeDoor=#MSGPCodeDoor
+SetOnly, (#ThisDoor=@MSG2P):   #CodeDoor=#MSG2PCodeDoor
+SetOnly, (#ThisDoor=@MSG2VP):  #CodeDoor=#MSG2VPCodeDoor
+SetOnly, (#ThisDoor=@MSG2P7-3):#CodeDoor=#MSG2P7-3CodeDoor
+SetOnly, (#ThisDoor=@MSG4P):   #CodeDoor=#MSG4PCodeDoor
+SetOnly, (#ThisDoor=@MSG6P):   #CodeDoor=#MSG6PCodeDoor
+SetOnly, (#ThisDoor=@MSG6-4P): #CodeDoor=#MSG6-4PCodeDoor
+SetOnly, (#ThisDoor=@MSG8P):   #CodeDoor=#MSG8PCodeDoor
+SetOnly, (#ThisDoor=@MSRP):    #CodeDoor=#MSRPCodeDoor
+SetOnly, (#ThisDoor=@MSR2P):   #CodeDoor=#MSR2PCodeDoor
+SetOnly, (#ThisDoor=@MSR2VP):  #CodeDoor=#MSR2VPCodeDoor
+SetOnly, (#ThisDoor=@MSR2P7-3):#CodeDoor=#MSR2P7-3CodeDoor
+SetOnly, (#ThisDoor=@MSR3P):   #CodeDoor=#MSR3PCodeDoor
+SetOnly, (#ThisDoor=@MSR4P):   #CodeDoor=#MSR4PCodeDoor
+SetOnly, (#ThisDoor=@MSR6P):   #CodeDoor=#MSR6PCodeDoor
+SetOnly, (#ThisDoor=@MSR6-4P): #CodeDoor=#MSR6-4PCodeDoor
+SetOnly, (#ThisDoor=@OFP):    #CodeDoor=#OFPCodeDoor
+SetOnly, (#ThisDoor=@OGP):    #CodeDoor=#OGPCodeDoor
+SetOnly, (#ThisDoor=@RPDR):   #CodeDoor=#RPDRCodeDoor
+SetOnly, (#ThisDoor=@RPDR-B): #CodeDoor=#RPDR-BCodeDoor
+SetOnly, (#ThisDoor=@SF2P):   #CodeDoor=#SF2PCodeDoor
+SetOnly, (#ThisDoor=@SF2VP):  #CodeDoor=#SF2VPCodeDoor
+SetOnly, (#ThisDoor=@SFP):    #CodeDoor=#SFPCodeDoor
+SetOnly, (#ThisDoor=@SFDR):   #CodeDoor=#SFDRCodeDoor
+SetOnly, (#ThisDoor=@SF2P7-3):#CodeDoor=#SF2P7-3CodeDoor
+SetOnly, (#ThisDoor=@SF2P3-7):#CodeDoor=#SF2P3-7CodeDoor
+SetOnly, (#ThisDoor=@SF6-4P): #CodeDoor=#SF6-4PCodeDoor
+SetOnly, (#ThisDoor=@SGP):    #CodeDoor=#SGPCodeDoor
+SetOnly, (#ThisDoor=@SGPDR):    #CodeDoor=#SGPDRCodeDoor
+SetOnly, (#ThisDoor=@STG):    #CodeDoor=#STGCodeDoor
+SetOnly, (#ThisDoor=@SG2P):   #CodeDoor=#SG2PCodeDoor
+SetOnly, (#ThisDoor=@SG2VP):  #CodeDoor=#SG2VPCodeDoor
+SetOnly, (#ThisDoor=@SG2P7-3):#CodeDoor=#SG2P7-3CodeDoor
+SetOnly, (#ThisDoor=@SG2P3-7):#CodeDoor=#SG2P3-7CodeDoor
+SetOnly, (#ThisDoor=@SG4P):   #CodeDoor=#SG4PCodeDoor
+SetOnly, (#ThisDoor=@SG6P):   #CodeDoor=#SG6PCodeDoor
+SetOnly, (#ThisDoor=@SG6-4P): #CodeDoor=#SG6-4PCodeDoor
+SetOnly, (#ThisDoor=@SG8P):   #CodeDoor=#SG8PCodeDoor
+SetOnly, (#ThisDoor=@SG33P):   #CodeDoor=#SG33PCodeDoor
+SetOnly, (#ThisDoor=@SGP9):   #CodeDoor=#SGP9CodeDoor
+SetOnly, (#ThisDoor=@SG34P):   #CodeDoor=#SG34PCodeDoor
+SetOnly, (#ThisDoor=@SHGP):   #CodeDoor=#SHGPCodeDoor
+SetOnly, (#ThisDoor=@SR2P):   #CodeDoor=#SR2PCodeDoor
+SetOnly, (#ThisDoor=@SR2VP):  #CodeDoor=#SR2VPCodeDoor
+SetOnly, (#ThisDoor=@SR2P7-3):#CodeDoor=#SR2P7-3CodeDoor
+SetOnly, (#ThisDoor=@SR2P3-7):#CodeDoor=#SR2P3-7CodeDoor
+SetOnly, (#ThisDoor=@SR3P):   #CodeDoor=#SR3PCodeDoor
+SetOnly, (#ThisDoor=@SR4P):   #CodeDoor=#SR4PCodeDoor
+SetOnly, (#ThisDoor=@SR6P):   #CodeDoor=#SR6PCodeDoor
+SetOnly, (#ThisDoor=@SR6-4P): #CodeDoor=#SR6-4PCodeDoor
+SetOnly, (#ThisDoor=@SQGRV):  #CodeDoor=#SQGRVCodeDoor
+SetOnly, (#ThisDoor=@SVGP):   #CodeDoor=#SVGPCodeDoor
+SetOnly, (#ThisDoor=@SQGRVDR):  #CodeDoor=#SQGRVDRCodeDoor
+SetOnly, (#ThisDoor=@SVGRP):   #CodeDoor=#SVGRPCodeDoor
+
+SetOnly, (#ThisDoor=@SRP-B):  #CodeDoor=#SRP-BCodeDoor
+SetOnly, (#ThisDoor=@ARP-B):  #CodeDoor=#ARP-BCodeDoor
+SetOnly, (#ThisDoor=@CRP-B):  #CodeDoor=#CRP-BCodeDoor
+SetOnly, (#ThisDoor=@SFP-B):  #CodeDoor=#SFP-BCodeDoor
+SetOnly, (#ThisDoor=@SFDR-B): #CodeDoor=#SFDR-BCodeDoor
+SetOnly, (#ThisDoor=@S-WEST): #CodeDoor=#S-WESTCodeDoor
+SetOnly, (#ThisDoor=@TAMBOR): #CodeDoor=#TAMBORCodeDoor
+SetOnly, (#ThisDoor=@TOPPUL): #CodeDoor=#TOPPULCodeDoor
+SetOnly, (#ThisDoor=@VGR):    #CodeDoor=#VGRCodeDoor
+SetOnly, (#ThisDoor=@WCFP):   #CodeDoor=#WCFPCodeDoor
+SetOnly, (#ThisDoor=@WCGP):   #CodeDoor=#WCGPCodeDoor
+SetOnly, (#ThisDoor=@WCG4P):  #CodeDoor=#WCG4PCodeDoor
+SetOnly, (#ThisDoor=@WCG6P):  #CodeDoor=#WCG6PCodeDoor
+SetOnly, (#ThisDoor=@WCG8P):  #CodeDoor=#WCG8PCodeDoor
+SetOnly, (#ThisDoor=@WCRP):   #CodeDoor=#WCRPCodeDoor
+SetOnly, (#ThisDoor=@Z-BTN-L):#CodeDoor=#Z-BTN-LCodeDoor
+SetOnly, (#ThisDoor=@Z-BTN-R):#CodeDoor=#Z-BTN-RCodeDoor
+SetOnly, (#ThisDoor=@AMP):#CodeDoor=#AMPCodeDoor
+SetOnly, (#ThisDoor=@CMP):#CodeDoor=#CMPCodeDoor
+SetOnly, (#ThisDoor=@SMP):#CodeDoor=#SMPCodeDoor
+SetOnly, (#ThisDoor=@SMP-bevel):#CodeDoor=#SMP-bevelCodeDoor
+SetOnly, (#ThisDoor=@MIRROR):#CodeDoor=#MIRRORCodeDoor
+SetOnly, (#ThisDoor=@SSP):#CodeDoor=#SSPCodeDoor
+SetOnly, (#ThisDoor=@FLAT-B):   #CodeDoor=#FLAT-BCodeDoor
+SetOnly, (#ThisDoor=@FLATDR-B): #CodeDoor=#FLATDR-BCodeDoor
+SetOnly, (#ThisDoor=@MDF-ARP): #CodeDoor=#MDF-ARPCodeDoor
+SetOnly, (#ThisDoor=@MDF-CRP): #CodeDoor=#MDF-CRPCodeDoor
+SetOnly, (#ThisDoor=@MDF-SRP): #CodeDoor=#MDF-SRPCodeDoor
+SetOnly, (#ThisDoor=@MDF-RDR): #CodeDoor=#MDF-RDRCodeDoor
+SetOnly, (#ThisDoor=@MDF-RPDR): #CodeDoor=#MDF-RPDRCodeDoor
+SetOnly,(#ThisDoor=@HARP-L):#CodeDoor=#Harp-lCodeDoor
+SetOnly,(#ThisDoor=@HARP-R):#CodeDoor=#Harp-rCodeDoor
+SetOnly,(#ThisDoor=@HAGP-L):#CodeDoor=#Hagp-lCodeDoor
+SetOnly,(#ThisDoor=@HAGP-R):#CodeDoor=#Hagp-rCodeDoor
+SetOnly,(#ThisDoor=@HAG4P-L):#CodeDoor=#Hag4p-lCodeDoor
+SetOnly,(#ThisDoor=@HAG4P-R):#CodeDoor=#Hag4p-rCodeDoor
+SetOnly,(#ThisDoor=@HAG6P-L):#CodeDoor=#Hag6p-lCodeDoor
+SetOnly,(#ThisDoor=@HAG6P-R):#CodeDoor=#Hag6p-rCodeDoor
+SetOnly,(#ThisDoor=@HAG8P-L):#CodeDoor=#Hag8p-lCodeDoor
+SetOnly,(#ThisDoor=@HAG8P-R):#CodeDoor=#Hag8p-rCodeDoor
+SetOnly,(#ThisDoor=@HAFP-L):#CodeDoor=#Hafp-lCodeDoor
+SetOnly,(#ThisDoor=@HAFP-R):#CodeDoor=#Hafp-rCodeDoor
+SetOnly,(#ThisDoor=@HCRP-L):#CodeDoor=#Hcrp-LCodeDoor
+SetOnly,(#ThisDoor=@HCRP-R):#CodeDoor=#Hcrp-RCodeDoor
+SetOnly,(#ThisDoor=@HCGP-L):#CodeDoor=#Hcgp-lCodeDoor
+SetOnly,(#ThisDoor=@HCGP-R):#CodeDoor=#Hcgp-rCodeDoor
+SetOnly,(#ThisDoor=@HCG4P-L):#CodeDoor=#Hcg4p-lCodeDoor
+SetOnly,(#ThisDoor=@HCG4P-R):#CodeDoor=#Hcg4p-rCodeDoor
+SetOnly,(#ThisDoor=@HCG6P-L):#CodeDoor=#Hcg6p-lCodeDoor
+SetOnly,(#ThisDoor=@HCG6P-R):#CodeDoor=#Hcg6p-rCodeDoor
+SetOnly,(#ThisDoor=@HCG8P-L):#CodeDoor=#Hcg8p-lCodeDoor
+SetOnly,(#ThisDoor=@HCG8P-R):#CodeDoor=#Hcg8p-rCodeDoor
+SetOnly,(#ThisDoor=@HCFP-L):#CodeDoor=#Hcfp-lCodeDoor
+SetOnly,(#ThisDoor=@HCFP-R):#CodeDoor=#Hcfp-rCodeDoor
+SetOnly,(#ThisDoor=@SH-MULL):#CodeDoor=#SH-MullCodeDoor
+SetOnly, (#ThisDoor=@SRBP): #CodeDoor=#SRBPCodeDoor
+SetOnly, (#ThisDoor=@SR2BP): #CodeDoor=#SR2BPCodeDoor
+SetOnly, (#ThisDoor=@SR2VBP): #CodeDoor=#SR2VBPCodeDoor
+SetOnly, (#ThisDoor=@RBPDR): #CodeDoor=#RBPDRCodeDoor
+SetOnly, (#ThisDoor=@FLAT-GRV-Dr): #CodeDoor=#FLAT-GRV-DrCodeDoor
+
+SetOnly, (#ThisDoor=@HACGP): #CodeDoor=#HACGPCodeDoor
+SetOnly, (#ThisDoor=@QCGP-L): #CodeDoor=#QCGP-LCodeDoor
+SetOnly, (#ThisDoor=@QCGP-R): #CodeDoor=#QCGP-RCodeDoor
+SetOnly, (#ThisDoor=@HACG4P): #CodeDoor=#HACG4PCodeDoor
+SetOnly, (#ThisDoor=@QCG4P-L): #CodeDoor=#QCG4P-LCodeDoor
+SetOnly, (#ThisDoor=@QCG4P-R): #CodeDoor=#QCG4P-RCodeDoor
+SetOnly, (#ThisDoor=@HACG6P): #CodeDoor=#HACG6PCodeDoor
+SetOnly, (#ThisDoor=@QCG6P-L): #CodeDoor=#QCG6P-LCodeDoor
+SetOnly, (#ThisDoor=@QCG6P-R): #CodeDoor=#QCG6P-RCodeDoor
+SetOnly, (#ThisDoor=@HACG8P): #CodeDoor=#HACG8PCodeDoor
+SetOnly, (#ThisDoor=@QCG8P-L): #CodeDoor=#QCG8P-LCodeDoor
+SetOnly, (#ThisDoor=@QCG8P-R): #CodeDoor=#QCG8P-RCodeDoor
+
+,v 9 Doors
+
+SetOnly, (#ThisDoor=@Tud-M): #CodeDoor=#Tud-MCodeDoor
+SetOnly, (#ThisDoor=@STG2): #CodeDoor=#STG2CodeDoor
+SetOnly, (#ThisDoor=@STG3): #CodeDoor=#STG3CodeDoor
+SetOnly, (#ThisDoor=@WKR): #CodeDoor=#WKRCodeDoor
+SetOnly, (#ThisDoor=@WKR2): #CodeDoor=#WKR2CodeDoor
+
+SetOnly, (#ThisDoor=@HCGPM-L): #CodeDoor=#HCGPM-LCodeDoor
+SetOnly, (#ThisDoor=@HCGPM-R): #CodeDoor=#HCGPM-RCodeDoor
+SetOnly, (#ThisDoor=@HCG4PM-L): #CodeDoor=#HCG4PM-LCodeDoor
+SetOnly, (#ThisDoor=@HCG4PM-R): #CodeDoor=#HCG4PM-RCodeDoor
+SetOnly, (#ThisDoor=@HCG6PM-L): #CodeDoor=#HCG6PM-LCodeDoor
+SetOnly, (#ThisDoor=@HCG6PM-R): #CodeDoor=#HCG6PM-RCodeDoor
+SetOnly, (#ThisDoor=@HCG8PM-L): #CodeDoor=#HCG8PM-LCodeDoor
+SetOnly, (#ThisDoor=@HCG8PM-R): #CodeDoor=#HCG8PM-RCodeDoor
+
+SetOnly, (#ThisDoor=@AR3P): #CodeDoor=#AR3PCodeDoor
+SetOnly, (#ThisDoor=@SRGP): #CodeDoor=#SRGPCodeDoor
+SetOnly, (#ThisDoor=@SGF2P3-7): #CodeDoor=#SGF2P3-7CodeDoor
+SetOnly, (#ThisDoor=@SGF2P7-3): #CodeDoor=#SGF2P7-3CodeDoor
+SetOnly, (#ThisDoor=@Deco-M): #CodeDoor=#Deco-MCodeDoor
+SetOnly, (#ThisDoor=@SFGP): #CodeDoor=#SFGPCodeDoor
+SetOnly, (#ThisDoor=@SFG7P): #CodeDoor=#SFG7PCodeDoor
+SetOnly, (#ThisDoor=@SFG4P): #CodeDoor=#SFG4PCodeDoor
+SetOnly, (#ThisDoor=@SFG4P3-7): #CodeDoor=#SFG4P3-7CodeDoor
+SetOnly, (#ThisDoor=@SFG7VP): #CodeDoor=#SFG7VPCodeDoor
+SetOnly, (#ThisDoor=@SFPSW): #CodeDoor=#SFPSWCodeDoor
+SetOnly, (#ThisDoor=@AAFPSW): #CodeDoor=#AAFPSWCodeDoor
+SetOnly, (#ThisDoor=@AFPSW): #CodeDoor=#AFPSWCodeDoor
+SetOnly, (#ThisDoor=@SWRP): #CodeDoor=#SWRPCodeDoor
+
+SetOnly, (#ThisDoor=@FLATDR-VGrain): #CodeDoor=#FLATDR-VGrainCodeDoor
+SetOnly, (#ThisDoor=@VGR-DR-VGrain): #CodeDoor=#VGR-DR-VGrainCodeDoor
+
+SetOnly, (#ThisDoor=@SR4PO-L): #CodeDoor=#SR4PO-LCodeDoor
+SetOnly, (#ThisDoor=@SR4PO-R): #CodeDoor=#SR4PO-RCodeDoor
+SetOnly, (#ThisDoor=@SF4PO-L): #CodeDoor=#SF4PO-LCodeDoor
+SetOnly, (#ThisDoor=@SF4PO-R): #CodeDoor=#SF4PO-RCodeDoor
+SetOnly, (#ThisDoor=@SG4PO-L): #CodeDoor=#SG4PO-LCodeDoor
+SetOnly, (#ThisDoor=@SG4PO-R): #CodeDoor=#SG4PO-RCodeDoor
+
+SetOnly, (#ThisDoor=@SQGRV2): #CodeDoor=#SQGRV2CodeDoor
+SetOnly, (#ThisDoor=@AFPH-DR): #CodeDoor=#AFPH-DRCodeDoor
+SetOnly, (#ThisDoor=@VGR-DR): #CodeDoor=#VGR-DRCodeDoor
+SetOnly, (#ThisDoor=@SRGP-DR): #CodeDoor=#SRGP-DRCodeDoor
+SetOnly, (#ThisDoor=@SqGrvDr): #CodeDoor=#SqGrvDrCodeDoor
+SetOnly, (#ThisDoor=@SqGrv2Dr): #CodeDoor=#SqGrv2DrCodeDoor
+SetOnly, (#ThisDoor=@SWRP-DR): #CodeDoor=#SWRP-DRCodeDoor
+
+SetOnly, (#ThisDoor=@MSRP-M): #CodeDoor=#MSRP-MCodeDoor
+SetOnly, (#ThisDoor=@MSRP-M2): #CodeDoor=#MSRP-M2CodeDoor
+SetOnly, (#ThisDoor=@MSFP-M): #CodeDoor=#MSFP-MCodeDoor
+SetOnly, (#ThisDoor=@MSFP-M2): #CodeDoor=#MSFP-M2CodeDoor
+SetOnly, (#ThisDoor=@MSGP-M): #CodeDoor=#MSGP-MCodeDoor
+SetOnly, (#ThisDoor=@MSGP-M2): #CodeDoor=#MSGP-M2CodeDoor
+SetOnly, (#ThisDoor=@MSG4P-M): #CodeDoor=#MSG4P-MCodeDoor
+SetOnly, (#ThisDoor=@MSG4P-M2): #CodeDoor=#MSG4P-M2CodeDoor
+SetOnly, (#ThisDoor=@MSG6P-M): #CodeDoor=#MSG6P-MCodeDoor
+SetOnly, (#ThisDoor=@MSG6P-M2): #CodeDoor=#MSG6P-M2CodeDoor
+SetOnly, (#ThisDoor=@MSG8P-M): #CodeDoor=#MSG8P-MCodeDoor
+SetOnly, (#ThisDoor=@MSG8P-M2): #CodeDoor=#MSG8P-M2CodeDoor
+
+Setonly,(#ThisDoor=@SRP-WF): #CodeDoor=#Srp-WfCodeDoor  
+Setonly,(#ThisDoor=@SR2P-WF): #CodeDoor=#Sr2p-WfCodeDoor
+Setonly,(#ThisDoor=@FlatDR-V): #CodeDoor=#FlatDR-VCodeDoor
+Setonly,(#ThisDoor=@VGR-DR-V): #CodeDoor=#VGR-DR-VCodeDoor 
+
+Setonly,(#ThisDoor=@SRP-M): #CodeDoor=#srp-MCodeDoor 
+Setonly,(#ThisDoor=@SR2P-M): #CodeDoor=#sr2p-MCodeDoor
+Setonly,(#ThisDoor=@SFP-M): #CodeDoor=#sfp-MCodeDoor 
+Setonly,(#ThisDoor=@SF2P-M): #CodeDoor=#sf2p-MCodeDoor
+Setonly,(#ThisDoor=@SGP-M): #CodeDoor=#sgp-MCodeDoor 
+Setonly,(#ThisDoor=@SG4P-M): #CodeDoor=#sg4p-MCodeDoor
+Setonly,(#ThisDoor=@SG6P-M): #CodeDoor=#sg6p-MCodeDoor
+Setonly,(#ThisDoor=@SG8P-M): #CodeDoor=#sg8p-MCodeDoor
+Setonly,(#ThisDoor=@SG33P-M): #CodeDoor=#SG33P-MCodeDoor
+Setonly,(#ThisDoor=@SGP9-M): #CodeDoor=#SGP9-MCodeDoor 
+Setonly,(#ThisDoor=@SG34P-M): #CodeDoor=#SG34P-MCodeDoor
+Setonly,(#ThisDoor=@RpDr-M): #CodeDoor=#RpDr-MCodeDoor
+Setonly,(#ThisDoor=@MsfpDr-M): #CodeDoor=#MsfpDr-MCodeDoor
+Setonly,(#ThisDoor=@FpDr-M): #CodeDoor=#FpDr-MCodeDoor
+Setonly,(#ThisDoor=@MsrpDr-M): #CodeDoor=#MsrpDr-MCodeDoor
+Setonly,(#ThisDoor=@HCG4PS-L): #CodeDoor=#Hcg4ps-lCodeDoor
+Setonly,(#ThisDoor=@HCG4PS-R): #CodeDoor=#Hcg4ps-rCodeDoor
+Setonly,(#ThisDoor=@HCG6PS-L): #CodeDoor=#Hcg6ps-lCodeDoor 
+Setonly,(#ThisDoor=@HCG6PS-R): #CodeDoor=#Hcg6ps-rCodeDoor
+Setonly,(#ThisDoor=@HCG8PS-L): #CodeDoor=#Hcg8ps-lCodeDoor
+Setonly,(#ThisDoor=@HCG8PS-R): #CodeDoor=#Hcg8ps-rCodeDoor
+Setonly,(#ThisDoor=@HAG3P-L): #CodeDoor=#hag3p-lCodeDoor
+Setonly,(#ThisDoor=@HAG3P-R): #CodeDoor=#hag3p-rCodeDoor 
+
+Setonly,(#ThisDoor=@QSG4P-L): #CodeDoor=#QSG4P-LCodeDoor
+Setonly,(#ThisDoor=@QSG4P-R): #CodeDoor=#QSG4P-RCodeDoor
+
+Setonly,(#ThisDoor=@QSG6P-L): #CodeDoor=#QSG6P-LCodeDoor
+Setonly,(#ThisDoor=@QSG6P-R): #CodeDoor=#QSG6P-RCodeDoor
+
+Setonly,(#ThisDoor=@ST-Flat): #CodeDoor=#ST-FlatCodeDoor 
+Setonly,(#ThisDoor=@ST-Glass): #CodeDoor=#ST-GlassCodeDoor   
+
+SetOnly, (#ThisDoor=@SF4P):   #CodeDoor=#SF4PCodeDoor
+SetOnly, (#ThisDoor=@SF3P):   #CodeDoor=#SF3PCodeDoor
+SetOnly, (#ThisDoor=@SF6P):   #CodeDoor=#SF6PCodeDoor
+
+SetOnly, (#ThisDoor=@SVGPDR):   #CodeDoor=#SVGPDRCodeDoor
+
+SetOnly, (#ThisDoor=@MSFP-DR):   #CodeDoor=#MSFP-DRCodeDoor
+SetOnly, (#ThisDoor=@MSRP-DR):   #CodeDoor=#MSRP-DRCodeDoor
+
+SetOnly, (#ThisDoor=@FLAT-ME):   #CodeDoor=#FLAT-MECodeDoor
+SetOnly, (#ThisDoor=@FLATDR-ME):   #CodeDoor=#FLATDR-MECodeDoor
+
+,missing - added 2/2018
+SetOnly,(#ThisDoor=@SGXP):#CodeDoor=#SGXPCodeDoor
+SetOnly,(#ThisDoor=@SGFP):#CodeDoor=#SGFPCodeDoor
+SetOnly,(#ThisDoor=@SFG2P):#CodeDoor=#SFG2PCodeDoor
+SetOnly,(#ThisDoor=@Flat Glass):#CodeDoor=#FlatGlassCodedoor
+Setonly,(#ThisDoor=@RG4P):#CodeDoor=#RG4PCodeDoor
+Setonly,(#ThisDoor=@RG4P-R):#CodeDoor=#RG4P-RCodeDoor
+Setonly,(#ThisDoor=@RG4P-L):#CodeDoor=#RG4P-LCodeDoor
+Setonly,(#ThisDoor=@RG6P):#CodeDoor=#RG6PCodeDoor
+Setonly,(#ThisDoor=@RG6P-R):#CodeDoor=#RG6P-RCodeDoor
+Setonly,(#ThisDoor=@RG6P-L):#CodeDoor=#RG6P-LCodeDoor
+Setonly,(#ThisDoor=@RG8P): #CodeDoor=#RG8PCodeDoor
+Setonly,(#ThisDoor=@RG8P-R):#CodeDoor=#RG8P-RCodeDoor
+Setonly,(#ThisDoor=@RG8P-L):#CodeDoor=#RG8P-LCodeDoor
+Setonly,(#ThisDoor=@RGP): #CodeDoor=#RGPCodeDoor
+Setonly,(#ThisDoor=@RGP-R): #CodeDoor=#RGP-RCodeDoor
+Setonly,(#ThisDoor=@RGP-L): #CodeDoor=#RGP-LCodeDoor
+Setonly,(#ThisDoor=@RPDR): #CodeDoor=#RPDRCodeDoor
+Setonly,(#ThisDoor=@Sbev): #CodeDoor=#SBevCodeDoor
+Setonly,(#ThisDoor=@AG2P): #CodeDoor=#AG2PCodeDoor
+Setonly,(#ThisDoor=@QSG8P-R): #CodeDoor=#QSG8P-RCodeDoor
+Setonly,(#ThisDoor=@QSG8P-L): #CodeDoor=#QSG8P-LCodeDoor
+
+,CFLA
+SetOnly, (#ThisDoor=@FROSTEDGLASS):  #CodeDoor=#FROSTEDGLASSCodeDoor
+SetOnly, (#ThisDoor=@GLASS):  #CodeDoor=#GLASSCodeDoor
+SetOnly, (#ThisDoor=@SM2P):   #CodeDoor=#SM2PCodeDoor
+SetOnly,(#ThisDoor=@SGF2P):#CodeDoor=#SGF2PCodeDoor
+SetOnly, (#ThisDoor=@SM2P3-7):   #CodeDoor=#SM2P3-7CodeDoor
+
+
+SetOnly, (#ThisDoor=@flatCFMirror):#CodeDoor=#flatCFMirrorCodeDoor
+SetOnly, (#ThisDoor=@StyliteAcrylicMirror):#CodeDoor=#StyliteAcrylicMirrorCodeDoor
+SetOnly, (#ThisDoor=@Clear Acrylic):#CodeDoor=#ClearAcrylicCodeDoor
+SetOnly, (#ThisDoor=@Matte Acrylic):#CodeDoor=#MatteAcrylicCodeDoor
+SetOnly, (#ThisDoor=@Smoke Acrylic):#CodeDoor=#SmokeAcrylicCodeDoor
+SetOnly, (#ThisDoor=@flatcfmolding):#CodeDoor=#flatcfMoldingCodeDoor
+SetOnly, (#ThisDoor=@cf5piece):#CodeDoor=#cf5pieceCodeDoor
+SetOnly, (#ThisDoor=@flat-HG):#Codedoor=#flat-HGCodeDoor
+SetOnly, (#ThisDoor=@flat-VG):#Codedoor=#flat-VGCodeDoor
+SetOnly, (#ThisDoor=@flat-HG-clear):#Codedoor=#flat-HG-clearCodeDoor
+SetOnly, (#ThisDoor=@flat-VG-clear):#Codedoor=#flat-VG-clearCodeDoor
+SetOnly, (#ThisDoor=@flat-HG-Matte):#Codedoor=#flat-HG-MatteCodeDoor
+SetOnly, (#ThisDoor=@flat-VG-Matte):#Codedoor=#flat-VG-MatteCodeDoor
+SetOnly, (#ThisDoor=@flat-HG-Smoke):#Codedoor=#flat-HG-SmokeCodeDoor
+SetOnly, (#ThisDoor=@flat-VG-Smoke):#Codedoor=#flat-VG-SmokeCodeDoor
+SetOnly, (#ThisDoor=@flat-HG-mirror):#Codedoor=#flat-HG-mirrorCodeDoor
+SetOnly, (#ThisDoor=@flat-VG-mirror):#Codedoor=#flat-VG-mirrorCodeDoor
+SetOnly, (#ThisDoor=@flat-HG-solid):#Codedoor=#flat-HG-solidCodeDoor
+SetOnly, (#ThisDoor=@flat-VG-solid):#Codedoor=#flat-VG-solidCodeDoor
+SetOnly, (#ThisDoor=@flat-HG-speaker):#Codedoor=#flat-HG-speakerCodeDoor
+SetOnly, (#ThisDoor=@flat-VG-speaker):#Codedoor=#flat-VG-speakerCodeDoor
+SetOnly, (#ThisDoor=@Bevel):#Codedoor=#BevelCodeDoor
+SetOnly, (#ThisDoor=@BevelDr):#Codedoor=#BevelDrCodeDoor
+SetOnly, (#ThisDoor=@FingerPullDr):#Codedoor=#FingerPullDrCodeDoor
+SetOnly, (#ThisDoor=@Extruded Pull Bot):#CodeDoor=#EXTRUDEDPULLBOTCodeDoor
+SetOnly, (#ThisDoor=@Extruded Pull Top):#CodeDoor=#EXTRUDEDPULLTOPCodeDoor
+SetOnly, (#ThisDoor=@Extruded Pull Left):#CodeDoor=#EXTRUDEDPULLLEFTCodeDoor
+SetOnly, (#ThisDoor=@Extruded Pull Right):#CodeDoor=#EXTRUDEDPULLRIGHTCodeDoor
+SetOnly, (#ThisDoor=@FT-1):#CodeDoor=#Ft-1CodeDoor
+
+
+SetOnly, (#ThisDoor=@Extruded Pull Bot DR):#CodeDoor=#EXTRUDEDPULLBOTDRCodeDoor
+SetOnly, (#ThisDoor=@Extruded Pull Top DR):#CodeDoor=#EXTRUDEDPULLTOPDRCodeDoor 
+SetOnly, (#ThisDoor=@flatcfMolding-DR):#CodeDoor=#flatcfMolding-DRCodeDoor
+SetOnly, (#ThisDoor=@flat-HG-DR):#CodeDoor=#flat-HG-DRCodeDoor
+SetOnly, (#ThisDoor=@flat-VG-DR):#CodeDoor=#flat-VG-DRCodeDoor
+
+SetOnly, (#ThisDoor=@Etched Insert):#CodeDoor=#etchedinsertCodeDoor
+SetOnly, (#ThisDoor=@Etched Insert w Mullion):#CodeDoor=#etchedinsertwmullionCodeDoor
+
+SetOnly, (#ThisDoor=@Melbourne):#CodeDoor=#MelbourneCodeDoor
+SetOnly, (#ThisDoor=@Sanford):#CodeDoor=#SanfordCodeDoor
+
+SetOnly, (#ThisDoor=@SGWA):#CodeDoor=#SGWACodeDoor
+SetOnly, (#ThisDoor=@SGRD):#CodeDoor=#SGRDCodeDoor
+
+
+set, #stopdoorcode=1
+,SET,#CodeDoor=.

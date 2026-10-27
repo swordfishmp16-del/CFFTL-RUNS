@@ -1,0 +1,9 @@
+, Corbels
+
+,Calculates the price for each part
+set, #cofcorbel = #melcorbelcost , default
+set, (#unitmaterialname <> "*MDF*")&(#unitmaterialname <> "*Veneer*"):  #cofcorbel = #melcorbelcost
+set, (#unitmaterialname = "*MDF*"): #cofcorbel = #MDFcorbelcost
+set, (#unitmaterialname = "*Veneer*"): #cofcorbel = #veneercorbelcost 
+
+Price, 1,   RM#Roomnum Corbel-#unitmaterialname,     #cofcorbel*#universalupcharge,             W, d,          #ShelfSupportPrintOrderNumber,     

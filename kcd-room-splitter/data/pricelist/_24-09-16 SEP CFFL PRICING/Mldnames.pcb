@@ -1,0 +1,191 @@
+,THIS SECTION WILL LET YOU SET THE COST OF YOUR MOLDINGS
+,JMF not used for CFLA
+
+                   Molding Name             Cost/Ft.     Percentage set in A-setup
+,---------------------------------------------------------------------------
+SetOnly, (#ThisMld=1 1/8" Band - Nosing + Dentil):      #MoldingName=#$118BandNosingDentil$    *   #percent
+SetOnly, (#ThisMld=1 1/2" Band - Nosing + Dentil):      #MoldingName=#$112BandNosingDentil$     *   #percent
+SetOnly, (#ThisMld=1 5/8" Band - Nosing + Dentil):      #MoldingName=#$158BandNosingDentil$    *   #percent
+SetOnly, (#ThisMld=1 3/4" Band - Nosing + Dentil):      #MoldingName=#$134BandNosingDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/4" Band - Nosing + Dentil):      #MoldingName=#$214BandNosingDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Band - Nosing + Dentil):      #MoldingName=#$212BandNosingDentil$     *   #percent
+SetOnly, (#ThisMld=3 1/4" Band - Nosing + Dentil):      #MoldingName=#$314BandNosingDentil$     *   #percent
+
+SetOnly, (#ThisMld=1 1/8" Band - Nosing):      #MoldingName=#$118BandNosing$    *   #percent
+SetOnly, (#ThisMld=1 1/2" Band - Nosing):      #MoldingName=#$112BandNosing$     *   #percent
+SetOnly, (#ThisMld=1 5/8" Band - Nosing):      #MoldingName=#$158BandNosing$    *   #percent
+SetOnly, (#ThisMld=1 3/4" Band - Nosing):      #MoldingName=#$134BandNosing$     *   #percent
+SetOnly, (#ThisMld=2 1/4" Band - Nosing):      #MoldingName=#$214BandNosing$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Band - Nosing):      #MoldingName=#$212BandNosing$     *   #percent
+SetOnly, (#ThisMld=3 1/4" Band - Nosing):      #MoldingName=#$314BandNosing$     *   #percent
+
+SetOnly, (#ThisMld=1 1/8" Band - Dentil):      #MoldingName=#$118BandDentil$    *   #percent
+SetOnly, (#ThisMld=1 1/2" Band - Dentil):      #MoldingName=#$112BandDentil$     *   #percent
+SetOnly, (#ThisMld=1 5/8" Band - Dentil):      #MoldingName=#$158BandDentil$    *   #percent
+SetOnly, (#ThisMld=1 3/4" Band - Dentil):      #MoldingName=#$134BandDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/4" Band - Dentil):      #MoldingName=#$214BandDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Band - Dentil):      #MoldingName=#$212BandDentil$     *   #percent
+SetOnly, (#ThisMld=3 1/4" Band - Dentil):      #MoldingName=#$314BandDentil$     *   #percent
+
+SetOnly, (#ThisMld=1 1/8" Band):       #MoldingName=#$118Band$    *   #percent
+SetOnly, (#ThisMld=1 1/2" Band):       #MoldingName=#$112Band$     *   #percent
+SetOnly, (#ThisMld=1 5/8" Band):       #MoldingName=#$158Band$    *   #percent
+SetOnly, (#ThisMld=1 3/4" Band):       #MoldingName=#$134Band$     *   #percent
+SetOnly, (#ThisMld=2 1/4" Band):       #MoldingName=#$214Band$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Band):       #MoldingName=#$212Band$     *   #percent
+SetOnly, (#ThisMld=3 1/4" Band):       #MoldingName=#$314Band$     *   #percent
+
+SetOnly, (#ThisMld=3 15/16" Camden):            #MoldingName=#$Camden$     *   #percent
+SetOnly, (#ThisMld=2 1/8" Contemporary):#MoldingName=#$SmContemp$     *   #percent
+SetOnly, (#ThisMld=6 11/16" Contemporary):#MoldingName=#$LgContemp$     *   #percent
+
+SetOnly, (#ThisMld=2 7/8" Cove - Cap):   #MoldingName=#$278CoveCap$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Cove - Cap):   #MoldingName=#$312CoveCap$     *   #percent
+
+SetOnly, (#ThisMld=3/4" Cove):         #MoldingName=#$34Cove$      *   #percent
+SetOnly, (#ThisMld=1 1/2" Cove):       #MoldingName=#$112Cove$     *   #percent
+SetOnly, (#ThisMld=2 1/8" Cove):       #MoldingName=#$218Cove$    *   #percent
+SetOnly, (#ThisMld=2 1/2" Cove):       #MoldingName=#$212Cove$     *   #percent
+SetOnly, (#ThisMld=2 9/16" Cove):      #MoldingName=#$2916Cove$     *   #percent
+SetOnly, (#ThisMld=2 7/8" Cove):       #MoldingName=#$278Cove$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Cove):       #MoldingName=#$312Cove$     *   #percent
+
+SetOnly, (#ThisMld=3/4" Cove - Dentil):        #MoldingName=#$34CoveDentil$      *   #percent
+SetOnly, (#ThisMld=1 1/2" Cove - Dentil):      #MoldingName=#$112CoveDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Cove - Dentil):      #MoldingName=#$212CoveDentil$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Cove - Dentil):      #MoldingName=#$312CoveDentil$     *   #percent
+
+SetOnly, (#ThisMld=3/4" Cove - Nosing):        #MoldingName=#$34CoveNosing$      *   #percent
+SetOnly, (#ThisMld=1 1/2" Cove - Nosing):      #MoldingName=#$112CoveNosing$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Cove - Nosing):      #MoldingName=#$212CoveNosing$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Cove - Nosing):      #MoldingName=#$312CoveNosing$     *   #percent
+
+SetOnly, (#ThisMld=3/4" Cove - Nosing + Dentil):        #MoldingName=#$34CoveNosingDentil$      *   #percent
+SetOnly, (#ThisMld=1 1/2" Cove - Nosing + Dentil):      #MoldingName=#$112CoveNosingDentil$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Cove - Nosing + Dentil):      #MoldingName=#$212CoveNosingDentil$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Cove - Nosing + Dentil):      #MoldingName=#$312CoveNosingDentil$     *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Crown - Nosing + Dentil):      #MoldingName=#$112CrownNosingDentil$    *   #percent
+SetOnly, (#ThisMld=2 1/4" Crown - Nosing + Dentil):      #MoldingName=#$214CrownNosingDentil$    *   #percent
+SetOnly, (#ThisMld=3 1/4" Crown - Nosing + Dentil):      #MoldingName=#$314CrownNosingDentil$    *   #percent
+SetOnly, (#ThisMld=4 1/4" Crown - Nosing + Dentil):      #MoldingName=#$414CrownNosingDentil$    *   #percent
+SetOnly, (#ThisMld=5 1/4" Crown - Nosing + Dentil):      #MoldingName=#$514CrownNosingDentil$    *   #percent
+SetOnly, (#ThisMld=6 1/4" Crown - Nosing + Dentil):     #MoldingName=#$614CrownNosingDentil$    *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Crown - Nosing):      #MoldingName=#$112CrownNosing$    *   #percent
+SetOnly, (#ThisMld=2 1/4" Crown - Nosing):      #MoldingName=#$214CrownNosing$    *   #percent
+SetOnly, (#ThisMld=3 1/4" Crown - Nosing):      #MoldingName=#$314CrownNosing$    *   #percent
+SetOnly, (#ThisMld=4 1/4" Crown - Nosing):      #MoldingName=#$414CrownNosing$    *   #percent
+SetOnly, (#ThisMld=5 1/4" Crown - Nosing):      #MoldingName=#$514CrownNosing$    *   #percent
+SetOnly, (#ThisMld=6 1/4" Crown - Nosing):      #MoldingName=#$614CrownNosing$    *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Crown - Dentil):      #MoldingName=#$112CrownDentil$    *   #percent
+SetOnly, (#ThisMld=2 1/4" Crown - Dentil):      #MoldingName=#$214CrownDentil$    *   #percent
+SetOnly, (#ThisMld=3 1/4" Crown - Dentil):      #MoldingName=#$314CrownDentil$    *   #percent
+SetOnly, (#ThisMld=4 1/4" Crown - Dentil):      #MoldingName=#$414CrownDentil$    *   #percent
+SetOnly, (#ThisMld=5 1/4" Crown - Dentil):      #MoldingName=#$514CrownDentil$    *   #percent
+SetOnly, (#ThisMld=6 1/4" Crown - Dentil):      #MoldingName=#$614CrownDentil$    *   #percent
+
+SetOnly, (#ThisMld=2 1/8" Crown - Cap):      #MoldingName=#$218CrownCap$     *   #percent
+
+SetOnly, (#ThisMld=2 1/8" #CrownMoldingType):      #MoldingName=#$218Crown$     *   #percent
+SetOnly, (#ThisMld=2 3/16" #CrownMoldingType):     #MoldingName=#$2316Crown$     *   #percent
+SetOnly, (#ThisMld=2 1/4" #CrownMoldingType):      #MoldingName=#$214Crown$     *   #percent
+SetOnly, (#ThisMld=2 3/4" #CrownMoldingType):      #MoldingName=#CrownMoldingType     *   #percent
+SetOnly, (#ThisMld=3 1/4" #CrownMoldingType):      #MoldingName=#$314Crown$     *   #percent
+SetOnly, (#ThisMld=3 5/8" #CrownMoldingType):      #MoldingName=#$358Crown$     *   #percent
+SetOnly, (#ThisMld=3 3/4" #CrownMoldingType):      #MoldingName=#$334Crown$     *   #percent
+SetOnly, (#ThisMld=4 1/4" #CrownMoldingType):      #MoldingName=#$414Crown$     *   #percent
+SetOnly, (#ThisMld=5 1/4" #CrownMoldingType):      #MoldingName=#$514Crown$     *   #percent
+SetOnly, (#ThisMld=6 1/4" #CrownMoldingType):                #MoldingName=#$614Crown$     *   #percent
+SetOnly, (#ThisMld=7 1/4" #CrownMoldingType):              #MoldingName=#$714Crown$     *   #percent
+
+SetOnly, (#ThisMld=2" Dentil):         #MoldingName=#$Dentil$        *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Double Bead):#MoldingName=#$112DoubleBead$     *   #percent
+SetOnly, (#ThisMld=2" Double Bead):    #MoldingName=#$2DoubleBead$        *   #percent 
+SetOnly, (#ThisMld=2 1/2" Double Bead):#MoldingName=#$212DoubleBead$     *   #percent
+SetOnly, (#ThisMld=3" Double Bead):    #MoldingName=#$3DoubleBead$        *   #percent
+SetOnly, (#ThisMld=3 1/2" Double Bead):#MoldingName=#$312DoubleBead$     *   #percent
+SetOnly, (#ThisMld=4" Double Bead):    #MoldingName=#$4DoubleBead$        *   #percent
+SetOnly, (#ThisMld=4 1/2" Double Bead):#MoldingName=#$412DoubleBead$     *   #percent
+SetOnly, (#ThisMld=5" Double Bead):    #MoldingName=#$5DoubleBead$        *   #percent
+SetOnly, (#ThisMld=5 1/2" Double Bead):#MoldingName=#$512DoubleBead$     *   #percent
+SetOnly, (#ThisMld=6" Double Bead):    #MoldingName=#$6DoubleBead$        *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Double Bead - Dentil):#MoldingName=#$112DoubleBeadDentil$     *   #percent
+SetOnly, (#ThisMld=2" Double Bead - Dentil):    #MoldingName=#$2DoubleBeadDentil$        *   #percent 
+SetOnly, (#ThisMld=2 1/2" Double Bead - Dentil):#MoldingName=#$212DoubleBeadDentil$     *   #percent
+SetOnly, (#ThisMld=3" Double Bead - Dentil):    #MoldingName=#$3DoubleBeadDentil$        *   #percent
+SetOnly, (#ThisMld=3 1/2" Double Bead - Dentil):#MoldingName=#$312DoubleBeadDentil$     *   #percent
+SetOnly, (#ThisMld=4" Double Bead - Dentil):    #MoldingName=#$4DoubleBeadDentil$        *   #percent
+SetOnly, (#ThisMld=4 1/2" Double Bead - Dentil):#MoldingName=#$412DoubleBeadDentil$     *   #percent
+SetOnly, (#ThisMld=5" Double Bead - Dentil):    #MoldingName=#$5DoubleBeadDentil$        *   #percent
+SetOnly, (#ThisMld=5 1/2" Double Bead - Dentil):#MoldingName=#$512DoubleBeadDentil$     *   #percent
+SetOnly, (#ThisMld=6" Double Bead - Dentil):    #MoldingName=#$6DoubleBeadDentil$        *   #percent
+
+SetOnly, (#ThisMld=3" Galley Rail):    #MoldingName=#$3GalleyRail$        *   #percent
+
+SetOnly, (#ThisMld=3" Roman Crown):   #MoldingName=#$3RomanCrown$     *   #percent
+SetOnly, (#ThisMld=2 3/8" Santa Fe):          #MoldingName=#$SantaFe$     *   #percent
+
+SetOnly, (#ThisMld=1" Square):         #MoldingName=#$1Square$      *   #percent
+SetOnly, (#ThisMld=1 1/2" Square):     #MoldingName=#$112Square$        *   #percent 
+SetOnly, (#ThisMld=2" Square):         #MoldingName=#$2Square$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Square):     #MoldingName=#$212Square$     *   #percent
+SetOnly, (#ThisMld=3" Square):         #MoldingName=#$3Square$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Square):     #MoldingName=#$312Square$     *   #percent
+SetOnly, (#ThisMld=4" Square):         #MoldingName=#$4Square$     *   #percent
+SetOnly, (#ThisMld=4 1/2" Square):     #MoldingName=#$412Square$     *   #percent
+SetOnly, (#ThisMld=5" Square):         #MoldingName=#$5Square$     *   #percent
+SetOnly, (#ThisMld=5 1/2" Square):     #MoldingName=#$512Square$     *   #percent
+SetOnly, (#ThisMld=6" Square):         #MoldingName=#$6Square$     *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Square - Cove):     #MoldingName=#$112SquareCove$        *   #percent 
+SetOnly, (#ThisMld=2" Square - Cove):         #MoldingName=#$2SquareCove$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Square - Cove):     #MoldingName=#$212SquareCove$     *   #percent
+SetOnly, (#ThisMld=3" Square - Cove):         #MoldingName=#$3SquareCove$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Square - Cove):     #MoldingName=#$312SquareCove$     *   #percent
+SetOnly, (#ThisMld=4" Square - Cove):         #MoldingName=#$4SquareCove$     *   #percent
+SetOnly, (#ThisMld=4 1/2" Square - Cove):     #MoldingName=#$412SquareCove$     *   #percent
+SetOnly, (#ThisMld=5" Square - Cove):         #MoldingName=#$5SquareCove$     *   #percent
+SetOnly, (#ThisMld=5 1/2" Square - Cove):     #MoldingName=#$512SquareCove$     *   #percent
+SetOnly, (#ThisMld=6" Square - Cove):         #MoldingName=#$6SquareCove$     *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Square - Cove + Nosing):     #MoldingName=#$112SquareCoveNosing$        *   #percent 
+SetOnly, (#ThisMld=2" Square - Cove + Nosing):         #MoldingName=#$2SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Square - Cove + Nosing):     #MoldingName=#$212SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=3" Square - Cove + Nosing):         #MoldingName=#$3SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Square - Cove + Nosing):     #MoldingName=#$312SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=4" Square - Cove + Nosing):         #MoldingName=#$4SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=4 1/2" Square - Cove + Nosing):     #MoldingName=#$412SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=5" Square - Cove + Nosing):         #MoldingName=#$5SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=5 1/2" Square - Cove + Nosing):     #MoldingName=#$512SquareCoveNosing$     *   #percent
+SetOnly, (#ThisMld=6" Square - Cove + Nosing):         #MoldingName=#$6SquareCoveNosing$     *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Square - Cove 1/4 Thick):    #MoldingName=#$112SquareCove14$        *   #percent 
+SetOnly, (#ThisMld=2" Square - Cove 1/4 Thick):         #MoldingName=#$2SquareCove14$     *   #percent
+SetOnly, (#ThisMld=2 1/2" Square - Cove 1/4 Thick):     #MoldingName=#$212SquareCove14$     *   #percent
+SetOnly, (#ThisMld=3" Square - Cove 1/4 Thick):         #MoldingName=#$3SquareCove14$     *   #percent
+SetOnly, (#ThisMld=3 1/2" Square - Cove 1/4 Thick):     #MoldingName=#$312SquareCove14$     *   #percent
+SetOnly, (#ThisMld=4" Square - Cove 1/4 Thick):         #MoldingName=#$4SquareCove14$     *   #percent
+SetOnly, (#ThisMld=4 1/2" Square - Cove 1/4 Thick):     #MoldingName=#$412SquareCove14$     *   #percent
+SetOnly, (#ThisMld=5" Square - Cove 1/4 Thick):         #MoldingName=#$5SquareCove14$     *   #percent
+SetOnly, (#ThisMld=5 1/2" Square - Cove 1/4 Thick):     #MoldingName=#$512SquareCove14$     *   #percent
+SetOnly, (#ThisMld=6" Square - Cove 1/4 Thick):         #MoldingName=#$6SquareCove14$     *   #percent
+
+SetOnly, (#ThisMld=2" Traditional): #MoldingName=#$SmTrad$     *   #percent
+SetOnly, (#ThisMld=3 1/8" Traditional):#MoldingName=#$MedTrad$    *   #percent
+SetOnly, (#ThisMld=4 1/8" Traditional): #MoldingName=#$LgTrad$     *   #percent
+
+SetOnly, (#ThisMld=1 1/2" Wide Crown):      #MoldingName=#$112WideCrown$    *   #percent
+SetOnly, (#ThisMld=2 1/4" Wide Crown):      #MoldingName=#$214WideCrown$    *   #percent
+SetOnly, (#ThisMld=3 1/4" Wide Crown):      #MoldingName=#$314WideCrown$    *   #percent
+SetOnly, (#ThisMld=4 1/4" Wide Crown):      #MoldingName=#$414WideCrown$    *   #percent
+SetOnly, (#ThisMld=5 1/4" Wide Crown):      #MoldingName=#$514WideCrown$    *   #percent
+SetOnly, (#ThisMld=6 1/4" Wide Crown):      #MoldingName=#$614WideCrown$    *   #percent
+
+
+
+Set, #MoldingName=5.00 ,Default Molding Cost
+

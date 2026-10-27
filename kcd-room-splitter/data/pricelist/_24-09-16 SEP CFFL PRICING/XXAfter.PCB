@@ -1,0 +1,235 @@
+,Set Item Costs by Size Increaments
+
+
+set,#unitlineal=w
+set,#unitsquare=w*h
+set,#unitcubic=w*h*d
+
+
+Load,DoTotals.pcb
+PriceOptions, 1, 
+,set, (TotOpCst>0):#Subtotal=[#SubTotal+TotOpCst]
+,Set,(TotOpCst>0):#Cabtotal = [#Cabtotal+TotOpCst]
+
+Set,(TotOpCst>0):#Cabtotalstd$ = [#Cabtotalstd$ + (TotOpCst*#Number)]
+Set,(TotOpCst>0):#Cabtotal = [#Cabtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+Set,(TotOpCst>0):#Subtotalstd$ = [#Subtotalstd$ + (TotOpCst*#Number)]
+Set,(TotOpCst>0):#Subtotal = [#Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+
+Do,((#RoomNum = 1)&(TotOpCst>0)):1
+{
+
+Set,#Room1Subtotal = [#Room1Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+Set, #Room1optioncost=TotOpCst*#Number
+}
+,end Room 1
+
+Do,((#RoomNum = 2)&(TotOpCst>0)):1
+{
+
+Set,#Room2Subtotal = [#Room2Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 2
+
+Do,((#RoomNum = 3)&(TotOpCst>0)):1
+{
+
+Set,#Room3Subtotal = [#Room3Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 3
+
+Do,((#RoomNum = 4)&(TotOpCst>0)):1
+{
+
+Set,#Room4Subtotal = [#Room4Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 4
+
+Do,((#RoomNum = 5)&(TotOpCst>0)):1
+{
+
+Set,#Room5Subtotal = [#Room5Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 5
+
+Do,((#RoomNum = 6)&(TotOpCst>0)):1
+{
+
+Set,#Room6Subtotal = [#Room6Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 6
+
+Do,((#RoomNum = 7)&(TotOpCst>0)):1
+{
+
+Set,#Room7Subtotal = [#Room7Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 7
+
+Do,((#RoomNum = 8)&(TotOpCst>0)):1
+{
+
+Set,#Room8Subtotal = [#Room8Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 8
+
+Do,((#RoomNum = 9)&(TotOpCst>0)):1
+{
+
+Set,#Room9Subtotal = [#Room9Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 9
+
+Do,((#RoomNum = 10)&(TotOpCst>0)):1
+{
+
+Set,#Room10Subtotal = [#Room10Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 10
+
+Do,((#RoomNum = 11)&(TotOpCst>0)):1
+{
+
+Set,#Room11Subtotal = [#Room11Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 11
+
+Do,((#RoomNum = 12)&(TotOpCst>0)):1
+{
+
+Set,#Room12Subtotal = [#Room12Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 12
+
+Do,((#RoomNum = 13)&(TotOpCst>0)):1
+{
+
+Set,#Room13Subtotal = [#Room13Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 13
+
+Do,((#RoomNum = 14)&(TotOpCst>0)):1
+{
+
+Set,#Room14Subtotal = [#Room14Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 14
+
+Do,((#RoomNum = 15)&(TotOpCst>0)):1
+{
+
+Set,#Room15Subtotal = [#Room15Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 15
+
+Do,((#RoomNum = 16)&(TotOpCst>0)):1
+{
+
+Set,#Room16Subtotal = [#Room16Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 16
+
+Do,((#RoomNum = 17)&(TotOpCst>0)):1
+{
+
+Set,#Room17Subtotal = [#Room17Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 17
+
+Do,((#RoomNum = 18)&(TotOpCst>0)):1
+{
+
+Set,#Room18Subtotal = [#Room18Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 18
+
+Do,((#RoomNum = 19)&(TotOpCst>0)):1
+{
+
+Set,#Room19Subtotal = [#Room19Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 19
+
+Do,((#RoomNum = 20)&(TotOpCst>0)):1
+{
+
+Set,#Room20Subtotal = [#Room20Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 20
+
+Do,((#RoomNum = 21)&(TotOpCst>0)):1
+{
+
+Set,#Room21Subtotal = [#Room21Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 21
+
+Do,((#RoomNum = 22)&(TotOpCst>0)):1
+{
+
+Set,#Room22Subtotal = [#Room22Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 22
+
+Do,((#RoomNum = 23)&(TotOpCst>0)):1
+{
+
+Set,#Room23Subtotal = [#Room23Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 23
+
+Do,((#RoomNum = 24)&(TotOpCst>0)):1
+{
+
+Set,#Room24Subtotal = [#Room24Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 24
+
+Do,((#RoomNum = 25)&(TotOpCst>0)):1
+{
+
+Set,#Room25Subtotal = [#Room25Subtotal + (TotOpCst*#Number*1.#notusedheredesignermarkup)]
+}
+,end Room 25
+
+Set,#HamperCoverCost = 0
+Set,#CostOfCover = 0
+
+,set unit subtotals back to zero
+Set,#UnitDoorHandleCount = 0
+Set,#UnitDoorKnobCount = 0
+Set,#UnitDoorHandleCost = 0
+Set,#UnitDoorKnobCost = 0
+Set,#UnitDoorHingeCount = 0
+Set,#UnitDoorHingeCost = 0
+
+set,#UnitDoorCost=0
+set,#UnitDoorNum=0
+set,#UnitDoorArea=0
+
+set,#UnitDrawerCost=0
+set,#UnitDrawerNum=0
+set,#UnitPulloutCost=0
+set,#UnitPulloutNum=0
+
+set,#UnitHangPoleNum=0
+set,#UnitHangPoleCost=0
+set,#UnitHangPoleLength=0
+
+set,#UnitCubbyCost=0
+set,#UnitCubbyNum=0
+set,#UnitBasketNum=0
+set,#UnitBasketCost=0
+
+set,#UnitWireShelfNum=0
+set,#UnitWireShelfCost=0
+set,#UnitWireShelfLength=0
+set,#UnitWireShelfSquare=0
+set,#UnitWSSNum=0
+set,#UnitWSSCost=0
+
+set,#UnitShoeShelfCost=0
+
+
+
+

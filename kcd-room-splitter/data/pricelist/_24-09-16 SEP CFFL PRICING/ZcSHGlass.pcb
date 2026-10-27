@@ -1,0 +1,34 @@
+
+,******** Glass SHELVES ***********
+Set, #ShelfWidth = [(W)]
+Set, #ShelfDepth = [(D)]
+,Load, C-Shelf Cost.Pcb
+
+Do,(#UnitFileName="gshelf2.cab"):1
+{
+Price, (H= 0.25):1,   RM#Roomnum Glass Shelf 1/4",      (W*D/144)*#14glasscost,       d, w,          #ShoeShelfPrintOrderNumber, 
+Price, (H= 0.375):1,  RM#Roomnum Glass Shelf 3/8" ,      (W*D/144)*#38glasscost,       d, w,          #ShoeShelfPrintOrderNumber,
+Price, (H= 0.5):1,   RM#Roomnum Glass Shelf 1/2" ,      (W*D/144)*#12glasscost,       d, w,          #ShoeShelfPrintOrderNumber,
+}  
+
+Do,(#UnitFileName="gshelf2bevel.cab"):1
+{
+Price, (H= 0.25):1,   RM#Roomnum Glass Shelf 1/4" w/Bevel,      ((W*D/144)*#14glasscost)+(W*#glassbevelperinch),       d, w,          #ShoeShelfPrintOrderNumber, 
+Price, (H= 0.375):1,  RM#Roomnum Glass Shelf 3/8"  w/Bevel,      ((W*D/144)*#38glasscost)+(W*#glassbevelperinch),       d, w,          #ShoeShelfPrintOrderNumber,
+Price, (H= 0.5):1,    RM#Roomnum Glass Shelf 1/2" w/Bevel,      ((W*D/144)*#12glasscost)+(W*#glassbevelperinch),       d, w,          #ShoeShelfPrintOrderNumber,
+}   
+
+Do,(#UnitFileName="gshelf2tempered.cab"):1
+{
+Price, (H= 0.25):1,   RM#Roomnum Tempered Glass Shelf 1/4",      (W*D/144)*(#14glasscost+#temperedcost),       d, w,          #ShoeShelfPrintOrderNumber, 
+Price, (H= 0.375):1,  RM#Roomnum Tempered Glass Shelf 3/8" ,      (W*D/144)*(#38glasscost+#temperedcost),       d, w,          #ShoeShelfPrintOrderNumber,
+Price, (H= 0.5):1,   RM#Roomnum Tempered Glass Shelf 1/2" ,      (W*D/144)*(#12glasscost+#temperedcost),       d, w,          #ShoeShelfPrintOrderNumber,
+}  
+
+Do,(#UnitFileName="gshelf2satin.cab"):1
+{
+Price, (H= 0.25):1,   RM#Roomnum Tempered Satin Edge Glass Shelf 1/4" w/Bevel,      (W*D/144)*(#14glasscost+#satintemperedcost),       d, w,          #ShoeShelfPrintOrderNumber, 
+Price, (H= 0.375):1,  RM#Roomnum Tempered Satin Edge Glass Shelf 3/8"  w/Bevel,      (W*D/144)*(#38glasscost+#satintemperedcost),       d, w,          #ShoeShelfPrintOrderNumber,
+Price, (H= 0.5):1,    RM#Roomnum Tempered Satin Edge Glass Shelf 1/2" w/Bevel,      (W*D/144)*(#12glasscost+#satintemperedcost),       d, w,          #ShoeShelfPrintOrderNumber,
+}   
+,*************************************

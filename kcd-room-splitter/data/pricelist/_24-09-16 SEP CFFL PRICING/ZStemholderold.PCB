@@ -1,0 +1,16 @@
+,StemWareHolder
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+
+
+Price, ((w>0)&(w<=18)):1,   RM#Roomnum Stem Ware Holder-18,         #CostofStemWareHolder18*#universalupcharge,             #VertD, W,          1000,  
+Price, ((w>18)&(w<=30)):1,   RM#Roomnum Stem Ware Holder-30,         #CostofStemWareHolder30*#universalupcharge,             #VertD, W,          1000,          
+Price, ((w>30)&(w<=36)):1,   RM#Roomnum Stem Ware Holder-36,         #CostofStemWareHolder36*#universalupcharge,             #VertD, W,          1000, 
+
+Load,(w>36):Eachunit.pcb
+    
+        
+

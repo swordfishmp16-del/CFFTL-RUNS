@@ -1,0 +1,10 @@
+,****Divider "Cubby" Vertical
+,********* All VERTICAL DIVIDERS *********
+
+,***************************************
+
+
+
+
+Price, (#unitfilename="*Velvetjewelrypullout*"):1,Vertical Jewelry Pullout w/ Velvet-#Unitmaterialname, #vertpulloutvelvetjewelrycost, D, H,  #AdjustableShelfPrintOrderNumber,
+Price, (#unitfilename="*cubbyjewelrypullout*"):1,Vertical Jewelry Pullout-#unitmaterialname, #vertpulloutjewelrycost, D, H,  #AdjustableShelfPrintOrderNumber,

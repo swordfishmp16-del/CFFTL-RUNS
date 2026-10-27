@@ -1,0 +1,141 @@
+,Set Item Costs factor for Fluted Pilaster Finishing
+
+,**
+
+,Calculating subtotals
+
+
+Set,#FlutedPilasterStyleCostGroup=0
+Set,#FlutedPilasterStyleName=None
+
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType1"):#FlutedPilasterStyleName =#DoorDrawerFinishingType1
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType1")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost21
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType1")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost22
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType2"):#FlutedPilasterStyleName =#DoorDrawerFinishingType2
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType2")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost1
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType2")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost2
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType3"):#FlutedPilasterStyleName =#DoorDrawerFinishingType3
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType3")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost3
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType3")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost4
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType4"):#FlutedPilasterStyleName =#DoorDrawerFinishingType4
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType4")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost5
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType4")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost6
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType5"):#FlutedPilasterStyleName =#DoorDrawerFinishingType5
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType5")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost7
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType5")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost8
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType6"):#FlutedPilasterStyleName =#DoorDrawerFinishingType6
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType6")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost9
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType6")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost10
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType7"):#FlutedPilasterStyleName =#DoorDrawerFinishingType7
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType7")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost11
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType7")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost12
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType8"):#FlutedPilasterStyleName =#DoorDrawerFinishingType8
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType8")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost13
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType8")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost14
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType9"):#FlutedPilasterStyleName =#DoorDrawerFinishingType9
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType9")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost15
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType9")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost16
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType10"):#FlutedPilasterStyleName =#DoorDrawerFinishingType10
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType10")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost17
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType10")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost18
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType11"):#FlutedPilasterStyleName =#DoorDrawerFinishingType11
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType11")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost19
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType11")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost20
+
+,Generic for malamine flat flute Type 12 should be melamine eb
+Set,(#DoorDrawerFinishingType = "*mm*"):#FlutedPilasterStyleName =#DoorDrawerFinishingType
+Set,(#DoorDrawerFinishingType = "*mm*")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost21
+Set,(#DoorDrawerFinishingType = "*mm*")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost22
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType13"):#FlutedPilasterStyleName =#DoorDrawerFinishingType13
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType13")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost23
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType13")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost24
+
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType14"):#FlutedPilasterStyleName =#DoorDrawerFinishingType14
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType14")&(#VertH>#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost25
+Set,(#DoorDrawerFinishingType = "#DoorDrawerFinishingType14")&(#VertH<=#SideHeight2A):#FlutedPilasterStyleCostGroup=#FlutedPilasterTypeCost26
+
+
+set, #FlutedPilasterStyleCostGroup=[#FlutedPilasterStyleCostGroup*#universalupcharge]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

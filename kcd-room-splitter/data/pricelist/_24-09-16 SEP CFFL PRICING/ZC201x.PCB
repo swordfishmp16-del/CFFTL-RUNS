@@ -1,0 +1,102 @@
+,CF Base with no drawer
+,Calculates the price for each part
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+load, Calculatecutbacksaddtoside.pcb
+Set, #VertD=#VertDL
+load, Pricesides.pcb      
+,*****************************************
+
+
+,********* All VERTICAL DIVIDERS *********
+,Vertical Divider
+Set, #VertH = [DH1]
+Set, #VertD = [D]
+load, Pricedividers.pcb        
+,*****************************************
+
+
+
+
+
+
+
+
+
+
+,*********** TOP SPANNERS OR FULL SHELF Base Cabinet and OTHER FIXED SHELVES**
+Set, #ShelfWidth = [(W-LS-RS)]
+Set,(#FullTops="No"):#ShelfDepth=[#SpannerWidth]:#ShelfDepth=[D]
+load, Pricefixedshelves.pcb
+,*****************************************
+
+
+
+,*********** All ADJ SHELVES *************
+,Top Adj Shelves
+Set, (MS=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-MS)/2]
+Set, #ShelfDepth = [(D)]
+Set, (MS=0):#Tempshelfcount=SH:#Tempshelfcount=SH*2
+Load, Priceadjshelves.pcb
+Set, (#CostOfAdjustableShelf>0)&(opt=#optRWNotchshelfoptnum):#addRWShelfnotch=#Tempshelfcount
+Price, (#CostOfAdjustableShelf>0)&(opt=#optRWNotchshelfoptnum):#Tempshelfcount,  #optionRWNotchshelfname cost,  #costtoRWnotchshelves,  , #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+
+
+}
+,*****************************************
+
+
+
+,************* OTHER PARTS ***************
+set, #Backheight = [H-TR-BR-K]
+set, #ShelfWidth = [(W-LS-RS)]
+
+
+
+set, (#Unitfilename="*AIG*")&(#floatingcabproduction="AIG"):#costbackPerSqFt=#Cost25inBackingSqFt
+,set, (#Unitfilename="*AIG*")&(#floatingcabproduction="AIG"):#costofback=#Cost25inBackingSqFt*((#backheight*#shelfwidth)/144)
+,set, (#Unitfilename="*AIG*")&(#floatingcabproduction="AIG"):#BackName=RM#Roomnum Back-1/4 #unitmaterialname Melamine
+set, (#Unitfilename="*AIG*")&(#floatingcabproduction="AIG"): #specialback=1
+
+
+Price, (#Unitfilename="*AIG*")&(#floatingcabproduction="AIG")&(#IncludeBacks>0):1,   RM#Roomnum 1/4 #unitmaterialname Melamine Back,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber, 
+
+Price, (#Unitfilename="*AIG*")&(#floatingcabproduction<>"AIG")&(#IncludeBacks>0):1,   #backname,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber, 
+Price, (#Unitfilename<>"*AIG*")&(#IncludeBacks>0):1,   #backname,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber, 
+              
+,Price, 1,            #ClosetPoleName,       #ClosetPoleCost,         (W-LS-RS), 1,  #ClosetPolePrintOrderNumber,        
+Price, (K>0):1,      #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,  
+load, (CT>0): eachunitcoutertops.pcb            
+,*****************************************
+
+
+
+
+,******* All DOORS & DRAWER FRONTS *******
+Load, Doors.pcb
+,*****************************************
+
+
+
+
+,*********** All DRAWER BOXES ************
+,Load, Drawers.Pcb
+,*****************************************
+
+
+
+
+,************ All PULLOUTS ***************
+Set, #PulloutOpeningWidth = [W-LS-RS]
+Load, (npo>0): G-Pullout Cost.Pcb
+,*****************************************
+
+
+
+
+
+
+

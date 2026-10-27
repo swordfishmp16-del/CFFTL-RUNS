@@ -1,0 +1,31 @@
+,************* Closet Poles ***************
+Set, #ShelfWidth = [(W-LS-RS)-.25]
+Set, (LS=W):#ShelfWidth = [(W)-.25]
+set, #stdrodcnt=0
+
+Set,(#singlerod=Yes)&(#ShelfWidth<=#StdClosetRodlength): #stdrodcnt=1 
+Price, (#singlerod=Yes)&(#ShelfWidth<=#StdClosetRodlength):1,            #ClosetPoleName,       #ClosetPoleCost,         #ShelfWidth, ,  #ClosetPolePrintOrderNumber,
+Set, (#singlerod=Yes)&(#ShelfWidth>#StdClosetRodlength): #stdrodcnt=(#shelfwidth)/#StdClosetRodlength
+Price, (#singlerod=Yes)&(#ShelfWidth>#StdClosetRodlength):1,      Oversize-#ClosetPoleName,       #ClosetPoleCost*#Oversizerodmultiplier,         #ShelfWidth, ,  #ClosetPolePrintOrderNumber,
+
+
+Set,(crodht1>0)&(#ShelfWidth<=#StdClosetRodlength): #stdrodcnt=1 
+Price, (crodht1>0)&(#ShelfWidth<=#StdClosetRodlength):1,            #ClosetPoleName,       #ClosetPoleCost,         #ShelfWidth, ,  #ClosetPolePrintOrderNumber,
+Set, (crodht1>0)&(#ShelfWidth>#StdClosetRodlength): #stdrodcnt=(#shelfwidth)/#StdClosetRodlength
+Price, (crodht1>0)&(#ShelfWidth>#StdClosetRodlength):1,      Oversize-#ClosetPoleName,       #ClosetPoleCost*#Oversizerodmultiplier,         #ShelfWidth, ,  #ClosetPolePrintOrderNumber,
+
+set, (crodht2>0)&(#ShelfWidth<=#StdClosetRodlength): #stdrodcnt=1
+Price, (crodht2>0)&(#ShelfWidth<=#StdClosetRodlength):1,            #ClosetPoleName,       #ClosetPoleCost,         #ShelfWidth, ,  #ClosetPolePrintOrderNumber,
+Set, (crodht2>0)&(#ShelfWidth>#StdClosetRodlength):#stdrodcnt=(#shelfwidth)/#StdClosetRodlength
+Price, (crodht2>0)&(#ShelfWidth>#StdClosetRodlength):1,      Oversize-#ClosetPoleName,       #ClosetPoleCost*#Oversizerodmultiplier,         #ShelfWidth, ,  #ClosetPolePrintOrderNumber,
+
+set,  (crodht3>0)&(#ShelfWidth<=#StdClosetRodlength):#stdrodcnt=1
+Price, (crodht3>0)&(#ShelfWidth<=#StdClosetRodlength):1,            #ClosetPoleName,       #ClosetPoleCost,         #ShelfWidth, ,  #ClosetPolePrintOrderNumber, 
+Set, (crodht3>0)&(#ShelfWidth>#StdClosetRodlength):#stdrodcnt=(#shelfwidth)/#StdClosetRodlength
+Price, (crodht3>0)&(#ShelfWidth>#StdClosetRodlength):1,      Oversize-#ClosetPoleName,       #ClosetPoleCost*#oversizerodmultiplier,         #ShelfWidth, ,  #ClosetPolePrintOrderNumber, 
+set, #stdrodcnt=0  
+,****************************************** 
+
+
+
+

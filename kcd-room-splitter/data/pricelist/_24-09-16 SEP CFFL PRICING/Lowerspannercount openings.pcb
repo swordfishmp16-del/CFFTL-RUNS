@@ -1,0 +1,103 @@
+set, #subtractlowerspanner1=0
+set, #subtractlowerspanner2=0
+set, #subtractlowerspanner3=0
+set, #subtractlowerspanner4=0
+set, #subtractlowerspanner5=0
+set, #subtractlowerspanner6=0
+set, #subtractlowerspanner7=0
+set, #subtractlowerspanner8=0
+set, #subtractlowerspanner9=0
+
+set, #Addshelfopening1=0
+set, #Addshelfopening2=0
+set, #Addshelfopening3=0
+set, #Addshelfopening4=0
+set, #Addshelfopening5=0
+set, #Addshelfopening6=0
+set, #Addshelfopening7=0
+set, #Addshelfopening8=0
+set, #Addshelfopening9=0
+set, #stopmidcount=1
+
+,for tall opening units
+
+
+Do, (#bottomdrw=2):1
+{
+Set,((D2H=0)|(D2HG<>0)): #Addshelfopening1=1
+Set,((D3H=0)|(D3HG<>0)|(OPT=#optionLockdr2)): #Addshelfopening2=1
+
+set, #stopmidcount=2
+}
+
+Do, (#bottomdrw=3):1
+{
+set, ((D2T=3)&(D3T=3)):#subtractlowerspanner1=1
+set, ((D2T=3)&(D3T=3)&(OPT=#optionLockdr2)): #subtractlowerspanner1=0
+set, (((D2T=3)|(D2T=5))&(D2HG<>0)):#subtractlowerspanner1=0
+set, ((D3T=3)&(D4T=3)):#subtractlowerspanner2=1
+set, ((D3T=3)&(D4T=3)&(OPT=#optionLockdr3)): #subtractlowerspanner2=0
+set, (((D3T=3)|(D3T=5))&(D3HG<>0)): #subtractlowerspanner1=0
+set, (((D3T=3)|(D3T=5))&(D3HG<>0)): #subtractlowerspanner2=0
+
+set, #lowerspannercount=(2-#subtractlowerspanner1-#subtractlowerspanner2)
+
+
+}
+
+Do, (#bottomdrw=4):1
+{
+set, ((D2T=3)&(D3T=3)):#subtractlowerspanner1=1
+set, ((D2T=3)&(D3T=3)&(OPT=#optionLockdr2)): #subtractlowerspanner1=0
+set, (((D2T=3)|(D2T=5))&(D2HG<>0)):#subtractlowerspanner1=0
+
+set, ((D3T=3)&(D4T=3)):#subtractlowerspanner2=1
+set, ((D3T=3)&(D4T=3)&(OPT=#optionLockdr3)): #subtractlowerspanner2=0
+set, (((D3T=3)|(D3T=5))&(D3HG<>0)): #subtractlowerspanner1=0
+set, (((D3T=3)|(D3T=5))&(D3HG<>0)): #subtractlowerspanner2=0
+
+set, ((D4T=3)&(D5T=3)):#subtractlowerspanner3=1
+set, ((D4T=3)&(D5T=3)&(OPT=#optionLockdr4)): #subtractlowerspanner3=0
+set, (((D4T=3)|(D4T=5))&(D4HG<>0)):#subtractlowerspanner3=0
+set, (((D4T=3)|(D4T=5))&(D4HG<>0)):#subtractlowerspanner2=0
+set, (((D5T=3)|(D5T=5))&(D5HG<>0)):#subtractlowerspanner3=0
+
+
+set, #lowerspannercount=(3-#subtractlowerspanner1-#subtractlowerspanner2-#subtractlowerspanner3)
+
+}
+
+Do, (#bottomdrw=5):1
+{
+set, ((D2T=3)&(D3T=3)):#subtractlowerspanner1=1
+set, ((D2T=3)&(D3T=3)&(OPT=#optionLockdr2)): #subtractlowerspanner1=0
+set, (((D2T=3)|(D2T=5))&(D2HG<>0)):#subtractlowerspanner1=0
+
+set, ((D3T=3)&(D4T=3)):#subtractlowerspanner2=1
+set, ((D3T=3)&(D4T=3)&(OPT=#optionLockdr3)): #subtractlowerspanner2=0
+set, (((D3T=3)|(D3T=5))&(D3HG<>0)): #subtractlowerspanner1=0
+set, (((D3T=3)|(D3T=5))&(D3HG<>0)): #subtractlowerspanner2=0
+
+set, ((D4T=3)&(D5T=3)):#subtractlowerspanner3=1
+set, ((D4T=3)&(D5T=3)&(OPT=#optionLockdr4)): #subtractlowerspanner3=0
+set, (((D4T=3)|(D4T=5))&(D4HG<>0)):#subtractlowerspanner3=0
+set, (((D4T=3)|(D4T=5))&(D4HG<>0)):#subtractlowerspanner2=0
+
+set, ((D5T=3)&(D6T=3)):#subtractlowerspanner4=1
+set, ((D5T=3)&(D6T=3)&(OPT=#optionLockdr5)): #subtractlowerspanner4=0
+set, (((D5T=3)|(D5T=5))&(D5HG<>0)):#subtractlowerspanner4=0
+set, (((D5T=3)|(D5T=5))&(D5HG<>0)):#subtractlowerspanner3=0
+set, (((D6T=3)|(D6T=5))&(D6HG<>0)):#subtractlowerspanner4=0
+
+set, #lowerspannercount=(4-#subtractlowerspanner1-#subtractlowerspanner2-#subtractlowerspanner3-#subtractlowerspanner4)
+
+}
+
+
+
+
+
+
+
+
+

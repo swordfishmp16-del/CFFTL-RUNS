@@ -1,0 +1,15 @@
+,CF Base Cubby Holes
+,Calculates the price for each part
+
+
+
+,************ All CUBBY HOLES ************
+Set, #NumVertCubby = PT
+Set, #NumHorzCubby = PN
+Set, #CubbyHeight = DH1
+Set, #CubbyWidth = (W-LS-RS)
+set, #sideth=.75
+set, #shelfth=.75
+Load, CubbyUnit.Pcb
+,*****************************************
+

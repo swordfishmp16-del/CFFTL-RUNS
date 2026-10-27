@@ -1,0 +1,19 @@
+
+
+,*********** All FIXED SHELVES ***********
+Set, #ShelfWidth = [(W)]
+Set, #ShelfDepth = [(D)]
+Load, Pricefixedshelves.pcb
+
+,Load, C-Shelf Cost.Pcb
+,Price, 1,   #TopShelfName,      #CostOfTopShelf,             #ShelfDepth, #ShelfWidth,          #TopShelfPrintOrderNumber,     
+Do,((lcb<>0) | (rcb<>0)):1
+{
+Price, 1,   Special Cut,         #costforspecialcuts,          ,,          #AdjustableShelfPrintOrderNumber,
+}
+,*****************************************
+
+
+
+
+

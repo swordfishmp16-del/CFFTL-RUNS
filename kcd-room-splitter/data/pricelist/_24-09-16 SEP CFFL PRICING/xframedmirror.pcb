@@ -1,0 +1,40 @@
+, SMP and flat-glass versions
+
+Set, (#Codedoor="*Bev*"):#mirrornote=Bevel:#mirrornote=
+
+set, #stopframedmirror=1
+Do,((#DoorDrawerType = "#DoorDrawerTypeName1")|(#DoorDrawerType = "#DoorDrawerTypeName2")):1
+{
+Do,(#ThisDoor <> #DoorDR)|((#ThisDoor = #DoorDR)&(#HasHinges=1)):1
+{
+
+}
+
+,Drawers
+
+Do,((#ThisDoor = #DoorDR)&(#HasHinges=0)):1
+{
+Set,(#DoorW>#Maxdrawerwidth): #Costofdoor=0, invalid size
+
+}
+
+}
+
+Do,((#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2")):1
+{
+Do,(#ThisDoor <> #DoorDR)|((#ThisDoor = #DoorDR)&(#HasHinges=1)):1
+{
+ Price,(#CostOfDoor>0):1   ,Door-#DoorDrawerType-#DoorDrawerFinishingType-#mirrornote Mirror,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+}
+Do,((#ThisDoor = #DoorDR)&(#HasHinges=0)):1
+{
+ Set,(#DoorW>#Maxdrawerwidth): #Costofdoor=0, invalid size
+ Set, #facetypefactor=#DrFrtfactor
+ Price,(#CostOfDoor>0):1   ,DrFrt-#DoorDrawerType-#DoorDrawerFinishingType-#mirrornote Mirror,    #CostOfDoor*#facetypefactor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+}
+
+
+}
+
+set, #stopframedmirror=2
+

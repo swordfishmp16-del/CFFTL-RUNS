@@ -1,0 +1,35 @@
+,use grid
+,Variables used to setup CSV output file
+
+
+,** Section 1 - CSV Variables **
+
+Displayset, #CSVoutput =Yes, 1.01 ---------------------------------------- Do you want a CSV output file? [Yes;No]
+Displayset, #CSVoutputfolder =R:\import\, 1.02 ---------------------------------------- What folder do you want to save the csv output? File will use Job Name.
+Displayset, #doorsideoverlayshopstandard=Full Overlay, 1.03 ----------------------------What is your shop standard hinge? [Full Overlay;Half Overlay], 
+Displayset, #halfoverlaysetting=7/16in, 1.04----------------------------------------------------------------What is the smallest reveal setting used for half-overlay hinges?
+,---------------------------------------------------------------------------
+,
+,Len, #size1, #csvoutputfolder
+,Len, #Size, #Path
+,Right, #filenameoutput, #Size-#size1, #Path
+,---------------------------------------------------------------------------
+
+Set, #CSVoutputfile =#CSVoutputfolder#jobexportname SpecialOrder.csv
+
+,Update V3.0 start 6/28
+Displayset, #CRcsvoutputinmm=IN, Do you want your Cut Rite CSV output in IN or MM? [IN;MM]
+set, (#CRcsvoutputinmm=MM):#CRmmmultiplier=25.4:#CRmmmultiplier=1
+ 
+,Update V3.0 end 6/28
+
+do, (#CSVoutput =Yes):1
+{
+Erase, #CSVoutputfile
+}
+SendtoFile, #CSVoutputfile , Part Name #Comma Unit Number #Comma Quantity #comma Note #comma Width #comma Length #comma Room Name #comma Wall Number #comma Job Name 
+
+
+
+
+

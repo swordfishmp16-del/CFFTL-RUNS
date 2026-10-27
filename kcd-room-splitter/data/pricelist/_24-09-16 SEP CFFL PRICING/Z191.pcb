@@ -1,0 +1,26 @@
+,CF Upper 45 shelf Right and Door with open sides angled with door
+,Calculates the price for each part
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [W-RS]
+load, PriceCornersidesangleL.pcb 
+,*****************************************
+
+
+
+,*********** All SHELVES ***********
+Set, #ShelfWidth = [(W-RS)]
+Set, #ShelfDepth = [(D-LS)]
+load, Pricecornershelves.pcb      
+,*****************************************
+
+
+
+,******* All DOORS & DRAWER FRONTS *******
+Load, Doors.pcb
+,*****************************************
+
+
+
+

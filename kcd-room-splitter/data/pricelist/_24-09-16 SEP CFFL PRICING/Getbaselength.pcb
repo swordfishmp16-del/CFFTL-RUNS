@@ -1,0 +1,546 @@
+
+,If there is no unit or wall on left(ubl=0) and right (ubr=0) and nowrapbase=0 then kick length equals unit width+depth left+depth right
+Do, (K<>0)|(T=230)|((T=890)&(#UnitFileName<>"890nc.cab")):1
+{
+,Set,((ult=0)&(#noreturnbase=0)&(T<>230))|((ublt<>0)&(ublz=>k))|((ublt<>0)&(ublK=0)):#KickFinishLeft=1:#KickFinishLeft=0
+,Set,((urt=0)&(#noreturnbase=0)&(T<>230))|((ubrt<>0)&(ubrz=>k))|((ubrt<>0)&(ubrK=0)):#KickFinishRight=1:#KickFinishRight=0
+,Set,(T=890):#KickFinishRight=0
+,Set,(T=890):#KickFinishLeft=0
+,set, #baselength=0
+,Set, (nkhyn=0):#baselength=W:#baselength=w-ls-rs
+,set,((T=230)|(T=890)):#baselength=w
+,set,(#name="No-price base board for show"):#baselength=0
+,Set,((T=230)&(#noreturnbase=1)):#baselength=0
+,Set,((T=550)&(#noreturnbase=1)):#baselength=0
+,Set,((T=230)&(#noreturnbase=0)):#baselength=w
+,Set,((T=550)&(#noreturnbase=0)):#baselength=w
+,Set,#KickBaseLengthsub=(#baselength+((d+6)*#KickFinishLeft)+((d+6)*#KickFinishRight))
+,***
+set, ((#ExtraUnitText5="*Continuous*")|(#ExtraUnitText5="#Basetype0")):#noreturnbase=1:#noreturnbase=0
+
+set, #stopgetbaselength=1
+set, #KickFinishLeft=0
+set, #KickFinishright=0
+,set, #crownbaseslop=6
+Set,((ult=0)&(#noreturnbase=0)):#KickFinishLeft=1
+Set,((uld>0)&(ulz=>K)):#KickFinishLeft=1
+Set,((uld>0)&(ulK=0)):#KickFinishLeft=1
+Set,((ult=645)&(#noreturnbase=0)):#KickFinishLeft=1
+
+Set,((urt=0)&(#noreturnbase=0)):#KickFinishRight=1
+Set,((urd>0)&(urz=>K)):#KickFinishRight=1
+Set,((urd>0)&(urK=0)):#KickFinishRight=1
+Set,((urt=645)&(#noreturnbase=0)):#KickFinishRight=1
+
+set,((T=230)|(T=890)|(T=645)|(T=640)):#Kickfinishleft=0
+set,((T=230)|(T=890)|(T=645)|(T=640)):#Kickfinishright=0
+
+set, #baselength=0
+Set, (nkhyn=0):#baselength=W:#baselength=(w-ls-rs)
+set,((T=230)|(T=890)|(T=645)|(T=640)):#baselength=(w)
+set,((T=890)&(#UnitFileName="890nc.cab")):#baselength=0
+Set,((T=230)&(#noreturnbase=1)):#baselength=0
+Set,((T=550)&(#noreturnbase=1)):#baselength=0
+Set,((T=230)&(#noreturnbase=0)):#baselength=w
+Set,((T=550)&(#noreturnbase=0)):#baselength=w
+Set,#KickBaseLengthsub=(#baselength+((d+#crownbaseslop)*#KickFinishLeft)+((d+#crownbaseslop)*#KickFinishRight))
+,***
+
+
+
+Set,#KickBaseLengthTotal=[#KickBaseLengthsub+#KickBaseLengthTotal]
+
+Set,#KickBaseCostSub=(#KickBaseLengthTotal*#BaseTypeCostGroup)
+Set,#KickBaseTotCost=[#KickBaseTotCost+#KickBaseCostSub]
+
+, Track base moulding for job by type
+Do, (#KickBaseLengthsub>0):1  ,Unit has molding
+{
+ Do, (#BaseType = "#BaseType0"):1
+   {
+      set, #BMld0Name = <#BaseType>
+      set, #BMld0Len = [#BMld0Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType1"):1
+   {
+      set, #BMld1Name = <#BaseType>
+      set, #BMld1Len = [#BMld1Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType2"):1
+   {
+      set, #BMld2Name = <#BaseType>
+      set, #BMld2Len = [#BMld2Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType3"):1
+   {
+      set, #BMld3Name = <#BaseType>
+      set, #BMld3Len = [#BMld3Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType4"):1
+   {
+      set, #BMld4Name = <#BaseType>
+      set, #BMld4Len = [#BMld4Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType5"):1
+   {
+      set, #BMld5Name = <#BaseType>
+      set, #BMld5Len = [#BMld5Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType6"):1
+   {
+      set, #BMld6Name = <#BaseType>
+      set, #BMld6Len = [#BMld6Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType7"):1
+   {
+      set, #BMld7Name = <#BaseType>
+      set, #BMld7Len = [#BMld7Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType8"):1
+   {
+      set, #BMld8Name = <#BaseType>
+      set, #BMld8Len = [#BMld8Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType9"):1
+   {
+      set, #BMld9Name = <#BaseType>
+      set, #BMld9Len = [#BMld9Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType10"):1
+   {
+      set, #BMld10Name = <#BaseType>
+      set, #BMld10Len = [#BMld10Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType11"):1
+   {
+      set, #BMld11Name = <#BaseType>
+      set, #BMld11Len = [#BMld11Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType12"):1
+   {
+      set, #BMld12Name = <#BaseType>
+      set, #BMld12Len = [#BMld12Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType13"):1
+   {
+      set, #BMld13Name = <#BaseType>
+      set, #BMld13Len = [#BMld13Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType14"):1
+   {
+      set, #BMld14Name = <#BaseType>
+      set, #BMld14Len = [#BMld14Len + (#KickBaseLengthsub)]
+   }
+ Do, (#BaseType = "#BaseType15"):1
+   {
+      set, #BMld15Name = <#BaseType>
+      set, #BMld15Len = [#BMld15Len + (#KickBaseLengthsub)]
+   }  
+}
+
+
+
+
+, Track base moulding for job by room
+
+Do, (#RoomNum=1):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm1BaseLengthtotal = [#Rm1BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm1BaseQty=[#Rm1BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm1BaseQty=[#Rm1BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm1BaseQty=[#Rm1BaseQty+1]
+      ,Set, #Rm1BaseCost =[#Rm1BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm1GarageWoodBaseLengthtotal = [#Rm1GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=2):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm2BaseLengthtotal = [#Rm2BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm2BaseQty=[#Rm2BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm2BaseQty=[#Rm2BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm2BaseQty=[#Rm2BaseQty+1]
+      ,Set, #Rm2BaseCost =[#Rm2BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm2GarageWoodBaseLengthtotal = [#Rm2GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=3):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm3BaseLengthtotal = [#Rm3BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm3BaseQty=[#Rm3BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm3BaseQty=[#Rm3BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm3BaseQty=[#Rm3BaseQty+1]
+      ,Set, #Rm3BaseCost =[#Rm3BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm3GarageWoodBaseLengthtotal = [#Rm3GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=4):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm4BaseLengthtotal = [#Rm4BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm4BaseQty=[#Rm4BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm4BaseQty=[#Rm4BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm4BaseQty=[#Rm4BaseQty+1]
+      ,Set, #Rm4BaseCost =[#Rm4BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm4GarageWoodBaseLengthtotal = [#Rm4GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=5):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm5BaseLengthtotal = [#Rm5BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm5BaseQty=[#Rm5BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm5BaseQty=[#Rm5BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm5BaseQty=[#Rm5BaseQty+1]
+      ,Set, #Rm5BaseCost =[#Rm5BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm5GarageWoodBaseLengthtotal = [#Rm5GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=6):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm6BaseLengthtotal = [#Rm6BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm6BaseQty=[#Rm6BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm6BaseQty=[#Rm6BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm6BaseQty=[#Rm6BaseQty+1]
+      ,Set, #Rm6BaseCost =[#Rm6BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm6GarageWoodBaseLengthtotal = [#Rm6GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=7):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm7BaseLengthtotal = [#Rm7BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm7BaseQty=[#Rm7BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm7BaseQty=[#Rm7BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm7BaseQty=[#Rm7BaseQty+1]
+      ,Set, #Rm7BaseCost =[#Rm7BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm7GarageWoodBaseLengthtotal = [#Rm7GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=8):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm8BaseLengthtotal = [#Rm8BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm8BaseQty=[#Rm8BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm8BaseQty=[#Rm8BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm8BaseQty=[#Rm8BaseQty+1]
+      ,Set, #Rm8BaseCost =[#Rm8BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm8GarageWoodBaseLengthtotal = [#Rm8GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=9):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm9BaseLengthtotal = [#Rm9BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm9BaseQty=[#Rm9BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm9BaseQty=[#Rm9BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm9BaseQty=[#Rm9BaseQty+1]
+      ,Set, #Rm9BaseCost =[#Rm9BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm9GarageWoodBaseLengthtotal = [#Rm9GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=10):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm10BaseLengthtotal = [#Rm10BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm10BaseQty=[#Rm10BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm10BaseQty=[#Rm10BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm10BaseQty=[#Rm10BaseQty+1]
+      ,Set, #Rm10BaseCost =[#Rm10BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm10GarageWoodBaseLengthtotal = [#Rm10GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=11):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm11BaseLengthtotal = [#Rm11BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm11BaseQty=[#Rm11BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm11BaseQty=[#Rm11BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm11BaseQty=[#Rm11BaseQty+1]
+      ,Set, #Rm11BaseCost =[#Rm11BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm11GarageWoodBaseLengthtotal = [#Rm11GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=12):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm12BaseLengthtotal = [#Rm12BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm12BaseQty=[#Rm12BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm12BaseQty=[#Rm12BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm12BaseQty=[#Rm12BaseQty+1]
+      ,Set, #Rm12BaseCost =[#Rm12BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm12GarageWoodBaseLengthtotal = [#Rm12GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=13):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm13BaseLengthtotal = [#Rm13BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm13BaseQty=[#Rm13BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm13BaseQty=[#Rm13BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm13BaseQty=[#Rm13BaseQty+1]
+      ,Set, #Rm13BaseCost =[#Rm13BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm13GarageWoodBaseLengthtotal = [#Rm13GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=14):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm14BaseLengthtotal = [#Rm14BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm14BaseQty=[#Rm14BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm14BaseQty=[#Rm14BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm14BaseQty=[#Rm14BaseQty+1]
+      ,Set, #Rm14BaseCost =[#Rm14BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm14GarageWoodBaseLengthtotal = [#Rm14GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=15):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm15BaseLengthtotal = [#Rm15BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm15BaseQty=[#Rm15BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm15BaseQty=[#Rm15BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm15BaseQty=[#Rm15BaseQty+1]
+      ,Set, #Rm15BaseCost =[#Rm15BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm15GarageWoodBaseLengthtotal = [#Rm15GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=16):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm16BaseLengthtotal = [#Rm16BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm16BaseQty=[#Rm16BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm16BaseQty=[#Rm16BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm16BaseQty=[#Rm16BaseQty+1]
+      ,Set, #Rm16BaseCost =[#Rm16BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm16GarageWoodBaseLengthtotal = [#Rm16GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=17):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm17BaseLengthtotal = [#Rm17BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm17BaseQty=[#Rm17BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm17BaseQty=[#Rm17BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm17BaseQty=[#Rm17BaseQty+1]
+      ,Set, #Rm17BaseCost =[#Rm17BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm17GarageWoodBaseLengthtotal = [#Rm17GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=18):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm18BaseLengthtotal = [#Rm18BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm18BaseQty=[#Rm18BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm18BaseQty=[#Rm18BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm18BaseQty=[#Rm18BaseQty+1]
+      ,Set, #Rm18BaseCost =[#Rm18BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm18GarageWoodBaseLengthtotal = [#Rm18GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=19):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm19BaseLengthtotal = [#Rm19BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm19BaseQty=[#Rm19BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm19BaseQty=[#Rm19BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm19BaseQty=[#Rm19BaseQty+1]
+      ,Set, #Rm19BaseCost =[#Rm19BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm19GarageWoodBaseLengthtotal = [#Rm19GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=20):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm20BaseLengthtotal = [#Rm20BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm20BaseQty=[#Rm20BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm20BaseQty=[#Rm20BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm20BaseQty=[#Rm20BaseQty+1]
+      ,Set, #Rm20BaseCost =[#Rm20BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm20GarageWoodBaseLengthtotal = [#Rm20GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=21):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm21BaseLengthtotal = [#Rm21BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm21BaseQty=[#Rm21BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm21BaseQty=[#Rm21BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm21BaseQty=[#Rm21BaseQty+1]
+      ,Set, #Rm21BaseCost =[#Rm21BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm21GarageWoodBaseLengthtotal = [#Rm21GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=22):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm22BaseLengthtotal = [#Rm22BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm22BaseQty=[#Rm22BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm22BaseQty=[#Rm22BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm22BaseQty=[#Rm22BaseQty+1]
+      ,Set, #Rm22BaseCost =[#Rm22BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm22GarageWoodBaseLengthtotal = [#Rm22GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=23):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm23BaseLengthtotal = [#Rm23BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm23BaseQty=[#Rm23BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm23BaseQty=[#Rm23BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm23BaseQty=[#Rm23BaseQty+1]
+      ,Set, #Rm23BaseCost =[#Rm23BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm23GarageWoodBaseLengthtotal = [#Rm23GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=24):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm24BaseLengthtotal = [#Rm24BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm24BaseQty=[#Rm24BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm24BaseQty=[#Rm24BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm24BaseQty=[#Rm24BaseQty+1]
+      ,Set, #Rm24BaseCost =[#Rm24BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm24GarageWoodBaseLengthtotal = [#Rm24GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+Do, (#RoomNum=25):1
+   {
+      Do,(#Name<>"Garage Wood Base"):1
+      {
+      Set, #Rm25BaseLengthtotal = [#Rm25BaseLengthtotal+(#KickBaseLengthsub)]
+      Set, (#baselength>#secMinSize)&(#baselength<=#secMaxSize)&(T<>550):#Rm25BaseQty=[#Rm25BaseQty+1]
+      Set, (#baselength>#secMaxSize)&(T<>550):#Rm25BaseQty=[#Rm25BaseQty+(#baselength\#secMaxSize)]
+      Set, (#baselength>#secMaxSize)&((#baselength/#secMaxSize)-(#baselength\#secMaxSize)>0):#Rm25BaseQty=[#Rm25BaseQty+1]
+      ,Set, #Rm25BaseCost =[#Rm25BaseQty*#BaseTypeCostGroup]
+      }
+      Do,(#Name="Garage Wood Base"):1
+      {
+       Set, #Rm25GarageWoodBaseLengthtotal = [#Rm25GarageWoodBaseLengthtotal+(#KickBaseLengthsub)]
+      }
+   }
+
+}

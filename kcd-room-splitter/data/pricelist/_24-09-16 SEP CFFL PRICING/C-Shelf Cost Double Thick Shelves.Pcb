@@ -1,0 +1,693 @@
+,Use Grid
+
+,**            ***** List method pricing Horizontal Double thick Shelves - up to 3 widths only each depth *****
+,**
+
+
+
+DisplaySet, #ShelfCostLS=35,Upcharge for L and angle cut Shelf
+
+
+Set, #CostOfHorizontal = 0, Default Cost
+set, #addshelf=0
+load, Calculatecutbacks.pcb
+
+DisplaySet, #NumShelfDepth=6, Q...     HOW MANY DIFFERENT SHELF DEPTHS DO YOU USE?  [1;2;3;4;5;6;7;8;9;10]
+  ,**              Example:  6 different sizes
+  ,**                  (Shelf Depth Smaller than 12")
+  ,**                  (Shelf Depth Equal to 12") 
+  ,**                  (Shelf Depth Larger than 12" & Smaller than 16")
+  ,**                  (Shelf Depth Equal to 16")
+  ,**                  (Shelf Depth Larger than 16" & Smaller than 24")
+  ,**                  (Shelf Depth Equal to 24") 
+  ,**
+
+  
+  Do,  (#NumShelfDepth>0):1
+  {
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    DisplaySet, #ShelfDepthA =12, 1 Q...     WHAT IS THE DEPTH OF YOUR 1st HORIZONTAL SHELF? (SMALLEST), ShelfDepth.Bmp
+    
+    DisplaySet, #NumShelfLengthA=3, 1 Q...     HOW MANY DIFFERENT LENGTHS DO YOU USE FOR THIS SHELF DEPTH?  [1;2;3]
+    ,** 
+
+    Do, (#NumShelfLengthA>0):1
+      {
+      DisplaySet, #ShelfLength1AB =36,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost1AB =126*#shelfpricemultiplier,                   Cost of a #ShelfThickB inches thick Shelf   (up to #ShelfDepthA" deep)   by   (up to #ShelfLength1AB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1AB) & (#ShelfDepth>0)&(#ShelfDepth<=#ShelfDepthA): #CostOfHorizontal = #ShelfCost1AB ,Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1A) & (#ShelfDepth>0)&(#ShelfDepth<=#ShelfDepthA): #addShelf = 1 ,Shelf count
+      ,**
+      }
+
+    Do, (#NumShelfLengthA>1):1
+      {
+      DisplaySet, #ShelfLength2AB =72,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp  
+      DisplaySet, #ShelfCost2AB =252*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthA" deep)   by   (up to #ShelfLength2AB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength1AB)&(#ShelfWidth<=#ShelfLength2AB) & (#ShelfDepth>0)&(#ShelfDepth<=#ShelfDepthA): #CostOfHorizontal = #ShelfCost2AB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength1A)&(#ShelfWidth<=#ShelfLength2A) & (#ShelfDepth>0)&(#ShelfDepth<=#ShelfDepthA): #addShelf = 2 ,Shelf count
+      ,**
+      }
+
+    Do, (#NumShelfLengthA>2):1
+      {
+      DisplaySet, #ShelfLength3AB =96,          Cost of a #ShelfThickB (Less than or Equal to, ShelfLength.Bmp)
+      DisplaySet, #ShelfCost3AB =378*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthA" deep)   by   (up to #ShelfLength3AB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength2AB)&(#ShelfWidth<=#ShelfLength3AB) & (#ShelfDepth>0)&(#ShelfDepth<=#ShelfDepthA): #CostOfHorizontal = #ShelfCost3AB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength2A)&(#ShelfWidth<=#ShelfLength3A) & (#ShelfDepth>0)&(#ShelfDepth<=#ShelfDepthA): #addShelf = 13 ,Shelf count
+      }
+
+    
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+  Do,  (#NumShelfDepth>1):1
+  {
+    DisplaySet, #ShelfDepthB =16, 2 Q...     WHAT IS THE DEPTH OF YOUR 2nd HORIZONTAL SHELF? , ShelfDepth.Bmp
+    
+    DisplaySet, #NumShelfLengthB=3, 2 Q...     HOW MANY DIFFERENT LENGTHS DO YOU USE FOR THIS SHELF DEPTH?  [1;2;3]
+    ,** 
+
+    Do, (#NumShelfLengthB>0):1
+      {
+      DisplaySet, #ShelfLength1BB =36,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost1BB =132*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthB" deep)   by   (up to #ShelfLength1BB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1BB) & (#ShelfDepth>#ShelfDepthA)&(#ShelfDepth<=#ShelfDepthB): #CostOfHorizontal = #ShelfCost1BB ,Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1B) & (#ShelfDepth>#ShelfDepthA)&(#ShelfDepth<=#ShelfDepthB): #addShelf = 3 ,Shelf count
+      ,**
+      }
+
+    Do, (#NumShelfLengthB>1):1
+      {
+      DisplaySet, #ShelfLength2BB =72,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost2BB =264*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthB" deep)   by   (up to #ShelfLength2BB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength1BB)&(#ShelfWidth<=#ShelfLength2BB) & (#ShelfDepth>#ShelfDepthA)&(#ShelfDepth<=#ShelfDepthB): #CostOfHorizontal = #ShelfCost2BB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength1B)&(#ShelfWidth<=#ShelfLength2B) & (#ShelfDepth>#ShelfDepthA)&(#ShelfDepth<=#ShelfDepthB):#addShelf = 4 ,Shelf count
+      ,** 
+      }
+
+    Do, (#NumShelfLengthB>2):1
+      {
+      DisplaySet, #ShelfLength3BB =96,          Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost3BB =396*#shelfpricemultiplier,                   Cost of a Shelf   (up to #ShelfDepthB" deep)   by   (up to #ShelfLength3BB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength2BB)&(#ShelfWidth<=#ShelfLength3BB) & (#ShelfDepth>#ShelfDepthA)&(#ShelfDepth<=#ShelfDepthB): #CostOfHorizontal = #ShelfCost3BB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength2B)&(#ShelfWidth<=#ShelfLength3B) & (#ShelfDepth>#ShelfDepthA)&(#ShelfDepth<=#ShelfDepthB): #addshelf=14, Shelf count
+      }
+
+    
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+  
+
+
+
+
+  Do,  (#NumShelfDepth>2):1
+  {
+    DisplaySet, #ShelfDepthC =18, 3 Q...     WHAT IS THE DEPTH OF YOUR 3rd HORIZONTAL SHELF? , ShelfDepth.Bmp
+    
+    DisplaySet, #NumShelfLengthC=3, 3 Q...     HOW MANY DIFFERENT LENGTHS DO YOU USE FOR THIS SHELF DEPTH?  [1;2;3]
+    ,** 
+
+    Do, (#NumShelfLengthC>0):1
+      {
+      DisplaySet, #ShelfLength1CB =36,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost1CB =138*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthC" deep)   by   (up to #ShelfLength1CB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1CB) & (#ShelfDepth>#ShelfDepthB)&(#ShelfDepth<=#ShelfDepthC): #CostOfHorizontal = #ShelfCost1CB ,Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1C) & (#ShelfDepth>#ShelfDepthB)&(#ShelfDepth<=#ShelfDepthC):#addShelf = 5 ,Shelf count      
+      ,**
+      }
+
+    Do, (#NumShelfLengthC>1):1
+      {
+      DisplaySet, #ShelfLength2CB =72,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost2CB =276*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthC" deep)   by   (up to #ShelfLength2CB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength1CB)&(#ShelfWidth<=#ShelfLength2CB) & (#ShelfDepth>#ShelfDepthB)&(#ShelfDepth<=#ShelfDepthC): #CostOfHorizontal = #ShelfCost2CB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength1C)&(#ShelfWidth<=#ShelfLength2C) & (#ShelfDepth>#ShelfDepthB)&(#ShelfDepth<=#ShelfDepthC):#addShelf = 6 ,Shelf count  
+      ,**
+      }
+
+    Do, (#NumShelfLengthC>2):1
+      {
+      DisplaySet, #ShelfLength3CB =96,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost3CB =414*#shelfpricemultiplier,                   Cost of a Shelf   (up to #ShelfDepthC" deep)   by   (up to #ShelfLength3CB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength2CB)&(#ShelfWidth<=#ShelfLength3CB) & (#ShelfDepth>#ShelfDepthB)&(#ShelfDepth<=#ShelfDepthC): #CostOfHorizontal = #ShelfCost3CB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength2C)&(#ShelfWidth<=#ShelfLength3C) & (#ShelfDepth>#ShelfDepthB)&(#ShelfDepth<=#ShelfDepthC): #CostOfHorizontal = #addshelf=15, shelf count
+      }
+
+    
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+ 
+
+
+
+
+  Do,  (#NumShelfDepth>3):1
+  {
+    DisplaySet, #ShelfDepthD =24, 4 Q...     WHAT IS THE DEPTH OF YOUR 4th HORIZONTAL SHELF? , ShelfDepth.Bmp
+    
+    DisplaySet, #NumShelfLengthD=3, 4 Q...     HOW MANY DIFFERENT LENGTHS DO YOU USE FOR THIS SHELF DEPTH?  [1;2;3]
+    ,** 
+
+    Do, (#NumShelfLengthd>0):1
+      {
+      DisplaySet, #ShelfLength1DB =36,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost1DB =152*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthD" deep)   by   (up to #ShelfLength1DB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1DB) & (#ShelfDepth>#ShelfDepthC)&(#ShelfDepth<=#ShelfDepthD): #CostOfHorizontal = #ShelfCost1DB ,Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1D) & (#ShelfDepth>#ShelfDepthC)&(#ShelfDepth<=#ShelfDepthD):#addShelf = 7 ,Shelf count  
+      ,**
+      }
+
+    Do, (#NumShelfLengthD>1):1
+      {
+      DisplaySet, #ShelfLength2DB =72,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost2DB =304*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthD" deep)   by   (up to #ShelfLength2DB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength1DB)&(#ShelfWidth<=#ShelfLength2DB) & (#ShelfDepth>#ShelfDepthC)&(#ShelfDepth<=#ShelfDepthD): #CostOfHorizontal = #ShelfCost2DB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength1D)&(#ShelfWidth<=#ShelfLength2D) & (#ShelfDepth>#ShelfDepthC)&(#ShelfDepth<=#ShelfDepthD):#addShelf = 8 ,Shelf count  
+      ,**
+      }
+
+    Do, (#NumShelfLengthD>2):1
+      {
+      DisplaySet, #ShelfLength3DB =96,          Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost3DB =456*#shelfpricemultiplier,                   Cost of a Shelf   (up to #ShelfDepthD" deep)   by   (up to #ShelfLength3DB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength2DB)&(#ShelfWidth<=#ShelfLength3DB) & (#ShelfDepth>#ShelfDepthC)&(#ShelfDepth<=#ShelfDepthD): #CostOfHorizontal = #ShelfCost3DB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength2D)&(#ShelfWidth<=#ShelfLength3D) & (#ShelfDepth>#ShelfDepthC)&(#ShelfDepth<=#ShelfDepthD): #addshelf=16, shelf count
+      ,**
+      }
+
+    
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumShelfDepth>4):1
+  {
+    DisplaySet, #ShelfDepthE =32, 5 Q...     WHAT IS THE DEPTH OF YOUR 5th HORIZONTAL SHELF? , ShelfDepth.Bmp
+    
+    DisplaySet, #NumShelfLengthE=3, 5 Q...     HOW MANY DIFFERENT LENGTHS DO YOU USE FOR THIS SHELF DEPTH?  [1;2;3]
+    ,** 
+
+    Do, (#NumShelfLengthE>0):1
+      {
+      DisplaySet, #ShelfLength1EB =36,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost1EB =182*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthE" deep)   by   (up to #ShelfLength1EB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1EB) & (#ShelfDepth>#ShelfDepthD)&(#ShelfDepth<=#ShelfDepthE): #CostOfHorizontal = #ShelfCost1EB ,Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1E) & (#ShelfDepth>#ShelfDepthD)&(#ShelfDepth<=#ShelfDepthE): #addShelf = 9 ,Shelf count
+      ,**
+      }
+
+    Do, (#NumShelfLengthE>1):1
+      {
+      DisplaySet, #ShelfLength2EB =72,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost2EB =364*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthE" deep)   by   (up to #ShelfLength2EB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength1EB)&(#ShelfWidth<=#ShelfLength2EB) & (#ShelfDepth>#ShelfDepthD)&(#ShelfDepth<=#ShelfDepthE): #CostOfHorizontal = #ShelfCost2EB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength1E)&(#ShelfWidth<=#ShelfLength2E) & (#ShelfDepth>#ShelfDepthD)&(#ShelfDepth<=#ShelfDepthE):#addShelf = 10 ,Shelf count    
+      ,** 
+      }
+
+    Do, (#NumShelfLengthE>2):1
+      {
+      DisplaySet, #ShelfLength3EB =96,          Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost3EB =546*#shelfpricemultiplier,                   Cost of a Shelf   (up to #ShelfDepthE" deep)   by   (up to #ShelfLength3EB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength2EB)&(#ShelfWidth<=#ShelfLength3EB) & (#ShelfDepth>#ShelfDepthD)&(#ShelfDepth<=#ShelfDepthE): #CostOfHorizontal = #ShelfCost3EB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength2E)&(#ShelfWidth<=#ShelfLength3E) & (#ShelfDepth>#ShelfDepthD)&(#ShelfDepth<=#ShelfDepthE): #addshelf = 17, shelf count
+      }
+
+    
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumShelfDepth>5):1
+  {
+    DisplaySet, #ShelfDepthF =48, 6 Q...     WHAT IS THE DEPTH OF YOUR 6th HORIZONTAL SHELF? , ShelfDepth.Bmp
+    
+    DisplaySet, #NumShelfLengthF=3, 6 Q...     HOW MANY DIFFERENT LENGTHS DO YOU USE FOR THIS SHELF DEPTH?  [1;2;3]
+    ,** 
+
+    Do, (#NumShelfLengthF>0):1
+      {
+      DisplaySet, #ShelfLength1FB =36,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost1FB =214*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthF" deep)   by   (up to #ShelfLength1FB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1FB) & (#ShelfDepth>#ShelfDepthE)&(#ShelfDepth<=#ShelfDepthF): #CostOfHorizontal = #ShelfCost1FB ,Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1F) & (#ShelfDepth>#ShelfDepthE)&(#ShelfDepth<=#ShelfDepthF):#addShelf = 11 ,Shelf count
+      ,**
+      }
+
+    Do, (#NumShelfLengthF>1):1
+      {
+      DisplaySet, #ShelfLength2FB =72,          Horizontal #ShelfThickB inches thick up length of,ShelfLengthDepth.Bmp
+      DisplaySet, #ShelfCost2FB =428*#shelfpricemultiplier,                   Cost of a #ShelfThickB Shelf   (up to #ShelfDepthF" deep)   by   (up to #ShelfLength2FB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength1FB)&(#ShelfWidth<=#ShelfLength2FB) & (#ShelfDepth>#ShelfDepthE)&(#ShelfDepth<=#ShelfDepthF): #CostOfHorizontal = #ShelfCost2FB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength1F)&(#ShelfWidth<=#ShelfLength2F) & (#ShelfDepth>#ShelfDepthE)&(#ShelfDepth<=#ShelfDepthF):#addShelf = 12 ,Shelf count
+      ,**
+      }
+
+    Do, (#NumShelfLengthF>2):1
+      {
+      DisplaySet, #ShelfLength3FB =96,          Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost3FB =642*#shelfpricemultiplier,                   Cost of a Shelf   (up to #ShelfDepthF" deep)   by   (up to #ShelfLength3FB" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength2FB)&(#ShelfWidth<=#ShelfLength3FB) & (#ShelfDepth>#ShelfDepthE)&(#ShelfDepth<=#ShelfDepthF): #CostOfHorizontal = #ShelfCost3FB , Set the Cost of This Shelf
+      ,Set, (#ShelfWidth>#ShelfLength2F)&(#ShelfWidth<=#ShelfLength3F) & (#ShelfDepth>#ShelfDepthE)&(#ShelfDepth<=#ShelfDepthF): #addShelf = 18, shelf count
+      }
+
+    
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumShelfDepth>6):1
+  {
+    DisplaySet, #ShelfDepthG =48, 7 Q...     WHAT IS THE DEPTH OF YOUR 7th HORIZONTAL SHELF? , ShelfDepth.Bmp
+    
+    DisplaySet, #NumShelfLengthG=2, 7 Q...     HOW MANY DIFFERENT LENGTHS DO YOU USE FOR THIS SHELF DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumShelfLengthG>0):1
+      {
+      DisplaySet, #ShelfLength1G =36,          1.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost1G =33,                   Cost of a Shelf   (up to #ShelfDepthG" deep)   by   (up to #ShelfLength1G" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1G) & (#ShelfDepth>#ShelfDepthF)&(#ShelfDepth<=#ShelfDepthG): #CostOfHorizontal = #ShelfCost1G ,Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthG>1):1
+      {
+      DisplaySet, #ShelfLength2G =120,          2.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost2G =(33+22),                   Cost of a Shelf   (up to #ShelfDepthG" deep)   by   (up to #ShelfLength2G" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength1G)&(#ShelfWidth<=#ShelfLength2G) & (#ShelfDepth>#ShelfDepthF)&(#ShelfDepth<=#ShelfDepthG): #CostOfHorizontal = #ShelfCost2G , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthG>2):1
+      {
+      DisplaySet, #ShelfLength3G =0,          3.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost3G =0,                   Cost of a Shelf   (up to #ShelfDepthG" deep)   by   (up to #ShelfLength3G" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength2G)&(#ShelfWidth<=#ShelfLength3G) & (#ShelfDepth>#ShelfDepthF)&(#ShelfDepth<=#ShelfDepthG): #CostOfHorizontal = #ShelfCost3G , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthG>3):1
+      {
+      DisplaySet, #ShelfLength4G =0,          4.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost4G =0,                   Cost of a Shelf   (up to #ShelfDepthG" deep)   by   (up to #ShelfLength4G" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength3G)&(#ShelfWidth<=#ShelfLength4G) & (#ShelfDepth>#ShelfDepthF)&(#ShelfDepth<=#ShelfDepthG): #CostOfHorizontal = #ShelfCost4G , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthG>4):1
+      {
+      DisplaySet, #ShelfLength5G =0,          5.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost5G =0,                   Cost of a Shelf   (up to #ShelfDepthG" deep)   by   (up to #ShelfLength5G" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength4G)&(#ShelfWidth<=#ShelfLength5G) & (#ShelfDepth>#ShelfDepthF)&(#ShelfDepth<=#ShelfDepthG): #CostOfHorizontal = #ShelfCost5G , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthG>5):1
+      {
+      DisplaySet, #ShelfLength6G =0,          6.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost6G =0,                   Cost of a Shelf   (up to #ShelfDepthG" deep)   by   (up to #ShelfLength6G" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength6G)&(#ShelfWidth<=#ShelfLength6G) & (#ShelfDepth>#ShelfDepthF)&(#ShelfDepth<=#ShelfDepthG): #CostOfHorizontal = #ShelfCost6G , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthG>6):1
+      {
+      DisplaySet, #ShelfLength7G =0,          7.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost7G =0,                   Cost of a Shelf   (up to #ShelfDepthG" deep)   by   (up to #ShelfLength7G" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength6G)&(#ShelfWidth<=#ShelfLength7G) & (#ShelfDepth>#ShelfDepthF)&(#ShelfDepth<=#ShelfDepthG): #CostOfHorizontal = #ShelfCost7G , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthG>7):1
+      {
+      DisplaySet, #ShelfLength8G =0 ,          8.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost8G =0   ,                    Cost of a Shelf   (up to #ShelfDepthG" deep)   by   (up to #ShelfLength8G" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength7G)&(#ShelfWidth<=#ShelfLength8G) & (#ShelfDepth>#ShelfDepthF)&(#ShelfDepth<=#ShelfDepthG): #CostOfHorizontal = #ShelfCost8G , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthG>8):1
+      {
+      DisplaySet, #ShelfLength9G =0 ,          9.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost9G =0   ,                    Cost of a Shelf   (up to #ShelfDepthG" deep)   by   (up to #ShelfLength9G" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength8G)&(#ShelfWidth<=#ShelfLength9G) & (#ShelfDepth>#ShelfDepthF)&(#ShelfDepth<=#ShelfDepthG): #CostOfHorizontal = #ShelfCost9G , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthG>9):1
+      {
+      DisplaySet, #ShelfLength10G =0,          10. Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost10G =0  ,                    Cost of a Shelf   (up to #ShelfDepthG" deep)   by   (up to #ShelfLength10G" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength9G)&(#ShelfWidth<=#ShelfLength10G) & (#ShelfDepth>#ShelfDepthF)&(#ShelfDepth<=#ShelfDepthG): #CostOfHorizontal = #ShelfCost10G , Set the Cost of This Shelf
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumShelfDepth>7):1
+  {
+    DisplaySet, #ShelfDepthH =0, 8 Q...     WHAT IS THE DEPTH OF YOUR 8th HORIZONTAL SHELF? , ShelfDepth.Bmp
+    
+    DisplaySet, #NumShelfLengthH=10, 8 Q...     HOW MANY DIFFERENT LENGTHS DO YOU USE FOR THIS SHELF DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumShelfLengthH>0):1
+      {
+      DisplaySet, #ShelfLength1H =0,          1.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost1H =0,                   Cost of a Shelf   (up to #ShelfDepthH" deep)   by   (up to #ShelfLength1H" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1H) & (#ShelfDepth>#ShelfDepthG)&(#ShelfDepth<=#ShelfDepthH): #CostOfHorizontal = #ShelfCost1H ,Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthH>1):1
+      {
+      DisplaySet, #ShelfLength2H =0,          2.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost2H =0,                   Cost of a Shelf   (up to #ShelfDepthH" deep)   by   (up to #ShelfLength2H" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength1H)&(#ShelfWidth<=#ShelfLength2H) & (#ShelfDepth>#ShelfDepthG)&(#ShelfDepth<=#ShelfDepthH): #CostOfHorizontal = #ShelfCost2H , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthH>2):1
+      {
+      DisplaySet, #ShelfLength3H =0,          3.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost3H =0,                   Cost of a Shelf   (up to #ShelfDepthH" deep)   by   (up to #ShelfLength3H" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength2H)&(#ShelfWidth<=#ShelfLength3H) & (#ShelfDepth>#ShelfDepthG)&(#ShelfDepth<=#ShelfDepthH): #CostOfHorizontal = #ShelfCost3H , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthH>3):1
+      {
+      DisplaySet, #ShelfLength4H =0,          4.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost4H =0,                   Cost of a Shelf   (up to #ShelfDepthH" deep)   by   (up to #ShelfLength4H" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength3H)&(#ShelfWidth<=#ShelfLength4H) & (#ShelfDepth>#ShelfDepthG)&(#ShelfDepth<=#ShelfDepthH): #CostOfHorizontal = #ShelfCost4H , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthH>4):1
+      {
+      DisplaySet, #ShelfLength5H =0,          5.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost5H =0,                   Cost of a Shelf   (up to #ShelfDepthH" deep)   by   (up to #ShelfLength5H" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength4H)&(#ShelfWidth<=#ShelfLength5H) & (#ShelfDepth>#ShelfDepthG)&(#ShelfDepth<=#ShelfDepthH): #CostOfHorizontal = #ShelfCost5H , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthH>5):1
+      {
+      DisplaySet, #ShelfLength6H =0,          6.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost6H =0,                   Cost of a Shelf   (up to #ShelfDepthH" deep)   by   (up to #ShelfLength6H" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength5H)&(#ShelfWidth<=#ShelfLength6H) & (#ShelfDepth>#ShelfDepthG)&(#ShelfDepth<=#ShelfDepthH): #CostOfHorizontal = #ShelfCost6H , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthH>6):1
+      {
+      DisplaySet, #ShelfLength7H =0,          7.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost7H =0,                   Cost of a Shelf   (up to #ShelfDepthH" deep)   by   (up to #ShelfLength7H" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength6H)&(#ShelfWidth<=#ShelfLength7H) & (#ShelfDepth>#ShelfDepthG)&(#ShelfDepth<=#ShelfDepthH): #CostOfHorizontal = #ShelfCost7H , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthH>7):1
+      {
+      DisplaySet, #ShelfLength8H =0 ,          8.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost8H =0   ,                    Cost of a Shelf   (up to #ShelfDepthH" deep)   by   (up to #ShelfLength8H" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength7H)&(#ShelfWidth<=#ShelfLength8H) & (#ShelfDepth>#ShelfDepthG)&(#ShelfDepth<=#ShelfDepthH): #CostOfHorizontal = #ShelfCost8H , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthH>8):1
+      {
+      DisplaySet, #ShelfLength9H =0 ,          9.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost9H =0   ,                    Cost of a Shelf   (up to #ShelfDepthH" deep)   by   (up to #ShelfLength9H" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength8H)&(#ShelfWidth<=#ShelfLength9H) & (#ShelfDepth>#ShelfDepthG)&(#ShelfDepth<=#ShelfDepthH): #CostOfHorizontal = #ShelfCost9H , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthH>9):1
+      {
+      DisplaySet, #ShelfLength10H =0,          10. Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost10H =0  ,                    Cost of a Shelf   (up to #ShelfDepthH" deep)   by   (up to #ShelfLength10H" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength9H)&(#ShelfWidth<=#ShelfLength10H) & (#ShelfDepth>#ShelfDepthG)&(#ShelfDepth<=#ShelfDepthH): #CostOfHorizontal = #ShelfCost10H , Set the Cost of This Shelf
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumShelfDepth>8):1
+  {
+    DisplaySet, #ShelfDepthI =0, 9 Q...     WHAT IS THE DEPTH OF YOUR 9th HORIZONTAL SHELF? , ShelfDepth.Bmp
+    
+    DisplaySet, #NumShelfLengthI=10, 9 Q...     HOW MANY DIFFERENT LENGTHS DO YOU USE FOR THIS SHELF DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumShelfLengthI>0):1
+      {
+      DisplaySet, #ShelfLength1I =0,          1.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost1I =0,                   Cost of a Shelf   (up to #ShelfDepthI" deep)   by   (up to #ShelfLength1I" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1I) & (#ShelfDepth>#ShelfDepthH)&(#ShelfDepth<=#ShelfDepthI): #CostOfHorizontal = #ShelfCost1I ,Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthI>1):1
+      {
+      DisplaySet, #ShelfLength2I =0,          2.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost2I =0,                   Cost of a Shelf   (up to #ShelfDepthI" deep)   by   (up to #ShelfLength2I" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength1I)&(#ShelfWidth<=#ShelfLength2I) & (#ShelfDepth>#ShelfDepthH)&(#ShelfDepth<=#ShelfDepthI): #CostOfHorizontal = #ShelfCost2I , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthI>2):1
+      {
+      DisplaySet, #ShelfLength3I =0,          3.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost3I =0,                   Cost of a Shelf   (up to #ShelfDepthI" deep)   by   (up to #ShelfLength3I" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength2I)&(#ShelfWidth<=#ShelfLength3I) & (#ShelfDepth>#ShelfDepthH)&(#ShelfDepth<=#ShelfDepthI): #CostOfHorizontal = #ShelfCost3I , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthI>3):1
+      {
+      DisplaySet, #ShelfLength4I =0,          4.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost4I =0,                   Cost of a Shelf   (up to #ShelfDepthI" deep)   by   (up to #ShelfLength4I" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength3I)&(#ShelfWidth<=#ShelfLength4I) & (#ShelfDepth>#ShelfDepthH)&(#ShelfDepth<=#ShelfDepthI): #CostOfHorizontal = #ShelfCost4I , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthI>4):1
+      {
+      DisplaySet, #ShelfLength5I =0,          5.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost5I =0,                   Cost of a Shelf   (up to #ShelfDepthI" deep)   by   (up to #ShelfLength5I" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength4I)&(#ShelfWidth<=#ShelfLength5I) & (#ShelfDepth>#ShelfDepthH)&(#ShelfDepth<=#ShelfDepthI): #CostOfHorizontal = #ShelfCost5I , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthI>5):1
+      {
+      DisplaySet, #ShelfLength6I =0,          6.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost6I =0,                   Cost of a Shelf   (up to #ShelfDepthI" deep)   by   (up to #ShelfLength6I" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength5I)&(#ShelfWidth<=#ShelfLength6I) & (#ShelfDepth>#ShelfDepthH)&(#ShelfDepth<=#ShelfDepthI): #CostOfHorizontal = #ShelfCost6I , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthI>6):1
+      {
+      DisplaySet, #ShelfLength7I =0,          7.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost7I =0,                   Cost of a Shelf   (up to #ShelfDepthI" deep)   by   (up to #ShelfLength7I" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength6I)&(#ShelfWidth<=#ShelfLength7I) & (#ShelfDepth>#ShelfDepthH)&(#ShelfDepth<=#ShelfDepthI): #CostOfHorizontal = #ShelfCost7I , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthI>7):1
+      {
+      DisplaySet, #ShelfLength8I =0 ,          8.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost8I =0   ,                    Cost of a Shelf   (up to #ShelfDepthI" deep)   by   (up to #ShelfLength8I" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength7I)&(#ShelfWidth<=#ShelfLength8I) & (#ShelfDepth>#ShelfDepthH)&(#ShelfDepth<=#ShelfDepthI): #CostOfHorizontal = #ShelfCost8I , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthI>8):1
+      {
+      DisplaySet, #ShelfLength9I =0 ,          9.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost9I =0   ,                    Cost of a Shelf   (up to #ShelfDepthI" deep)   by   (up to #ShelfLength9I" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength8I)&(#ShelfWidth<=#ShelfLength9I) & (#ShelfDepth>#ShelfDepthH)&(#ShelfDepth<=#ShelfDepthI): #CostOfHorizontal = #ShelfCost9I , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthI>9):1
+      {
+      DisplaySet, #ShelfLength10I =0,          10. Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost10I =0  ,                    Cost of a Shelf   (up to #ShelfDepthI" deep)   by   (up to #ShelfLength10I" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength9I)&(#ShelfWidth<=#ShelfLength10I) & (#ShelfDepth>#ShelfDepthH)&(#ShelfDepth<=#ShelfDepthI): #CostOfHorizontal = #ShelfCost10I , Set the Cost of This Shelf
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+
+
+
+
+
+
+  Do,  (#NumShelfDepth>9):1
+  {
+    DisplaySet, #ShelfDepthJ =0, 10 Q...     WHAT IS THE DEPTH OF YOUR 10th HORIZONTAL SHELF? , ShelfDepth.Bmp
+    
+    DisplaySet, #NumShelfLengthJ=10, 10 Q...     HOW MANY DIFFERENT LENGTHS DO YOU USE FOR THIS SHELF DEPTH?  [1;2;3;4;5;6;7;8;9;10]
+    ,** 
+
+    Do, (#NumShelfLengthJ>0):1
+      {
+      DisplaySet, #ShelfLength1J =0,          1.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost1J =0,                   Cost of a Shelf   (up to #ShelfDepthJ" deep)   by   (up to #ShelfLength1J" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>0)&(#ShelfWidth<=#ShelfLength1J) & (#ShelfDepth>#ShelfDepthI)&(#ShelfDepth<=#ShelfDepthJ): #CostOfHorizontal = #ShelfCost1J ,Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthJ>1):1
+      {
+      DisplaySet, #ShelfLength2J =0,          2.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost2J =0,                   Cost of a Shelf   (up to #ShelfDepthJ" deep)   by   (up to #ShelfLength2J" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength1J)&(#ShelfWidth<=#ShelfLength2J) & (#ShelfDepth>#ShelfDepthI)&(#ShelfDepth<=#ShelfDepthJ): #CostOfHorizontal = #ShelfCost2J , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthJ>2):1
+      {
+      DisplaySet, #ShelfLength3J =0,          3.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost3J =0,                   Cost of a Shelf   (up to #ShelfDepthJ" deep)   by   (up to #ShelfLength3J" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength2J)&(#ShelfWidth<=#ShelfLength3J) & (#ShelfDepth>#ShelfDepthI)&(#ShelfDepth<=#ShelfDepthJ): #CostOfHorizontal = #ShelfCost3J , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthA>3):1
+      {
+      DisplaySet, #ShelfLength4J =0,          4.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost4J =0,                   Cost of a Shelf   (up to #ShelfDepthJ" deep)   by   (up to #ShelfLength4J" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength3J)&(#ShelfWidth<=#ShelfLength4J) & (#ShelfDepth>#ShelfDepthI)&(#ShelfDepth<=#ShelfDepthJ): #CostOfHorizontal = #ShelfCost4J , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthJ>4):1
+      {
+      DisplaySet, #ShelfLength5J =0,          5.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost5J =0,                   Cost of a Shelf   (up to #ShelfDepthJ" deep)   by   (up to #ShelfLength5J" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength4J)&(#ShelfWidth<=#ShelfLength5J) & (#ShelfDepth>#ShelfDepthI)&(#ShelfDepth<=#ShelfDepthJ): #CostOfHorizontal = #ShelfCost5J , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthJ>5):1
+      {
+      DisplaySet, #ShelfLength6J =0,          6.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost6J =0,                   Cost of a Shelf   (up to #ShelfDepthJ" deep)   by   (up to #ShelfLength6J" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength5J)&(#ShelfWidth<=#ShelfLength6J) & (#ShelfDepth>#ShelfDepthI)&(#ShelfDepth<=#ShelfDepthJ): #CostOfHorizontal = #ShelfCost6J , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthJ>6):1
+      {
+      DisplaySet, #ShelfLength7J =0,          7.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost7J =0,                   Cost of a Shelf   (up to #ShelfDepthJ" deep)   by   (up to #ShelfLength7J" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength6J)&(#ShelfWidth<=#ShelfLength7J) & (#ShelfDepth>#ShelfDepthI)&(#ShelfDepth<=#ShelfDepthJ): #CostOfHorizontal = #ShelfCost7J , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthJ>7):1
+      {
+      DisplaySet, #ShelfLength8J =0 ,          8.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost8J =0   ,                    Cost of a Shelf   (up to #ShelfDepthJ" deep)   by   (up to #ShelfLength8J" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength7J)&(#ShelfWidth<=#ShelfLength8J) & (#ShelfDepth>#ShelfDepthI)&(#ShelfDepth<=#ShelfDepthJ): #CostOfHorizontal = #ShelfCost8J , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthJ>8):1
+      {
+      DisplaySet, #ShelfLength9J =0 ,          9.  Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost9J =0   ,                    Cost of a Shelf   (up to #ShelfDepthJ" deep)   by   (up to #ShelfLength9J" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength8J)&(#ShelfWidth<=#ShelfLength9J) & (#ShelfDepth>#ShelfDepthI)&(#ShelfDepth<=#ShelfDepthJ): #CostOfHorizontal = #ShelfCost9J , Set the Cost of This Shelf
+      }
+
+    Do, (#NumShelfLengthJ>9):1
+      {
+      DisplaySet, #ShelfLength10J =0,          10. Horizontal Shelf Length is Less than or Equal to, ShelfLength.Bmp
+      DisplaySet, #ShelfCost10J =0  ,                    Cost of a Shelf   (up to #ShelfDepthJ" deep)   by   (up to #ShelfLength10J" long), ShelfLengthDepth.Bmp
+      Set, (#ShelfWidth>#ShelfLength9J)&(#ShelfWidth<=#ShelfLength10J) & (#ShelfDepth>#ShelfDepthI)&(#ShelfDepth<=#ShelfDepthJ): #CostOfHorizontal = #ShelfCost10J , Set the Cost of This Shelf
+      }
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }
+  ,**
+}
+
+
+,DisplaySet, #ShelfCostLS=35,Upcharge for L and angle cut Shelf
+
+
+,Set,#Shelfcostfor16moredeep=#Shelfcostfor16lessdeep,Cost of L Shelf 16 plus deep cost
+
+,Set, #ShelfCostLS =0
+,Do,  (rccd>0):1
+,  {
+    ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+    
+   
+ ,   Do, (rccd>0):1
+ ,     {
+
+ ,     Set, #ShelfCostLS =#Shelfcostfor16lessdeep,                   Cost of L Shelf 12 or 16 deep
+ ,     Set, (1=1): #CostOfHorizontal = #ShelfCostLS ,Set the Cost of This Shelf
+ ,     }
+
+ ,   Do, (rccd>16):1
+  ,    {
+  ,    set, #ShelfCostLS =#Shelfcostfor16moredeep,                   Cost of L Shelf 12 or 16 deep
+,      Set, (1=1): #CostOfHorizontal = #ShelfCostLS ,Set the Cost of This Shelf
+  ,    }
+
+,}
+
+
+,**
+,**
+,******************************* Shelf Hardware Costs ************************************
+DisplaySet, #CostAddedToFixedShelves =0,          1.   Cost added to each Fixed Shelves for hardware.
+DisplaySet, #CostAddedToAdjustableShelves =0,          2.   Cost added to each Adjustable Shelves for hardware.
+'DisplaySet, #CostAddedToShoeShelves =8,          3.   Cost added to each Shoe Shelf for rail.
+
+,Set the Cost of Each Type of Shelf****See Getmaterialcostshelf****
+,Set, #CostOfTopShelf = [(#CostOfHorizontal + #CostAddedToFixedShelves + #costforspecialcuts)]
+,Set, #CostOfMiddleShelf = [(#CostOfHorizontal + #CostAddedToFixedShelves + #costforspecialcuts)]
+,Set, #CostOfBottomShelf = [(#CostOfHorizontal + #CostAddedToFixedShelves + #costforspecialcuts)]
+,Set, #CostOfAdjustableShelf = [(#CostOfHorizontal + #CostAddedToAdjustableShelves + #costforspecialcuts)]
+,Set, #CostOfCubbyShelf = [(#CostOfHorizontal + #CostAddedToAdjustableShelves +#costforspecialcuts)]
+,Set, #CostOfShoeShelf = [(#CostOfHorizontal + #ShoeFenceCostGroup + #costforspecialcuts)]
+
+
+
+
+,KF Added
+,Load,GetMaterialCostAdjShelf.pcb
+
+
+
+,Calculates the Name of All Verticals
+,Load,(#UsePartNames=No): H-HorizontalNames.Pcb
+
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+,Blank Lines at the end of the Grid (for Looks Only)
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**

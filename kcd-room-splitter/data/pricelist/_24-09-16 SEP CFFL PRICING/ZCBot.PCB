@@ -1,0 +1,18 @@
+
+,*********** All FIXED SHELVES ***********
+Set, #ShelfWidth = [(W)]
+Set, #ShelfDepth = [(D)]
+Load, Pricefixedshelves.pcb
+
+
+
+Price, (#chargeforconnectingshelves="Yes"): 1,Connecting Shelf Upcharge, #Costofbottomconnector,,  ,       #KickPrintOrderNumber,
+ 
+
+,****************************************
+
+,*********** All OTHER PIECES ************
+
+Price, (K>0):1,   #KickName,             #CostOfKick,                    K, W,          #KickPrintOrderNumber,
+        
+,*****************************************

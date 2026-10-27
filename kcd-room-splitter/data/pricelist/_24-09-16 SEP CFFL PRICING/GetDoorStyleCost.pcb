@@ -1,0 +1,111 @@
+,Called from D - Door Cost
+set, #stopstyle=1
+,Calculating subtotals
+load, getdoordrawerfinishingcost.pcb
+load, getdoordrawerinsertcost.pcb
+
+Set,#DoorDrawerType=#ExtraUnitText2
+Set,#DoorDrawerStyleCostGroup=0
+
+,Set, (#unitfilename="*OK-*"):#DoorDrawerType=#memodoor
+
+Do,(#whichdoor<>"0")&((#DoorDrawertype<>"#DoorDrawerTypeName1")&(#DoorDrawertype<>"#DoorDrawerTypeName2")):1
+{
+  ReadCSVFile,Special Order Doors Price List.csv,1,2,3
+  ReadCsvValue,Special Order Doors Price List.csv,#DoorDrawerType,#SODoorcode,#DoorDrawerStyleCostGroup
+ }
+
+
+Set,(#DoorDrawerType = "#DoorDrawerTypeName3"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor3
+Set,(#DoorDrawerType = "#DoorDrawerTypeName4"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor4
+Set,(#DoorDrawerType = "#DoorDrawerTypeName5"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor5
+Set,(#DoorDrawerType = "#DoorDrawerTypeName6"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor6
+
+set, #stophere=0
+Do,(#CodeDoor="flatCFMirror")|(#codedoor="flatCFMolding"):1
+{
+ Do,(#ContrastMaterialName="None"):1
+ {
+set, #stophere=1
+ Set, #DoorDrawerType = #DoorDrawerTypeName1
+ Set, #DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor1
+ }
+ Do,(#ContrastMaterialName<>"None"):1
+ {
+ Set,#DoorDrawerType = #DoorDrawerTypeName2
+ Set,#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor2
+ Set,#use2ndmaterial=1
+ }
+}
+set, #DoorDrawerStyleCostGroup=[#DoorDrawerStyleCostGroup*#universalupcharge]
+set, #stopstyle=2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

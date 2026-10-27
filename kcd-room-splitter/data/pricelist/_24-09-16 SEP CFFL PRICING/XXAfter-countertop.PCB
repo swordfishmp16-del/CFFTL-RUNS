@@ -1,0 +1,229 @@
+Do,(#RoomNum = 1):1
+{
+
+Set,(ct>0):#Room1CTopCost = [#Room1CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room1CTSqFt = [(#Room1CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room1CTName = <#CountertopTypeName>
+
+}
+,end Room 1
+
+Do,(#RoomNum = 2):1
+{
+Set,(ct>0):#Room2CTopCost = [#Room2CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room2CTSqFt = [(#Room2CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room2CTName = <#CountertopTypeName>
+}
+,end Room 2
+
+Do,(#RoomNum = 3):1
+{
+Set,(ct>0):#Room3CTopCost = [#Room3CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room3CTSqFt = [(#Room3CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room3CTName = <#CountertopTypeName>
+}
+,end Room 3
+
+Do,(#RoomNum = 4):1
+{
+Set,(ct>0):#Room4CTopCost = [#Room4CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room4CTSqFt = [(#Room4CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room4CTName = <#CountertopTypeName>
+}
+,end Room 4
+
+Do,(#RoomNum = 5):1
+{
+Set,(ct>0):#Room5CTopCost = [#Room5CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room5CTSqFt = [(#Room5CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room5CTName = <#CountertopTypeName>
+}
+,end Room 5
+
+Do,(#RoomNum = 6):1
+{
+Set,(ct>0):#Room6CTopCost = [#Room6CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room6CTSqFt = [(#Room6CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room6CTName = <#CountertopTypeName>
+}
+,end Room 6
+
+Do,(#RoomNum = 7):1
+{
+Set,(ct>0):#Room7CTopCost = [#Room7CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room7CTSqFt = [(#Room7CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room7CTName = <#CountertopTypeName>
+}
+,end Room 7
+
+Do,(#RoomNum = 8):1
+{
+Set,(ct>0):#Room8CTopCost = [#Room8CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room8CTSqFt = [(#Room8CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room8CTName = <#CountertopTypeName>
+}
+,end Room 8
+
+Do,(#RoomNum = 9):1
+{
+Set,(ct>0):#Room9CTopCost = [#Room9CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room9CTSqFt = [(#Room9CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room9CTName = <#CountertopTypeName>
+}
+,end Room 9
+
+Do,(#RoomNum = 10):1
+{
+Set,(ct>0):#Room10CTopCost = [#Room10CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room10CTSqFt = [(#Room10CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room10CTName = <#CountertopTypeName>
+}
+,end Room 10
+
+Do,(#RoomNum = 11):1
+{
+Set,(ct>0):#Room11CTopCost = [#Room11CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room11CTSqFt = [(#Room11CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room11CTName = <#CountertopTypeName>
+}
+,end Room 11
+
+Do,(#RoomNum = 12):1
+{
+Set,(ct>0):#Room12CTopCost = [#Room12CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room12CTSqFt = [(#Room12CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room12CTName = <#CountertopTypeName>
+}
+,end Room 12
+
+Do,(#RoomNum = 13):1
+{
+Set,(ct>0):#Room13CTopCost = [#Room13CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room13CTSqFt = [(#Room13CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room13CTName = <#CountertopTypeName>
+}
+,end Room 13
+
+Do,(#RoomNum = 14):1
+{
+Set,(ct>0):#Room14CTopCost = [#Room14CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room14CTSqFt = [(#Room14CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room14CTName = <#CountertopTypeName>
+}
+,end Room 14
+
+Do,(#RoomNum = 15):1
+{
+Set,(ct>0):#Room15CTopCost = [#Room15CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room15CTSqFt = [(#Room15CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room15CTName = <#CountertopTypeName>
+}
+,end Room 15
+
+Do,(#RoomNum = 16):1
+{
+Set,(ct>0):#Room16CTopCost = [#Room16CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room16CTSqFt = [(#Room16CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room16CTName = <#CountertopTypeName>
+}
+,end Room 16
+
+Do,(#RoomNum = 17):1
+{
+Set,(ct>0):#Room17CTopCost = [#Room17CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room17CTSqFt = [(#Room17CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room17CTName = <#CountertopTypeName>
+}
+,end Room 17
+
+Do,(#RoomNum = 18):1
+{
+Set,(ct>0):#Room18CTopCost = [#Room18CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room18CTSqFt = [(#Room18CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room18CTName = <#CountertopTypeName>
+}
+,end Room 18
+
+Do,(#RoomNum = 19):1
+{
+Set,(ct>0):#Room19CTopCost = [#Room19CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room19CTSqFt = [(#Room19CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room19CTName = <#CountertopTypeName>
+}
+,end Room 19
+
+Do,(#RoomNum = 20):1
+{
+Set,(ct>0):#Room20CTopCost = [#Room20CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room20CTSqFt = [(#Room20CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room20CTName = <#CountertopTypeName>
+}
+,end Room 20
+
+Do,(#RoomNum = 21):1
+{
+Set,(ct>0):#Room21CTopCost = [#Room21CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room21CTSqFt = [(#Room21CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room21CTName = <#CountertopTypeName>
+}
+,end Room 21
+
+Do,(#RoomNum = 22):1
+{
+Set,(ct>0):#Room22CTopCost = [#Room22CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room22CTSqFt = [(#Room22CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room22CTName = <#CountertopTypeName>
+}
+,end Room 22
+
+Do,(#RoomNum = 23):1
+{
+Set,(ct>0):#Room23CTopCost = [#Room23CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room23CTSqFt = [(#Room23CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room23CTName = <#CountertopTypeName>
+}
+,end Room 23
+
+Do,(#RoomNum = 24):1
+{
+Set,(ct>0):#Room24CTopCost = [#Room24CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room24CTSqFt = [(#Room24CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room24CTName = <#CountertopTypeName>
+}
+,end Room 24
+
+Do,(#RoomNum = 25):1
+{
+Set,(ct>0):#Room25CTopCost = [#Room25CTopCost + (((#ctw+ctl+ctr)*#CTopLF$*Num)+ #ExtraCost + ((#ctw+ctl+ctr)*(#ctd+ctf+ctb)*#CTopSq$*Num))]
+Set,(ct>0):#CTSQFTtemp= ((#ctw+ctl+ctr)*(#ctd+ctf+ctb))/144
+Set,(ct>0):#Room25CTSqFt = [(#Room25CTSqFt+#CTSQFTtemp)]
+Set,(ct>0):#Room25CTName = <#CountertopTypeName>
+}
+,end Room 25
+
+Set,#ExtraCost=0
+

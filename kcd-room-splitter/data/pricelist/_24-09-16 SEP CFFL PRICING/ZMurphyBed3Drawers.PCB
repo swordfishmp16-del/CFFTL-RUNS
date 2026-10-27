@@ -1,0 +1,34 @@
+,CF Calculates the price for each part
+Set,#ZUnitType=Murphybed
+
+
+,********** COST FOR ZOOM ROOM UNIT ***********
+Load,G-Cost Wall Bed.pcb
+Price, 1,   #Code Cabinet,         #CostOfMurphyBed,             W, H,          #LeftSidePrintOrderNumber, 
+
+,***The following tracks the depth for the contract, does not count panels
+set, #VertH=H
+set, #VertD=D
+set, #wallbeddepthtrack=1
+load, Pricesides.pcb
+,load, b-side cost.pcb
+set, #wallbeddepthtrack=0        
+,*****************************************
+   
+Set, #ShelfWidth = [(W-LS-RS)]  
+,************* OTHER PARTS ***************
+set, #Backheight = [H-TR]
+set, #ShelfWidth = [(W-LS-RS)]
+Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,             
+Price, (CRodHt1>0):1,            #ClosetPoleName,       #ClosetPoleCost,         (W-LS-RS), 1,  #ClosetPolePrintOrderNumber,       
+Price, (CRodHt2>0):1,            #ClosetPoleName,       #ClosetPoleCost,         (W-LS-RS), 1,  #ClosetPolePrintOrderNumber,        
+,Price, (K>0):1,      #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,              
+,*****************************************
+
+do,(#DoorDrawerType <> "Flat Edgebend"):1
+{
+Load,Doors.pcb
+}
+
+
+

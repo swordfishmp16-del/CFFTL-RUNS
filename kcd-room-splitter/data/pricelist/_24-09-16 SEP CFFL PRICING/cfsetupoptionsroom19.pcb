@@ -1,0 +1,58 @@
+,**********Initial options Room19************************
+
+
+
+set,#Room19hasoptions=0
+set, #Room19cedarbottomcount=0
+set, #Room19falsebottomcount=0
+set, #Room19doubledeckercount=0
+set, #Room19locknotchcount=0
+set, #Room19slidingdoorcount=0
+set, #Room19drawerfaceonlycount=0
+set, #Room19drawerFileFrameboxcount=0
+set, #Room19Bot75count=0
+set, #Room19CedarBot25count=0
+set, #Room19switchglidescount=0
+Set,#Room19Routedpuckshelfcount=0
+Set,#Room19Surfacepuckshelfcount=0
+
+Set,#Room19SurfaceXLpuckshelfcount=0
+Set,#Room19task12inshelfcount=0
+Set,#Room19task24inshelfcount=0
+Set,#Room19task30inshelfcount=0
+Set,#Room19task36inshelfcount=0
+Set,#Room19task42inshelfcount=0
+Set,#Room19task45inshelfcount=0
+Set, #Room19CuttoFitcount=0
+set, #Room19scarcleatcount=0
+set, #Room19CenterBackborecount=0
+set, #Room19DBLBackborecount=0
+set, #Room19setholescustomcount=0
+set, #Room19adjholescustomcount=0
+set, #Room19noholesdrillonsitecount=0
+set, #Room19SlantedHeadboardcount=0
+
+set, #Room19Singledoorcleatcount=0
+set, #Room19Dbldoorcleatcount=0
+
+set, #Room19SlidingdoorCount=0
+
+set, #Room19FalsebottomDrwCount=0
+set, #Room19DoubleDeckerDrwCount=0
+set, #Room19with34bottomDrwCount=0
+set, #Room19switchtosidemountDrwCount=0
+set, #Room19FileframecutdownDrwCount=0
+set, #Room19LocknotchDrwCount=0
+set, #Room19with25cedarbotDrwCount=0
+set, #Room19boxcutbackDrwCount=0
+set, #Room19Drwboxtoshelfcount=0
+set, #Room19EBTopofPanelcount=0
+set, #Room19EBBackofPanelcount=0
+set, #Room19RWNotchcount=0
+Set,#Room19RWshelfcount=0
+
+Set,#Room19Wbusbarcount=0
+Set,#Room19WLEDshelfcount=0
+
+set,#Room19LeftHangercount=0
+set,#Room19RightHangercount=0

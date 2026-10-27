@@ -1,0 +1,170 @@
+,This is a KCD system file. Do NOT change it in any way!
+
+,This file will set the size of each Drawer Box and then load the file that makes the drawer boxes
+
+,initialize these to zero before going into the E-Drawer Cost file
+Set,#UnitDrawerCost=0
+Set,#UnitDrawerNum=0
+
+
+,Calculates a Drawer 1 cost
+Set, #DrawerOpeningWidth = [W-LS-RS]
+Set, #DrawerOpeningHeight = DH1
+Set, #DrawerFrontWidth = D1W
+Set, #DrawerFrontHeight = D1H
+Set, (#DrawerFrontHeight=0):#drawerfront1=0:#drawerfront1=1
+set, #nodrawerbox=0
+Set, (D1DR>0):#drawernumber=1:#drawernumber=0
+Set, ((Opt=#OptDrw1NDB)&(#drawernumber=1)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw1SG)&(#drawernumber=1)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (#nodrawerbox=0)&(D1HG=0)&(D1H>0)&(D1T=3):E-Drawer Cost.Pcb
+,Load, (D1H>0)&(DH1>0)&(D1T=3):E-Drawer Cost.Pcb
+
+,Calculates a Drawer 2 cost
+Set, #DrawerOpeningWidth = [W-LS-RS]
+Set, #DrawerOpeningHeight = DH2
+Set, #DrawerFrontWidth = D2W
+Set, #DrawerFrontHeight = D2H
+Set, (#DrawerFrontHeight=0):#drawerfront2=0:#drawerfront2=1
+Set, (D1DR>0):#drawernumber=2:#drawernumber=1
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw2NDB)&(#drawernumber=2)):#nodrawerbox=1
+Set, ((Opt=#OptDrw1NDB)&(#drawernumber=1)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw1SG)&(#drawernumber=1)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Set, ((Opt=#OptDrw2SG)&(#drawernumber=2)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (#nodrawerbox=0)&(D2HG=0)&(D2H>0)&(D2T=3):E-Drawer Cost.Pcb
+,Load, (D2H>0)&(DH2>0)&(D2T=3):E-Drawer Cost.Pcb
+
+,Calculates a Drawer 3 cost
+Set, #DrawerOpeningWidth = [W-LS-RS]
+Set, #DrawerOpeningHeight = DH3
+Set, #DrawerFrontWidth = D3W
+Set, #DrawerFrontHeight = D3H
+Set, (#DrawerFrontHeight=0):#drawerfront3=0:#drawerfront3=1
+Set, (D1DR>0):#drawernumber=3:#drawernumber=2
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw2NDB)&(#drawernumber=2)):#nodrawerbox=1
+Set, ((Opt=#OptDrw3NDB)&(#drawernumber=3)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw3SG)&(#drawernumber=3)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Set, ((Opt=#OptDrw2SG)&(#drawernumber=2)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (#nodrawerbox=0)&(D3HG=0)&(D3H>0)&(D3T=3):E-Drawer Cost.Pcb
+,Load, (D3H>0)&(DH3>0)&(D3T=3):E-Drawer Cost.Pcb
+
+,Calculates a Drawer 4 cost
+Set, #DrawerOpeningWidth = [W-LS-RS]
+Set, #DrawerOpeningHeight = DH4
+Set, #DrawerFrontWidth = D4W
+Set, #DrawerFrontHeight = D4H
+Set, (#DrawerFrontHeight=0):#drawerfront4=0:#drawerfront4=1
+Set, (D1DR>0):#drawernumber=4:#drawernumber=3
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw4NDB)&(#drawernumber=4)):#nodrawerbox=1
+Set, ((Opt=#OptDrw3NDB)&(#drawernumber=3)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw3SG)&(#drawernumber=3)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Set, ((Opt=#OptDrw4SG)&(#drawernumber=4)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (#nodrawerbox=0)&(D4HG=0)&(D4H>0)&(D4T=3):E-Drawer Cost.Pcb
+,Load, (D4H>0)&(DH4>0)&(D4T=3):E-Drawer Cost.Pcb
+
+,Calculates a Drawer 5 cost
+Set, #DrawerOpeningWidth = [W-LS-RS]
+Set, #DrawerOpeningHeight = DH5
+Set, #DrawerFrontWidth = D5W
+Set, #DrawerFrontHeight = D5H
+Set, (#DrawerFrontHeight=0):#drawerfront5=0:#drawerfront5=1
+Set, (D1DR>0):#drawernumber=5:#drawernumber=4
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw5NDB)&(#drawernumber=5)):#nodrawerbox=1
+Set, ((Opt=#OptDrw4NDB)&(#drawernumber=4)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw5SG)&(#drawernumber=5)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Set, ((Opt=#OptDrw4SG)&(#drawernumber=4)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (#nodrawerbox=0)&(D5HG=0)&(D5H>0)&(D5T=3):E-Drawer Cost.Pcb
+,Load, (D5H>0)&(DH5>0)&(D5T=3):E-Drawer Cost.Pcb
+
+,Calculates a Drawer 6 cost
+Set, #DrawerOpeningWidth = [W-LS-RS]
+Set, #DrawerOpeningHeight = DH6
+Set, #DrawerFrontWidth = D6W
+Set, #DrawerFrontHeight = D6H
+Set, (#DrawerFrontHeight=0):#drawerfront6=0:#drawerfront6=1
+Set, (D1DR>0):#drawernumber=6:#drawernumber=5
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw6NDB)&(#drawernumber=6)):#nodrawerbox=1
+Set, ((Opt=#OptDrw5NDB)&(#drawernumber=5)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw5SG)&(#drawernumber=5)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Set, ((Opt=#OptDrw6SG)&(#drawernumber=6)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (#nodrawerbox=0)&(D6HG=0)&(D6H>0)&(D6T=3):E-Drawer Cost.Pcb
+,Load, (D6H>0)&(DH6>0)&(D6T=3):E-Drawer Cost.Pcb
+
+,Calculates a Drawer 7 cost
+Set, #DrawerOpeningWidth = [W-LS-RS]
+Set, #DrawerOpeningHeight = DH7
+Set, #DrawerFrontWidth = D7W
+Set, #DrawerFrontHeight = D7H
+Set, (#DrawerFrontHeight=0):#drawerfront7=0:#drawerfront7=1
+Set, (D1DR>0):#drawernumber=7:#drawernumber=6
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw7NDB)&(#drawernumber=7)):#nodrawerbox=1
+Set, ((Opt=#OptDrw6NDB)&(#drawernumber=6)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw7SG)&(#drawernumber=7)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Set, ((Opt=#OptDrw6SG)&(#drawernumber=6)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (#nodrawerbox=0)&(D7HG=0)&(D7H>0)&(D7T=3):E-Drawer Cost.Pcb
+,Load, (D7H>0)&(DH7>0)&(D7T=3):E-Drawer Cost.Pcb
+
+,Calculates a Drawer 8 cost
+Set, #DrawerOpeningWidth = [W-LS-RS]
+Set, #DrawerOpeningHeight = DH8
+Set, #DrawerFrontWidth = D8W
+Set, #DrawerFrontHeight = D8H
+Set, (#DrawerFrontHeight=0):#drawerfront8=0:#drawerfront8=1
+Set, (D1DR>0):#drawernumber=8:#drawernumber=7
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw8NDB)&(#drawernumber=8)):#nodrawerbox=1
+Set, ((Opt=#OptDrw7NDB)&(#drawernumber=7)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw7SG)&(#drawernumber=7)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Set, ((Opt=#OptDrw8SG)&(#drawernumber=8)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (#nodrawerbox=0)&(D8HG=0)&(D8H>0)&(D8T=3):E-Drawer Cost.Pcb
+,Load, (D8H>0)&(DH8>0)&(D8T=3):E-Drawer Cost.Pcb
+
+,Calculates a Drawer 9 cost
+Set, #DrawerOpeningWidth = [W-LS-RS]
+Set, #DrawerOpeningHeight = DH9
+Set, #DrawerFrontWidth = D9W
+Set, #DrawerFrontHeight = D9H
+Set, (#DrawerFrontHeight=0):#drawerfront9=0:#drawerfront9=1
+Set, (D1DR>0):#drawernumber=9:#drawernumber=8
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw9NDB)&(#drawernumber=9)):#nodrawerbox=1
+Set, ((Opt=#OptDrw8NDB)&(#drawernumber=8)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw9SG)&(#drawernumber=9)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Set, ((Opt=#OptDrw8SG)&(#drawernumber=8)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (#nodrawerbox=0)&(D9HG=0)&(D9H>0)&(D9T=3):E-Drawer Cost.Pcb
+,Load, (D9H>0)&(DH9>0)&(D9T=3):E-Drawer Cost.Pcb
+
+,Calculates a Drawer 10 cost used when 2 upper doors
+Set, #DrawerOpeningWidth = [W-LS-RS]
+Set, #DrawerOpeningHeight = DH10
+Set, #DrawerFrontWidth = D10W
+Set, #DrawerFrontHeight = D10H
+Set, (#DrawerFrontHeight=0):#drawerfront10=0:#drawerfront10=1
+Set, (D1DR>0):#drawernumber=10:#drawernumber=9
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw9NDB)&(#drawernumber=9)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw9SG)&(#drawernumber=9)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (D10HG=0)&(D10H>0)&(D10T=3):E-Drawer Cost.Pcb
+,Load, (D9H>0)&(DH9>0)&(D9T=3):E-Drawer Cost.Pcb
+
+
+set, #drawernumber=0
+
+
+End of 'DRAWERS.PCB' KCD system file

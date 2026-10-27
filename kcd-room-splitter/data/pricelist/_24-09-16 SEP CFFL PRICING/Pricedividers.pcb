@@ -1,0 +1,114 @@
+,CF Prices and counts the middle divider (panel) 
+
+
+
+Set, #NextVertH = [DH6]
+
+Do, (MS>0):1
+{
+set, #sideTH= MS
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH= {MS}
+Price, (MS>0):1,   #DividerName-#sideTH"-#edgebandingtype,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber,          
+Price, ((#VertD>12)&(MS>0)&(#dogear=1)):1, Dog-Ear Panel Cut, #Dogearpanelcost, ,,#LeftSidePrintOrderNumber,
+}
+,Bottom Vertical Divider
+
+Do, (LMS>0):1
+{
+set, #sideTH= LMS
+Set, #VertH = [DH2]
+Set, #VertD = [D]
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH= {LMS}
+Price, (LMS>0):1,   #DividerName-#sideTH"-#EdgeBandingType,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber, 
+}
+Do, (MS2>0):1
+{
+set, #sideTH= MS2
+Set, #VertH = [DH2]
+Set, #VertD = [D]
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH= {MS2}
+Price, (MS2>0):1,   #DividerName-#sideTH"-#EdgeBandingType,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber, 
+}
+,3rd Vertical Divider
+
+Do, (LLMS>0):1
+{
+set, #sideTH= LLMS
+Set, #VertH = [DH3]
+Set, #VertD = [D]
+set, #temppanelcount =1
+Load, B-Side Cost.Pcb
+set, #sideTH= {LLMS}
+Price, (LLMS>0):1, #DividerName-#sideTH"-#edgebandingtype,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber,          
+}
+Do, (MS3>0):1
+{
+set, #sideTH= MS3
+Set, #VertH = [DH3]
+Set, #VertD = [D]
+set, #temppanelcount =1
+Load, B-Side Cost.Pcb
+set, #sideTH= {MS3}
+Price, (MS3>0):1, #DividerName-#sideTH"-#edgebandingtype,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber,          
+}
+
+Do, (ms4>0):1
+{
+set, #sideTH= MS4
+,4th Vertical Divider
+Set, #VertH = [DH4]
+Set, #VertD = [D]
+set, #temppanelcount =1
+Load, B-Side Cost.Pcb
+set, #sideTH= {MS4}
+Price, (ms4>0):1,  #DividerName-#sideTH"-#edgebandingtype,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber,
+}
+
+
+Do, (ms5>0):1
+{
+set, #sideTH= MS5
+,5th Vertical Divider
+Set, #VertH = [DH5]
+Set, #VertD = [D]
+Load, B-Side Cost.Pcb
+set, #sideTH= {MS5}
+Price, (ms5>0):1,  #DividerName-#sideTH"-#edgebandingtype,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber, 
+}
+
+}
+
+Do, (BMS>0):1
+{
+set, #sideTH= BMS
+Set, #VertH = [DH6]
+Set, (ms5=0):#VertH = [DH5]
+Set, ((ms4=0)&(ms5=0)):#VertH = [DH4]
+Set, ((llms=0)&(ms4=0)&(ms5=0)):#VertH=[DH3]
+
+Set, #VertD = [D]
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH= {BMS}
+Price, (BMS>0):1,  #DividerName-#sideTH"-#edgebandingtype,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber, 
+}
+Do, (MS6>0):1
+{
+set, #sideTH= MS6
+Set, #VertH = [DH6]
+Set, (ms5=0):#VertH = [DH5]
+Set, ((ms4=0)&(ms5=0)):#VertH = [DH4]
+Set, ((ms3=0)&(ms4=0)&(ms5=0)):#VertH=[DH3]
+
+Set, #VertD = [D]
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH= {MS6}
+Price, (MS6>0):1,  #DividerName-#sideTH"-#edgebandingtype,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber, 
+}

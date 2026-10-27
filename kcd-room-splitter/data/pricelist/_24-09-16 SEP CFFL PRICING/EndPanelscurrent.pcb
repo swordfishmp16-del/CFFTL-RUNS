@@ -1,0 +1,82 @@
+,***********This calculates the cost of each End Panel as Door Type Selected
+
+Set, #CostOfDoor=0 ,Set as Default
+
+
+Set,(#UseDoorCode=Yes):#DoorName=#CodeDoor:#DoorName=Door - #DoorDrawerType
+Set,(#UseDoorCode=Yes):#DrFrtName=#CodeDoor:#DrFrtName=DrFrt - #DoorDrawerType
+
+
+
+,***Single End Panel Door
+Set, #Endpanel=1
+Set, #DoorH=#EndpanelH
+Set, #DoorW=#EndpanelW
+Set, D1H=#EndpanelH
+Set, D1W=#EndpanelW
+set, D1HL=0
+set, D1HK=0
+set, D1HG=0
+Set, #DoorHL=D1HL
+Set, #DoorHK=D1HK
+set, #DoorHG=D1HG
+,Load, D-Door Cost.pcb
+Set, #Endpanel=0
+set, #codedoor=Endpanel
+load, GetDoorStyleCost.pcb
+
+,Do,  (#DoorDrawerType = "#DoorDrawerTypeName1"):1              ,flat edgeband door cost
+,{
+, Edgeband doors allowed sizes matching melamine
+, Set,(#CostOfDoor>0)&(#IncludeInsert=0)&(#Tempdoorcost>0):#CostOfDoor=#TempDoorCost*#DoorDrawerTypeCostFactor1 ,  flat door 
+, Set,(#CostOfDoor>0)&(#IncludeInsert=0)&(#Tempdoorcost=0):#CostofDoor=0
+
+ ,Framed doors allowed sizes matching melamine
+ ,Set,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Tempdoorcost>0):#CostOfDoor=(#TempDoorCost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door 
+, Set,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Tempdoorcost=0):#CostofDoor=0
+
+, Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#UnitMaterialName,    #CostOfDoor,    #EndpanelW, #EndpanelH, #DoorPrintOrderNumber,   
+, Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#UnitMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #EndpanelW, #EndpanelH, #DoorPrintOrderNumber,
+
+
+, }
+
+
+,Do,  (#DoorDrawerType = "#DoorDrawerTypeName2"):1              ,flat edgeband door cost 2nd color
+,{
+
+,Set,(#CostOfDoor>0)&(#IncludeInsert=0)&(#Tempdoorcost>0):#CostOfDoor=#Tempdoorcost*#DoorDrawerTypeCostFactor2 , flat door 
+,Set,(#CostOfDoor>0)&(#IncludeInsert=0)&(#Tempdoorcost=0):#CostofDoor=0
+
+,Framed doors allowed sizes contrast melamine
+,Set,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Tempdoorcost>0):#CostOfDoor=(#Tempdoorcost+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor2 , Framed flat door 
+,Set,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Tempdoorcost=0):#CostofDoor=0
+
+,Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#ContrastMaterialName,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+,Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#ContrastMaterialName-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+,}
+
+
+
+Do, (#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2"):1              ,Custom Door cost
+{
+
+set, #costofdoor = #EndpanelW*#EndpanelH/144*(#DoorDrawerStyleCostGroup+#DoorDrawerFinishingCostGroup)
+,set, (#EndPanelW>#MaxDoorWidth):#Costofdoor=0
+
+, solid doors
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1   ,#DecorativePanelName -#DoorDrawerType #DoorDrawerFinishingType,    #CostOfDoor,   #EndpanelW, #EndpanelH, #DoorPrintOrderNumber,
+,Framed doors 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1   ,#DecorativePanelName -#DoorDrawerType #DoorDrawerFinishingType-#DoorDrawerInsertType,    #CostOfDoor,    #EndpanelW, #EndpanelH, #DoorPrintOrderNumber,
+
+
+
+}
+
+,invalid door
+Do, (#CostofDoor=0):1
+{
+set, #name =  No Color Selected or invalid size
+load, Eachunit.pcb
+}
+

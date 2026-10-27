@@ -1,0 +1,2412 @@
+,Chelsea was here 10-12-21 - This page will match Room Number, Handle/Knob number, and report the correct handle/knob name.
+
+
+
+set, #HWCount=#newHWcount
+set, #HWcost=(#TempHKtotalunitCost*#HWCount)
+
+Do, (#RoomNum=1):1
+ {
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom1=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room1=999
+   set,#CountHandleName0Room1=[#CountHandleName0Room1+#HWCount]
+   set,#CostHandleName0Room1=0
+   }
+  Do, (#HKName="#HandleName1Room1"):1
+   {
+   set,#CodeHandleName1Room1=<#HKCode>
+   set,#CountHandleName1Room1=[#CountHandleName1Room1+#HWCount]
+   set,#CostHandleName1Room1=[#CostHandleName1Room1+#HWcost]
+   }
+Do,(#HandleName2Room1<>"#HandleName1Room1"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room1"):1
+   {
+   set,#CodeHandleName2Room1=<#HKCode>
+   set,#CountHandleName2Room1=[#CountHandleName2Room1+#HWCount]
+   set,#CostHandleName2Room1=[#CostHandleName2Room1+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room1<>"#HandleName1Room1")&(#HandleName3Room1<>"#HandleName2Room1")):1
+{
+  Do, (#HKName="#HandleName3Room1"):1
+   {
+   set,#CodeHandleName3Room1=<#HKCode>
+   set,#CountHandleName3Room1=[#CountHandleName3Room1+#HWCount]
+   set,#CostHandleName3Room1=[#CostHandleName3Room1+#HWcost]
+   }
+}
+Do,((#HandleName4Room1<>"#HandleName1Room1")&(#HandleName4Room1<>"#HandleName2Room1")&(#HandleName4Room1<>"#HandleName3Room1")):1
+{
+  Do, (#HKName="#HandleName4Room1"):1
+   {
+   set,#CodeHandleName4Room1=<#HKCode>
+   set,#CountHandleName4Room1=[#CountHandleName4Room1+#HWCount]
+   set,#CostHandleName4Room1=[#CostHandleName4Room1+#HWcost]
+   }
+}
+Do,((#HandleName5Room1<>"#HandleName1Room1")&(#HandleName5Room1<>"#HandleName2Room1")&(#HandleName5Room1<>"#HandleName3Room1")&(#HandleName5Room1<>"#HandleName4Room1")):1
+{
+  Do, (#HKName="#HandleName5Room1"):1
+   {
+   set,#CodeHandleName5Room1=<#HKCode>
+   set,#CountHandleName5Room1=[#CountHandleName5Room1+#HWCount]
+   set,#CostHandleName5Room1=[#CostHandleName5Room1+#HWcost]
+   }
+}
+Do,((#HandleName6Room1<>"#HandleName1Room1")&(#HandleName6Room1<>"#HandleName2Room1")&(#HandleName6Room1<>"#HandleName3Room1")&(#HandleName6Room1<>"#HandleName4Room1")&(#HandleName6Room1<>"#HandleName5Room1")):1
+{
+  Do, (#HKName="#HandleName6Room1"):1
+   {
+   set,#CodeHandleName6Room1=<#HKCode>
+   set,#CountHandleName6Room1=[#CountHandleName6Room1+#HWCount]
+   set,#CostHandleName6Room1=[#CostHandleName6Room1+#HWcost]
+   }
+}
+Do,((#HandleName7Room1<>"#HandleName1Room1")&(#HandleName7Room1<>"#HandleName2Room1")&(#HandleName7Room1<>"#HandleName3Room1")&(#HandleName7Room1<>"#HandleName4Room1")&(#HandleName7Room1<>"#HandleName5Room1")&(#HandleName7Room1<>"#HandleName6Room1")):1
+{
+  Do, (#HKName="#HandleName7Room1"):1
+   {
+   set,#CodeHandleName7Room1=<#HKCode>
+   set,#CountHandleName7Room1=[#CountHandleName7Room1+#HWCount]
+   set,#CostHandleName7Room1=[#CostHandleName7Room1+#HWcost]
+   }
+}
+Do,((#HandleName8Room1<>"#HandleName1Room1")&(#HandleName8Room1<>"#HandleName2Room1")&(#HandleName8Room1<>"#HandleName3Room1")&(#HandleName8Room1<>"#HandleName4Room1")&(#HandleName8Room1<>"#HandleName5Room1")&(#HandleName8Room1<>"#HandleName6Room1")&(#HandleName8Room1<>"#HandleName7Room1")):1
+{
+  Do, (#HKName="#HandleName8Room1"):1
+   {
+   set,#CodeHandleName8Room1=<#HKCode>
+   set,#CountHandleName8Room1=[#CountHandleName8Room1+#HWCount]
+   set,#CostHandleName8Room1=[#CostHandleName8Room1+#HWcost]
+   }
+}
+Do,((#HandleName9Room1<>"#HandleName1Room1")&(#HandleName9Room1<>"#HandleName2Room1")&(#HandleName9Room1<>"#HandleName3Room1")&(#HandleName9Room1<>"#HandleName4Room1")&(#HandleName9Room1<>"#HandleName5Room1")&(#HandleName9Room1<>"#HandleName6Room1")&(#HandleName9Room1<>"#HandleName7Room1")&(#HandleName9Room1<>"#HandleName8Room1")):1
+{
+  Do, (#HKName="#HandleName9Room1"):1
+   {
+   set,#CodeHandleName9Room1=<#HKCode>
+   set,#CountHandleName9Room1=[#CountHandleName9Room1+#HWCount]
+   set,#CostHandleName9Room1=[#CostHandleName9Room1+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room1DoorHWCost=[#CostHandleName1Room1+#CostHandleName2Room1+#CostHandleName3Room1+#CostHandleName4Room1+#CostHandleName5Room1+#CostHandleName6Room1+#CostHandleName7Room1+#CostHandleName8Room1+#CostHandleName9Room1]
+
+End
+ }
+
+Do, (#RoomNum=2):1
+ {
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom2=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room2=999
+   set,#CountHandleName0Room2=[#CountHandleName0Room2+#HWCount]
+   set,#CostHandleName0Room2=0
+   }
+  Do, (#HKName="#HandleName1Room2"):1
+   {
+   set,#CodeHandleName1Room2=<#HKCode>
+   set,#CountHandleName1Room2=[#CountHandleName1Room2+#HWCount]
+   set,#CostHandleName1Room2=[#CostHandleName1Room2+#HWcost]
+   }
+Do,(#HandleName2Room2<>"#HandleName1Room2"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room2"):1
+   {
+   set,#CodeHandleName2Room2=<#HKCode>
+   set,#CountHandleName2Room2=[#CountHandleName2Room2+#HWCount]
+   set,#CostHandleName2Room2=[#CostHandleName2Room2+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room2<>"#HandleName1Room2")|(#HandleName3Room2<>"#HandleName2Room2")):1
+{
+  Do, (#HKName="#HandleName3Room2"):1
+   {
+   set,#CodeHandleName3Room2=<#HKCode>
+   set,#CountHandleName3Room2=[#CountHandleName3Room2+#HWCount]
+   set,#CostHandleName3Room2=[#CostHandleName3Room2+#HWcost]
+   }
+}
+Do,((#HandleName4Room2<>"#HandleName1Room2")&(#HandleName4Room2<>"#HandleName2Room2")&(#HandleName4Room2<>"#HandleName3Room2")):1
+{
+  Do, (#HKName="#HandleName4Room2"):1
+   {
+   set,#CodeHandleName4Room2=<#HKCode>
+   set,#CountHandleName4Room2=[#CountHandleName4Room2+#HWCount]
+   set,#CostHandleName4Room2=[#CostHandleName4Room2+#HWcost]
+   }
+}
+Do,((#HandleName5Room2<>"#HandleName1Room2")&(#HandleName5Room2<>"#HandleName2Room2")&(#HandleName5Room2<>"#HandleName3Room2")&(#HandleName5Room2<>"#HandleName4Room2")):1
+{
+  Do, (#HKName="#HandleName5Room2"):1
+   {
+   set,#CodeHandleName5Room2=<#HKCode>
+   set,#CountHandleName5Room2=[#CountHandleName5Room2+#HWCount]
+   set,#CostHandleName5Room2=[#CostHandleName5Room2+#HWcost]
+   }
+}
+Do,((#HandleName6Room2<>"#HandleName1Room2")&(#HandleName6Room2<>"#HandleName2Room2")&(#HandleName6Room2<>"#HandleName3Room2")&(#HandleName6Room2<>"#HandleName4Room2")&(#HandleName6Room2<>"#HandleName5Room2")):1
+{
+  Do, (#HKName="#HandleName6Room2"):1
+   {
+   set,#CodeHandleName6Room2=<#HKCode>
+   set,#CountHandleName6Room2=[#CountHandleName6Room2+#HWCount]
+   set,#CostHandleName6Room2=[#CostHandleName6Room2+#HWcost]
+   }
+}
+Do,((#HandleName7Room2<>"#HandleName1Room2")&(#HandleName7Room2<>"#HandleName2Room2")&(#HandleName7Room2<>"#HandleName3Room2")&(#HandleName7Room2<>"#HandleName4Room2")&(#HandleName7Room2<>"#HandleName5Room2")&(#HandleName7Room2<>"#HandleName6Room2")):1
+{
+  Do, (#HKName="#HandleName7Room2"):1
+   {
+   set,#CodeHandleName7Room2=<#HKCode>
+   set,#CountHandleName7Room2=[#CountHandleName7Room2+#HWCount]
+   set,#CostHandleName7Room2=[#CostHandleName7Room2+#HWcost]
+   }
+}
+Do,((#HandleName8Room2<>"#HandleName1Room2")&(#HandleName8Room2<>"#HandleName2Room2")&(#HandleName8Room2<>"#HandleName3Room2")&(#HandleName8Room2<>"#HandleName4Room2")&(#HandleName8Room2<>"#HandleName5Room2")&(#HandleName8Room2<>"#HandleName6Room2")&(#HandleName8Room2<>"#HandleName7Room2")):1
+{
+  Do, (#HKName="#HandleName8Room2"):1
+   {
+   set,#CodeHandleName8Room2=<#HKCode>
+   set,#CountHandleName8Room2=[#CountHandleName8Room2+#HWCount]
+   set,#CostHandleName8Room2=[#CostHandleName8Room2+#HWcost]
+   }
+}
+Do,((#HandleName9Room2<>"#HandleName1Room2")&(#HandleName9Room2<>"#HandleName2Room2")&(#HandleName9Room2<>"#HandleName3Room2")&(#HandleName9Room2<>"#HandleName4Room2")&(#HandleName9Room2<>"#HandleName5Room2")&(#HandleName9Room2<>"#HandleName6Room2")&(#HandleName9Room2<>"#HandleName7Room2")&(#HandleName9Room2<>"#HandleName8Room2")):1
+{
+  Do, (#HKName="#HandleName9Room2"):1
+   {
+   set,#CodeHandleName9Room2=<#HKCode>
+   set,#CountHandleName9Room2=[#CountHandleName9Room2+#HWCount]
+   set,#CostHandleName9Room2=[#CostHandleName9Room2+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room2DoorHWCost=[#CostHandleName1Room2+#CostHandleName2Room2+#CostHandleName3Room2+#CostHandleName4Room2+#CostHandleName5Room2+#CostHandleName6Room2+#CostHandleName7Room2+#CostHandleName8Room2+#CostHandleName9Room2]
+
+End
+ }
+
+Do, (#RoomNum=3):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom3=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room3=999
+   set,#CountHandleName0Room3=[#CountHandleName0Room3+#HWCount]
+   set,#CostHandleName0Room3=0
+   }
+  Do, (#HKName="#HandleName1Room3"):1
+   {
+   set,#CodeHandleName1Room3=<#HKCode>
+   set,#CountHandleName1Room3=[#CountHandleName1Room3+#HWCount]
+   set,#CostHandleName1Room3=[#CostHandleName1Room3+#HWcost]
+   }
+Do,(#HandleName2Room3<>"#HandleName1Room3"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room3"):1
+   {
+   set,#CodeHandleName2Room3=<#HKCode>
+   set,#CountHandleName2Room3=[#CountHandleName2Room3+#HWCount]
+   set,#CostHandleName2Room3=[#CostHandleName2Room3+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room3<>"#HandleName1Room3")|(#HandleName3Room3<>"#HandleName2Room3")):1
+{
+  Do, (#HKName="#HandleName3Room3"):1
+   {
+   set,#CodeHandleName3Room3=<#HKCode>
+   set,#CountHandleName3Room3=[#CountHandleName3Room3+#HWCount]
+   set,#CostHandleName3Room3=[#CostHandleName3Room3+#HWcost]
+   }
+}
+Do,((#HandleName4Room3<>"#HandleName1Room3")&(#HandleName4Room3<>"#HandleName2Room3")&(#HandleName4Room3<>"#HandleName3Room3")):1
+{
+  Do, (#HKName="#HandleName4Room3"):1
+   {
+   set,#CodeHandleName4Room3=<#HKCode>
+   set,#CountHandleName4Room3=[#CountHandleName4Room3+#HWCount]
+   set,#CostHandleName4Room3=[#CostHandleName4Room3+#HWcost]
+   }
+}
+Do,((#HandleName5Room3<>"#HandleName1Room3")&(#HandleName5Room3<>"#HandleName2Room3")&(#HandleName5Room3<>"#HandleName3Room3")&(#HandleName5Room3<>"#HandleName4Room3")):1
+{
+  Do, (#HKName="#HandleName5Room3"):1
+   {
+   set,#CodeHandleName5Room3=<#HKCode>
+   set,#CountHandleName5Room3=[#CountHandleName5Room3+#HWCount]
+   set,#CostHandleName5Room3=[#CostHandleName5Room3+#HWcost]
+   }
+}
+Do,((#HandleName6Room3<>"#HandleName1Room3")&(#HandleName6Room3<>"#HandleName2Room3")&(#HandleName6Room3<>"#HandleName3Room3")&(#HandleName6Room3<>"#HandleName4Room3")&(#HandleName6Room3<>"#HandleName5Room3")):1
+{
+  Do, (#HKName="#HandleName6Room3"):1
+   {
+   set,#CodeHandleName6Room3=<#HKCode>
+   set,#CountHandleName6Room3=[#CountHandleName6Room3+#HWCount]
+   set,#CostHandleName6Room3=[#CostHandleName6Room3+#HWcost]
+   }
+}
+Do,((#HandleName7Room3<>"#HandleName1Room3")&(#HandleName7Room3<>"#HandleName2Room3")&(#HandleName7Room3<>"#HandleName3Room3")&(#HandleName7Room3<>"#HandleName4Room3")&(#HandleName7Room3<>"#HandleName5Room3")&(#HandleName7Room3<>"#HandleName6Room3")):1
+{
+  Do, (#HKName="#HandleName7Room3"):1
+   {
+   set,#CodeHandleName7Room3=<#HKCode>
+   set,#CountHandleName7Room3=[#CountHandleName7Room3+#HWCount]
+   set,#CostHandleName7Room3=[#CostHandleName7Room3+#HWcost]
+   }
+}
+Do,((#HandleName8Room3<>"#HandleName1Room3")&(#HandleName8Room3<>"#HandleName2Room3")&(#HandleName8Room3<>"#HandleName3Room3")&(#HandleName8Room3<>"#HandleName4Room3")&(#HandleName8Room3<>"#HandleName5Room3")&(#HandleName8Room3<>"#HandleName6Room3")&(#HandleName8Room3<>"#HandleName7Room3")):1
+{
+  Do, (#HKName="#HandleName8Room3"):1
+   {
+   set,#CodeHandleName8Room3=<#HKCode>
+   set,#CountHandleName8Room3=[#CountHandleName8Room3+#HWCount]
+   set,#CostHandleName8Room3=[#CostHandleName8Room3+#HWcost]
+   }
+}
+Do,((#HandleName9Room3<>"#HandleName1Room3")&(#HandleName9Room3<>"#HandleName2Room3")&(#HandleName9Room3<>"#HandleName3Room3")&(#HandleName9Room3<>"#HandleName4Room3")&(#HandleName9Room3<>"#HandleName5Room3")&(#HandleName9Room3<>"#HandleName6Room3")&(#HandleName9Room3<>"#HandleName7Room3")&(#HandleName9Room3<>"#HandleName8Room3")):1
+{
+  Do, (#HKName="#HandleName9Room3"):1
+   {
+   set,#CodeHandleName9Room3=<#HKCode>
+   set,#CountHandleName9Room3=[#CountHandleName9Room3+#HWCount]
+   set,#CostHandleName9Room3=[#CostHandleName9Room3+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room3DoorHWCost=[#CostHandleName1Room3+#CostHandleName2Room3+#CostHandleName3Room3+#CostHandleName4Room3+#CostHandleName5Room3+#CostHandleName6Room3+#CostHandleName7Room3+#CostHandleName8Room3+#CostHandleName9Room3]
+
+End
+ }
+Do, (#RoomNum=4):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom4=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room4=999
+   set,#CountHandleName0Room4=[#CountHandleName0Room4+#HWCount]
+   set,#CostHandleName0Room4=0
+   }
+  Do, (#HKName="#HandleName1Room4"):1
+   {
+   set,#CodeHandleName1Room4=<#HKCode>
+   set,#CountHandleName1Room4=[#CountHandleName1Room4+#HWCount]
+   set,#CostHandleName1Room4=[#CostHandleName1Room4+#HWcost]
+   }
+Do,(#HandleName2Room4<>"#HandleName1Room4"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room4"):1
+   {
+   set,#CodeHandleName2Room4=<#HKCode>
+   set,#CountHandleName2Room4=[#CountHandleName2Room4+#HWCount]
+   set,#CostHandleName2Room4=[#CostHandleName2Room4+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room4<>"#HandleName1Room4")|(#HandleName3Room4<>"#HandleName2Room4")):1
+{
+  Do, (#HKName="#HandleName3Room4"):1
+   {
+   set,#CodeHandleName3Room4=<#HKCode>
+   set,#CountHandleName3Room4=[#CountHandleName3Room4+#HWCount]
+   set,#CostHandleName3Room4=[#CostHandleName3Room4+#HWcost]
+   }
+}
+Do,((#HandleName4Room4<>"#HandleName1Room4")&(#HandleName4Room4<>"#HandleName2Room4")&(#HandleName4Room4<>"#HandleName3Room4")):1
+{
+  Do, (#HKName="#HandleName4Room4"):1
+   {
+   set,#CodeHandleName4Room4=<#HKCode>
+   set,#CountHandleName4Room4=[#CountHandleName4Room4+#HWCount]
+   set,#CostHandleName4Room4=[#CostHandleName4Room4+#HWcost]
+   }
+}
+Do,((#HandleName5Room4<>"#HandleName1Room4")&(#HandleName5Room4<>"#HandleName2Room4")&(#HandleName5Room4<>"#HandleName3Room4")&(#HandleName5Room4<>"#HandleName4Room4")):1
+{
+  Do, (#HKName="#HandleName5Room4"):1
+   {
+   set,#CodeHandleName5Room4=<#HKCode>
+   set,#CountHandleName5Room4=[#CountHandleName5Room4+#HWCount]
+   set,#CostHandleName5Room4=[#CostHandleName5Room4+#HWcost]
+   }
+}
+Do,((#HandleName6Room4<>"#HandleName1Room4")&(#HandleName6Room4<>"#HandleName2Room4")&(#HandleName6Room4<>"#HandleName3Room4")&(#HandleName6Room4<>"#HandleName4Room4")&(#HandleName6Room4<>"#HandleName5Room4")):1
+{
+  Do, (#HKName="#HandleName6Room4"):1
+   {
+   set,#CodeHandleName6Room4=<#HKCode>
+   set,#CountHandleName6Room4=[#CountHandleName6Room4+#HWCount]
+   set,#CostHandleName6Room4=[#CostHandleName6Room4+#HWcost]
+   }
+}
+Do,((#HandleName7Room4<>"#HandleName1Room4")&(#HandleName7Room4<>"#HandleName2Room4")&(#HandleName7Room4<>"#HandleName3Room4")&(#HandleName7Room4<>"#HandleName4Room4")&(#HandleName7Room4<>"#HandleName5Room4")&(#HandleName7Room4<>"#HandleName6Room4")):1
+{
+  Do, (#HKName="#HandleName7Room4"):1
+   {
+   set,#CodeHandleName7Room4=<#HKCode>
+   set,#CountHandleName7Room4=[#CountHandleName7Room4+#HWCount]
+   set,#CostHandleName7Room4=[#CostHandleName7Room4+#HWcost]
+   }
+}
+Do,((#HandleName8Room4<>"#HandleName1Room4")&(#HandleName8Room4<>"#HandleName2Room4")&(#HandleName8Room4<>"#HandleName3Room4")&(#HandleName8Room4<>"#HandleName4Room4")&(#HandleName8Room4<>"#HandleName5Room4")&(#HandleName8Room4<>"#HandleName6Room4")&(#HandleName8Room4<>"#HandleName7Room4")):1
+{
+  Do, (#HKName="#HandleName8Room4"):1
+   {
+   set,#CodeHandleName8Room4=<#HKCode>
+   set,#CountHandleName8Room4=[#CountHandleName8Room4+#HWCount]
+   set,#CostHandleName8Room4=[#CostHandleName8Room4+#HWcost]
+   }
+}
+Do,((#HandleName9Room4<>"#HandleName1Room4")&(#HandleName9Room4<>"#HandleName2Room4")&(#HandleName9Room4<>"#HandleName3Room4")&(#HandleName9Room4<>"#HandleName4Room4")&(#HandleName9Room4<>"#HandleName5Room4")&(#HandleName9Room4<>"#HandleName6Room4")&(#HandleName9Room4<>"#HandleName7Room4")&(#HandleName9Room4<>"#HandleName8Room4")):1
+{
+  Do, (#HKName="#HandleName9Room4"):1
+   {
+   set,#CodeHandleName9Room4=<#HKCode>
+   set,#CountHandleName9Room4=[#CountHandleName9Room4+#HWCount]
+   set,#CostHandleName9Room4=[#CostHandleName9Room4+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room4DoorHWCost=[#CostHandleName1Room4+#CostHandleName2Room4+#CostHandleName3Room4+#CostHandleName4Room4+#CostHandleName5Room4+#CostHandleName6Room4+#CostHandleName7Room4+#CostHandleName8Room4+#CostHandleName9Room4]
+
+End
+ }
+Do, (#RoomNum=5):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom5=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room5=999
+   set,#CountHandleName0Room5=[#CountHandleName0Room5+#HWCount]
+   set,#CostHandleName0Room5=0
+   }
+  Do, (#HKName="#HandleName1Room5"):1
+   {
+   set,#CodeHandleName1Room5=<#HKCode>
+   set,#CountHandleName1Room5=[#CountHandleName1Room5+#HWCount]
+   set,#CostHandleName1Room5=[#CostHandleName1Room5+#HWcost]
+   }
+Do,(#HandleName2Room5<>"#HandleName1Room5"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room5"):1
+   {
+   set,#CodeHandleName2Room5=<#HKCode>
+   set,#CountHandleName2Room5=[#CountHandleName2Room5+#HWCount]
+   set,#CostHandleName2Room5=[#CostHandleName2Room5+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room5<>"#HandleName1Room5")|(#HandleName3Room5<>"#HandleName2Room5")):1
+{
+  Do, (#HKName="#HandleName3Room5"):1
+   {
+   set,#CodeHandleName3Room5=<#HKCode>
+   set,#CountHandleName3Room5=[#CountHandleName3Room5+#HWCount]
+   set,#CostHandleName3Room5=[#CostHandleName3Room5+#HWcost]
+   }
+}
+Do,((#HandleName4Room5<>"#HandleName1Room5")&(#HandleName4Room5<>"#HandleName2Room5")&(#HandleName4Room5<>"#HandleName3Room5")):1
+{
+  Do, (#HKName="#HandleName4Room5"):1
+   {
+   set,#CodeHandleName4Room5=<#HKCode>
+   set,#CountHandleName4Room5=[#CountHandleName4Room5+#HWCount]
+   set,#CostHandleName4Room5=[#CostHandleName4Room5+#HWcost]
+   }
+}
+Do,((#HandleName5Room5<>"#HandleName1Room5")&(#HandleName5Room5<>"#HandleName2Room5")&(#HandleName5Room5<>"#HandleName3Room5")&(#HandleName5Room5<>"#HandleName4Room5")):1
+{
+  Do, (#HKName="#HandleName5Room5"):1
+   {
+   set,#CodeHandleName5Room5=<#HKCode>
+   set,#CountHandleName5Room5=[#CountHandleName5Room5+#HWCount]
+   set,#CostHandleName5Room5=[#CostHandleName5Room5+#HWcost]
+   }
+}
+Do,((#HandleName6Room5<>"#HandleName1Room5")&(#HandleName6Room5<>"#HandleName2Room5")&(#HandleName6Room5<>"#HandleName3Room5")&(#HandleName6Room5<>"#HandleName4Room5")&(#HandleName6Room5<>"#HandleName5Room5")):1
+{
+  Do, (#HKName="#HandleName6Room5"):1
+   {
+   set,#CodeHandleName6Room5=<#HKCode>
+   set,#CountHandleName6Room5=[#CountHandleName6Room5+#HWCount]
+   set,#CostHandleName6Room5=[#CostHandleName6Room5+#HWcost]
+   }
+}
+Do,((#HandleName7Room5<>"#HandleName1Room5")&(#HandleName7Room5<>"#HandleName2Room5")&(#HandleName7Room5<>"#HandleName3Room5")&(#HandleName7Room5<>"#HandleName4Room5")&(#HandleName7Room5<>"#HandleName5Room5")&(#HandleName7Room5<>"#HandleName6Room5")):1
+{
+  Do, (#HKName="#HandleName7Room5"):1
+   {
+   set,#CodeHandleName7Room5=<#HKCode>
+   set,#CountHandleName7Room5=[#CountHandleName7Room5+#HWCount]
+   set,#CostHandleName7Room5=[#CostHandleName7Room5+#HWcost]
+   }
+}
+Do,((#HandleName8Room5<>"#HandleName1Room5")&(#HandleName8Room5<>"#HandleName2Room5")&(#HandleName8Room5<>"#HandleName3Room5")&(#HandleName8Room5<>"#HandleName4Room5")&(#HandleName8Room5<>"#HandleName5Room5")&(#HandleName8Room5<>"#HandleName6Room5")&(#HandleName8Room5<>"#HandleName7Room5")):1
+{
+  Do, (#HKName="#HandleName8Room5"):1
+   {
+   set,#CodeHandleName8Room5=<#HKCode>
+   set,#CountHandleName8Room5=[#CountHandleName8Room5+#HWCount]
+   set,#CostHandleName8Room5=[#CostHandleName8Room5+#HWcost]
+   }
+}
+Do,((#HandleName9Room5<>"#HandleName1Room5")&(#HandleName9Room5<>"#HandleName2Room5")&(#HandleName9Room5<>"#HandleName3Room5")&(#HandleName9Room5<>"#HandleName4Room5")&(#HandleName9Room5<>"#HandleName5Room5")&(#HandleName9Room5<>"#HandleName6Room5")&(#HandleName9Room5<>"#HandleName7Room5")&(#HandleName9Room5<>"#HandleName8Room5")):1
+{
+  Do, (#HKName="#HandleName9Room5"):1
+   {
+   set,#CodeHandleName9Room5=<#HKCode>
+   set,#CountHandleName9Room5=[#CountHandleName9Room5+#HWCount]
+   set,#CostHandleName9Room5=[#CostHandleName9Room5+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room5DoorHWCost=[#CostHandleName1Room5+#CostHandleName2Room5+#CostHandleName3Room5+#CostHandleName4Room5+#CostHandleName5Room5+#CostHandleName6Room5+#CostHandleName7Room5+#CostHandleName8Room5+#CostHandleName9Room5]
+
+End
+ }
+Do, (#RoomNum=6):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom6=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room6=999
+   set,#CountHandleName0Room6=[#CountHandleName0Room6+#HWCount]
+   set,#CostHandleName0Room6=0
+   }
+  Do, (#HKName="#HandleName1Room6"):1
+   {
+   set,#CodeHandleName1Room6=<#HKCode>
+   set,#CountHandleName1Room6=[#CountHandleName1Room6+#HWCount]
+   set,#CostHandleName1Room6=[#CostHandleName1Room6+#HWcost]
+   }
+Do,(#HandleName2Room6<>"#HandleName1Room6"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room6"):1
+   {
+   set,#CodeHandleName2Room6=<#HKCode>
+   set,#CountHandleName2Room6=[#CountHandleName2Room6+#HWCount]
+   set,#CostHandleName2Room6=[#CostHandleName2Room6+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room6<>"#HandleName1Room6")|(#HandleName3Room6<>"#HandleName2Room6")):1
+{
+  Do, (#HKName="#HandleName3Room6"):1
+   {
+   set,#CodeHandleName3Room6=<#HKCode>
+   set,#CountHandleName3Room6=[#CountHandleName3Room6+#HWCount]
+   set,#CostHandleName3Room6=[#CostHandleName3Room6+#HWcost]
+   }
+}
+Do,((#HandleName4Room6<>"#HandleName1Room6")&(#HandleName4Room6<>"#HandleName2Room6")&(#HandleName4Room6<>"#HandleName3Room6")):1
+{
+  Do, (#HKName="#HandleName4Room6"):1
+   {
+   set,#CodeHandleName4Room6=<#HKCode>
+   set,#CountHandleName4Room6=[#CountHandleName4Room6+#HWCount]
+   set,#CostHandleName4Room6=[#CostHandleName4Room6+#HWcost]
+   }
+}
+Do,((#HandleName5Room6<>"#HandleName1Room6")&(#HandleName5Room6<>"#HandleName2Room6")&(#HandleName5Room6<>"#HandleName3Room6")&(#HandleName5Room6<>"#HandleName4Room6")):1
+{
+  Do, (#HKName="#HandleName5Room6"):1
+   {
+   set,#CodeHandleName5Room6=<#HKCode>
+   set,#CountHandleName5Room6=[#CountHandleName5Room6+#HWCount]
+   set,#CostHandleName5Room6=[#CostHandleName5Room6+#HWcost]
+   }
+}
+Do,((#HandleName6Room6<>"#HandleName1Room6")&(#HandleName6Room6<>"#HandleName2Room6")&(#HandleName6Room6<>"#HandleName3Room6")&(#HandleName6Room6<>"#HandleName4Room6")&(#HandleName6Room6<>"#HandleName5Room6")):1
+{
+  Do, (#HKName="#HandleName6Room6"):1
+   {
+   set,#CodeHandleName6Room6=<#HKCode>
+   set,#CountHandleName6Room6=[#CountHandleName6Room6+#HWCount]
+   set,#CostHandleName6Room6=[#CostHandleName6Room6+#HWcost]
+   }
+}
+Do,((#HandleName7Room6<>"#HandleName1Room6")&(#HandleName7Room6<>"#HandleName2Room6")&(#HandleName7Room6<>"#HandleName3Room6")&(#HandleName7Room6<>"#HandleName4Room6")&(#HandleName7Room6<>"#HandleName5Room6")&(#HandleName7Room6<>"#HandleName6Room6")):1
+{
+  Do, (#HKName="#HandleName7Room6"):1
+   {
+   set,#CodeHandleName7Room6=<#HKCode>
+   set,#CountHandleName7Room6=[#CountHandleName7Room6+#HWCount]
+   set,#CostHandleName7Room6=[#CostHandleName7Room6+#HWcost]
+   }
+}
+Do,((#HandleName8Room6<>"#HandleName1Room6")&(#HandleName8Room6<>"#HandleName2Room6")&(#HandleName8Room6<>"#HandleName3Room6")&(#HandleName8Room6<>"#HandleName4Room6")&(#HandleName8Room6<>"#HandleName5Room6")&(#HandleName8Room6<>"#HandleName6Room6")&(#HandleName8Room6<>"#HandleName7Room6")):1
+{
+  Do, (#HKName="#HandleName8Room6"):1
+   {
+   set,#CodeHandleName8Room6=<#HKCode>
+   set,#CountHandleName8Room6=[#CountHandleName8Room6+#HWCount]
+   set,#CostHandleName8Room6=[#CostHandleName8Room6+#HWcost]
+   }
+}
+Do,((#HandleName9Room6<>"#HandleName1Room6")&(#HandleName9Room6<>"#HandleName2Room6")&(#HandleName9Room6<>"#HandleName3Room6")&(#HandleName9Room6<>"#HandleName4Room6")&(#HandleName9Room6<>"#HandleName5Room6")&(#HandleName9Room6<>"#HandleName6Room6")&(#HandleName9Room6<>"#HandleName7Room6")&(#HandleName9Room6<>"#HandleName8Room6")):1
+{
+  Do, (#HKName="#HandleName9Room6"):1
+   {
+   set,#CodeHandleName9Room6=<#HKCode>
+   set,#CountHandleName9Room6=[#CountHandleName9Room6+#HWCount]
+   set,#CostHandleName9Room6=[#CostHandleName9Room6+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room6DoorHWCost=[#CostHandleName1Room6+#CostHandleName2Room6+#CostHandleName3Room6+#CostHandleName4Room6+#CostHandleName5Room6+#CostHandleName6Room6+#CostHandleName7Room6+#CostHandleName8Room6+#CostHandleName9Room6]
+
+End
+ }
+Do, (#RoomNum=7):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom7=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room7=999
+   set,#CountHandleName0Room7=[#CountHandleName0Room7+#HWCount]
+   set,#CostHandleName0Room7=0
+   }
+  Do, (#HKName="#HandleName1Room7"):1
+   {
+   set,#CodeHandleName1Room7=<#HKCode>
+   set,#CountHandleName1Room7=[#CountHandleName1Room7+#HWCount]
+   set,#CostHandleName1Room7=[#CostHandleName1Room7+#HWcost]
+   }
+Do,(#HandleName2Room7<>"#HandleName1Room7"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room7"):1
+   {
+   set,#CodeHandleName2Room7=<#HKCode>
+   set,#CountHandleName2Room7=[#CountHandleName2Room7+#HWCount]
+   set,#CostHandleName2Room7=[#CostHandleName2Room7+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room7<>"#HandleName1Room7")|(#HandleName3Room7<>"#HandleName2Room7")):1
+{
+  Do, (#HKName="#HandleName3Room7"):1
+   {
+   set,#CodeHandleName3Room7=<#HKCode>
+   set,#CountHandleName3Room7=[#CountHandleName3Room7+#HWCount]
+   set,#CostHandleName3Room7=[#CostHandleName3Room7+#HWcost]
+   }
+}
+Do,((#HandleName4Room7<>"#HandleName1Room7")&(#HandleName4Room7<>"#HandleName2Room7")&(#HandleName4Room7<>"#HandleName3Room7")):1
+{
+  Do, (#HKName="#HandleName4Room7"):1
+   {
+   set,#CodeHandleName4Room7=<#HKCode>
+   set,#CountHandleName4Room7=[#CountHandleName4Room7+#HWCount]
+   set,#CostHandleName4Room7=[#CostHandleName4Room7+#HWcost]
+   }
+}
+Do,((#HandleName5Room7<>"#HandleName1Room7")&(#HandleName5Room7<>"#HandleName2Room7")&(#HandleName5Room7<>"#HandleName3Room7")&(#HandleName5Room7<>"#HandleName4Room7")):1
+{
+  Do, (#HKName="#HandleName5Room7"):1
+   {
+   set,#CodeHandleName5Room7=<#HKCode>
+   set,#CountHandleName5Room7=[#CountHandleName5Room7+#HWCount]
+   set,#CostHandleName5Room7=[#CostHandleName5Room7+#HWcost]
+   }
+}
+Do,((#HandleName6Room7<>"#HandleName1Room7")&(#HandleName6Room7<>"#HandleName2Room7")&(#HandleName6Room7<>"#HandleName3Room7")&(#HandleName6Room7<>"#HandleName4Room7")&(#HandleName6Room7<>"#HandleName5Room7")):1
+{
+  Do, (#HKName="#HandleName6Room7"):1
+   {
+   set,#CodeHandleName6Room7=<#HKCode>
+   set,#CountHandleName6Room7=[#CountHandleName6Room7+#HWCount]
+   set,#CostHandleName6Room7=[#CostHandleName6Room7+#HWcost]
+   }
+}
+Do,((#HandleName7Room7<>"#HandleName1Room7")&(#HandleName7Room7<>"#HandleName2Room7")&(#HandleName7Room7<>"#HandleName3Room7")&(#HandleName7Room7<>"#HandleName4Room7")&(#HandleName7Room7<>"#HandleName5Room7")&(#HandleName7Room7<>"#HandleName6Room7")):1
+{
+  Do, (#HKName="#HandleName7Room7"):1
+   {
+   set,#CodeHandleName7Room7=<#HKCode>
+   set,#CountHandleName7Room7=[#CountHandleName7Room7+#HWCount]
+   set,#CostHandleName7Room7=[#CostHandleName7Room7+#HWcost]
+   }
+}
+Do,((#HandleName8Room7<>"#HandleName1Room7")&(#HandleName8Room7<>"#HandleName2Room7")&(#HandleName8Room7<>"#HandleName3Room7")&(#HandleName8Room7<>"#HandleName4Room7")&(#HandleName8Room7<>"#HandleName5Room7")&(#HandleName8Room7<>"#HandleName6Room7")&(#HandleName8Room7<>"#HandleName7Room7")):1
+{
+  Do, (#HKName="#HandleName8Room7"):1
+   {
+   set,#CodeHandleName8Room7=<#HKCode>
+   set,#CountHandleName8Room7=[#CountHandleName8Room7+#HWCount]
+   set,#CostHandleName8Room7=[#CostHandleName8Room7+#HWcost]
+   }
+}
+Do,((#HandleName9Room7<>"#HandleName1Room7")&(#HandleName9Room7<>"#HandleName2Room7")&(#HandleName9Room7<>"#HandleName3Room7")&(#HandleName9Room7<>"#HandleName4Room7")&(#HandleName9Room7<>"#HandleName5Room7")&(#HandleName9Room7<>"#HandleName6Room7")&(#HandleName9Room7<>"#HandleName7Room7")&(#HandleName9Room7<>"#HandleName8Room7")):1
+{
+  Do, (#HKName="#HandleName9Room7"):1
+   {
+   set,#CodeHandleName9Room7=<#HKCode>
+   set,#CountHandleName9Room7=[#CountHandleName9Room7+#HWCount]
+   set,#CostHandleName9Room7=[#CostHandleName9Room7+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room7DoorHWCost=[#CostHandleName1Room7+#CostHandleName2Room7+#CostHandleName3Room7+#CostHandleName4Room7+#CostHandleName5Room7+#CostHandleName6Room7+#CostHandleName7Room7+#CostHandleName8Room7+#CostHandleName9Room7]
+
+End
+ }
+Do, (#RoomNum=8):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom8=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room8=999
+   set,#CountHandleName0Room8=[#CountHandleName0Room8+#HWCount]
+   set,#CostHandleName0Room8=0
+   }
+  Do, (#HKName="#HandleName1Room8"):1
+   {
+   set,#CodeHandleName1Room8=<#HKCode>
+   set,#CountHandleName1Room8=[#CountHandleName1Room8+#HWCount]
+   set,#CostHandleName1Room8=[#CostHandleName1Room8+#HWcost]
+   }
+Do,(#HandleName2Room8<>"#HandleName1Room8"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room8"):1
+   {
+   set,#CodeHandleName2Room8=<#HKCode>
+   set,#CountHandleName2Room8=[#CountHandleName2Room8+#HWCount]
+   set,#CostHandleName2Room8=[#CostHandleName2Room8+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room8<>"#HandleName1Room8")|(#HandleName3Room8<>"#HandleName2Room8")):1
+{
+  Do, (#HKName="#HandleName3Room8"):1
+   {
+   set,#CodeHandleName3Room8=<#HKCode>
+   set,#CountHandleName3Room8=[#CountHandleName3Room8+#HWCount]
+   set,#CostHandleName3Room8=[#CostHandleName3Room8+#HWcost]
+   }
+}
+Do,((#HandleName4Room8<>"#HandleName1Room8")&(#HandleName4Room8<>"#HandleName2Room8")&(#HandleName4Room8<>"#HandleName3Room8")):1
+{
+  Do, (#HKName="#HandleName4Room8"):1
+   {
+   set,#CodeHandleName4Room8=<#HKCode>
+   set,#CountHandleName4Room8=[#CountHandleName4Room8+#HWCount]
+   set,#CostHandleName4Room8=[#CostHandleName4Room8+#HWcost]
+   }
+}
+Do,((#HandleName5Room8<>"#HandleName1Room8")&(#HandleName5Room8<>"#HandleName2Room8")&(#HandleName5Room8<>"#HandleName3Room8")&(#HandleName5Room8<>"#HandleName4Room8")):1
+{
+  Do, (#HKName="#HandleName5Room8"):1
+   {
+   set,#CodeHandleName5Room8=<#HKCode>
+   set,#CountHandleName5Room8=[#CountHandleName5Room8+#HWCount]
+   set,#CostHandleName5Room8=[#CostHandleName5Room8+#HWcost]
+   }
+}
+Do,((#HandleName6Room8<>"#HandleName1Room8")&(#HandleName6Room8<>"#HandleName2Room8")&(#HandleName6Room8<>"#HandleName3Room8")&(#HandleName6Room8<>"#HandleName4Room8")&(#HandleName6Room8<>"#HandleName5Room8")):1
+{
+  Do, (#HKName="#HandleName6Room8"):1
+   {
+   set,#CodeHandleName6Room8=<#HKCode>
+   set,#CountHandleName6Room8=[#CountHandleName6Room8+#HWCount]
+   set,#CostHandleName6Room8=[#CostHandleName6Room8+#HWcost]
+   }
+}
+Do,((#HandleName7Room8<>"#HandleName1Room8")&(#HandleName7Room8<>"#HandleName2Room8")&(#HandleName7Room8<>"#HandleName3Room8")&(#HandleName7Room8<>"#HandleName4Room8")&(#HandleName7Room8<>"#HandleName5Room8")&(#HandleName7Room8<>"#HandleName6Room8")):1
+{
+  Do, (#HKName="#HandleName7Room8"):1
+   {
+   set,#CodeHandleName7Room8=<#HKCode>
+   set,#CountHandleName7Room8=[#CountHandleName7Room8+#HWCount]
+   set,#CostHandleName7Room8=[#CostHandleName7Room8+#HWcost]
+   }
+}
+Do,((#HandleName8Room8<>"#HandleName1Room8")&(#HandleName8Room8<>"#HandleName2Room8")&(#HandleName8Room8<>"#HandleName3Room8")&(#HandleName8Room8<>"#HandleName4Room8")&(#HandleName8Room8<>"#HandleName5Room8")&(#HandleName8Room8<>"#HandleName6Room8")&(#HandleName8Room8<>"#HandleName7Room8")):1
+{
+  Do, (#HKName="#HandleName8Room8"):1
+   {
+   set,#CodeHandleName8Room8=<#HKCode>
+   set,#CountHandleName8Room8=[#CountHandleName8Room8+#HWCount]
+   set,#CostHandleName8Room8=[#CostHandleName8Room8+#HWcost]
+   }
+}
+Do,((#HandleName9Room8<>"#HandleName1Room8")&(#HandleName9Room8<>"#HandleName2Room8")&(#HandleName9Room8<>"#HandleName3Room8")&(#HandleName9Room8<>"#HandleName4Room8")&(#HandleName9Room8<>"#HandleName5Room8")&(#HandleName9Room8<>"#HandleName6Room8")&(#HandleName9Room8<>"#HandleName7Room8")&(#HandleName9Room8<>"#HandleName8Room8")):1
+{
+  Do, (#HKName="#HandleName9Room8"):1
+   {
+   set,#CodeHandleName9Room8=<#HKCode>
+   set,#CountHandleName9Room8=[#CountHandleName9Room8+#HWCount]
+   set,#CostHandleName9Room8=[#CostHandleName9Room8+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room8DoorHWCost=[#CostHandleName1Room8+#CostHandleName2Room8+#CostHandleName3Room8+#CostHandleName4Room8+#CostHandleName5Room8+#CostHandleName6Room8+#CostHandleName7Room8+#CostHandleName8Room8+#CostHandleName9Room8]
+
+End
+ }
+Do, (#RoomNum=9):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom9=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room9=999
+   set,#CountHandleName0Room9=[#CountHandleName0Room9+#HWCount]
+   set,#CostHandleName0Room9=0
+   }
+  Do, (#HKName="#HandleName1Room9"):1
+   {
+   set,#CodeHandleName1Room9=<#HKCode>
+   set,#CountHandleName1Room9=[#CountHandleName1Room9+#HWCount]
+   set,#CostHandleName1Room9=[#CostHandleName1Room9+#HWcost]
+   }
+Do,(#HandleName2Room9<>"#HandleName1Room9"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room9"):1
+   {
+   set,#CodeHandleName2Room9=<#HKCode>
+   set,#CountHandleName2Room9=[#CountHandleName2Room9+#HWCount]
+   set,#CostHandleName2Room9=[#CostHandleName2Room9+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room9<>"#HandleName1Room9")|(#HandleName3Room9<>"#HandleName2Room9")):1
+{
+  Do, (#HKName="#HandleName3Room9"):1
+   {
+   set,#CodeHandleName3Room9=<#HKCode>
+   set,#CountHandleName3Room9=[#CountHandleName3Room9+#HWCount]
+   set,#CostHandleName3Room9=[#CostHandleName3Room9+#HWcost]
+   }
+}
+Do,((#HandleName4Room9<>"#HandleName1Room9")&(#HandleName4Room9<>"#HandleName2Room9")&(#HandleName4Room9<>"#HandleName3Room9")):1
+{
+  Do, (#HKName="#HandleName4Room9"):1
+   {
+   set,#CodeHandleName4Room9=<#HKCode>
+   set,#CountHandleName4Room9=[#CountHandleName4Room9+#HWCount]
+   set,#CostHandleName4Room9=[#CostHandleName4Room9+#HWcost]
+   }
+}
+Do,((#HandleName5Room9<>"#HandleName1Room9")&(#HandleName5Room9<>"#HandleName2Room9")&(#HandleName5Room9<>"#HandleName3Room9")&(#HandleName5Room9<>"#HandleName4Room9")):1
+{
+  Do, (#HKName="#HandleName5Room9"):1
+   {
+   set,#CodeHandleName5Room9=<#HKCode>
+   set,#CountHandleName5Room9=[#CountHandleName5Room9+#HWCount]
+   set,#CostHandleName5Room9=[#CostHandleName5Room9+#HWcost]
+   }
+}
+Do,((#HandleName6Room9<>"#HandleName1Room9")&(#HandleName6Room9<>"#HandleName2Room9")&(#HandleName6Room9<>"#HandleName3Room9")&(#HandleName6Room9<>"#HandleName4Room9")&(#HandleName6Room9<>"#HandleName5Room9")):1
+{
+  Do, (#HKName="#HandleName6Room9"):1
+   {
+   set,#CodeHandleName6Room9=<#HKCode>
+   set,#CountHandleName6Room9=[#CountHandleName6Room9+#HWCount]
+   set,#CostHandleName6Room9=[#CostHandleName6Room9+#HWcost]
+   }
+}
+Do,((#HandleName7Room9<>"#HandleName1Room9")&(#HandleName7Room9<>"#HandleName2Room9")&(#HandleName7Room9<>"#HandleName3Room9")&(#HandleName7Room9<>"#HandleName4Room9")&(#HandleName7Room9<>"#HandleName5Room9")&(#HandleName7Room9<>"#HandleName6Room9")):1
+{
+  Do, (#HKName="#HandleName7Room9"):1
+   {
+   set,#CodeHandleName7Room9=<#HKCode>
+   set,#CountHandleName7Room9=[#CountHandleName7Room9+#HWCount]
+   set,#CostHandleName7Room9=[#CostHandleName7Room9+#HWcost]
+   }
+}
+Do,((#HandleName8Room9<>"#HandleName1Room9")&(#HandleName8Room9<>"#HandleName2Room9")&(#HandleName8Room9<>"#HandleName3Room9")&(#HandleName8Room9<>"#HandleName4Room9")&(#HandleName8Room9<>"#HandleName5Room9")&(#HandleName8Room9<>"#HandleName6Room9")&(#HandleName8Room9<>"#HandleName7Room9")):1
+{
+  Do, (#HKName="#HandleName8Room9"):1
+   {
+   set,#CodeHandleName8Room9=<#HKCode>
+   set,#CountHandleName8Room9=[#CountHandleName8Room9+#HWCount]
+   set,#CostHandleName8Room9=[#CostHandleName8Room9+#HWcost]
+   }
+}
+Do,((#HandleName9Room9<>"#HandleName1Room9")&(#HandleName9Room9<>"#HandleName2Room9")&(#HandleName9Room9<>"#HandleName3Room9")&(#HandleName9Room9<>"#HandleName4Room9")&(#HandleName9Room9<>"#HandleName5Room9")&(#HandleName9Room9<>"#HandleName6Room9")&(#HandleName9Room9<>"#HandleName7Room9")&(#HandleName9Room9<>"#HandleName8Room9")):1
+{
+  Do, (#HKName="#HandleName9Room9"):1
+   {
+   set,#CodeHandleName9Room9=<#HKCode>
+   set,#CountHandleName9Room9=[#CountHandleName9Room9+#HWCount]
+   set,#CostHandleName9Room9=[#CostHandleName9Room9+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room9DoorHWCost=[#CostHandleName1Room9+#CostHandleName2Room9+#CostHandleName3Room9+#CostHandleName4Room9+#CostHandleName5Room9+#CostHandleName6Room9+#CostHandleName7Room9+#CostHandleName8Room9+#CostHandleName9Room9]
+
+End
+ }
+Do, (#RoomNum=10):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom10=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room10=999
+   set,#CountHandleName0Room10=[#CountHandleName0Room10+#HWCount]
+   set,#CostHandleName0Room10=0
+   }
+  Do, (#HKName="#HandleName1Room10"):1
+   {
+   set,#CodeHandleName1Room10=<#HKCode>
+   set,#CountHandleName1Room10=[#CountHandleName1Room10+#HWCount]
+   set,#CostHandleName1Room10=[#CostHandleName1Room10+#HWcost]
+   }
+Do,(#HandleName2Room10<>"#HandleName1Room10"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room10"):1
+   {
+   set,#CodeHandleName2Room10=<#HKCode>
+   set,#CountHandleName2Room10=[#CountHandleName2Room10+#HWCount]
+   set,#CostHandleName2Room10=[#CostHandleName2Room10+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room10<>"#HandleName1Room10")|(#HandleName3Room10<>"#HandleName2Room10")):1
+{
+  Do, (#HKName="#HandleName3Room10"):1
+   {
+   set,#CodeHandleName3Room10=<#HKCode>
+   set,#CountHandleName3Room10=[#CountHandleName3Room10+#HWCount]
+   set,#CostHandleName3Room10=[#CostHandleName3Room10+#HWcost]
+   }
+}
+Do,((#HandleName4Room10<>"#HandleName1Room10")&(#HandleName4Room10<>"#HandleName2Room10")&(#HandleName4Room10<>"#HandleName3Room10")):1
+{
+  Do, (#HKName="#HandleName4Room10"):1
+   {
+   set,#CodeHandleName4Room10=<#HKCode>
+   set,#CountHandleName4Room10=[#CountHandleName4Room10+#HWCount]
+   set,#CostHandleName4Room10=[#CostHandleName4Room10+#HWcost]
+   }
+}
+Do,((#HandleName5Room10<>"#HandleName1Room10")&(#HandleName5Room10<>"#HandleName2Room10")&(#HandleName5Room10<>"#HandleName3Room10")&(#HandleName5Room10<>"#HandleName4Room10")):1
+{
+  Do, (#HKName="#HandleName5Room10"):1
+   {
+   set,#CodeHandleName5Room10=<#HKCode>
+   set,#CountHandleName5Room10=[#CountHandleName5Room10+#HWCount]
+   set,#CostHandleName5Room10=[#CostHandleName5Room10+#HWcost]
+   }
+}
+Do,((#HandleName6Room10<>"#HandleName1Room10")&(#HandleName6Room10<>"#HandleName2Room10")&(#HandleName6Room10<>"#HandleName3Room10")&(#HandleName6Room10<>"#HandleName4Room10")&(#HandleName6Room10<>"#HandleName5Room10")):1
+{
+  Do, (#HKName="#HandleName6Room10"):1
+   {
+   set,#CodeHandleName6Room10=<#HKCode>
+   set,#CountHandleName6Room10=[#CountHandleName6Room10+#HWCount]
+   set,#CostHandleName6Room10=[#CostHandleName6Room10+#HWcost]
+   }
+}
+Do,((#HandleName7Room10<>"#HandleName1Room10")&(#HandleName7Room10<>"#HandleName2Room10")&(#HandleName7Room10<>"#HandleName3Room10")&(#HandleName7Room10<>"#HandleName4Room10")&(#HandleName7Room10<>"#HandleName5Room10")&(#HandleName7Room10<>"#HandleName6Room10")):1
+{
+  Do, (#HKName="#HandleName7Room10"):1
+   {
+   set,#CodeHandleName7Room10=<#HKCode>
+   set,#CountHandleName7Room10=[#CountHandleName7Room10+#HWCount]
+   set,#CostHandleName7Room10=[#CostHandleName7Room10+#HWcost]
+   }
+}
+Do,((#HandleName8Room10<>"#HandleName1Room10")&(#HandleName8Room10<>"#HandleName2Room10")&(#HandleName8Room10<>"#HandleName3Room10")&(#HandleName8Room10<>"#HandleName4Room10")&(#HandleName8Room10<>"#HandleName5Room10")&(#HandleName8Room10<>"#HandleName6Room10")&(#HandleName8Room10<>"#HandleName7Room10")):1
+{
+  Do, (#HKName="#HandleName8Room10"):1
+   {
+   set,#CodeHandleName8Room10=<#HKCode>
+   set,#CountHandleName8Room10=[#CountHandleName8Room10+#HWCount]
+   set,#CostHandleName8Room10=[#CostHandleName8Room10+#HWcost]
+   }
+}
+Do,((#HandleName9Room10<>"#HandleName1Room10")&(#HandleName9Room10<>"#HandleName2Room10")&(#HandleName9Room10<>"#HandleName3Room10")&(#HandleName9Room10<>"#HandleName4Room10")&(#HandleName9Room10<>"#HandleName5Room10")&(#HandleName9Room10<>"#HandleName6Room10")&(#HandleName9Room10<>"#HandleName7Room10")&(#HandleName9Room10<>"#HandleName8Room10")):1
+{
+  Do, (#HKName="#HandleName9Room10"):1
+   {
+   set,#CodeHandleName9Room10=<#HKCode>
+   set,#CountHandleName9Room10=[#CountHandleName9Room10+#HWCount]
+   set,#CostHandleName9Room10=[#CostHandleName9Room10+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room10DoorHWCost=[#CostHandleName1Room10+#CostHandleName2Room10+#CostHandleName3Room10+#CostHandleName4Room10+#CostHandleName5Room10+#CostHandleName6Room10+#CostHandleName7Room10+#CostHandleName8Room10+#CostHandleName9Room10]
+
+End
+ }
+Do, (#RoomNum=11):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom11=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room11=999
+   set,#CountHandleName0Room11=[#CountHandleName0Room11+#HWCount]
+   set,#CostHandleName0Room11=0
+   }
+  Do, (#HKName="#HandleName1Room11"):1
+   {
+   set,#CodeHandleName1Room11=<#HKCode>
+   set,#CountHandleName1Room11=[#CountHandleName1Room11+#HWCount]
+   set,#CostHandleName1Room11=[#CostHandleName1Room11+#HWcost]
+   }
+Do,(#HandleName2Room11<>"#HandleName1Room11"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room11"):1
+   {
+   set,#CodeHandleName2Room11=<#HKCode>
+   set,#CountHandleName2Room11=[#CountHandleName2Room11+#HWCount]
+   set,#CostHandleName2Room11=[#CostHandleName2Room11+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room11<>"#HandleName1Room11")|(#HandleName3Room11<>"#HandleName2Room11")):1
+{
+  Do, (#HKName="#HandleName3Room11"):1
+   {
+   set,#CodeHandleName3Room11=<#HKCode>
+   set,#CountHandleName3Room11=[#CountHandleName3Room11+#HWCount]
+   set,#CostHandleName3Room11=[#CostHandleName3Room11+#HWcost]
+   }
+}
+Do,((#HandleName4Room11<>"#HandleName1Room11")&(#HandleName4Room11<>"#HandleName2Room11")&(#HandleName4Room11<>"#HandleName3Room11")):1
+{
+  Do, (#HKName="#HandleName4Room11"):1
+   {
+   set,#CodeHandleName4Room11=<#HKCode>
+   set,#CountHandleName4Room11=[#CountHandleName4Room11+#HWCount]
+   set,#CostHandleName4Room11=[#CostHandleName4Room11+#HWcost]
+   }
+}
+Do,((#HandleName5Room11<>"#HandleName1Room11")&(#HandleName5Room11<>"#HandleName2Room11")&(#HandleName5Room11<>"#HandleName3Room11")&(#HandleName5Room11<>"#HandleName4Room11")):1
+{
+  Do, (#HKName="#HandleName5Room11"):1
+   {
+   set,#CodeHandleName5Room11=<#HKCode>
+   set,#CountHandleName5Room11=[#CountHandleName5Room11+#HWCount]
+   set,#CostHandleName5Room11=[#CostHandleName5Room11+#HWcost]
+   }
+}
+Do,((#HandleName6Room11<>"#HandleName1Room11")&(#HandleName6Room11<>"#HandleName2Room11")&(#HandleName6Room11<>"#HandleName3Room11")&(#HandleName6Room11<>"#HandleName4Room11")&(#HandleName6Room11<>"#HandleName5Room11")):1
+{
+  Do, (#HKName="#HandleName6Room11"):1
+   {
+   set,#CodeHandleName6Room11=<#HKCode>
+   set,#CountHandleName6Room11=[#CountHandleName6Room11+#HWCount]
+   set,#CostHandleName6Room11=[#CostHandleName6Room11+#HWcost]
+   }
+}
+Do,((#HandleName7Room11<>"#HandleName1Room11")&(#HandleName7Room11<>"#HandleName2Room11")&(#HandleName7Room11<>"#HandleName3Room11")&(#HandleName7Room11<>"#HandleName4Room11")&(#HandleName7Room11<>"#HandleName5Room11")&(#HandleName7Room11<>"#HandleName6Room11")):1
+{
+  Do, (#HKName="#HandleName7Room11"):1
+   {
+   set,#CodeHandleName7Room11=<#HKCode>
+   set,#CountHandleName7Room11=[#CountHandleName7Room11+#HWCount]
+   set,#CostHandleName7Room11=[#CostHandleName7Room11+#HWcost]
+   }
+}
+Do,((#HandleName8Room11<>"#HandleName1Room11")&(#HandleName8Room11<>"#HandleName2Room11")&(#HandleName8Room11<>"#HandleName3Room11")&(#HandleName8Room11<>"#HandleName4Room11")&(#HandleName8Room11<>"#HandleName5Room11")&(#HandleName8Room11<>"#HandleName6Room11")&(#HandleName8Room11<>"#HandleName7Room11")):1
+{
+  Do, (#HKName="#HandleName8Room11"):1
+   {
+   set,#CodeHandleName8Room11=<#HKCode>
+   set,#CountHandleName8Room11=[#CountHandleName8Room11+#HWCount]
+   set,#CostHandleName8Room11=[#CostHandleName8Room11+#HWcost]
+   }
+}
+Do,((#HandleName9Room11<>"#HandleName1Room11")&(#HandleName9Room11<>"#HandleName2Room11")&(#HandleName9Room11<>"#HandleName3Room11")&(#HandleName9Room11<>"#HandleName4Room11")&(#HandleName9Room11<>"#HandleName5Room11")&(#HandleName9Room11<>"#HandleName6Room11")&(#HandleName9Room11<>"#HandleName7Room11")&(#HandleName9Room11<>"#HandleName8Room11")):1
+{
+  Do, (#HKName="#HandleName9Room11"):1
+   {
+   set,#CodeHandleName9Room11=<#HKCode>
+   set,#CountHandleName9Room11=[#CountHandleName9Room11+#HWCount]
+   set,#CostHandleName9Room11=[#CostHandleName9Room11+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room11DoorHWCost=[#CostHandleName1Room11+#CostHandleName2Room11+#CostHandleName3Room11+#CostHandleName4Room11+#CostHandleName5Room11+#CostHandleName6Room11+#CostHandleName7Room11+#CostHandleName8Room11+#CostHandleName9Room11]
+
+End
+ }
+Do, (#RoomNum=12):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom12=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room12=999
+   set,#CountHandleName0Room12=[#CountHandleName0Room12+#HWCount]
+   set,#CostHandleName0Room12=0
+   }
+  Do, (#HKName="#HandleName1Room12"):1
+   {
+   set,#CodeHandleName1Room12=<#HKCode>
+   set,#CountHandleName1Room12=[#CountHandleName1Room12+#HWCount]
+   set,#CostHandleName1Room12=[#CostHandleName1Room12+#HWcost]
+   }
+Do,(#HandleName2Room12<>"#HandleName1Room12"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room12"):1
+   {
+   set,#CodeHandleName2Room12=<#HKCode>
+   set,#CountHandleName2Room12=[#CountHandleName2Room12+#HWCount]
+   set,#CostHandleName2Room12=[#CostHandleName2Room12+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room12<>"#HandleName1Room12")|(#HandleName3Room12<>"#HandleName2Room12")):1
+{
+  Do, (#HKName="#HandleName3Room12"):1
+   {
+   set,#CodeHandleName3Room12=<#HKCode>
+   set,#CountHandleName3Room12=[#CountHandleName3Room12+#HWCount]
+   set,#CostHandleName3Room12=[#CostHandleName3Room12+#HWcost]
+   }
+}
+Do,((#HandleName4Room12<>"#HandleName1Room12")&(#HandleName4Room12<>"#HandleName2Room12")&(#HandleName4Room12<>"#HandleName3Room12")):1
+{
+  Do, (#HKName="#HandleName4Room12"):1
+   {
+   set,#CodeHandleName4Room12=<#HKCode>
+   set,#CountHandleName4Room12=[#CountHandleName4Room12+#HWCount]
+   set,#CostHandleName4Room12=[#CostHandleName4Room12+#HWcost]
+   }
+}
+Do,((#HandleName5Room12<>"#HandleName1Room12")&(#HandleName5Room12<>"#HandleName2Room12")&(#HandleName5Room12<>"#HandleName3Room12")&(#HandleName5Room12<>"#HandleName4Room12")):1
+{
+  Do, (#HKName="#HandleName5Room12"):1
+   {
+   set,#CodeHandleName5Room12=<#HKCode>
+   set,#CountHandleName5Room12=[#CountHandleName5Room12+#HWCount]
+   set,#CostHandleName5Room12=[#CostHandleName5Room12+#HWcost]
+   }
+}
+Do,((#HandleName6Room12<>"#HandleName1Room12")&(#HandleName6Room12<>"#HandleName2Room12")&(#HandleName6Room12<>"#HandleName3Room12")&(#HandleName6Room12<>"#HandleName4Room12")&(#HandleName6Room12<>"#HandleName5Room12")):1
+{
+  Do, (#HKName="#HandleName6Room12"):1
+   {
+   set,#CodeHandleName6Room12=<#HKCode>
+   set,#CountHandleName6Room12=[#CountHandleName6Room12+#HWCount]
+   set,#CostHandleName6Room12=[#CostHandleName6Room12+#HWcost]
+   }
+}
+Do,((#HandleName7Room12<>"#HandleName1Room12")&(#HandleName7Room12<>"#HandleName2Room12")&(#HandleName7Room12<>"#HandleName3Room12")&(#HandleName7Room12<>"#HandleName4Room12")&(#HandleName7Room12<>"#HandleName5Room12")&(#HandleName7Room12<>"#HandleName6Room12")):1
+{
+  Do, (#HKName="#HandleName7Room12"):1
+   {
+   set,#CodeHandleName7Room12=<#HKCode>
+   set,#CountHandleName7Room12=[#CountHandleName7Room12+#HWCount]
+   set,#CostHandleName7Room12=[#CostHandleName7Room12+#HWcost]
+   }
+}
+Do,((#HandleName8Room12<>"#HandleName1Room12")&(#HandleName8Room12<>"#HandleName2Room12")&(#HandleName8Room12<>"#HandleName3Room12")&(#HandleName8Room12<>"#HandleName4Room12")&(#HandleName8Room12<>"#HandleName5Room12")&(#HandleName8Room12<>"#HandleName6Room12")&(#HandleName8Room12<>"#HandleName7Room12")):1
+{
+  Do, (#HKName="#HandleName8Room12"):1
+   {
+   set,#CodeHandleName8Room12=<#HKCode>
+   set,#CountHandleName8Room12=[#CountHandleName8Room12+#HWCount]
+   set,#CostHandleName8Room12=[#CostHandleName8Room12+#HWcost]
+   }
+}
+Do,((#HandleName9Room12<>"#HandleName1Room12")&(#HandleName9Room12<>"#HandleName2Room12")&(#HandleName9Room12<>"#HandleName3Room12")&(#HandleName9Room12<>"#HandleName4Room12")&(#HandleName9Room12<>"#HandleName5Room12")&(#HandleName9Room12<>"#HandleName6Room12")&(#HandleName9Room12<>"#HandleName7Room12")&(#HandleName9Room12<>"#HandleName8Room12")):1
+{
+  Do, (#HKName="#HandleName9Room12"):1
+   {
+   set,#CodeHandleName9Room12=<#HKCode>
+   set,#CountHandleName9Room12=[#CountHandleName9Room12+#HWCount]
+   set,#CostHandleName9Room12=[#CostHandleName9Room12+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room12DoorHWCost=[#CostHandleName1Room12+#CostHandleName2Room12+#CostHandleName3Room12+#CostHandleName4Room12+#CostHandleName5Room12+#CostHandleName6Room12+#CostHandleName7Room12+#CostHandleName8Room12+#CostHandleName9Room12]
+
+End
+ }
+Do, (#RoomNum=13):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom13=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room13=999
+   set,#CountHandleName0Room13=[#CountHandleName0Room13+#HWCount]
+   set,#CostHandleName0Room13=0
+   }
+  Do, (#HKName="#HandleName1Room13"):1
+   {
+   set,#CodeHandleName1Room13=<#HKCode>
+   set,#CountHandleName1Room13=[#CountHandleName1Room13+#HWCount]
+   set,#CostHandleName1Room13=[#CostHandleName1Room13+#HWcost]
+   }
+Do,(#HandleName2Room13<>"#HandleName1Room13"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room13"):1
+   {
+   set,#CodeHandleName2Room13=<#HKCode>
+   set,#CountHandleName2Room13=[#CountHandleName2Room13+#HWCount]
+   set,#CostHandleName2Room13=[#CostHandleName2Room13+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room13<>"#HandleName1Room13")|(#HandleName3Room13<>"#HandleName2Room13")):1
+{
+  Do, (#HKName="#HandleName3Room13"):1
+   {
+   set,#CodeHandleName3Room13=<#HKCode>
+   set,#CountHandleName3Room13=[#CountHandleName3Room13+#HWCount]
+   set,#CostHandleName3Room13=[#CostHandleName3Room13+#HWcost]
+   }
+}
+Do,((#HandleName4Room13<>"#HandleName1Room13")&(#HandleName4Room13<>"#HandleName2Room13")&(#HandleName4Room13<>"#HandleName3Room13")):1
+{
+  Do, (#HKName="#HandleName4Room13"):1
+   {
+   set,#CodeHandleName4Room13=<#HKCode>
+   set,#CountHandleName4Room13=[#CountHandleName4Room13+#HWCount]
+   set,#CostHandleName4Room13=[#CostHandleName4Room13+#HWcost]
+   }
+}
+Do,((#HandleName5Room13<>"#HandleName1Room13")&(#HandleName5Room13<>"#HandleName2Room13")&(#HandleName5Room13<>"#HandleName3Room13")&(#HandleName5Room13<>"#HandleName4Room13")):1
+{
+  Do, (#HKName="#HandleName5Room13"):1
+   {
+   set,#CodeHandleName5Room13=<#HKCode>
+   set,#CountHandleName5Room13=[#CountHandleName5Room13+#HWCount]
+   set,#CostHandleName5Room13=[#CostHandleName5Room13+#HWcost]
+   }
+}
+Do,((#HandleName6Room13<>"#HandleName1Room13")&(#HandleName6Room13<>"#HandleName2Room13")&(#HandleName6Room13<>"#HandleName3Room13")&(#HandleName6Room13<>"#HandleName4Room13")&(#HandleName6Room13<>"#HandleName5Room13")):1
+{
+  Do, (#HKName="#HandleName6Room13"):1
+   {
+   set,#CodeHandleName6Room13=<#HKCode>
+   set,#CountHandleName6Room13=[#CountHandleName6Room13+#HWCount]
+   set,#CostHandleName6Room13=[#CostHandleName6Room13+#HWcost]
+   }
+}
+Do,((#HandleName7Room13<>"#HandleName1Room13")&(#HandleName7Room13<>"#HandleName2Room13")&(#HandleName7Room13<>"#HandleName3Room13")&(#HandleName7Room13<>"#HandleName4Room13")&(#HandleName7Room13<>"#HandleName5Room13")&(#HandleName7Room13<>"#HandleName6Room13")):1
+{
+  Do, (#HKName="#HandleName7Room13"):1
+   {
+   set,#CodeHandleName7Room13=<#HKCode>
+   set,#CountHandleName7Room13=[#CountHandleName7Room13+#HWCount]
+   set,#CostHandleName7Room13=[#CostHandleName7Room13+#HWcost]
+   }
+}
+Do,((#HandleName8Room13<>"#HandleName1Room13")&(#HandleName8Room13<>"#HandleName2Room13")&(#HandleName8Room13<>"#HandleName3Room13")&(#HandleName8Room13<>"#HandleName4Room13")&(#HandleName8Room13<>"#HandleName5Room13")&(#HandleName8Room13<>"#HandleName6Room13")&(#HandleName8Room13<>"#HandleName7Room13")):1
+{
+  Do, (#HKName="#HandleName8Room13"):1
+   {
+   set,#CodeHandleName8Room13=<#HKCode>
+   set,#CountHandleName8Room13=[#CountHandleName8Room13+#HWCount]
+   set,#CostHandleName8Room13=[#CostHandleName8Room13+#HWcost]
+   }
+}
+Do,((#HandleName9Room13<>"#HandleName1Room13")&(#HandleName9Room13<>"#HandleName2Room13")&(#HandleName9Room13<>"#HandleName3Room13")&(#HandleName9Room13<>"#HandleName4Room13")&(#HandleName9Room13<>"#HandleName5Room13")&(#HandleName9Room13<>"#HandleName6Room13")&(#HandleName9Room13<>"#HandleName7Room13")&(#HandleName9Room13<>"#HandleName8Room13")):1
+{
+  Do, (#HKName="#HandleName9Room13"):1
+   {
+   set,#CodeHandleName9Room13=<#HKCode>
+   set,#CountHandleName9Room13=[#CountHandleName9Room13+#HWCount]
+   set,#CostHandleName9Room13=[#CostHandleName9Room13+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room13DoorHWCost=[#CostHandleName1Room13+#CostHandleName2Room13+#CostHandleName3Room13+#CostHandleName4Room13+#CostHandleName5Room13+#CostHandleName6Room13+#CostHandleName7Room13+#CostHandleName8Room13+#CostHandleName9Room13]
+
+End
+ }
+Do, (#RoomNum=14):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom14=1
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room14=999
+   set,#CountHandleName0Room14=[#CountHandleName0Room14+#HWCount]
+   set,#CostHandleName0Room14=0
+   }
+  Do, (#HKName="#HandleName1Room14"):1
+   {
+   set,#CodeHandleName1Room14=<#HKCode>
+   set,#CountHandleName1Room14=[#CountHandleName1Room14+#HWCount]
+   set,#CostHandleName1Room14=[#CostHandleName1Room14+#HWcost]
+   }
+Do,(#HandleName2Room14<>"#HandleName1Room14"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room14"):1
+   {
+   set,#CodeHandleName2Room14=<#HKCode>
+   set,#CountHandleName2Room14=[#CountHandleName2Room14+#HWCount]
+   set,#CostHandleName2Room14=[#CostHandleName2Room14+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room14<>"#HandleName1Room14")|(#HandleName3Room14<>"#HandleName2Room14")):1
+{
+  Do, (#HKName="#HandleName3Room14"):1
+   {
+   set,#CodeHandleName3Room14=<#HKCode>
+   set,#CountHandleName3Room14=[#CountHandleName3Room14+#HWCount]
+   set,#CostHandleName3Room14=[#CostHandleName3Room14+#HWcost]
+   }
+}
+Do,((#HandleName4Room14<>"#HandleName1Room14")&(#HandleName4Room14<>"#HandleName2Room14")&(#HandleName4Room14<>"#HandleName3Room14")):1
+{
+  Do, (#HKName="#HandleName4Room14"):1
+   {
+   set,#CodeHandleName4Room14=<#HKCode>
+   set,#CountHandleName4Room14=[#CountHandleName4Room14+#HWCount]
+   set,#CostHandleName4Room14=[#CostHandleName4Room14+#HWcost]
+   }
+}
+Do,((#HandleName5Room14<>"#HandleName1Room14")&(#HandleName5Room14<>"#HandleName2Room14")&(#HandleName5Room14<>"#HandleName3Room14")&(#HandleName5Room14<>"#HandleName4Room14")):1
+{
+  Do, (#HKName="#HandleName5Room14"):1
+   {
+   set,#CodeHandleName5Room14=<#HKCode>
+   set,#CountHandleName5Room14=[#CountHandleName5Room14+#HWCount]
+   set,#CostHandleName5Room14=[#CostHandleName5Room14+#HWcost]
+   }
+}
+Do,((#HandleName6Room14<>"#HandleName1Room14")&(#HandleName6Room14<>"#HandleName2Room14")&(#HandleName6Room14<>"#HandleName3Room14")&(#HandleName6Room14<>"#HandleName4Room14")&(#HandleName6Room14<>"#HandleName5Room14")):1
+{
+  Do, (#HKName="#HandleName6Room14"):1
+   {
+   set,#CodeHandleName6Room14=<#HKCode>
+   set,#CountHandleName6Room14=[#CountHandleName6Room14+#HWCount]
+   set,#CostHandleName6Room14=[#CostHandleName6Room14+#HWcost]
+   }
+}
+Do,((#HandleName7Room14<>"#HandleName1Room14")&(#HandleName7Room14<>"#HandleName2Room14")&(#HandleName7Room14<>"#HandleName3Room14")&(#HandleName7Room14<>"#HandleName4Room14")&(#HandleName7Room14<>"#HandleName5Room14")&(#HandleName7Room14<>"#HandleName6Room14")):1
+{
+  Do, (#HKName="#HandleName7Room14"):1
+   {
+   set,#CodeHandleName7Room14=<#HKCode>
+   set,#CountHandleName7Room14=[#CountHandleName7Room14+#HWCount]
+   set,#CostHandleName7Room14=[#CostHandleName7Room14+#HWcost]
+   }
+}
+Do,((#HandleName8Room14<>"#HandleName1Room14")&(#HandleName8Room14<>"#HandleName2Room14")&(#HandleName8Room14<>"#HandleName3Room14")&(#HandleName8Room14<>"#HandleName4Room14")&(#HandleName8Room14<>"#HandleName5Room14")&(#HandleName8Room14<>"#HandleName6Room14")&(#HandleName8Room14<>"#HandleName7Room14")):1
+{
+  Do, (#HKName="#HandleName8Room14"):1
+   {
+   set,#CodeHandleName8Room14=<#HKCode>
+   set,#CountHandleName8Room14=[#CountHandleName8Room14+#HWCount]
+   set,#CostHandleName8Room14=[#CostHandleName8Room14+#HWcost]
+   }
+}
+Do,((#HandleName9Room14<>"#HandleName1Room14")&(#HandleName9Room14<>"#HandleName2Room14")&(#HandleName9Room14<>"#HandleName3Room14")&(#HandleName9Room14<>"#HandleName4Room14")&(#HandleName9Room14<>"#HandleName5Room14")&(#HandleName9Room14<>"#HandleName6Room14")&(#HandleName9Room14<>"#HandleName7Room14")&(#HandleName9Room14<>"#HandleName8Room14")):1
+{
+  Do, (#HKName="#HandleName9Room14"):1
+   {
+   set,#CodeHandleName9Room14=<#HKCode>
+   set,#CountHandleName9Room14=[#CountHandleName9Room14+#HWCount]
+   set,#CostHandleName9Room14=[#CostHandleName9Room14+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room14DoorHWCost=[#CostHandleName1Room14+#CostHandleName2Room14+#CostHandleName3Room14+#CostHandleName4Room14+#CostHandleName5Room14+#CostHandleName6Room14+#CostHandleName7Room14+#CostHandleName8Room14+#CostHandleName9Room14]
+
+End
+ }
+Do, (#RoomNum=15):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom15=1
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room15=999
+   set,#CountHandleName0Room15=[#CountHandleName0Room15+#HWCount]
+   set,#CostHandleName0Room15=0
+   }
+  Do, (#HKName="#HandleName1Room15"):1
+   {
+   set,#CodeHandleName1Room15=<#HKCode>
+   set,#CountHandleName1Room15=[#CountHandleName1Room15+#HWCount]
+   set,#CostHandleName1Room15=[#CostHandleName1Room15+#HWcost]
+   }
+Do,(#HandleName2Room15<>"#HandleName1Room15"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room15"):1
+   {
+   set,#CodeHandleName2Room15=<#HKCode>
+   set,#CountHandleName2Room15=[#CountHandleName2Room15+#HWCount]
+   set,#CostHandleName2Room15=[#CostHandleName2Room15+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room15<>"#HandleName1Room15")|(#HandleName3Room15<>"#HandleName2Room15")):1
+{
+  Do, (#HKName="#HandleName3Room15"):1
+   {
+   set,#CodeHandleName3Room15=<#HKCode>
+   set,#CountHandleName3Room15=[#CountHandleName3Room15+#HWCount]
+   set,#CostHandleName3Room15=[#CostHandleName3Room15+#HWcost]
+   }
+}
+Do,((#HandleName4Room15<>"#HandleName1Room15")&(#HandleName4Room15<>"#HandleName2Room15")&(#HandleName4Room15<>"#HandleName3Room15")):1
+{
+  Do, (#HKName="#HandleName4Room15"):1
+   {
+   set,#CodeHandleName4Room15=<#HKCode>
+   set,#CountHandleName4Room15=[#CountHandleName4Room15+#HWCount]
+   set,#CostHandleName4Room15=[#CostHandleName4Room15+#HWcost]
+   }
+}
+Do,((#HandleName5Room15<>"#HandleName1Room15")&(#HandleName5Room15<>"#HandleName2Room15")&(#HandleName5Room15<>"#HandleName3Room15")&(#HandleName5Room15<>"#HandleName4Room15")):1
+{
+  Do, (#HKName="#HandleName5Room15"):1
+   {
+   set,#CodeHandleName5Room15=<#HKCode>
+   set,#CountHandleName5Room15=[#CountHandleName5Room15+#HWCount]
+   set,#CostHandleName5Room15=[#CostHandleName5Room15+#HWcost]
+   }
+}
+Do,((#HandleName6Room15<>"#HandleName1Room15")&(#HandleName6Room15<>"#HandleName2Room15")&(#HandleName6Room15<>"#HandleName3Room15")&(#HandleName6Room15<>"#HandleName4Room15")&(#HandleName6Room15<>"#HandleName5Room15")):1
+{
+  Do, (#HKName="#HandleName6Room15"):1
+   {
+   set,#CodeHandleName6Room15=<#HKCode>
+   set,#CountHandleName6Room15=[#CountHandleName6Room15+#HWCount]
+   set,#CostHandleName6Room15=[#CostHandleName6Room15+#HWcost]
+   }
+}
+Do,((#HandleName7Room15<>"#HandleName1Room15")&(#HandleName7Room15<>"#HandleName2Room15")&(#HandleName7Room15<>"#HandleName3Room15")&(#HandleName7Room15<>"#HandleName4Room15")&(#HandleName7Room15<>"#HandleName5Room15")&(#HandleName7Room15<>"#HandleName6Room15")):1
+{
+  Do, (#HKName="#HandleName7Room15"):1
+   {
+   set,#CodeHandleName7Room15=<#HKCode>
+   set,#CountHandleName7Room15=[#CountHandleName7Room15+#HWCount]
+   set,#CostHandleName7Room15=[#CostHandleName7Room15+#HWcost]
+   }
+}
+Do,((#HandleName8Room15<>"#HandleName1Room15")&(#HandleName8Room15<>"#HandleName2Room15")&(#HandleName8Room15<>"#HandleName3Room15")&(#HandleName8Room15<>"#HandleName4Room15")&(#HandleName8Room15<>"#HandleName5Room15")&(#HandleName8Room15<>"#HandleName6Room15")&(#HandleName8Room15<>"#HandleName7Room15")):1
+{
+  Do, (#HKName="#HandleName8Room15"):1
+   {
+   set,#CodeHandleName8Room15=<#HKCode>
+   set,#CountHandleName8Room15=[#CountHandleName8Room15+#HWCount]
+   set,#CostHandleName8Room15=[#CostHandleName8Room15+#HWcost]
+   }
+}
+Do,((#HandleName9Room15<>"#HandleName1Room15")&(#HandleName9Room15<>"#HandleName2Room15")&(#HandleName9Room15<>"#HandleName3Room15")&(#HandleName9Room15<>"#HandleName4Room15")&(#HandleName9Room15<>"#HandleName5Room15")&(#HandleName9Room15<>"#HandleName6Room15")&(#HandleName9Room15<>"#HandleName7Room15")&(#HandleName9Room15<>"#HandleName8Room15")):1
+{
+  Do, (#HKName="#HandleName9Room15"):1
+   {
+   set,#CodeHandleName9Room15=<#HKCode>
+   set,#CountHandleName9Room15=[#CountHandleName9Room15+#HWCount]
+   set,#CostHandleName9Room15=[#CostHandleName9Room15+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room15DoorHWCost=[#CostHandleName1Room15+#CostHandleName2Room15+#CostHandleName3Room15+#CostHandleName4Room15+#CostHandleName5Room15+#CostHandleName6Room15+#CostHandleName7Room15+#CostHandleName8Room15+#CostHandleName9Room15]
+
+End
+ }
+Do, (#RoomNum=16):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom16=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room16=999
+   set,#CountHandleName0Room16=[#CountHandleName0Room16+#HWCount]
+   set,#CostHandleName0Room16=0
+   }
+  Do, (#HKName="#HandleName1Room16"):1
+   {
+   set,#CodeHandleName1Room16=<#HKCode>
+   set,#CountHandleName1Room16=[#CountHandleName1Room16+#HWCount]
+   set,#CostHandleName1Room16=[#CostHandleName1Room16+#HWcost]
+   }
+Do,(#HandleName2Room16<>"#HandleName1Room16"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room16"):1
+   {
+   set,#CodeHandleName2Room16=<#HKCode>
+   set,#CountHandleName2Room16=[#CountHandleName2Room16+#HWCount]
+   set,#CostHandleName2Room16=[#CostHandleName2Room16+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room16<>"#HandleName1Room16")|(#HandleName3Room16<>"#HandleName2Room16")):1
+{
+  Do, (#HKName="#HandleName3Room16"):1
+   {
+   set,#CodeHandleName3Room16=<#HKCode>
+   set,#CountHandleName3Room16=[#CountHandleName3Room16+#HWCount]
+   set,#CostHandleName3Room16=[#CostHandleName3Room16+#HWcost]
+   }
+}
+Do,((#HandleName4Room16<>"#HandleName1Room16")&(#HandleName4Room16<>"#HandleName2Room16")&(#HandleName4Room16<>"#HandleName3Room16")):1
+{
+  Do, (#HKName="#HandleName4Room16"):1
+   {
+   set,#CodeHandleName4Room16=<#HKCode>
+   set,#CountHandleName4Room16=[#CountHandleName4Room16+#HWCount]
+   set,#CostHandleName4Room16=[#CostHandleName4Room16+#HWcost]
+   }
+}
+Do,((#HandleName5Room16<>"#HandleName1Room16")&(#HandleName5Room16<>"#HandleName2Room16")&(#HandleName5Room16<>"#HandleName3Room16")&(#HandleName5Room16<>"#HandleName4Room16")):1
+{
+  Do, (#HKName="#HandleName5Room16"):1
+   {
+   set,#CodeHandleName5Room16=<#HKCode>
+   set,#CountHandleName5Room16=[#CountHandleName5Room16+#HWCount]
+   set,#CostHandleName5Room16=[#CostHandleName5Room16+#HWcost]
+   }
+}
+Do,((#HandleName6Room16<>"#HandleName1Room16")&(#HandleName6Room16<>"#HandleName2Room16")&(#HandleName6Room16<>"#HandleName3Room16")&(#HandleName6Room16<>"#HandleName4Room16")&(#HandleName6Room16<>"#HandleName5Room16")):1
+{
+  Do, (#HKName="#HandleName6Room16"):1
+   {
+   set,#CodeHandleName6Room16=<#HKCode>
+   set,#CountHandleName6Room16=[#CountHandleName6Room16+#HWCount]
+   set,#CostHandleName6Room16=[#CostHandleName6Room16+#HWcost]
+   }
+}
+Do,((#HandleName7Room16<>"#HandleName1Room16")&(#HandleName7Room16<>"#HandleName2Room16")&(#HandleName7Room16<>"#HandleName3Room16")&(#HandleName7Room16<>"#HandleName4Room16")&(#HandleName7Room16<>"#HandleName5Room16")&(#HandleName7Room16<>"#HandleName6Room16")):1
+{
+  Do, (#HKName="#HandleName7Room16"):1
+   {
+   set,#CodeHandleName7Room16=<#HKCode>
+   set,#CountHandleName7Room16=[#CountHandleName7Room16+#HWCount]
+   set,#CostHandleName7Room16=[#CostHandleName7Room16+#HWcost]
+   }
+}
+Do,((#HandleName8Room16<>"#HandleName1Room16")&(#HandleName8Room16<>"#HandleName2Room16")&(#HandleName8Room16<>"#HandleName3Room16")&(#HandleName8Room16<>"#HandleName4Room16")&(#HandleName8Room16<>"#HandleName5Room16")&(#HandleName8Room16<>"#HandleName6Room16")&(#HandleName8Room16<>"#HandleName7Room16")):1
+{
+  Do, (#HKName="#HandleName8Room16"):1
+   {
+   set,#CodeHandleName8Room16=<#HKCode>
+   set,#CountHandleName8Room16=[#CountHandleName8Room16+#HWCount]
+   set,#CostHandleName8Room16=[#CostHandleName8Room16+#HWcost]
+   }
+}
+Do,((#HandleName9Room16<>"#HandleName1Room16")&(#HandleName9Room16<>"#HandleName2Room16")&(#HandleName9Room16<>"#HandleName3Room16")&(#HandleName9Room16<>"#HandleName4Room16")&(#HandleName9Room16<>"#HandleName5Room16")&(#HandleName9Room16<>"#HandleName6Room16")&(#HandleName9Room16<>"#HandleName7Room16")&(#HandleName9Room16<>"#HandleName8Room16")):1
+{
+  Do, (#HKName="#HandleName9Room16"):1
+   {
+   set,#CodeHandleName9Room16=<#HKCode>
+   set,#CountHandleName9Room16=[#CountHandleName9Room16+#HWCount]
+   set,#CostHandleName9Room16=[#CostHandleName9Room16+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room16DoorHWCost=[#CostHandleName1Room16+#CostHandleName2Room16+#CostHandleName3Room16+#CostHandleName4Room16+#CostHandleName5Room16+#CostHandleName6Room16+#CostHandleName7Room16+#CostHandleName8Room16+#CostHandleName9Room16]
+
+End
+ }
+Do, (#RoomNum=17):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom17=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room17=999
+   set,#CountHandleName0Room17=[#CountHandleName0Room17+#HWCount]
+   set,#CostHandleName0Room17=0
+   }
+  Do, (#HKName="#HandleName1Room17"):1
+   {
+   set,#CodeHandleName1Room17=<#HKCode>
+   set,#CountHandleName1Room17=[#CountHandleName1Room17+#HWCount]
+   set,#CostHandleName1Room17=[#CostHandleName1Room17+#HWcost]
+   }
+Do,(#HandleName2Room17<>"#HandleName1Room17"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room17"):1
+   {
+   set,#CodeHandleName2Room17=<#HKCode>
+   set,#CountHandleName2Room17=[#CountHandleName2Room17+#HWCount]
+   set,#CostHandleName2Room17=[#CostHandleName2Room17+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room17<>"#HandleName1Room17")|(#HandleName3Room17<>"#HandleName2Room17")):1
+{
+  Do, (#HKName="#HandleName3Room17"):1
+   {
+   set,#CodeHandleName3Room17=<#HKCode>
+   set,#CountHandleName3Room17=[#CountHandleName3Room17+#HWCount]
+   set,#CostHandleName3Room17=[#CostHandleName3Room17+#HWcost]
+   }
+}
+Do,((#HandleName4Room17<>"#HandleName1Room17")&(#HandleName4Room17<>"#HandleName2Room17")&(#HandleName4Room17<>"#HandleName3Room17")):1
+{
+  Do, (#HKName="#HandleName4Room17"):1
+   {
+   set,#CodeHandleName4Room17=<#HKCode>
+   set,#CountHandleName4Room17=[#CountHandleName4Room17+#HWCount]
+   set,#CostHandleName4Room17=[#CostHandleName4Room17+#HWcost]
+   }
+}
+Do,((#HandleName5Room17<>"#HandleName1Room17")&(#HandleName5Room17<>"#HandleName2Room17")&(#HandleName5Room17<>"#HandleName3Room17")&(#HandleName5Room17<>"#HandleName4Room17")):1
+{
+  Do, (#HKName="#HandleName5Room17"):1
+   {
+   set,#CodeHandleName5Room17=<#HKCode>
+   set,#CountHandleName5Room17=[#CountHandleName5Room17+#HWCount]
+   set,#CostHandleName5Room17=[#CostHandleName5Room17+#HWcost]
+   }
+}
+Do,((#HandleName6Room17<>"#HandleName1Room17")&(#HandleName6Room17<>"#HandleName2Room17")&(#HandleName6Room17<>"#HandleName3Room17")&(#HandleName6Room17<>"#HandleName4Room17")&(#HandleName6Room17<>"#HandleName5Room17")):1
+{
+  Do, (#HKName="#HandleName6Room17"):1
+   {
+   set,#CodeHandleName6Room17=<#HKCode>
+   set,#CountHandleName6Room17=[#CountHandleName6Room17+#HWCount]
+   set,#CostHandleName6Room17=[#CostHandleName6Room17+#HWcost]
+   }
+}
+Do,((#HandleName7Room17<>"#HandleName1Room17")&(#HandleName7Room17<>"#HandleName2Room17")&(#HandleName7Room17<>"#HandleName3Room17")&(#HandleName7Room17<>"#HandleName4Room17")&(#HandleName7Room17<>"#HandleName5Room17")&(#HandleName7Room17<>"#HandleName6Room17")):1
+{
+  Do, (#HKName="#HandleName7Room17"):1
+   {
+   set,#CodeHandleName7Room17=<#HKCode>
+   set,#CountHandleName7Room17=[#CountHandleName7Room17+#HWCount]
+   set,#CostHandleName7Room17=[#CostHandleName7Room17+#HWcost]
+   }
+}
+Do,((#HandleName8Room17<>"#HandleName1Room17")&(#HandleName8Room17<>"#HandleName2Room17")&(#HandleName8Room17<>"#HandleName3Room17")&(#HandleName8Room17<>"#HandleName4Room17")&(#HandleName8Room17<>"#HandleName5Room17")&(#HandleName8Room17<>"#HandleName6Room17")&(#HandleName8Room17<>"#HandleName7Room17")):1
+{
+  Do, (#HKName="#HandleName8Room17"):1
+   {
+   set,#CodeHandleName8Room17=<#HKCode>
+   set,#CountHandleName8Room17=[#CountHandleName8Room17+#HWCount]
+   set,#CostHandleName8Room17=[#CostHandleName8Room17+#HWcost]
+   }
+}
+Do,((#HandleName9Room17<>"#HandleName1Room17")&(#HandleName9Room17<>"#HandleName2Room17")&(#HandleName9Room17<>"#HandleName3Room17")&(#HandleName9Room17<>"#HandleName4Room17")&(#HandleName9Room17<>"#HandleName5Room17")&(#HandleName9Room17<>"#HandleName6Room17")&(#HandleName9Room17<>"#HandleName7Room17")&(#HandleName9Room17<>"#HandleName8Room17")):1
+{
+  Do, (#HKName="#HandleName9Room17"):1
+   {
+   set,#CodeHandleName9Room17=<#HKCode>
+   set,#CountHandleName9Room17=[#CountHandleName9Room17+#HWCount]
+   set,#CostHandleName9Room17=[#CostHandleName9Room17+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room17DoorHWCost=[#CostHandleName1Room17+#CostHandleName2Room17+#CostHandleName3Room17+#CostHandleName4Room17+#CostHandleName5Room17+#CostHandleName6Room17+#CostHandleName7Room17+#CostHandleName8Room17+#CostHandleName9Room17]
+
+End
+ }
+Do, (#RoomNum=18):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom18=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room18=999
+   set,#CountHandleName0Room18=[#CountHandleName0Room18+#HWCount]
+   set,#CostHandleName0Room18=0
+   }
+  Do, (#HKName="#HandleName1Room18"):1
+   {
+   set,#CodeHandleName1Room18=<#HKCode>
+   set,#CountHandleName1Room18=[#CountHandleName1Room18+#HWCount]
+   set,#CostHandleName1Room18=[#CostHandleName1Room18+#HWcost]
+   }
+Do,(#HandleName2Room18<>"#HandleName1Room18"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room18"):1
+   {
+   set,#CodeHandleName2Room18=<#HKCode>
+   set,#CountHandleName2Room18=[#CountHandleName2Room18+#HWCount]
+   set,#CostHandleName2Room18=[#CostHandleName2Room18+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room18<>"#HandleName1Room18")|(#HandleName3Room18<>"#HandleName2Room18")):1
+{
+  Do, (#HKName="#HandleName3Room18"):1
+   {
+   set,#CodeHandleName3Room18=<#HKCode>
+   set,#CountHandleName3Room18=[#CountHandleName3Room18+#HWCount]
+   set,#CostHandleName3Room18=[#CostHandleName3Room18+#HWcost]
+   }
+}
+Do,((#HandleName4Room18<>"#HandleName1Room18")&(#HandleName4Room18<>"#HandleName2Room18")&(#HandleName4Room18<>"#HandleName3Room18")):1
+{
+  Do, (#HKName="#HandleName4Room18"):1
+   {
+   set,#CodeHandleName4Room18=<#HKCode>
+   set,#CountHandleName4Room18=[#CountHandleName4Room18+#HWCount]
+   set,#CostHandleName4Room18=[#CostHandleName4Room18+#HWcost]
+   }
+}
+Do,((#HandleName5Room18<>"#HandleName1Room18")&(#HandleName5Room18<>"#HandleName2Room18")&(#HandleName5Room18<>"#HandleName3Room18")&(#HandleName5Room18<>"#HandleName4Room18")):1
+{
+  Do, (#HKName="#HandleName5Room18"):1
+   {
+   set,#CodeHandleName5Room18=<#HKCode>
+   set,#CountHandleName5Room18=[#CountHandleName5Room18+#HWCount]
+   set,#CostHandleName5Room18=[#CostHandleName5Room18+#HWcost]
+   }
+}
+Do,((#HandleName6Room18<>"#HandleName1Room18")&(#HandleName6Room18<>"#HandleName2Room18")&(#HandleName6Room18<>"#HandleName3Room18")&(#HandleName6Room18<>"#HandleName4Room18")&(#HandleName6Room18<>"#HandleName5Room18")):1
+{
+  Do, (#HKName="#HandleName6Room18"):1
+   {
+   set,#CodeHandleName6Room18=<#HKCode>
+   set,#CountHandleName6Room18=[#CountHandleName6Room18+#HWCount]
+   set,#CostHandleName6Room18=[#CostHandleName6Room18+#HWcost]
+   }
+}
+Do,((#HandleName7Room18<>"#HandleName1Room18")&(#HandleName7Room18<>"#HandleName2Room18")&(#HandleName7Room18<>"#HandleName3Room18")&(#HandleName7Room18<>"#HandleName4Room18")&(#HandleName7Room18<>"#HandleName5Room18")&(#HandleName7Room18<>"#HandleName6Room18")):1
+{
+  Do, (#HKName="#HandleName7Room18"):1
+   {
+   set,#CodeHandleName7Room18=<#HKCode>
+   set,#CountHandleName7Room18=[#CountHandleName7Room18+#HWCount]
+   set,#CostHandleName7Room18=[#CostHandleName7Room18+#HWcost]
+   }
+}
+Do,((#HandleName8Room18<>"#HandleName1Room18")&(#HandleName8Room18<>"#HandleName2Room18")&(#HandleName8Room18<>"#HandleName3Room18")&(#HandleName8Room18<>"#HandleName4Room18")&(#HandleName8Room18<>"#HandleName5Room18")&(#HandleName8Room18<>"#HandleName6Room18")&(#HandleName8Room18<>"#HandleName7Room18")):1
+{
+  Do, (#HKName="#HandleName8Room18"):1
+   {
+   set,#CodeHandleName8Room18=<#HKCode>
+   set,#CountHandleName8Room18=[#CountHandleName8Room18+#HWCount]
+   set,#CostHandleName8Room18=[#CostHandleName8Room18+#HWcost]
+   }
+}
+Do,((#HandleName9Room18<>"#HandleName1Room18")&(#HandleName9Room18<>"#HandleName2Room18")&(#HandleName9Room18<>"#HandleName3Room18")&(#HandleName9Room18<>"#HandleName4Room18")&(#HandleName9Room18<>"#HandleName5Room18")&(#HandleName9Room18<>"#HandleName6Room18")&(#HandleName9Room18<>"#HandleName7Room18")&(#HandleName9Room18<>"#HandleName8Room18")):1
+{
+  Do, (#HKName="#HandleName9Room18"):1
+   {
+   set,#CodeHandleName9Room18=<#HKCode>
+   set,#CountHandleName9Room18=[#CountHandleName9Room18+#HWCount]
+   set,#CostHandleName9Room18=[#CostHandleName9Room18+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room18DoorHWCost=[#CostHandleName1Room18+#CostHandleName2Room18+#CostHandleName3Room18+#CostHandleName4Room18+#CostHandleName5Room18+#CostHandleName6Room18+#CostHandleName7Room18+#CostHandleName8Room18+#CostHandleName9Room18]
+
+End
+ }
+Do, (#RoomNum=19):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom19=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room19=999
+   set,#CountHandleName0Room19=[#CountHandleName0Room19+#HWCount]
+   set,#CostHandleName0Room19=0
+   }
+  Do, (#HKName="#HandleName1Room19"):1
+   {
+   set,#CodeHandleName1Room19=<#HKCode>
+   set,#CountHandleName1Room19=[#CountHandleName1Room19+#HWCount]
+   set,#CostHandleName1Room19=[#CostHandleName1Room19+#HWcost]
+   }
+Do,(#HandleName2Room19<>"#HandleName1Room19"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room19"):1
+   {
+   set,#CodeHandleName2Room19=<#HKCode>
+   set,#CountHandleName2Room19=[#CountHandleName2Room19+#HWCount]
+   set,#CostHandleName2Room19=[#CostHandleName2Room19+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room19<>"#HandleName1Room19")|(#HandleName3Room19<>"#HandleName2Room19")):1
+{
+  Do, (#HKName="#HandleName3Room19"):1
+   {
+   set,#CodeHandleName3Room19=<#HKCode>
+   set,#CountHandleName3Room19=[#CountHandleName3Room19+#HWCount]
+   set,#CostHandleName3Room19=[#CostHandleName3Room19+#HWcost]
+   }
+}
+Do,((#HandleName4Room19<>"#HandleName1Room19")&(#HandleName4Room19<>"#HandleName2Room19")&(#HandleName4Room19<>"#HandleName3Room19")):1
+{
+  Do, (#HKName="#HandleName4Room19"):1
+   {
+   set,#CodeHandleName4Room19=<#HKCode>
+   set,#CountHandleName4Room19=[#CountHandleName4Room19+#HWCount]
+   set,#CostHandleName4Room19=[#CostHandleName4Room19+#HWcost]
+   }
+}
+Do,((#HandleName5Room19<>"#HandleName1Room19")&(#HandleName5Room19<>"#HandleName2Room19")&(#HandleName5Room19<>"#HandleName3Room19")&(#HandleName5Room19<>"#HandleName4Room19")):1
+{
+  Do, (#HKName="#HandleName5Room19"):1
+   {
+   set,#CodeHandleName5Room19=<#HKCode>
+   set,#CountHandleName5Room19=[#CountHandleName5Room19+#HWCount]
+   set,#CostHandleName5Room19=[#CostHandleName5Room19+#HWcost]
+   }
+}
+Do,((#HandleName6Room19<>"#HandleName1Room19")&(#HandleName6Room19<>"#HandleName2Room19")&(#HandleName6Room19<>"#HandleName3Room19")&(#HandleName6Room19<>"#HandleName4Room19")&(#HandleName6Room19<>"#HandleName5Room19")):1
+{
+  Do, (#HKName="#HandleName6Room19"):1
+   {
+   set,#CodeHandleName6Room19=<#HKCode>
+   set,#CountHandleName6Room19=[#CountHandleName6Room19+#HWCount]
+   set,#CostHandleName6Room19=[#CostHandleName6Room19+#HWcost]
+   }
+}
+Do,((#HandleName7Room19<>"#HandleName1Room19")&(#HandleName7Room19<>"#HandleName2Room19")&(#HandleName7Room19<>"#HandleName3Room19")&(#HandleName7Room19<>"#HandleName4Room19")&(#HandleName7Room19<>"#HandleName5Room19")&(#HandleName7Room19<>"#HandleName6Room19")):1
+{
+  Do, (#HKName="#HandleName7Room19"):1
+   {
+   set,#CodeHandleName7Room19=<#HKCode>
+   set,#CountHandleName7Room19=[#CountHandleName7Room19+#HWCount]
+   set,#CostHandleName7Room19=[#CostHandleName7Room19+#HWcost]
+   }
+}
+Do,((#HandleName8Room19<>"#HandleName1Room19")&(#HandleName8Room19<>"#HandleName2Room19")&(#HandleName8Room19<>"#HandleName3Room19")&(#HandleName8Room19<>"#HandleName4Room19")&(#HandleName8Room19<>"#HandleName5Room19")&(#HandleName8Room19<>"#HandleName6Room19")&(#HandleName8Room19<>"#HandleName7Room19")):1
+{
+  Do, (#HKName="#HandleName8Room19"):1
+   {
+   set,#CodeHandleName8Room19=<#HKCode>
+   set,#CountHandleName8Room19=[#CountHandleName8Room19+#HWCount]
+   set,#CostHandleName8Room19=[#CostHandleName8Room19+#HWcost]
+   }
+}
+Do,((#HandleName9Room19<>"#HandleName1Room19")&(#HandleName9Room19<>"#HandleName2Room19")&(#HandleName9Room19<>"#HandleName3Room19")&(#HandleName9Room19<>"#HandleName4Room19")&(#HandleName9Room19<>"#HandleName5Room19")&(#HandleName9Room19<>"#HandleName6Room19")&(#HandleName9Room19<>"#HandleName7Room19")&(#HandleName9Room19<>"#HandleName8Room19")):1
+{
+  Do, (#HKName="#HandleName9Room19"):1
+   {
+   set,#CodeHandleName9Room19=<#HKCode>
+   set,#CountHandleName9Room19=[#CountHandleName9Room19+#HWCount]
+   set,#CostHandleName9Room19=[#CostHandleName9Room19+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room19DoorHWCost=[#CostHandleName1Room19+#CostHandleName2Room19+#CostHandleName3Room19+#CostHandleName4Room19+#CostHandleName5Room19+#CostHandleName6Room19+#CostHandleName7Room19+#CostHandleName8Room19+#CostHandleName9Room19]
+
+End
+ }
+Do, (#RoomNum=20):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom20=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room20=999
+   set,#CountHandleName0Room20=[#CountHandleName0Room20+#HWCount]
+   set,#CostHandleName0Room20=0
+   }
+  Do, (#HKName="#HandleName1Room20"):1
+   {
+   set,#CodeHandleName1Room20=<#HKCode>
+   set,#CountHandleName1Room20=[#CountHandleName1Room20+#HWCount]
+   set,#CostHandleName1Room20=[#CostHandleName1Room20+#HWcost]
+   }
+Do,(#HandleName2Room20<>"#HandleName1Room20"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room20"):1
+   {
+   set,#CodeHandleName2Room20=<#HKCode>
+   set,#CountHandleName2Room20=[#CountHandleName2Room20+#HWCount]
+   set,#CostHandleName2Room20=[#CostHandleName2Room20+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room20<>"#HandleName1Room20")|(#HandleName3Room20<>"#HandleName2Room20")):1
+{
+  Do, (#HKName="#HandleName3Room20"):1
+   {
+   set,#CodeHandleName3Room20=<#HKCode>
+   set,#CountHandleName3Room20=[#CountHandleName3Room20+#HWCount]
+   set,#CostHandleName3Room20=[#CostHandleName3Room20+#HWcost]
+   }
+}
+Do,((#HandleName4Room20<>"#HandleName1Room20")&(#HandleName4Room20<>"#HandleName2Room20")&(#HandleName4Room20<>"#HandleName3Room20")):1
+{
+  Do, (#HKName="#HandleName4Room20"):1
+   {
+   set,#CodeHandleName4Room20=<#HKCode>
+   set,#CountHandleName4Room20=[#CountHandleName4Room20+#HWCount]
+   set,#CostHandleName4Room20=[#CostHandleName4Room20+#HWcost]
+   }
+}
+Do,((#HandleName5Room20<>"#HandleName1Room20")&(#HandleName5Room20<>"#HandleName2Room20")&(#HandleName5Room20<>"#HandleName3Room20")&(#HandleName5Room20<>"#HandleName4Room20")):1
+{
+  Do, (#HKName="#HandleName5Room20"):1
+   {
+   set,#CodeHandleName5Room20=<#HKCode>
+   set,#CountHandleName5Room20=[#CountHandleName5Room20+#HWCount]
+   set,#CostHandleName5Room20=[#CostHandleName5Room20+#HWcost]
+   }
+}
+Do,((#HandleName6Room20<>"#HandleName1Room20")&(#HandleName6Room20<>"#HandleName2Room20")&(#HandleName6Room20<>"#HandleName3Room20")&(#HandleName6Room20<>"#HandleName4Room20")&(#HandleName6Room20<>"#HandleName5Room20")):1
+{
+  Do, (#HKName="#HandleName6Room20"):1
+   {
+   set,#CodeHandleName6Room20=<#HKCode>
+   set,#CountHandleName6Room20=[#CountHandleName6Room20+#HWCount]
+   set,#CostHandleName6Room20=[#CostHandleName6Room20+#HWcost]
+   }
+}
+Do,((#HandleName7Room20<>"#HandleName1Room20")&(#HandleName7Room20<>"#HandleName2Room20")&(#HandleName7Room20<>"#HandleName3Room20")&(#HandleName7Room20<>"#HandleName4Room20")&(#HandleName7Room20<>"#HandleName5Room20")&(#HandleName7Room20<>"#HandleName6Room20")):1
+{
+  Do, (#HKName="#HandleName7Room20"):1
+   {
+   set,#CodeHandleName7Room20=<#HKCode>
+   set,#CountHandleName7Room20=[#CountHandleName7Room20+#HWCount]
+   set,#CostHandleName7Room20=[#CostHandleName7Room20+#HWcost]
+   }
+}
+Do,((#HandleName8Room20<>"#HandleName1Room20")&(#HandleName8Room20<>"#HandleName2Room20")&(#HandleName8Room20<>"#HandleName3Room20")&(#HandleName8Room20<>"#HandleName4Room20")&(#HandleName8Room20<>"#HandleName5Room20")&(#HandleName8Room20<>"#HandleName6Room20")&(#HandleName8Room20<>"#HandleName7Room20")):1
+{
+  Do, (#HKName="#HandleName8Room20"):1
+   {
+   set,#CodeHandleName8Room20=<#HKCode>
+   set,#CountHandleName8Room20=[#CountHandleName8Room20+#HWCount]
+   set,#CostHandleName8Room20=[#CostHandleName8Room20+#HWcost]
+   }
+}
+Do,((#HandleName9Room20<>"#HandleName1Room20")&(#HandleName9Room20<>"#HandleName2Room20")&(#HandleName9Room20<>"#HandleName3Room20")&(#HandleName9Room20<>"#HandleName4Room20")&(#HandleName9Room20<>"#HandleName5Room20")&(#HandleName9Room20<>"#HandleName6Room20")&(#HandleName9Room20<>"#HandleName7Room20")&(#HandleName9Room20<>"#HandleName8Room20")):1
+{
+  Do, (#HKName="#HandleName9Room20"):1
+   {
+   set,#CodeHandleName9Room20=<#HKCode>
+   set,#CountHandleName9Room20=[#CountHandleName9Room20+#HWCount]
+   set,#CostHandleName9Room20=[#CostHandleName9Room20+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room20DoorHWCost=[#CostHandleName1Room20+#CostHandleName2Room20+#CostHandleName3Room20+#CostHandleName4Room20+#CostHandleName5Room20+#CostHandleName6Room20+#CostHandleName7Room20+#CostHandleName8Room20+#CostHandleName9Room20]
+
+End
+ }
+Do, (#RoomNum=21):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom21=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room21=999
+   set,#CountHandleName0Room21=[#CountHandleName0Room21+#HWCount]
+   set,#CostHandleName0Room21=0
+   }
+  Do, (#HKName="#HandleName1Room21"):1
+   {
+   set,#CodeHandleName1Room21=<#HKCode>
+   set,#CountHandleName1Room21=[#CountHandleName1Room21+#HWCount]
+   set,#CostHandleName1Room21=[#CostHandleName1Room21+#HWcost]
+   }
+Do,(#HandleName2Room21<>"#HandleName1Room21"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room21"):1
+   {
+   set,#CodeHandleName2Room21=<#HKCode>
+   set,#CountHandleName2Room21=[#CountHandleName2Room21+#HWCount]
+   set,#CostHandleName2Room21=[#CostHandleName2Room21+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room21<>"#HandleName1Room21")|(#HandleName3Room21<>"#HandleName2Room21")):1
+{
+  Do, (#HKName="#HandleName3Room21"):1
+   {
+   set,#CodeHandleName3Room21=<#HKCode>
+   set,#CountHandleName3Room21=[#CountHandleName3Room21+#HWCount]
+   set,#CostHandleName3Room21=[#CostHandleName3Room21+#HWcost]
+   }
+}
+Do,((#HandleName4Room21<>"#HandleName1Room21")&(#HandleName4Room21<>"#HandleName2Room21")&(#HandleName4Room21<>"#HandleName3Room21")):1
+{
+  Do, (#HKName="#HandleName4Room21"):1
+   {
+   set,#CodeHandleName4Room21=<#HKCode>
+   set,#CountHandleName4Room21=[#CountHandleName4Room21+#HWCount]
+   set,#CostHandleName4Room21=[#CostHandleName4Room21+#HWcost]
+   }
+}
+Do,((#HandleName5Room21<>"#HandleName1Room21")&(#HandleName5Room21<>"#HandleName2Room21")&(#HandleName5Room21<>"#HandleName3Room21")&(#HandleName5Room21<>"#HandleName4Room21")):1
+{
+  Do, (#HKName="#HandleName5Room21"):1
+   {
+   set,#CodeHandleName5Room21=<#HKCode>
+   set,#CountHandleName5Room21=[#CountHandleName5Room21+#HWCount]
+   set,#CostHandleName5Room21=[#CostHandleName5Room21+#HWcost]
+   }
+}
+Do,((#HandleName6Room21<>"#HandleName1Room21")&(#HandleName6Room21<>"#HandleName2Room21")&(#HandleName6Room21<>"#HandleName3Room21")&(#HandleName6Room21<>"#HandleName4Room21")&(#HandleName6Room21<>"#HandleName5Room21")):1
+{
+  Do, (#HKName="#HandleName6Room21"):1
+   {
+   set,#CodeHandleName6Room21=<#HKCode>
+   set,#CountHandleName6Room21=[#CountHandleName6Room21+#HWCount]
+   set,#CostHandleName6Room21=[#CostHandleName6Room21+#HWcost]
+   }
+}
+Do,((#HandleName7Room21<>"#HandleName1Room21")&(#HandleName7Room21<>"#HandleName2Room21")&(#HandleName7Room21<>"#HandleName3Room21")&(#HandleName7Room21<>"#HandleName4Room21")&(#HandleName7Room21<>"#HandleName5Room21")&(#HandleName7Room21<>"#HandleName6Room21")):1
+{
+  Do, (#HKName="#HandleName7Room21"):1
+   {
+   set,#CodeHandleName7Room21=<#HKCode>
+   set,#CountHandleName7Room21=[#CountHandleName7Room21+#HWCount]
+   set,#CostHandleName7Room21=[#CostHandleName7Room21+#HWcost]
+   }
+}
+Do,((#HandleName8Room21<>"#HandleName1Room21")&(#HandleName8Room21<>"#HandleName2Room21")&(#HandleName8Room21<>"#HandleName3Room21")&(#HandleName8Room21<>"#HandleName4Room21")&(#HandleName8Room21<>"#HandleName5Room21")&(#HandleName8Room21<>"#HandleName6Room21")&(#HandleName8Room21<>"#HandleName7Room21")):1
+{
+  Do, (#HKName="#HandleName8Room21"):1
+   {
+   set,#CodeHandleName8Room21=<#HKCode>
+   set,#CountHandleName8Room21=[#CountHandleName8Room21+#HWCount]
+   set,#CostHandleName8Room21=[#CostHandleName8Room21+#HWcost]
+   }
+}
+Do,((#HandleName9Room21<>"#HandleName1Room21")&(#HandleName9Room21<>"#HandleName2Room21")&(#HandleName9Room21<>"#HandleName3Room21")&(#HandleName9Room21<>"#HandleName4Room21")&(#HandleName9Room21<>"#HandleName5Room21")&(#HandleName9Room21<>"#HandleName6Room21")&(#HandleName9Room21<>"#HandleName7Room21")&(#HandleName9Room21<>"#HandleName8Room21")):1
+{
+  Do, (#HKName="#HandleName9Room21"):1
+   {
+   set,#CodeHandleName9Room21=<#HKCode>
+   set,#CountHandleName9Room21=[#CountHandleName9Room21+#HWCount]
+   set,#CostHandleName9Room21=[#CostHandleName9Room21+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room21DoorHWCost=[#CostHandleName1Room21+#CostHandleName2Room21+#CostHandleName3Room21+#CostHandleName4Room21+#CostHandleName5Room21+#CostHandleName6Room21+#CostHandleName7Room21+#CostHandleName8Room21+#CostHandleName9Room21]
+
+End
+ }
+
+Do, (#RoomNum=22):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom22=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room22=999
+   set,#CountHandleName0Room22=[#CountHandleName0Room22+#HWCount]
+   set,#CostHandleName0Room22=0
+   }
+  Do, (#HKName="#HandleName1Room22"):1
+   {
+   set,#CodeHandleName1Room22=<#HKCode>
+   set,#CountHandleName1Room22=[#CountHandleName1Room22+#HWCount]
+   set,#CostHandleName1Room22=[#CostHandleName1Room22+#HWcost]
+   }
+Do,(#HandleName2Room22<>"#HandleName1Room22"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room22"):1
+   {
+   set,#CodeHandleName2Room22=<#HKCode>
+   set,#CountHandleName2Room22=[#CountHandleName2Room22+#HWCount]
+   set,#CostHandleName2Room22=[#CostHandleName2Room22+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room22<>"#HandleName1Room22")|(#HandleName3Room22<>"#HandleName2Room22")):1
+{
+  Do, (#HKName="#HandleName3Room22"):1
+   {
+   set,#CodeHandleName3Room22=<#HKCode>
+   set,#CountHandleName3Room22=[#CountHandleName3Room22+#HWCount]
+   set,#CostHandleName3Room22=[#CostHandleName3Room22+#HWcost]
+   }
+}
+Do,((#HandleName4Room22<>"#HandleName1Room22")&(#HandleName4Room22<>"#HandleName2Room22")&(#HandleName4Room22<>"#HandleName3Room22")):1
+{
+  Do, (#HKName="#HandleName4Room22"):1
+   {
+   set,#CodeHandleName4Room22=<#HKCode>
+   set,#CountHandleName4Room22=[#CountHandleName4Room22+#HWCount]
+   set,#CostHandleName4Room22=[#CostHandleName4Room22+#HWcost]
+   }
+}
+Do,((#HandleName5Room22<>"#HandleName1Room22")&(#HandleName5Room22<>"#HandleName2Room22")&(#HandleName5Room22<>"#HandleName3Room22")&(#HandleName5Room22<>"#HandleName4Room22")):1
+{
+  Do, (#HKName="#HandleName5Room22"):1
+   {
+   set,#CodeHandleName5Room22=<#HKCode>
+   set,#CountHandleName5Room22=[#CountHandleName5Room22+#HWCount]
+   set,#CostHandleName5Room22=[#CostHandleName5Room22+#HWcost]
+   }
+}
+Do,((#HandleName6Room22<>"#HandleName1Room22")&(#HandleName6Room22<>"#HandleName2Room22")&(#HandleName6Room22<>"#HandleName3Room22")&(#HandleName6Room22<>"#HandleName4Room22")&(#HandleName6Room22<>"#HandleName5Room22")):1
+{
+  Do, (#HKName="#HandleName6Room22"):1
+   {
+   set,#CodeHandleName6Room22=<#HKCode>
+   set,#CountHandleName6Room22=[#CountHandleName6Room22+#HWCount]
+   set,#CostHandleName6Room22=[#CostHandleName6Room22+#HWcost]
+   }
+}
+Do,((#HandleName7Room22<>"#HandleName1Room22")&(#HandleName7Room22<>"#HandleName2Room22")&(#HandleName7Room22<>"#HandleName3Room22")&(#HandleName7Room22<>"#HandleName4Room22")&(#HandleName7Room22<>"#HandleName5Room22")&(#HandleName7Room22<>"#HandleName6Room22")):1
+{
+  Do, (#HKName="#HandleName7Room22"):1
+   {
+   set,#CodeHandleName7Room22=<#HKCode>
+   set,#CountHandleName7Room22=[#CountHandleName7Room22+#HWCount]
+   set,#CostHandleName7Room22=[#CostHandleName7Room22+#HWcost]
+   }
+}
+Do,((#HandleName8Room22<>"#HandleName1Room22")&(#HandleName8Room22<>"#HandleName2Room22")&(#HandleName8Room22<>"#HandleName3Room22")&(#HandleName8Room22<>"#HandleName4Room22")&(#HandleName8Room22<>"#HandleName5Room22")&(#HandleName8Room22<>"#HandleName6Room22")&(#HandleName8Room22<>"#HandleName7Room22")):1
+{
+  Do, (#HKName="#HandleName8Room22"):1
+   {
+   set,#CodeHandleName8Room22=<#HKCode>
+   set,#CountHandleName8Room22=[#CountHandleName8Room22+#HWCount]
+   set,#CostHandleName8Room22=[#CostHandleName8Room22+#HWcost]
+   }
+}
+Do,((#HandleName9Room22<>"#HandleName1Room22")&(#HandleName9Room22<>"#HandleName2Room22")&(#HandleName9Room22<>"#HandleName3Room22")&(#HandleName9Room22<>"#HandleName4Room22")&(#HandleName9Room22<>"#HandleName5Room22")&(#HandleName9Room22<>"#HandleName6Room22")&(#HandleName9Room22<>"#HandleName7Room22")&(#HandleName9Room22<>"#HandleName8Room22")):1
+{
+  Do, (#HKName="#HandleName9Room22"):1
+   {
+   set,#CodeHandleName9Room22=<#HKCode>
+   set,#CountHandleName9Room22=[#CountHandleName9Room22+#HWCount]
+   set,#CostHandleName9Room22=[#CostHandleName9Room22+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room22DoorHWCost=[#CostHandleName1Room22+#CostHandleName2Room22+#CostHandleName3Room22+#CostHandleName4Room22+#CostHandleName5Room22+#CostHandleName6Room22+#CostHandleName7Room22+#CostHandleName8Room22+#CostHandleName9Room22]
+
+End
+ }
+Do, (#RoomNum=23):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom23=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room23=999
+   set,#CountHandleName0Room23=[#CountHandleName0Room23+#HWCount]
+   set,#CostHandleName0Room23=0
+   }
+  Do, (#HKName="#HandleName1Room23"):1
+   {
+   set,#CodeHandleName1Room23=<#HKCode>
+   set,#CountHandleName1Room23=[#CountHandleName1Room23+#HWCount]
+   set,#CostHandleName1Room23=[#CostHandleName1Room23+#HWcost]
+   }
+Do,(#HandleName2Room23<>"#HandleName1Room23"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room23"):1
+   {
+   set,#CodeHandleName2Room23=<#HKCode>
+   set,#CountHandleName2Room23=[#CountHandleName2Room23+#HWCount]
+   set,#CostHandleName2Room23=[#CostHandleName2Room23+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room23<>"#HandleName1Room23")|(#HandleName3Room23<>"#HandleName2Room23")):1
+{
+  Do, (#HKName="#HandleName3Room23"):1
+   {
+   set,#CodeHandleName3Room23=<#HKCode>
+   set,#CountHandleName3Room23=[#CountHandleName3Room23+#HWCount]
+   set,#CostHandleName3Room23=[#CostHandleName3Room23+#HWcost]
+   }
+}
+Do,((#HandleName4Room23<>"#HandleName1Room23")&(#HandleName4Room23<>"#HandleName2Room23")&(#HandleName4Room23<>"#HandleName3Room23")):1
+{
+  Do, (#HKName="#HandleName4Room23"):1
+   {
+   set,#CodeHandleName4Room23=<#HKCode>
+   set,#CountHandleName4Room23=[#CountHandleName4Room23+#HWCount]
+   set,#CostHandleName4Room23=[#CostHandleName4Room23+#HWcost]
+   }
+}
+Do,((#HandleName5Room23<>"#HandleName1Room23")&(#HandleName5Room23<>"#HandleName2Room23")&(#HandleName5Room23<>"#HandleName3Room23")&(#HandleName5Room23<>"#HandleName4Room23")):1
+{
+  Do, (#HKName="#HandleName5Room23"):1
+   {
+   set,#CodeHandleName5Room23=<#HKCode>
+   set,#CountHandleName5Room23=[#CountHandleName5Room23+#HWCount]
+   set,#CostHandleName5Room23=[#CostHandleName5Room23+#HWcost]
+   }
+}
+Do,((#HandleName6Room23<>"#HandleName1Room23")&(#HandleName6Room23<>"#HandleName2Room23")&(#HandleName6Room23<>"#HandleName3Room23")&(#HandleName6Room23<>"#HandleName4Room23")&(#HandleName6Room23<>"#HandleName5Room23")):1
+{
+  Do, (#HKName="#HandleName6Room23"):1
+   {
+   set,#CodeHandleName6Room23=<#HKCode>
+   set,#CountHandleName6Room23=[#CountHandleName6Room23+#HWCount]
+   set,#CostHandleName6Room23=[#CostHandleName6Room23+#HWcost]
+   }
+}
+Do,((#HandleName7Room23<>"#HandleName1Room23")&(#HandleName7Room23<>"#HandleName2Room23")&(#HandleName7Room23<>"#HandleName3Room23")&(#HandleName7Room23<>"#HandleName4Room23")&(#HandleName7Room23<>"#HandleName5Room23")&(#HandleName7Room23<>"#HandleName6Room23")):1
+{
+  Do, (#HKName="#HandleName7Room23"):1
+   {
+   set,#CodeHandleName7Room23=<#HKCode>
+   set,#CountHandleName7Room23=[#CountHandleName7Room23+#HWCount]
+   set,#CostHandleName7Room23=[#CostHandleName7Room23+#HWcost]
+   }
+}
+Do,((#HandleName8Room23<>"#HandleName1Room23")&(#HandleName8Room23<>"#HandleName2Room23")&(#HandleName8Room23<>"#HandleName3Room23")&(#HandleName8Room23<>"#HandleName4Room23")&(#HandleName8Room23<>"#HandleName5Room23")&(#HandleName8Room23<>"#HandleName6Room23")&(#HandleName8Room23<>"#HandleName7Room23")):1
+{
+  Do, (#HKName="#HandleName8Room23"):1
+   {
+   set,#CodeHandleName8Room23=<#HKCode>
+   set,#CountHandleName8Room23=[#CountHandleName8Room23+#HWCount]
+   set,#CostHandleName8Room23=[#CostHandleName8Room23+#HWcost]
+   }
+}
+Do,((#HandleName9Room23<>"#HandleName1Room23")&(#HandleName9Room23<>"#HandleName2Room23")&(#HandleName9Room23<>"#HandleName3Room23")&(#HandleName9Room23<>"#HandleName4Room23")&(#HandleName9Room23<>"#HandleName5Room23")&(#HandleName9Room23<>"#HandleName6Room23")&(#HandleName9Room23<>"#HandleName7Room23")&(#HandleName9Room23<>"#HandleName8Room23")):1
+{
+  Do, (#HKName="#HandleName9Room23"):1
+   {
+   set,#CodeHandleName9Room23=<#HKCode>
+   set,#CountHandleName9Room23=[#CountHandleName9Room23+#HWCount]
+   set,#CostHandleName9Room23=[#CostHandleName9Room23+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room23DoorHWCost=[#CostHandleName1Room23+#CostHandleName2Room23+#CostHandleName3Room23+#CostHandleName4Room23+#CostHandleName5Room23+#CostHandleName6Room23+#CostHandleName7Room23+#CostHandleName8Room23+#CostHandleName9Room23]
+
+End
+ }
+Do, (#RoomNum=24):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom24=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room24=999
+   set,#CountHandleName0Room24=[#CountHandleName0Room24+#HWCount]
+   set,#CostHandleName0Room24=0
+   }
+  Do, (#HKName="#HandleName1Room24"):1
+   {
+   set,#CodeHandleName1Room24=<#HKCode>
+   set,#CountHandleName1Room24=[#CountHandleName1Room24+#HWCount]
+   set,#CostHandleName1Room24=[#CostHandleName1Room24+#HWcost]
+   }
+Do,(#HandleName2Room24<>"#HandleName1Room24"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room24"):1
+   {
+   set,#CodeHandleName2Room24=<#HKCode>
+   set,#CountHandleName2Room24=[#CountHandleName2Room24+#HWCount]
+   set,#CostHandleName2Room24=[#CostHandleName2Room24+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room24<>"#HandleName1Room24")|(#HandleName3Room24<>"#HandleName2Room24")):1
+{
+  Do, (#HKName="#HandleName3Room24"):1
+   {
+   set,#CodeHandleName3Room24=<#HKCode>
+   set,#CountHandleName3Room24=[#CountHandleName3Room24+#HWCount]
+   set,#CostHandleName3Room24=[#CostHandleName3Room24+#HWcost]
+   }
+}
+Do,((#HandleName4Room24<>"#HandleName1Room24")&(#HandleName4Room24<>"#HandleName2Room24")&(#HandleName4Room24<>"#HandleName3Room24")):1
+{
+  Do, (#HKName="#HandleName4Room24"):1
+   {
+   set,#CodeHandleName4Room24=<#HKCode>
+   set,#CountHandleName4Room24=[#CountHandleName4Room24+#HWCount]
+   set,#CostHandleName4Room24=[#CostHandleName4Room24+#HWcost]
+   }
+}
+Do,((#HandleName5Room24<>"#HandleName1Room24")&(#HandleName5Room24<>"#HandleName2Room24")&(#HandleName5Room24<>"#HandleName3Room24")&(#HandleName5Room24<>"#HandleName4Room24")):1
+{
+  Do, (#HKName="#HandleName5Room24"):1
+   {
+   set,#CodeHandleName5Room24=<#HKCode>
+   set,#CountHandleName5Room24=[#CountHandleName5Room24+#HWCount]
+   set,#CostHandleName5Room24=[#CostHandleName5Room24+#HWcost]
+   }
+}
+Do,((#HandleName6Room24<>"#HandleName1Room24")&(#HandleName6Room24<>"#HandleName2Room24")&(#HandleName6Room24<>"#HandleName3Room24")&(#HandleName6Room24<>"#HandleName4Room24")&(#HandleName6Room24<>"#HandleName5Room24")):1
+{
+  Do, (#HKName="#HandleName6Room24"):1
+   {
+   set,#CodeHandleName6Room24=<#HKCode>
+   set,#CountHandleName6Room24=[#CountHandleName6Room24+#HWCount]
+   set,#CostHandleName6Room24=[#CostHandleName6Room24+#HWcost]
+   }
+}
+Do,((#HandleName7Room24<>"#HandleName1Room24")&(#HandleName7Room24<>"#HandleName2Room24")&(#HandleName7Room24<>"#HandleName3Room24")&(#HandleName7Room24<>"#HandleName4Room24")&(#HandleName7Room24<>"#HandleName5Room24")&(#HandleName7Room24<>"#HandleName6Room24")):1
+{
+  Do, (#HKName="#HandleName7Room24"):1
+   {
+   set,#CodeHandleName7Room24=<#HKCode>
+   set,#CountHandleName7Room24=[#CountHandleName7Room24+#HWCount]
+   set,#CostHandleName7Room24=[#CostHandleName7Room24+#HWcost]
+   }
+}
+Do,((#HandleName8Room24<>"#HandleName1Room24")&(#HandleName8Room24<>"#HandleName2Room24")&(#HandleName8Room24<>"#HandleName3Room24")&(#HandleName8Room24<>"#HandleName4Room24")&(#HandleName8Room24<>"#HandleName5Room24")&(#HandleName8Room24<>"#HandleName6Room24")&(#HandleName8Room24<>"#HandleName7Room24")):1
+{
+  Do, (#HKName="#HandleName8Room24"):1
+   {
+   set,#CodeHandleName8Room24=<#HKCode>
+   set,#CountHandleName8Room24=[#CountHandleName8Room24+#HWCount]
+   set,#CostHandleName8Room24=[#CostHandleName8Room24+#HWcost]
+   }
+}
+Do,((#HandleName9Room24<>"#HandleName1Room24")&(#HandleName9Room24<>"#HandleName2Room24")&(#HandleName9Room24<>"#HandleName3Room24")&(#HandleName9Room24<>"#HandleName4Room24")&(#HandleName9Room24<>"#HandleName5Room24")&(#HandleName9Room24<>"#HandleName6Room24")&(#HandleName9Room24<>"#HandleName7Room24")&(#HandleName9Room24<>"#HandleName8Room24")):1
+{
+  Do, (#HKName="#HandleName9Room24"):1
+   {
+   set,#CodeHandleName9Room24=<#HKCode>
+   set,#CountHandleName9Room24=[#CountHandleName9Room24+#HWCount]
+   set,#CostHandleName9Room24=[#CostHandleName9Room24+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room24DoorHWCost=[#CostHandleName1Room24+#CostHandleName2Room24+#CostHandleName3Room24+#CostHandleName4Room24+#CostHandleName5Room24+#CostHandleName6Room24+#CostHandleName7Room24+#CostHandleName8Room24+#CostHandleName9Room24]
+
+End
+ }
+Do, (#RoomNum=25):1
+{
+Set,(#codedoor="*extruded*"):#extrudedHandlesRoom25=1
+
+   Do, ("#HKName"=0):1
+   {
+   set,#CodeHandleName0Room25=999
+   set,#CountHandleName0Room25=[#CountHandleName0Room25+#HWCount]
+   set,#CostHandleName0Room25=0
+   }
+  Do, (#HKName="#HandleName1Room25"):1
+   {
+   set,#CodeHandleName1Room25=<#HKCode>
+   set,#CountHandleName1Room25=[#CountHandleName1Room25+#HWCount]
+   set,#CostHandleName1Room25=[#CostHandleName1Room25+#HWcost]
+   }
+Do,(#HandleName2Room25<>"#HandleName1Room25"):1
+{
+set,#handlecountstop=1
+  Do, (#HKName="#HandleName2Room25"):1
+   {
+   set,#CodeHandleName2Room25=<#HKCode>
+   set,#CountHandleName2Room25=[#CountHandleName2Room25+#HWCount]
+   set,#CostHandleName2Room25=[#CostHandleName2Room25+#HWcost]
+   }
+set,#handlecountstop=2
+
+}
+Do,((#HandleName3Room25<>"#HandleName1Room25")|(#HandleName3Room25<>"#HandleName2Room25")):1
+{
+  Do, (#HKName="#HandleName3Room25"):1
+   {
+   set,#CodeHandleName3Room25=<#HKCode>
+   set,#CountHandleName3Room25=[#CountHandleName3Room25+#HWCount]
+   set,#CostHandleName3Room25=[#CostHandleName3Room25+#HWcost]
+   }
+}
+Do,((#HandleName4Room25<>"#HandleName1Room25")&(#HandleName4Room25<>"#HandleName2Room25")&(#HandleName4Room25<>"#HandleName3Room25")):1
+{
+  Do, (#HKName="#HandleName4Room25"):1
+   {
+   set,#CodeHandleName4Room25=<#HKCode>
+   set,#CountHandleName4Room25=[#CountHandleName4Room25+#HWCount]
+   set,#CostHandleName4Room25=[#CostHandleName4Room25+#HWcost]
+   }
+}
+Do,((#HandleName5Room25<>"#HandleName1Room25")&(#HandleName5Room25<>"#HandleName2Room25")&(#HandleName5Room25<>"#HandleName3Room25")&(#HandleName5Room25<>"#HandleName4Room25")):1
+{
+  Do, (#HKName="#HandleName5Room25"):1
+   {
+   set,#CodeHandleName5Room25=<#HKCode>
+   set,#CountHandleName5Room25=[#CountHandleName5Room25+#HWCount]
+   set,#CostHandleName5Room25=[#CostHandleName5Room25+#HWcost]
+   }
+}
+Do,((#HandleName6Room25<>"#HandleName1Room25")&(#HandleName6Room25<>"#HandleName2Room25")&(#HandleName6Room25<>"#HandleName3Room25")&(#HandleName6Room25<>"#HandleName4Room25")&(#HandleName6Room25<>"#HandleName5Room25")):1
+{
+  Do, (#HKName="#HandleName6Room25"):1
+   {
+   set,#CodeHandleName6Room25=<#HKCode>
+   set,#CountHandleName6Room25=[#CountHandleName6Room25+#HWCount]
+   set,#CostHandleName6Room25=[#CostHandleName6Room25+#HWcost]
+   }
+}
+Do,((#HandleName7Room25<>"#HandleName1Room25")&(#HandleName7Room25<>"#HandleName2Room25")&(#HandleName7Room25<>"#HandleName3Room25")&(#HandleName7Room25<>"#HandleName4Room25")&(#HandleName7Room25<>"#HandleName5Room25")&(#HandleName7Room25<>"#HandleName6Room25")):1
+{
+  Do, (#HKName="#HandleName7Room25"):1
+   {
+   set,#CodeHandleName7Room25=<#HKCode>
+   set,#CountHandleName7Room25=[#CountHandleName7Room25+#HWCount]
+   set,#CostHandleName7Room25=[#CostHandleName7Room25+#HWcost]
+   }
+}
+Do,((#HandleName8Room25<>"#HandleName1Room25")&(#HandleName8Room25<>"#HandleName2Room25")&(#HandleName8Room25<>"#HandleName3Room25")&(#HandleName8Room25<>"#HandleName4Room25")&(#HandleName8Room25<>"#HandleName5Room25")&(#HandleName8Room25<>"#HandleName6Room25")&(#HandleName8Room25<>"#HandleName7Room25")):1
+{
+  Do, (#HKName="#HandleName8Room25"):1
+   {
+   set,#CodeHandleName8Room25=<#HKCode>
+   set,#CountHandleName8Room25=[#CountHandleName8Room25+#HWCount]
+   set,#CostHandleName8Room25=[#CostHandleName8Room25+#HWcost]
+   }
+}
+Do,((#HandleName9Room25<>"#HandleName1Room25")&(#HandleName9Room25<>"#HandleName2Room25")&(#HandleName9Room25<>"#HandleName3Room25")&(#HandleName9Room25<>"#HandleName4Room25")&(#HandleName9Room25<>"#HandleName5Room25")&(#HandleName9Room25<>"#HandleName6Room25")&(#HandleName9Room25<>"#HandleName7Room25")&(#HandleName9Room25<>"#HandleName8Room25")):1
+{
+  Do, (#HKName="#HandleName9Room25"):1
+   {
+   set,#CodeHandleName9Room25=<#HKCode>
+   set,#CountHandleName9Room25=[#CountHandleName9Room25+#HWCount]
+   set,#CostHandleName9Room25=[#CostHandleName9Room25+#HWcost]
+   }
+}
+   Set, #unitHWcost=[#unitHWcost+#HWcost]
+   ,Set,#Room25DoorHWCost=[#CostHandleName1Room25+#CostHandleName2Room25+#CostHandleName3Room25+#CostHandleName4Room25+#CostHandleName5Room25+#CostHandleName6Room25+#CostHandleName7Room25+#CostHandleName8Room25+#CostHandleName9Room25]
+
+End
+ }
+
+
+
+

@@ -1,0 +1,1339 @@
+,
+,**
+,**
+
+,,**            ***** Go back to A-Setup to change the method of pricing Pullouts *****
+,,**
+
+
+,Set Pullout Width Height Depth from the Closet size
+Set, #W = [(#PulloutOpeningWidth/NDiv) -1]
+Set, #H = 3
+Set, #D = [D]
+
+,------- Set Cost from Pullout Size (Largest to Smallest) -------
+Set, #CostOfPullout = 100 ,Default Pullout Cost - reset to proper cost below
+
+
+
+
+
+,**
+DisplaySet, #NumberOfPulloutSizes =90,      Q.    How many different Pullout sizes do you use?  [1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32;33;34;35;36;37;38;39;40;41;42;43;44;45;46;47;48;49;50;51;52;53;54;55;56;57;58;59;60;61;62;63;64;65;66;67;68;69;70;71;72;73;74;75;76;77;78;79;80;81;82;83;84;85;86;87;88;89;90]
+
+
+
+,** 
+,**  Fill in the information below for each of your Pullout sizes
+,**  ** Start with your Largest Pullout and work to your Smallest **
+,**
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Do, (#NumberOfPulloutSizes>=1):1
+{
+,**   Pullout Size #1   (Largest)
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =1.01,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=2):1
+{
+,**   Pullout Size #2
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =2.02,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=3):1
+{
+,**   Pullout Size #3
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =3.03,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=4):1
+{
+,**   Pullout Size #4
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =4.04,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=5):1
+{
+,**   Pullout Size #5
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =5.05,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=6):1
+{
+,**   Pullout Size #6
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =6.06,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=7):1
+{
+,**   Pullout Size #7
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =7.07,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=8):1
+{
+,**   Pullout Size #8
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =8.08,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=9):1
+{
+,**   Pullout Size #9
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =9.09,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=10):1
+{
+,**   Pullout Size #10
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =10.10,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=11):1
+{
+,**   Pullout Size #11
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =11.11,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=12):1
+{
+,**   Pullout Size #12
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =12.12,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=13):1
+{
+,**   Pullout Size #13
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =13.13,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=14):1
+{
+,**   Pullout Size #14
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =14.14,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=15):1
+{
+,**   Pullout Size #15
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =15.15,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=16):1
+{
+,**   Pullout Size #16
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =16.16,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=17):1
+{
+,**   Pullout Size #17
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =17.17,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=18):1
+{
+,**   Pullout Size #18
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =18.18,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=19):1
+{
+,**   Pullout Size #19
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =19.19,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=20):1
+{
+,**   Pullout Size #20
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =20.20,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=21):1
+{
+,**   Pullout Size #21
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =21.21,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=22):1
+{
+,**   Pullout Size #22
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =22.22,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=23):1
+{
+,**   Pullout Size #23
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =23.23,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=24):1
+{
+,**   Pullout Size #24
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =24.24,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=25):1
+{
+,**   Pullout Size #25
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =25.25,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=26):1
+{
+,**   Pullout Size #26
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =26.26,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=27):1
+{
+,**   Pullout Size #27
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =27.27,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=28):1
+{
+,**   Pullout Size #28
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =28.28,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=29):1
+{
+,**   Pullout Size #29
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =29.29,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=30):1
+{
+,**   Pullout Size #30
+DisplaySet, #PulloutWidth =36,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =30.30,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=31):1
+{
+,**   Pullout Size #31   
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =31.31,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=32):1
+{
+,**   Pullout Size #32
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =32.32,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=33):1
+{
+,**   Pullout Size #33
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =33.33,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=34):1
+{
+,**   Pullout Size #34
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =34.34,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=35):1
+{
+,**   Pullout Size #35
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =35.35,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=36):1
+{
+,**   Pullout Size #36
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =36.36,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=37):1
+{
+,**   Pullout Size #37
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =37.37,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=38):1
+{
+,**   Pullout Size #38
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =38.38,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=39):1
+{
+,**   Pullout Size #39
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =39.39,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=40):1
+{
+,**   Pullout Size #40
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =40.40,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=41):1
+{
+,**   Pullout Size #41
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =41.41,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=42):1
+{
+,**   Pullout Size #42
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =42.42,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=43):1
+{
+,**   Pullout Size #43
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =43.43,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=44):1
+{
+,**   Pullout Size #44
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =44.44,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=45):1
+{
+,**   Pullout Size #45
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =45.45,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=46):1
+{
+,**   Pullout Size #46
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =46.46,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=47):1
+{
+,**   Pullout Size #47
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =47.47,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=48):1
+{
+,**   Pullout Size #48
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =48.48,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=49):1
+{
+,**   Pullout Size #49
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =49.49,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=50):1
+{
+,**   Pullout Size #50
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =5050,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=51):1
+{
+,**   Pullout Size #51
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =51.51,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=52):1
+{
+,**   Pullout Size #52
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =52.52,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=53):1
+{
+,**   Pullout Size #53
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =53.53,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=54):1
+{
+,**   Pullout Size #54
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =54.54,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=55):1
+{
+,**   Pullout Size #55
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =55.55,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=56):1
+{
+,**   Pullout Size #56
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =56.56,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=57):1
+{
+,**   Pullout Size #57
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =57.57,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=58):1
+{
+,**   Pullout Size #58
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =58.58,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=59):1
+{
+,**   Pullout Size #59
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =59.59,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=60):1
+{
+,**   Pullout Size #60
+DisplaySet, #PulloutWidth =24,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =60.60,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=61):1
+{
+,**   Pullout Size #61   
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =61.61,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=62):1
+{
+,**   Pullout Size #62
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =62.62,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=63):1
+{
+,**   Pullout Size #63
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =63.63,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=64):1
+{
+,**   Pullout Size #64
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =64.64,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=65):1
+{
+,**   Pullout Size #65
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =65.65,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=66):1
+{
+,**   Pullout Size #66
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =24,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =66.66,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=67):1
+{
+,**   Pullout Size #67
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =67.67,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=68):1
+{
+,**   Pullout Size #68
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =68.68,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=69):1
+{
+,**   Pullout Size #69
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =69.69,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=70):1
+{
+,**   Pullout Size #70
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =70.70,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=71):1
+{
+,**   Pullout Size #71
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =71.71,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=72):1
+{
+,**   Pullout Size #72
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =21,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =72.72,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=73):1
+{
+,**   Pullout Size #73
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =73.73,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=74):1
+{
+,**   Pullout Size #74
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =74.74,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=75):1
+{
+,**   Pullout Size #75
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =75.75,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=76):1
+{
+,**   Pullout Size #76
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =76.76,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=77):1
+{
+,**   Pullout Size #77
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =77.77,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=78):1
+{
+,**   Pullout Size #78
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =18,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =78.78,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=79):1
+{
+,**   Pullout Size #79
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =79.79,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=80):1
+{
+,**   Pullout Size #80
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =80.80,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=81):1
+{
+,**   Pullout Size #81
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =81.81,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=82):1
+{
+,**   Pullout Size #82
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =82.82,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=83):1
+{
+,**   Pullout Size #83
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =83.83,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=84):1
+{
+,**   Pullout Size #84
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =15,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =84.84,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=85):1
+{
+,**   Pullout Size #85
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =18,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =85.85,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=86):1
+{
+,**   Pullout Size #86
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =15,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =86.86,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=87):1
+{
+,**   Pullout Size #87
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =12,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =87.87,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=88):1
+{
+,**   Pullout Size #88
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =9,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =88.88,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=89):1
+{
+,**   Pullout Size #89
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =6,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =89.89,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfPulloutSizes>=90):1
+{
+,**   Pullout Size #90
+DisplaySet, #PulloutWidth =12,     -----------------     Width of Pullout           - WIDTH -
+DisplaySet, #PulloutDepth =12,     -----------------     Depth of Pullout          - DEPTH -
+DisplaySet, #PulloutHeight =3,     -----------------     Height of Pullout         - HEIGHT -
+DisplaySet, #PulloutCost =90.90,     -----------------     Cost of Pullout             - COST -
+
+Set, (#W<=#PulloutWidth) & (#D<=#PulloutDepth) & (#H<=#PulloutHeight):  #CostOfPullout=[#PulloutCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+set,#UnitPulloutCost=[(#CostOfPullout*NPO*NDIV)]
+set,#UnitPulloutNum=[NPO*NDIV]
+
+
+
+
+,**
+'Price Pullout Box
+Set, #H = {#H}
+Price, (Npo*NDiv>0):1,    #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>1):1,    #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>2):1,    #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>3):1,    #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>4):1,    #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>5):1,    #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>6):1,    #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>7):1,    #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>8):1,    #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>9):1,    #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>10):1,   #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>11):1,   #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>12):1,   #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>13):1,   #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>14):1,   #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>15):1,   #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>16):1,   #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>17):1,   #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>18):1,   #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+Price, (Npo*NDiv>19):1,   #H"  #PulloutName,   #CostOfPullout,   #W,   #D,   #PulloutPrintOrderNumber,   
+
+
+
+,Remove These
+Erase, #W
+Erase, #H
+Erase, #D 

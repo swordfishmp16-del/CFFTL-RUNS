@@ -1,0 +1,16 @@
+,charge for shelf cutbacks and add width if needed
+Set, #costforspecialcuts=0
+Do,((lcb<>0) | (rcb<>0)):1
+{
+Set, #costforspecialcuts=#ShelfCostLS
+}
+Do,((lcb<>0) & (rcb<>0)):1
+{
+Set, #costforspecialcuts=2*#ShelfCostLS
+}
+
+
+Set,(lcb<=0):#addleft=0:#addleft=lcb
+Set,(rcb<=0):#addright=0:#addright=rcb
+Set, #Shelfwidth = [#Shelfwidth+#addleft+#addright]
+

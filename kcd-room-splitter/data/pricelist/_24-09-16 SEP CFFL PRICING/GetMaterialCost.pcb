@@ -1,0 +1,203 @@
+,Set Item Costs by Size Increaments
+
+,Key
+,Material or Color Unit
+,Material or Color Edge Band
+,Material or Color Door
+,Material or Color Drawer
+,Material or Color Ctop
+,Material or Color Crown moulding
+,Material or Color Base moulding
+
+
+,Calculating subtotals
+
+Set,#MaterialCostGroup=0
+
+Set,(#UnitMaterial = "#MaterialName1"):#MaterialCostGroup=#DetailedMaterialCostFactor1
+Set,(#UnitMaterial = "#MaterialName2"):#MaterialCostGroup=#DetailedMaterialCostFactor2
+Set,(#UnitMaterial = "#MaterialName3"):#MaterialCostGroup=#DetailedMaterialCostFactor3
+Set,(#UnitMaterial = "#MaterialName4"):#MaterialCostGroup=#DetailedMaterialCostFactor4
+Set,(#UnitMaterial = "#MaterialName5"):#MaterialCostGroup=#DetailedMaterialCostFactor5
+Set,(#UnitMaterial = "#MaterialName6"):#MaterialCostGroup=#DetailedMaterialCostFactor6
+Set,(#UnitMaterial = "#MaterialName7"):#MaterialCostGroup=#DetailedMaterialCostFactor7
+Set,(#UnitMaterial = "#MaterialName8"):#MaterialCostGroup=#DetailedMaterialCostFactor8
+Set,(#UnitMaterial = "#MaterialName9"):#MaterialCostGroup=#DetailedMaterialCostFactor9
+Set,(#UnitMaterial = "#MaterialName10"):#MaterialCostGroup=#DetailedMaterialCostFactor10
+Set,(#UnitMaterial = "#MaterialName11"):#MaterialCostGroup=#DetailedMaterialCostFactor11
+Set,(#UnitMaterial = "#MaterialName12"):#MaterialCostGroup=#DetailedMaterialCostFactor12
+Set,(#UnitMaterial = "#MaterialName13"):#MaterialCostGroup=#DetailedMaterialCostFactor13
+Set,(#UnitMaterial = "#MaterialName14"):#MaterialCostGroup=#DetailedMaterialCostFactor14
+Set,(#UnitMaterial = "#MaterialName15"):#MaterialCostGroup=#DetailedMaterialCostFactor15
+Set,(#UnitMaterial = "#MaterialName16"):#MaterialCostGroup=#DetailedMaterialCostFactor16
+Set,(#UnitMaterial = "#MaterialName17"):#MaterialCostGroup=#DetailedMaterialCostFactor17
+Set,(#UnitMaterial = "#MaterialName18"):#MaterialCostGroup=#DetailedMaterialCostFactor18
+Set,(#UnitMaterial = "#MaterialName19"):#MaterialCostGroup=#DetailedMaterialCostFactor19
+Set,(#UnitMaterial = "#MaterialName20"):#MaterialCostGroup=#DetailedMaterialCostFactor20
+Set,(#UnitMaterial = "#MaterialName21"):#MaterialCostGroup=#DetailedMaterialCostFactor21
+Set,(#UnitMaterial = "#MaterialName22"):#MaterialCostGroup=#DetailedMaterialCostFactor22
+Set,(#UnitMaterial = "#MaterialName23"):#MaterialCostGroup=#DetailedMaterialCostFactor23
+Set,(#UnitMaterial = "#MaterialName24"):#MaterialCostGroup=#DetailedMaterialCostFactor24
+Set,(#UnitMaterial = "#MaterialName25"):#MaterialCostGroup=#DetailedMaterialCostFactor25
+Set,(#UnitMaterial = "#MaterialName26"):#MaterialCostGroup=#DetailedMaterialCostFactor26
+Set,(#UnitMaterial = "#MaterialName27"):#MaterialCostGroup=#DetailedMaterialCostFactor27
+Set,(#UnitMaterial = "#MaterialName28"):#MaterialCostGroup=#DetailedMaterialCostFactor28
+Set,(#UnitMaterial = "#MaterialName29"):#MaterialCostGroup=#DetailedMaterialCostFactor29
+Set,(#UnitMaterial = "#MaterialName30"):#MaterialCostGroup=#DetailedMaterialCostFactor30
+Set,(#UnitMaterial = "#MaterialName31"):#MaterialCostGroup=#DetailedMaterialCostFactor31
+Set,(#UnitMaterial = "#MaterialName32"):#MaterialCostGroup=#DetailedMaterialCostFactor32
+Set,(#UnitMaterial = "#MaterialName33"):#MaterialCostGroup=#DetailedMaterialCostFactor33
+Set,(#UnitMaterial = "#MaterialName34"):#MaterialCostGroup=#DetailedMaterialCostFactor34
+Set,(#UnitMaterial = "#MaterialName35"):#MaterialCostGroup=#DetailedMaterialCostFactor35
+Set,(#UnitMaterial = "#MaterialName36"):#MaterialCostGroup=#DetailedMaterialCostFactor36
+Set,(#UnitMaterial = "#MaterialName37"):#MaterialCostGroup=#DetailedMaterialCostFactor37
+Set,(#UnitMaterial = "#MaterialName38"):#MaterialCostGroup=#DetailedMaterialCostFactor38
+Set,(#UnitMaterial = "#MaterialName39"):#MaterialCostGroup=#DetailedMaterialCostFactor39
+Set,(#UnitMaterial = "#MaterialName40"):#MaterialCostGroup=#DetailedMaterialCostFactor40
+Set,(#UnitMaterial = "#MaterialName41"):#MaterialCostGroup=#DetailedMaterialCostFactor41
+Set,(#UnitMaterial = "#MaterialName42"):#MaterialCostGroup=#DetailedMaterialCostFactor42
+Set,(#UnitMaterial = "#MaterialName43"):#MaterialCostGroup=#DetailedMaterialCostFactor43
+Set,(#UnitMaterial = "#MaterialName44"):#MaterialCostGroup=#DetailedMaterialCostFactor44
+Set,(#UnitMaterial = "#MaterialName45"):#MaterialCostGroup=#DetailedMaterialCostFactor45
+
+Set,(#UnitMaterial = "#MaterialName46"):#MaterialCostGroup=#DetailedMaterialCostFactor46
+Set,(#UnitMaterial = "#MaterialName47"):#MaterialCostGroup=#DetailedMaterialCostFactor47
+Set,(#UnitMaterial = "#MaterialName48"):#MaterialCostGroup=#DetailedMaterialCostFactor48
+Set,(#UnitMaterial = "#MaterialName49"):#MaterialCostGroup=#DetailedMaterialCostFactor49
+Set,(#UnitMaterial = "#MaterialName50"):#MaterialCostGroup=#DetailedMaterialCostFactor50
+Set,(#UnitMaterial = "#MaterialName51"):#MaterialCostGroup=#DetailedMaterialCostFactor51
+Set,(#UnitMaterial = "#MaterialName52"):#MaterialCostGroup=#DetailedMaterialCostFactor52
+Set,(#UnitMaterial = "#MaterialName53"):#MaterialCostGroup=#DetailedMaterialCostFactor53
+Set,(#UnitMaterial = "#MaterialName54"):#MaterialCostGroup=#DetailedMaterialCostFactor54
+Set,(#UnitMaterial = "#MaterialName55"):#MaterialCostGroup=#DetailedMaterialCostFactor55
+Set,(#UnitMaterial = "#MaterialName56"):#MaterialCostGroup=#DetailedMaterialCostFactor56
+Set,(#UnitMaterial = "#MaterialName57"):#MaterialCostGroup=#DetailedMaterialCostFactor57
+Set,(#UnitMaterial = "#MaterialName58"):#MaterialCostGroup=#DetailedMaterialCostFactor58
+Set,(#UnitMaterial = "#MaterialName59"):#MaterialCostGroup=#DetailedMaterialCostFactor59
+Set,(#UnitMaterial = "#MaterialName60"):#MaterialCostGroup=#DetailedMaterialCostFactor60
+
+
+Set,(#UnitMaterial = "#MaterialName61"):#MaterialCostGroup=#DetailedMaterialCostFactor61
+Set,(#UnitMaterial = "#MaterialName62"):#MaterialCostGroup=#DetailedMaterialCostFactor62
+Set,(#UnitMaterial = "#MaterialName63"):#MaterialCostGroup=#DetailedMaterialCostFactor63
+Set,(#UnitMaterial = "#MaterialName64"):#MaterialCostGroup=#DetailedMaterialCostFactor64
+Set,(#UnitMaterial = "#MaterialName65"):#MaterialCostGroup=#DetailedMaterialCostFactor65
+Set,(#UnitMaterial = "#MaterialName66"):#MaterialCostGroup=#DetailedMaterialCostFactor66
+Set,(#UnitMaterial = "#MaterialName67"):#MaterialCostGroup=#DetailedMaterialCostFactor67
+Set,(#UnitMaterial = "#MaterialName68"):#MaterialCostGroup=#DetailedMaterialCostFactor68
+Set,(#UnitMaterial = "#MaterialName69"):#MaterialCostGroup=#DetailedMaterialCostFactor69
+Set,(#UnitMaterial = "#MaterialName70"):#MaterialCostGroup=#DetailedMaterialCostFactor70
+
+Set,(#UnitMaterial = "#MaterialName71"):#MaterialCostGroup=#DetailedMaterialCostFactor71
+Set,(#UnitMaterial = "#MaterialName72"):#MaterialCostGroup=#DetailedMaterialCostFactor72
+Set,(#UnitMaterial = "#MaterialName73"):#MaterialCostGroup=#DetailedMaterialCostFactor73
+Set,(#UnitMaterial = "#MaterialName74"):#MaterialCostGroup=#DetailedMaterialCostFactor74
+Set,(#UnitMaterial = "#MaterialName75"):#MaterialCostGroup=#DetailedMaterialCostFactor75
+Set,(#UnitMaterial = "#MaterialName76"):#MaterialCostGroup=#DetailedMaterialCostFactor76
+Set,(#UnitMaterial = "#MaterialName77"):#MaterialCostGroup=#DetailedMaterialCostFactor77
+Set,(#UnitMaterial = "#MaterialName78"):#MaterialCostGroup=#DetailedMaterialCostFactor78
+Set,(#UnitMaterial = "#MaterialName79"):#MaterialCostGroup=#DetailedMaterialCostFactor79
+Set,(#UnitMaterial = "#MaterialName80"):#MaterialCostGroup=#DetailedMaterialCostFactor80
+
+Set,(#UnitMaterial = "#MaterialName81"):#MaterialCostGroup=#DetailedMaterialCostFactor81
+Set,(#UnitMaterial = "#MaterialName82"):#MaterialCostGroup=#DetailedMaterialCostFactor82
+Set,(#UnitMaterial = "#MaterialName83"):#MaterialCostGroup=#DetailedMaterialCostFactor83
+Set,(#UnitMaterial = "#MaterialName84"):#MaterialCostGroup=#DetailedMaterialCostFactor84
+Set,(#UnitMaterial = "#MaterialName85"):#MaterialCostGroup=#DetailedMaterialCostFactor85
+Set,(#UnitMaterial = "#MaterialName86"):#MaterialCostGroup=#DetailedMaterialCostFactor86
+Set,(#UnitMaterial = "#MaterialName87"):#MaterialCostGroup=#DetailedMaterialCostFactor87
+Set,(#UnitMaterial = "#MaterialName88"):#MaterialCostGroup=#DetailedMaterialCostFactor88
+Set,(#UnitMaterial = "#MaterialName89"):#MaterialCostGroup=#DetailedMaterialCostFactor89
+Set,(#UnitMaterial = "#MaterialName90"):#MaterialCostGroup=#DetailedMaterialCostFactor90
+
+Set,(#UnitMaterial = "#MaterialName91"):#MaterialCostGroup=#DetailedMaterialCostFactor91
+Set,(#UnitMaterial = "#MaterialName92"):#MaterialCostGroup=#DetailedMaterialCostFactor92
+Set,(#UnitMaterial = "#MaterialName93"):#MaterialCostGroup=#DetailedMaterialCostFactor93
+Set,(#UnitMaterial = "#MaterialName94"):#MaterialCostGroup=#DetailedMaterialCostFactor94
+Set,(#UnitMaterial = "#MaterialName95"):#MaterialCostGroup=#DetailedMaterialCostFactor95
+Set,(#UnitMaterial = "#MaterialName96"):#MaterialCostGroup=#DetailedMaterialCostFactor96
+Set,(#UnitMaterial = "#MaterialName97"):#MaterialCostGroup=#DetailedMaterialCostFactor97
+Set,(#UnitMaterial = "#MaterialName98"):#MaterialCostGroup=#DetailedMaterialCostFactor98
+Set,(#UnitMaterial = "#MaterialName99"):#MaterialCostGroup=#DetailedMaterialCostFactor99
+Set,(#UnitMaterial = "#MaterialName100"):#MaterialCostGroup=#DetailedMaterialCostFactor100
+
+Set,(#UnitMaterial = "#MaterialName101"):#MaterialCostGroup=#DetailedMaterialCostFactor101
+Set,(#UnitMaterial = "#MaterialName102"):#MaterialCostGroup=#DetailedMaterialCostFactor102
+Set,(#UnitMaterial = "#MaterialName103"):#MaterialCostGroup=#DetailedMaterialCostFactor103
+Set,(#UnitMaterial = "#MaterialName104"):#MaterialCostGroup=#DetailedMaterialCostFactor104
+Set,(#UnitMaterial = "#MaterialName105"):#MaterialCostGroup=#DetailedMaterialCostFactor105
+Set,(#UnitMaterial = "#MaterialName106"):#MaterialCostGroup=#DetailedMaterialCostFactor106
+Set,(#UnitMaterial = "#MaterialName107"):#MaterialCostGroup=#DetailedMaterialCostFactor107
+Set,(#UnitMaterial = "#MaterialName108"):#MaterialCostGroup=#DetailedMaterialCostFactor108
+Set,(#UnitMaterial = "#MaterialName109"):#MaterialCostGroup=#DetailedMaterialCostFactor109
+Set,(#UnitMaterial = "#MaterialName110"):#MaterialCostGroup=#DetailedMaterialCostFactor110
+
+,Set the Cost of Each Type of Vertical
+,Set, #CostOfSide =  [(#CostOfVertical + #CostAddedToSides)]
+
+,Set the Cost of Each Type of Shelf
+,Set, #CostOfTopShelf = [(#CostOfHorizontal + #CostAddedToFixedShelves)]
+,Set, #CostOfMiddleShelf = [(#CostOfHorizontal + #CostAddedToFixedShelves)]
+,Set, #CostOfBottomShelf = [(#CostOfHorizontal + #CostAddedToFixedShelves)]
+,Set, #CostOfAdjustableShelf = [(#CostOfHorizontal + #CostAddedToAdjustableShelves)]
+,Set, #CostOfCubbyShelf = [(#CostOfHorizontal + #CostAddedToAdjustableShelves)]
+,Set, #CostOfShoeShelf = [(#CostOfHorizontal + #CostAddedToShoeShelves)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

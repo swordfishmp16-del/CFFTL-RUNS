@@ -40,3 +40,13 @@ If the shop's library changes (new units, new options), make a new `cat_compact.
 a machine that has the library (`catjson.py` and `rawlib.py`, see `kcd-deep-dive-notes.md` section 12),
 gzip them and replace the two files here. If the engineers change the workbook template, replace
 `template.xltm` and run `kcdbook.py` once on a blank job to confirm its check still passes.
+
+## pricelist/
+
+`_24-09-16 SEP CFFL PRICING` is the September 2024 KCD price list (the `C:\KCD23-STDPLIST` folder of that month), from
+the "KCD SEP 16 UPDATE ENG" folder Mike uploaded. It is here so the price engine can be run and tested anywhere
+(`python3 kcdrun.py ... --pricelist "data/pricelist/_24-09-16 SEP CFFL PRICING"`). It is NOT the current list: prices
+changed since (the engineers' 2026 pastes match the May 2026 list plus the May 22, July and August 2026 update
+packs). For a real job, add the current month's folder from `C:\KCD23-STDPLIST` (or OneDrive `me and claude\KCD23\
+STDPLIST`) next to it and name that folder with `--pricelist`; the run report then says which list the prices came
+from. The price list is the shop's data, not a customer file.

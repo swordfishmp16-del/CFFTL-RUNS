@@ -1,0 +1,8 @@
+
+
+,************ ALL WIRE SHELVES ***********
+Price, 4,            #WireShelfName,         #CostOfWireShelf,             W, d,          #WireShelfPrintOrderNumber,          
+Price, (WSS>0):1,    #WireSupportName,       #CostOfWireSupport,           W, d,          #WireSupportPrintOrderNumber,        
+Price, (WSS>0):1,    #WireSupportName,       #CostOfWireSupport,           W, d,          #WireSupportPrintOrderNumber,        
+,*****************************************
+

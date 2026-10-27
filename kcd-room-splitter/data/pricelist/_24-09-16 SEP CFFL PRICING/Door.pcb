@@ -1,0 +1,667 @@
+,This calculates the cost of each Door and Drawer Front
+Set, #Gap = DrGp
+load, Doorset.pcb
+,load, D-Door Cost.pcb
+Set, #CostOfDoor=0 ,Set as Default
+,set, #includeinsert=0
+,Set,(#UseDoorCode=Yes):#DoorName=#CodeDoor:#DoorName=Door - #MemoDoor
+,Set,(#UseDoorCode=Yes):#DrFrtName=#CodeDoor:#DrFrtName=DrFrt - #MemoDoor
+
+,Set,(#UseDoorCode=Yes):#DoorName=#CodeDoor:#DoorName=Door - #DoorDrawerType
+Set,(#endpanel=1):#DoorName=Door End Panel-#DoorDrawerType:#DoorName=Door-#DoorDrawerType
+,Set,(#UseDoorCode=Yes):#DrFrtName=#CodeDoor:#DrFrtName=DrFrt-#DoorDrawerType
+Set,#DrFrtName=DrFrt-#DoorDrawerType
+Set, ((#DoorDrawerFinishingCostGroup<1)):#edgebanddoorspecialfinishcost=(1+#DoorDrawerFinishingCostGroup):#edgebanddoorspecialfinishcost=1
+Set, ((#DoorDrawerFinishingType="*mm*")):#edgebandfinish=-#DoorDrawerFinishingType:#edgebandfinish=-#EdgeBandingType
+Set, ((#DoorDrawerFinishingType="*Front*")):#edgebandfinish=
+Set, ((#DoorDrawerFinishingType="*Front*")|(#DoorDrawerFinishingType="*mm*")):#dredgebandfinish=:#dredgebandfinish=-#EdgeBandingType
+
+set, (#DoorDrawerFinishingType="*Front*"):#Doorfaceupcharge=((#Doorw*#DoorH)/144*#DoorDrawerFinishingCostGroup)
+
+set, #drawerstop=99
+
+,Single Door
+Set,  (#DoorSD>0): #ThisDoor = #DoorSD                                      ,SINGLE DOOR
+set, #whichdoor=Single
+Do, (#DoorSD>0):1
+{
+Load, (#DoorSD>0): DoorSet.Pcb
+Load, (#DoorSD>0): DoorHandleKnob.Pcb
+Load, (#DoorSD>0): Glassdr.Pcb
+
+Set, (#wallbeddepthtrack=1)&(#ContrastMaterialName="None")&(#TempDoorCost=0): #TempDoorCost=#DefaultWallBeddoorcost
+Set, (#wallbeddepthtrack=1)&(#ContrastMaterialName<>"None")&(#TempDoorCost=0): #TempDoorCost=#DefaultWallBeddoor2ndcost
+
+Set, #CFSpecialDoors=0
+Set,(#Codedoor="StyliteAcrylicMirror")|(#Codedoor="ST-Glass")|(#Codedoor="Clear Acrylic")|(#Codedoor="Matte Acrylic")|(#Codedoor="flatCFMirror")|(#Codedoor="flatcfmolding")|(#Codedoor="Smoke Acrylic")|(#Codedoor="Glass")|(#Codedoor="FrostedGlass"):#CFSpecialDoors=1
+
+Do,(#CFSpecialDoors=1):1
+{
+,mirrored doors all sizes matching melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , flatCFMirror door 
+,applied molding doors all sizes matching melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatcfmolding")&(#ContrastMaterialName="None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Addmoldingtodoor)*#DoorDrawerTypeCostFactor1 , Applied Molding door 
+
+,mirrored doors all sizes 2nd color melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor2 , flatCFMirror door 
+Set,(#Codedoor="flatCFMirror")&(#Tempdoorcost=0):#CostofDoor=0
+,applied molding doors all sizes 2nd color melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatcfmolding")&(#ContrastMaterialName<>"None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Addmoldingtodoor)*#DoorDrawerTypeCostFactor2 , applied molding door 
+Set,(#Codedoor="flatcfmolding")&(#Tempdoorcost=0):#CostofDoor=0
+
+,Acrylic doors
+Set,(#Codedoor="Clear Acrylic"):#CostOfDoor=(#ClearAcrylicdoorcost*#universalupcharge), clear acrylic door
+Set,(#Codedoor="Matte Acrylic"):#CostOfDoor=(#MatteAcrylicdoorcost*#universalupcharge), Matte acrylic door
+Set,(#Codedoor="Smoke Acrylic"):#CostOfDoor=(#SmokeAcrylicdoorcost*#universalupcharge), Smoke acrylic door
+,Solid Glass Doors
+Set,(#Codedoor="Glass"):#CostOfDoor=(#Solidglassdoorcost*#universalupcharge), Solid door
+Set,(#Codedoor="FrostedGlass"):#CostOfDoor=(#SolidFrostedGlassdoorcost*#universalupcharge), Solid Frosted Glass door
+,Metal framed door
+Set,(#Codedoor="ST-Glass"):#CostOfDoor=((#MetalFramedoorcost+#GlassDoorExtraCost)*#universalupcharge), Metal Frame Glass door
+Set,(#Codedoor="StyliteAcrylicMirror"):#CostOfDoor=(#StyliteAcrylicMirrordoorcost*#universalupcharge), Stylite acrylic Mirror door
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&((#Codedoor="*Acrylic*")|(#Codedoor="FrostedGlass")|(#Codedoor="Glass")):1 , RM#Roomnum #Codedoor Door,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#CFSpecialdoors=1)&((#Codedoor="ST-Glass")):1 ,RM#Roomnum Metal Door-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):1 ,RM#Roomnum #Codedoor Door-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"): 1 ,RM#Roomnum #Codedoor Door-#ContrastMaterialName-#ContrastMaterialCostGroup-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatcfMolding")&(#ContrastMaterialName="None"):1 ,RM#Roomnum #Codedoor Door-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatcfMolding")&(#ContrastMaterialName<>"None"): 1 ,RM#Roomnum #Codedoor Door-#ContrastMaterialName-#ContrastMaterialCostGroup-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+Set,  (#DoorSD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorSD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+
+}
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialdoors=0):1              ,flat edgeband door cost
+{
+,Edgeband doors allowed sizes matching melamine
+Set,(#IncludeInsert=0):#CostOfDoor=(#TempDoorCost*#edgebanddoorspecialfinishcost)*#DoorDrawerTypeCostFactor1 ,  flat door 
+
+,Framed doors allowed sizes matching melamine
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#14melamineDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#DoorDrawerInsertType=#DoorDrawerInsert14Mel
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SpeakerDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SmokeDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#MirrorDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0):#CostofDoor=0
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#wallbeddepthtrack=1)&(#chargeallwbdoors=Yes):1 ,#DoorName-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#wallbeddepthtrack=0):1 ,#DoorName-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#wallbeddepthtrack=0):1 ,Framed #DoorName-#UnitMaterialName-#DoorDrawerInsertType#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+Price, (#DoorDrawerFinishingType="*front*"):1, Add to Door-#DoorDrawerFinishingType, #Doorfaceupcharge, #doorW, #DoorH , #DoorPrintOrderNumber, 
+
+
+Set,  (#DoorSD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorSD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,flat edgeband door cost 2nd color
+{
+,Edgeband doors allowed sizes contrast melamine
+Set,(#IncludeInsert=0):#CostOfDoor=(#TempDoorCost*#edgebanddoorspecialfinishcost)*#DoorDrawerTypeCostFactor2 , flat door 
+
+,Framed doors allowed sizes contrast melamine
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#14melamineDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#DoorDrawerInsertType=#DoorDrawerInsert14Mel
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SpeakerDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SmokeDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#MirrorDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0):#CostofDoor=0
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#ContrastMaterialName-#contrastMaterialCostGroup-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#ContrastMaterialName-#contrastMaterialCostGroup-#DoorDrawerInsertType#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorSD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorSD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+Do, (#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,Custom Door cost
+{
+Set,(#DoorW>#Maxdoorwidth)&(#wallbeddepthtrack=0): #Costofdoor=0, invalid size
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#IncludeInsert=0
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+ Do,(#DoorW<=#Maxdoorwidth)|(#wallbeddepthtrack=1):1
+ {
+ , solid doors
+ Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DoorName-#DoorDrawerFinishingType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+ ,Framed doors 
+ Price,(#CostOfDoor>0)&(#IncludeInsert=1):1   ,#DoorName-#DoorDrawerFinishingType-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+ Set,  (#DoorSD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+ Set,  (#DoorSD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+ }
+}
+
+,Update V7.2.9 start
+set, #UnitDoorArea=[(#UnitDoorArea+#DoorA)*num]
+set, #UnitDoorNum=[(#UnitDoorNum+1)*num]
+,Update V7.2.9 end
+
+}
+
+,Left Door of a pair
+Set,  (#DoorLD>0): #ThisDoor = #DoorLD                                    ,LEFT DOOR OF PAIR
+set, #whichdoor=Pairleft
+Do, (#DoorLD>0):1
+{
+Load, (#DoorLD>0): DoorSet.Pcb
+Load, (#DoorLD>0): DoorHandleKnob.Pcb
+Load, (#DoorLD>0): Glassdr.Pcb
+
+Set, (#wallbeddepthtrack=1)&(#ContrastMaterialName="None")&(#DoorW>#Maxdoorwidth): #TempDoorCost=#DefaultWallBeddoorcost
+Set, (#wallbeddepthtrack=1)&(#ContrastMaterialName<>"None")&(#DoorW>#Maxdoorwidth): #TempDoorCost=#DefaultWallBeddoor2ndcost
+
+Set, #CFSpecialDoors=0
+Set,(#Codedoor="StyliteAcrylicMirror")|(#Codedoor="ST-Glass")|(#Codedoor="Clear Acrylic")|(#Codedoor="Matte Acrylic")|(#Codedoor="flatCFMirror")|(#Codedoor="flatcfmolding")|(#Codedoor="Smoke Acrylic")|(#Codedoor="Glass")|(#Codedoor="FrostedGlass"):#CFSpecialDoors=1
+
+Do,(#CFSpecialDoors=1):1
+{
+,mirrored doors all sizes matching melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , flatCFMirror door 
+,applied molding doors all sizes matching melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatcfmolding")&(#ContrastMaterialName="None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Addmoldingtodoor)*#DoorDrawerTypeCostFactor1 , Applied Molding door 
+
+,mirrored doors all sizes 2nd color melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor2 , flatCFMirror door 
+Set,(#Codedoor="flatCFMirror")&(#Tempdoorcost=0):#CostofDoor=0
+,applied molding doors all sizes 2nd color melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatcfmolding")&(#ContrastMaterialName<>"None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Addmoldingtodoor)*#DoorDrawerTypeCostFactor2 , applied molding door 
+Set,(#Codedoor="flatcfmolding")&(#Tempdoorcost=0):#CostofDoor=0
+
+,Acrylic doors
+Set,(#Codedoor="Clear Acrylic"):#CostOfDoor=(#ClearAcrylicdoorcost*#universalupcharge), clear acrylic door
+Set,(#Codedoor="Matte Acrylic"):#CostOfDoor=(#MatteAcrylicdoorcost*#universalupcharge), Matte acrylic door
+Set,(#Codedoor="Smoke Acrylic"):#CostOfDoor=(#SmokeAcrylicdoorcost*#universalupcharge), Smoke acrylic door
+,Solid Glass Doors
+Set,(#Codedoor="Glass"):#CostOfDoor=(#Solidglassdoorcost*#universalupcharge), Solid door
+Set,(#Codedoor="FrostedGlass"):#CostOfDoor=(#SolidFrostedGlassdoorcost*#universalupcharge), Solid Frosted Glass door
+,Metal framed door
+Set,(#Codedoor="ST-Glass"):#CostOfDoor=((#MetalFramedoorcost+#GlassDoorExtraCost)*#universalupcharge), Metal Frame Glass door
+Set,(#Codedoor="StyliteAcrylicMirror"):#CostOfDoor=(#StyliteAcrylicMirrordoorcost*#universalupcharge), Stylite acrylic Mirror door
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&((#Codedoor="*Acrylic*")|(#Codedoor="FrostedGlass")|(#Codedoor="Glass")):1 ,RM#Roomnum #Codedoor Door,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#CFSpecialdoors=1)&((#Codedoor="ST-Glass")):1 ,RM#Roomnum Metal Door-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):1 , RM#Roomnum #Codedoor Door-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"): 1 , RM#Roomnum #Codedoor Door-#ContrastMaterialName-#contrastMaterialCostGroup-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatcfMolding")&(#ContrastMaterialName="None"):1 , RM#Roomnum #Codedoor Door-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatcfMolding")&(#ContrastMaterialName<>"None"): 1 , RM#Roomnum #Codedoor Door-#ContrastMaterialName-#contrastMaterialCostGroup-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+Set,  (#DoorLD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorLD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+
+}
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialdoors=0):1              ,flat edgeband door cost
+{
+,Edgeband doors allowed sizes matching melamine
+Set,(#IncludeInsert=0):#CostOfDoor=(#TempDoorCost*#edgebanddoorspecialfinishcost)*#DoorDrawerTypeCostFactor1 ,  flat door 
+
+,Framed doors allowed sizes matching melamine
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 , Framed flat door 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#14melamineDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#DoorDrawerInsertType=#DoorDrawerInsert14Mel
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SpeakerDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SmokeDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#MirrorDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+Set,(#includeinsert=1)&(#Tempdoorcost=0):#CostofDoor=0
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#wallbeddepthtrack=1)&(#chargeallwbdoors=Yes):1 ,#DoorName-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#wallbeddepthtrack=0):1 ,#DoorName-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#wallbeddepthtrack=0):1 ,Framed #DoorName-#UnitMaterialName-#DoorDrawerInsertType#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+Price, (#DoorDrawerFinishingType="*front*"):1, Add to Door-#DoorDrawerFinishingType, #Doorfaceupcharge, #doorW, #DoorH , #DoorPrintOrderNumber, 
+
+Set,  (#DoorLD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorLD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,flat edgeband door cost 2nd color
+{
+,Edgeband doors allowed sizes contrast melamine
+Set,(#IncludeInsert=0):#CostOfDoor=(#TempDoorCost*#edgebanddoorspecialfinishcost)*#DoorDrawerTypeCostFactor2 , flat door 
+
+,Framed doors allowed sizes contrast melamine
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor2 , Framed flat door 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#14melamineDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#DoorDrawerInsertType=#DoorDrawerInsert14Mel
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SpeakerDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SmokeDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#MirrorDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+Set,(#includeinsert=1)&(#Tempdoorcost=0):#CostofDoor=0
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#ContrastMaterialName-#contrastMaterialCostGroup-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#ContrastMaterialName-#contrastMaterialCostGroup-#DoorDrawerInsertType#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorLD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorLD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+
+
+Do, (#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,Custom Door cost
+{
+Set,(#DoorW>#Maxdoorwidth)&(#wallbeddepthtrack=0): #Costofdoor=0, invalid size
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#IncludeInsert=0
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+ Do,(#DoorW<=#Maxdoorwidth)|(#wallbeddepthtrack=1):1
+ {
+ , solid doors
+ Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DoorName-#DoorDrawerFinishingType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+ ,Framed doors 
+ Price,(#CostOfDoor>0)&(#IncludeInsert=1):1   ,#DoorName-#DoorDrawerFinishingType-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+ Set,  (#DoorLD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+ Set,  (#DoorLD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+ }
+}
+,Update V7.2.9 start
+set, #UnitDoorArea=[(#UnitDoorArea+#DoorA)*num]
+set, #UnitDoorNum=[(#UnitDoorNum+1)*num]
+,Update V7.2.9 end
+}
+
+,Right Door of a pair
+Set,  (#DoorRD>0): #ThisDoor = #DoorRD                                  ,RIGHT DOOR OF PAIR
+set, #whichdoor=Pairright
+Do, (#DoorRD>0):1
+{
+Load, (#DoorRD>0): DoorSet.Pcb
+Load, (#DoorRD>0): DoorHandleKnob.Pcb
+Load, (#DoorRD>0): Glassdr.Pcb
+
+Set, (#wallbeddepthtrack=1)&(#ContrastMaterialName="None")&(#DoorW>#Maxdoorwidth): #TempDoorCost=#DefaultWallBeddoorcost
+Set, (#wallbeddepthtrack=1)&(#ContrastMaterialName<>"None")&(#DoorW>#Maxdoorwidth): #TempDoorCost=#DefaultWallBeddoor2ndcost
+
+Set, #CFSpecialDoors=0
+Set,(#Codedoor="StyliteAcrylicMirror")|(#Codedoor="ST-Glass")|(#Codedoor="Clear Acrylic")|(#Codedoor="Matte Acrylic")|(#Codedoor="flatCFMirror")|(#Codedoor="flatcfmolding")|(#Codedoor="Smoke Acrylic")|(#Codedoor="Glass")|(#Codedoor="FrostedGlass"):#CFSpecialDoors=1
+
+Do,(#CFSpecialDoors=1):1
+{
+,mirrored doors all sizes matching melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , flatCFMirror door 
+,applied molding doors all sizes matching melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatcfmolding")&(#ContrastMaterialName="None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Addmoldingtodoor)*#DoorDrawerTypeCostFactor1 , Applied Molding door 
+
+,mirrored doors all sizes 2nd color melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor2 , flatCFMirror door 
+Set,(#Codedoor="flatCFMirror")&(#Tempdoorcost=0):#CostofDoor=0
+,applied molding doors all sizes 2nd color melamine
+Set,(#IncludeInsert=0)&(#Codedoor="flatcfmolding")&(#ContrastMaterialName<>"None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Addmoldingtodoor)*#DoorDrawerTypeCostFactor2 , applied molding door 
+Set,(#Codedoor="flatcfmolding")&(#Tempdoorcost=0):#CostofDoor=0
+
+,Acrylic doors
+Set,(#Codedoor="Clear Acrylic"):#CostOfDoor=(#ClearAcrylicdoorcost*#universalupcharge), clear acrylic door
+Set,(#Codedoor="Matte Acrylic"):#CostOfDoor=(#MatteAcrylicdoorcost*#universalupcharge), Matte acrylic door
+Set,(#Codedoor="Smoke Acrylic"):#CostOfDoor=(#SmokeAcrylicdoorcost*#universalupcharge), Smoke acrylic door
+,Solid Glass Doors
+Set,(#Codedoor="Glass"):#CostOfDoor=(#Solidglassdoorcost*#universalupcharge), Solid door
+Set,(#Codedoor="FrostedGlass"):#CostOfDoor=(#SolidFrostedGlassdoorcost*#universalupcharge), Solid Frosted Glass door
+,Metal framed door
+Set,(#Codedoor="ST-Glass"):#CostOfDoor=((#MetalFramedoorcost+#GlassDoorExtraCost)*#universalupcharge), Metal Frame Glass door
+Set,(#Codedoor="StyliteAcrylicMirror"):#CostOfDoor=(#StyliteAcrylicMirrordoorcost*#universalupcharge), Stylite acrylic Mirror door
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&((#Codedoor="*Acrylic*")|(#Codedoor="FrostedGlass")|(#Codedoor="Glass")):1 ,RM#Roomnum #Codedoor Door,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#CFSpecialdoors=1)&((#Codedoor="ST-Glass")):1 ,RM#Roomnum Metal Door-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):1 , RM#Roomnum #Codedoor Door-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"): 1 , RM#Roomnum #Codedoor Door-#ContrastMaterialName-#contrastMaterialCostGroup-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatcfMolding")&(#ContrastMaterialName="None"):1 , RM#Roomnum #Codedoor Door-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatcfMolding")&(#ContrastMaterialName<>"None"): 1 , RM#Roomnum #Codedoor Door-#ContrastMaterialName-#contrastMaterialCostGroup-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+Set,  (#DoorRD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorRD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+
+}
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialdoors=0):1              ,flat edgeband door cost
+{
+,Edgeband doors allowed sizes matching melamine
+Set,(#IncludeInsert=0):#CostOfDoor=(#TempDoorCost*#edgebanddoorspecialfinishcost)*#DoorDrawerTypeCostFactor1 ,  flat door 
+
+,Framed doors allowed sizes matching melamine
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 , Framed flat door 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#14melamineDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#DoorDrawerInsertType=#DoorDrawerInsert14Mel
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SpeakerDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SmokeDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#MirrorDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+Set,(#Includeinsert=1)&(#Tempdoorcost=0):#CostofDoor=0
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#wallbeddepthtrack=1)&(#chargeallwbdoors=Yes):1 ,#DoorName-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#wallbeddepthtrack=0):1 ,#DoorName-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#wallbeddepthtrack=0):1 ,Framed #DoorName-#UnitMaterialName-#DoorDrawerInsertType#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+Price, (#DoorDrawerFinishingType="*front*"):1, Add to Door-#DoorDrawerFinishingType, #Doorfaceupcharge, #doorW, #DoorH , #DoorPrintOrderNumber, 
+
+Set,  (#DoorRD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorRD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,flat edgeband door cost 2nd color
+{
+,Edgeband doors allowed sizes contrast melamine
+Set,(#IncludeInsert=0):#CostOfDoor=(#TempDoorCost*#edgebanddoorspecialfinishcost)*#DoorDrawerTypeCostFactor2 , flat door 
+
+,Framed doors allowed sizes contrast melamine
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor2 , Framed flat door 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#14melamineDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#DoorDrawerInsertType=#DoorDrawerInsert14Mel
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SpeakerDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SmokeDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#MirrorDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+Set,(#Includeinsert=1)&(#Tempdoorcost=0):#CostofDoor=0
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#ContrastMaterialName-#contrastMaterialCostGroup-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#ContrastMaterialName-#contrastMaterialCostGroup--#DoorDrawerInsertType#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorRD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorRD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+
+
+Do, (#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2")&(#CFSpecialdoors=0):1              ,Custom Door cost
+{
+Set,(#DoorW>#Maxdoorwidth)&(#wallbeddepthtrack=0): #Costofdoor=0, invalid size
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#IncludeInsert=0
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+ Do,(#DoorW<=#Maxdoorwidth)|(#wallbeddepthtrack=1):1
+ {
+ , solid doors
+ Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DoorName-#DoorDrawerFinishingType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+ ,Framed doors 
+ Price,(#CostOfDoor>0)&(#IncludeInsert=1):1   ,#DoorName-#DoorDrawerFinishingType-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+ Set,  (#DoorRD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+ Set,  (#DoorRD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+ }
+
+}
+,Update V7.2.9 start
+set, #UnitDoorArea=[(#UnitDoorArea+#DoorA)*num]
+set, #UnitDoorNum=[(#UnitDoorNum+1)*num]
+,Update V7.2.9 end
+}
+,Drawer Front
+set, #drawerstop=1
+Do, (#PriceDrawerFronts =Yes):1
+,set, #includeddrawerface = 0
+{
+set, #includeddrawerface = 0
+Set,  (#DoorDR>0): #ThisDoor = #DoorDR                                  ,DRAWER OF DRAWER FRONT 
+Do, (#DoorDR>0):1
+{
+Load, (#DoorDR>0): DoorSet.Pcb
+Load, (#DoorDR>0):DrawerHandleKnob.Pcb
+Load, (#DoorDR>0): Glassdr.Pcb
+
+Set,(#DoorW>#Maxdrawerwidth)&(#wallbeddepthtrack=0): #Costofdoor=0, invalid size
+Set, #CFSpecialDoors=0
+Set,(#Codedoor="StyliteAcrylicMirror")|(#Codedoor="ST-Glass")|(#Codedoor="Clear Acrylic")|(#Codedoor="Matte Acrylic")|(#Codedoor="flatCFMirror")|(#Codedoor="flatcfmolding*")|(#Codedoor="Smoke Acrylic")|(#Codedoor="Glass")|(#Codedoor="FrostedGlass"):#CFSpecialDoors=1
+
+set, #stopdrawerfront=1
+
+Do,(#CFSpecialDoors=1):1
+{
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#Appliedmirrorcostdwr)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=((#2ndcolorFlatEdgeBandDrawerFront)+#Appliedmirrorcostdwr)*#DoorDrawerTypeCostFactor2 , Small flatCFMirror door 2nd color
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#Codedoor="flatcfmolding*")&(#ContrastMaterialName="None"):#CostOfDoor=(#Addmoldingtodrawer)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#Codedoor="flatcfmolding*")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#2ndcolorFlatEdgeBandDrawerFront+#Addmoldingtodrawer)*#DoorDrawerTypeCostFactor2 , Small flatCFMirror door 2nd color
+
+
+Set,(#DoorW<=#Maxdrawerwidth)&(#Codedoor="Clear Acrylic"):#CostOfDoor=(#ClearAcrylicdoorcost*#universalupcharge), clear acrylic door
+Set,(#DoorW<=#Maxdrawerwidth)&(#Codedoor="Matte Acrylic"):#CostOfDoor=(#MatteAcrylicdoorcost*#universalupcharge), Matte acrylic door
+Set,(#DoorW<=#Maxdrawerwidth)&(#Codedoor="Smoke Acrylic"):#CostOfDoor=(#SmokeAcrylicdoorcost*#universalupcharge), Smoke acrylic door
+,Solid Glass Doors
+Set,(#Codedoor="Glass"):#CostOfDoor=(#Solidglassdoorcost*#universalupcharge), Solid door
+Set,(#Codedoor="FrostedGlass"):#CostOfDoor=(#SolidFrostedGlassdoorcost*#universalupcharge), Solid Frosted Glass door
+,Metal framed door
+Set,(#Codedoor="ST-Glass"):#CostOfDoor=((#MetalFramedoorcost+#GlassDoorExtraCost)*#universalupcharge), Metal Frame Glass door
+Set,(#Codedoor="StyliteAcrylicMirror"):#CostOfDoor=(#StyliteAcrylicMirrordoorcost*#universalupcharge), Stylite acrylic Mirror door
+
+Set, (#HasHinges=0): #facetype=Drfrt:#facetype=Door
+Set, (#HasHinges<>0): #costofdoor=(#tempdoorcost*#edgebanddoorspecialfinishcost)+#addmoldingtodoor
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&((#Codedoor="*Acrylic*")|(#Codedoor="FrostedGlass")|(#Codedoor="Glass")):1 ,RM#Roomnum #Codedoor #facetype,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#CFSpecialdoors=1)&((#Codedoor="ST-Glass")):1 ,RM#Roomnum Metal #facetype-#DoorDrawerInsertType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):1 , RM#Roomnum #Codedoor #facetype-#UnitMaterialName-#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"): 1 , RM#Roomnum #Codedoor #facetype-#ContrastMaterialName-#contrastMaterialCostGroup-#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatcfmolding*")&(#ContrastMaterialName="None"):1 , RM#Roomnum #Codedoor #facetype-#UnitMaterialName-#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=1)&(#Codedoor="flatcfmolding*")&(#ContrastMaterialName<>"None"): 1 , RM#Roomnum #Codedoor #facetype-#ContrastMaterialName-#contrastMaterialCostGroup-#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+Set,  (#DoorDR>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorDR>0): #TotalNumDoors = [#TotalNumDoors + 1]
+
+}
+,******flat drawer face pricing with drawerbox
+
+Do, (#HasHinges=0):1
+{
+Price, (#CodeDoor="FingerpullDR"):1,  RM#Roomnum Add Finger Pull to Drawer, #fingerpullcost,   , , #DoorPrintOrderNumber,
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialDoors=0)&(#BoxDrawertype="White*"):1        ,Flat edgeband Drawer front cost with white box 
+{
+
+set, #drawerstop=3
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#CFSpecialdoors=0)&(#Unitmaterialname="#basicwhitecolorname")&(#nodrawerbox=0):#CostOfDoor=0
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#CFSpecialdoors=0)&(#Unitmaterialname="#basicwhitecolorname")&(#nodrawerbox=0):#includeddrawerface=1
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#CFSpecialdoors=0)&(#Unitmaterialname="#basicwhitecolorname")&(#nodrawerbox=1):#CostOfDoor=#2ndcolorFlatEdgeBandDrawerFront*#materialcostgroup , Charge for door when no drawer box 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#CFSpecialdoors=0)&(#Unitmaterialname<>"#basicwhitecolorname"):#CostOfDoor=#2ndcolorFlatEdgeBandDrawerFront*#materialcostgroup , Standard edgeband drawer front
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Unitmaterialname="#basicwhitecolorname"):#CostOfDoor=#FramedDrawerFrontCost+#GlassDoorExtraCost , Framed edgeband drawer with insert
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Unitmaterialname="#basicwhitecolorname"):#Tempdoorcost=#FramedDrawerFrontCost
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Unitmaterialname<>"#basicwhitecolorname"):#CostOfDoor=#2ndcolorFramedDrawerFrontCost*#materialcostgroup+#GlassDoorExtraCost , Framed edgeband drawer with insert
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Unitmaterialname<>"#basicwhitecolorname"):#Tempdoorcost=#2ndcolorFramedDrawerFrontCost*#materialcostgroup
+
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#14melamineDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#DoorDrawerInsertType=#DoorDrawerInsert14Mel
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SpeakerDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SmokeDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#MirrorDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+
+Price,(#CostOfDoor=0)&(#IncludeInsert=0)&(#CFSpecialdoors=0)&(#includeddrawerface=1)&(#showincludedsdrawerfaceonreport="Yes"):1   ,#DrFrtName-#UnitMaterialName-#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DrFrtName-#UnitMaterialName-#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Codedoor<>"flatCFMirror"):1   ,Framed #DrfrtName-#UnitMaterialName-#DoorDrawerInsertType#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorDR>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorDR>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialDoors=0)&(#BoxDrawertype<>"White*"):1              ,Flat edgeband Drawer front cost with matching material boxes
+{
+,Set,(#DoorH<=48)&(#IncludeInsert=0)&(#CFSpecialdoors=0):#CostOfDoor=0 , Standard edgeband drawer front
+
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#CFSpecialdoors=0)&(#nodrawerbox=0):#CostOfDoor=0 , Standard edgeband drawer front
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#CFSpecialdoors=0)&(#nodrawerbox=0):#includeddrawerface=1
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#CFSpecialdoors=0)&(#nodrawerbox=1):#CostOfDoor=#2ndcolorFlatEdgeBandDrawerFront*#materialcostgroup ,    , Charge for door when no drawer box
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#CFSpecialdoors=0)&(#nodrawerbox=0):#Includeddrawerface=1 , Standard edgeband drawer front
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1):#CostOfDoor=#FramedDrawerFrontCost+#GlassDoorExtraCost , Framed edgeband drawer with insert
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1):#Tempdoorcost=#FramedDrawerFrontCost , Framed edgeband drawer with insert
+
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#CostOfDoor=((#tempdoorcost*#edgebanddoorspecialfinishcost)+#14melamineDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#DoorDrawerInsertType=#DoorDrawerInsert14Mel
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#CostOfDoor=((#tempdoorcost*#edgebanddoorspecialfinishcost)+#SpeakerDoorExtraCost)*#DoorDrawerTypeCostFactor1] ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#CostOfDoor=((#tempdoorcost*#edgebanddoorspecialfinishcost)+#SmokeDoorExtraCost)*#DoorDrawerTypeCostFactor1] ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#CostOfDoor=((#tempdoorcost*#edgebanddoorspecialfinishcost)+#MirrorDoorExtraCost)*#DoorDrawerTypeCostFactor1] ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+Price,(#CostOfDoor=0)&(#IncludeInsert=0)&(#CFSpecialdoors=0)&(#includeddrawerface=1)&(#showincludedsdrawerfaceonreport="Yes"):1   ,#DrFrtName-#UnitMaterialName-#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DrFrtName-#UnitMaterialName-#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Codedoor<>"flatCFMirror"):1   ,Framed #DrfrtName-#UnitMaterialName-#DoorDrawerInsertType#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorDR>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorDR>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#CFSpecialDoors=0):1              ,Flat edgeband Drawer front cost 2nd color
+{
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0)&(#CFSpecialdoors=0):#CostOfDoor=#2ndcolorFlatEdgeBandDrawerFront , Standard edgeband drawer front 2nd color
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1):#CostOfDoor=#2ndcolorFramedDrawerFrontCost+#GlassDoorExtraCost , Framed edgeband drawer with insert 2nd color
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1):#Tempdoorcost=#2ndcolorFramedDrawerFrontCost
+
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#14melamineDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#DoorDrawerInsertType=#DoorDrawerInsert14Mel
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SpeakerDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SmokeDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#MirrorDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#CFSpecialdoors=0):1   ,#DrFrtName-#ContrastMaterialName-#contrastMaterialCostGroup-#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#Codedoor<>"flatCFMirror"):1   ,Framed #DrfrtName-#ContrastMaterialName-#contrastMaterialCostGroup-#DoorDrawerInsertType#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+Set,  (#DoorDR>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorDR>0): #TotalNumDoors = [#TotalNumDoors + 1]
+}
+}
+,*******Drawer become a door ******************************************************************************** drawer face pricing without drawerbox is a door
+Do, (#HasHinges=1):1
+{
+Price, (#CodeDoor="FingerpullDR"):1,  RM#Roomnum Add Finger Pull to Door, #fingerpullcost,   , , #DoorPrintOrderNumber,
+Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#CFSpecialDoors=0):1              ,Flat edgeband Drawer front cost
+{
+
+,Edgeband doors allowed sizes matching melamine
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost))*#DoorDrawerTypeCostFactor1 ,  flat door 
+
+,Framed doors allowed sizes matching melamine
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1):#CostOfDoor=(((#TempDoorCost*#edgebanddoorspecialfinishcost))+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door 
+
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#14melamineDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#DoorDrawerInsertType=#DoorDrawerInsert14Mel
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SpeakerDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SmokeDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#MirrorDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+
+Set,(#Includeinsert=1)&(#Tempdoorcost=0):#CostofDoor=0
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#wallbeddepthtrack=1)&(#chargeallwbdoors=Yes):1 ,#DoorName-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=0)&(#wallbeddepthtrack=0):1 ,#DoorName-#UnitMaterialName-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1)&(#wallbeddepthtrack=0):1 ,Framed #DoorName-#UnitMaterialName-#DoorDrawerInsertType#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+Price, (#DoorDrawerFinishingType="*front*"):1, Add to Door-#DoorDrawerFinishingType, #Doorfaceupcharge, #doorW, #DoorH , #DoorPrintOrderNumber, 
+
+,**Count as door
+Set,  (#DoorSD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorSD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+
+}
+
+Do, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#CFSpecialDoors=0):1              ,Flat edgeband Drawer front cost 2nd color
+{
+,Edgeband doors allowed sizes contrast melamine
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=0):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost))*#DoorDrawerTypeCostFactor2 , flat door 
+
+,Framed doors allowed sizes contrast melamine
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1):#CostOfDoor=(((#TempDoorCost*#edgebanddoorspecialfinishcost))+#GlassDoorExtraCost)*#DoorDrawerTypeCostFactor2 , Framed flat door 
+
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#14melamineDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#DoorDrawerInsertType=#DoorDrawerInsert14Mel
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SpeakerDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#SmokeDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#MirrorDoorExtraCost)*#DoorDrawerTypeCostFactor1 ,  Framed flat door melamine insert 
+Set,(#DoorW<=#Maxdrawerwidth)&(#IncludeInsert=1)&(#Tempdoorcost>0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+
+Set,(#Includeinsert=1)&(#Tempdoorcost=0):#CostofDoor=0
+
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1 ,#DoorName-#ContrastMaterialName-#contrastMaterialCostGroup-#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,   
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1 ,Framed #DoorName-#ContrastMaterialName-#contrastMaterialCostGroup-#DoorDrawerInsertType#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+,**Count as a door
+Set,  (#DoorSD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+Set,  (#DoorSD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+
+}
+}
+
+Do, (#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2")&(#CFSpecialDoors=0):1              ,Custom Drawer Front cost
+{
+Set, (#HasHinges=0)&(#wallbeddepthtrack=0): #facetype=#DrFrtName:#facetype=#DoorName
+Set, (#HasHinges=0)&(#wallbeddepthtrack=0): #facetypefactor=#DrFrtfactor:#facetypefactor=*1
+set, (#DoorDrawerType = "*#DoorDrawerTypeName1"):#facetypefactor=*1
+, solid drawer front
+
+Set,(#DoorW>#Maxdrawerwidth)&(#wallbeddepthtrack=0): #Costofdoor=0, invalid size
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Solid")|(#Codedoor="flat-HG-Solid")):#IncludeInsert=0
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Speaker")|(#Codedoor="flat-HG-Speaker")):#DoorDrawerInsertType=#DoorDrawerInsertSpeaker
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Smoke")|(#Codedoor="flat-HG-Smoke")):#DoorDrawerInsertType=#DoorDrawerInsertSmoke
+Set,(#IncludeInsert=1)&(#Tempdoorcost=0)&((#Codedoor="flat-VG-Mirror")|(#Codedoor="flat-HG-Mirror")):#DoorDrawerInsertType=#DoorDrawerInsertMirror
+
+ Do,(#DoorW<=#Maxdrawerwidth)|(#wallbeddepthtrack=1):1
+ {
+ Set, #costofdoor=[#costofdoor#facetypefactor]
+ Price,(#CostOfDoor>0)&(#IncludeInsert=0):1   ,#Facetype-#DoorDrawerFinishingType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+ ,Framed doors 
+ Price,(#CostOfDoor>0)&(#IncludeInsert=1):1   ,#Facetype-#DoorDrawerFinishingType-#DoorDrawerInsertType,    #CostOfDoor#facetypefactor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+
+ Set,  (#DoorSD>0): #UnitDoorCost = [[#UnitDoorCost] + [#CostOfDoor]]
+ Set,  (#DoorSD>0): #TotalNumDoors = [#TotalNumDoors + 1]
+ }
+}
+}
+}
+
+set, #drawerstop=2
+set, #stopdrawerfront=2
+,invalid door
+Do, (#CostofDoor=0)&(#includeddrawerface = 0):1
+{
+set, #name =  No Color Selected or invalid size
+
+load, Eachunit.pcb
+} 
+Load,GetHandleKnobCost.pcb
+Set, #IncludeInsert=0
+set,#costofdoor=0
+set,#basicdoorcost=0

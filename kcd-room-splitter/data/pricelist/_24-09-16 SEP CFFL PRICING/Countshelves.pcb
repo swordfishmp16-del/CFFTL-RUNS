@@ -1,0 +1,2259 @@
+,Counting shelves by depth and length
+
+
+
+Do,(#addshelf>0):1
+{
+Do,(#RoomNum = 1):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room1Shelf12 = [#room1Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf12cost = [#room1Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room1Shelf12L = [#room1Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf12Lcost = [#room1Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room1Shelf16 = [#room1Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf16cost = [#room1Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room1Shelf16L = [#room1Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf16Lcost = [#room1Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room1Shelf18 = [#room1Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf18cost = [#room1Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room1Shelf18L = [#room1Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf18Lcost = [#room1Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room1Shelf24 = [#room1Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf24cost = [#room1Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room1Shelf24L = [#room1Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf24Lcost = [#room1Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room1Shelf32 = [#room1Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf32cost = [#room1Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room1Shelf32L = [#room1Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf32Lcost = [#room1Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room1Shelf48 = [#room1Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf48cost = [#room1Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room1Shelf48L = [#room1Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room1Shelf48Lcost = [#room1Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #Room1shelvescost = [(#room1Shelf12cost+#room1Shelf12Lcost+#room1Shelf16cost+#room1Shelf16Lcost+#room1Shelf18cost+#room1Shelf18Lcost+#room1Shelf24cost+#room1Shelf24Lcost+#room1Shelf32cost+#room1Shelf32Lcost+#room1Shelf48cost+#room1Shelf48Lcost)]
+}
+,end Room 1
+
+Do,(#RoomNum = 2):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room2Shelf12 = [#room2Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf12cost = [#room2Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room2Shelf12L = [#room2Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf12Lcost = [#room2Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room2Shelf16 = [#room2Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf16cost = [#room2Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room2Shelf16L = [#room2Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf16Lcost = [#room2Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room2Shelf18 = [#room2Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf18cost = [#room2Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room2Shelf18L = [#room2Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf18Lcost = [#room2Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room2Shelf24 = [#room2Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf24cost = [#room2Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room2Shelf24L = [#room2Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf24Lcost = [#room2Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room2Shelf32 = [#room2Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf32cost = [#room2Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room2Shelf32L = [#room2Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf32Lcost = [#room2Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room2Shelf48 = [#room2Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf48cost = [#room2Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room2Shelf48L = [#room2Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room2Shelf48Lcost = [#room2Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room2shelvescost = [(#room2Shelf12cost+#room2Shelf12Lcost+#room2Shelf16cost+#room2Shelf16Lcost+#room2Shelf18cost+#room2Shelf18Lcost+#room2Shelf24cost+#room2Shelf24Lcost+#room2Shelf32cost+#room2Shelf32Lcost+#room2Shelf48cost+#room2Shelf48Lcost)]
+}
+,end Room 2
+
+Do,(#RoomNum = 3):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room3Shelf12 = [#room3Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf12cost = [#room3Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room3Shelf12L = [#room3Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf12Lcost = [#room3Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room3Shelf16 = [#room3Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf16cost = [#room3Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room3Shelf16L = [#room3Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf16Lcost = [#room3Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room3Shelf18 = [#room3Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf18cost = [#room3Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room3Shelf18L = [#room3Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf18Lcost = [#room3Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room3Shelf24 = [#room3Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf24cost = [#room3Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room3Shelf24L = [#room3Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf24Lcost = [#room3Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room3Shelf32 = [#room3Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf32cost = [#room3Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room3Shelf32L = [#room3Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf32Lcost = [#room3Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room3Shelf48 = [#room3Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf48cost = [#room3Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room3Shelf48L = [#room3Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room3Shelf48Lcost = [#room3Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room3shelvescost = [(#room3Shelf12cost+#room3Shelf12Lcost+#room3Shelf16cost+#room3Shelf16Lcost+#room3Shelf18cost+#room3Shelf18Lcost+#room3Shelf24cost+#room3Shelf24Lcost+#room3Shelf32cost+#room3Shelf32Lcost+#room3Shelf48cost+#room3Shelf48Lcost)]
+}
+,end Room 3
+
+Do,(#RoomNum = 4):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room4Shelf12 = [#room4Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf12cost = [#room4Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room4Shelf12L = [#room4Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf12Lcost = [#room4Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room4Shelf16 = [#room4Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf16cost = [#room4Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room4Shelf16L = [#room4Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf16Lcost = [#room4Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room4Shelf18 = [#room4Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf18cost = [#room4Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room4Shelf18L = [#room4Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf18Lcost = [#room4Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room4Shelf24 = [#room4Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf24cost = [#room4Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room4Shelf24L = [#room4Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf24Lcost = [#room4Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room4Shelf32 = [#room4Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf32cost = [#room4Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room4Shelf32L = [#room4Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf32Lcost = [#room4Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room4Shelf48 = [#room4Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf48cost = [#room4Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room4Shelf48L = [#room4Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room4Shelf48Lcost = [#room4Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room4shelvescost = [(#room4Shelf12cost+#room4Shelf12Lcost+#room4Shelf16cost+#room4Shelf16Lcost+#room4Shelf18cost+#room4Shelf18Lcost+#room4Shelf24cost+#room4Shelf24Lcost+#room4Shelf32cost+#room4Shelf32Lcost+#room4Shelf48cost+#room4Shelf48Lcost)]
+}
+,end Room 4
+
+Do,(#RoomNum = 5):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room5Shelf12 = [#room5Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf12cost = [#room5Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room5Shelf12L = [#room5Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf12Lcost = [#room5Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room5Shelf16 = [#room5Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf16cost = [#room5Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room5Shelf16L = [#room5Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf16Lcost = [#room5Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room5Shelf18 = [#room5Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf18cost = [#room5Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room5Shelf18L = [#room5Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf18Lcost = [#room5Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room5Shelf24 = [#room5Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf24cost = [#room5Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room5Shelf24L = [#room5Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf24Lcost = [#room5Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room5Shelf32 = [#room5Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf32cost = [#room5Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room5Shelf32L = [#room5Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf32Lcost = [#room5Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room5Shelf48 = [#room5Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf48cost = [#room5Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room5Shelf48L = [#room5Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room5Shelf48Lcost = [#room5Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room5shelvescost = [(#room5Shelf12cost+#room5Shelf12Lcost+#room5Shelf16cost+#room5Shelf16Lcost+#room5Shelf18cost+#room5Shelf18Lcost+#room5Shelf24cost+#room5Shelf24Lcost+#room5Shelf32cost+#room5Shelf32Lcost+#room5Shelf48cost+#room5Shelf48Lcost)]
+}
+,end Room 5
+
+Do,(#RoomNum = 6):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room6Shelf12 = [#room6Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf12cost = [#room6Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room6Shelf12L = [#room6Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf12Lcost = [#room6Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room6Shelf16 = [#room6Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf16cost = [#room6Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room6Shelf16L = [#room6Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf16Lcost = [#room6Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room6Shelf18 = [#room6Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf18cost = [#room6Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room6Shelf18L = [#room6Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf18Lcost = [#room6Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room6Shelf24 = [#room6Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf24cost = [#room6Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room6Shelf24L = [#room6Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf24Lcost = [#room6Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room6Shelf32 = [#room6Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf32cost = [#room6Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room6Shelf32L = [#room6Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf32Lcost = [#room6Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room6Shelf48 = [#room6Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf48cost = [#room6Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room6Shelf48L = [#room6Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room6Shelf48Lcost = [#room6Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room6shelvescost = [(#room6Shelf12cost+#room6Shelf12Lcost+#room6Shelf16cost+#room6Shelf16Lcost+#room6Shelf18cost+#room6Shelf18Lcost+#room6Shelf24cost+#room6Shelf24Lcost+#room6Shelf32cost+#room6Shelf32Lcost+#room6Shelf48cost+#room6Shelf48Lcost)]
+}
+,end Room 6
+
+Do,(#RoomNum = 7):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room7Shelf12 = [#room7Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf12cost = [#room7Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room7Shelf12L = [#room7Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf12Lcost = [#room7Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room7Shelf16 = [#room7Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf16cost = [#room7Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room7Shelf16L = [#room7Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf16Lcost = [#room7Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room7Shelf18 = [#room7Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf18cost = [#room7Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room7Shelf18L = [#room7Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf18Lcost = [#room7Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room7Shelf24 = [#room7Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf24cost = [#room7Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room7Shelf24L = [#room7Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf24Lcost = [#room7Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room7Shelf32 = [#room7Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf32cost = [#room7Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room7Shelf32L = [#room7Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf32Lcost = [#room7Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room7Shelf48 = [#room7Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf48cost = [#room7Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room7Shelf48L = [#room7Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room7Shelf48Lcost = [#room7Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room7shelvescost = [(#room7Shelf12cost+#room7Shelf12Lcost+#room7Shelf16cost+#room7Shelf16Lcost+#room7Shelf18cost+#room7Shelf18Lcost+#room7Shelf24cost+#room7Shelf24Lcost+#room7Shelf32cost+#room7Shelf32Lcost+#room7Shelf48cost+#room7Shelf48Lcost)]
+}
+,end Room 7
+
+Do,(#RoomNum = 8):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room8Shelf12 = [#room8Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf12cost = [#room8Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room8Shelf12L = [#room8Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf12Lcost = [#room8Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room8Shelf16 = [#room8Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf16cost = [#room8Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room8Shelf16L = [#room8Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf16Lcost = [#room8Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room8Shelf18 = [#room8Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf18cost = [#room8Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room8Shelf18L = [#room8Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf18Lcost = [#room8Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room8Shelf24 = [#room8Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf24cost = [#room8Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room8Shelf24L = [#room8Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf24Lcost = [#room8Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room8Shelf32 = [#room8Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf32cost = [#room8Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room8Shelf32L = [#room8Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf32Lcost = [#room8Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room8Shelf48 = [#room8Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf48cost = [#room8Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room8Shelf48L = [#room8Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room8Shelf48Lcost = [#room8Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room8shelvescost = [(#room8Shelf12cost+#room8Shelf12Lcost+#room8Shelf16cost+#room8Shelf16Lcost+#room8Shelf18cost+#room8Shelf18Lcost+#room8Shelf24cost+#room8Shelf24Lcost+#room8Shelf32cost+#room8Shelf32Lcost+#room8Shelf48cost+#room8Shelf48Lcost)]
+}
+,end Room 8
+
+Do,(#RoomNum = 9):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room9Shelf12 = [#room9Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf12cost = [#room9Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room9Shelf12L = [#room9Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf12Lcost = [#room9Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room9Shelf16 = [#room9Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf16cost = [#room9Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room9Shelf16L = [#room9Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf16Lcost = [#room9Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room9Shelf18 = [#room9Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf18cost = [#room9Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room9Shelf18L = [#room9Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf18Lcost = [#room9Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room9Shelf24 = [#room9Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf24cost = [#room9Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room9Shelf24L = [#room9Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf24Lcost = [#room9Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room9Shelf32 = [#room9Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf32cost = [#room9Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room9Shelf32L = [#room9Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf32Lcost = [#room9Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room9Shelf48 = [#room9Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf48cost = [#room9Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room9Shelf48L = [#room9Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room9Shelf48Lcost = [#room9Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room9shelvescost = [(#room9Shelf12cost+#room9Shelf12Lcost+#room9Shelf16cost+#room9Shelf16Lcost+#room9Shelf18cost+#room9Shelf18Lcost+#room9Shelf24cost+#room9Shelf24Lcost+#room9Shelf32cost+#room9Shelf32Lcost+#room9Shelf48cost+#room9Shelf48Lcost)]
+}
+,end Room 9
+
+Do,(#RoomNum = 10):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room10Shelf12 = [#room10Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf12cost = [#room10Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room10Shelf12L = [#room10Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf12Lcost = [#room10Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room10Shelf16 = [#room10Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf16cost = [#room10Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room10Shelf16L = [#room10Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf16Lcost = [#room10Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room10Shelf18 = [#room10Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf18cost = [#room10Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room10Shelf18L = [#room10Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf18Lcost = [#room10Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room10Shelf24 = [#room10Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf24cost = [#room10Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room10Shelf24L = [#room10Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf24Lcost = [#room10Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room10Shelf32 = [#room10Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf32cost = [#room10Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room10Shelf32L = [#room10Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf32Lcost = [#room10Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room10Shelf48 = [#room10Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf48cost = [#room10Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room10Shelf48L = [#room10Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room10Shelf48Lcost = [#room10Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room10shelvescost = [(#room10Shelf12cost+#room10Shelf12Lcost+#room10Shelf16cost+#room10Shelf16Lcost+#room10Shelf18cost+#room10Shelf18Lcost+#room10Shelf24cost+#room10Shelf24Lcost+#room10Shelf32cost+#room10Shelf32Lcost+#room10Shelf48cost+#room10Shelf48Lcost)]
+}
+,end Room 10
+
+Do,(#RoomNum = 11):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room11Shelf12 = [#room11Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf12cost = [#room11Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room11Shelf12L = [#room11Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf12Lcost = [#room11Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room11Shelf16 = [#room11Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf16cost = [#room11Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room11Shelf16L = [#room11Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf16Lcost = [#room11Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room11Shelf18 = [#room11Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf18cost = [#room11Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room11Shelf18L = [#room11Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf18Lcost = [#room11Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room11Shelf24 = [#room11Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf24cost = [#room11Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room11Shelf24L = [#room11Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf24Lcost = [#room11Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room11Shelf32 = [#room11Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf32cost = [#room11Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room11Shelf32L = [#room11Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf32Lcost = [#room11Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room11Shelf48 = [#room11Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf48cost = [#room11Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room11Shelf48L = [#room11Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room11Shelf48Lcost = [#room11Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room11shelvescost = [(#room11Shelf12cost+#room11Shelf12Lcost+#room11Shelf16cost+#room11Shelf16Lcost+#room11Shelf18cost+#room11Shelf18Lcost+#room11Shelf24cost+#room11Shelf24Lcost+#room11Shelf32cost+#room11Shelf32Lcost+#room11Shelf48cost+#room11Shelf48Lcost)]
+}
+,end Room 11
+
+Do,(#RoomNum = 12):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room12Shelf12 = [#room12Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf12cost = [#room12Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room12Shelf12L = [#room12Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf12Lcost = [#room12Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room12Shelf16 = [#room12Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf16cost = [#room12Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room12Shelf16L = [#room12Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf16Lcost = [#room12Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room12Shelf18 = [#room12Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf18cost = [#room12Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room12Shelf18L = [#room12Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf18Lcost = [#room12Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room12Shelf24 = [#room12Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf24cost = [#room12Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room12Shelf24L = [#room12Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf24Lcost = [#room12Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room12Shelf32 = [#room12Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf32cost = [#room12Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room12Shelf32L = [#room12Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf32Lcost = [#room12Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room12Shelf48 = [#room12Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf48cost = [#room12Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room12Shelf48L = [#room12Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room12Shelf48Lcost = [#room12Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room12shelvescost = [(#room12Shelf12cost+#room12Shelf12Lcost+#room12Shelf16cost+#room12Shelf16Lcost+#room12Shelf18cost+#room12Shelf18Lcost+#room12Shelf24cost+#room12Shelf24Lcost+#room12Shelf32cost+#room12Shelf32Lcost+#room12Shelf48cost+#room12Shelf48Lcost)]
+}
+,end Room 12
+
+Do,(#RoomNum = 13):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room13Shelf12 = [#room13Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf12cost = [#room13Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room13Shelf12L = [#room13Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf12Lcost = [#room13Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room13Shelf16 = [#room13Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf16cost = [#room13Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room13Shelf16L = [#room13Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf16Lcost = [#room13Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room13Shelf18 = [#room13Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf18cost = [#room13Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room13Shelf18L = [#room13Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf18Lcost = [#room13Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room13Shelf24 = [#room13Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf24cost = [#room13Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room13Shelf24L = [#room13Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf24Lcost = [#room13Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room13Shelf32 = [#room13Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf32cost = [#room13Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room13Shelf32L = [#room13Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf32Lcost = [#room13Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room13Shelf48 = [#room13Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf48cost = [#room13Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room13Shelf48L = [#room13Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room13Shelf48Lcost = [#room13Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room13shelvescost = [(#room13Shelf12cost+#room13Shelf12Lcost+#room13Shelf16cost+#room13Shelf16Lcost+#room13Shelf18cost+#room13Shelf18Lcost+#room13Shelf24cost+#room13Shelf24Lcost+#room13Shelf32cost+#room13Shelf32Lcost+#room13Shelf48cost+#room13Shelf48Lcost)]
+}
+,end Room 13
+
+Do,(#RoomNum = 14):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room14Shelf12 = [#room14Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf12cost = [#room14Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room14Shelf12L = [#room14Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf12Lcost = [#room14Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room14Shelf16 = [#room14Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf16cost = [#room14Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room14Shelf16L = [#room14Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf16Lcost = [#room14Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room14Shelf18 = [#room14Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf18cost = [#room14Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room14Shelf18L = [#room14Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf18Lcost = [#room14Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room14Shelf24 = [#room14Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf24cost = [#room14Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room14Shelf24L = [#room14Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf24Lcost = [#room14Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room14Shelf32 = [#room14Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf32cost = [#room14Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room14Shelf32L = [#room14Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf32Lcost = [#room14Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room14Shelf48 = [#room14Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf48cost = [#room14Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room14Shelf48L = [#room14Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room14Shelf48Lcost = [#room14Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room14shelvescost = [(#room14Shelf12cost+#room14Shelf12Lcost+#room14Shelf16cost+#room14Shelf16Lcost+#room14Shelf18cost+#room14Shelf18Lcost+#room14Shelf24cost+#room14Shelf24Lcost+#room14Shelf32cost+#room14Shelf32Lcost+#room14Shelf48cost+#room14Shelf48Lcost)]
+}
+,end Room 14
+
+Do,(#RoomNum = 15):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room15Shelf12 = [#room15Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf12cost = [#room15Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room15Shelf12L = [#room15Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf12Lcost = [#room15Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room15Shelf16 = [#room15Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf16cost = [#room15Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room15Shelf16L = [#room15Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf16Lcost = [#room15Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room15Shelf18 = [#room15Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf18cost = [#room15Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room15Shelf18L = [#room15Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf18Lcost = [#room15Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room15Shelf24 = [#room15Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf24cost = [#room15Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room15Shelf24L = [#room15Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf24Lcost = [#room15Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room15Shelf32 = [#room15Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf32cost = [#room15Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room15Shelf32L = [#room15Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf32Lcost = [#room15Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room15Shelf48 = [#room15Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf48cost = [#room15Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room15Shelf48L = [#room15Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room15Shelf48Lcost = [#room15Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room15shelvescost = [(#room15Shelf12cost+#room15Shelf12Lcost+#room15Shelf16cost+#room15Shelf16Lcost+#room15Shelf18cost+#room15Shelf18Lcost+#room15Shelf24cost+#room15Shelf24Lcost+#room15Shelf32cost+#room15Shelf32Lcost+#room15Shelf48cost+#room15Shelf48Lcost)]
+}
+,end Room 15
+
+Do,(#RoomNum = 16):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room16Shelf12 = [#room16Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf12cost = [#room16Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room16Shelf12L = [#room16Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf12Lcost = [#room16Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room16Shelf16 = [#room16Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf16cost = [#room16Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room16Shelf16L = [#room16Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf16Lcost = [#room16Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room16Shelf18 = [#room16Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf18cost = [#room16Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room16Shelf18L = [#room16Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf18Lcost = [#room16Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room16Shelf24 = [#room16Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf24cost = [#room16Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room16Shelf24L = [#room16Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf24Lcost = [#room16Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room16Shelf32 = [#room16Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf32cost = [#room16Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room16Shelf32L = [#room16Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf32Lcost = [#room16Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room16Shelf48 = [#room16Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf48cost = [#room16Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room16Shelf48L = [#room16Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room16Shelf48Lcost = [#room16Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room16shelvescost = [(#room16Shelf12cost+#room16Shelf12Lcost+#room16Shelf16cost+#room16Shelf16Lcost+#room16Shelf18cost+#room16Shelf18Lcost+#room16Shelf24cost+#room16Shelf24Lcost+#room16Shelf32cost+#room16Shelf32Lcost+#room16Shelf48cost+#room16Shelf48Lcost)]
+}
+,end Room 16
+
+Do,(#RoomNum = 17):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room17Shelf12 = [#room17Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf12cost = [#room17Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room17Shelf12L = [#room17Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf12Lcost = [#room17Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room17Shelf16 = [#room17Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf16cost = [#room17Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room17Shelf16L = [#room17Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf16Lcost = [#room17Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room17Shelf18 = [#room17Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf18cost = [#room17Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room17Shelf18L = [#room17Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf18Lcost = [#room17Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room17Shelf24 = [#room17Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf24cost = [#room17Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room17Shelf24L = [#room17Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf24Lcost = [#room17Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room17Shelf32 = [#room17Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf32cost = [#room17Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room17Shelf32L = [#room17Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf32Lcost = [#room17Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room17Shelf48 = [#room17Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf48cost = [#room17Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room17Shelf48L = [#room17Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room17Shelf48Lcost = [#room17Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room17shelvescost = [(#room17Shelf12cost+#room17Shelf12Lcost+#room17Shelf16cost+#room17Shelf16Lcost+#room17Shelf18cost+#room17Shelf18Lcost+#room17Shelf24cost+#room17Shelf24Lcost+#room17Shelf32cost+#room17Shelf32Lcost+#room17Shelf48cost+#room17Shelf48Lcost)]
+}
+,end Room 17
+
+Do,(#RoomNum = 18):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room18Shelf12 = [#room18Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf12cost = [#room18Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room18Shelf12L = [#room18Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf12Lcost = [#room18Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room18Shelf16 = [#room18Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf16cost = [#room18Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room18Shelf16L = [#room18Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf16Lcost = [#room18Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room18Shelf18 = [#room18Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf18cost = [#room18Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room18Shelf18L = [#room18Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf18Lcost = [#room18Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room18Shelf24 = [#room18Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf24cost = [#room18Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room18Shelf24L = [#room18Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf24Lcost = [#room18Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room18Shelf32 = [#room18Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf32cost = [#room18Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room18Shelf32L = [#room18Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf32Lcost = [#room18Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room18Shelf48 = [#room18Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf48cost = [#room18Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room18Shelf48L = [#room18Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room18Shelf48Lcost = [#room18Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room18shelvescost = [(#room18Shelf12cost+#room18Shelf12Lcost+#room18Shelf16cost+#room18Shelf16Lcost+#room18Shelf18cost+#room18Shelf18Lcost+#room18Shelf24cost+#room18Shelf24Lcost+#room18Shelf32cost+#room18Shelf32Lcost+#room18Shelf48cost+#room18Shelf48Lcost)]
+}
+,end Room 18
+
+Do,(#RoomNum = 19):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room19Shelf12 = [#room19Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf12cost = [#room19Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room19Shelf12L = [#room19Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf12Lcost = [#room19Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room19Shelf16 = [#room19Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf16cost = [#room19Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room19Shelf16L = [#room19Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf16Lcost = [#room19Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room19Shelf18 = [#room19Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf18cost = [#room19Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room19Shelf18L = [#room19Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf18Lcost = [#room19Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room19Shelf24 = [#room19Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf24cost = [#room19Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room19Shelf24L = [#room19Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf24Lcost = [#room19Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room19Shelf32 = [#room19Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf32cost = [#room19Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room19Shelf32L = [#room19Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf32Lcost = [#room19Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room19Shelf48 = [#room19Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf48cost = [#room19Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room19Shelf48L = [#room19Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room19Shelf48Lcost = [#room19Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room19shelvescost = [(#room19Shelf12cost+#room19Shelf12Lcost+#room19Shelf16cost+#room19Shelf16Lcost+#room19Shelf18cost+#room19Shelf18Lcost+#room19Shelf24cost+#room19Shelf24Lcost+#room19Shelf32cost+#room19Shelf32Lcost+#room19Shelf48cost+#room19Shelf48Lcost)]
+}
+,end Room 19
+
+Do,(#RoomNum = 20):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room20Shelf12 = [#room20Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf12cost = [#room20Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room20Shelf12L = [#room20Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf12Lcost = [#room20Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room20Shelf16 = [#room20Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf16cost = [#room20Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room20Shelf16L = [#room20Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf16Lcost = [#room20Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room20Shelf18 = [#room20Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf18cost = [#room20Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room20Shelf18L = [#room20Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf18Lcost = [#room20Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room20Shelf24 = [#room20Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf24cost = [#room20Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room20Shelf24L = [#room20Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf24Lcost = [#room20Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room20Shelf32 = [#room20Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf32cost = [#room20Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room20Shelf32L = [#room20Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf32Lcost = [#room20Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room20Shelf48 = [#room20Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf48cost = [#room20Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room20Shelf48L = [#room20Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room20Shelf48Lcost = [#room20Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room20shelvescost = [(#room20Shelf12cost+#room20Shelf12Lcost+#room20Shelf16cost+#room20Shelf16Lcost+#room20Shelf18cost+#room20Shelf18Lcost+#room20Shelf24cost+#room20Shelf24Lcost+#room20Shelf32cost+#room20Shelf32Lcost+#room20Shelf48cost+#room20Shelf48Lcost)]
+}
+,end Room 20
+
+Do,(#RoomNum = 21):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room21Shelf12 = [#room21Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf12cost = [#room21Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room21Shelf12L = [#room21Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf12Lcost = [#room21Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room21Shelf16 = [#room21Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf16cost = [#room21Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room21Shelf16L = [#room21Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf16Lcost = [#room21Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room21Shelf18 = [#room21Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf18cost = [#room21Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room21Shelf18L = [#room21Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf18Lcost = [#room21Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room21Shelf24 = [#room21Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf24cost = [#room21Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room21Shelf24L = [#room21Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf24Lcost = [#room21Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room21Shelf32 = [#room21Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf32cost = [#room21Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room21Shelf32L = [#room21Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf32Lcost = [#room21Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room21Shelf48 = [#room21Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf48cost = [#room21Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room21Shelf48L = [#room21Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room21Shelf48Lcost = [#room21Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room21shelvescost = [(#room21Shelf12cost+#room21Shelf12Lcost+#room21Shelf16cost+#room21Shelf16Lcost+#room21Shelf18cost+#room21Shelf18Lcost+#room21Shelf24cost+#room21Shelf24Lcost+#room21Shelf32cost+#room21Shelf32Lcost+#room21Shelf48cost+#room21Shelf48Lcost)]
+}
+,end Room 21
+
+Do,(#RoomNum = 22):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room22Shelf12 = [#room22Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf12cost = [#room22Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room22Shelf12L = [#room22Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf12Lcost = [#room22Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room22Shelf16 = [#room22Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf16cost = [#room22Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room22Shelf16L = [#room22Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf16Lcost = [#room22Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room22Shelf18 = [#room22Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf18cost = [#room22Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room22Shelf18L = [#room22Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf18Lcost = [#room22Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room22Shelf24 = [#room22Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf24cost = [#room22Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room22Shelf24L = [#room22Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf24Lcost = [#room22Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room22Shelf32 = [#room22Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf32cost = [#room22Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room22Shelf32L = [#room22Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf32Lcost = [#room22Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room22Shelf48 = [#room22Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf48cost = [#room22Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room22Shelf48L = [#room22Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room22Shelf48Lcost = [#room22Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room22shelvescost = [(#room22Shelf12cost+#room22Shelf12Lcost+#room22Shelf16cost+#room22Shelf16Lcost+#room22Shelf18cost+#room22Shelf18Lcost+#room22Shelf24cost+#room22Shelf24Lcost+#room22Shelf32cost+#room22Shelf32Lcost+#room22Shelf48cost+#room22Shelf48Lcost)]
+}
+,end Room 22
+
+Do,(#RoomNum = 23):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room23Shelf12 = [#room23Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf12cost = [#room23Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room23Shelf12L = [#room23Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf12Lcost = [#room23Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room23Shelf16 = [#room23Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf16cost = [#room23Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room23Shelf16L = [#room23Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf16Lcost = [#room23Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room23Shelf18 = [#room23Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf18cost = [#room23Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room23Shelf18L = [#room23Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf18Lcost = [#room23Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room23Shelf24 = [#room23Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf24cost = [#room23Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room23Shelf24L = [#room23Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf24Lcost = [#room23Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room23Shelf32 = [#room23Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf32cost = [#room23Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room23Shelf32L = [#room23Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf32Lcost = [#room23Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room23Shelf48 = [#room23Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf48cost = [#room23Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room23Shelf48L = [#room23Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room23Shelf48Lcost = [#room23Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room23shelvescost = [(#room23Shelf12cost+#room23Shelf12Lcost+#room23Shelf16cost+#room23Shelf16Lcost+#room23Shelf18cost+#room23Shelf18Lcost+#room23Shelf24cost+#room23Shelf24Lcost+#room23Shelf32cost+#room23Shelf32Lcost+#room23Shelf48cost+#room23Shelf48Lcost)]
+}
+,end Room 23
+
+Do,(#RoomNum = 24):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room24Shelf12 = [#room24Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf12cost = [#room24Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room24Shelf12L = [#room24Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf12Lcost = [#room24Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room24Shelf16 = [#room24Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf16cost = [#room24Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room24Shelf16L = [#room24Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf16Lcost = [#room24Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room24Shelf18 = [#room24Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf18cost = [#room24Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room24Shelf18L = [#room24Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf18Lcost = [#room24Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room24Shelf24 = [#room24Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf24cost = [#room24Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room24Shelf24L = [#room24Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf24Lcost = [#room24Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room24Shelf32 = [#room24Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf32cost = [#room24Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room24Shelf32L = [#room24Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf32Lcost = [#room24Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room24Shelf48 = [#room24Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf48cost = [#room24Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room24Shelf48L = [#room24Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room24Shelf48Lcost = [#room24Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room24shelvescost = [(#room24Shelf12cost+#room24Shelf12Lcost+#room24Shelf16cost+#room24Shelf16Lcost+#room24Shelf18cost+#room24Shelf18Lcost+#room24Shelf24cost+#room24Shelf24Lcost+#room24Shelf32cost+#room24Shelf32Lcost+#room24Shelf48cost+#room24Shelf48Lcost)]
+}
+,end Room 24
+
+Do,(#RoomNum = 25):1
+{
+Do, (#addshelf = 1):1
+{
+Set,#room25Shelf12 = [#room25Shelf12+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf12cost = [#room25Shelf12*#ShelfCost1A]
+}
+Do, (#addshelf = 2):1
+{
+Set,#room25Shelf12L = [#room25Shelf12L+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf12Lcost = [#room25Shelf12L*#ShelfCost2A]
+}
+Do, (#addshelf = 3):1
+{
+Set,#room25Shelf16 = [#room25Shelf16+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf16cost = [#room25Shelf16*#ShelfCost1B]
+}
+Do, (#addshelf = 4):1
+{
+Set,#room25Shelf16L = [#room25Shelf16L+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf16Lcost = [#room25Shelf16L*#ShelfCost2B]
+}
+Do, (#addshelf = 5):1
+{
+Set,#room25Shelf18 = [#room25Shelf18+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf18cost = [#room25Shelf18*#ShelfCost1C]
+}
+Do, (#addshelf = 6):1
+{
+Set,#room25Shelf18L = [#room25Shelf18L+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf18Lcost = [#room25Shelf18L*#ShelfCost2C]
+}
+Do, (#addshelf = 7):1
+{
+Set,#room25Shelf24 = [#room25Shelf24+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf24cost = [#room25Shelf24*#ShelfCost1D]
+}
+Do, (#addshelf = 8):1
+{
+Set,#room25Shelf24L = [#room25Shelf24L+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf24Lcost = [#room25Shelf24L*#ShelfCost2D]
+}
+Do, (#addshelf = 9):1
+{
+Set,#room25Shelf32 = [#room25Shelf32+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf32cost = [#room25Shelf32*#ShelfCost1E]
+}
+Do, (#addshelf = 10):1
+{
+Set,#room25Shelf32L = [#room25Shelf32L+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf32Lcost = [#room25Shelf32L*#ShelfCost2E]
+}
+Do, (#addshelf = 11):1
+{
+Set,#room25Shelf48 = [#room25Shelf48+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf48cost = [#room25Shelf48*#ShelfCost1F]
+}
+Do, (#addshelf = 12):1
+{
+Set,#room25Shelf48L = [#room25Shelf48L+(#tempshelfcount)] ,Shelf count
+Set,#room25Shelf48Lcost = [#room25Shelf48L*#ShelfCost2F]
+}
+Do, (#addshelf = 13):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 14):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 15):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 16):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 17):1
+{
+,notsure what to do or how to track these
+}
+Do, (#addshelf = 18):1
+{
+,notsure what to do or how to track these
+}
+set, #room25shelvescost = [(#room25Shelf12cost+#room25Shelf12Lcost+#room25Shelf16cost+#room25Shelf16Lcost+#room25Shelf18cost+#room25Shelf18Lcost+#room25Shelf24cost+#room25Shelf24Lcost+#room25Shelf32cost+#room25Shelf32Lcost+#room25Shelf48cost+#room25Shelf48Lcost)]
+}
+,end Room 25
+}
+
+
+

@@ -1,0 +1,6 @@
+,KCDw SYSTEM FILE DO NOT CHANGE
+,TAPERED LEGS
+Set,#LCode=Closet
+Set,#UCode=Kick
+Set,#PCode=TLeg
+Load, Eachunit.pcb

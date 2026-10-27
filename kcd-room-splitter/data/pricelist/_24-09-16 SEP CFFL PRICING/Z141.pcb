@@ -1,0 +1,48 @@
+,Calc all Costs for Sides
+Set, #VertH = [H]
+Set, #VertD = [D]
+Load, B-Side Cost.Pcb
+
+,Calculates the price for each part
+,Price, (LS>0):1,   #LeftSideName,         #CostOfSide,             h, d,          #LeftSidePrintOrderNumber,          
+,Price, (RS>0):1,   #RightSideName,        #CostOfSide,             h, d,          #RightSidePrintOrderNumber,         
+
+Set,(ul=1)&(LS>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+
+Price, (LS>0):1,   #LeftSideName,         #CostOfSide+#UsePanelTouchingWallCost,             #VertD, #VertH,          #LeftSidePrintOrderNumber,
+  
+Set,(ur=1)&(RS>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+        
+Price, (RS>0):1,   #RightSideName,        #CostOfSide+#UsePanelTouchingWallCost,             #VertD, #VertH,          #RightSidePrintOrderNumber,         
+,*****************************************
+
+,Load,  CalcSides.Pcb
+Set, #ShelfWidth = [(W-LS-RS)]     
+Set, #ShelfDepth = [(D)]
+Load, C-Shelf Cost.Pcb
+Price, (TR>0):1,     #TopShelfName,         #CostOfTopShelf,         (W-LS-RS), d,   #TopShelfPrintOrderNumber,          
+Price, (BR>0):1,     #MiddleShelfName,      #CostOfMiddleShelf,      (W-LS-RS), d,  #MiddleShelfPrintOrderNumber,       
+Price, (BR>0):1,     #BottomShelfName,      #CostOfBottomShelf,      (W-LS-RS), d,  #BottomShelfPrintOrderNumber,       
+
+Price, (SH>0):1,   #AdjustableShelfName,  #CostOfAdjustableShelf,  (W-LS-RS), d,  #AdjustableShelfPrintOrderNumber,   
+Price, (SH>1):1,   #AdjustableShelfName,  #CostOfAdjustableShelf,  (W-LS-RS), d,  #AdjustableShelfPrintOrderNumber,   
+Price, (SH>2):1,   #AdjustableShelfName,  #CostOfAdjustableShelf,  (W-LS-RS), d,  #AdjustableShelfPrintOrderNumber,   
+Price, (SH>3):1,   #AdjustableShelfName,  #CostOfAdjustableShelf,  (W-LS-RS), d,  #AdjustableShelfPrintOrderNumber,   
+Price, (SH>4):1,   #AdjustableShelfName,  #CostOfAdjustableShelf,  (W-LS-RS), d,  #AdjustableShelfPrintOrderNumber,   
+Price, (SH>5):1,   #AdjustableShelfName,  #CostOfAdjustableShelf,  (W-LS-RS), d,  #AdjustableShelfPrintOrderNumber,   
+Price, (SH>6):1,   #AdjustableShelfName,  #CostOfAdjustableShelf,  (W-LS-RS), d,  #AdjustableShelfPrintOrderNumber,   
+Price, (SH>7):1,   #AdjustableShelfName,  #CostOfAdjustableShelf,  (W-LS-RS), d,  #AdjustableShelfPrintOrderNumber,   
+Price, (SH>8):1,   #AdjustableShelfName,  #CostOfAdjustableShelf,  (W-LS-RS), d,  #AdjustableShelfPrintOrderNumber,   
+Price, (SH>9):1,   #AdjustableShelfName,  #CostOfAdjustableShelf,  (W-LS-RS), d,  #AdjustableShelfPrintOrderNumber,   
+
+Price, (#IncludeBacks>0):1, #BackName,             #CostOfBack,             w, h,          #BackPrintOrderNumber,              
+
+
+
+
+,Calculated each Door and Drawer Front cost
+Load, Doors.pcb
+
+
+,Calculate each Drawer Box
+Load, Drawers.Pcb

@@ -1,0 +1,7 @@
+set, (w>d): #cleatlength=w
+set, (d>w): #cleatlength=d
+,Calculates the price for each part
+Price, 1,   #ShelfSupportName,      #CostOfShelfSupport,             W, d,          #ShelfSupportPrintOrderNumber,   
+
+
+  

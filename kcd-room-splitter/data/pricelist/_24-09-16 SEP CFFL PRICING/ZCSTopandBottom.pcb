@@ -1,0 +1,38 @@
+,CF Top and Bottom Connecting Shelves
+,Calculates the price for each part
+
+
+
+,*********** All FIXED SHELVES ***********
+Set, #ShelfWidth = [(W-LS-RS)]     
+Set, #ShelfDepth = [(D)]
+load, Pricefixedshelves.pcb
+,*****************************************
+
+
+
+Price, (#chargeforconnectingshelves="Yes"): 1,Connecting Shelf Upcharge, #Costoftopconnector+#Costofbottomconnector,,  ,       #KickPrintOrderNumber,
+ 
+
+ 
+
+,************* OTHER PARTS ***************
+set, #Backheight = [H-TR-BR-K]
+set, #ShelfWidth = [(W-LS-RS)]
+Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber, 
+                  
+Price, (K>0):1,      #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,              
+,*****************************************
+
+
+
+
+
+
+
+
+
+
+
+
+

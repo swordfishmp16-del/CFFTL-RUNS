@@ -1,0 +1,18 @@
+,THIS SECTION WILL LET YOU SET THE COST OF YOUR MOLDINGS
+,not used by CF - JMF CFLA
+
+
+
+
+SetOnly, (#ThisMld=Facia):             #MldCost=#CrownMoldingTypeCost2
+SetOnly, (#ThisMld=RTF Crown Small):   #MldCost=#CrownMoldingTypeCost3
+SetOnly, (#ThisMld=RTF Crown Large):   #MldCost=#CrownMoldingTypeCost4
+SetOnly, (#ThisMld=Wood Crown):        #MldCost=#CrownMoldingTypeCost5
+SetOnly, (#ThisMld=Dental Crown):      #MldCost=#CrownMoldingTypeCost6
+
+
+
+
+
+Set, #MldCost=5.00 ,Default Molding Cost
+

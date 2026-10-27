@@ -1,0 +1,36 @@
+,SUBTOTAL SECTION
+Price ,(#Closetsubtotal>0):1 ,Closet Assembly, (#Closetsubtotal)  ,,,, ; #NumOfUnits = [#NumOfUnits + #closetnum]; #LinealFt=[#LinealFt+#closetft]
+
+,Set,#Subtotal1cost1=#Subtotal1cost
+
+,Set,#Subtotal2cost2=#Subtotal2cost
+
+,Set,#Subtotal3cost3=#Subtotal3cost
+
+,Set,#Subtotal4cost4=#Subtotal4cost
+
+,Set,#Subtotal5cost5=#Subtotal5cost
+
+,Set,#Subtotal6cost6=#Subtotal6cost
+
+,Set,#Subtotal7cost7=#Subtotal7cost
+
+,Set,#Subtotal8cost8=#Subtotal8cost
+
+,Set,#Subtotal9cost9=#Subtotal9cost
+
+,Set,#Subtotal10cost10=#Subtotal10cost
+
+,Set,#Subtotal11cost11=0
+
+,Set,#Subtotal12cost12=0
+
+,Set,#Subtotal13cost13=0
+
+,Set,#Subtotal14cost14=0
+
+,Load, Molding.Pcb
+
+
+set,#PreSubTotal=[#Subtotal]
+Set,#TotalCabCost=[#CabTotal]

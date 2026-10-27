@@ -1,0 +1,128 @@
+,Calculates the price for each part
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+Load, pricesides.Pcb
+
+,*****************************************
+
+
+
+,********* All VERTICAL DIVIDERS *********
+,Vertical Divider
+Set,(ndwr>1):#VertH = [DH1]:#VertH = [DH2]
+Set, #VertD = [D]
+Load, pricedividers.Pcb
+,*****************************************
+
+
+
+,*********** All FIXED SHELVES ***********
+Set, #ShelfWidth = [(W-LS-RS)]     
+Set, #ShelfDepth = [(D)]
+set, #lowerspannercount=1
+Load, pricefixedshelves.Pcb
+,*****************************************
+
+
+
+
+,*********** TOP SPANNERS OR FULL SHELF ******
+,Set,(#FullTops="No"):#ShelfDepth=[#SpannerWidth]:#ShelfDepth=[D]
+,Set,(#FullTops="No"):#Tops=2:#Tops=1
+,Load, C-Shelf Cost.Pcb
+,Price,(TR>0):#Tops,  #TopShelfName,         #CostOfTopShelf,         #ShelfDepth, #ShelfWidth,  #TopShelfPrintOrderNumber,          
+,*****************************************
+
+
+
+
+,*********** SPANNER OR FIXED SHELF ******
+,Set,(#FullShelf="No"):#ShelfDepth=[#SpannerMidWidth]:#ShelfDepth=[D]
+,Load, C-Shelf Cost.Pcb
+,Price, (MR>0):1,     #MiddleShelfName,      #CostOfMiddleShelf,      #ShelfDepth, #ShelfWidth,  #MiddleShelfPrintOrderNumber,       
+,*****************************************
+
+
+
+
+,*********** All ADJ SHELVES *************
+,Top Adj Shelves
+Set, (ndwr>1):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-MS)/2]
+Set, (ndwr>1):#tempshelfcount = SH:#Tempshelfcount = SH*2
+Set, #ShelfDepth = [(D)]
+
+load, Priceadjshelves.pcb
+Set, (#CostOfAdjustableShelf>0)&(opt=#optRWNotchshelfoptnum):#addRWShelfnotch=#Tempshelfcount
+Price, (#CostOfAdjustableShelf>0)&(opt=#optRWNotchshelfoptnum):#Tempshelfcount,  #optionRWNotchshelfname cost,  #costtoRWnotchshelves,  , #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+
+
+
+,Load, C-Shelf Cost.Pcb
+,Price, SH,          #AdjustableShelfName,  #CostOfAdjustableShelf,  #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,   
+,Price, (ndr>1):SH, #AdjustableShelfName,  #CostOfAdjustableShelf,  #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,   
+,*****************************************
+
+
+
+set, #shelfwidth=[(W-LS-RS)]
+set, #backheight = dh2
+,************* OTHER PARTS ***************
+Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,          #shelfwidth, #backheight,          #BackPrintOrderNumber,              
+,Price, 1,            #ClosetPoleName,       #ClosetPoleCost,         (W-LS-RS), 1,  #ClosetPolePrintOrderNumber,        
+Price, (K>0):1,      #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,              
+,*****************************************
+
+
+
+
+,******* All DOORS & DRAWER FRONTS *******
+Load, Doors.pcb
+,*****************************************
+
+
+
+
+,*********** All DRAWER BOXES ************
+,Load, Drawers.Pcb
+,*****************************************
+Set, (ndwr>1):#DrawerOpeningWidth = [(W-LS-RS)/2]:#DrawerOpeningWidth = [(W-LS-RS-MS)]
+Set, (ndwr>1):#DrawerFrontWidth = [(D1W)/2]:#DrawerFrontWidth = [(D1W)]
+
+
+
+,Calculates a Drawer cost
+
+Set, #DrawerOpeningHeight = DH1
+Set, #DrawerFrontHeight = D1H
+Set, (#DrawerFrontHeight=0):#drawerfront1=0:#drawerfront1=1
+set, #nodrawerbox=0
+Set, (D1DR>0):#drawernumber=1:#drawernumber=0
+Set, ((Opt=#OptDrw1NDB)&(#drawernumber=1)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw1SG)&(#drawernumber=1)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (#nodrawerbox=0)&(D1HG=0)&(D1H>0)&(D1T=3):E-Drawer Cost.Pcb
+
+Do, (ndwr>1):1
+{
+,Calculates a Drawer cost
+Set, #DrawerOpeningHeight = DH2
+Set, #DrawerFrontHeight = D2H
+Set, (#DrawerFrontHeight=0):#drawerfront1=0:#drawerfront1=1
+set, #nodrawerbox=0
+Set, (D2DR>0):#drawernumber=2:#drawernumber=0
+Set, ((Opt=#OptDrw2NDB)&(#drawernumber=2)):#nodrawerbox=1
+set, #swapglides=0
+Set, ((Opt=#OptDrw2SG)&(#drawernumber=2)&((#ExtraUnitText8 = "*under*")|(#ExtraUnitText8 = "*push*")|(#ExtraUnitText8 = "*inset*"))):#swapglides=1
+Load, (#nodrawerbox=0)&(D2HG=0)&(D2H>0)&(D2T=3):E-Drawer Cost.Pcb
+}
+
+
+
+,************ All PULLOUTS ***************
+Set, #PulloutOpeningWidth = [W-LS-RS]
+Load, (npo>0): G-Pullout Cost.Pcb
+,*****************************************
+

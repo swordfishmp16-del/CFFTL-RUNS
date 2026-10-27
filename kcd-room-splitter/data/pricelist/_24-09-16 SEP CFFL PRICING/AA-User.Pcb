@@ -1,0 +1,2866 @@
+,Use Grid
+,**
+,**   USER FILE for Pricing
+,**
+,**   The Names you enter below must match what you have in your Set Unit Info Section to work
+,**
+
+Set,#MaterialCostGroup=0
+
+Set,#Totalcountloadsforsides=0
+set,#shoeFencecostgroup=0
+
+
+
+Set,#UnitMaterial=#ExtraUnitText1
+Set,#UnitMaterialName=#ExtraUnitText1
+
+Set,#DoorDrawerType=#ExtraUnitText2
+
+Set,#EdgeBandingType=#ExtraUnitText3
+
+
+Set,#ContrastMaterial=#ExtraUnitText12
+Set,#ContrastMaterialName=#ExtraUnitText12
+Set,("ContrastmaterialName <> "None 1.00"):#use2ndmaterial=1:#Use2ndmaterial=0
+
+
+Set,#ClosetRodType=#ExtraUnitText4
+
+Set,#BaseType=#ExtraUnitText5
+
+Set,#CrownMoldingType=#ExtraUnitText6
+
+Set,#BackType=#ExtraUnitText7
+
+Set,#BoxDrawertype=#ExtraUnitText8
+
+Set,#notchDepth=#ExtraUnitText9
+
+Set,#notchheight=#ExtraUnitText10
+
+set,#ShoeFenceType = None
+
+Set,#DoorDrawerFinishingType=#ExtraUnitText14
+
+set,#DoorDrawerInsertType = #ExtraUnitText15
+
+
+
+,**  SECTION 1  Miscellaneous (Panel touching wall with Pop Up Questions for Discounts and Fees)
+,**  SECTION 2  Door and Drawer Front Setup ( Set in QUICK LOAD under D-DOOR COST.PCB bottom right corner of your screen )
+,**  SECTION 3  Edge Banding
+,**  SECTION 4  Rod Cost
+,**  SECTION 5  Base Cost (Kick)
+,**  SECTION 6  Crown Molding Cost
+,**  SECTION 7  Back Cost
+,**  SECTION 8  Fluted Pilaster Cost
+,**  SECTION 9  Drawer Box Cost ( Set in QUICK LOAD under E-DRAWER COST.PCB bottom right corner of your screen )
+,**  SECTION 10 Handle and Knob Cost
+,**  SECTION 11 Finishing Cost
+,**  SECTION 12 Shoe Fence Cost
+,**  SECTION 13 Door/Drawer Finishing Cost
+,**  SECTION 14 Door/Drawer Insert Cost
+,**  SECTION 15 Miscellaneous Cost and Shelf Options
+
+
+
+,Hanknob not setup yet this variable below could be wrong
+Set,#HanKnobHardware=#ExtraUnitText11
+
+,This was added below to work on xxafter.prt room subtotals
+Set,#ClosetHardwaretype=#ExtraUnitText11
+
+
+
+,   **
+,Set,#IncludequestionBack=no
+
+,Set, #IncludeBackName =Include Backs Yes or No?, --- Include Backs Question?
+,DisplaySet, #IncludeBacksName =Include Backs Yes or No?, --- Include Backs Question?
+,AskQuestion,#IncludeBacksYN,No,#IncludeBacksName  [Yes;No]
+Set,#IncludeBacks=bkyn
+,Set,#IncludeBacks=Yes
+
+,Set,(#IncludeBacksYN="No"):#IncludeBacks=No
+
+,**
+DisplaySet,#PanelTouchingWallCost=17,1. Extra cost for panel touching wall
+
+,**
+
+,load, I-Popupquestions.pcb
+
+,,**  SECTION 1
+,,**   Material Color name and cost factor
+
+,DisplaySet,#MaterialName1=White  1.15,         Material 1 Name
+,DisplaySet,#DetailedMaterialCostFactor1=1,1.1    #MaterialName1 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName2=Almond  1.15,         Material 2 Name
+,DisplaySet,#DetailedMaterialCostFactor2=1.10,1.2    #MaterialName2 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName3=Hard Rock Maple Grain  1.25,         Material 3 Name
+,DisplaySet,#DetailedMaterialCostFactor3=1.25,1.3    #MaterialName3 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName4=Gray  1.3,         Material 4 Name
+,DisplaySet,#DetailedMaterialCostFactor4=1.3,1.4    #MaterialName4 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName5=Black  1.3,         Material 5 Name
+,DisplaySet,#DetailedMaterialCostFactor5=1.13,1.5    #MaterialName5 MaterialCost Factor
+,,**
+,DisplaySet,#MaterialName6=Pearl  1.3,         Material 6 Name
+,DisplaySet,#DetailedMaterialCostFactor6=1.3,1.6    #MaterialName6 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName7=Red  1.55,         Material 7 Name
+,DisplaySet,#DetailedMaterialCostFactor7=1.55,1.7    #MaterialName7 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName8=Slate Gray  1.55,         Material 8 Name
+,DisplaySet,#DetailedMaterialCostFactor8=1.55,1.8    #MaterialName8 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName9=Arbor Myrtle Grain  1.55,         Material 9 Name
+,DisplaySet,#DetailedMaterialCostFactor9=1.55,1.9   #MaterialName9 Cost Factor
+,,**
+,DisplaySet,#MaterialName10=Backwoods Sycamore Grain  1.55,         Material 10 Name
+,DisplaySet,#DetailedMaterialCostFactor10=1.55,1.10  #MaterialName10 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName11=Candlelight Grain  1.55,         Material 11 Name
+,DisplaySet,#DetailedMaterialCostFactor11=1.55,1.11  #MaterialName11 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName12=Cinnamon Spice Grain  1.55,         Material 12 Name
+,DisplaySet,#DetailedMaterialCostFactor12=1.55,1.12  #MaterialName12 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName13=Coffee Tree Grain  1.55,         Material 13 Name
+,DisplaySet,#DetailedMaterialCostFactor13=1.55,1.13  #MaterialName13 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName14=Exotic Walnut Grain  1.55,         Material 14 Name
+,DisplaySet,#DetailedMaterialCostFactor14=1.55,1.14  #MaterialName14 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName15=Espresso Grain  1.55 ,         Material 15 Name
+,DisplaySet,#DetailedMaterialCostFactor15=1.55,1.15  #MaterialName15 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName16=Geneva Grain  1.55,         Material 16 Name
+,DisplaySet,#DetailedMaterialCostFactor16=1.55,1.16  #MaterialName16 Material Cost Factor
+,,**
+,DisplaySet,#MaterialName17=Grove Myrtle Grain  1.55,         Material 17 Name
+,DisplaySet,#DetailedMaterialCostFactor17=1.55,1.17  #MaterialName17 Cost Factor
+,,**
+,DisplaySet,#MaterialName18=Latte Grain  1.55,         Material 18 Name
+,DisplaySet,#DetailedMaterialCostFactor18=1.55,1.18  #MaterialName18 Cost Factor
+,,**
+,DisplaySet,#MaterialName19=Mahogany Grain  1.55,         Material 19 Name
+,DisplaySet,#DetailedMaterialCostFactor19=1.55,1.19  #MaterialName19 Cost Factor
+,,**
+,DisplaySet,#MaterialName20=Mesa Grain  1.55,         Material 20 Name
+,DisplaySet,#DetailedMaterialCostFactor20=1.55,1.20  #MaterialName20 Cost Factor
+,,**
+,DisplaySet,#MaterialName21=Nutmeg Cherry Grain  1.55,         Material 21 Name
+,DisplaySet,#DetailedMaterialCostFactor21=1.55,1.21  #MaterialName21 Cost Factor
+,,**
+,DisplaySet,#MaterialName22=Smoke Grain  1.55,         Material 22 Name
+,DisplaySet,#DetailedMaterialCostFactor22=1.55,1.22  #MaterialName22 Cost Factor
+,,**
+,DisplaySet,#MaterialName23=Summer Flame Grain  1.55,         Material 23 Name
+,DisplaySet,#DetailedMaterialCostFactor23=1.55,1.23  #MaterialName23 Cost Factor
+,,**
+,DisplaySet,#MaterialName24=Wild Cherry Grain  1.55,         Material 24 Name
+,DisplaySet,#DetailedMaterialCostFactor24=1.55,1.24  #MaterialName24 Cost Factor
+,,**
+,DisplaySet,#MaterialName25=White Texture Grain  1.55,         Material 25 Name
+,DisplaySet,#DetailedMaterialCostFactor25=1.55,1.25  #MaterialName25 Cost Factor
+,,**
+,DisplaySet,#MaterialName26=Black Diamond Texture  1.8,         Material 26 Name
+,DisplaySet,#DetailedMaterialCostFactor26=1.8,1.26  #MaterialName26 Cost Factor
+,,**
+,DisplaySet,#MaterialName27=African Limba Grain  1.8,         Material 27 Name
+,DisplaySet,#DetailedMaterialCostFactor27=1.8,1.27  #MaterialName27 Cost Factor
+,,**
+,DisplaySet,#MaterialName28=Bamboo Grain  1.8,         Material 28 Name
+,DisplaySet,#DetailedMaterialCostFactor28=1.8,1.28  #MaterialName28 Cost Factor
+,,**
+,DisplaySet,#MaterialName29=Evening Shade Grain  1.8,         Material 29 Name
+,DisplaySet,#DetailedMaterialCostFactor29=1.8,1.29  #MaterialName29 Cost Factor
+,,**
+,DisplaySet,#MaterialName30=Gray Diamond Plate  1.8,         Material 30 Name
+,DisplaySet,#DetailedMaterialCostFactor30=1.8,1.30  #MaterialName30 Cost Factor
+,,**
+,DisplaySet,#MaterialName31=Gray Strie Grain  1.8,         Material 31 Name
+,DisplaySet,#DetailedMaterialCostFactor31=1.8,1.31  #MaterialName31 Cost Factor
+,,**
+,DisplaySet,#MaterialName32=Carmel Strie Grain  1.8,         Material 32 Name
+,DisplaySet,#DetailedMaterialCostFactor32=1.8,1.32  #MaterialName32 Cost Factor
+,,**
+,DisplaySet,#MaterialName33=Natural Strie Grain  1.8,         Material 33 Name
+,DisplaySet,#DetailedMaterialCostFactor33=1.8,1.33  #MaterialName33 Cost Factor
+,,**
+,DisplaySet,#MaterialName34=Gray Linen  1.8,         Material 34 Name
+,DisplaySet,#DetailedMaterialCostFactor34=1.8,1.34  #MaterialName34 Cost Factor
+,,**
+,DisplaySet,#MaterialName35=Ecru Linen  1.8,         Material 35 Name
+,DisplaySet,#DetailedMaterialCostFactor35=1.8,1.35  #MaterialName35 Cost Factor
+,,**
+,DisplaySet,#MaterialName36=Senoma Grain  1.8 ,         Material 36 Name
+,DisplaySet,#DetailedMaterialCostFactor36=1.8,1.36  #MaterialName36 Cost Factor
+,,**
+,DisplaySet,#MaterialName37=Tempest Grain  1.8,         Material 37 Name
+,DisplaySet,#DetailedMaterialCostFactor37=1.8,1.37  #MaterialName37 Cost Factor
+,,**
+,DisplaySet,#MaterialName38=Byantine Texture Grain  1.8,         Material 38 Name
+,DisplaySet,#DetailedMaterialCostFactor38=1.8,1.38  #MaterialName38 Cost Factor
+,,**
+,DisplaySet,#MaterialName39=Rustic Gray Texture Grain  1.8,         Material 39 Name
+,DisplaySet,#DetailedMaterialCostFactor39=1.8,1.39  #MaterialName39 Cost Factor
+,,**
+,DisplaySet,#MaterialName40=Bistro Walnut Grain  1.8,         Material 40 Name
+,DisplaySet,#DetailedMaterialCostFactor40=1.8,1.40  #MaterialName40 Cost Factor
+,,**
+,DisplaySet,#MaterialName41=Antique Rain Heavy Texture Grain  3.5,         Material 41 Name
+,DisplaySet,#DetailedMaterialCostFactor41=3.5,1.41  #MaterialName41 Cost Factor
+,,**
+,DisplaySet,#MaterialName42=Black Artika Heavy Texture Grain  3.5,         Material 42 Name
+,DisplaySet,#DetailedMaterialCostFactor42=3.5,1.42  #MaterialName42 Cost Factor
+,,**
+,DisplaySet,#MaterialName43=Ebony Artika Heavy Texture Grain  3.5,         Material 43 Name
+,DisplaySet,#DetailedMaterialCostFactor43=3.5,1.43  #MaterialName43 Cost Factor
+,,**
+,DisplaySet,#MaterialName44=Palomino Walnut Heavy Texture Grain  3.5,         Material 44 Name
+,DisplaySet,#DetailedMaterialCostFactor44=3.5,1.44  #MaterialName44 Cost Factor
+,,**
+,DisplaySet,#MaterialName45=Oregon Pine Heavy Texture Grain  3.5,         Material 45 Name
+,DisplaySet,#DetailedMaterialCostFactor45=3.5,1.45  #MaterialName45 Cost Factor
+,,**
+,DisplaySet,#MaterialName46=Black Rain Heavy Texture Grain  3.5,         Material 46 Name
+,DisplaySet,#DetailedMaterialCostFactor46=3.5,1.46  #MaterialName46 Cost Factor
+,,**
+,DisplaySet,#MaterialName47=Bamboo Heavy Texture Grain  3.5,         Material 47 Name
+,DisplaySet,#DetailedMaterialCostFactor47=3.5,1.47  #MaterialName45 Cost Factor
+,,**
+,DisplaySet,#MaterialName48=White Zebra Heavy Texture Grain  3.5,         Material 48 Name
+,DisplaySet,#DetailedMaterialCostFactor48=3.50,1.48  #MaterialName48 Cost Factor
+,,**
+,DisplaySet,#MaterialName49=Extra,         Material 49 Name
+,DisplaySet,#DetailedMaterialCostFactor49=0,1.49  #MaterialName49 Cost Factor
+,,**
+,DisplaySet,#MaterialName50=Extra,         Material 50 Name
+,DisplaySet,#DetailedMaterialCostFactor50=0,1.50  #MaterialName50 Cost Factor
+,,**
+,DisplaySet,#MaterialName51=Extra,         Material 51 Name
+,DisplaySet,#DetailedMaterialCostFactor51=0,1.51  #MaterialName51 Cost Factor
+,,**
+,DisplaySet,#MaterialName52=Extra,         Material 52 Name
+,DisplaySet,#DetailedMaterialCostFactor52=0,1.52  #MaterialName52 Cost Factor
+,,**
+,DisplaySet,#MaterialName53=Extra,         Material 53 Name
+,DisplaySet,#DetailedMaterialCostFactor53=0,1.53  #MaterialName53 Cost Factor
+,,**
+,DisplaySet,#MaterialName54=Extra,         Material 54 Name
+,DisplaySet,#DetailedMaterialCostFactor54=0,1.54  #MaterialName54 Cost Factor
+,,**
+,DisplaySet,#MaterialName55=Extra,         Material 55 Name
+,DisplaySet,#DetailedMaterialCostFactor55=0,1.55  #MaterialName55 Cost Factor
+,,**
+,DisplaySet,#MaterialName56=Extra,         Material 56 Name
+,DisplaySet,#DetailedMaterialCostFactor56=0,1.56  #MaterialName56 Cost Factor
+,,**
+,DisplaySet,#MaterialName57=Extra,         Material 57 Name
+,DisplaySet,#DetailedMaterialCostFactor57=0,1.57  #MaterialName57 Cost Factor
+,,**
+,DisplaySet,#MaterialName58=Extra,         Material 58 Name
+,DisplaySet,#DetailedMaterialCostFactor58=0,1.58  #MaterialName58 Cost Factor
+,,**
+,DisplaySet,#MaterialName59=Extra ,         Material 59 Name
+,DisplaySet,#DetailedMaterialCostFactor59=0,1.59  #MaterialName59 Cost Factor
+,,**
+,DisplaySet,#MaterialName60=Extra,         Material 60 Name
+,DisplaySet,#DetailedMaterialCostFactor60=0,1.60  #MaterialName60 Cost Factor
+,,**
+,DisplaySet,#MaterialName61=Extra,         Material 61 Name
+,DisplaySet,#DetailedMaterialCostFactor61=0,1.61  #MaterialName61 Cost Factor
+,,**
+,DisplaySet,#MaterialName62=Extra,         Material 62 Name
+,DisplaySet,#DetailedMaterialCostFactor62=0,1.62  #MaterialName62 Cost Factor
+,,**
+,DisplaySet,#MaterialName63=Extra,         Material 63 Name
+,DisplaySet,#DetailedMaterialCostFactor63=0,1.63  #MaterialName63 Cost Factor
+,,**
+,DisplaySet,#MaterialName64=Extra,         Material 64 Name
+,DisplaySet,#DetailedMaterialCostFactor64=0,1.64  #MaterialName64 Cost Factor
+,,**
+,DisplaySet,#MaterialName65=Extra,         Material 65 Name
+,DisplaySet,#DetailedMaterialCostFactor65=0,1.65  #MaterialName65 Cost Factor
+,,**
+,DisplaySet,#MaterialName66=Extra,         Material 66 Name
+,DisplaySet,#DetailedMaterialCostFactor66=0,1.66  #MaterialName66 Cost Factor
+,,**
+,DisplaySet,#MaterialName67=Extra,         Material 67 Name
+,DisplaySet,#DetailedMaterialCostFactor67=0,1.67  #MaterialName67 Cost Factor
+,,**
+,DisplaySet,#MaterialName68=Extra,         Material 68 Name
+,DisplaySet,#DetailedMaterialCostFactor68=0,1.68  #MaterialName68 Cost Factor
+,,**
+,DisplaySet,#MaterialName69=Extra,         Material 69 Name
+,DisplaySet,#DetailedMaterialCostFactor69=0,1.69  #MaterialName69 Cost Factor
+,,**
+,DisplaySet,#MaterialName70=Extra,         Material 70 Name
+,DisplaySet,#DetailedMaterialCostFactor70=0,1.70  #MaterialName70 Cost Factor
+,,**
+,DisplaySet,#MaterialName71=Extra,         Material 71 Name
+,DisplaySet,#DetailedMaterialCostFactor71=0,1.71  #MaterialName71 Cost Factor
+,,**
+,DisplaySet,#MaterialName72=Extra,         Material 72 Name
+,DisplaySet,#DetailedMaterialCostFactor672=0,1.72  #MaterialName72 Cost Factor
+,,**
+,DisplaySet,#MaterialName73=Extra,         Material 73 Name
+,DisplaySet,#DetailedMaterialCostFactor73=0,1.73  #MaterialName73 Cost Factor
+,,**
+,DisplaySet,#MaterialName74=Extra,         Material 74 Name
+,DisplaySet,#DetailedMaterialCostFactor74=0,1.74  #MaterialName74 Cost Factor
+,,**
+,DisplaySet,#MaterialName75=Extra,         Material 75 Name
+,DisplaySet,#DetailedMaterialCostFactor75=0,1.75  #MaterialName75 Cost Factor
+,,**
+,DisplaySet,#MaterialName76=Extra,         Material 76 Name
+,DisplaySet,#DetailedMaterialCostFactor76=0,1.76  #MaterialName76 Cost Factor
+,,**
+,DisplaySet,#MaterialName77=Extra,         Material 77 Name
+,DisplaySet,#DetailedMaterialCostFactor77=0,1.77  #MaterialName77 Cost Factor
+,,**
+,DisplaySet,#MaterialName78=Extra,         Material 78 Name
+,DisplaySet,#DetailedMaterialCostFactor78=0,1.78  #MaterialName78 Cost Factor
+,,**
+,DisplaySet,#MaterialName79=Extra,         Material 79 Name
+,DisplaySet,#DetailedMaterialCostFactor79=0,1.79  #MaterialName79 Cost Factor
+,,**
+,DisplaySet,#MaterialName80=Extra,         Material 80 Name
+,DisplaySet,#DetailedMaterialCostFactor80=0,1.80  #MaterialName80 Cost Factor
+,,**
+,DisplaySet,#MaterialName81=Extra,         Material 81 Name
+,DisplaySet,#DetailedMaterialCostFactor81=0,1.81  #MaterialName81 Cost Factor
+,,**
+,DisplaySet,#MaterialName82=Extra,         Material 82 Name
+,DisplaySet,#DetailedMaterialCostFactor82=0,1.82  #MaterialName82 Cost Factor
+,,**
+,DisplaySet,#MaterialName83=Extra,         Material 83 Name
+,DisplaySet,#DetailedMaterialCostFactor83=0,1.83  #MaterialName83 Cost Factor
+,,**
+,DisplaySet,#MaterialName84=Extra,         Material 84 Name
+,DisplaySet,#DetailedMaterialCostFactor84=0,1.84  #MaterialName84 Cost Factor
+,,**
+,DisplaySet,#MaterialName85=Extra,         Material 85 Name
+,DisplaySet,#DetailedMaterialCostFactor85=0,1.85  #MaterialName85 Cost Factor
+,,**
+,DisplaySet,#MaterialName86=Extra,         Material 86 Name
+,DisplaySet,#DetailedMaterialCostFactor86=0,1.86  #MaterialName86 Cost Factor
+,,**
+,DisplaySet,#MaterialName87=Extra,         Material 87 Name
+,DisplaySet,#DetailedMaterialCostFactor87=0,1.87  #MaterialName87 Cost Factor
+,,**
+,DisplaySet,#MaterialName88=Extra,         Material 88 Name
+,DisplaySet,#DetailedMaterialCostFactor88=0,1.88  #MaterialName88 Cost Factor
+,,**
+,DisplaySet,#MaterialName89=Extra,         Material 89 Name
+,DisplaySet,#DetailedMaterialCostFactor89=0,1.89  #MaterialName89 Cost Factor
+,,**
+,DisplaySet,#MaterialName90=Extra,         Material 90 Name
+,DisplaySet,#DetailedMaterialCostFactor60=0,1.90  #MaterialName60 Cost Factor
+,,**
+,DisplaySet,#MaterialName90=Extra,         Material 90 Name
+,DisplaySet,#DetailedMaterialCostFactor90=0,1.91  #MaterialName90 Cost Factor
+,,**
+,DisplaySet,#MaterialName91=Extra,         Material 91 Name
+,DisplaySet,#DetailedMaterialCostFactor91=0,1.92  #MaterialName91 Cost Factor
+,,**
+,DisplaySet,#MaterialName92=Extra,         Material 92 Name
+,DisplaySet,#DetailedMaterialCostFactor92=0,1.93  #MaterialName92 Cost Factor
+,,**
+,DisplaySet,#MaterialName93=Extra,         Material 93 Name
+,DisplaySet,#DetailedMaterialCostFactor93=0,1.94  #MaterialName93 Cost Factor
+,,**
+,DisplaySet,#MaterialName94=Extra,         Material 94 Name
+,DisplaySet,#DetailedMaterialCostFactor94=0,1.95  #MaterialName94 Cost Factor
+,,**
+,DisplaySet,#MaterialName95=Extra,         Material 95 Name
+,DisplaySet,#DetailedMaterialCostFactor95=0,1.95  #MaterialName95 Cost Factor
+,,**
+,DisplaySet,#MaterialName96=Extra,         Material 96 Name
+,DisplaySet,#DetailedMaterialCostFactor96=0,1.96  #MaterialName96 Cost Factor
+,,**
+,DisplaySet,#MaterialName97=Extra,         Material 97 Name
+,DisplaySet,#DetailedMaterialCostFactor97=0,1.97  #MaterialName97 Cost Factor
+,,**
+,DisplaySet,#MaterialName98=Extra,         Material 98 Name
+,DisplaySet,#DetailedMaterialCostFactor98=0,1.98  #MaterialName98 Cost Factor
+,,**
+,DisplaySet,#MaterialName99=Extra,         Material 99 Name
+,DisplaySet,#DetailedMaterialCostFactor99=0,1.99  #MaterialName99 Cost Factor
+,,**
+,DisplaySet,#MaterialName100=Extra,         Material 100 Name
+,DisplaySet,#DetailedMaterialCostFactor100=0,1.100  #MaterialName100 Cost Factor
+
+
+,**
+,**  SECTION 2 Door and Drawer Front Setup ( Set in QUICK LOAD under D-DOOR COST.PCB bottom right corner of your screen )
+,**
+
+,**  SECTION 3 Edge Banding
+,**
+DisplaySet,#edgebyfoot=No, Do you price your edges by the foot? [Yes;No]
+
+DisplaySet,#EdgeBandingType1=,         Edge Band 1 Name
+DisplaySet,#EdgeBandingTypeCost1=0,3.1         #EdgeBandingType1 1 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType2=,         Edge Band 2 Name
+DisplaySet,#EdgeBandingTypeCost2=0,3.2         #EdgeBandingType2 2 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType3=,         Edge Band 3 Name
+DisplaySet,#EdgeBandingTypeCost3=,3.3         #EdgeBandingType3 3 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType4=,         Edge Band 4 Name
+DisplaySet,#EdgeBandingTypeCost4=,3.4         #EdgeBandingType4 4 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType5=Almond .5 mm,         Edge Band 5 Name
+DisplaySet,#EdgeBandingTypeCost5=.05,3.5         #EdgeBandingType5 5 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType6=Celadon 1 mm,         Edge Band 6 Name
+DisplaySet,#EdgeBandingTypeCost6=.1,3.6         #EdgeBandingType6 6 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType7=Mysterious 1 mm,         Edge Band 7 Name
+DisplaySet,#EdgeBandingTypeCost7=.1,3.7         #EdgeBandingType7 7 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType8=Wheat Tabby 1 mm,         Edge Band 8 Name
+DisplaySet,#EdgeBandingTypeCost8=.1,3.8         #EdgeBandingType8 8 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType9=Blackwood 1 mm,         Edge Band 9 Name
+DisplaySet,#EdgeBandingTypeCost9=.1,3.9         #EdgeBandingType9 9 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType10=Bohemian Blanco 1 mm,         Edge Band 10 Name
+DisplaySet,#EdgeBandingTypeCost10=.1,3.10         #EdgeBandingType10 10 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType11=Apple Cocoa .5 mm,         Edge Band 11 Name
+DisplaySet,#EdgeBandingTypeCost11=.05,3.11         #EdgeBandingType11 11 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType12=Wood .5 mm,         Edge Band 12 Name
+DisplaySet,#EdgeBandingTypeCost12=0,3.12         #EdgeBandingType12 12 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType13=Wood on Mela .5 mm,         Edge Band 13 Name
+DisplaySet,#EdgeBandingTypeCost13=.20,3.13         #EdgeBandingType13 13 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType14=Willow 1 mm,         Edge Band 14 Name
+DisplaySet,#EdgeBandingTypeCost14=.1,3.14         #EdgeBandingType14 14 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType15=,         Edge Band 15 Name
+DisplaySet,#EdgeBandingTypeCost15=,3.15         #EdgeBandingType15 15 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType16=,         Edge Band 16 Name
+DisplaySet,#EdgeBandingTypeCost16=,3.16         #EdgeBandingType16 16 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType17=Bisque 1 mm,         Edge Band 17 Name
+DisplaySet,#EdgeBandingTypeCost17=.1,3.17         #EdgeBandingType17 17 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType18=,         Edge Band 18 Name
+DisplaySet,#EdgeBandingTypeCost18=,3.18         #EdgeBandingType18 18 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType19=Black 1 mm,         Edge Band 19 Name
+DisplaySet,#EdgeBandingTypeCost19=.1,3.19         #EdgeBandingType19 19 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType20=,         Edge Band 20 Name
+DisplaySet,#EdgeBandingTypeCost20=,3.20         #EdgeBandingType20 20 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType21=Avondale Ash 1 mm,         Edge Band 21 Name
+DisplaySet,#EdgeBandingTypeCost21=.1,3.21         #EdgeBandingType21 21 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType22=Cemento 1 mm,         Edge Band 22 Name
+DisplaySet,#EdgeBandingTypeCost22=.1,3.22         #EdgeBandingType22 22 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType23=Belair 1 mm,         Edge Band 23 Name
+DisplaySet,#EdgeBandingTypeCost23=.1,3.23         #EdgeBandingType23 23 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType24=Blanca Elme .5 mm,         Edge Band 24 Name
+DisplaySet,#EdgeBandingTypeCost24=.05,3.24         #EdgeBandingType24 24 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType25=Daintree 1 mm,         Edge Band 25 Name
+DisplaySet,#EdgeBandingTypeCost25=.1,3.25         #EdgeBandingType25 25 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType26=Mineral Grey 1 mm,         Edge Band 26 Name
+DisplaySet,#EdgeBandingTypeCost26=.1,3.26         #EdgeBandingType26 26 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType27=Nogal Slow 1 mm,         Edge Band 27 Name
+DisplaySet,#EdgeBandingTypeCost27=.1,3.27         #EdgeBandingType27 27 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType28=Campania Elme .5 mm,         Edge Band 28 Name
+DisplaySet,#EdgeBandingTypeCost28=.05,3.28         #EdgeBandingType28 28 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType29=Dering Forest 1 mm,         Edge Band 29 Name
+DisplaySet,#EdgeBandingTypeCost29=.1,3.29         #EdgeBandingType29 29 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType30=unused,         Edge Band 30 Name
+DisplaySet,#EdgeBandingTypeCost30=,3.30         #EdgeBandingType30 30 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType31=Fawn Cypress 1 mm,         Edge Band 31 Name
+DisplaySet,#EdgeBandingTypeCost31=.1,3.31         #EdgeBandingType31 31 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType32=Fairchild 1 mm,         Edge Band 32 Name
+DisplaySet,#EdgeBandingTypeCost32=.1,3.32         #EdgeBandingType32 32 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType33=unused,         Edge Band 33 Name
+DisplaySet,#EdgeBandingTypeCost33=,3.33         #EdgeBandingType33 33 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType34=High Line 1 mm,         Edge Band 34 Name
+DisplaySet,#EdgeBandingTypeCost34=.1,3.34         #EdgeBandingType34 34 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType35=Monteverdi 1 mm,         Edge Band 35 Name
+DisplaySet,#EdgeBandingTypeCost35=.1,3.35         #EdgeBandingType35 35 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType36=,         Edge Band 36 Name
+DisplaySet,#EdgeBandingTypeCost36=,3.36         #EdgeBandingType36 36 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType37=Neo Walnut 1 mm,         Edge Band 37 Name
+DisplaySet,#EdgeBandingTypeCost37=.1,3.37         #EdgeBandingType37 37 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType38=Phantom Charcoal 1 mm,         Edge Band 38 Name
+DisplaySet,#EdgeBandingTypeCost38=.1,3.38         #EdgeBandingType38 38 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType39=Randolph Forest 1 mm,         Edge Band 39 Name
+DisplaySet,#EdgeBandingTypeCost39=.1,3.39         #EdgeBandingType39 39 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType40=unused,         Edge Band 40 Name
+DisplaySet,#EdgeBandingTypeCost40=,3.40         #EdgeBandingType40 40 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType41=Veranda Teak 1 mm,         Edge Band 41 Name
+DisplaySet,#EdgeBandingTypeCost41=.1,3.41         #EdgeBandingType41 41 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType42=White Cypress 1 mm,         Edge Band 42 Name
+DisplaySet,#EdgeBandingTypeCost42=.1,3.42         #EdgeBandingType42 42 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType43=Designer White 1 mm,         Edge Band 43 Name
+DisplaySet,#EdgeBandingTypeCost43=.1,3.43         #EdgeBandingType43 43 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType44=,         Edge Band 44 Name
+DisplaySet,#EdgeBandingTypeCost44=,3.44         #EdgeBandingType44 44 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType45=Amalfi Noce GL 1 mm,         Edge Band 45 Name
+DisplaySet,#EdgeBandingTypeCost45=.12,3.45         #EdgeBandingType45 45 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType46=Solar White GL 1 mm,         Edge Band 46 Name
+DisplaySet,#EdgeBandingTypeCost46=.12,3.46         #EdgeBandingType46 46 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType47=unused,         Edge Band 47 Name
+DisplaySet,#EdgeBandingTypeCost47=,3.47         #EdgeBandingType47 47 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType48=unused,         Edge Band 48 Name
+DisplaySet,#EdgeBandingTypeCost48=,3.48         #EdgeBandingType48 48 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType49=unused,         Edge Band 49 Name
+DisplaySet,#EdgeBandingTypeCost49=,3.49         #EdgeBandingType49 49 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType50=Silver Met GL 1 mm,         Edge Band 50 Name
+DisplaySet,#EdgeBandingTypeCost50=.1,3.50         #EdgeBandingType50 50 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType51=Red Ultra GL 1 mm,         Edge Band 51 Name
+DisplaySet,#EdgeBandingTypeCost51=.1,3.51         #EdgeBandingType51 51 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType52=,         Edge Band 52 Name
+DisplaySet,#EdgeBandingTypeCost52=,3.52         #EdgeBandingType52 52 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType53=,         Edge Band 53 Name
+DisplaySet,#EdgeBandingTypeCost53=,3.53         #EdgeBandingType53 53 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType54=Twilight Pearl GL 1 mm,         Edge Band 54 Name
+DisplaySet,#EdgeBandingTypeCost54=.1,3.54         #EdgeBandingType54 54 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType55=Espiga Pimienta 1 mm,         Edge Band 55 Name
+DisplaySet,#EdgeBandingTypeCost55=.1,3.55         #EdgeBandingType55 55 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType56=Espiga Sal 1 mm,         Edge Band 56 Name
+DisplaySet,#EdgeBandingTypeCost56=.1,3.56         #EdgeBandingType56 56 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType57=Espresso .5 mm,         Edge Band 57 Name
+DisplaySet,#EdgeBandingTypeCost57=.05,3.57         #EdgeBandingType57 57 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType58=,         Edge Band 58 Name
+DisplaySet,#EdgeBandingTypeCost58=,3.58         #EdgeBandingType58 58 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType59=Fashion Grey 1 mm,         Edge Band 59 Name
+DisplaySet,#EdgeBandingTypeCost59=.1,3.59         #EdgeBandingType59 59 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType60=Fog Grey 1 mm,         Edge Band 60 Name
+DisplaySet,#EdgeBandingTypeCost60=.1,3.60         #EdgeBandingType60 60 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType61=,         Edge Band 61 Name
+DisplaySet,#EdgeBandingTypeCost61=,3.61         #EdgeBandingType61 61 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType62=Folkstone Grey 1 mm,         Edge Band 62 Name
+DisplaySet,#EdgeBandingTypeCost62=.1,3.62         #EdgeBandingType62 62 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType63=,         Edge Band 63 Name
+DisplaySet,#EdgeBandingTypeCost63=,3.63         #EdgeBandingType63 63 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType64=Fossil Shale 1 mm,         Edge Band 64 Name
+DisplaySet,#EdgeBandingTypeCost64=.1,3.64         #EdgeBandingType64 64 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType65=Fresno Glacial 1 mm,         Edge Band 65 Name
+DisplaySet,#EdgeBandingTypeCost65=.1,3.65         #EdgeBandingType65 65 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType66=Friston Ash 1 mm,         Edge Band 66 Name
+DisplaySet,#EdgeBandingTypeCost66=.1,3.66         #EdgeBandingType66 66 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType67=Fusion Maple .5 mm,         Edge Band 67 Name
+DisplaySet,#EdgeBandingTypeCost67=.05,3.67         #EdgeBandingType67 67 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType68=,         Edge Band 68 Name
+DisplaySet,#EdgeBandingTypeCost68=,3.68         #EdgeBandingType68 68 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType69=unused,         Edge Band 69 Name
+DisplaySet,#EdgeBandingTypeCost69=,3.69         #EdgeBandingType69 69 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType70=,         Edge Band 70 Name
+DisplaySet,#EdgeBandingTypeCost70=,3.70         #EdgeBandingType70 70 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType71=Roble Denver 1 mm,         Edge Band 71 Name
+DisplaySet,#EdgeBandingTypeCost71=.1,3.71         #EdgeBandingType71 71 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType72=Roble Eternity 1 mm,         Edge Band 72 Name
+DisplaySet,#EdgeBandingTypeCost72=.1,3.72         #EdgeBandingType72 72 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType73=unused,         Edge Band 73 Name
+DisplaySet,#EdgeBandingTypeCost73=,3.73         #EdgeBandingType73 73 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType74=Gris Coco 1 mm,         Edge Band 74 Name
+DisplaySet,#EdgeBandingTypeCost74=.1,3.74         #EdgeBandingType74 74 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType75=,         Edge Band 75 Name
+DisplaySet,#EdgeBandingTypeCost75=,3.75         #EdgeBandingType75 75 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType76=,         Edge Band 76 Name
+DisplaySet,#EdgeBandingTypeCost76=,3.76         #EdgeBandingType76 76 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType77=,         Edge Band 77 Name
+DisplaySet,#EdgeBandingTypeCost77=,3.77         #EdgeBandingType77 77 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType78=Holly Berry 1 mm,         Edge Band 78 Name
+DisplaySet,#EdgeBandingTypeCost78=.1,3.78         #EdgeBandingType78 78 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType79=Hudson Cherry .5 mm,         Edge Band 79 Name
+DisplaySet,#EdgeBandingTypeCost79=.05,3.79         #EdgeBandingType79 79 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType80=,         Edge Band 80 Name
+DisplaySet,#EdgeBandingTypeCost80=,3.80         #EdgeBandingType80 80 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType81=,         Edge Band 81 Name
+DisplaySet,#EdgeBandingTypeCost81=,3.81         #EdgeBandingType81 81 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType82=Lapis Blue 1 mm,         Edge Band 82 Name
+DisplaySet,#EdgeBandingTypeCost82=.1,3.82         #EdgeBandingType82 82 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType83=,         Edge Band 83 Name
+DisplaySet,#EdgeBandingTypeCost83=,3.83         #EdgeBandingType83 83 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType84=,         Edge Band 84 Name
+DisplaySet,#EdgeBandingTypeCost84=,3.84         #EdgeBandingType84 84 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType85=Lewis Cherry .5 mm,         Edge Band 85 Name
+DisplaySet,#EdgeBandingTypeCost85=.05,3.85         #EdgeBandingType85 85 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType86=,         Edge Band 86 Name
+DisplaySet,#EdgeBandingTypeCost86=,3.86         #EdgeBandingType86 86 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType87=,         Edge Band 87 Name
+DisplaySet,#EdgeBandingTypeCost87=,3.87         #EdgeBandingType87 87 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType88=,         Edge Band 88 Name
+DisplaySet,#EdgeBandingTypeCost88=,3.88         #EdgeBandingType88 88 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType89=Lino Cancun 1 mm,         Edge Band 89 Name
+DisplaySet,#EdgeBandingTypeCost89=.1,3.89         #EdgeBandingType89 89 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType90=Low Line 1 mm,         Edge Band 90 Name
+DisplaySet,#EdgeBandingTypeCost90=.1,3.90         #EdgeBandingType90 90 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType91=Marsielle 1 mm,         Edge Band 91 Name
+DisplaySet,#EdgeBandingTypeCost91=.12,3.91         #EdgeBandingType91 91 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType92=Milano 1 mm,         Edge Band 92 Name
+DisplaySet,#EdgeBandingTypeCost92=.1,3.92         #EdgeBandingType92 92 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType93=unused,         Edge Band 93 Name
+DisplaySet,#EdgeBandingTypeCost93=,3.93         #EdgeBandingType93 93 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType94=,         Edge Band 94 Name
+DisplaySet,#EdgeBandingTypeCost94=,3.94         #EdgeBandingType94 94 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType95=Monaco 1 mm,         Edge Band 95 Name
+DisplaySet,#EdgeBandingTypeCost95=.12,3.95         #EdgeBandingType95 95 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType96=Moscatto 1 mm,         Edge Band 96 Name
+DisplaySet,#EdgeBandingTypeCost96=.12,3.96         #EdgeBandingType96 96 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType97=Naples 1 mm,         Edge Band 97 Name
+DisplaySet,#EdgeBandingTypeCost97=.1,3.97         #EdgeBandingType97 97 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType98=Nina Maple .5 mm,         Edge Band 98 Name
+DisplaySet,#EdgeBandingTypeCost98=.05,3.98         #EdgeBandingType98 98 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType99=,         Edge Band 99 Name
+DisplaySet,#EdgeBandingTypeCost99=,3.99         #EdgeBandingType99 99 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType100=unused,         Edge Band 100 Name
+DisplaySet,#EdgeBandingTypeCost100=,3.100         #EdgeBandingType100 100 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType101=Roble Joplin 1 mm,         Edge Band 101 Name
+DisplaySet,#EdgeBandingTypeCost101=.1,3.101         #EdgeBandingType101 101 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType102=Pepper Dust 1 mm,         Edge Band 102 Name
+DisplaySet,#EdgeBandingTypeCost102=.1,3.102         #EdgeBandingType102 102 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType103=Phantom Ecru 1 mm,         Edge Band 103 Name
+DisplaySet,#EdgeBandingTypeCost103=.1,3.103         #EdgeBandingType103 103 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType104=Portico Teak 1 mm,         Edge Band 104 Name
+DisplaySet,#EdgeBandingTypeCost104=.1,3.104         #EdgeBandingType104 104 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType105=unused,         Edge Band 105 Name
+DisplaySet,#EdgeBandingTypeCost105=,3.105         #EdgeBandingType105 105 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType106=unused,         Edge Band 106 Name
+DisplaySet,#EdgeBandingTypeCost106=,3.106        #EdgeBandingType106 106 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType107=unused,         Edge Band 107 Name
+DisplaySet,#EdgeBandingTypeCost107=,3.107         #EdgeBandingType107 107 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType108=Roble Aurora 1 mm,         Edge Band 108 Name
+DisplaySet,#EdgeBandingTypeCost108=.1,3.108         #EdgeBandingType108 108 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType109=Roble Azabache 1 mm,         Edge Band 109 Name
+DisplaySet,#EdgeBandingTypeCost109=.1,3.109         #EdgeBandingType109 109 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType110=Roble Colorado 1 mm,         Edge Band 110 Name
+DisplaySet,#EdgeBandingTypeCost110=.1,3.110         #EdgeBandingType110 110 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType111=,         Edge Band 111 Name
+DisplaySet,#EdgeBandingTypeCost111=,3.111         #EdgeBandingType111 111 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType112=,         Edge Band 112 Name
+DisplaySet,#EdgeBandingTypeCost112=,3.112         #EdgeBandingType112 112 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType113=unused,         Edge Band 113 Name
+DisplaySet,#EdgeBandingTypeCost113=,3.113         #EdgeBandingType113 113 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType114=Roble Oasis 1 mm,         Edge Band 114 Name
+DisplaySet,#EdgeBandingTypeCost114=.1,3.114         #EdgeBandingType114 114 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType115=unused,         Edge Band 115 Name
+DisplaySet,#EdgeBandingTypeCost115=,3.115         #EdgeBandingType115 115 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType116=unused,         Edge Band 116 Name
+DisplaySet,#EdgeBandingTypeCost116=,3.116         #EdgeBandingType116 116 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType117=,         Edge Band 117 Name
+DisplaySet,#EdgeBandingTypeCost117=,3.117         #EdgeBandingType117 117 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType118=unused,         Edge Band 118 Name
+DisplaySet,#EdgeBandingTypeCost118=,3.118         #EdgeBandingType118 118 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType119=Black Ultra GL 1 mm,         Edge Band 119 Name
+DisplaySet,#EdgeBandingTypeCost119=.1,3.119         #EdgeBandingType119 119 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType120=Bright White GL 1 mm,         Edge Band 120 Name
+DisplaySet,#EdgeBandingTypeCost120=.1,3.120         #EdgeBandingType120 120 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType121=Outer Space GL 1 mm,         Edge Band 121 Name
+DisplaySet,#EdgeBandingTypeCost121=.1,3.121         #EdgeBandingType121 121 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType122=unused,         Edge Band 122 Name
+DisplaySet,#EdgeBandingTypeCost122=,3.122         #EdgeBandingType122 122 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType123=unused,         Edge Band 123 Name
+DisplaySet,#EdgeBandingTypeCost123=,3.123         #EdgeBandingType123 123 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType124=,         Edge Band 124 Name
+DisplaySet,#EdgeBandingTypeCost124=,3.124         #EdgeBandingType124 124 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType125=,         Edge Band 125 Name
+DisplaySet,#EdgeBandingTypeCost125=,3.125         #EdgeBandingType125 125 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType126=Tenino Grey 1 mm,         Edge Band 126 Name
+DisplaySet,#EdgeBandingTypeCost126=.12,3.126         #EdgeBandingType126 126 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType127=Tessuto 1 mm,         Edge Band 127 Name
+DisplaySet,#EdgeBandingTypeCost127=.1,3.127         #EdgeBandingType127 127 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType128=Roble Stella 1 mm,         Edge Band 128 Name
+DisplaySet,#EdgeBandingTypeCost128=.1,3.128         #EdgeBandingType128 128 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType129=Stainless 1 mm,         Edge Band 129 Name
+DisplaySet,#EdgeBandingTypeCost129=.1,3.129         #EdgeBandingType129 129 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType130=Valley Forge Elm 1 mm,         Edge Band 130 Name
+DisplaySet,#EdgeBandingTypeCost130=.1,3.130         #EdgeBandingType130 130 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType131=White .5 mm,         Edge Band 131 Name
+DisplaySet,#EdgeBandingTypeCost131=.05,3.131         #EdgeBandingType131 131 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType132=White River For 1 mm,         Edge Band 132 Name
+DisplaySet,#EdgeBandingTypeCost132=.1,3.132         #EdgeBandingType132 132 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType133=,         Edge Band 133 Name
+DisplaySet,#EdgeBandingTypeCost133=,3.133         #EdgeBandingType133 133 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType134=,         Edge Band 134 Name
+DisplaySet,#EdgeBandingTypeCost134=,3.134         #EdgeBandingType134 134 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType135=,         Edge Band 135 Name
+DisplaySet,#EdgeBandingTypeCost135=,3.135         #EdgeBandingType135 135 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType136=unused,         Edge Band 136 Name
+DisplaySet,#EdgeBandingTypeCost136=,3.136         #EdgeBandingType136 136 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType137=White Textured 1 mm,         Edge Band 137 Name
+DisplaySet,#EdgeBandingTypeCost137=.12,3.137         #EdgeBandingType137 137 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType138=unused,         Edge Band 138 Name
+DisplaySet,#EdgeBandingTypeCost138=,3.138         #EdgeBandingType138 138 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType139=Wild Apple .5 mm,         Edge Band 139 Name
+DisplaySet,#EdgeBandingTypeCost139=.05,3.139         #EdgeBandingType139 139 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType140=Old job 2 mm,         Edge Band 140 Name
+DisplaySet,#EdgeBandingTypeCost140=.1,3.140         #EdgeBandingType140 140 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType141=SO Material 1 mm,         Edge Band 141 Name
+DisplaySet,#EdgeBandingTypeCost141=.1,3.141         #EdgeBandingType141 141 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType142=SO Mica Made 1 mm,         Edge Band 142 Name
+DisplaySet,#EdgeBandingTypeCost142=.15,3.142         #EdgeBandingType142 142 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType143=,         Edge Band 143 Name
+DisplaySet,#EdgeBandingTypeCost143=,3.143         #EdgeBandingType143 143 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType144=unused,         Edge Band 144 Name
+DisplaySet,#EdgeBandingTypeCost144=,3.144         #EdgeBandingType144 144 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType145=unused,         Edge Band 145 Name
+DisplaySet,#EdgeBandingTypeCost145=,3.145         #EdgeBandingType145 145 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType146=,         Edge Band 146 Name
+DisplaySet,#EdgeBandingTypeCost146=,3.146         #EdgeBandingType146 146 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType147=SO Upgrade 1 mm,         Edge Band 147 Name
+DisplaySet,#EdgeBandingTypeCost147=.20,3.147         #EdgeBandingType147 147 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType148=,         Edge Band 148 Name
+DisplaySet,#EdgeBandingTypeCost148=,3.148         #EdgeBandingType148 148 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType149=,         Edge Band 149 Name
+DisplaySet,#EdgeBandingTypeCost149=,3.149         #EdgeBandingType149 149 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType150=,         Edge Band 150 Name
+DisplaySet,#EdgeBandingTypeCost150=,3.150         #EdgeBandingType150 150 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType151=,         Edge Band 151 Name
+DisplaySet,#EdgeBandingTypeCost151=,3.151         #EdgeBandingType151 151 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType152=White 1 mm,         Edge Band 152 Name
+DisplaySet,#EdgeBandingTypeCost152=.1,3.152         #EdgeBandingType152 152 Cost Factor added to Shelves and Sides
+
+DisplaySet,#EdgeBandingType153=,         Edge Band 153 Name
+DisplaySet,#EdgeBandingTypeCost153=,3.153         #EdgeBandingType153 153 Cost Factor added to Shelves and Sides
+
+
+,**
+,**  SECTION 4 Rod Cost
+,**
+,DisplaySet,#CostOfClosetPoleTemp =7.00 ,          1.5      Cost of Each Closet Pole per Lineal Foot
+,Set,#CostOfClosetPole = (#CostOfClosetPoleTemp/#LinealDivisor)
+DisplaySet,#StdClosetRodlength=39,    Length in INCHES for standard rod
+DisplaySet,#Oversizerodmultiplier=2,    Multiplier for Oversized rods (1 = no upcharge)
+
+,**   Closet Rod name and cost
+,DisplaySet,#ClosetRodType0=None,         Closet Rod 0 Name
+,DisplaySet,#ClosetRodTypeCost0=0,4.0         #ClosetRodType0 Cost
+,**
+DisplaySet,#ClosetRodType1=Oval Polished Chrome,         Closet Rod 1 Name
+DisplaySet,#ClosetRodTypeCost1=35,4.1         #ClosetRodType1 Cost
+,**
+DisplaySet,#ClosetRodType2=Oval Matte Aluminum,         Closet Rod 2 Name
+DisplaySet,#ClosetRodTypeCost2=35,4.2         #ClosetRodType2 Cost
+,**
+DisplaySet,#ClosetRodType3=Round Matte Brass,         Closet Rod 3 Name
+DisplaySet,#ClosetRodTypeCost3=60,4.3         #ClosetRodType3 Cost
+,**
+DisplaySet,#ClosetRodType4=Round Polished Chrome,         Closet Rod 4 Name
+DisplaySet,#ClosetRodTypeCost4=60,4.4         #ClosetRodType4 Cost
+,**
+DisplaySet,#ClosetRodType5=Round Matte Aluminum,         Closet Rod 5 Name
+DisplaySet,#ClosetRodTypeCost5=60,4.5         #ClosetRodType5 Cost
+,**
+DisplaySet,#ClosetRodType6=Syn Polished Chrome,         Closet Rod 6 Name
+DisplaySet,#ClosetRodTypeCost6=65,4.6         #ClosetRodType6 Cost
+,**
+DisplaySet,#ClosetRodType7=Syn Matte Aluminum,         Closet Rod 7 Name
+DisplaySet,#ClosetRodTypeCost7=65,4.7         #ClosetRodType7 Cost
+,**
+DisplaySet,#ClosetRodType8=Syn Matte Nickel,         Closet Rod 8 Name
+DisplaySet,#ClosetRodTypeCost8=65,4.8         #ClosetRodType8 Cost
+,**
+DisplaySet,#ClosetRodType9=Syn Matte Black,         Closet Rod 9 Name
+DisplaySet,#ClosetRodTypeCost9=65,4.9         #ClosetRodType9 Cost
+,**
+DisplaySet,#ClosetRodType10=Syn Matte Gold,         Closet Rod 10 Name
+DisplaySet,#ClosetRodTypeCost10=65,4.10         #ClosetRodType10 Cost
+,**
+DisplaySet,#ClosetRodType11=Syn Slate,         Closet Rod 11 Name
+DisplaySet,#ClosetRodTypeCost11=65,4.11         #ClosetRodType11 Cost
+,**
+DisplaySet,#ClosetRodType12=Square Polished Chrome,         Closet Rod 12 Name
+DisplaySet,#ClosetRodTypeCost12=65,4.12         #ClosetRodType12 Cost
+,**
+DisplaySet,#ClosetRodType13=Square Matte Aluminum,         Closet Rod 13 Name
+DisplaySet,#ClosetRodTypeCost13=65,4.13         #ClosetRodType13 Cost
+,**
+DisplaySet,#ClosetRodType14=Square Matte Nickel,         Closet Rod 14 Name
+DisplaySet,#ClosetRodTypeCost14=65,4.14         #ClosetRodType14 Cost
+,**
+DisplaySet,#ClosetRodType15=Square Matte Black,         Closet Rod 15 Name
+DisplaySet,#ClosetRodTypeCost15=65,4.15         #ClosetRodType15 Cost
+,**
+DisplaySet,#ClosetRodType16=Square Matte Gold,         Closet Rod 16 Name
+DisplaySet,#ClosetRodTypeCost16=65,4.16         #ClosetRodType16 Cost
+,**
+DisplaySet,#ClosetRodType17=Square Slate,         Closet Rod 17 Name
+DisplaySet,#ClosetRodTypeCost17=65,4.17         #ClosetRodType17 Cost
+,**
+DisplaySet,#ClosetRodType18=Undermount Polished Chrome,         Closet Rod 18 Name
+DisplaySet,#ClosetRodTypeCost18=85,4.18         #ClosetRodType18 Cost
+,**
+DisplaySet,#ClosetRodType19=Undermount Matte Aluminum,         Closet Rod 19 Name
+DisplaySet,#ClosetRodTypeCost19=85,4.19         #ClosetRodType19 Cost
+,**
+DisplaySet,#ClosetRodType20=Undermount Matte Nickel,         Closet Rod 20 Name
+DisplaySet,#ClosetRodTypeCost20=85,4.20         #ClosetRodType20 Cost
+,**
+DisplaySet,#ClosetRodType21=Undermount Matte Black,         Closet Rod 21 Name
+DisplaySet,#ClosetRodTypeCost21=85,4.21         #ClosetRodType21 Cost
+,**
+DisplaySet,#ClosetRodType22=Undermount Matte Gold,         Closet Rod 22 Name
+DisplaySet,#ClosetRodTypeCost22=85,4.22         #ClosetRodType22 Cost
+,**
+DisplaySet,#ClosetRodType23=Undermount Slate,         Closet Rod 23 Name
+DisplaySet,#ClosetRodTypeCost23=85,4.23         #ClosetRodType23 Cost
+,**
+DisplaySet,#ClosetRodType24=Round Matte Black,         Closet Rod 24 Name
+DisplaySet,#ClosetRodTypeCost24=60,4.24         #ClosetRodType24 Cost
+,**
+DisplaySet,#ClosetRodType25=Oval Matte Black,         Closet Rod 25 Name
+DisplaySet,#ClosetRodTypeCost25=35,4.25         #ClosetRodType25 Cost
+,**
+DisplaySet,#ClosetRodType26=Leather Pewter Polished Chrome,         Closet Rod 26 Name
+DisplaySet,#ClosetRodTypeCost26=105,4.26         #ClosetRodType26 Cost
+,**
+DisplaySet,#ClosetRodType27=Leather Pewter Matte Aluminum,         Closet Rod 27 Name
+DisplaySet,#ClosetRodTypeCost27=105,4.27         #ClosetRodType27 Cost
+,**
+DisplaySet,#ClosetRodType28=Leather Pewter Matte Nickel,         Closet Rod 28 Name
+DisplaySet,#ClosetRodTypeCost28=105,4.28         #ClosetRodType28 Cost
+,**
+DisplaySet,#ClosetRodType29=Leather Pewter Matte Black,         Closet Rod 29 Name
+DisplaySet,#ClosetRodTypeCost29=105,4.29         #ClosetRodType29 Cost
+,**
+DisplaySet,#ClosetRodType30=Leather Pewter Matte Gold,         Closet Rod 30 Name
+DisplaySet,#ClosetRodTypeCost30=105,4.30         #ClosetRodType30 Cost
+,**
+DisplaySet,#ClosetRodType31=Leather Pewter Slate,         Closet Rod 31 Name
+DisplaySet,#ClosetRodTypeCost31=105,4.31         #ClosetRodType31 Cost
+,**
+DisplaySet,#ClosetRodType32=Leather Winter Polished Chrome,         Closet Rod 32 Name
+DisplaySet,#ClosetRodTypeCost32=105,4.32        #ClosetRodType32 Cost
+,**
+DisplaySet,#ClosetRodType33=Leather Winter Matte Aluminum,         Closet Rod 33 Name
+DisplaySet,#ClosetRodTypeCost33=105,4.33         #ClosetRodType33 Cost
+,**
+DisplaySet,#ClosetRodType34=Leather Winter Matte Nickel,         Closet Rod 34 Name
+DisplaySet,#ClosetRodTypeCost34=105,4.34         #ClosetRodType34 Cost
+,**
+DisplaySet,#ClosetRodType35=Leather Winter Matte Black,         Closet Rod 35 Name
+DisplaySet,#ClosetRodTypeCost35=105,4.35         #ClosetRodType35 Cost
+,**
+DisplaySet,#ClosetRodType36=Leather Winter Matte Gold,         Closet Rod 36 Name
+DisplaySet,#ClosetRodTypeCost36=105,4.36         #ClosetRodType36 Cost
+,**
+DisplaySet,#ClosetRodType37=Leather Winter Slate,         Closet Rod 37 Name
+DisplaySet,#ClosetRodTypeCost37=105,4.37         #ClosetRodType37 Cost
+,**
+DisplaySet,#ClosetRodType38=Leather Oyster Polished Chrome,         Closet Rod 38 Name
+DisplaySet,#ClosetRodTypeCost38=105,4.38         #ClosetRodType38 Cost
+,**
+DisplaySet,#ClosetRodType39=Leather Oyster Matte Aluminum,         Closet Rod 39 Name
+DisplaySet,#ClosetRodTypeCost39=105,4.39         #ClosetRodType39 Cost
+,**
+DisplaySet,#ClosetRodType40=Leather Oyster Matte Nickel,         Closet Rod 40 Name
+DisplaySet,#ClosetRodTypeCost40=105,4.40         #ClosetRodType40 Cost
+,**
+DisplaySet,#ClosetRodType41=Leather Oyster Matte Black,         Closet Rod 41 Name
+DisplaySet,#ClosetRodTypeCost41=105,4.41         #ClosetRodType41 Cost
+,**
+DisplaySet,#ClosetRodType42=Leather Oyster Matte Gold,         Closet Rod 42 Name
+DisplaySet,#ClosetRodTypeCost42=105,4.42         #ClosetRodType42 Cost
+,**
+DisplaySet,#ClosetRodType43=Leather Oyster Slate,         Closet Rod 43 Name
+DisplaySet,#ClosetRodTypeCost43=105,4.43         #ClosetRodType43 Cost
+,**
+DisplaySet,#ClosetRodType44=,         Closet Rod 44 Name
+DisplaySet,#ClosetRodTypeCost44=,4.44         #ClosetRodType44 Cost
+,**
+DisplaySet,#ClosetRodType45=,         Closet Rod 45 Name
+DisplaySet,#ClosetRodTypeCost45=,4.45         #ClosetRodType45 Cost
+,**
+DisplaySet,#ClosetRodType46=,         Closet Rod 46 Name
+DisplaySet,#ClosetRodTypeCost46=,4.46         #ClosetRodType46 Cost
+,**
+DisplaySet,#ClosetRodType47=,         Closet Rod 47 Name
+DisplaySet,#ClosetRodTypeCost47=,4.47         #ClosetRodType47 Cost
+,**
+DisplaySet,#ClosetRodType48=,         Closet Rod 48 Name
+DisplaySet,#ClosetRodTypeCost48=,4.48         #ClosetRodType48 Cost
+,**
+DisplaySet,#ClosetRodType49=,         Closet Rod 49 Name
+DisplaySet,#ClosetRodTypeCost49=,4.49         #ClosetRodType49 Cost
+,**
+DisplaySet,#ClosetRodType50=,         Closet Rod 50 Name
+DisplaySet,#ClosetRodTypeCost50=,4.50         #ClosetRodType50 Cost
+,**
+DisplaySet,#ClosetRodType51=,         Closet Rod 51 Name
+DisplaySet,#ClosetRodTypeCost51=,4.51         #ClosetRodType51 Cost
+,**
+DisplaySet,#ClosetRodType52=,         Closet Rod 52 Name
+DisplaySet,#ClosetRodTypeCost52=,4.52         #ClosetRodType52 Cost
+,**
+DisplaySet,#ClosetRodType53=,         Closet Rod 53 Name
+DisplaySet,#ClosetRodTypeCost53=,4.53         #ClosetRodType53 Cost
+,**
+
+
+
+,**  SECTION 5 Base Cost
+
+,**V7.2.4
+
+Displayset, #alwayschargeforkick=Yes, 2.2 Do you charge for #Basetype0 when base molding is added? [Yes;No]
+Set,#CostOfKick =#BaseTypeCost0,          2.2a      Cost Formula for a standard Inset Kick per section
+
+DisplaySet,#IncludeMolding =1 ,         1=Yes 0=No Include Molding?
+displaySet,#moldingscale=8 foot,         How do you price the Base and Crown molding lengths? [Section;8 foot;inch;foot;metric]
+displaySET,#moldingfudge=0   ,         waste factor in dollars for molding
+displayset, #crownbaseslop=6,          Length added to molding for corner cuts SHould match setting in cut list
+DisplaySet,#SecMinSize=5,     Minimum Section Width before pricing
+Displayset, #SecMaxsize=37.5,   Maximum Section Width before pricing
+,***V7.2.4 end  Below change the word "section" for each base  and crown type to "#moldingscale"
+DisplaySet,#BaseType0=STD Toe Kick Match,5.0         Base Type 0 Name
+DisplaySet,#BaseTypeCost0=9*#MaterialCostGroup,5.0         #BaseType0 Cost per #moldingscale
+,**
+DisplaySet,#BaseType00=STD Toe Kick 2nd Material,5.00         Base Type 00 Name
+DisplaySet,#BaseTypeCost00=9*#ContrastMaterialCostGroup,5.00        #BaseType00 Cost per #moldingscale
+,**
+DisplaySet,#BaseType1=Melamine Match,5.1         Base Type 1 Name
+DisplaySet,#BaseTypeCost1=88*#MaterialCostGroup,5.1         #BaseType1 Cost per #moldingscale
+,**
+DisplaySet,#BaseType2=Melamine 2nd Material,5.2         Base Type 2 Name
+DisplaySet,#BaseTypeCost2=88*#ContrastMaterialCostGroup,5.2         #BaseType2 Cost per #moldingscale
+,**
+DisplaySet,#BaseType3=TH Decorative,5.3         Base Type 3 Name
+DisplaySet,#BaseTypeCost3=145,5.3         #BaseType3 Cost per #moldingscale
+,**
+DisplaySet,#BaseType4=N/A,5.4         Base Type 4 Name
+DisplaySet,#BaseTypeCost4=,5.4         #BaseType4 Cost per #moldingscale
+,**
+DisplaySet,#BaseType5=N/A,5.5         Base Type 5 Name
+DisplaySet,#BaseTypeCost5=,5.5         #BaseType5 Cost per #moldingscale
+,**
+DisplaySet,#BaseType6=TH Decorative Glazed,5.6         Base Type 6 Name
+DisplaySet,#BaseTypeCost6=195,5.6         #BaseType6 Cost per #moldingscale
+,**
+DisplaySet,#BaseType7=TH Square,5.7         Base Type 7 Name
+DisplaySet,#BaseTypeCost7=145,5.7         #BaseType7 Cost per #moldingscale
+,,**
+DisplaySet,#BaseType8=CF Base TH,5.8         Base Type 8 Name
+DisplaySet,#BaseTypeCost8=125,5.8         #BaseType8 Cost per #moldingscale
+,,**
+DisplaySet,#BaseType9=N/A,5.9         Base Type 9 Name
+DisplaySet,#BaseTypeCost9=,5.9         #BaseType9 Cost per #moldingscale
+,,**
+DisplaySet,#BaseType10=TH Profiled Edge,5.10         Base Type 10 Name
+DisplaySet,#BaseTypeCost10=145,5.10         #BaseType10 Cost per #moldingscale
+,,**
+DisplaySet,#BaseType11=N/A,5.11         Base Type 11 Name
+DisplaySet,#BaseTypeCost11=,5.11         #BaseType11 Cost per #moldingscale
+,,**
+DisplaySet,#BaseType12=N/A,5.12         Base Type 12 Name
+DisplaySet,#BaseTypeCost12=,5.12         #BaseType12 Cost per #moldingscale
+,,**
+DisplaySet,#BaseType13=Mica,5.13         Base Type 13 Name
+DisplaySet,#BaseTypeCost13=185,         #BaseType13 Cost per #moldingscale
+,,**
+DisplaySet,#BaseType14=Wood Decorative,5.14         Base Type 14 Name
+DisplaySet,#BaseTypeCost14=220,         #BaseType14 Cost per #moldingscale
+,,**
+DisplaySet,#BaseType15=Wood Decorative Glazed,5.15         Base Type 15 Name
+DisplaySet,#BaseTypeCost15=320,         #BaseType15 Cost per #moldingscale
+,,**
+DisplaySet,#BaseType16=Wood Square,5.16         Base Type 16 Name
+DisplaySet,#BaseTypeCost16=220,         #BaseType16 Cost per #moldingscale
+
+
+,**
+,**  SECTION 6 Crown Molding Cost
+,**
+
+,*  Include Molding Cost
+,*V7.2.4 this was move up to before base moldings
+,DisplaySet,#IncludeMolding =1 ,         1=Yes 0=No Include Molding?
+,Set,#moldingscale=foot,         How would you like to price out the molding? [8 foot;inch;foot;metric]
+,SET,#moldingfudge=0   ,         waste factor in dollars for molding
+,DisplaySet,#SecMinSize=5,     Minimum Section Width before pricing
+,Displayset, #SecMaxsize=36,   Maximum Section Width before pricing
+,**
+,*V7.2.4 
+DisplaySet,#CrownMoldingType0=None,         Crown Molding Type 0 Name
+DisplaySet,#CrownMoldingTypeCost0=0,6.0         #CrownMoldingType0 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType1=Melamine Match,         Crown Molding Type 1 Name
+DisplaySet,#CrownMoldingTypeCost1=88*#MaterialCostGroup,6.1         #CrownMoldingType1 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType2=Melamine Match To Ceiling,         Crown Molding Type 2 Name
+DisplaySet,#CrownMoldingTypeCost2=98*#MaterialCostGroup,6.2         #CrownMoldingType2 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType3=Melamine 2nd Material ,         Crown Molding Type 3 Name
+DisplaySet,#CrownMoldingTypeCost3=88*#ContrastMaterialCostGroup,6.3         #CrownMoldingType3 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType4=Melamine 2nd Material To Ceiling,         Crown Molding Type 4 Name
+DisplaySet,#CrownMoldingTypeCost4=98*#ContrastMaterialCostGroup,6.4         #CrownMoldingType4 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType5=TH Decorative,         Crown Molding Type 5 Name
+DisplaySet,#CrownMoldingTypeCost5=185,6.5         #CrownMoldingType5 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType6=N/A,         Crown Molding Type 6 Name
+DisplaySet,#CrownMoldingTypeCost6=,6.6         #CrownMoldingType6 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType7=N/A,         Crown Molding Type 7 Name
+DisplaySet,#CrownMoldingTypeCost7=,6.7         #CrownMoldingType7 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType8=N/A,         Crown Molding Type 8 Name
+DisplaySet,#CrownMoldingTypeCost8=,6.8         #CrownMoldingType8 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType9=N/A,         Crown Molding Type 9 Name
+DisplaySet,#CrownMoldingTypeCost9=,6.9         #CrownMoldingType9 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType10=N/A,         Crown Molding Type 10 Name
+DisplaySet,#CrownMoldingTypeCost10=,6.10         #CrownMoldingType10 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType11=TH Decorative Glazed,         Crown Molding Type 11 Name
+DisplaySet,#CrownMoldingTypeCost11=225,6.11         #CrownMoldingType11 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType12=N/A,         Crown Molding Type 12 Name
+DisplaySet,#CrownMoldingTypeCost12=,6.12         #CrownMoldingType12 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType13=TH Square,         Crown Molding Type 13 Name
+DisplaySet,#CrownMoldingTypeCost13=145,6.13         #CrownMoldingType13 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType14=N/A,         Crown Molding Type 14 Name
+DisplaySet,#CrownMoldingTypeCost14=,6.14         #CrownMoldingType14 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType15=N/A,         Crown Molding Type 15 Name
+DisplaySet,#CrownMoldingTypeCost15=,6.15         #CrownMoldingType15 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType16=N/A,         Crown Molding Type 16 Name
+DisplaySet,#CrownMoldingTypeCost16=,6.16         #CrownMoldingType16 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType17=N/A,         Crown Molding Type 17 Name
+DisplaySet,#CrownMoldingTypeCost17=,6.17         #CrownMoldingType17 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType18=N/A,         Crown Molding Type 18 Name
+DisplaySet,#CrownMoldingTypeCost18=,6.18         #CrownMoldingType18 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType19=TH Profiled Edge,         Crown Molding Type 19 Name
+DisplaySet,#CrownMoldingTypeCost19=145,6.19         #CrownMoldingType19 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType20=N/A,         Crown Molding Type 20 Name
+DisplaySet,#CrownMoldingTypeCost20=,6.20         #CrownMoldingType20 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType21=N/A,         Crown Molding Type 21 Name
+DisplaySet,#CrownMoldingTypeCost21=,6.21         #CrownMoldingType21 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType22=N/A,         Crown Molding Type 22 Name
+DisplaySet,#CrownMoldingTypeCost22=,6.22         #CrownMoldingType22 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType23=N/A,         Crown Molding Type 23 Name
+DisplaySet,#CrownMoldingTypeCost23=,6.23         #CrownMoldingType23 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType24=N/A,         Crown Molding Type 24 Name
+DisplaySet,#CrownMoldingTypeCost24=,6.24         #CrownMoldingType24 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType25=N/A,         Crown Molding Type 25 Name
+DisplaySet,#CrownMoldingTypeCost25=,6.25         #CrownMoldingType25 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType26=N/A,         Crown Molding Type 26 Name
+DisplaySet,#CrownMoldingTypeCost26=,6.26         #CrownMoldingType26 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType27=N/A,         Crown Molding Type 27 Name
+DisplaySet,#CrownMoldingTypeCost27=,6.27         #CrownMoldingType27 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType28=N/A,         Crown Molding Type 28 Name
+DisplaySet,#CrownMoldingTypeCost28=,6.28         #CrownMoldingType28 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType29=N/A,         Crown Molding Type 29 Name
+DisplaySet,#CrownMoldingTypeCost29=,6.29         #CrownMoldingType29 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType30=N/A,         Crown Molding Type 30 Name
+DisplaySet,#CrownMoldingTypeCost30=,6.30         #CrownMoldingType30 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType31=N/A,         Crown Molding Type 31 Name
+DisplaySet,#CrownMoldingTypeCost31=,6.31         #CrownMoldingType31 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType32=N/A,         Crown Molding Type 32 Name
+DisplaySet,#CrownMoldingTypeCost32=,6.32         #CrownMoldingType32 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType33=CF Crown TH,         Crown Molding Type 33 Name
+DisplaySet,#CrownMoldingTypeCost33=150,6.33         #CrownMoldingType33 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType34=N/A,         Crown Molding Type 34 Name
+DisplaySet,#CrownMoldingTypeCost34=,6.34        #CrownMoldingType34 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType35=N/A,         Crown Molding Type 35 Name
+DisplaySet,#CrownMoldingTypeCost35=,6.35         #CrownMoldingType35 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType36=N/A,         Crown Molding Type 36 Name
+DisplaySet,#CrownMoldingTypeCost36=,6.36         #CrownMoldingType36 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType37=N/A,         Crown Molding Type 37 Name
+DisplaySet,#CrownMoldingTypeCost37=,6.37         #CrownMoldingType37 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType38=N/A,         Crown Molding Type 38 Name
+DisplaySet,#CrownMoldingTypeCost38=,6.38         #CrownMoldingType38 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType39=Mica,         Crown Molding Type 39 Name
+DisplaySet,#CrownMoldingTypeCost39=185,6.39         #CrownMoldingType39 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType40=N/A,         Crown Molding Type 40 Name
+DisplaySet,#CrownMoldingTypeCost40=,6.40         #CrownMoldingType40 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType41=Wood Decorative CM514,         Crown Molding Type 41 Name
+DisplaySet,#CrownMoldingTypeCost41=250,6.41         #CrownMoldingType41 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType42=N/A,         Crown Molding Type 42 Name
+DisplaySet,#CrownMoldingTypeCost42=,6.42         #CrownMoldingType42 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType43=Wood Decorative Glazed CM514,         Crown Molding Type 43 Name
+DisplaySet,#CrownMoldingTypeCost43=350,6.43         #CrownMoldingType43 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType44=N/A,         Crown Molding Type 44 Name
+DisplaySet,#CrownMoldingTypeCost44=,6.44         #CrownMoldingType44 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType45=Wood Square,         Crown Molding Type 45 Name
+DisplaySet,#CrownMoldingTypeCost45=220,6.45         #CrownMoldingType45 Cost per #moldingscale
+,**
+
+DisplaySet,#CrownMoldingType46=N/A,         Crown Molding Type 46 Name
+DisplaySet,#CrownMoldingTypeCost46=,6.46         #CrownMoldingType46 Cost per #moldingscale
+,**
+
+
+
+,**  SECTION 7 Back Cost
+,**
+,Set,#BackType=#ExtraUnitText7
+,Update V7.2.7 start
+,** Closet Pieces backing pricing
+DisplaySet,#CostMirrorBackPerSqFt =54,7.0.0     Cost of Mirror Back Material per Square Foot
+Displayset,#CostTGCedarPerSqFt=25,7.0.1     Cost of Tongue and Groove Cedar
+Displayset,#CostqtrincedarPerSqFt=25,7.0.2     Cost of 1/4" Cedar
+Displayset,#CostqtrinBackingpersqft=10, 7.0.2a  Cost of 1/4" RTF Backing
+Displayset,#CostUnfinishedbeadboardPerSqFt=25,7.0.3     Cost of Unfinished Beadboard 
+Displayset,#CostPaintedbeadboardPerSqFt=25,7.0.4     Cost of Painted Beadboard 
+Displayset,#CostGlazedbeadboardPerSqFt=25,7.0.4     Cost of Glazed Beadboard
+Displayset ,#CostRTFbeadboardPerSqFt=50,7.0.4     Cost of RTF Beadboard 
+Displayset ,#Cost25inBackingSqFt=25,7.0.4     Cost of 1/4in Melamine 
+,**
+,** Set Unit Info Room Backing Pricing
+,Update V7.2.7 end
+
+
+
+DisplaySet,#BackType0=None,7.0        Back Type 0 Name
+DisplaySet,#BackTypeCost0=0,7.0         #BackType0 Cost Sqft
+,**
+
+DisplaySet,#BackType1=Melamine Match-3/4 #unitmaterialName,7.1         Back Type 1 Name
+DisplaySet,#BackTypeCost1=9*#MaterialCostGroup,7.1         #BackType1 Cost Sqft
+,**
+DisplaySet,#BackType2=Melamine 2nd Material-3/4 #contrastmaterialName , 7.2        Back Type 2 Name
+DisplaySet,#BackTypeCost2=9*#ContrastMaterialCostGroup,7.2         #BackType2 Cost Sqft
+,**
+
+DisplaySet,#BackType3=Textured,7.3         Back Type 3 Name
+DisplaySet,#BackTypeCost3=15,7.3         #BackType3 Cost Sqft
+,**
+
+DisplaySet,#BackType4=Gloss or Matte Melamine,7.4         Back Type 4 Name
+DisplaySet,#BackTypeCost4=24,7.4         #BackType4 Cost Sqft
+,**
+
+DisplaySet,#BackType5=Wood,7.5         Back Type 5 Name
+DisplaySet,#BackTypeCost5=25,7.5         #BackType5 Cost Sqft
+,**
+
+DisplaySet,#BackType6=Cedar,7.6         Back Type 6 Name
+DisplaySet,#BackTypeCost6=25,7.6         #BackType6 Cost Sqft
+,**
+
+DisplaySet,#BackType7=Bead Board,7.7         Back Type 7 Name
+DisplaySet,#BackTypeCost7=25,7.7         #BackType7 Cost Sqft
+,**
+
+DisplaySet,#BackType8=Ledger Stone,7.8         Back Type 8 Name
+DisplaySet,#BackTypeCost8=100,7.8         #BackType8 Cost Sqft
+,**
+
+DisplaySet,#BackType9=,7.9         Back Type 9 Name
+DisplaySet,#BackTypeCost9=,7.9         #BackType9 Cost Sqft
+,**
+
+DisplaySet,#BackType10=,7.10         Back Type 10 Name
+DisplaySet,#BackTypeCost10=,7.10         #BackType10 Cost Sqft
+,**
+
+DisplaySet,#BackType11=,7.11         Back Type 11 Name
+DisplaySet,#BackTypeCost11=,7.11         #BackType11 Cost Sqft
+,**
+
+DisplaySet,#BackType12=,7.12         Back Type 12 Name
+DisplaySet,#BackTypeCost12=,7.12         #BackType12 Cost Sqft
+,**
+
+DisplaySet,#BackType13=,7.13         Back Type 13 Name
+DisplaySet,#BackTypeCost13=,7.13         #BackType13 Cost Sqft
+,**
+
+DisplaySet,#BackType14=,7.14         Back Type 14 Name
+DisplaySet,#BackTypeCost14=,7.14         #BackType14 Cost Sqft
+,**
+
+DisplaySet,#BackType15=,7.15         Back Type 15 Name
+DisplaySet,#BackTypeCost15=,7.15         #BackType15 Cost Sqft
+,**
+
+DisplaySet,#BackType16=,7.16         Back Type 16 Name
+DisplaySet,#BackTypeCost16=,7.16         #BackType16 Cost Sqft
+,**
+
+DisplaySet,#BackType17=,7.17         Back Type 17 Name
+DisplaySet,#BackTypeCost17=,7.17         #BackType17 Cost Sqft
+,**
+
+DisplaySet,#BackType18=,7.18         Back Type 18 Name
+DisplaySet,#BackTypeCost18=,7.18         #BackType18 Cost Sqft
+,**
+
+DisplaySet,#BackType19=,7.19         Back Type 19 Name
+DisplaySet,#BackTypeCost19=,7.19         #BackType19 Cost Sqft
+,**
+
+DisplaySet,#BackType20=,7.20         Back Type 20 Name
+DisplaySet,#BackTypeCost20=,7.20         #BackType20 Cost Sqft
+,**
+
+DisplaySet,#BackType21=,7.21         Back Type 21 Name
+DisplaySet,#BackTypeCost21=,7.21         #BackType21 Cost Sqft
+,**
+
+DisplaySet,#BackType22=,7.22         Back Type 22 Name
+DisplaySet,#BackTypeCost22=,7.22         #BackType22 Cost Sqft
+,**
+
+DisplaySet,#BackType23=,7.23         Back Type 23 Name
+DisplaySet,#BackTypeCost23=,7.23         #BackType23 Cost Sqft
+,**
+
+DisplaySet,#BackType24=,7.24         Back Type 24 Name
+DisplaySet,#BackTypeCost24=,7.24         #BackType24 Cost Sqft
+,**
+
+DisplaySet,#BackType25=,7.25         Back Type 25 Name
+DisplaySet,#BackTypeCost25=,7.25         #BackType25 Cost Sqft
+,**
+
+DisplaySet,#BackType26=,7.26         Back Type 26 Name
+DisplaySet,#BackTypeCost26=,7.26         #BackType26 Cost Sqft
+,**
+
+DisplaySet,#BackType27=, 7.27        Back Type 27 Name
+DisplaySet,#BackTypeCost27=,7.27         #BackType27 Cost Sqft
+,**
+
+
+,**  SECTION 8 Fluted Pilaster Cost
+,**
+
+DisplaySet,#FlutedPilasterType1=Stained,        Fluted Pilaster Type 1 Name
+DisplaySet,#FlutedPilasterTypeCost1=250,8.1         #FlutedPilasterType1 Cost fixed Cost
+,**
+DisplaySet,#FlutedPilasterType2=Stained half,        Fluted Pilaster Type 2 Name
+DisplaySet,#FlutedPilasterTypeCost2=250,8.2         #FlutedPilasterType2 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType3=Painted,        Fluted Pilaster Type 3 Name
+DisplaySet,#FlutedPilasterTypeCost3=250,8.3         #FlutedPilasterType3 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType4=Painted  half,        Fluted Pilaster Type 4 Name
+DisplaySet,#FlutedPilasterTypeCost4=250,8.4         #FlutedPilasterType4 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType5=Stained Glazed,        Fluted Pilaster Type 5 Name
+DisplaySet,#FlutedPilasterTypeCost5=300,8.5         #FlutedPilasterType5 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType6=Stained Glazed half,        Fluted Pilaster Type 6 Name
+DisplaySet,#FlutedPilasterTypeCost6=300,8.6         #FlutedPilasterType6 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType7=Painted Glazed,        Fluted Pilaster Type 7 Name
+DisplaySet,#FlutedPilasterTypeCost7=300,8.7         #FlutedPilasterType7 Cost fixed Cost
+,**
+DisplaySet,#FlutedPilasterType8=Painted Glazed half,        Fluted Pilaster Type 8 Name
+DisplaySet,#FlutedPilasterTypeCost8=300,8.8         #FlutedPilasterType8 Cost fixed Cost
+,**
+DisplaySet,#FlutedPilasterType9=Thermo Standard,        Fluted Pilaster Type 9 Name
+DisplaySet,#FlutedPilasterTypeCost9=150,8.9         #FlutedPilasterType9 Cost fixed Cost
+,**
+DisplaySet,#FlutedPilasterType10=Thermo Standard half,        Fluted Pilaster Type 10 Name
+DisplaySet,#FlutedPilasterTypeCost10=150,8.10         #FlutedPilasterType10 Cost fixed Cost
+,**
+DisplaySet,#FlutedPilasterType11=Thermo Textured,        Fluted Pilaster Type 11 Name
+DisplaySet,#FlutedPilasterTypeCost11=200,8.11         #FlutedPilasterType11 Cost fixed Cost
+,**
+DisplaySet,#FlutedPilasterType12=Thermo Textured half,        Fluted Pilaster Type 12 Name
+DisplaySet,#FlutedPilasterTypeCost12=200,8.12         #FlutedPilasterType12 Cost fixed Cost
+,**
+DisplaySet,#FlutedPilasterType13=Thermo Gloss,        Fluted Pilaster Type 13 Name
+DisplaySet,#FlutedPilasterTypeCost13=200,8.13         #FlutedPilasterType13 Cost fixed Cost
+,**
+DisplaySet,#FlutedPilasterType14=Thermo Gloss half,        Fluted Pilaster Type 14 Name
+DisplaySet,#FlutedPilasterTypeCost14=200,8.14         #FlutedPilasterType14 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType15=Thermo Glazed,        Fluted Pilaster Type 15 Name
+DisplaySet,#FlutedPilasterTypeCost15=200,8.15         #FlutedPilasterType15 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType16=Thermo Glazed half,        Fluted Pilaster Type 16 Name
+DisplaySet,#FlutedPilasterTypeCost16=200,8.16         #FlutedPilasterType16 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType17=Wood Custom Stained,        Fluted Pilaster Type 17 Name
+DisplaySet,#FlutedPilasterTypeCost17=325,8.17         #FlutedPilasterType17 Cost fixed Cost
+,**
+DisplaySet,#FlutedPilasterType18=Wood Custom Stained Half,        Fluted Pilaster Type 18 Name
+DisplaySet,#FlutedPilasterTypeCost18=325,8.18         #FlutedPilasterType18 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType19=Wood Custom Painted,        Fluted Pilaster Type 19 Name
+DisplaySet,#FlutedPilasterTypeCost19=325,8.19         #FlutedPilasterType19 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType20=Wood Custom Painted Half,        Fluted Pilaster Type 20 Name
+DisplaySet,#FlutedPilasterTypeCost16=325,8.20         #FlutedPilasterType20 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType21=unused,        Fluted Pilaster Type 21 Name
+DisplaySet,#FlutedPilasterTypeCost21=200,8.21         #FlutedPilasterType21 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType22=unused,        Fluted Pilaster Type 22 Name
+DisplaySet,#FlutedPilasterTypeCost22=200,8.22         #FlutedPilasterType22 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType23=Mica Front 1 mm,        Fluted Pilaster Type 23 Name
+DisplaySet,#FlutedPilasterTypeCost23=200,8.23         #FlutedPilasterType23 fixed Cost
+,**
+DisplaySet,#FlutedPilasterType24=Mica Front 1 mm Half,        Fluted Pilaster Type 24 Name
+DisplaySet,#FlutedPilasterTypeCost24=200,8.24         #FlutedPilasterType24 fixed Cost
+
+
+
+,**
+,**  SECTION 9 Drawer Box Cost ( Set in QUICK LOAD under E-DRAWER COST.PCB bottom right corner of your screen )
+,**
+
+,**  SECTION 10 Extruded Handle Cost (Set in CSV for other handles)
+,**
+
+,**Set up Extruded Handles (Selected with Door in KCD)
+Displayset, #exthandlename=Aluminum Extruded Handles-specify finish, What is your extruded handle name?
+,**
+Displayset, #exthandlesize1=24IN, What is your small size price point?
+Displayset, #extrudedhandlecost1=28, Cost for smallest?
+,**
+Displayset, #exthandlesize2=48IN, What is your Medium size price point?
+Displayset, #extrudedhandlecost2=28, Cost for Medium?
+,**
+Displayset, #exthandlesize3=96IN, What is your Large size price point?
+Displayset, #extrudedhandlecost3=56, Cost for Large?
+,**
+
+,   Handle and Knob
+DisplaySet,#HandleName0=None,         Set 0 Name
+DisplaySet,#$Handle-Style-0=0,10.0    #HandleName0  Handle Cost
+Displayset,#Handle-Style-0PN=None Selected,10.0    #HandleName0 Handle Part Number
+DisplaySet,#$Knob-Style-0=0,10.0    #HandleName0  Knob Cost
+Displayset,#Knob-Style-0PN=None Selected,10.0    #HandleName0 Knob Part Number,**
+
+
+,**  SECTION 11 Panel & Shelf Finishing (NO LONGER USED)
+,**
+,DisplaySet,#FinishType1=select with materials,         Finish 1 Name
+,DisplaySet,#FinishTypeCost1=0,11.1         #FinishType1 1 Cost Factor added to Shelves and Sides
+
+,DisplaySet,#FinishType2=Clear Coat .5,         Finish 2 Name
+,DisplaySet,#FinishTypeCost2=.5,11.2         #FinishType2 2 Cost Factor added to Shelves and Sides
+
+,DisplaySet,#FinishType3=Stained .8,         Finish 3 Name
+,DisplaySet,#FinishTypeCost3=.8,11.3         #FinishType3 3 Cost Factor added to Shelves and Sides
+
+,DisplaySet,#FinishType4=MDF Painted 1.05,         Finish 4 Name
+,DisplaySet,#FinishTypeCost4=1.05,11.4         #FinishType4 4 Cost Factor added to Shelves and Sides
+
+,DisplaySet,#FinishType5=Veneer Painted .85,         Finish 5 Name
+,DisplaySet,#FinishTypeCost5=.85,11.5         #FinishType5 5 Cost Factor added to Shelves and Sides
+
+,DisplaySet,#FinishType6=MDF Glazed 2.0,         Finish 6 Name
+,DisplaySet,#FinishTypeCost6=2,11.6         #FinishType6 6 Cost Factor added to Shelves and Sides
+
+,DisplaySet,#FinishType7=Veneer Glazed 1.5,         Finish 7 Name
+,DisplaySet,#FinishTypeCost7=1.5,11.7         #FinishType7 7 Cost Factor added to Shelves and Sides
+
+,DisplaySet,#FinishType8=Extra,         Finish 8 Name
+,DisplaySet,#FinishTypeCost8=0,11.8         #FinishType8 8 Cost Factor added to Shelves and Sides
+
+,DisplaySet,#FinishType9=Extra,         Finish 9 Name
+,DisplaySet,#FinishTypeCost9=0,11.9         #FinishType9 9 Cost Factor added to Shelves and Sides
+
+,DisplaySet,#FinishType10=Extra,         Finish 10 Name
+,DisplaySet,#FinishTypeCost10=0,11.10         #FinishType10 10 Cost Factor added to Shelves and Sides
+
+,DisplaySet,#FinishType11=Extra,         Finish 11 Name
+,DisplaySet,#FinishTypeCost11=0,11.11         #FinishType11 11 Cost Factor added to Shelves and Sides
+,**
+
+
+,**  SECTION 12 Shoe Shelf Toe Stop Cost
+,** Keep the order, rename to UNUSED at $0 if you do not offer a toestop. Call the CF KCD Manager is you need to add a type of toestop.
+,DisplaySet,#ShoeFenceType0=None,12.0         Shoe Fence 0 Name
+,DisplaySet,#ShoeFenceTypeCost0=0,12.0         #ShoeFenceType0 0 Cost
+
+DisplaySet,#ShoeFenceType1=Toe Stop Matching Material,12.1         Shoe Fence 1 Name
+,Displayset,#Toestopopt1=191, Option number for #ShoefenceType1
+DisplaySet,#ShoeFenceTypeCost1=12,12.1         #ShoeFenceType1 1 Cost
+
+DisplaySet,#ShoeFenceType2=Toe Stop 2nd Material,12.2         Shoe Fence 2 Name
+,Displayset,#Toestopopt2=192, Option number for #ShoefenceType2
+DisplaySet,#ShoeFenceTypeCost2=12,12.2        #ShoeFenceType2 2 Cost
+
+DisplaySet,#ShoeFenceType3=Toe Stop Lucite,12.3         Shoe Fence 3 Name
+,Displayset,#Toestopopt3=193, Option number for #ShoefenceType3
+DisplaySet,#ShoeFenceTypeCost3=28,12.3         #ShoeFenceType3 3 Cost
+
+DisplaySet,#ShoeFenceType4=Unused,12.4         Shoe Fence 4 Name
+,Displayset,#Toestopopt4=194, Option number for #ShoefenceType4
+DisplaySet,#ShoeFenceTypeCost4=0,12.4         #ShoeFenceType4 4 Cost
+
+DisplaySet,#ShoeFenceType5=Toe Stop Metal Fence,12.5         Shoe Fence 5 Name
+,Displayset,#Toestopopt5=195, Option number for #ShoefenceType5
+DisplaySet,#ShoeFenceTypeCost5=40,12.5         #ShoeFenceType5 5 Cost
+
+DisplaySet,#ShoeFenceType6=Toe Stop Elite Metal,12.6         Shoe Fence 6 Name
+,Displayset,#Toestopopt6=196, Option number for #ShoefenceType6
+DisplaySet,#ShoeFenceTypeCost6=33,12.6         #ShoeFenceType6 6 Cost
+
+DisplaySet,#ShoeFenceType7=Toe Stop Wood Painted,12.7         Shoe Fence 7 Name
+,Displayset,#Toestopopt7=197, Option number for #ShoefenceType7
+DisplaySet,#ShoeFenceTypeCost7=38,12.7         #ShoeFenceType7 7 Cost
+
+DisplaySet,#ShoeFenceType8=Toe Stop Wood Stained,12.8         Shoe Fence 8 Name
+,Displayset,#Toestopopt8=198, Option number for #ShoefenceType8
+DisplaySet,#ShoeFenceTypeCost8=42,12.8         #ShoeFenceType8 8 Cost
+
+DisplaySet,#ShoeFenceType9=Toe Stop Wood Glazed,12.9         Shoe Fence 9 Name
+,Displayset,#Toestopopt9=199, Option number for #ShoefenceType9
+DisplaySet,#ShoeFenceTypeCost9=46,12.9         #ShoeFenceType9 9 Cost
+
+,**  SECTION 13 Door/Drawer Finishing
+DisplaySet,#DoorDrawerFinishingType1=No Finish ,13.1         Door Drawer Finishing Type
+DisplaySet,#DoorDrawerFinishingTypeCost1=0,13.1         #DoorDrawerFinishingType1 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType2=Wood Stained,13.2         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost2=9,13.2         #DoorDrawerFinishingtype2 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType3=Wood Painted,13.3         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost3=10,13.3         #DoorDrawerFinishingtype3 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType4=Wood Stained Glazed,13.4         Door Drawer Finishing Type
+DisplaySet,#DoorDrawerFinishingTypeCost4=15,13.4         #DoorDrawerFinishingType4 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType5=Wood Painted Glazed,13.5         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost5=17,13.5         #DoorDrawerFinishingtype5 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType6=Thermo Standard,13.6         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost6=0,13.6         #DoorDrawerFinishingtype6 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType7=Thermo Textured,13.7         Door Drawer Finishing Type
+DisplaySet,#DoorDrawerFinishingTypeCost7=20,13.7         #DoorDrawerFinishingType7 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType8=Thermo Gloss,13.8         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost8=20,13.8         #DoorDrawerFinishingtype8 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType9=Thermo Glazed,13.9         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost9=20,13.9         #DoorDrawerFinishingtype9 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType10=Wood Custom Stained,13.10         Door Drawer Finishing Type
+DisplaySet,#DoorDrawerFinishingTypeCost10=35,13.10         #DoorDrawerFinishingType10 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType11=Wood Custom Painted,13.11         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost11=35,13.11         #DoorDrawerFinishingtype11 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType12=unused,13.12         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost12=45,13.12         #DoorDrawerFinishingtype12 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType13=Mica Front 1 mm,13.13         Door Drawer Finishing Type
+DisplaySet,#DoorDrawerFinishingTypeCost13=45,13.13         #DoorDrawerFinishingType13 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType14=Metal Mica Front 1 mm,13.14         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost14=50,13.14         #DoorDrawerFinishingtype14 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType15=Slab Wood .5 mm,13.15         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost15=.10,13.15         #DoorDrawerFinishingtype15 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType16=CF Thermofoil,13.16         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost16=20,13.16         #DoorDrawerFinishingtype16 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType17=,13.17         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost17=.10,13.17         #DoorDrawerFinishingtype17 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType18=Wood Edge .5 mm,13.18         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost18=0,13.18         #DoorDrawerFinishingtype18 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType19=Wood Edge on Mela .5 mm,13.19         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost19=.20,13.19         #DoorDrawerFinishingtype19 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType20=Almond .5 mm,13.20         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost20=.05,13.20         #DoorDrawerFinishingtype20 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType21=,13.21         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost21=,13.21         #DoorDrawerFinishingtype21 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType22=unused,13.22         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost22=,13.22         #DoorDrawerFinishingtype22 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType23=Avondale Ash 1 mm,13.23         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost23=.10,13.23         #DoorDrawerFinishingtype23 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType24=Blackwood 1 mm,13.24         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost24=.10,13.24         #DoorDrawerFinishingtype24 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType25=Bohemian Blanco 1 mm,13.25         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost25=.10,13.25         #DoorDrawerFinishingtype25 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType26=Apple Cocoa .5 mm,13.26         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost26=.05,13.26         #DoorDrawerFinishingtype26 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType27=Belair 1 mm,13.27         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost27=.1,13.27         #DoorDrawerFinishingtype27 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType28=Daintree 1 mm,13.28         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost28=.1,13.28         #DoorDrawerFinishingtype28 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType29=Atlantis 1 mm,13.29         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost29=.10,13.29         #DoorDrawerFinishingtype29 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType30=Dering Forest 1 mm,13.30         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost30=.1,13.30         #DoorDrawerFinishingtype30 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType31=Fairchild 1 mm,13.31         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost31=.1,13.31         #DoorDrawerFinishingtype31 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType32=Bisque 1 mm,13.32         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost32=.1,13.32         #DoorDrawerFinishingtype32 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType33=unused,13.33         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost33=,13.33         #DoorDrawerFinishingtype33 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType34=Black 1 mm,13.34         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost34=.1,13.34         #DoorDrawerFinishingtype34 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType35=High Line 1 mm,13.35         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost35=.10,13.35         #DoorDrawerFinishingtype35 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType36=Monteverdi 1 mm,13.36         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost36=.10,13.36         #DoorDrawerFinishingtype36 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType37=Cemento 1 mm,13.37         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost37=.10,13.37         #DoorDrawerFinishingtype37 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType38=Neowalnut 1 mm,13.38         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost38=.10,13.38         #DoorDrawerFinishingtype38 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType39=Blanca Elme .5 mm,13.39         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost39=.05,13.39         #DoorDrawerFinishingtype39 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType40=Phantom Charcoal 1 mm,13.40         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost40=.10,13.40         #DoorDrawerFinishingtype40 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType41=Randolph Forest 1 mm,13.41         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost41=.10,13.41         #DoorDrawerFinishingtype41 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType42=Red Ultra GL 1 mm,13.42         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost42=.12,13.42         #DoorDrawerFinishingtype42 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType43=Mineral Grey 1 mm,13.43         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost43=.10,13.43         #DoorDrawerFinishingtype43 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType44=Nogal Slow 1 mm,13.44         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost44=.10,13.44         #DoorDrawerFinishingtype44 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType45=Campania Elme .5 mm,13.45         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost45=.05,13.45         #DoorDrawerFinishingtype45 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType46=Veranda Teak 1 mm,13.46         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost46=.10,13.46         #DoorDrawerFinishingtype46 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType47=unused,13.47         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost47=,13.47         #DoorDrawerFinishingtype47 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType48=Neo Walnut 1 mm,13.48         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost48=.10,13.48         #DoorDrawerFinishingtype48 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType49=Amalfi Noce GL 1 mm,13.49         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost49=.12,13.49         #DoorDrawerFinishingtype49 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType50=Solar White GL 1 mm,13.50         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost50=.12,13.50         #DoorDrawerFinishingtype50 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType51=unused,13.51         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost51=,13.51         #DoorDrawerFinishingtype51 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType52=Jet Black GL 1 mm,13.52         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost52=.10,13.52         #DoorDrawerFinishingtype52 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType53=unused,13.53         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost53=,13.53         #DoorDrawerFinishingtype53 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType54=unused,13.54         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost54=,13.54         #DoorDrawerFinishingtype54 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType55=Silver Met GL 1 mm,13.55         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost55=.12,13.55         #DoorDrawerFinishingtype55 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType56=unused,13.56         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost56=,13.56         #DoorDrawerFinishingtype56 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType57=unused,13.57         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost57=,13.57         #DoorDrawerFinishingtype57 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType58=Twilight Pearl GL 1 mm,13.58         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost58=.12,13.58         #DoorDrawerFinishingtype58 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType59=unused,13.59         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost59=,13.59         #DoorDrawerFinishingtype59 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType60=Designer White 1 mm,13.60         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost60=.10,13.60         #DoorDrawerFinishingtype60 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType61=White River For 1 mm,13.61         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost61=.10,13.61         #DoorDrawerFinishingtype61 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType62=Celadon 1 mm,13.62         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost62=.10,13.62         #DoorDrawerFinishingtype62 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType63=Mysterious 1 mm,13.63         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost63=.1,13.63         #DoorDrawerFinishingtype63 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType64=Wheat Tabby 1 mm,13.64         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost64=.1,13.64         #DoorDrawerFinishingtype64 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType65=Willow 1 mm,13.65         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost65=.1,13.65         #DoorDrawerFinishingtype65 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType66=unused,13.66         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost66=,13.66         #DoorDrawerFinishingtype66 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType67=,13.67         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost67=,13.67         #DoorDrawerFinishingtype67 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType68=unused,13.68         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost68=,13.68         #DoorDrawerFinishingtype68 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType69=unused ,13.69         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost69=,13.69         #DoorDrawerFinishingtype69 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType70=unused,13.70         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost70=,13.70         #DoorDrawerFinishingtype70 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType71=Espiga Pimienta 1 mm,13.71         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost71=.10,13.71         #DoorDrawerFinishingtype71 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType72=Espiga Sal 1 mm,13.72         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost72=.10,13.72         #DoorDrawerFinishingtype72 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType73=Espresso .5 mm,13.73         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost73=.05,13.73         #DoorDrawerFinishingtype73 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType74=,13.74         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost74=,13.74         #DoorDrawerFinishingtype74 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType75=unused,13.75         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost75=,13.75         #DoorDrawerFinishingtype75 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType76=Fog Grey 1 mm,13.76         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost76=.10,13.76         #DoorDrawerFinishingtype76 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType77=,13.77         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost77=,13.77         #DoorDrawerFinishingtype77 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType78=Folkstone Grey 1 mm,13.78         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost78=.10,13.78         #DoorDrawerFinishingtype78 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType79=,13.79         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost79=,13.79         #DoorDrawerFinishingtype79 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType80=Fossil Shale 1 mm,13.80         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost80=.10,13.80         #DoorDrawerFinishingtype80 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType81=Fresno Glacial 1 mm,13.81         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost81=.10,13.81         #DoorDrawerFinishingtype81 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType82=Friston Ash 1 mm,13.82         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost82=.10,13.82         #DoorDrawerFinishingtype82 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType83=Fusion Maple .5 mm,13.83         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost83=.05,13.83         #DoorDrawerFinishingtype83 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType84=Gris Coco 1 mm,13.84         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost84=.10,13.84         #DoorDrawerFinishingtype84 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType85=,13.85         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost85=,13.85         #DoorDrawerFinishingtype85 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType86=unused,13.86         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost86=,13.86         #DoorDrawerFinishingtype86 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType87=,13.87         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost87=,13.87         #DoorDrawerFinishingtype87 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType88=Roble Denver 1 mm,13.88         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost88=.10,13.88         #DoorDrawerFinishingtype88 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType89=Roble Eternity 1 mm,13.89         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost89=.10,13.89         #DoorDrawerFinishingtype89 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType90=unused,13.90         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost90=,13.90         #DoorDrawerFinishingtype90 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType91=,13.91         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost91=,13.91         #DoorDrawerFinishingtype91 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType92=unused,13.92         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost92=,13.92         #DoorDrawerFinishingtype92 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType93=unused,13.93         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost93=,13.93         #DoorDrawerFinishingtype93 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType94=unused,13.94         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost94=,13.94         #DoorDrawerFinishingtype94 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType95=Holly Berry 1 mm,13.95         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost95=.10,13.95         #DoorDrawerFinishingtype95 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType96=Hudson Cherry .5 mm,13.96         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost96=.05,13.96         #DoorDrawerFinishingtype96 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType97=,13.97         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost97=,13.97         #DoorDrawerFinishingtype97 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType98=unused,13.98         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost98=,13.98         #DoorDrawerFinishingtype98 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType99=Lapis Blue 1 mm,13.99         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost99=.10,13.99         #DoorDrawerFinishingtype99 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType100=unused,13.100         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost100=,13.100         #DoorDrawerFinishingtype100 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType101=,13.101         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost101=,13.101         #DoorDrawerFinishingtype101 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType102=Lewis Cherry .5 mm,13.102         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost102=.05,13.102         #DoorDrawerFinishingtype102 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType103=,13.103         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost103=,13.103         #DoorDrawerFinishingtype103 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType104=unused,13.104         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost104=,13.104         #DoorDrawerFinishingtype104 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType105=unused,13.105         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost105=,13.105         #DoorDrawerFinishingtype105 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType106=unused,13.106         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost106=,13.106         #DoorDrawerFinishingtype106 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType107=Lino Cancun 1 mm,13.107         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost107=.10,13.107         #DoorDrawerFinishingtype107 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType108=Low Line 1 mm,13.108         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost108=.10,13.108         #DoorDrawerFinishingtype108 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType109=Marsielle 1 mm,13.109         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost109=.12,13.109         #DoorDrawerFinishingtype109 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType110=Milano 1 mm,13.110         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost110=.10,13.110         #DoorDrawerFinishingtype110 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType111=unused,13.111         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost111=,13.111         #DoorDrawerFinishingtype111 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType112=Fawn Cypress 1 mm,13.112         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost112=.1,13.112         #DoorDrawerFinishingtype112 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType113=Monaco 1 mm,13.113         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost113=.12,13.113         #DoorDrawerFinishingtype113 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType114=Moscatto 1 mm,13.114         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost114=.12,13.114         #DoorDrawerFinishingtype114 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType115=Naples 1 mm,13.115         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost115=.12,13.115         #DoorDrawerFinishingtype115 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType116=Nina Maple .5 mm,13.116         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost116=.05,13.116         #DoorDrawerFinishingtype116 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType117=,13.117         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost117=,13.117         #DoorDrawerFinishingtype117 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType118=unused,13.118         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost118=,13.118         #DoorDrawerFinishingtype118 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType119=Roble Joplin 1 mm,13.119         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost119=.10,13.119         #DoorDrawerFinishingtype119 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType120=Pepper Dust 1 mm,13.120         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost120=.10,13.120         #DoorDrawerFinishingtype120 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType121=Phantom Ecru 1 mm,13.121         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost121=.10,13.121         #DoorDrawerFinishingtype121 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType122=Portico Teak 1 mm,13.122         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost122=.10,13.122         #DoorDrawerFinishingtype122 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType123=Provincial Oak 1 mm,13.123         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost123=.12,13.123         #DoorDrawerFinishingtype123 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType124=unused,13.124         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost124=,13.124         #DoorDrawerFinishingtype124 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType125=unused,13.125         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost125=,13.125         #DoorDrawerFinishingtype125 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType126=Roble Aurora 1 mm,13.126         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost126=.10,13.126         #DoorDrawerFinishingtype126 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType127=Roble Azabache 1 mm,13.127         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost127=.10,13.127         #DoorDrawerFinishingtype127 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType128=Roble Colorado 1 mm,13.128         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost128=.10,13.128         #DoorDrawerFinishingtype128 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType129=unused,13.129         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost129=,13.129         #DoorDrawerFinishingtype129 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType130=unused,13.130         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost130=,13.130         #DoorDrawerFinishingtype130 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType131=unused,13.131         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost131=,13.131         #DoorDrawerFinishingtype131 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType132=Roble Oasis 1 mm,13.132         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost132=.10,13.132         #DoorDrawerFinishingtype132 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType133=Silver Frost GL 1 mm,13.133         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost133=.10,13.133         #DoorDrawerFinishingtype133 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType134=,13.134         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost134=,13.134         #DoorDrawerFinishingtype134 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType135=unused,13.135         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost135=,13.135         #DoorDrawerFinishingtype135 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType136=,13.136         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost136=,13.136         #DoorDrawerFinishingtype136 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType137=,13.137         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost137=,13.137         #DoorDrawerFinishingtype137 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType138=unused,13.138         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost138=,13.138         #DoorDrawerFinishingtype138 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType139=unused,13.139         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost139=,13.139         #DoorDrawerFinishingtype139 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType140=,13.140         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost140=,13.140         #DoorDrawerFinishingtype140 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType141=,13.141         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost141=,13.141         #DoorDrawerFinishingtype141 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType142=unused,13.142         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost142=,13.142         #DoorDrawerFinishingtype142 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType143=,13.143         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost143=,13.143         #DoorDrawerFinishingtype143 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType144=,13.144         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost144=,13.144         #DoorDrawerFinishingtype144 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType145=Tenino Grey 1 mm,13.145         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost145=.12,13.145         #DoorDrawerFinishingtype145 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType146=Tessuto 1 mm,13.146         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost146=.10,13.146         #DoorDrawerFinishingtype146 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType147=Roble Stella 1 mm,13.147         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost147=.10,13.147         #DoorDrawerFinishingtype147 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType148=,13.148         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost148=,13.148         #DoorDrawerFinishingtype148 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType149=Valley Forge Elm 1 mm,13.149         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost149=.10,13.149         #DoorDrawerFinishingtype149 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType150=White .5 mm,13.150         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost150=.05,13.150         #DoorDrawerFinishingtype150 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType151=Stainless 1 mm,13.151         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost151=.10,13.151         #DoorDrawerFinishingtype151 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType152=,13.152         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost152=,13.152         #DoorDrawerFinishingtype152 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType153=Black Ultra GL 1 mm,13.153         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost153=.12,13.153         #DoorDrawerFinishingtype153 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType154=Bright White GL 1 mm,13.154         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost154=.12,13.154         #DoorDrawerFinishingtype154 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType155=Outer Space GL 1 mm,13.155         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost155=.12,13.155         #DoorDrawerFinishingtype155 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType156=White Ultra GL 1 mm,13.156         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost156=.12,13.156         #DoorDrawerFinishingtype156 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType157=White Cypress 1 mm,13.157         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost157=.10,13.157         #DoorDrawerFinishingtype157 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType158=White Textured 1 mm,13.158         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost158=.12,13.158         #DoorDrawerFinishingtype158 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType159=,13.159         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost159=,13.159         #DoorDrawerFinishingtype159 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType160=Wild Apple .5 mm,13.160         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost160=.05,13.160         #DoorDrawerFinishingtype160 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType161=Old job 2 mm,13.161         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost161=.10,13.161         #DoorDrawerFinishingtype161 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType162=SO Material 1 mm,13.162         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost162=.10,13.162         #DoorDrawerFinishingtype162 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType163=SO Mica Made 1 mm,13.163         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost163=.15,13.163         #DoorDrawerFinishingtype163 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType164=SO Upgrade 1 mm,13.164         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost164=.20,13.164         #DoorDrawerFinishingtype164 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType165=CF 5 Piece,13.165         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost165=0,13.165         #DoorDrawerFinishingtype165 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType166=White 1 mm,13.166         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost166=.1,13.166         #DoorDrawerFinishingtype166 Cost per square foot
+
+DisplaySet,#DoorDrawerFinishingType167=The items below are for Outdoor Cabinets,13.167         Door Drawer Finishing Type
+DisplaySet,#DoorDrawerFinishingTypeCost167=0,13.167        #DoorDrawerFinishingtype167 Upcharge per face
+
+DisplaySet,#DoorDrawerFinishingType168=Drift Ash,13.168         Door Drawer Finishing Type
+DisplaySet,#DoorDrawerFinishingTypeCost168=1.05,13.168        #DoorDrawerFinishingtype168 Upcharge per face
+
+DisplaySet,#DoorDrawerFinishingType169=Pure Black,13.169         Door Drawer Finishing Type
+DisplaySet,#DoorDrawerFinishingTypeCost169=1,13.169        #DoorDrawerFinishingtype169 Upcharge per face
+
+DisplaySet,#DoorDrawerFinishingType170=Seaside Blue,13.170         Door Drawer Finishing Type
+DisplaySet,#DoorDrawerFinishingTypeCost170=1,13.170        #DoorDrawerFinishingtype170 Upcharge per face
+
+DisplaySet,#DoorDrawerFinishingType171=Seashell White,13.171         Door Drawer Finishing Type
+DisplaySet,#DoorDrawerFinishingTypeCost171=1,13.171         #DoorDrawerFinishingType171 Upcharge per face
+
+DisplaySet,#DoorDrawerFinishingType172=Sand Gray,13.172         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost172=1,13.172         #DoorDrawerFinishingtype172 Upcharge per face
+
+DisplaySet,#DoorDrawerFinishingType173=Timber,13.173         Door Drawer Fininshing Type
+DisplaySet,#DoorDrawerFinishingTypeCost173=1.05,13.173         #DoorDrawerFinishingtype173 Upcharge per face
+
+
+
+
+
+,**  SECTION 14 Door/Drawer Insert
+,Update V8.0 start
+,**  Preset insert pricing based on door selected.
+DisplaySet,#DoorDrawerInsertMirror=Mirror , 14.1.1  Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertCostMirror=54, 14.1.1a  #DoorDrawerInsertMirror Cost per square foot
+
+DisplaySet,#DoorDrawerInsertBevMirror=Bevel Safety Back Mirror, 14.1.2   Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertCostBevMirror=54, 14.1.2a  #DoorDrawerInsertBevMirror Cost per square foot
+
+DisplaySet,#DoorDrawerInsertSpeaker=Speaker Cloth, 14.1.3  Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertCostSpeaker=40,14.1.3a  #DoorDrawerInsertSpeaker Cost per square foot
+
+DisplaySet,#DoorDrawerInsert14Mel=1/4 Melamine, 14.1.4  Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertCost14mel=22,14.1.4a  #DoorDrawerInsert14mel Cost per square foot
+
+DisplaySet,#DoorDrawerInsertSmoke=1/8 Smoke Acrylic ,14.1.5         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertCostSmoke=54,14.1.5         #DoorDrawerInsertSmoke Cost per square foot
+
+DisplaySet,#DoorDrawerInsertFrost=Frosted Glass,14.1.6         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertCostFrost=54,14.1.6         #DoorDrawerInsertFrosted Cost per square foot
+
+,Update V8.0 end
+DisplaySet,#DoorDrawerInsertType2=None,14.2         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertTypeCost2=0,14.2         #DoorDrawerInsertType2 Cost per square foot
+
+DisplaySet,#DoorDrawerInsertType3=Clear Glass,14.3         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertTypeCost3=30,14.3        #DoorDrawerInserttype3 Cost per square foot
+
+DisplaySet,#DoorDrawerInsertType4=Matte Acrylic Color-,14.4         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertTypeCost4=54,14.4         #DoorDrawerInserttype4 Cost per square foot
+
+DisplaySet,#DoorDrawerInsertType5=Gloss Acrylic Color-,14.5         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertTypeCost5=54,14.5         #DoorDrawerInsertType5 Cost per square foot
+
+DisplaySet,#DoorDrawerInsertType6=Smoked Glass,14.6         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertTypeCost6=54,14.6         #DoorDrawerInserttype6 Cost per square foot
+
+DisplaySet,#DoorDrawerInsertType7=Unused,14.7         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertTypeCost7=,14.7         #DoorDrawerInserttype7 Cost per square foot
+
+DisplaySet,#DoorDrawerInsertType8=Specialty Glass 65,14.8         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertTypeCost8=65,14.8         #DoorDrawerInserttype8 Cost per square foot
+
+DisplaySet,#DoorDrawerInsertType10=Specialty Glass 75,14.10         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertTypeCost10=75,14.10         #DoorDrawerInserttype10 Cost per square foot
+
+DisplaySet,#DoorDrawerInsertType11=Specialty Glass 85,14.11         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertTypeCost11=85,14.11         #DoorDrawerInsertType11 Cost per square foot
+
+DisplaySet,#DoorDrawerInsertType12=Specialty Glass 100,14.12         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertTypeCost12=100,14.12         #DoorDrawerInserttype12 Cost per square foot
+
+DisplaySet,#DoorDrawerInsertType13=Specialty Glass 125,14.13         Door Drawer Insert Type
+DisplaySet,#DoorDrawerInsertTypeCost13=125,14.13         #DoorDrawerInserttype13 Cost per square foot
+
+
+,**  SECTION 15 Miscellaneous Cost
+,Update V8.0 start
+,**  SECTION 15 Miscellaneous Cost
+Displayset, #floatingcabproduction=AIG, 7.0.5---How do you produce your Floating Cabinets? [AIG;Standard]
+Displayset, #AcrylicDividerCost=20, Q...Cost for routed acrylic shelf divider
+Displayset, #traypricemethod=Fixed Style Cost, Q...How do you price your trays [Shelf Cost Plus;Fixed Style Cost]
+Displayset, #Costfortray=235,15.1 Cost to upgrade shelf to tray OR fixed melamine tray cost no matter the size. 
+DisplaySet,#Acrylictrayfrontcost=40,15.2.0   Cost to add Clear Acrylic Tray front  OR fixed cost for Acrylic Front Tray style 
+Displayset,#Mattetrayfrontcost=60,15.2.1   Cost to add Matte Acrylic Tray front OR fixed cost for Matte Front Tray style
+DisplaySet,#fingerpullcost=235,15.2.3   Cost to add Finger Pull Tray front OR fixed cost for Finger pull tray style
+DisplaySet,#dovetailtraycost=100,15.2.4   Cost to upgrade tray to Dovetail Tray OR fixed cost for Dovetail style
+Displayset, #undermttraycost=0, 15.2.5 Cost for Under Mount glides on tray or sliding shelves 
+Displayset, #doublesidedcaddy=750, 15.2.6 Cost for double sided PullOut Vertical Tie Insert
+Displayset, #singlesidedcaddy=500, 15.2.7 Cost for single sided PullOut Vertical Tie Insert
+Displayset, #videoinsertcost=275, 15.2.8 Cost for PullOut Video Insert
+Displayset, #supportpolelinearfootcost=75, 15.4.1 Linear foot charge for Library Support Pole
+Displayset, #supportpolePN=Finish, 15.4.2 Part Number Library Support Pole
+Displayset, #libraryladdercost=4000, 15.5.1 Cost for Library Ladder
+Displayset, #LadderPN=Finish, 15.5.2 Part Number Library Ladder
+,update V7.2.14 end
+,Update V8.0 Options moved to SO-Set Option names.pcb
+ ,**      These questions are for adding options to panels
+ Displayset,#dogearoption=3,WHAT OPTION NUMBER IS USED FOR Dog ear panels?
+ ,**      These questions are for adding options to shelves
+  ,Displayset,#Wallwidthadj=102mm, 1.3 -----  What is the extra width for the Horizontal shelves & rods for cut to fit.
+  ,Displayset,#CutToFitoptnum=2, 1.4 -----  WHAT OPTION NUMBER IS USED FOR Cut To Fit on horizontal shelves & rods.
+  ,DisplaySet,#ExtrustionName=C-Channel, Q...    What is the name for the shelf support extrusions?
+  ,Displayset,#extrusionoptioncost=12.50, Q...   What is the cost of a single self support extrusion?
+  ,Displayset,#2CChannelsoption=4, Q...   WHAT OPTION NUMBER IS USED FOR 2 shelf stiffeners (front and back) shelf support?
+  ,Displayset,#1CChannelsoption=5,Q...   WHAT OPTION NUMBER IS USED FOR 1 shelf stiffener (front or back) shelf support?
+  ,Displayset,#adjtodoublethickoption=6,Q...   WHAT OPTION NUMBER IS USED FOR making adj shelves double thick?
+  ,Displayset,#adjtoeurooption=53,Q...    What is the option number for making 1 adj shelves euro?
+  ,Displayset,#alladjtoeurooption=9, Q...WHAT OPTION NUMBER IS USED FOR making ALL adj shelves euro?
+  ,DisplaySet,#adjfrontlipoption =7, Q...   WHAT OPTION NUMBER IS USED FOR FRONT LIP ON Adjustable SHELF?
+  ,DisplaySet,#eurofrontlipoption =8, Q...   WHAT OPTION NUMBER IS USED FOR FRONT LIP ON Euro SHELF? (show double thick)
+  ,DisplaySet,#frontlipoptioncost =15, Q...   WHAT IS THE COST FOR FRONT LIP ON SHELF?
+  ,DisplaySet,#FixedLipName=Shelf-FrontLip ,Q...     What is the name of the shelf lip piece?    
+  ,DisplaySet,#LipHeight=1.5,Q...     What is the height of the shelf lip piece?
+  ,Displayset,#dogearoption=3, Q... WHAT OPTION NUMBER IS USED dogeared panels
+,** Lighting option set-up
+,*** STRIP LIGHTING
+  ,DisplaySet,#ShelfledTeurooption =89, Q...   WHAT OPTION NUMBER IS USED FOR LED strip lights on Top Euro SHELVES?
+  ,DisplaySet,#ShelfledMeurooption =90, Q...   WHAT OPTION NUMBER IS USED FOR LED strip lights on Mid Euro SHELVES?
+  ,DisplaySet,#ShelfledLMeurooption =91, Q...   WHAT OPTION NUMBER IS USED FOR LED strip lights on Lower Mid Euro SHELVES?
+  ,DisplaySet,#Shelfledadjoption =92, Q...   WHAT OPTION NUMBER IS USED FOR LED strip lights on Adjustable SHELVES (must make euro)?
+  ,DisplaySet,#Shelfledbottomkickoption =93, Q...   WHAT OPTION NUMBER IS USED FOR LED strip lights on Bottom Euro KICK?
+  ,DisplaySet,#Shelfledupboteurooption =94, Q...   WHAT OPTION NUMBER IS USED FOR LED strip lights on Upper Bottom Shelf?
+,Update V8.0 end
+
+,Set,#UseCtopFootageFactor=square,Do you price your Counter Tops by Lineal or Square Ft? [lineal;square]
+,DisplaySet,#UseCtopFootageFactor=  Lineal,Do you price your Counter Tops by Lineal or Square Ft? [Lineal;square]
+,Set,(#UseCtopFootageFactor="square");#CtopFormulaForFootage=((((w+ctl+ctr)*(d+ctf+ctb)*Num))/144)
+,Set,(#UseCtopFootageFactor="lineal");#CtopFormulaForFootage=((((w+ctl+ctr)*Num))/12)
+
+
+,Creates Counter Top total job footage
+,Set,(ct>0);#CTopFootage = [#CTopFootage + #CtopFormulaForFootage]
+Set,#CTopFootage = 0
+
+
+
+,-----------------------KCDW COUNTERTOP PRICING---------------------------
+,Set, #CTopName=Formica Countertops     ,Counter Top Type/Name
+,
+
+
+
+,   Counter Top Type
+
+Set,#CtopName1=None,         Counter Top 1 Type
+Set,#CtoptypeCostFactor1=0,2.1    #CtopName1 Type Cost Per Foot
+,**
+Set,#CtopName2=Melamine,         Counter Top 2 Type
+Set,#CtoptypeCostFactor2=1,2.1    #CtopName2 Type Cost Per Foot
+,**
+Set,#CtopName3=HPL,         Counter Top 3 Type
+Set,#CtoptypeCostFactor3=20,2.1    #CtopName3 Type Cost Per Foot
+,**
+Set,#CtopName4=Granite,         Counter Top 4 Type
+Set,#CtoptypeCostFactor4=1,2.1    #CtopName4 Type Cost Per Foot
+,**
+Set,#CtopName5=Extra,         Counter Top 5 Type
+Set,#CtoptypeCostFactor5=0,2.1    #CtopName5 Type Cost Per Foot
+,**
+Set,#CtopName6=Extra,         Counter Top 6 Type
+Set,#CtoptypeCostFactor6=0,2.1    #CtopName6 Type Cost Per Foot
+,**
+Set,#CtopName7=Extra,         Counter Top 7 Type
+Set,#CtoptypeCostFactor7=0,2.1    #CtopName7 Type Cost Per Foot
+,**
+Set,#CtopName8=Extra,         Counter Top 8 Type
+Set,#CtoptypeCostFactor8=0,2.1    #CtopName8 Type Cost Per Foot
+,**
+
+
+
+
+
+,                       ######  COUNTER TOP COST ######
+
+Set, #CTopLF$temp =0,* COUNTER TOP ---------- lineal foot/meter cost
+
+Set, #CTopSq$temp =19.15,* COUNTER TOP ---------- Square foot/meter cost
+
+
+,                       ######  BACKSPLASH COST ######
+
+Set,#Subtotal11Name=4" Backsplash ,4" Backsplash Name (this is what prints out on the report)
+Set, #Splash4LF$temp =2.25  ,4" BACKSPLASH -------- lineal foot/meter cost
+,**
+Set,#Subtotal12Name=Full Backsplash ,Full Backsplash Name (this is what prints out on the report)
+Set, #SplashFLF$temp =16    ,FULL BACKSPLASH ------ lineal foot/meter cost
+Set, #SplashFSQ$temp =0        ,FULL BACKSPLASH ------ Square foot/meter cost
+,**
+Set,#Subtotal13Name=Tile Backsplash ,Tile Backsplash Name (this is what prints out on the report)
+Set, #SplashTLF$temp =20    ,TILE BACKSPLASH ------ lineal foot/meter cost
+Set, #SplashTSQ$temp =0        ,TILE BACKSPLASH------- Square foot/meter cost
+
+
+set, (#incm="-Inch"):#CTopLinealFactor=12
+set, (#incm="-Inch"):#CtopSquareFactor=144
+set, (#incm="-Mm"):#CTopLinealFactor=1000
+set, (#incm="-Mm"):#CtopSquareFactor=1000000
+set, (#incm="-Cm"):#CTopLinealFactor=100
+set, (#incm="-Cm"):#CtopSquareFactor=10000
+
+
+
+Set, #SplashTLF$ = #SplashTLF$temp/#CTopLinealFactor    ,TILE BACKSPLASH ------ lineal foot/meter cost
+Set, #SplashTSQ$ = #SplashTSQ$temp/#CtopSquareFactor        ,TILE BACKSPLASH------- Square foot/meter cost
+Set, #SplashFLF$ = #SplashFLF$temp/#CTopLinealFactor    ,FULL BACKSPLASH ------ lineal foot/meter cost
+Set, #SplashFSQ$ = #SplashFSQ$temp/#CtopSquareFactor        ,FULL BACKSPLASH ------ Square foot/meter cost
+Set, #Splash4LF$ = #Splash4LF$temp/#CTopLinealFactor  ,4" BACKSPLASH -------- lineal foot/meter cost
+Set, #CTopLF$ = #CTopLF$temp/#CTopLinealFactor     ,* COUNTER TOP ---------- lineal foot cost
+Set, #CTopSq$ = #CTopSq$temp/#CtopSquareFactor    ,* COUNTER TOP ---------- Square foot cost
+
+
+
+
+,For My information
+Set,#Subtotal5Name =  Total Drawer Box Cost , ------------- Name
+Set,#Subtotal5Cost =  #TotalDrawerCost , ----------------- Cost
+Set,#Subtotal6Name =  Total Pullout Box Cost , ------------- Name
+Set,#Subtotal6Cost =  #TotalPulloutCost , ----------------- Cost
+Set,#Subtotal7Name =  Total Drawer Guide Cost , ------------- Name
+Set,#Subtotal7Cost =  #TotalDrawerGuideCost , ----------------- Cost
+Set,#Subtotal8Name =  Total Pullout Guide Cost , ------------ Name
+Set,#Subtotal8Cost =  #TotalPulloutGuideCost , --- Cost
+Set,#Subtotal9Name =  Total Drawer and Pullout Cost , ------ Name
+Set,#Subtotal9Cost =  #TotalDrawerCost + #TotalPulloutCost , --Cost
+Set,#Subtotal10Name = Total Dwr and Pullout Guide Cost , ------------- Name
+Set,#Subtotal10Cost = #TotalDrawerGuideCost + #TotalPulloutGuideCost , ----------------- Cost
+,My information above
+
+
+
+
+Set,#UnitDoorHingeCount = 0
+Set,#UnitDoorHandleCount = 0
+Set,#UnitDoorKnobCount = 0
+Set,#UnitDoorHandleCost = 0
+Set,#UnitDoorKnobCost = 0
+Set,#TotalDoorHandleCount=0
+Set,#TotalDoorHingeCount=0
+Set,#TotalDoorKnobCount=0
+Set,#TotalDoorHandleCost=0
+Set,#TotalDoorHingeCost=0
+Set,#TotalDoorKnobCost=0
+
+
+Set,#WhiteDoor=1,    Door Cost Factor for White material
+Set,#MaterialWtFactor=0,1.1a       Weight Factor multiplies Sqfootage by this number
+,SHUT OFF BELOW
+,DisplaySet,#WhiteDoor=.9,    Door Cost Factor for White material
+,DisplaySet,#MaterialWtFactor=2,1.1a       Weight Factor multiplies Sqfootage by this number
+
+
+,**
+
+
+,   **   Molding
+Set,#IncludeMolding=yes
+,SHUT OFF BELOW
+,Markup is only reflected in the room by room report
+,displaySet,#DesignerMarkup=01, Markup - will only be refleted in the room by room report answer 01 for 1 percent
+,Set,#DesignerMarkup=#MarkupTier, Markup - will only be refleted in the room by room report answer 01 for 1 percent
+
+Set, #IncludeMoldingName =Include Molding Yes or No?,1.5 --- Include molding Question?
+,DisplaySet, #IncludeMoldingName =Include Molding Yes or No?,1.5 --- Include molding Question?
+
+,AskQuestion,#IncludeMoldingYN,Yes,#IncludeMoldingName  [Yes;No]
+,Set,(#IncludeMoldingYN="No"):#IncludeMolding=No
+
+
+
+,DisplaySet,#BaseBdNotchNote=Notch Baseboard, Baseboard notch note
+,DisplaySet, #IncludeBasebdName =Include Base board notch Yes or No?,1.3 --- Include base board notch Question?
+,AskQuestion,#IncludeBasebdYN,Yes,#IncludeBasebdName  [Yes;No]
+,Set,(#IncludeBasebdYN="Yes"):#BaseBoardNote=Notch for baseboard
+,**
+
+,Wood type
+Set,#WoodTypeFactor=1
+Set,#WoodType="Standard"
+,    **   Wood Type
+,DisplaySet, #WoodTypeName =What is the Wood Type?,1.6 --- Wood Type Question?
+,AskQuestion,#WoodType,Regular Core, #WoodTypeName [Regular Core; Green Core]
+,**
+
+,      Core Type
+,DisplaySet,(#WoodType="Regular Core"):#WoodTypeFactor=1,1.7 --- Cost Factor for Regular Core
+,DisplaySet,(#WoodType="Green Core"):#WoodTypeFactor=1.2,1.8 --- Cost Factor for Green Core
+,**
+
+
+,   Drawer Box and Slide
+
+Set,#DrawerBoxSlideName1=Select,         Drawer Box and Slide 1 Name
+Set,#DrawerBoxSlideCost$1=1,1.9    #DrawerBoxSlideName1 Drawer Box and Slide Cost Factor
+,**
+Set,#DrawerBoxSlideName2=White,         Drawer Box and Slide 2 Name
+Set,#DrawerBoxSlideCost$2=1,1.10    #DrawerBoxSlideName2 Drawer Box and Slide Cost Factor
+,**
+set,#DrawerBoxSlideName3=Black,         Drawer Box and Slide 3 Name
+Set,#DrawerBoxSlideCost$3=1.25,1.11    #DrawerBoxSlideName3 Drawer Box and Slide Cost Factor
+,**
+Set,#DrawerBoxSlideName4=None,         Drawer Box and Slide 4 Name
+Set,#DrawerBoxSlideCost$4=0,1.12    #DrawerBoxSlideName4 Drawer Box and Slide Cost Factor
+,**
+Set,#DrawerBoxSlideName5=None,         Drawer Box and Slide 5 Name
+Set,#DrawerBoxSlideCost$5=0,1.13    #DrawerBoxSlideName5 Drawer Box and Slide Cost Factor
+,**
+Set,#DrawerBoxSlideName6=None,         Drawer Box and Slide 6 Name
+Set,#DrawerBoxSlideCost$6=0,1.14    #DrawerBoxSlideName6 Drawer Box and Slide Cost Factor
+,**
+Set,#DrawerBoxSlideName7=None,         Drawer Box and Slide 7 Name
+Set,#DrawerBoxSlideCost$7=0,1.15    #DrawerBoxSlideName7 Drawer Box and Slide Cost Factor
+,**
+Set,#DrawerBoxSlideName8=Extra,         Drawer Box and Slide 8 Name
+Set,#DrawerBoxSlideCost$8=1,1.16    #DrawerBoxSlideName8 Drawer Box and Slide Cost Factor
+,**
+Set,#DrawerBoxSlideName9=Extra,         Drawer Box and Slide 9 Name
+Set,#DrawerBoxSlideCost$9=1,1.17    #DrawerBoxSlideName9 Drawer Box and Slide Cost Factor
+,**
+Set,#DrawerBoxSlideName10=Extra                   ,         Drawer Box and Slide 10 Name
+Set,#DrawerBoxSlideCost$10=1,1.18    #DrawerBoxSlideName10 Drawer Box and Slide Cost Factor
+,**
+
+
+
+,    Hinge
+Set,#HingeName1=None                   ,         Hinge 1 Name
+Set,#HingeCost$1=0,1.9    #HingeName1 Hinge Cost
+,**
+Set,#HingeName2=Reg 110                  ,         Hinge 2 Name
+Set,#HingeCost$2=16.80,1.10    #HingeName2 Hinge Cost
+,**
+Set,#HingeName3=Reg 160                  ,         Hinge 3 Name
+Set,#HingeCost$3=20.22,1.11    #HingeName3 Hinge Cost
+,**
+Set,#HingeName4=Soft close 110                   ,         Hinge 4 Name
+Set,#HingeCost$4=29.22,1.12    #HingeName4 Hinge Cost
+,**
+Set,#HingeName5=Soft close 160                   ,         Hinge 5 Name
+Set,#HingeCost$5=16.46,1.13    #HingeName5 Hinge Cost
+,**
+Set,#HingeName6=Extra                   ,         Hinge 6 Name
+Set,#HingeCost$6=1,1.14    #HingeName6 Hinge Cost
+,**
+Set,#HingeName7=Extra                   ,         Hinge 7 Name
+Set,#HingeCost$7=1,1.15    #HingeName7 Hinge Cost
+,**
+Set,#HingeName8=Extra                   ,         Hinge 8 Name
+Set,#HingeCost$8=1,1.16    #HingeName8 Hinge Cost
+,**
+Set,#HingeName9=Extra                   ,         Hinge 9 Name
+Set,#HingeCost$9=1,1.17    #HingeName9 Hinge Cost
+,**
+Set,#HingeName10=Extra                   ,         Hinge 10 Name
+Set,#HingeCost$10=1,1.18    #HingeName10 Hinge Cost
+,**
+
+
+,Drawer Box and Slide
+,Box 1
+,Box 1
+,Box 2
+,Box 3
+,Box 4
+,Box 5
+,Box 6
+,Box 7
+,Box 8
+,Box 9
+,Box 10
+
+
+
+,Handles
+,Handle 1
+,Handle 2
+,Handle 3
+,Handle 4
+,Handle 5
+,Handle 6
+,Handle 7
+,Handle 8
+,Handle 9
+,Handle 10
+
+,Hinge Style
+,Hinge 1
+,Hinge 2
+,Hinge 3
+,Hinge 4
+,Hinge 5
+,Hinge 6
+,Hinge 7
+,Hinge 8
+,Hinge 9
+,Hinge 10
+,**
+
+,            ***** Door Part Setup*****
+
+Set,#DoorRailWidth=3,         Door Rail Width
+Set,#DoorStileWidth=3,        Door Stile Width
+
+
+Set,#DoorRailadj=0,         Rail length less overall door width
+Set,#DoorStileadj=0,         Stile length less overall door height
+Set,#PanelWidthadj=4.813,         Panel width less overall door width
+Set,#PanelHtadj=4.813,         Panel Height less overall door height
+
+
+
+
+
+
+
+
+,          ***** BaseBoard Notch Setup*****
+
+Set,#BaseBdNotchName=Notch Base Bd, Notch Discription
+
+Set,#BaseBoardNotchCosttemp=0,  Cost of notch for baseboard
+
+,            ***** Back Height Adjust for BaseBoard Setup*****
+,Back Height Formula
+
+Set,#AdjustedBackHt=(h-#ReduceBackHt),
+,Set,#BackHeightLessBaseBoard=(#ExtraUnitText11+.125), Back Height Less Baseboard Height
+Set,#BottomHtoffFloor=z+k, Bottom Height off Floor to check for baseboard height difference
+Set,#StandardBackHtCalc=(tr+br+k), Standard back height Amount less ht of cabinet
+Set,#NonStdBackCalc=(((#ExtraUnitText11+.125)-z)+tr), Back Height formula for adjust for off floor
+Set,#StandardBackHtLessBaseBoard=((#ExtraUnitText11+.125)+tr), Back Height Less Baseboard Height
+
+,Set,(z<=#ExtraUnitText11):#offflooradjust=(#ExtraUnitText11-z):#offflooradjust=#BackHeightLessBaseBoard
+,Set,(z<=#ExtraUnitText11):#BackHeightLessBaseBoard=((#ExtraUnitText11+.125)-z)-tr
+
+
+
+,KF Just changed below
+,Load,HandleKnobCost.pcb
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

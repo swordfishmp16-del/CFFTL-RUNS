@@ -1,0 +1,78 @@
+,CF Library - closet pieces
+,******** Tie Drawer *************
+Set, #PulloutOpeningWidth = W
+,Load, (npo>0): G-Pullout Cost.Pcb
+
+,**
+'Price Pullout Box
+
+Set, #W = [(#PulloutOpeningWidth/NDiv) -1]
+Set, #H = H
+Set, #D = [D]
+
+
+Set, #H = {#H}
+,Price, (H<=4):1,    #H"  #PulloutName Tie,  528,   w,   d,   #PulloutPrintOrderNumber,
+,Price, (H>4):1,    #H"  #PulloutName Tie,   528,   w,   d,   #PulloutPrintOrderNumber,
+
+set, #VD2unit=1
+Price, (#Unitfilename="*Double*"):1,    Double-Sided Caddy Insert,  #doublesidedcaddy*#universalupcharge,   w,   d,   #PulloutPrintOrderNumber,
+set, #VD2unit=0
+set, #VDunit=1
+Price, (#Unitfilename<>"*Double*"):1,   Single-Sided Caddy Insert,  #singlesidedcaddy*#universalupcharge,   w,   d,   #PulloutPrintOrderNumber,
+set, #VDunit=0
+,***********************************
+
+
+,CF Base with no drawer
+,Calculates the price for each part
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+load, Calculatecutbacksaddtoside.pcb
+Set, #VertD=#VertDL
+load, Pricesides.pcb      
+,*****************************************
+
+
+,*********** TOP SPANNERS OR FULL SHELF Base Cabinet and OTHER FIXED SHELVES**
+Set, #ShelfWidth = [(W-LS-RS)]
+Set,(#FullTops="No"):#ShelfDepth=[#SpannerWidth]:#ShelfDepth=[D]
+load, Pricefixedshelves.pcb
+,*****************************************
+
+
+
+,*********** All ADJ SHELVES *************
+,Top Adj Shelves
+Set, (MS=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-MS)/2]
+Set, #ShelfDepth = [(D)]
+Set, (MS=0):#Tempshelfcount=SH:#Tempshelfcount=SH*2
+Load, Priceadjshelves.pcb
+
+,*****************************************
+
+
+
+,************* OTHER PARTS ***************
+set, #Backheight = [H-TR-BR-K]
+set, #ShelfWidth = [(W-LS-RS)]
+Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber, 
+       
+,Price, 1,            #ClosetPoleName,       #ClosetPoleCost,         (W-LS-RS), 1,  #ClosetPolePrintOrderNumber,        
+Price, (K>0):1,      #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,  
+load, (CT>0): eachunitcoutertops.pcb            
+,*****************************************
+
+
+
+
+,******* All DOORS & DRAWER FRONTS *******
+Load, Doors.pcb
+,*****************************************
+
+
+
+

@@ -1,0 +1,11 @@
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Library Support Pole
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+
+
+set, #supportpolecost=(w/12)*(#supportpolelinearfootcost)
+
+Price,1, RM#Roomnum Library Ladder Support #SupportPolePN,      #SupportPolecost*#universalupcharge,  W     , ,    
+
+     

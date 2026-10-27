@@ -1,0 +1,1818 @@
+,Use Grid
+,**
+,**
+set, #clothlinercost=0
+set, #plasticlinercost=0
+set, #clothliner=
+set, #plasticliner=
+set,#tipouthamperbraketpartnumber =
+Set,#richelieubasketcode=
+
+
+,,**            ***** Go back to A-Setup to change the method of pricing Baskets *****
+,,**
+,**---V7.2.13------All baskets listed, use unit library allowed sizes and unit type selections to limit your basket offerings. 
+
+set, (#extraunittext7<>"*1/4*")&(bkyn=1):#backamount=.75:#backamount=0
+,Set Basket Width Height Depth from the Closet size
+Set, #W = [#BasketOpeningWidth]
+Set, #H = [#BasketOpeningHeight]
+Set, #D = [D-#backamount-#bottombasketdepthadj]
+,V7.2.4 start
+Set, #typeofbasket = Invalid Size
+,V7.2.4 end
+,------- Set Cost from Basket Size (Largest to Smallest) -------
+Set, #CostOfBasket = 0 ,Default Basket Cost - reset to proper cost below
+
+Set, #basketdepthcode=0, default value
+Displayset, #hafelepartnumber=Direct Entry, Do you use part numbers? [Hafele;Richelieu;Direct Entry]
+
+Do, (#hafelepartnumber="Hafele"):1
+{
+Set,(#UnitFileName="*CHR*"):#Basketfinish=CHR
+Set,(#UnitFileName="*MB*"):#Basketfinish=MB
+Set,(#UnitFileName="*WHT*"):#Basketfinish=WHT
+Set,(#UnitFileName="*SG*"):#Basketfinish=SG
+Set,(#UnitFileName="*MG*"):#Basketfinish=MG
+Set,(#UnitFileName="*MNL*"):#Basketfinish=MNL
+}
+
+Do, (#hafelepartnumber="Richelieu"):1
+{
+Set,(#UnitFileName="*CHR*")&(#UnitFileName<>"*tipout*"):#Basketfinish=CR3
+Set,(#UnitFileName="*ORB*")&(#UnitFileName<>"*tipout*"):#Basketfinish=ORB3
+Set,(#UnitFileName="*MNL*")&(#UnitFileName<>"*tipout*"):#Basketfinish=SN3
+Set,(#UnitFileName<>"*tipout*"):#richelieubasketcode=CB
+
+Set,(#UnitFileName="*CHR*")&(#UnitFileName="*tipout*"):#Basketfinish=CR52 Hamper
+Set,(#UnitFileName="*ORB*")&(#UnitFileName="*tipout*"):#Basketfinish=ORB Hamper
+Set,(#UnitFileName="*MNL*")&(#UnitFileName="*tipout*"):#Basketfinish=SN52 Hamper
+Set,(#UnitFileName="*tipout*"):#richelieubasketcode=CTOH
+
+
+}
+
+
+,**
+DisplaySet, #NumberOfBasketSizes =27,      Q.    How many different Basket sizes do you use?  [1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32;33;34;35;36;37;38;39;40;41;42;43;44;45;46;47;48;49;50;51;52;53;54;55;56;57;58;59;60;61;62;63;64;65;66;67;68;69;70;71;72;73;74;75;76;77;78;79;80;81;82;83;84;85;86;87;88;89;90]
+
+
+
+,** 
+,**  Fill in the information below for each of your Basket sizes
+,**  ** Start with your Largest Basket and work to your Smallest **
+,**
+,V7.2.4 start
+,find "<=" and replace all with "="  each set line for all baskets.
+,
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Do, (#NumberOfBasketSizes>=1):1
+{
+,**   Basket Size #1   (Largest)
+DisplaySet, #BasketWidth =30,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket1Depth =16,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =17,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =195,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket1type=8573014140  RICH 30/17,  -----------------     Description of Basket or PN for Direct Entry     - TYPE -
+Displayset, #Basket1plastic=-547.98.465,  -----------------     Description of Basket Plastic Liner     
+Displayset, #Basket1canvas=-547.37.489,  -----------------     Description of Basket Cloth Liner   
+Displayset, #Basket1plasticcost=15,  -----------------     Cost of Basket Plastic Liner     
+Displayset, #Basket1canvascost=35,  -----------------     Cost of Basket Cloth Liner   
+
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket1plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket1canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket1plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket1canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket1type
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=2):1
+{
+,**   Basket Size #2
+DisplaySet, #BasketWidth =30,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket1Depth =16,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =11,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =175,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket2type=8513014140  RICH 30/11,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket2plastic=-547.98.465,  -----------------     Description of Basket Plastic Liner     
+Displayset, #Basket2canvas=-547.37.488,  -----------------     Description of Basket Cloth Liner   
+Displayset, #Basket2plasticcost=15,  -----------------     Cost of Basket Plastic Liner     
+Displayset, #Basket2canvascost=35,  -----------------     Cost of Basket Cloth Liner   
+
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket2plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket2canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket2plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket2canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket2type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=3):1
+{
+,**   Basket Size #3
+DisplaySet, #BasketWidth =30,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket1Depth =16,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =155,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket3type=8563014140  RICH 30/6,  -----------------     Description of Basket or PN for Direct Entry     - TYPE -
+Displayset, #Basket3plastic=-547.98.476,  -----------------     Description of Basket Plastic Liner     
+Displayset, #Basket3canvas=-547.37.487,  -----------------     Description of Basket Cloth Liner   
+Displayset, #Basket3plasticcost=15,  -----------------     Cost of Basket Cloth Liner     
+Displayset, #Basket3canvascost=35,  -----------------     Cost of Basket Plastic Liner   
+
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket3plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket3canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket3plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket3canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket3type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=4):1
+{
+,**   Basket Size #4
+DisplaySet, #BasketWidth =30,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket2Depth =14,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =17,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =195,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket4type=8573014140  RICH 30/17,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket4plastic=-547.98.445,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket4canvas=-547.37.486,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket4plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket4canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket4plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket4canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket4plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket4canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket4type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=5):1
+{
+,**   Basket Size #5
+DisplaySet, #BasketWidth =30,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket2Depth =14,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =11,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =175,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket5type=8513014140  RICH 30/11,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket5plastic=-547.98.445,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket5canvas=-547.37.485,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket5plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket5canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket5plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket5canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket5plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket5canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket5type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=6):1
+{
+,**   Basket Size #6
+DisplaySet, #BasketWidth =30,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket2Depth =14,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =155,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket6type=8563014140  RICH 30/6,  -----------------     Description of Basket or PN for Direct Entry     - TYPE -
+Displayset, #Basket6plastic=-547.98.456,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket6canvas=-547.37.484,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket6plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket6canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket6plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket6canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket6plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket6canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket6type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=7):1
+{
+,**   Basket Size #7
+DisplaySet, #BasketWidth =30,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket3Depth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =17,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =300,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket7type=CB301218CR3,  -----------------     Description of Basket or PN for Direct Entry     - TYPE -
+Displayset, #Basket7plastic=NA,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket7canvas=NA,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket7plasticcost=0,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket7canvascost=0,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket7plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothlinercost=#Basket7canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticliner=#Basket7plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothliner=#Basket7canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#typeofbasket=#Basket7type
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=8):1
+{
+,**   Basket Size #8
+DisplaySet, #BasketWidth =30,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket3Depth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =11,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =300,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket8type=CB301211CR3,  -----------------     Description of Basket or PN for Direct Entry     - TYPE -
+Displayset, #Basket8plastic=NA,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket8canvas=NA,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket8plasticcost=0,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket8canvascost=0,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket8plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothlinercost=#Basket8canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticliner=#Basket8plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothliner=#Basket8canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#typeofbasket=#Basket8type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=9):1
+{
+,**   Basket Size #9
+DisplaySet, #BasketWidth =30,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket3Depth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =300,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket9type=CB301207CR3,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket9plastic=NA,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket9canvas=NA,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket9plasticcost=0,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket9canvascost=0,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket9plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothlinercost=#Basket9canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticliner=#Basket9plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothliner=#Basket9canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#typeofbasket=#Basket9type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=10):1
+{
+,**   Basket Size #10
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket1Depth =16,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =17,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =195,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket10type=8572414140  RICH 24/17,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #24intipoutcost=115,-----------------     Cost for Tip Out HAMPER Laundry Version
+Set, (#UnitFileName="*tipout*"):#BasketCost =#24intipoutcost
+Displayset,  #Basket10TOBasketPN=Tip Out Hamper 547.42.242,  -----------------     Direct Entry Part number of Tip Out HAMPER Basket  
+Displayset,  #Basket10TOBracketPN=-547.42.990,  -----------------     Direct Entry Part number of Tip Out HAMPER Bracket 
+Displayset, #Basket10TOplastic=-Hamper 547.95.434,  -----------------     Description of Tip Out HAMPER Basket Plastic Liner    
+Displayset, #Basket10TOcanvas=-Hamper 547.42.488,  -----------------     Description of Tip Out HAMPER Basket Cloth Liner  
+Displayset, #Basket10TOplasticcost=15,  -----------------     Cost of Tip Out HAMPER Basket Plastic Liner    
+Displayset, #Basket10TOcanvascost=40,  -----------------     Cost of Tip Out HAMPER Basket Cloth Liner   
+
+Displayset, #Basket10plastic=-547.98.463,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket10canvas=-547.36.489,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket10plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket10canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket10plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket10canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket10plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket10canvas
+
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket10type
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#typeofbasket=#Basket10typeHamper
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*")&(#hafelepartnumber="Direct Entry"):#typeofbasket=#Basket10TOBasketPN 
+set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*")&(#hafelepartnumber="Direct Entry"):#tipouthamperbraketpartnumber =#Basket10TOBracketPN
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#plasticliner=#Basket10TOplastic
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#clothliner=#Basket10TOcanvas
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#plasticlinercost=#Basket10TOplasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#clothlinercost=#Basket10TOcanvascost
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=11):1
+{
+,**   Basket Size #11
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket1Depth =16,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =11,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =175,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket11type=8512414140  RICH 24/11,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket11plastic=-547.98.463,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket11canvas=-547.36.488,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket11plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket11canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket11plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket11canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket11plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket11canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket11type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=12):1
+{
+,**   Basket Size #12
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket1Depth =16,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =155,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket12type=8562414140  RICH 24/6,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket12plastic=-547.98.474,  -----------------     Description of Basket Plastic Liner     
+Displayset, #Basket12canvas=-547.36.487,  -----------------     Description of Basket Cloth Liner   
+Displayset, #Basket12plasticcost=15,  -----------------     Cost of Basket Plastic Liner     
+Displayset, #Basket12canvascost=35,  -----------------     Cost of Basket Cloth Liner   
+
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket12plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket12canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket12plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket12canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket12type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=13):1
+{
+,**   Basket Size #13
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket2Depth =14,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =17,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =195,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket13type=8572414140  RICH 24/17,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #2414intipoutcost=115,-----------------     Cost for Tip Out HAMPER Laundry Version
+Set, (#UnitFileName="*tipout*"):#BasketCost =#2414intipoutcost
+Displayset, #Basket13TOBasketPN=Tip Out Hamper 547.95.232,  -----------------     Direct Entry Part number of Tip Out HAMPER Basket  
+Displayset, #Basket13TOBracketPN=-547.42.990,  -----------------     Direct Entry Part number of Tip Out HAMPER Bracket  
+Displayset, #Basket13TOplastic=-Hamper 547.95.432,  -----------------    Description of Tip Out HAMPER Basket Plastic Liner    
+Displayset, #Basket13TOcanvas=-Hamper 547.42.487,  -----------------     Description of Tip Out HAMPER Basket Cloth Liner  
+Displayset, #Basket13TOplasticcost=15,  -----------------     Cost of Tip Out HAMPER Basket Plastic Liner    
+Displayset, #Basket13TOcanvascost=40,  -----------------     Cost of Tip Out HAMPER Basket Cloth Liner   
+
+Displayset, #Basket13plastic=-547.98.443,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket13canvas=-547.36.486,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket13plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket13canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket13plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket13canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket13plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket13canvas
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket13type
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#typeofbasket=#Basket13typeHamper
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*")&(#hafelepartnumber="Direct Entry"):#typeofbasket=#Basket13TOBasketPN
+set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*")&(#hafelepartnumber="Direct Entry"):#tipouthamperbraketpartnumber =#Basket13TOBracketPN
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#plasticliner=#Basket13TOplastic
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#clothliner=#Basket13TOcanvas
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#plasticlinercost=#Basket13TOplasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#clothlinercost=#Basket13TOcanvascost
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=14):1
+{
+,**   Basket Size #14
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket2Depth =14,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =11,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =175,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket14type=8512414140  RICH 24/11,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket14plastic=-547.98.443,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket14canvas=-547.36.485,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket14plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket14canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket14plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket14canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket14plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket14canvas
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket14type
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=15):1
+{
+,**   Basket Size #15
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket2Depth =14,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =155,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket15type=8562414140  RICH 24/6,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket15plastic=-547.98.454,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket15canvas=-547.36.484,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket15plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket15canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket15plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket15canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket15plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket15canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket15type
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=16):1
+{
+,**   Basket Size #16
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket3Depth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =17,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =300,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket16type=CB241218CR3,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket16plastic=NA,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket16canvas=NA,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket16plasticcost=0,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket16canvascost=0,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket16plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothlinercost=#Basket16canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticliner=#Basket16plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothliner=#Basket16canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#typeofbasket=#Basket16type
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=17):1
+{
+,**   Basket Size #17
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket3Depth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =11,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =300,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket17type=CB241211CR3,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket17plastic=NA,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket17canvas=NA,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket17plasticcost=0,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket17canvascost=0,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket17plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothlinercost=#Basket17canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticliner=#Basket17plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothliner=#Basket17canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#typeofbasket=#Basket17type
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=18):1
+{
+,**   Basket Size #18
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket3Depth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =300,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket18type=CB241207CR3,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket18plastic=NA,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket18canvas=NA,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket18plasticcost=0,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket18canvascost=0,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket18plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothlinercost=#Basket18canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticliner=#Basket18plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothliner=#Basket18canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#typeofbasket=#Basket18type
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=19):1
+{
+,**   Basket Size #19
+DisplaySet, #BasketWidth =18,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket1Depth =16,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =17,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =195,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket19type=8571814140  RICH 18/17,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #18intipoutcost=115,-----------------     Cost for Tip Out HAMPER Laundry Version
+Set, (#UnitFileName="*tipout*"):#BasketCost =#18intipoutcost
+Displayset, #Basket19TOBasketPN=Tip Out Hamper 547.42.241,  -----------------     Direct Entry Part number of Tip Out HAMPER Basket  
+Displayset, #Basket19TOBracketPN=-547.42.990,  -----------------     Direct Entry Part number of Tip Out HAMPER Bracket  
+Displayset, #Basket19TOplastic=-Hamper 547.95.433,  -----------------     Description of Tip Out HAMPER Basket Plastic Liner    
+Displayset, #Basket19TOcanvas=-Hamper 547.42.486,  -----------------     Description of Tip Out HAMPER Basket Cloth Liner  
+Displayset, #Basket19TOplasticcost=15,  -----------------     Cost of Tip Out HAMPER Basket Plastic Liner    
+Displayset, #Basket19TOcanvascost=40,  -----------------     Cost of Tip Out HAMPER Basket Cloth Liner   
+
+Displayset, #Basket19plastic=-547.98.461,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket19canvas=-547.35.489,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket19plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket19canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket19plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket19canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket19plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket19canvas
+
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket19type
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#typeofbasket=#Basket19typeHamper
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*")&(#hafelepartnumber="Direct Entry"):#typeofbasket=#Basket19TOBasketPN
+set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*")&(#hafelepartnumber="Direct Entry"):#tipouthamperbraketpartnumber =#Basket19TOBracketPN
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#plasticliner=#Basket19TOplastic
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#clothliner=#Basket19TOcanvas
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#plasticlinercost=#Basket19TOplasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#clothlinercost=#Basket19TOcanvascost
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=20):1
+{
+,**   Basket Size #20
+DisplaySet, #BasketWidth =18,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket1Depth =16,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =11,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =175,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket20type=8511814140  RICH 18/11,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket20plastic=-547.98.461,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket20canvas=-547.35.488,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket20plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket20canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket20plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket20canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket20plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket20canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket20type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=21):1
+{
+,**   Basket Size #21
+DisplaySet, #BasketWidth =18,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket1Depth =16,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =155,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket21type=8561814140  RICH 18/6,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket21plastic=-547.98.456,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket21canvas=-547.35.487,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket21plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket21canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket21plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket21canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket21plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket21canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket21type
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=22):1
+{
+,**   Basket Size #22
+DisplaySet, #BasketWidth =18,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket2Depth =14,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =17,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =195,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket22type=8571814140  RICH 18/17,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #1814intipoutcost=110,-----------------     Cost for Tip Out HAMPER Laundry Version
+Set, (#UnitFileName="*tipout*"):#BasketCost =#1814intipoutcost
+Displayset, #Basket22TOBasketPN=Tip Out Hamper 547.95.231,  -----------------    Direct Entry Part number of Tip Out HAMPER Basket 
+Displayset, #Basket22TOBracketPN=-547.42.990,  -----------------     Direct Entry Part number of Tip Out HAMPER Bracket   
+Displayset, #Basket22TOplastic=-Hamper 547.95.431,  -----------------     Description of Tip Out HAMPER Basket Plastic Liner    
+Displayset, #Basket22TOcanvas=-Hamper 547.42.485,  -----------------     Description of Tip Out HAMPER Basket Cloth Liner  
+Displayset, #Basket22TOplasticcost=15,  -----------------     Cost of Tip Out HAMPER Basket Plastic Liner    
+Displayset, #Basket22TOcanvascost=40,  -----------------     Cost of Tip Out HAMPER Basket Cloth Liner   
+
+Displayset, #Basket22plastic=-547.98.441,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket22canvas=-547.35.486,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket22plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket22canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket22plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket22canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket22plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket22canvas
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket22type
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#typeofbasket=#Basket22typeHamper
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*")&(#hafelepartnumber="Direct Entry"):#typeofbasket=#Basket22TOBasketPN
+set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*")&(#hafelepartnumber="Direct Entry"):#tipouthamperbraketpartnumber =#Basket22TOBracketPN
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#plasticliner=#Basket22TOplastic
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#clothliner=#Basket22TOcanvas
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#plasticlinercost=#Basket22TOplasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight)&(#UnitFileName="*tipout*"):#clothlinercost=#Basket22TOcanvascost
+
+
+
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=23):1
+{
+,**   Basket Size #23
+DisplaySet, #BasketWidth =18,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket2Depth =14,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =11,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =175,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket23type=8511814140  RICH 18/11,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket23plastic=-547.98.441,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket23canvas=-547.35.485,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket23plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket23canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket23plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket23canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket23plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket23canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket23type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=24):1
+{
+,**   Basket Size #24
+DisplaySet, #BasketWidth =18,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket2Depth =14,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =155,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket24type=8561814140  RICH 18/6,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket24plastic=-547.98.452,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket24canvas=-547.35.484,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket24plasticcost=15,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket24canvascost=35,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket24plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothlinercost=#Basket24canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#plasticliner=#Basket24plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#clothliner=#Basket24canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket2Depth)&(#D<#Basket1Depth) & (#H=#BasketHeight):#typeofbasket=#Basket24type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=25):1
+{
+,**   Basket Size #25
+DisplaySet, #BasketWidth =18,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket3Depth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =17,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =300,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket25type=CR181218CR3,  -----------------     Description of Basket or PN for Direct Entry     - TYPE -
+Displayset, #Basket25plastic=NA,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket25canvas=NA,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket25plasticcost=0,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket25canvascost=0,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket25plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothlinercost=#Basket25canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticliner=#Basket25plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothliner=#Basket25canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#typeofbasket=#Basket25type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=26):1
+{
+,**   Basket Size #26
+DisplaySet, #BasketWidth =18,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket3Depth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =11,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =300,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket26type=CB181211CR3,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket26plastic=NA,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket26canvas=NA,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket26plasticcost=0,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket26canvascost=0,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket26plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothlinercost=#Basket26canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticliner=#Basket26plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothliner=#Basket26canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#typeofbasket=#Basket26type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=27):1
+{
+,**   Basket Size #27
+DisplaySet, #BasketWidth =18,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #Basket3Depth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =300,     -----------------     Cost of Basket             - COST -
+Displayset, #Basket27type=CB181207CR3,  -----------------     Description of Basket or PN for Direct Entry    - TYPE -
+Displayset, #Basket27plastic=NA,  -----------------     Description of Basket Plastic Liner 
+Displayset, #Basket27canvas=NA,  -----------------     Description of Basket Cloth Liner 
+Displayset, #Basket27plasticcost=0,  -----------------     Cost of Basket Plastic Liner 
+Displayset, #Basket27canvascost=0,  -----------------     Cost of Basket Cloth Liner 
+
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticlinercost=#Basket27plasticcost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothlinercost=#Basket27canvascost
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#plasticliner=#Basket27plastic
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#clothliner=#Basket27canvas
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+Set, (#W=#BasketWidth) & (#D>=#Basket3Depth)&(#D<#Basket2Depth) & (#H=#BasketHeight):#typeofbasket=#Basket27type
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=28):1
+{
+,**   Basket Size #28
+DisplaySet, #BasketWidth =36,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =9,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =28.28,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=29):1
+{
+,**   Basket Size #29
+DisplaySet, #BasketWidth =36,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =29.29,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=30):1
+{
+,**   Basket Size #30
+DisplaySet, #BasketWidth =36,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =3,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =30.30,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=31):1
+{
+,**   Basket Size #31   
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =18,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =31.31,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=32):1
+{
+,**   Basket Size #32
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =15,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =32.32,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=33):1
+{
+,**   Basket Size #33
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =12,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =33.33,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=34):1
+{
+,**   Basket Size #34
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =9,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =34.34,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=35):1
+{
+,**   Basket Size #35
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =35.35,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=36):1
+{
+,**   Basket Size #36
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =3,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =36.36,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=37):1
+{
+,**   Basket Size #37
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =18,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =37.37,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=38):1
+{
+,**   Basket Size #38
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =15,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =38.38,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=39):1
+{
+,**   Basket Size #39
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =12,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =39.39,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=40):1
+{
+,**   Basket Size #40
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =9,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =40.40,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=41):1
+{
+,**   Basket Size #41
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =41.41,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=42):1
+{
+,**   Basket Size #42
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =3,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =42.42,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=43):1
+{
+,**   Basket Size #43
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =18,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =43.43,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=44):1
+{
+,**   Basket Size #44
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =15,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =44.44,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=45):1
+{
+,**   Basket Size #45
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =12,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =45.45,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=46):1
+{
+,**   Basket Size #46
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =9,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =46.46,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=47):1
+{
+,**   Basket Size #47
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =47.47,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=48):1
+{
+,**   Basket Size #48
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =3,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =48.48,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=49):1
+{
+,**   Basket Size #49
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =18,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =49.49,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=50):1
+{
+,**   Basket Size #50
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =15,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =5050,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=51):1
+{
+,**   Basket Size #51
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =12,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =51.51,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=52):1
+{
+,**   Basket Size #52
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =9,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =52.52,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=53):1
+{
+,**   Basket Size #53
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =53.53,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=54):1
+{
+,**   Basket Size #54
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =3,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =54.54,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=55):1
+{
+,**   Basket Size #55
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =18,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =55.55,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=56):1
+{
+,**   Basket Size #56
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =15,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =56.56,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=57):1
+{
+,**   Basket Size #57
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =12,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =57.57,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=58):1
+{
+,**   Basket Size #58
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =9,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =58.58,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=59):1
+{
+,**   Basket Size #59
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =59.59,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=60):1
+{
+,**   Basket Size #60
+DisplaySet, #BasketWidth =24,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =3,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =60.60,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=61):1
+{
+,**   Basket Size #61   
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =18,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =61.61,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=62):1
+{
+,**   Basket Size #62
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =15,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =62.62,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=63):1
+{
+,**   Basket Size #63
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =12,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =63.63,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=64):1
+{
+,**   Basket Size #64
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =9,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =64.64,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+}
+
+
+
+Do, (#NumberOfBasketSizes>=65):1
+{
+,**   Basket Size #65
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =65.65,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=66):1
+{
+,**   Basket Size #66
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =24,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =3,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =66.66,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=67):1
+{
+,**   Basket Size #67
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =18,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =67.67,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=68):1
+{
+,**   Basket Size #68
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =15,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =68.68,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=69):1
+{
+,**   Basket Size #69
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =12,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =69.69,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=70):1
+{
+,**   Basket Size #70
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =9,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =70.70,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=71):1
+{
+,**   Basket Size #71
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =71.71,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=72):1
+{
+,**   Basket Size #72
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =21,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =3,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =72.72,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=73):1
+{
+,**   Basket Size #73
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =18,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =73.73,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=74):1
+{
+,**   Basket Size #74
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =15,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =74.74,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=75):1
+{
+,**   Basket Size #75
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =12,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =75.75,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=76):1
+{
+,**   Basket Size #76
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =9,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =76.76,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=77):1
+{
+,**   Basket Size #77
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =77.77,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=78):1
+{
+,**   Basket Size #78
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =18,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =3,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =78.78,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=79):1
+{
+,**   Basket Size #79
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =18,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =79.79,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=80):1
+{
+,**   Basket Size #80
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =15,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =80.80,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=81):1
+{
+,**   Basket Size #81
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =12,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =81.81,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=82):1
+{
+,**   Basket Size #82
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =9,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =82.82,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=83):1
+{
+,**   Basket Size #83
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =83.83,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=84):1
+{
+,**   Basket Size #84
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =15,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =3,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =84.84,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=85):1
+{
+,**   Basket Size #85
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =18,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =85.85,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=86):1
+{
+,**   Basket Size #86
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =15,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =86.86,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=87):1
+{
+,**   Basket Size #87
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =12,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =87.87,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=88):1
+{
+,**   Basket Size #88
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =9,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =88.88,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=89):1
+{
+,**   Basket Size #89
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =6,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =89.89,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+
+
+Do, (#NumberOfBasketSizes>=90):1
+{
+,**   Basket Size #90
+DisplaySet, #BasketWidth =12,     -----------------     Width of Basket           - WIDTH -
+DisplaySet, #BasketDepth =12,     -----------------     Depth of Basket          - DEPTH -
+DisplaySet, #BasketHeight =3,     -----------------     Height of Basket         - HEIGHT -
+DisplaySet, #BasketCost =90.90,     -----------------     Cost of Basket             - COST -
+
+Set, (#W=#BasketWidth) & (#D>=#BasketDepth) & (#H=#BasketHeight):  #CostOfBasket=[#BasketCost]
+,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+
+,V7.2.4 end of editing (see note at start)
+
+Do, (#hafelepartnumber="Hafele"):1
+{
+
+Set, (#Basketfinish="CHR"):#basketfinishcode=2
+Set, (#Basketfinish="MB"):#basketfinishcode=3
+Set, (#Basketfinish="WHT"):#basketfinishcode=7
+Set, (#Basketfinish="SG"):#basketfinishcode=5
+Set, (#Basketfinish="MG"):#basketfinishcode=8
+Set, (#Basketfinish="MNL"):#basketfinishcode=6
+
+Set, (#Basketfinish="CHR"):#bracketfinishcode=990
+Set, (#Basketfinish="MB"):#bracketfinishcode=390
+Set, (#Basketfinish="WHT"):#bracketfinishcode=991
+Set, (#Basketfinish="SG"):#bracketfinishcode=590
+Set, (#Basketfinish="MG"):#bracketfinishcode=890
+Set, (#Basketfinish="MNL"):#bracketfinishcode=690
+
+Set, (#w =30): #basketwidthcode=41
+Set, (#w =24): #basketwidthcode=40
+Set, (#w =18): #basketwidthcode=38
+Set, (#w =24)&(#UnitFileName="*tipout*"):#basketTOwidthcode=2
+Set, (#w =18)&(#UnitFileName="*tipout*"):#basketTOwidthcode=1
+
+Set, (#d >=16):#basketdepthcode=5
+Set, (#d >=14)&(#d <16):#basketdepthcode=3
+Set, (#d >=12)&(#d <14):#basketdepthcode=1
+Set, (#d >=16)&(#UnitFileName="*tipout*"):#basketTOdepthcode=4
+Set, (#d >=14)&(#d <16)&(#UnitFileName="*tipout*"):#basketTOdepthcode=3
+
+set, (#h =17):#BasketHeightcode=8
+set, (#h =11):#BasketHeightcode=6
+set, (#h =6):#BasketHeightcode=2
+Set, (#h =17)&(#UnitFileName="*tipout*"):#basketTOheightcode=42
+
+
+Set,(#basketdepthcode=0):#Typeofbasket=Invalid Size
+
+Do, (#basketfinishcode=5):1 ,Slate invalid sizes
+ {
+set, #stopbasket=1
+ Set,(#basketdepthcode=1):#TypeofBasket=Invalid Size
+ Set,(#basketdepthcode=5):#TypeofBasket=Invalid Size
+set, #stopbasket=2
+ }
+Do, (#basketfinishcode=6):1 ,Matte Nickel invalid sizes
+ {
+ Set,(#basketdepthcode=1):#TypeofBasket=Invalid Size
+ }
+Do, (#basketfinishcode=3):1 ,MB invalid sizes
+ {
+ Set,(#basketdepthcode=1):#TypeofBasket=Invalid Size
+ }
+Do, (#basketfinishcode=7):1 ,White invalid sizes
+ {
+ Set,(#basketdepthcode=1)&(#basketHeightcode=2)&(#basketWidthcode=38):#TypeofBasket=Invalid Size
+ Set,(#basketdepthcode=1)&(#basketWidthcode=41):#TypeofBasket=Invalid Size
+ }
+
+Set, #basketpartnumber = 
+set, (#TypeofBasket<>"Invalid Size"):#basketpartnumber =-547.#basketwidthcode.#basketfinishcode#basketdepthcode#basketheightcode
+Set, (#UnitFileName="*tipout*"):#basketpartnumber =-547.#basketTOheightcode.#basketfinishcode#basketTOdepthcode#basketTOwidthcode
+
+set, #tipouthamperbraketpartnumber=-547.42.#bracketfinishcode
+
+}
+
+Set, (#d >=16):#basketdepthsize=16
+Set, (#d >=14)&(#d <16):#basketdepthsize=14
+Set, (#d >=12)&(#d <14):#basketdepthsize=12
+Set, (#d >=16)&(#UnitFileName="*tipout*"):#basketdepthsize=16
+Set, (#d >=14)&(#d <16)&(#UnitFileName="*tipout*"):#basketdepthsize=14
+
+set,#UnitBasketNum =[#UnitBasketNum + 1]
+set,#UnitBasketCost= [#UnitBasketCost + #CostOfBasket]
+
+
+
+,**
+'Price Basket Box
+
+Set, #H = {#H}
+,V7.2.4 start
+Do,  (#hafelepartnumber="Hafele"):1
+{
+Price,(#TypeofBasket<>"Invalid Size"): 1,   RM#Roomnum #BasketName-#typeofbasket-#Basketfinish#Basketpartnumber,   #CostOfBasket*#universalupcharge,   #Basketdepthsize,   #BasketOpeningWidth,   #BasketPrintOrderNumber,  
+Price, (#UnitFileName="*tipout*")&(#TypeofBasket<>"Invalid Size"):1, RM#Roomnum Tip-out Hamper Bracket#tipouthamperbraketpartnumber, 0,   1,   8.5,   #BasketPrintOrderNumber, 
+Price, (#Unitfilename="*PL*"):1, RM#Roomnum Basket Plastic Liner#plasticliner,#plasticlinercost*#universalupcharge, , , #BasketPrintOrderNumber,
+Price, (#Unitfilename="*CL*"):1, RM#Roomnum Basket Cloth Liner#clothliner,#clothlinercost*#universalupcharge, , , #BasketPrintOrderNumber,
+}
+
+Do, (#TypeofBasket="Invalid Size"):1
+{
+set, #name=#typeofbasket Basket
+load, Eachunit.pcb
+}
+Do,  (#hafelepartnumber="Richelieu"):1
+{
+Price,(#TypeofBasket<>"Invalid Size"): 1,   RM#Roomnum #BasketName #richelieubasketcode#typeofbasket#Basketfinish,   #CostOfBasket*#universalupcharge,   #Basketdepthsize,   #BasketOpeningWidth,   #BasketPrintOrderNumber,  
+,Price, (#UnitFileName="*tipout*")&(#TypeofBasket<>"Invalid Size"):1, RM#Roomnum Tip-out Hamper Bracket#tipouthamperbraketpartnumber, 0,   1,   8.5,   #BasketPrintOrderNumber, 
+Price, (#Unitfilename="*PL*"):1, RM#Roomnum Basket Plastic Liner#plasticliner,#plasticlinercost*#universalupcharge, , , #BasketPrintOrderNumber,
+Price, (#Unitfilename="*CL*"):1, RM#Roomnum Basket Cloth Liner#clothliner,#clothlinercost*#universalupcharge, , , #BasketPrintOrderNumber,
+}
+Do,  (#hafelepartnumber="Direct Entry"):1
+{
+Price,(#TypeofBasket<>"Invalid Size"): 1,   RM#Roomnum #BasketName #typeofbasket,   #CostOfBasket*#universalupcharge,   #Basketdepthsize,   #BasketOpeningWidth,   #BasketPrintOrderNumber,  
+Price, (#UnitFileName="*tipout*")&(#TypeofBasket<>"Invalid Size"):1, RM#Roomnum Tip-out Hamper Bracket#tipouthamperbraketpartnumber, 0,   1,   8.5,   #BasketPrintOrderNumber, 
+Price, (#Unitfilename="*PL*"):1, RM#Roomnum Basket Plastic Liner#plasticliner,#plasticlinercost*#universalupcharge, , , #BasketPrintOrderNumber,
+Price, (#Unitfilename="*CL*"):1, RM#Roomnum Basket Cloth Liner#clothliner,#clothlinercost*#universalupcharge, , , #BasketPrintOrderNumber,
+}
+,V7.2.4 end
+
+,Remove These
+Erase, #W
+Erase, #H
+Erase, #D 
+
+
+

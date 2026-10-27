@@ -1,0 +1,12 @@
+Set, (#ExtraUnitText3="*2nd Material"): #FillerMaterial=#ContrastMaterialName:#FillerMaterial=#UnitMaterialName
+Set, (#ExtraUnitText3="*Wood*"):#FillerMaterial=Match Edge Material
+
+,******** ALL FILLERS *********
+Price,       1,    #FillerName-#FillerMaterial,           #CostOfFiller*#universalupcharge,           w, h,          #FillerPrintOrderNumber,              
+,******************************
+
+
+,No cost for base filler kicks
+,******** ALL KICKS ***********
+,Price, (K>0):1,    #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,              
+,******************************

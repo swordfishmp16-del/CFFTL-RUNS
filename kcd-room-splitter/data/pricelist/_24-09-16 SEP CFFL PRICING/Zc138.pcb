@@ -1,0 +1,51 @@
+,Determine Cost of tie rack
+
+Do,(#UnitFileName="TieL.cab"):1
+{
+Set, #CostofTieRack = #CostofStdTieRack
+Set, #Tietype = Sliding #UnitMaterialName CHR
+}
+Do,(#UnitFileName="TieLU1.cab"):1
+{
+Set, #CostofTieRack = #CostofStdTieRack
+Set, #Tietype = Sliding #UnitMaterialName BN
+}
+Do,(#UnitFileName="TieR.cab"):1
+{
+Set, #CostofTieRack = #CostofStdTieRack
+Set, #Tietype = Sliding #UnitMaterialName CHR
+}
+Do,(#UnitFileName="TieRU1.cab"):1
+{
+Set, #CostofTieRack = #CostofStdTieRack
+Set, #Tietype = Sliding #UnitMaterialName BN
+}
+ 
+Do,(#UnitFileName="TieRFixedCR.cab"):1
+{
+Set, #CostofTieRack = #CostofFixedTieRack
+Set, #Tietype = Wall Mounted #UnitMaterialName CHR
+}
+Do,(#UnitFileName="TieRFixedBN.cab"):1
+{
+Set, #CostofTieRack = #CostofFixedTieRack
+Set, #Tietype = Wall Mounted #UnitMaterialName BN
+}
+
+Do,(#UnitFileName="MushpegL.cab")|(#UnitFileName="MushpegR.cab"):1
+{
+Set, #CostofTieRack = #CostofPegRack
+Set, #Tietype = Sliding #UnitMaterialName 
+}
+Do,(#UnitFileName="MushpegRfixed.cab"):1
+{
+Set, #CostofTieRack = #CostoffixedPegRack
+Set, #Tietype = Wall Mounted #UnitMaterialName
+}
+
+,******** ALL TIE RACKS **************
+Price,(#UnitFileName<>"Mush*"): 1,  RM#Roomnum #TieRackName,      #CostOfTieRack*#universalupcharge,             W, d,          #TieRackPrintOrderNumber,     
+,*************************************
+Price,(#UnitFileName="Mush*"): 1,  RM#Roomnum Peg Rack-#tietype ,      #CostOfTieRack*#universalupcharge,             W, d,          #TieRackPrintOrderNumber,     
+
+

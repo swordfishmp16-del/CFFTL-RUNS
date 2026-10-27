@@ -1,0 +1,242 @@
+Set,#KickBaseCost8footSectionsSub={((#KickBaseLengthTotal)\96)+2}
+Set,#KickBaseCost8foottotSections=#KickBaseCost8footSectionsSub
+load, final-ok.pcb
+load, final-ess.pcb
+Load, Molding.Pcb
+load, cost-subtotals.pcb
+
+
+
+,Set,#KickBaseCost8footTotLength=[#KickBaseCost8footLengthSub]
+
+
+,Set,#KickBaseCostSub=#BaseTypeCostGroup
+
+,SUBTOTAL SECTION
+Set,#Subtotal1cost1=#Subtotal1cost
+Set,#Subtotal2cost2=#Subtotal2cost
+Set,#Subtotal3cost3=#Subtotal3cost
+Set,#Subtotal4cost4=#Subtotal4cost
+Set,#Subtotal5cost5=#Subtotal5cost
+Set,#Subtotal6cost6=#Subtotal6cost
+Set,#Subtotal7cost7=#Subtotal7cost
+Set,#Subtotal8cost8=#Subtotal8cost
+Set,#Subtotal9cost9=#Subtotal9cost
+Set,#Subtotal10cost10=#Subtotal10cost
+Set,#Subtotal14cost14=#Subtotal14cost
+Set,#Subtotal15cost15=#Subtotal15cost
+Set,#Subtotal16cost16=#Subtotal16cost
+Set,#Subtotal17cost17=#Subtotal17cost
+Set,#Subtotal18cost18=#Subtotal18cost
+Set,#Subtotal19cost19=#Subtotal19cost
+Set,#Subtotal20cost20=#Subtotal20cost
+Set,#Subtotal21cost21=#Subtotal21cost
+Set,#Subtotal22cost22=#Subtotal22cost
+Set,#Subtotal23cost23=#Subtotal23cost
+Set,#Subtotal24cost24=#Subtotal24cost
+Set,#Subtotal25cost25=#Subtotal25cost
+Set,#Subtotal26cost26=#Subtotal26cost
+Set,#Subtotal27cost27=#Subtotal27cost
+Set,#Subtotal28cost28=#Subtotal28cost
+
+
+,Load, Molding.Pcb
+Set,  #SubTotal=[[#SubTotal] + #CTopCost]
+Set,  #SubTotal=[[#SubTotal] + #CTopCostV]
+
+,Back Splash
+Set,  (#Subtotal11Cost11>0):#SubTotal=[#SubTotal + [#Subtotal11Cost11]]
+,Full Backsplash
+Set,  (#Subtotal12Cost12>0):#SubTotal=[#SubTotal + [#Subtotal12Cost12]]
+,Tile Backsplash
+Set,  (#Subtotal13Cost13>0):#SubTotal=[#SubTotal + [#Subtotal13Cost13]]
+
+,Handles
+set,(#Subtotal1Cost1>0):#SubTotal=[#SubTotal +[#Subtotal1Cost1]]
+,Knobs
+set,(#Subtotal2Cost2>0):#SubTotal=[#SubTotal + [#Subtotal2Cost2]]
+,Hinges
+set,(#Subtotal3Cost3>0):#SubTotal=[#SubTotal + [#Subtotal3Cost3]]
+
+,Molding
+
+Set,#TMoldC=0
+
+,Changed for Closet Factory for XXbefore rm molding method
+set,(#IncludeMolding>0)&(MldNum>0):#SubTotal=[#SubTotal + (#Rm1MldCost+#Rm2MldCost+#Rm3MldCost+#Rm4MldCost+#Rm5MldCost+#Rm6MldCost+#Rm7MldCost+#Rm8MldCost+#Rm9MldCost+#Rm10MldCost+#Rm11MldCost+#Rm12MldCost+#Rm13MldCost+#Rm14MldCost+#Rm15MldCost+#Rm16MldCost+#Rm17MldCost+#Rm18MldCost+#Rm19MldCost+#Rm20MldCost+#Rm21MldCost+#Rm22MldCost+#Rm23MldCost+#Rm24MldCost+#Rm25MldCost)]
+Set,(#IncludeMolding>0)&(MldNum>0):#TMoldC=[#Rm1MldCost+#Rm2MldCost+#Rm3MldCost+#Rm4MldCost+#Rm5MldCost+#Rm6MldCost+#Rm7MldCost+#Rm8MldCost+#Rm9MldCost+#Rm10MldCost+#Rm11MldCost+#Rm12MldCost+#Rm13MldCost+#Rm14MldCost+#Rm15MldCost+#Rm16MldCost+#Rm17MldCost+#Rm18MldCost+#Rm19MldCost+#Rm20MldCost+#Rm21MldCost+#Rm22MldCost+#Rm23MldCost+#Rm24MldCost+#Rm25MldCost]
+Set,#SubTotal=[#SubTotal + (#Rm1BaseCost+#Rm2BaseCost+#Rm3BaseCost+#Rm4BaseCost+#Rm5BaseCost+#Rm6BaseCost+#Rm7BaseCost+#Rm8BaseCost+#Rm9BaseCost+#Rm10BaseCost+#Rm11BaseCost+#Rm12BaseCost+#Rm13BaseCost+#Rm14BaseCost+#Rm15BaseCost+#Rm16BaseCost+#Rm17BaseCost+#Rm18BaseCost+#Rm19BaseCost+#Rm20BaseCost+#Rm21BaseCost+#Rm22BaseCost+#Rm23BaseCost+#Rm24BaseCost+#Rm25BaseCost)] 
+Set,#TBaseMoldC=[#Rm1BaseCost+#Rm2BaseCost+#Rm3BaseCost+#Rm4BaseCost+#Rm5BaseCost+#Rm6BaseCost+#Rm7BaseCost+#Rm8BaseCost+#Rm9BaseCost+#Rm10BaseCost+#Rm11BaseCost+#Rm12BaseCost+#Rm13BaseCost+#Rm14BaseCost+#Rm15BaseCost+#Rm16BaseCost+#Rm17BaseCost+#Rm18BaseCost+#Rm19BaseCost+#Rm20BaseCost+#Rm21BaseCost+#Rm22BaseCost+#Rm23BaseCost+#Rm24BaseCost+#Rm25BaseCost]
+
+
+Set,#SubTotal=[#SubTotal + #Rm1WGBaseCost+ #Rm2WGBaseCost+ #Rm3WGBaseCost+ #Rm4WGBaseCost+ #Rm5WGBaseCost+ #Rm6WGBaseCost+ #Rm7WGBaseCost+ #Rm8WGBaseCost+ #Rm9WGBaseCost+ #Rm10WGBaseCost+ #Rm11WGBaseCost+ #Rm12WGBaseCost+ #Rm13WGBaseCost+ #Rm14WGBaseCost+ #Rm15WGBaseCost+ #Rm16WGBaseCost+ #Rm17WGBaseCost+ #Rm18WGBaseCost+ #Rm19WGBaseCost+ #Rm20WGBaseCost+ #Rm21WGBaseCost+ #Rm22WGBaseCost+ #Rm23WGBaseCost+ #Rm24WGBaseCost+ #Rm25WGBaseCost]
+Set,#TWGBaseMoldC=[#Rm1WGBaseCost+#Rm2WGBaseCost+#Rm3WGBaseCost+#Rm4WGBaseCost+#Rm5WGBaseCost+#Rm6WGBaseCost+#Rm7WGBaseCost+#Rm8WGBaseCost+#Rm9WGBaseCost+#Rm10WGBaseCost+#Rm11WGBaseCost+#Rm12WGBaseCost+#Rm13WGBaseCost+#Rm14WGBaseCost+#Rm15WGBaseCost+#Rm16WGBaseCost+#Rm17WGBaseCost+#Rm18WGBaseCost+#Rm19WGBaseCost+#Rm20WGBaseCost+#Rm21WGBaseCost+#Rm22WGBaseCost+#Rm23WGBaseCost+#Rm24WGBaseCost+#Rm25WGBaseCost]
+
+
+
+,Was below for standard molding cost built into KCD
+,set,(#IncludeMolding>0)&(MldNum>0):#SubTotal=[#SubTotal + #MoldingCost1]
+,set,(#IncludeMolding>0)&(MldNum>1):#SubTotal=[#SubTotal + #MoldingCost2]
+,set,(#IncludeMolding>0)&(MldNum>2):#SubTotal=[#SubTotal + #MoldingCost3]
+,set,(#IncludeMolding>0)&(MldNum>3):#SubTotal=[#SubTotal + #MoldingCost4]
+,set,(#IncludeMolding>0)&(MldNum>4):#SubTotal=[#SubTotal + #MoldingCost5]
+,set,(#IncludeMolding>0)&(MldNum>5):#SubTotal=[#SubTotal + #MoldingCost6]
+,set,(#IncludeMolding>0)&(MldNum>6):#SubTotal=[#SubTotal + #MoldingCost7]
+,set,(#IncludeMolding>0)&(MldNum>7):#SubTotal=[#SubTotal + #MoldingCost8]
+,set,(#IncludeMolding>0)&(MldNum>8):#SubTotal=[#SubTotal + #MoldingCost9]
+,set,(#IncludeMolding>0)&(MldNum>9):#SubTotal=[#SubTotal + #MoldingCost10]
+
+,Doors
+set,#Subtotal4Cost4=0
+,Drawer Boxes
+set,#Subtotal5Cost5=0
+,Pullouts
+set,#Subtotal6Cost6=0
+,DrawerGuides
+set,#Subtotal7Cost7=0
+,Pullout Guides
+set,#Subtotal8Cost8=0
+,Drawer and Pullout Boxes
+set,#Subtotal9Cost9=0
+,Drawer and Pullout Guides
+set,#Subtotal10Cost10=0
+
+
+load, cost-extra.pcb
+
+,Extra
+set,#Subtotal14Cost14=[#Subtotal14Cost14]
+set,(#Subtotal14Cost14<>0)&(#UseSub1=yes):#SubTotal=[#SubTotal + [#Subtotal14Cost14]]:#Subtotal14Cost14=0
+set,#Subtotal15Cost15=[#Subtotal15Cost15]
+set,(#Subtotal15Cost15<>0)&(#UseSub2=yes):#SubTotal=[#SubTotal + [#Subtotal15Cost15]]:#Subtotal15Cost15=0
+set,#Subtotal16Cost16=[#Subtotal16Cost16]
+set,(#Subtotal16Cost16<>0)&(#UseSub3=yes):#SubTotal=[#SubTotal + [#Subtotal16Cost16]]:#Subtotal16Cost16=0
+set,#Subtotal17Cost17=[#Subtotal17Cost17]
+set,(#Subtotal17Cost17<>0)&(#UseSub4=yes):#SubTotal=[#SubTotal + [#Subtotal17Cost17]]:#Subtotal17Cost17=0
+set,#Subtotal18Cost18=[#Subtotal18Cost18]
+set,(#Subtotal18Cost18<>0)&(#UseSub5=yes):#SubTotal=[#SubTotal + [#Subtotal18Cost18]]:#Subtotal18Cost18=0
+
+load, calcroomsubtotalswithdiscounts.pcb
+Set,#Subtotal19cost19=0
+
+,Installation Before Tax
+set,#Subtotal20Cost20=[#Subtotal20Cost20]
+set,(#Subtotal20Cost20>0)&(#InstallationTax=yes)&(#useinstallation=yes):#SubTotal=[#SubTotal + [#Subtotal20Cost20]]:#Subtotal20Cost20=0
+
+, Costco before tax
+Set, #CCsubtotal=[#subtotal]
+
+, Truncate Costco pretax total
+, Get Costco Total (Trim off the right 3 chars leaving the Whole number only)
+Set, #CostcoTotaltemppretax = [#CCsubTotal]
+Len, #Size, #CostcoTotaltemppretax
+Left, #CostcosubTotal, #Size-3, #CostcoTotaltemppretax
+
+,Tax
+set, #Costcosubtotalpretax=[#CostcosubTotal]
+Set,#Subtotal21Cost21 = [[#Subtotal]*#TaxAmt] , ----------------- Cost
+,Tax for Costco
+Set,#CCSubtotal21Cost21 = [[#CostcoSubtotal]*#TaxAmt] , ----------------- Cost
+
+
+set,#Subtotal21Cost21=[#Subtotal21Cost21]
+set,(#Subtotal21Cost21>0)&(#UseTax=yes):#SubTotal=[#SubTotal + [#Subtotal21Cost21]]:#Subtotal21Cost21=0
+, For Costco
+set,#CCSubtotal21Cost21=[#CCSubtotal21Cost21]
+set,(#CCSubtotal21Cost21>0)&(#UseTax=yes):#CostcoSubTotal=[#CostcoSubTotal + [#CCSubtotal21Cost21]]:#CCSubtotal21Cost21=0
+
+
+
+,Installation After Tax
+set,#Subtotal22Cost22=[#Subtotal22Cost22]
+set,(#Subtotal22Cost22>0)&(#InstallationTax=no)&(#useinstallation=yes):#SubTotal=[#SubTotal + [#Subtotal22Cost22]]:#Subtotal22Cost22=0
+,For costco
+set,(#Subtotal22Cost22>0)&(#InstallationTax=no)&(#useinstallation=yes):#CostcoSubTotal=[#CostcoSubTotal + [#Subtotal22Cost22]]:#Subtotal22Cost22=0
+
+Set,#Subtotal23cost23=0
+
+
+,Extra
+set,#Subtotal24Cost24=[#Subtotal24Cost24]
+set,(#Subtotal24Cost24<>0)&(#UseSub6=yes):#SubTotal=[#SubTotal + [#Subtotal24Cost24]]:#Subtotal24Cost24=0
+,For costco
+set,(#Subtotal24Cost24<>0)&(#UseSub6=yes):#CostcoSubTotal=[#CostcoSubTotal + [#Subtotal24Cost24]]:#Subtotal24Cost24=0
+set,#Subtotal25Cost25=[#Subtotal25Cost25]
+set,(#Subtotal25Cost25<>0)&(#UseSub7=yes):#SubTotal=[#SubTotal + [#Subtotal25Cost25]]:#Subtotal25Cost25=0
+,For costco
+set,(#Subtotal25Cost25<>0)&(#UseSub7=yes):#CostcoSubTotal=[#CostcoSubTotal + [#Subtotal25Cost25]]:#Subtotal25Cost25=0
+set,#Subtotal26Cost26=[#Subtotal26Cost26]
+set,(#Subtotal26Cost26<>0)&(#UseSub8=yes):#SubTotal=[#SubTotal + [#Subtotal26Cost26]]:#Subtotal26Cost26=0
+,For costco
+set,(#Subtotal26Cost26<>0)&(#UseSub8=yes):#CostcoSubTotal=[#CostcoSubTotal + [#Subtotal26Cost26]]:#Subtotal26Cost26=0
+set,#Subtotal27Cost27=[#Subtotal27Cost27]
+set,(#Subtotal27Cost27<>0)&(#UseSub9=yes):#SubTotal=[#SubTotal + [#Subtotal27Cost27]]:#Subtotal27Cost27=0
+,For costco
+set,(#Subtotal27Cost27<>0)&(#UseSub9=yes):#CostcoSubTotal=[#CostcoSubTotal + [#Subtotal27Cost27]]:#Subtotal27Cost27=0
+set,#Subtotal28Cost28=[#Subtotal28Cost28]
+set,(#Subtotal28Cost28<>0)&(#UseSub10=yes):#SubTotal=[#SubTotal + [#Subtotal28Cost28]]:#Subtotal28Cost28=0
+,For costco
+set,(#Subtotal28Cost28<>0)&(#UseSub10=yes):#CostcoSubTotal=[#CostcoSubTotal + [#Subtotal28Cost28]]:#Subtotal28Cost28=0
+
+,nodiscount on processing fee
+set,#nofeediscount$=[#Subtotal14Cost14*0.#DesignerMarkup]
+
+set, (#DesignerMarkup>0):#Finaljobtotal= [(#Subtotal*1.#DesignerMarkup)-#nofeediscount$]:#Finaljobtotal= [#Subtotal]
+set, (#DesignerMarkup>0):#Finaljobdiscount= [#Subtotal18cost18*1.#DesignerMarkup]:#Finaljobdiscount= [#Subtotal18cost18]
+, For costco
+set, (#DesignerMarkup>0):#CCFinaljobtotal= [(#CostcoSubtotal*1.#DesignerMarkup)-#nofeediscount$]:#CCFinaljobtotal= [#CostcoSubtotal]
+
+
+
+,***CF payment breakdown
+Do,(#Finaljobtotal>=10000):1
+{
+set, #jobdeposit=1000
+}
+Do,(#FinaljobTotal<10000):1
+{ 
+set, #jobdeposit=[#FinaljobTotal*.10]
+}
+
+,Set, #jobfirstpayment = (#FinaljobTotal/2)-#jobdeposit
+,Set, #jobsecondpayment = (#FinaljobTotal/2)-(#FinaljobTotal*.10)
+,Set, #jobfinalpayment = (#FinaljobTotal*.10) 
+,for franchisees who do 50/50 payments
+,Set, #halfpayment = #FinaljobTotal/2
+
+set, #deposit10financed=[#FinaljobTotal*.10]
+set, #second90financed=[#finaljobtotal-#deposit10financed]
+Set, #financedamount=[#Finaljobtotal-#jobdeposit],for 1000 limit on deposit hashtagjobdeposit
+
+Set, #jobsecondpayment =[#FinaljobTotal*.40]
+Set, #jobfinalpayment = [#FinaljobTotal*.10] 
+Set, #jobfirstpayment = [#FinaljobTotal-#jobdeposit-#jobsecondpayment-#jobfinalpayment]
+,for franchisees who do 50/50 payments
+Set, #1halfpayment = [#FinaljobTotal/2]
+Set, #2halfpayment = [#FinaljobTotal-#1halfpayment]
+
+,for franchise with 60% first payment 30% second and 10% final
+Set, #jobsecond30payment =[#FinaljobTotal*.30]
+Set, #jobfirst60payment = [#FinaljobTotal-#jobsecond30payment-#jobfinalpayment]
+
+Set, #First50percent=[#FinaljobTotal-#jobsecondpayment-#jobfinalpayment]
+
+,Get Costco Cash card (Trim off the right 3 chars leaving the Whole number only)
+,Taxes are subtracted out prior to calculating Cash Card total.
+Set, #CostcoCashCardtemp = [(#CCFinaljobTotal-[#CCSubtotal21Cost21])*.10]
+,The line below remove comma to round up.. keep comma to round down
+set,(#costcocashcardtemp-(#costcocashcardtemp\1)>.50):#costcocashcardtemp=[#costcocashcardtemp+1]
+
+Len, #Size, #CostcoCashcardtemp
+Left, #CostcoCashCard, #Size-3, #CostcoCashcardtemp
+
+,Get Costco Total (Trim off the right 3 chars leaving the Whole number only)
+Set, #CostcoTotal = [#CCFinaljobTotal]
+,The line below remove comma to round up.. keep comma to round down
+,set,(#costcoTotaltemp-(#costcototaltemp\1)>.50):#costcototaltemp=[#costcototaltemp+1]
+,Len, #Size, #CostcoTotaltemp
+,Left, #CostcoTotal, #Size-3, #CostcoTotaltemp
+
+,Load, CommonOKCounter_Export.pcb
+Load, CSVFile2.pcb
+,Load,CSVFile.pcb

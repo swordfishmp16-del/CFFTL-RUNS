@@ -1,0 +1,430 @@
+,from xflat.pcb
+set, #stopsolid=1
+Load, DS-Solid Door cost.pcb
+Set,(#DoorDrawerType = "#DoorDrawerTypeName4"):#DoorDrawerStyleCostGroup=#SolidDoorDrawerTypeCostFactor4
+Set,(#DoorDrawerType = "#DoorDrawerTypeName5"):#DoorDrawerStyleCostGroup=#SolidDoorDrawerTypeCostFactor5
+Set,(#DoorDrawerType = "#DoorDrawerTypeName6"):#DoorDrawerStyleCostGroup=#SolidDoorDrawerTypeCostFactor6
+Set,(#DoorDrawerType = "#DoorDrawerTypeName7"):#DoorDrawerStyleCostGroup=#SolidDoorDrawerTypeCostFactor7
+Set,(#DoorDrawerType = "#DoorDrawerTypeName8"):#DoorDrawerStyleCostGroup=#SolidDoorDrawerTypeCostFactor8
+set, #stopsolid=2
+Do,(1=2):1
+{
+Set,(#DoorDrawerType = "#DoorDrawerTypeName9"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor9
+Set,(#DoorDrawerType = "#DoorDrawerTypeName10"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor10
+Set,(#DoorDrawerType = "#DoorDrawerTypeName11"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor11
+Set,(#DoorDrawerType = "#DoorDrawerTypeName12"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor12
+Set,(#DoorDrawerType = "#DoorDrawerTypeName13"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor13
+Set,(#DoorDrawerType = "#DoorDrawerTypeName14"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor14
+Set,(#DoorDrawerType = "#DoorDrawerTypeName15"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor15
+Set,(#DoorDrawerType = "#DoorDrawerTypeName16"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor16
+Set,(#DoorDrawerType = "#DoorDrawerTypeName17"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor17
+Set,(#DoorDrawerType = "#DoorDrawerTypeName18"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor18
+Set,(#DoorDrawerType = "#DoorDrawerTypeName19"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor19
+Set,(#DoorDrawerType = "#DoorDrawerTypeName20"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor20
+Set,(#DoorDrawerType = "#DoorDrawerTypeName21"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor21
+Set,(#DoorDrawerType = "#DoorDrawerTypeName22"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor22
+Set,(#DoorDrawerType = "#DoorDrawerTypeName23"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor23
+Set,(#DoorDrawerType = "#DoorDrawerTypeName24"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor24
+Set,(#DoorDrawerType = "#DoorDrawerTypeName25"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor25
+Set,(#DoorDrawerType = "#DoorDrawerTypeName26"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor26
+Set,(#DoorDrawerType = "#DoorDrawerTypeName27"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor27
+Set,(#DoorDrawerType = "#DoorDrawerTypeName28"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor28
+Set,(#DoorDrawerType = "#DoorDrawerTypeName29"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor29
+Set,(#DoorDrawerType = "#DoorDrawerTypeName30"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor30
+Set,(#DoorDrawerType = "#DoorDrawerTypeName31"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor31
+Set,(#DoorDrawerType = "#DoorDrawerTypeName32"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor32
+Set,(#DoorDrawerType = "#DoorDrawerTypeName33"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor33
+Set,(#DoorDrawerType = "#DoorDrawerTypeName34"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor34
+Set,(#DoorDrawerType = "#DoorDrawerTypeName35"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor35
+Set,(#DoorDrawerType = "#DoorDrawerTypeName36"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor36
+Set,(#DoorDrawerType = "#DoorDrawerTypeName37"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor37
+Set,(#DoorDrawerType = "#DoorDrawerTypeName38"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor38
+Set,(#DoorDrawerType = "#DoorDrawerTypeName39"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor39
+Set,(#DoorDrawerType = "#DoorDrawerTypeName40"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor40
+Set,(#DoorDrawerType = "#DoorDrawerTypeName41"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor41
+Set,(#DoorDrawerType = "#DoorDrawerTypeName42"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor42
+Set,(#DoorDrawerType = "#DoorDrawerTypeName43"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor43
+Set,(#DoorDrawerType = "#DoorDrawerTypeName44"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor44
+Set,(#DoorDrawerType = "#DoorDrawerTypeName45"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor45
+Set,(#DoorDrawerType = "#DoorDrawerTypeName46"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor46
+Set,(#DoorDrawerType = "#DoorDrawerTypeName47"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor47
+Set,(#DoorDrawerType = "#DoorDrawerTypeName48"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor48
+Set,(#DoorDrawerType = "#DoorDrawerTypeName49"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor49
+Set,(#DoorDrawerType = "#DoorDrawerTypeName50"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor50
+Set,(#DoorDrawerType = "#DoorDrawerTypeName51"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor51
+Set,(#DoorDrawerType = "#DoorDrawerTypeName52"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor52
+Set,(#DoorDrawerType = "#DoorDrawerTypeName53"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor53
+Set,(#DoorDrawerType = "#DoorDrawerTypeName54"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor54
+Set,(#DoorDrawerType = "#DoorDrawerTypeName55"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor55
+Set,(#DoorDrawerType = "#DoorDrawerTypeName56"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor56
+Set,(#DoorDrawerType = "#DoorDrawerTypeName57"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor57
+Set,(#DoorDrawerType = "#DoorDrawerTypeName58"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor58
+Set,(#DoorDrawerType = "#DoorDrawerTypeName59"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor59
+Set,(#DoorDrawerType = "#DoorDrawerTypeName60"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor60
+Set,(#DoorDrawerType = "#DoorDrawerTypeName61"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor61
+Set,(#DoorDrawerType = "#DoorDrawerTypeName62"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor62
+Set,(#DoorDrawerType = "#DoorDrawerTypeName63"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor63
+Set,(#DoorDrawerType = "#DoorDrawerTypeName64"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor64
+Set,(#DoorDrawerType = "#DoorDrawerTypeName65"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor65
+Set,(#DoorDrawerType = "#DoorDrawerTypeName66"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor66
+Set,(#DoorDrawerType = "#DoorDrawerTypeName67"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor67
+Set,(#DoorDrawerType = "#DoorDrawerTypeName68"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor68
+Set,(#DoorDrawerType = "#DoorDrawerTypeName69"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor69
+Set,(#DoorDrawerType = "#DoorDrawerTypeName70"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor70
+Set,(#DoorDrawerType = "#DoorDrawerTypeName71"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor71
+Set,(#DoorDrawerType = "#DoorDrawerTypeName72"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor72
+Set,(#DoorDrawerType = "#DoorDrawerTypeName73"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor73
+Set,(#DoorDrawerType = "#DoorDrawerTypeName74"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor74
+Set,(#DoorDrawerType = "#DoorDrawerTypeName75"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor75
+Set,(#DoorDrawerType = "#DoorDrawerTypeName76"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor76
+Set,(#DoorDrawerType = "#DoorDrawerTypeName77"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor77
+Set,(#DoorDrawerType = "#DoorDrawerTypeName78"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor78
+Set,(#DoorDrawerType = "#DoorDrawerTypeName79"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor79
+Set,(#DoorDrawerType = "#DoorDrawerTypeName80"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor80
+Set,(#DoorDrawerType = "#DoorDrawerTypeName81"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor81
+Set,(#DoorDrawerType = "#DoorDrawerTypeName82"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor82
+Set,(#DoorDrawerType = "#DoorDrawerTypeName83"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor83
+Set,(#DoorDrawerType = "#DoorDrawerTypeName84"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor84
+Set,(#DoorDrawerType = "#DoorDrawerTypeName85"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor85
+Set,(#DoorDrawerType = "#DoorDrawerTypeName86"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor86
+Set,(#DoorDrawerType = "#DoorDrawerTypeName87"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor87
+Set,(#DoorDrawerType = "#DoorDrawerTypeName88"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor88
+Set,(#DoorDrawerType = "#DoorDrawerTypeName89"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor89
+Set,(#DoorDrawerType = "#DoorDrawerTypeName90"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor90
+Set,(#DoorDrawerType = "#DoorDrawerTypeName91"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor91
+Set,(#DoorDrawerType = "#DoorDrawerTypeName92"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor92
+Set,(#DoorDrawerType = "#DoorDrawerTypeName93"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor93
+Set,(#DoorDrawerType = "#DoorDrawerTypeName94"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor94
+Set,(#DoorDrawerType = "#DoorDrawerTypeName95"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor95
+Set,(#DoorDrawerType = "#DoorDrawerTypeName96"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor96
+Set,(#DoorDrawerType = "#DoorDrawerTypeName97"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor97
+Set,(#DoorDrawerType = "#DoorDrawerTypeName98"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor98
+Set,(#DoorDrawerType = "#DoorDrawerTypeName99"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor99
+Set,(#DoorDrawerType = "#DoorDrawerTypeName100"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor100
+Set,(#DoorDrawerType = "#DoorDrawerTypeName101"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor101
+Set,(#DoorDrawerType = "#DoorDrawerTypeName102"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor102
+Set,(#DoorDrawerType = "#DoorDrawerTypeName103"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor103
+Set,(#DoorDrawerType = "#DoorDrawerTypeName104"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor104
+Set,(#DoorDrawerType = "#DoorDrawerTypeName105"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor105
+Set,(#DoorDrawerType = "#DoorDrawerTypeName106"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor106
+Set,(#DoorDrawerType = "#DoorDrawerTypeName107"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor107
+Set,(#DoorDrawerType = "#DoorDrawerTypeName108"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor108
+Set,(#DoorDrawerType = "#DoorDrawerTypeName109"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor109
+Set,(#DoorDrawerType = "#DoorDrawerTypeName110"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor110
+Set,(#DoorDrawerType = "#DoorDrawerTypeName111"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor111
+Set,(#DoorDrawerType = "#DoorDrawerTypeName112"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor112
+Set,(#DoorDrawerType = "#DoorDrawerTypeName113"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor113
+Set,(#DoorDrawerType = "#DoorDrawerTypeName114"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor114
+Set,(#DoorDrawerType = "#DoorDrawerTypeName115"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor115
+Set,(#DoorDrawerType = "#DoorDrawerTypeName116"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor116
+Set,(#DoorDrawerType = "#DoorDrawerTypeName117"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor117
+Set,(#DoorDrawerType = "#DoorDrawerTypeName118"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor118
+Set,(#DoorDrawerType = "#DoorDrawerTypeName119"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor119
+Set,(#DoorDrawerType = "#DoorDrawerTypeName120"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor120
+Set,(#DoorDrawerType = "#DoorDrawerTypeName121"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor121
+Set,(#DoorDrawerType = "#DoorDrawerTypeName122"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor122
+Set,(#DoorDrawerType = "#DoorDrawerTypeName123"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor123
+Set,(#DoorDrawerType = "#DoorDrawerTypeName124"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor124
+Set,(#DoorDrawerType = "#DoorDrawerTypeName125"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor125
+Set,(#DoorDrawerType = "#DoorDrawerTypeName126"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor126
+Set,(#DoorDrawerType = "#DoorDrawerTypeName127"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor127
+Set,(#DoorDrawerType = "#DoorDrawerTypeName128"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor128
+Set,(#DoorDrawerType = "#DoorDrawerTypeName129"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor129
+Set,(#DoorDrawerType = "#DoorDrawerTypeName130"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor130
+Set,(#DoorDrawerType = "#DoorDrawerTypeName131"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor131
+Set,(#DoorDrawerType = "#DoorDrawerTypeName132"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor132
+Set,(#DoorDrawerType = "#DoorDrawerTypeName133"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor133
+Set,(#DoorDrawerType = "#DoorDrawerTypeName134"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor134
+Set,(#DoorDrawerType = "#DoorDrawerTypeName135"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor135
+Set,(#DoorDrawerType = "#DoorDrawerTypeName136"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor136
+Set,(#DoorDrawerType = "#DoorDrawerTypeName137"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor137
+Set,(#DoorDrawerType = "#DoorDrawerTypeName138"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor138
+Set,(#DoorDrawerType = "#DoorDrawerTypeName139"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor139
+Set,(#DoorDrawerType = "#DoorDrawerTypeName140"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor140
+Set,(#DoorDrawerType = "#DoorDrawerTypeName141"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor141
+Set,(#DoorDrawerType = "#DoorDrawerTypeName142"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor142
+Set,(#DoorDrawerType = "#DoorDrawerTypeName143"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor143
+Set,(#DoorDrawerType = "#DoorDrawerTypeName144"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor144
+Set,(#DoorDrawerType = "#DoorDrawerTypeName145"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor145
+Set,(#DoorDrawerType = "#DoorDrawerTypeName146"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor146
+Set,(#DoorDrawerType = "#DoorDrawerTypeName147"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor147
+Set,(#DoorDrawerType = "#DoorDrawerTypeName148"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor148
+Set,(#DoorDrawerType = "#DoorDrawerTypeName149"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor149
+Set,(#DoorDrawerType = "#DoorDrawerTypeName150"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor150
+Set,(#DoorDrawerType = "#DoorDrawerTypeName151"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor151
+Set,(#DoorDrawerType = "#DoorDrawerTypeName152"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor152
+Set,(#DoorDrawerType = "#DoorDrawerTypeName153"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor153
+Set,(#DoorDrawerType = "#DoorDrawerTypeName154"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor154
+Set,(#DoorDrawerType = "#DoorDrawerTypeName155"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor155
+Set,(#DoorDrawerType = "#DoorDrawerTypeName156"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor156
+Set,(#DoorDrawerType = "#DoorDrawerTypeName157"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor157
+Set,(#DoorDrawerType = "#DoorDrawerTypeName158"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor158
+Set,(#DoorDrawerType = "#DoorDrawerTypeName159"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor159
+Set,(#DoorDrawerType = "#DoorDrawerTypeName160"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor160
+Set,(#DoorDrawerType = "#DoorDrawerTypeName161"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor161
+Set,(#DoorDrawerType = "#DoorDrawerTypeName162"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor162
+Set,(#DoorDrawerType = "#DoorDrawerTypeName163"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor163
+Set,(#DoorDrawerType = "#DoorDrawerTypeName164"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor164
+Set,(#DoorDrawerType = "#DoorDrawerTypeName165"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor165
+Set,(#DoorDrawerType = "#DoorDrawerTypeName166"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor166
+Set,(#DoorDrawerType = "#DoorDrawerTypeName167"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor167
+Set,(#DoorDrawerType = "#DoorDrawerTypeName168"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor168
+Set,(#DoorDrawerType = "#DoorDrawerTypeName169"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor169
+Set,(#DoorDrawerType = "#DoorDrawerTypeName170"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor170
+Set,(#DoorDrawerType = "#DoorDrawerTypeName171"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor171
+Set,(#DoorDrawerType = "#DoorDrawerTypeName172"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor172
+Set,(#DoorDrawerType = "#DoorDrawerTypeName173"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor173
+Set,(#DoorDrawerType = "#DoorDrawerTypeName174"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor174
+Set,(#DoorDrawerType = "#DoorDrawerTypeName175"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor175
+Set,(#DoorDrawerType = "#DoorDrawerTypeName176"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor176
+Set,(#DoorDrawerType = "#DoorDrawerTypeName177"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor177
+Set,(#DoorDrawerType = "#DoorDrawerTypeName178"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor178
+Set,(#DoorDrawerType = "#DoorDrawerTypeName179"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor179
+Set,(#DoorDrawerType = "#DoorDrawerTypeName180"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor180
+Set,(#DoorDrawerType = "#DoorDrawerTypeName181"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor181
+Set,(#DoorDrawerType = "#DoorDrawerTypeName182"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor182
+Set,(#DoorDrawerType = "#DoorDrawerTypeName183"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor183
+Set,(#DoorDrawerType = "#DoorDrawerTypeName184"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor184
+Set,(#DoorDrawerType = "#DoorDrawerTypeName185"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor185
+Set,(#DoorDrawerType = "#DoorDrawerTypeName186"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor186
+Set,(#DoorDrawerType = "#DoorDrawerTypeName187"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor187
+Set,(#DoorDrawerType = "#DoorDrawerTypeName188"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor188
+Set,(#DoorDrawerType = "#DoorDrawerTypeName189"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor189
+Set,(#DoorDrawerType = "#DoorDrawerTypeName190"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor190
+Set,(#DoorDrawerType = "#DoorDrawerTypeName191"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor191
+Set,(#DoorDrawerType = "#DoorDrawerTypeName192"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor192
+Set,(#DoorDrawerType = "#DoorDrawerTypeName193"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor193
+Set,(#DoorDrawerType = "#DoorDrawerTypeName194"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor194
+Set,(#DoorDrawerType = "#DoorDrawerTypeName195"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor195
+Set,(#DoorDrawerType = "#DoorDrawerTypeName196"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor196
+Set,(#DoorDrawerType = "#DoorDrawerTypeName197"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor197
+Set,(#DoorDrawerType = "#DoorDrawerTypeName198"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor198
+Set,(#DoorDrawerType = "#DoorDrawerTypeName199"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor199
+Set,(#DoorDrawerType = "#DoorDrawerTypeName201"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor201
+Set,(#DoorDrawerType = "#DoorDrawerTypeName202"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor202
+Set,(#DoorDrawerType = "#DoorDrawerTypeName203"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor203
+Set,(#DoorDrawerType = "#DoorDrawerTypeName204"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor204
+Set,(#DoorDrawerType = "#DoorDrawerTypeName205"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor205
+Set,(#DoorDrawerType = "#DoorDrawerTypeName206"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor206
+Set,(#DoorDrawerType = "#DoorDrawerTypeName207"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor207
+Set,(#DoorDrawerType = "#DoorDrawerTypeName208"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor208
+Set,(#DoorDrawerType = "#DoorDrawerTypeName209"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor209
+Set,(#DoorDrawerType = "#DoorDrawerTypeName210"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor210
+Set,(#DoorDrawerType = "#DoorDrawerTypeName211"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor211
+Set,(#DoorDrawerType = "#DoorDrawerTypeName212"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor212
+Set,(#DoorDrawerType = "#DoorDrawerTypeName213"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor213
+Set,(#DoorDrawerType = "#DoorDrawerTypeName214"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor214
+Set,(#DoorDrawerType = "#DoorDrawerTypeName215"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor215
+Set,(#DoorDrawerType = "#DoorDrawerTypeName216"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor216
+Set,(#DoorDrawerType = "#DoorDrawerTypeName217"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor217
+Set,(#DoorDrawerType = "#DoorDrawerTypeName218"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor218
+Set,(#DoorDrawerType = "#DoorDrawerTypeName219"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor219
+Set,(#DoorDrawerType = "#DoorDrawerTypeName220"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor220
+Set,(#DoorDrawerType = "#DoorDrawerTypeName221"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor221
+Set,(#DoorDrawerType = "#DoorDrawerTypeName222"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor222
+Set,(#DoorDrawerType = "#DoorDrawerTypeName223"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor223
+Set,(#DoorDrawerType = "#DoorDrawerTypeName224"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor224
+Set,(#DoorDrawerType = "#DoorDrawerTypeName225"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor225
+Set,(#DoorDrawerType = "#DoorDrawerTypeName226"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor226
+Set,(#DoorDrawerType = "#DoorDrawerTypeName227"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor227
+Set,(#DoorDrawerType = "#DoorDrawerTypeName228"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor228
+Set,(#DoorDrawerType = "#DoorDrawerTypeName229"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor229
+Set,(#DoorDrawerType = "#DoorDrawerTypeName230"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor230
+Set,(#DoorDrawerType = "#DoorDrawerTypeName231"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor231
+Set,(#DoorDrawerType = "#DoorDrawerTypeName232"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor232
+Set,(#DoorDrawerType = "#DoorDrawerTypeName233"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor233
+Set,(#DoorDrawerType = "#DoorDrawerTypeName234"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor234
+Set,(#DoorDrawerType = "#DoorDrawerTypeName235"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor235
+Set,(#DoorDrawerType = "#DoorDrawerTypeName236"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor236
+Set,(#DoorDrawerType = "#DoorDrawerTypeName237"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor237
+Set,(#DoorDrawerType = "#DoorDrawerTypeName238"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor238
+Set,(#DoorDrawerType = "#DoorDrawerTypeName239"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor239
+Set,(#DoorDrawerType = "#DoorDrawerTypeName240"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor240
+Set,(#DoorDrawerType = "#DoorDrawerTypeName241"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor241
+Set,(#DoorDrawerType = "#DoorDrawerTypeName242"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor242
+Set,(#DoorDrawerType = "#DoorDrawerTypeName243"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor243
+Set,(#DoorDrawerType = "#DoorDrawerTypeName244"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor244
+Set,(#DoorDrawerType = "#DoorDrawerTypeName245"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor245
+Set,(#DoorDrawerType = "#DoorDrawerTypeName246"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor246
+Set,(#DoorDrawerType = "#DoorDrawerTypeName247"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor247
+Set,(#DoorDrawerType = "#DoorDrawerTypeName248"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor248
+Set,(#DoorDrawerType = "#DoorDrawerTypeName249"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor249
+Set,(#DoorDrawerType = "#DoorDrawerTypeName250"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor250
+Set,(#DoorDrawerType = "#DoorDrawerTypeName251"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor251
+Set,(#DoorDrawerType = "#DoorDrawerTypeName252"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor252
+Set,(#DoorDrawerType = "#DoorDrawerTypeName253"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor253
+Set,(#DoorDrawerType = "#DoorDrawerTypeName254"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor254
+Set,(#DoorDrawerType = "#DoorDrawerTypeName255"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor255
+Set,(#DoorDrawerType = "#DoorDrawerTypeName256"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor256
+Set,(#DoorDrawerType = "#DoorDrawerTypeName257"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor257
+Set,(#DoorDrawerType = "#DoorDrawerTypeName258"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor258
+Set,(#DoorDrawerType = "#DoorDrawerTypeName259"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor259
+Set,(#DoorDrawerType = "#DoorDrawerTypeName260"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor260
+Set,(#DoorDrawerType = "#DoorDrawerTypeName261"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor261
+Set,(#DoorDrawerType = "#DoorDrawerTypeName262"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor262
+Set,(#DoorDrawerType = "#DoorDrawerTypeName263"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor263
+Set,(#DoorDrawerType = "#DoorDrawerTypeName264"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor264
+Set,(#DoorDrawerType = "#DoorDrawerTypeName265"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor265
+Set,(#DoorDrawerType = "#DoorDrawerTypeName266"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor266
+Set,(#DoorDrawerType = "#DoorDrawerTypeName267"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor267
+Set,(#DoorDrawerType = "#DoorDrawerTypeName268"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor268
+Set,(#DoorDrawerType = "#DoorDrawerTypeName269"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor269
+Set,(#DoorDrawerType = "#DoorDrawerTypeName270"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor270
+Set,(#DoorDrawerType = "#DoorDrawerTypeName271"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor271
+Set,(#DoorDrawerType = "#DoorDrawerTypeName272"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor272
+Set,(#DoorDrawerType = "#DoorDrawerTypeName273"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor273
+Set,(#DoorDrawerType = "#DoorDrawerTypeName274"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor274
+Set,(#DoorDrawerType = "#DoorDrawerTypeName275"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor275
+Set,(#DoorDrawerType = "#DoorDrawerTypeName276"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor276
+Set,(#DoorDrawerType = "#DoorDrawerTypeName277"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor277
+Set,(#DoorDrawerType = "#DoorDrawerTypeName278"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor278
+Set,(#DoorDrawerType = "#DoorDrawerTypeName279"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor279
+Set,(#DoorDrawerType = "#DoorDrawerTypeName280"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor280
+Set,(#DoorDrawerType = "#DoorDrawerTypeName281"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor281
+Set,(#DoorDrawerType = "#DoorDrawerTypeName282"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor282
+Set,(#DoorDrawerType = "#DoorDrawerTypeName283"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor283
+Set,(#DoorDrawerType = "#DoorDrawerTypeName284"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor284
+Set,(#DoorDrawerType = "#DoorDrawerTypeName285"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor285
+Set,(#DoorDrawerType = "#DoorDrawerTypeName286"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor286
+Set,(#DoorDrawerType = "#DoorDrawerTypeName287"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor287
+Set,(#DoorDrawerType = "#DoorDrawerTypeName288"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor288
+Set,(#DoorDrawerType = "#DoorDrawerTypeName289"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor289
+Set,(#DoorDrawerType = "#DoorDrawerTypeName290"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor290
+Set,(#DoorDrawerType = "#DoorDrawerTypeName291"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor291
+Set,(#DoorDrawerType = "#DoorDrawerTypeName292"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor292
+Set,(#DoorDrawerType = "#DoorDrawerTypeName293"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor293
+Set,(#DoorDrawerType = "#DoorDrawerTypeName294"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor294
+Set,(#DoorDrawerType = "#DoorDrawerTypeName295"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor295
+Set,(#DoorDrawerType = "#DoorDrawerTypeName296"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor296
+Set,(#DoorDrawerType = "#DoorDrawerTypeName297"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor297
+Set,(#DoorDrawerType = "#DoorDrawerTypeName298"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor298
+Set,(#DoorDrawerType = "#DoorDrawerTypeName299"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor299
+Set,(#DoorDrawerType = "#DoorDrawerTypeName300"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor300
+Set,(#DoorDrawerType = "#DoorDrawerTypeName301"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor301
+Set,(#DoorDrawerType = "#DoorDrawerTypeName302"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor302
+Set,(#DoorDrawerType = "#DoorDrawerTypeName303"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor303
+Set,(#DoorDrawerType = "#DoorDrawerTypeName304"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor304
+Set,(#DoorDrawerType = "#DoorDrawerTypeName305"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor305
+Set,(#DoorDrawerType = "#DoorDrawerTypeName306"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor306
+Set,(#DoorDrawerType = "#DoorDrawerTypeName307"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor307
+Set,(#DoorDrawerType = "#DoorDrawerTypeName308"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor308
+Set,(#DoorDrawerType = "#DoorDrawerTypeName309"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor309
+Set,(#DoorDrawerType = "#DoorDrawerTypeName310"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor310
+Set,(#DoorDrawerType = "#DoorDrawerTypeName311"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor311
+Set,(#DoorDrawerType = "#DoorDrawerTypeName312"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor312
+Set,(#DoorDrawerType = "#DoorDrawerTypeName313"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor313
+Set,(#DoorDrawerType = "#DoorDrawerTypeName314"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor314
+Set,(#DoorDrawerType = "#DoorDrawerTypeName315"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor315
+Set,(#DoorDrawerType = "#DoorDrawerTypeName316"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor316
+Set,(#DoorDrawerType = "#DoorDrawerTypeName317"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor317
+Set,(#DoorDrawerType = "#DoorDrawerTypeName318"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor318
+Set,(#DoorDrawerType = "#DoorDrawerTypeName319"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor319
+Set,(#DoorDrawerType = "#DoorDrawerTypeName320"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor320
+Set,(#DoorDrawerType = "#DoorDrawerTypeName321"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor321
+Set,(#DoorDrawerType = "#DoorDrawerTypeName322"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor322
+Set,(#DoorDrawerType = "#DoorDrawerTypeName323"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor323
+Set,(#DoorDrawerType = "#DoorDrawerTypeName324"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor324
+Set,(#DoorDrawerType = "#DoorDrawerTypeName325"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor325
+Set,(#DoorDrawerType = "#DoorDrawerTypeName326"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor326
+Set,(#DoorDrawerType = "#DoorDrawerTypeName327"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor327
+Set,(#DoorDrawerType = "#DoorDrawerTypeName328"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor328
+Set,(#DoorDrawerType = "#DoorDrawerTypeName329"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor329
+Set,(#DoorDrawerType = "#DoorDrawerTypeName330"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor330
+Set,(#DoorDrawerType = "#DoorDrawerTypeName331"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor331
+Set,(#DoorDrawerType = "#DoorDrawerTypeName332"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor332
+Set,(#DoorDrawerType = "#DoorDrawerTypeName333"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor333
+Set,(#DoorDrawerType = "#DoorDrawerTypeName334"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor334
+Set,(#DoorDrawerType = "#DoorDrawerTypeName335"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor335
+Set,(#DoorDrawerType = "#DoorDrawerTypeName336"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor336
+Set,(#DoorDrawerType = "#DoorDrawerTypeName337"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor337
+Set,(#DoorDrawerType = "#DoorDrawerTypeName338"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor338
+Set,(#DoorDrawerType = "#DoorDrawerTypeName339"):#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor339
+
+set, #stophere=0
+Do,(#CodeDoor="flatCFMirror")|(#codedoor="flatCFMolding"):1
+{
+ Do,(#ContrastMaterialName="None"):1
+ {
+set, #stophere=1
+ Set, #DoorDrawerType = #DoorDrawerTypeName1
+ Set, #DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor1
+ }
+ Do,(#ContrastMaterialName<>"None"):1
+ {
+ Set,#DoorDrawerType = #DoorDrawerTypeName2
+ Set,#DoorDrawerStyleCostGroup=#DoorDrawerTypeCostFactor2
+ Set,#use2ndmaterial=1
+ }
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

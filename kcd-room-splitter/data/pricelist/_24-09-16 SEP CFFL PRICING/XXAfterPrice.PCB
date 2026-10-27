@@ -1,0 +1,3896 @@
+,Set Item Costs by Size Increaments
+
+
+Set, #stopxxafterprice=1
+,Calculating subtotals
+Do,(#Number>0):1
+{
+Set,#Cabtotalstd$ = [#Cabtotalstd$ + (#Cost*#Number)]
+Set,#Cabtotal = [#Cabtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+Set,#Subtotalstd$ = [#Subtotalstd$ + (#Cost*#Number)]
+Set,#Subtotal = [#Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+}
+Do, (#stopfinalOK<>1):1
+{
+
+Do,(#RoomNum = 1):1
+{
+
+Set,#Room1Subtotal = [#Room1Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room1Material = <#UnitMaterialname>
+Set,#Room1Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room1ContrastMaterial= <#ContrastMaterialname>
+Set, #Room1ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room1EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room1ClosetRodType= <#ClosetRodType>
+Set, #Room1ClosetRodcount= [#Room1ClosetRodcount+#stdrodcnt]
+Set, (#name="#ClosetPoleName")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="#ClosetPoleName"):#Room1ClosetRodlengthcount= [#Room1ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room1DoorDrawerType= <#DoorDrawerType>
+Set,#Room1DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room1DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room1Basicdoorcost=[#Room1Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room1DoorCost=[#Room1DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#RM1otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#RM1otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#RM1otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#RM1otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#RM1otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#RM1otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#RM1otherinsert7=Applied Molding
+
+
+Set,#Room1CrownMoldingType=<#CrownMoldingType>
+Set, #Room1CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room1BaseType= <#BaseType>
+Set,(#Room1BaseType<>"#BaseType0")&(#Room1BaseType<>"#BaseType00"):#Room1basecostgroup=<#BaseTypeCostGroup>:#Room1basecostgroup=0
+
+Set,(#Toestopcount>0):#Room1ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#room1Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room1Shoefencecount = [#Room1Shoefencecount+#Toestopcount]
+
+Set,#Room1BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#room1hasbacking=1
+set,(#specialback=1):#Room1Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#room1needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room1BoxDrawertype= <#BoxDrawertype>
+Set,#Room1BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room1BoxDrawercount=[#Room1BoxDrawercount+1]
+Set,(#swapglides=1):#Room1Drawerswitchcount=[#Room1Drawerswitchcount+1]
+}
+Set,#Room1Glidecount=[(#Room1BoxDrawercount-#Room1Drawerswitchcount)]
+Set, #Room1Switchglidecount=[#Room1Drawerswitchcount ]
+
+Do,(#Room1BoxDrawertype<>"*Melamine*")&(#Room1BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room1BoxGlideTag
+Len, #size,#Room1BoxDrawertype
+Left,#Room1boxname, #Size-#tagsize, #Room1BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room1SSGlidecount=[#Room1SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room1SSUMGlidecount=[#Room1SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room1POGlidecount=[#Room1POGlidecount+1]
+Set,(#UMPullout=1):#Room1POUMGlidecount=[#Room1POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room1VDGlidecount=[#Room1VDGlidecount+1]
+Set,(#VD2unit=1):#Room1VD2Glidecount=[#Room1VD2Glidecount+1]
+Set, #Room1VDTotalGlidecount=[#Room1VDGlidecount+#Room1VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room1ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room1HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room1KnobPN=<#DoorKnobPN>
+
+Set,#Room1notchdepth= <#notchdepth>
+Set,#Room1notchheight= <#notchheight>
+Set, #Room1notchdepthhasshoe=<#notchdepthhasshoe>
+}
+
+Set,(#Stdhingeadd>0):#Room1StdDoorHingeCount = [#Room1StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room1OverlayDoorHingeCount = [#Room1OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room1TopDoorHingeCount=[#Room1TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room1BottomDoorHingeCount=[#Room1BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionroom1.pcb for others.
+Set,#Room1dogearpanelcount=[#Room1dogearpanelcount+#dogearadd]
+Set,#Room1Cchannel2shelfcount=[#Room1Cchannel2shelfcount+#addcchannel2]
+Set,#Room1Cchannel1shelfcount=[#Room1Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room1Cchannelcount=[#Room1Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room1Cchannellengthcount=[#Room1Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room1thickadjshelfcount=[#Room1thickadjshelfcount+#addadjtothickshelf]
+Set,#Room1adjtoeuroshelfcount=[#Room1adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room1frontlipshelfcount=[#Room1frontlipshelfcount+#addfrontlips]
+Set,#Room1ledFpanelcount=[#Room1ledFpanelcount+#ledFpaneladd]
+Set,#Room1ledHpanelcount=[#Room1ledHpanelcount+#ledHpaneladd]
+Set,#Room1ledshelfcount=[#Room1ledshelfcount+#addledshelf]
+Set,#Room1Routedpuckshelfcount=[#Room1Routedpuckshelfcount+#addpuckshelf]
+Set,#Room1Surfacepuckshelfcount=[#Room1Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room1task12inshelfcount=[#Room1Task12inshelfcount+#add12intaskshelf]
+Set,#Room1task24inshelfcount=[#Room1Task24inshelfcount+#add24intaskshelf]
+Set,#Room1task30inshelfcount=[#Room1Task30inshelfcount+#add30intaskshelf]
+Set,#Room1task36inshelfcount=[#Room1Task36inshelfcount+#add36intaskshelf]
+Set,#Room1task42inshelfcount=[#Room1Task42inshelfcount+#add42intaskshelf]
+Set,#Room1task45inshelfcount=[#Room1Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room1EBTopofPanelcount=[#Room1EBTopofPanelcount+#TopEBadd]
+Set,#Room1EBBackofPanelcount=[#Room1EBBackofPanelcount+#BackEBadd]
+Set,#Room1RWshelfcount=[#Room1RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room1Wbusbarcount=[#Room1Wbusbarcount+#wBusbaradd]
+Set,#Room1WLEDshelfcount=[#Room1WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceroom1options.pcb
+
+
+}
+,end Room1
+
+
+Do,(#RoomNum = 2):1
+{
+
+Set,#Room2Subtotal = [#Room2Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room2Material = <#UnitMaterialname>
+Set,#Room2Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room2ContrastMaterial= <#ContrastMaterialname>
+Set, #Room2ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room2EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room2ClosetRodType= <#ClosetRodType>
+Set, #Room2ClosetRodcount= [#Room2ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room2ClosetRodlengthcount= [#Room2ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room2DoorDrawerType= <#DoorDrawerType>
+Set,#Room2DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room2DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room2Basicdoorcost=[#Room2Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room2DoorCost=[#Room2DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm2otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm2otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm2otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm2otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm2otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm2otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm2otherinsert7=Applied Molding
+
+
+Set,#Room2CrownMoldingType=<#CrownMoldingType>
+Set, #Room2CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room2BaseType= <#BaseType>
+Set,(#Room2BaseType<>"#BaseType0")&(#Room2BaseType<>"#BaseType00"):#Room2basecostgroup=<#BaseTypeCostGroup>:#Room2basecostgroup=0
+
+Set,(#Toestopcount>0):#Room2ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room2Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room2Shoefencecount = [#Room2Shoefencecount+#Toestopcount]
+
+Set,#Room2BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room2hasbacking=1
+set,(#specialback=1):#Room2Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room2needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room2BoxDrawertype= <#BoxDrawertype>
+Set,#Room2BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room2BoxDrawercount=[#Room2BoxDrawercount+1]
+Set,(#swapglides=1):#Room2Drawerswitchcount=[#Room2Drawerswitchcount+1]
+}
+Set,#Room2Glidecount=[(#Room2BoxDrawercount-#Room2Drawerswitchcount)]
+Set, #Room2Switchglidecount=[#Room2Drawerswitchcount]
+
+Do,(#Room2BoxDrawertype<>"*Melamine*")&(#Room2BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room2BoxGlideTag
+Len, #size,#Room2BoxDrawertype
+Left,#Room2boxname, #Size-#tagsize, #Room2BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room2SSGlidecount=[#Room2SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room2SSUMGlidecount=[#Room2SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room2POGlidecount=[#Room2POGlidecount+1]
+Set,(#UMPullout=1):#Room2POUMGlidecount=[#Room2POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room2VDGlidecount=[#Room2VDGlidecount+1]
+Set,(#VD2unit=1):#Room2VD2Glidecount=[#Room2VD2Glidecount+1]
+Set, #Room2VDTotalGlidecount=[#Room2VDGlidecount+#Room2VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room2ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room2HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room2KnobPN=<#DoorKnobPN>
+
+Set,#Room2notchdepth= <#notchdepth>
+Set,#Room2notchheight= <#notchheight>
+Set, #Room2notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room2StdDoorHingeCount = [#Room2StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room2OverlayDoorHingeCount = [#Room2OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room2TopDoorHingeCount=[#Room2TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room2BottomDoorHingeCount=[#Room2BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom2.pcb for others.
+Set,#Room2dogearpanelcount=[#Room2dogearpanelcount+#dogearadd]
+Set,#Room2Cchannel2shelfcount=[#Room2Cchannel2shelfcount+#addcchannel2]
+Set,#Room2Cchannel1shelfcount=[#Room2Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room2Cchannelcount=[#Room2Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room2Cchannellengthcount=[#Room2Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room2thickadjshelfcount=[#Room2thickadjshelfcount+#addadjtothickshelf]
+Set,#Room2adjtoeuroshelfcount=[#Room2adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room2frontlipshelfcount=[#Room2frontlipshelfcount+#addfrontlips]
+Set,#Room2ledFpanelcount=[#Room2ledFpanelcount+#ledFpaneladd]
+Set,#Room2ledHpanelcount=[#Room2ledHpanelcount+#ledHpaneladd]
+Set,#Room2ledshelfcount=[#Room2ledshelfcount+#addledshelf]
+Set,#Room2Routedpuckshelfcount=[#Room2Routedpuckshelfcount+#addpuckshelf]
+Set,#Room2Surfacepuckshelfcount=[#Room2Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room2task12inshelfcount=[#Room2Task12inshelfcount+#add12intaskshelf]
+Set,#Room2task24inshelfcount=[#Room2Task24inshelfcount+#add24intaskshelf]
+Set,#Room2task30inshelfcount=[#Room2Task30inshelfcount+#add30intaskshelf]
+Set,#Room2task36inshelfcount=[#Room2Task36inshelfcount+#add36intaskshelf]
+Set,#Room2task42inshelfcount=[#Room2Task42inshelfcount+#add42intaskshelf]
+Set,#Room2task45inshelfcount=[#Room2Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room2EBTopofPanelcount=[#Room2EBTopofPanelcount+#TopEBadd]
+Set,#Room2EBBackofPanelcount=[#Room2EBBackofPanelcount+#BackEBadd]
+Set,#Room2RWshelfcount=[#Room2RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room2Wbusbarcount=[#Room2Wbusbarcount+#wBusbaradd]
+Set,#Room2WLEDshelfcount=[#Room2WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom2options.pcb
+
+
+}
+,end Room2
+
+
+Do,(#RoomNum = 3):1
+{
+
+Set,#Room3Subtotal = [#Room3Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room3Material = <#UnitMaterialname>
+Set,#Room3Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room3ContrastMaterial= <#ContrastMaterialname>
+Set, #Room3ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room3EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room3ClosetRodType= <#ClosetRodType>
+Set, #Room3ClosetRodcount= [#Room3ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room3ClosetRodlengthcount= [#Room3ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room3DoorDrawerType= <#DoorDrawerType>
+Set,#Room3DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room3DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room3Basicdoorcost=[#Room3Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room3DoorCost=[#Room3DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm3otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm3otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm3otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm3otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm3otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm3otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm3otherinsert7=Applied Molding
+
+
+Set,#Room3CrownMoldingType=<#CrownMoldingType>
+Set, #Room3CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room3BaseType= <#BaseType>
+Set,(#Room3BaseType<>"#BaseType0")&(#Room3BaseType<>"#BaseType00"):#Room3basecostgroup=<#BaseTypeCostGroup>:#Room3basecostgroup=0
+
+Set,(#Toestopcount>0):#Room3ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room3Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room3Shoefencecount = [#Room3Shoefencecount+#Toestopcount]
+
+Set,#Room3BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room3hasbacking=1
+set,(#specialback=1):#Room3Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room3needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room3BoxDrawertype= <#BoxDrawertype>
+Set,#Room3BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room3BoxDrawercount=[#Room3BoxDrawercount+1]
+Set,(#swapglides=1):#Room3Drawerswitchcount=[#Room3Drawerswitchcount+1]
+}
+Set,#Room3Glidecount=[(#Room3BoxDrawercount-#Room3Drawerswitchcount)]
+Set, #Room3Switchglidecount=[#Room3Drawerswitchcount]
+
+Do,(#Room3BoxDrawertype<>"*Melamine*")&(#Room3BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room3BoxGlideTag
+Len, #size,#Room3BoxDrawertype
+Left,#Room3boxname, #Size-#tagsize, #Room3BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room3SSGlidecount=[#Room3SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room3SSUMGlidecount=[#Room3SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room3POGlidecount=[#Room3POGlidecount+1]
+Set,(#UMPullout=1):#Room3POUMGlidecount=[#Room3POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room3VDGlidecount=[#Room3VDGlidecount+1]
+Set,(#VD2unit=1):#Room3VD2Glidecount=[#Room3VD2Glidecount+1]
+Set, #Room3VDTotalGlidecount=[#Room3VDGlidecount+#Room3VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room3ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room3HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room3KnobPN=<#DoorKnobPN>
+
+Set,#Room3notchdepth= <#notchdepth>
+Set,#Room3notchheight= <#notchheight>
+Set, #Room3notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room3StdDoorHingeCount = [#Room3StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room3OverlayDoorHingeCount = [#Room3OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room3TopDoorHingeCount=[#Room3TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room3BottomDoorHingeCount=[#Room3BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom3.pcb for others.
+Set,#Room3dogearpanelcount=[#Room3dogearpanelcount+#dogearadd]
+Set,#Room3Cchannel2shelfcount=[#Room3Cchannel2shelfcount+#addcchannel2]
+Set,#Room3Cchannel1shelfcount=[#Room3Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room3Cchannelcount=[#Room3Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room3Cchannellengthcount=[#Room3Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room3thickadjshelfcount=[#Room3thickadjshelfcount+#addadjtothickshelf]
+Set,#Room3adjtoeuroshelfcount=[#Room3adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room3frontlipshelfcount=[#Room3frontlipshelfcount+#addfrontlips]
+Set,#Room3ledFpanelcount=[#Room3ledFpanelcount+#ledFpaneladd]
+Set,#Room3ledHpanelcount=[#Room3ledHpanelcount+#ledHpaneladd]
+Set,#Room3ledshelfcount=[#Room3ledshelfcount+#addledshelf]
+Set,#Room3Routedpuckshelfcount=[#Room3Routedpuckshelfcount+#addpuckshelf]
+Set,#Room3Surfacepuckshelfcount=[#Room3Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room3task12inshelfcount=[#Room3Task12inshelfcount+#add12intaskshelf]
+Set,#Room3task24inshelfcount=[#Room3Task24inshelfcount+#add24intaskshelf]
+Set,#Room3task30inshelfcount=[#Room3Task30inshelfcount+#add30intaskshelf]
+Set,#Room3task36inshelfcount=[#Room3Task36inshelfcount+#add36intaskshelf]
+Set,#Room3task42inshelfcount=[#Room3Task42inshelfcount+#add42intaskshelf]
+Set,#Room3task45inshelfcount=[#Room3Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room3EBTopofPanelcount=[#Room3EBTopofPanelcount+#TopEBadd]
+Set,#Room3EBBackofPanelcount=[#Room3EBBackofPanelcount+#BackEBadd]
+Set,#Room3RWshelfcount=[#Room3RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room3Wbusbarcount=[#Room3Wbusbarcount+#wBusbaradd]
+Set,#Room3WLEDshelfcount=[#Room3WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom3options.pcb
+
+
+}
+,end Room3
+
+
+Do,(#RoomNum = 4):1
+{
+
+Set,#Room4Subtotal = [#Room4Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room4Material = <#UnitMaterialname>
+Set,#Room4Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room4ContrastMaterial= <#ContrastMaterialname>
+Set, #Room4ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room4EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room4ClosetRodType= <#ClosetRodType>
+Set, #Room4ClosetRodcount= [#Room4ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room4ClosetRodlengthcount= [#Room4ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room4DoorDrawerType= <#DoorDrawerType>
+Set,#Room4DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room4DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room4Basicdoorcost=[#Room4Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room4DoorCost=[#Room4DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm4otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm4otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm4otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm4otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm4otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm4otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm4otherinsert7=Applied Molding
+
+
+Set,#Room4CrownMoldingType=<#CrownMoldingType>
+Set, #Room4CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room4BaseType= <#BaseType>
+Set,(#Room4BaseType<>"#BaseType0")&(#Room4BaseType<>"#BaseType00"):#Room4basecostgroup=<#BaseTypeCostGroup>:#Room4basecostgroup=0
+
+Set,(#Toestopcount>0):#Room4ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room4Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room4Shoefencecount = [#Room4Shoefencecount+#Toestopcount]
+
+Set,#Room4BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room4hasbacking=1
+set,(#specialback=1):#Room4Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room4needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room4BoxDrawertype= <#BoxDrawertype>
+Set,#Room4BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room4BoxDrawercount=[#Room4BoxDrawercount+1]
+Set,(#swapglides=1):#Room4Drawerswitchcount=[#Room4Drawerswitchcount+1]
+}
+Set,#Room4Glidecount=[(#Room4BoxDrawercount-#Room4Drawerswitchcount)]
+Set, #Room4Switchglidecount=[#Room4Drawerswitchcount]
+
+Do,(#Room4BoxDrawertype<>"*Melamine*")&(#Room4BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room4BoxGlideTag
+Len, #size,#Room4BoxDrawertype
+Left,#Room4boxname, #Size-#tagsize, #Room4BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room4SSGlidecount=[#Room4SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room4SSUMGlidecount=[#Room4SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room4POGlidecount=[#Room4POGlidecount+1]
+Set,(#UMPullout=1):#Room4POUMGlidecount=[#Room4POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room4VDGlidecount=[#Room4VDGlidecount+1]
+Set,(#VD2unit=1):#Room4VD2Glidecount=[#Room4VD2Glidecount+1]
+Set, #Room4VDTotalGlidecount=[#Room4VDGlidecount+#Room4VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room4ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room4HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room4KnobPN=<#DoorKnobPN>
+
+Set,#Room4notchdepth= <#notchdepth>
+Set,#Room4notchheight= <#notchheight>
+Set, #Room4notchdepthhasshoe=<#notchdepthhasshoe>
+}
+
+Set,(#Stdhingeadd>0):#Room4StdDoorHingeCount = [#Room4StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room4OverlayDoorHingeCount = [#Room4OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room4TopDoorHingeCount=[#Room4TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room4BottomDoorHingeCount=[#Room4BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom4.pcb for others.
+Set,#Room4dogearpanelcount=[#Room4dogearpanelcount+#dogearadd]
+Set,#Room4Cchannel2shelfcount=[#Room4Cchannel2shelfcount+#addcchannel2]
+Set,#Room4Cchannel1shelfcount=[#Room4Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room4Cchannelcount=[#Room4Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room4Cchannellengthcount=[#Room4Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room4thickadjshelfcount=[#Room4thickadjshelfcount+#addadjtothickshelf]
+Set,#Room4adjtoeuroshelfcount=[#Room4adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room4frontlipshelfcount=[#Room4frontlipshelfcount+#addfrontlips]
+Set,#Room4ledFpanelcount=[#Room4ledFpanelcount+#ledFpaneladd]
+Set,#Room4ledHpanelcount=[#Room4ledHpanelcount+#ledHpaneladd]
+Set,#Room4ledshelfcount=[#Room4ledshelfcount+#addledshelf]
+Set,#Room4Routedpuckshelfcount=[#Room4Routedpuckshelfcount+#addpuckshelf]
+Set,#Room4Surfacepuckshelfcount=[#Room4Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room4task12inshelfcount=[#Room4Task12inshelfcount+#add12intaskshelf]
+Set,#Room4task24inshelfcount=[#Room4Task24inshelfcount+#add24intaskshelf]
+Set,#Room4task30inshelfcount=[#Room4Task30inshelfcount+#add30intaskshelf]
+Set,#Room4task36inshelfcount=[#Room4Task36inshelfcount+#add36intaskshelf]
+Set,#Room4task42inshelfcount=[#Room4Task42inshelfcount+#add42intaskshelf]
+Set,#Room4task45inshelfcount=[#Room4Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room4EBTopofPanelcount=[#Room4EBTopofPanelcount+#TopEBadd]
+Set,#Room4EBBackofPanelcount=[#Room4EBBackofPanelcount+#BackEBadd]
+Set,#Room4RWshelfcount=[#Room4RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room4Wbusbarcount=[#Room4Wbusbarcount+#wBusbaradd]
+Set,#Room4WLEDshelfcount=[#Room4WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom4options.pcb
+
+
+}
+,end Room4
+
+
+Do,(#RoomNum = 5):1
+{
+
+Set,#Room5Subtotal = [#Room5Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room5Material = <#UnitMaterialname>
+Set,#Room5Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room5ContrastMaterial= <#ContrastMaterialname>
+Set, #Room5ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room5EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room5ClosetRodType= <#ClosetRodType>
+Set, #Room5ClosetRodcount= [#Room5ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room5ClosetRodlengthcount= [#Room5ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room5DoorDrawerType= <#DoorDrawerType>
+Set,#Room5DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room5DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room5Basicdoorcost=[#Room5Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room5DoorCost=[#Room5DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm5otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm5otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm5otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm5otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm5otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm5otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm5otherinsert7=Applied Molding
+
+
+Set,#Room5CrownMoldingType=<#CrownMoldingType>
+Set, #Room5CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room5BaseType= <#BaseType>
+Set,(#Room5BaseType<>"#BaseType0")&(#Room5BaseType<>"#BaseType00"):#Room5basecostgroup=<#BaseTypeCostGroup>:#Room5basecostgroup=0
+
+Set,(#Toestopcount>0):#Room5ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room5Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room5Shoefencecount = [#Room5Shoefencecount+#Toestopcount]
+
+Set,#Room5BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room5hasbacking=1
+set,(#specialback=1):#Room5Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room5needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room5BoxDrawertype= <#BoxDrawertype>
+Set,#Room5BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room5BoxDrawercount=[#Room5BoxDrawercount+1]
+Set,(#swapglides=1):#Room5Drawerswitchcount=[#Room5Drawerswitchcount+1]
+}
+Set,#Room5Glidecount=[(#Room5BoxDrawercount-#Room5Drawerswitchcount)]
+Set, #Room5Switchglidecount=[#Room5Drawerswitchcount]
+
+Do,(#Room5BoxDrawertype<>"*Melamine*")&(#Room5BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room5BoxGlideTag
+Len, #size,#Room5BoxDrawertype
+Left,#Room5boxname, #Size-#tagsize, #Room5BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room5SSGlidecount=[#Room5SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room5SSUMGlidecount=[#Room5SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room5POGlidecount=[#Room5POGlidecount+1]
+Set,(#UMPullout=1):#Room5POUMGlidecount=[#Room5POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room5VDGlidecount=[#Room5VDGlidecount+1]
+Set,(#VD2unit=1):#Room5VD2Glidecount=[#Room5VD2Glidecount+1]
+Set, #Room5VDTotalGlidecount=[#Room5VDGlidecount+#Room5VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room5ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room5HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room5KnobPN=<#DoorKnobPN>
+
+Set,#Room5notchdepth= <#notchdepth>
+Set,#Room5notchheight= <#notchheight>
+Set, #Room5notchdepthhasshoe=<#notchdepthhasshoe>
+}
+
+Set,(#Stdhingeadd>0):#Room5StdDoorHingeCount = [#Room5StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room5OverlayDoorHingeCount = [#Room5OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room5TopDoorHingeCount=[#Room5TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room5BottomDoorHingeCount=[#Room5BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom5.pcb for others.
+Set,#Room5dogearpanelcount=[#Room5dogearpanelcount+#dogearadd]
+Set,#Room5Cchannel2shelfcount=[#Room5Cchannel2shelfcount+#addcchannel2]
+Set,#Room5Cchannel1shelfcount=[#Room5Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room5Cchannelcount=[#Room5Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room5Cchannellengthcount=[#Room5Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room5thickadjshelfcount=[#Room5thickadjshelfcount+#addadjtothickshelf]
+Set,#Room5adjtoeuroshelfcount=[#Room5adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room5frontlipshelfcount=[#Room5frontlipshelfcount+#addfrontlips]
+Set,#Room5ledFpanelcount=[#Room5ledFpanelcount+#ledFpaneladd]
+Set,#Room5ledHpanelcount=[#Room5ledHpanelcount+#ledHpaneladd]
+Set,#Room5ledshelfcount=[#Room5ledshelfcount+#addledshelf]
+Set,#Room5Routedpuckshelfcount=[#Room5Routedpuckshelfcount+#addpuckshelf]
+Set,#Room5Surfacepuckshelfcount=[#Room5Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room5task12inshelfcount=[#Room5Task12inshelfcount+#add12intaskshelf]
+Set,#Room5task24inshelfcount=[#Room5Task24inshelfcount+#add24intaskshelf]
+Set,#Room5task30inshelfcount=[#Room5Task30inshelfcount+#add30intaskshelf]
+Set,#Room5task36inshelfcount=[#Room5Task36inshelfcount+#add36intaskshelf]
+Set,#Room5task42inshelfcount=[#Room5Task42inshelfcount+#add42intaskshelf]
+Set,#Room5task45inshelfcount=[#Room5Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room5EBTopofPanelcount=[#Room5EBTopofPanelcount+#TopEBadd]
+Set,#Room5EBBackofPanelcount=[#Room5EBBackofPanelcount+#BackEBadd]
+Set,#Room5RWshelfcount=[#Room5RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room5Wbusbarcount=[#Room5Wbusbarcount+#wBusbaradd]
+Set,#Room5WLEDshelfcount=[#Room5WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom5options.pcb
+
+
+}
+,end Room5
+
+
+Do,(#RoomNum = 6):1
+{
+
+Set,#Room6Subtotal = [#Room6Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room6Material = <#UnitMaterialname>
+Set,#Room6Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room6ContrastMaterial= <#ContrastMaterialname>
+Set, #Room6ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room6EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room6ClosetRodType= <#ClosetRodType>
+Set, #Room6ClosetRodcount= [#Room6ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room6ClosetRodlengthcount= [#Room6ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room6DoorDrawerType= <#DoorDrawerType>
+Set,#Room6DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room6DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room6Basicdoorcost=[#Room6Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room6DoorCost=[#Room6DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm6otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm6otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm6otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm6otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm6otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm6otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm6otherinsert7=Applied Molding
+
+
+Set,#Room6CrownMoldingType=<#CrownMoldingType>
+Set, #Room6CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room6BaseType= <#BaseType>
+Set,(#Room6BaseType<>"#BaseType0")&(#Room6BaseType<>"#BaseType00"):#Room6basecostgroup=<#BaseTypeCostGroup>:#Room6basecostgroup=0
+
+Set,(#Toestopcount>0):#Room6ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room6Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room6Shoefencecount = [#Room6Shoefencecount+#Toestopcount]
+
+Set,#Room6BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room6hasbacking=1
+set,(#specialback=1):#Room6Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room6needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room6BoxDrawertype= <#BoxDrawertype>
+Set,#Room6BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room6BoxDrawercount=[#Room6BoxDrawercount+1]
+Set,(#swapglides=1):#Room6Drawerswitchcount=[#Room6Drawerswitchcount+1]
+}
+Set,#Room6Glidecount=[(#Room6BoxDrawercount-#Room6Drawerswitchcount)]
+Set, #Room6Switchglidecount=[#Room6Drawerswitchcount]
+
+Do,(#Room6BoxDrawertype<>"*Melamine*")&(#Room6BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room6BoxGlideTag
+Len, #size,#Room6BoxDrawertype
+Left,#Room6boxname, #Size-#tagsize, #Room6BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room6SSGlidecount=[#Room6SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room6SSUMGlidecount=[#Room6SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room6POGlidecount=[#Room6POGlidecount+1]
+Set,(#UMPullout=1):#Room6POUMGlidecount=[#Room6POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room6VDGlidecount=[#Room6VDGlidecount+1]
+Set,(#VD2unit=1):#Room6VD2Glidecount=[#Room6VD2Glidecount+1]
+Set, #Room6VDTotalGlidecount=[#Room6VDGlidecount+#Room6VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room6ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room6HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room6KnobPN=<#DoorKnobPN>
+
+Set,#Room6notchdepth= <#notchdepth>
+Set,#Room6notchheight= <#notchheight>
+Set, #Room6notchdepthhasshoe=<#notchdepthhasshoe>
+}
+
+Set,(#Stdhingeadd>0):#Room6StdDoorHingeCount = [#Room6StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room6OverlayDoorHingeCount = [#Room6OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room6TopDoorHingeCount=[#Room6TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room6BottomDoorHingeCount=[#Room6BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom6.pcb for others.
+Set,#Room6dogearpanelcount=[#Room6dogearpanelcount+#dogearadd]
+Set,#Room6Cchannel2shelfcount=[#Room6Cchannel2shelfcount+#addcchannel2]
+Set,#Room6Cchannel1shelfcount=[#Room6Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room6Cchannelcount=[#Room6Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room6Cchannellengthcount=[#Room6Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room6thickadjshelfcount=[#Room6thickadjshelfcount+#addadjtothickshelf]
+Set,#Room6adjtoeuroshelfcount=[#Room6adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room6frontlipshelfcount=[#Room6frontlipshelfcount+#addfrontlips]
+Set,#Room6ledFpanelcount=[#Room6ledFpanelcount+#ledFpaneladd]
+Set,#Room6ledHpanelcount=[#Room6ledHpanelcount+#ledHpaneladd]
+Set,#Room6ledshelfcount=[#Room6ledshelfcount+#addledshelf]
+Set,#Room6Routedpuckshelfcount=[#Room6Routedpuckshelfcount+#addpuckshelf]
+Set,#Room6Surfacepuckshelfcount=[#Room6Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room6task12inshelfcount=[#Room6Task12inshelfcount+#add12intaskshelf]
+Set,#Room6task24inshelfcount=[#Room6Task24inshelfcount+#add24intaskshelf]
+Set,#Room6task30inshelfcount=[#Room6Task30inshelfcount+#add30intaskshelf]
+Set,#Room6task36inshelfcount=[#Room6Task36inshelfcount+#add36intaskshelf]
+Set,#Room6task42inshelfcount=[#Room6Task42inshelfcount+#add42intaskshelf]
+Set,#Room6task45inshelfcount=[#Room6Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room6EBTopofPanelcount=[#Room6EBTopofPanelcount+#TopEBadd]
+Set,#Room6EBBackofPanelcount=[#Room6EBBackofPanelcount+#BackEBadd]
+Set,#Room6RWshelfcount=[#Room6RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room6Wbusbarcount=[#Room6Wbusbarcount+#wBusbaradd]
+Set,#Room6WLEDshelfcount=[#Room6WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom6options.pcb
+
+
+}
+,end Room6
+
+
+Do,(#RoomNum = 7):1
+{
+
+Set,#Room7Subtotal = [#Room7Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room7Material = <#UnitMaterialname>
+Set,#Room7Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room7ContrastMaterial= <#ContrastMaterialname>
+Set, #Room7ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room7EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room7ClosetRodType= <#ClosetRodType>
+Set, #Room7ClosetRodcount= [#Room7ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room7ClosetRodlengthcount= [#Room7ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room7DoorDrawerType= <#DoorDrawerType>
+Set,#Room7DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room7DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room7Basicdoorcost=[#Room7Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room7DoorCost=[#Room7DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm7otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm7otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm7otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm7otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm7otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm7otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm7otherinsert7=Applied Molding
+
+
+Set,#Room7CrownMoldingType=<#CrownMoldingType>
+Set, #Room7CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room7BaseType= <#BaseType>
+Set,(#Room7BaseType<>"#BaseType0")&(#Room7BaseType<>"#BaseType00"):#Room7basecostgroup=<#BaseTypeCostGroup>:#Room7basecostgroup=0
+
+Set,(#Toestopcount>0):#Room7ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room7Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room7Shoefencecount = [#Room7Shoefencecount+#Toestopcount]
+
+Set,#Room7BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room7hasbacking=1
+set,(#specialback=1):#Room7Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room7needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room7BoxDrawertype= <#BoxDrawertype>
+Set,#Room7BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room7BoxDrawercount=[#Room7BoxDrawercount+1]
+Set,(#swapglides=1):#Room7Drawerswitchcount=[#Room7Drawerswitchcount+1]
+}
+Set,#Room7Glidecount=[(#Room7BoxDrawercount-#Room7Drawerswitchcount)]
+Set, #Room7Switchglidecount=[#Room7Drawerswitchcount]
+
+Do,(#Room7BoxDrawertype<>"*Melamine*")&(#Room7BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room7BoxGlideTag
+Len, #size,#Room7BoxDrawertype
+Left,#Room7boxname, #Size-#tagsize, #Room7BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room7SSGlidecount=[#Room7SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room7SSUMGlidecount=[#Room7SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room7POGlidecount=[#Room7POGlidecount+1]
+Set,(#UMPullout=1):#Room7POUMGlidecount=[#Room7POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room7VDGlidecount=[#Room7VDGlidecount+1]
+Set,(#VD2unit=1):#Room7VD2Glidecount=[#Room7VD2Glidecount+1]
+Set, #Room7VDTotalGlidecount=[#Room7VDGlidecount+#Room7VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room7ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room7HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room7KnobPN=<#DoorKnobPN>
+
+Set,#Room7notchdepth= <#notchdepth>
+Set,#Room7notchheight= <#notchheight>
+Set, #Room7notchdepthhasshoe=<#notchdepthhasshoe>
+}
+
+Set,(#Stdhingeadd>0):#Room7StdDoorHingeCount = [#Room7StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room7OverlayDoorHingeCount = [#Room7OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room7TopDoorHingeCount=[#Room7TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room7BottomDoorHingeCount=[#Room7BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom7.pcb for others.
+Set,#Room7dogearpanelcount=[#Room7dogearpanelcount+#dogearadd]
+Set,#Room7Cchannel2shelfcount=[#Room7Cchannel2shelfcount+#addcchannel2]
+Set,#Room7Cchannel1shelfcount=[#Room7Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room7Cchannelcount=[#Room7Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room7Cchannellengthcount=[#Room7Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room7thickadjshelfcount=[#Room7thickadjshelfcount+#addadjtothickshelf]
+Set,#Room7adjtoeuroshelfcount=[#Room7adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room7frontlipshelfcount=[#Room7frontlipshelfcount+#addfrontlips]
+Set,#Room7ledFpanelcount=[#Room7ledFpanelcount+#ledFpaneladd]
+Set,#Room7ledHpanelcount=[#Room7ledHpanelcount+#ledHpaneladd]
+Set,#Room7ledshelfcount=[#Room7ledshelfcount+#addledshelf]
+Set,#Room7Routedpuckshelfcount=[#Room7Routedpuckshelfcount+#addpuckshelf]
+Set,#Room7Surfacepuckshelfcount=[#Room7Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room7task12inshelfcount=[#Room7Task12inshelfcount+#add12intaskshelf]
+Set,#Room7task24inshelfcount=[#Room7Task24inshelfcount+#add24intaskshelf]
+Set,#Room7task30inshelfcount=[#Room7Task30inshelfcount+#add30intaskshelf]
+Set,#Room7task36inshelfcount=[#Room7Task36inshelfcount+#add36intaskshelf]
+Set,#Room7task42inshelfcount=[#Room7Task42inshelfcount+#add42intaskshelf]
+Set,#Room7task45inshelfcount=[#Room7Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room7EBTopofPanelcount=[#Room7EBTopofPanelcount+#TopEBadd]
+Set,#Room7EBBackofPanelcount=[#Room7EBBackofPanelcount+#BackEBadd]
+Set,#Room7RWshelfcount=[#Room7RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room7Wbusbarcount=[#Room7Wbusbarcount+#wBusbaradd]
+Set,#Room7WLEDshelfcount=[#Room7WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom7options.pcb
+
+
+}
+,end Room7
+
+
+Do,(#RoomNum = 8):1
+{
+
+Set,#Room8Subtotal = [#Room8Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room8Material = <#UnitMaterialname>
+Set,#Room8Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room8ContrastMaterial= <#ContrastMaterialname>
+Set, #Room8ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room8EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room8ClosetRodType= <#ClosetRodType>
+Set, #Room8ClosetRodcount= [#Room8ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room8ClosetRodlengthcount= [#Room8ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room8DoorDrawerType= <#DoorDrawerType>
+Set,#Room8DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room8DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room8Basicdoorcost=[#Room8Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room8DoorCost=[#Room8DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm8otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm8otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm8otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm8otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm8otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm8otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm8otherinsert7=Applied Molding
+
+
+Set,#Room8CrownMoldingType=<#CrownMoldingType>
+Set, #Room8CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room8BaseType= <#BaseType>
+Set,(#Room8BaseType<>"#BaseType0")&(#Room8BaseType<>"#BaseType00"):#Room8basecostgroup=<#BaseTypeCostGroup>:#Room8basecostgroup=0
+
+Set,(#Toestopcount>0):#Room8ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room8Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room8Shoefencecount = [#Room8Shoefencecount+#Toestopcount]
+
+Set,#Room8BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room8hasbacking=1
+set,(#specialback=1):#Room8Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room8needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room8BoxDrawertype= <#BoxDrawertype>
+Set,#Room8BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room8BoxDrawercount=[#Room8BoxDrawercount+1]
+Set,(#swapglides=1):#Room8Drawerswitchcount=[#Room8Drawerswitchcount+1]
+}
+Set,#Room8Glidecount=[(#Room8BoxDrawercount-#Room8Drawerswitchcount)]
+Set, #Room8Switchglidecount=[#Room8Drawerswitchcount]
+
+Do,(#Room8BoxDrawertype<>"*Melamine*")&(#Room8BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room8BoxGlideTag
+Len, #size,#Room8BoxDrawertype
+Left,#Room8boxname, #Size-#tagsize, #Room8BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room8SSGlidecount=[#Room8SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room8SSUMGlidecount=[#Room8SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room8POGlidecount=[#Room8POGlidecount+1]
+Set,(#UMPullout=1):#Room8POUMGlidecount=[#Room8POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room8VDGlidecount=[#Room8VDGlidecount+1]
+Set,(#VD2unit=1):#Room8VD2Glidecount=[#Room8VD2Glidecount+1]
+Set, #Room8VDTotalGlidecount=[#Room8VDGlidecount+#Room8VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room8ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room8HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room8KnobPN=<#DoorKnobPN>
+
+Set,#Room8notchdepth= <#notchdepth>
+Set,#Room8notchheight= <#notchheight>
+Set, #Room8notchdepthhasshoe=<#notchdepthhasshoe>
+}
+
+Set,(#Stdhingeadd>0):#Room8StdDoorHingeCount = [#Room8StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room8OverlayDoorHingeCount = [#Room8OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room8TopDoorHingeCount=[#Room8TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room8BottomDoorHingeCount=[#Room8BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom8.pcb for others.
+Set,#Room8dogearpanelcount=[#Room8dogearpanelcount+#dogearadd]
+Set,#Room8Cchannel2shelfcount=[#Room8Cchannel2shelfcount+#addcchannel2]
+Set,#Room8Cchannel1shelfcount=[#Room8Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room8Cchannelcount=[#Room8Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room8Cchannellengthcount=[#Room8Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room8thickadjshelfcount=[#Room8thickadjshelfcount+#addadjtothickshelf]
+Set,#Room8adjtoeuroshelfcount=[#Room8adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room8frontlipshelfcount=[#Room8frontlipshelfcount+#addfrontlips]
+Set,#Room8ledFpanelcount=[#Room8ledFpanelcount+#ledFpaneladd]
+Set,#Room8ledHpanelcount=[#Room8ledHpanelcount+#ledHpaneladd]
+Set,#Room8ledshelfcount=[#Room8ledshelfcount+#addledshelf]
+Set,#Room8Routedpuckshelfcount=[#Room8Routedpuckshelfcount+#addpuckshelf]
+Set,#Room8Surfacepuckshelfcount=[#Room8Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room8task12inshelfcount=[#Room8Task12inshelfcount+#add12intaskshelf]
+Set,#Room8task24inshelfcount=[#Room8Task24inshelfcount+#add24intaskshelf]
+Set,#Room8task30inshelfcount=[#Room8Task30inshelfcount+#add30intaskshelf]
+Set,#Room8task36inshelfcount=[#Room8Task36inshelfcount+#add36intaskshelf]
+Set,#Room8task42inshelfcount=[#Room8Task42inshelfcount+#add42intaskshelf]
+Set,#Room8task45inshelfcount=[#Room8Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room8EBTopofPanelcount=[#Room8EBTopofPanelcount+#TopEBadd]
+Set,#Room8EBBackofPanelcount=[#Room8EBBackofPanelcount+#BackEBadd]
+Set,#Room8RWshelfcount=[#Room8RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room8Wbusbarcount=[#Room8Wbusbarcount+#wBusbaradd]
+Set,#Room8WLEDshelfcount=[#Room8WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom8options.pcb
+
+
+}
+,end Room8
+
+
+Do,(#RoomNum = 9):1
+{
+
+Set,#Room9Subtotal = [#Room9Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room9Material = <#UnitMaterialname>
+Set,#Room9Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room9ContrastMaterial= <#ContrastMaterialname>
+Set, #Room9ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room9EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room9ClosetRodType= <#ClosetRodType>
+Set, #Room9ClosetRodcount= [#Room9ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room9ClosetRodlengthcount= [#Room9ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room9DoorDrawerType= <#DoorDrawerType>
+Set,#Room9DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room9DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room9Basicdoorcost=[#Room9Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room9DoorCost=[#Room9DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm9otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm9otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm9otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm9otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm9otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm9otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm9otherinsert7=Applied Molding
+
+
+Set,#Room9CrownMoldingType=<#CrownMoldingType>
+Set, #Room9CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room9BaseType= <#BaseType>
+Set,(#Room9BaseType<>"#BaseType0")&(#Room9BaseType<>"#BaseType00"):#Room9basecostgroup=<#BaseTypeCostGroup>:#Room9basecostgroup=0
+
+Set,(#Toestopcount>0):#Room9ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room9Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room9Shoefencecount = [#Room9Shoefencecount+#Toestopcount]
+
+Set,#Room9BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room9hasbacking=1
+set,(#specialback=1):#Room9Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room9needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room9BoxDrawertype= <#BoxDrawertype>
+Set,#Room9BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room9BoxDrawercount=[#Room9BoxDrawercount+1]
+Set,(#swapglides=1):#Room9Drawerswitchcount=[#Room9Drawerswitchcount+1]
+}
+Set,#Room9Glidecount=[(#Room9BoxDrawercount-#Room9Drawerswitchcount)]
+Set, #Room9Switchglidecount=[#Room9Drawerswitchcount]
+
+Do,(#Room9BoxDrawertype<>"*Melamine*")&(#Room9BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room9BoxGlideTag
+Len, #size,#Room9BoxDrawertype
+Left,#Room9boxname, #Size-#tagsize, #Room9BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room9SSGlidecount=[#Room9SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room9SSUMGlidecount=[#Room9SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room9POGlidecount=[#Room9POGlidecount+1]
+Set,(#UMPullout=1):#Room9POUMGlidecount=[#Room9POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room9VDGlidecount=[#Room9VDGlidecount+1]
+Set,(#VD2unit=1):#Room9VD2Glidecount=[#Room9VD2Glidecount+1]
+Set, #Room9VDTotalGlidecount=[#Room9VDGlidecount+#Room9VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room9ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room9HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room9KnobPN=<#DoorKnobPN>
+
+Set,#Room9notchdepth= <#notchdepth>
+Set,#Room9notchheight= <#notchheight>
+Set, #Room9notchdepthhasshoe=<#notchdepthhasshoe>
+}
+
+Set,(#Stdhingeadd>0):#Room9StdDoorHingeCount = [#Room9StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room9OverlayDoorHingeCount = [#Room9OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room9TopDoorHingeCount=[#Room9TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room9BottomDoorHingeCount=[#Room9BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom9.pcb for others.
+Set,#Room9dogearpanelcount=[#Room9dogearpanelcount+#dogearadd]
+Set,#Room9Cchannel2shelfcount=[#Room9Cchannel2shelfcount+#addcchannel2]
+Set,#Room9Cchannel1shelfcount=[#Room9Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room9Cchannelcount=[#Room9Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room9Cchannellengthcount=[#Room9Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room9thickadjshelfcount=[#Room9thickadjshelfcount+#addadjtothickshelf]
+Set,#Room9adjtoeuroshelfcount=[#Room9adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room9frontlipshelfcount=[#Room9frontlipshelfcount+#addfrontlips]
+Set,#Room9ledFpanelcount=[#Room9ledFpanelcount+#ledFpaneladd]
+Set,#Room9ledHpanelcount=[#Room9ledHpanelcount+#ledHpaneladd]
+Set,#Room9ledshelfcount=[#Room9ledshelfcount+#addledshelf]
+Set,#Room9Routedpuckshelfcount=[#Room9Routedpuckshelfcount+#addpuckshelf]
+Set,#Room9Surfacepuckshelfcount=[#Room9Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room9task12inshelfcount=[#Room9Task12inshelfcount+#add12intaskshelf]
+Set,#Room9task24inshelfcount=[#Room9Task24inshelfcount+#add24intaskshelf]
+Set,#Room9task30inshelfcount=[#Room9Task30inshelfcount+#add30intaskshelf]
+Set,#Room9task36inshelfcount=[#Room9Task36inshelfcount+#add36intaskshelf]
+Set,#Room9task42inshelfcount=[#Room9Task42inshelfcount+#add42intaskshelf]
+Set,#Room9task45inshelfcount=[#Room9Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room9EBTopofPanelcount=[#Room9EBTopofPanelcount+#TopEBadd]
+Set,#Room9EBBackofPanelcount=[#Room9EBBackofPanelcount+#BackEBadd]
+Set,#Room9RWshelfcount=[#Room9RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room9Wbusbarcount=[#Room9Wbusbarcount+#wBusbaradd]
+Set,#Room9WLEDshelfcount=[#Room9WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom9options.pcb
+
+
+}
+,end Room9
+
+
+Do,(#RoomNum = 10):1
+{
+
+Set,#Room10Subtotal = [#Room10Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room10Material = <#UnitMaterialname>
+Set,#Room10Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room10ContrastMaterial= <#ContrastMaterialname>
+Set, #Room10ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room10EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room10ClosetRodType= <#ClosetRodType>
+Set, #Room10ClosetRodcount= [#Room10ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room10ClosetRodlengthcount= [#Room10ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room10DoorDrawerType= <#DoorDrawerType>
+Set,#Room10DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room10DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room10Basicdoorcost=[#Room10Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room10DoorCost=[#Room10DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm10otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm10otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm10otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm10otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm10otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm10otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm10otherinsert7=Applied Molding
+
+
+Set,#Room10CrownMoldingType=<#CrownMoldingType>
+Set, #Room10CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room10BaseType= <#BaseType>
+Set,(#Room10BaseType<>"#BaseType0")&(#Room10BaseType<>"#BaseType00"):#Room10basecostgroup=<#BaseTypeCostGroup>:#Room10basecostgroup=0
+
+Set,(#Toestopcount>0):#Room10ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room10Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room10Shoefencecount = [#Room10Shoefencecount+#Toestopcount]
+
+Set,#Room10BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room10hasbacking=1
+set,(#specialback=1):#Room10Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room10needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room10BoxDrawertype= <#BoxDrawertype>
+Set,#Room10BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room10BoxDrawercount=[#Room10BoxDrawercount+1]
+Set,(#swapglides=1):#Room10Drawerswitchcount=[#Room10Drawerswitchcount+1]
+}
+Set,#Room10Glidecount=[(#Room10BoxDrawercount-#Room10Drawerswitchcount)]
+Set, #Room10Switchglidecount=[#Room10Drawerswitchcount]
+
+Do,(#Room10BoxDrawertype<>"*Melamine*")&(#Room10BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room10BoxGlideTag
+Len, #size,#Room10BoxDrawertype
+Left,#Room10boxname, #Size-#tagsize, #Room10BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room10SSGlidecount=[#Room10SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room10SSUMGlidecount=[#Room10SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room10POGlidecount=[#Room10POGlidecount+1]
+Set,(#UMPullout=1):#Room10POUMGlidecount=[#Room10POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room10VDGlidecount=[#Room10VDGlidecount+1]
+Set,(#VD2unit=1):#Room10VD2Glidecount=[#Room10VD2Glidecount+1]
+Set, #Room10VDTotalGlidecount=[#Room10VDGlidecount+#Room10VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room10ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room10HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room10KnobPN=<#DoorKnobPN>
+
+Set,#Room10notchdepth= <#notchdepth>
+Set,#Room10notchheight= <#notchheight>
+Set, #Room10notchdepthhasshoe=<#notchdepthhasshoe>
+}
+
+Set,(#Stdhingeadd>0):#Room10StdDoorHingeCount = [#Room10StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room10OverlayDoorHingeCount = [#Room10OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room10TopDoorHingeCount=[#Room10TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room10BottomDoorHingeCount=[#Room10BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom10.pcb for others.
+Set,#Room10dogearpanelcount=[#Room10dogearpanelcount+#dogearadd]
+Set,#Room10Cchannel2shelfcount=[#Room10Cchannel2shelfcount+#addcchannel2]
+Set,#Room10Cchannel1shelfcount=[#Room10Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room10Cchannelcount=[#Room10Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room10Cchannellengthcount=[#Room10Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room10thickadjshelfcount=[#Room10thickadjshelfcount+#addadjtothickshelf]
+Set,#Room10adjtoeuroshelfcount=[#Room10adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room10frontlipshelfcount=[#Room10frontlipshelfcount+#addfrontlips]
+Set,#Room10ledFpanelcount=[#Room10ledFpanelcount+#ledFpaneladd]
+Set,#Room10ledHpanelcount=[#Room10ledHpanelcount+#ledHpaneladd]
+Set,#Room10ledshelfcount=[#Room10ledshelfcount+#addledshelf]
+Set,#Room10Routedpuckshelfcount=[#Room10Routedpuckshelfcount+#addpuckshelf]
+Set,#Room10Surfacepuckshelfcount=[#Room10Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room10task12inshelfcount=[#Room10Task12inshelfcount+#add12intaskshelf]
+Set,#Room10task24inshelfcount=[#Room10Task24inshelfcount+#add24intaskshelf]
+Set,#Room10task30inshelfcount=[#Room10Task30inshelfcount+#add30intaskshelf]
+Set,#Room10task36inshelfcount=[#Room10Task36inshelfcount+#add36intaskshelf]
+Set,#Room10task42inshelfcount=[#Room10Task42inshelfcount+#add42intaskshelf]
+Set,#Room10task45inshelfcount=[#Room10Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room10EBTopofPanelcount=[#Room10EBTopofPanelcount+#TopEBadd]
+Set,#Room10EBBackofPanelcount=[#Room10EBBackofPanelcount+#BackEBadd]
+Set,#Room10RWshelfcount=[#Room10RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room10Wbusbarcount=[#Room10Wbusbarcount+#wBusbaradd]
+Set,#Room10WLEDshelfcount=[#Room10WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom10options.pcb
+
+
+}
+,end Room10
+
+
+Do,(#RoomNum = 11):1
+{
+
+Set,#Room11Subtotal = [#Room11Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room11Material = <#UnitMaterialname>
+Set,#Room11Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room11ContrastMaterial= <#ContrastMaterialname>
+Set, #Room11ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room11EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room11ClosetRodType= <#ClosetRodType>
+Set, #Room11ClosetRodcount= [#Room11ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room11ClosetRodlengthcount= [#Room11ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room11DoorDrawerType= <#DoorDrawerType>
+Set,#Room11DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room11DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room11Basicdoorcost=[#Room11Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room11DoorCost=[#Room11DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm11otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm11otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm11otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm11otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm11otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm11otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm11otherinsert7=Applied Molding
+
+
+Set,#Room11CrownMoldingType=<#CrownMoldingType>
+Set, #Room11CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room11BaseType= <#BaseType>
+Set,(#Room11BaseType<>"#BaseType0")&(#Room11BaseType<>"#BaseType00"):#Room11basecostgroup=<#BaseTypeCostGroup>:#Room11basecostgroup=0
+
+Set,(#Toestopcount>0):#Room11ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room11Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room11Shoefencecount = [#Room11Shoefencecount+#Toestopcount]
+
+Set,#Room11BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room11hasbacking=1
+set,(#specialback=1):#Room11Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room11needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room11BoxDrawertype= <#BoxDrawertype>
+Set,#Room11BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room11BoxDrawercount=[#Room11BoxDrawercount+1]
+Set,(#swapglides=1):#Room11Drawerswitchcount=[#Room11Drawerswitchcount+1]
+}
+Set,#Room11Glidecount=[(#Room11BoxDrawercount-#Room11Drawerswitchcount)]
+Set, #Room11Switchglidecount=[#Room11Drawerswitchcount]
+
+Do,(#Room11BoxDrawertype<>"*Melamine*")&(#Room11BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room11BoxGlideTag
+Len, #size,#Room11BoxDrawertype
+Left,#Room11boxname, #Size-#tagsize, #Room11BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room11SSGlidecount=[#Room11SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room11SSUMGlidecount=[#Room11SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room11POGlidecount=[#Room11POGlidecount+1]
+Set,(#UMPullout=1):#Room11POUMGlidecount=[#Room11POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room11VDGlidecount=[#Room11VDGlidecount+1]
+Set,(#VD2unit=1):#Room11VD2Glidecount=[#Room11VD2Glidecount+1]
+Set, #Room11VDTotalGlidecount=[#Room11VDGlidecount+#Room11VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room11ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room11HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room11KnobPN=<#DoorKnobPN>
+
+Set,#Room11notchdepth= <#notchdepth>
+Set,#Room11notchheight= <#notchheight>
+Set, #Room11notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room11StdDoorHingeCount = [#Room11StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room11OverlayDoorHingeCount = [#Room11OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room11TopDoorHingeCount=[#Room11TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room11BottomDoorHingeCount=[#Room11BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom11.pcb for others.
+Set,#Room11dogearpanelcount=[#Room11dogearpanelcount+#dogearadd]
+Set,#Room11Cchannel2shelfcount=[#Room11Cchannel2shelfcount+#addcchannel2]
+Set,#Room11Cchannel1shelfcount=[#Room11Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room11Cchannelcount=[#Room11Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room11Cchannellengthcount=[#Room11Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room11thickadjshelfcount=[#Room11thickadjshelfcount+#addadjtothickshelf]
+Set,#Room11adjtoeuroshelfcount=[#Room11adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room11frontlipshelfcount=[#Room11frontlipshelfcount+#addfrontlips]
+Set,#Room11ledFpanelcount=[#Room11ledFpanelcount+#ledFpaneladd]
+Set,#Room11ledHpanelcount=[#Room11ledHpanelcount+#ledHpaneladd]
+Set,#Room11ledshelfcount=[#Room11ledshelfcount+#addledshelf]
+Set,#Room11Routedpuckshelfcount=[#Room11Routedpuckshelfcount+#addpuckshelf]
+Set,#Room11Surfacepuckshelfcount=[#Room11Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room11task12inshelfcount=[#Room11Task12inshelfcount+#add12intaskshelf]
+Set,#Room11task24inshelfcount=[#Room11Task24inshelfcount+#add24intaskshelf]
+Set,#Room11task30inshelfcount=[#Room11Task30inshelfcount+#add30intaskshelf]
+Set,#Room11task36inshelfcount=[#Room11Task36inshelfcount+#add36intaskshelf]
+Set,#Room11task42inshelfcount=[#Room11Task42inshelfcount+#add42intaskshelf]
+Set,#Room11task45inshelfcount=[#Room11Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room11EBTopofPanelcount=[#Room11EBTopofPanelcount+#TopEBadd]
+Set,#Room11EBBackofPanelcount=[#Room11EBBackofPanelcount+#BackEBadd]
+Set,#Room11RWshelfcount=[#Room11RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room11Wbusbarcount=[#Room11Wbusbarcount+#wBusbaradd]
+Set,#Room11WLEDshelfcount=[#Room11WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom11options.pcb
+
+
+}
+,end Room11
+
+
+Do,(#RoomNum = 12):1
+{
+
+Set,#Room12Subtotal = [#Room12Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room12Material = <#UnitMaterialname>
+Set,#Room12Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room12ContrastMaterial= <#ContrastMaterialname>
+Set, #Room12ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room12EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room12ClosetRodType= <#ClosetRodType>
+Set, #Room12ClosetRodcount= [#Room12ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room12ClosetRodlengthcount= [#Room12ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room12DoorDrawerType= <#DoorDrawerType>
+Set,#Room12DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room12DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room12Basicdoorcost=[#Room12Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room12DoorCost=[#Room12DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm12otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm12otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm12otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm12otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm12otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm12otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm12otherinsert7=Applied Molding
+
+
+Set,#Room12CrownMoldingType=<#CrownMoldingType>
+Set, #Room12CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room12BaseType= <#BaseType>
+Set,(#Room12BaseType<>"#BaseType0")&(#Room12BaseType<>"#BaseType00"):#Room12basecostgroup=<#BaseTypeCostGroup>:#Room12basecostgroup=0
+
+Set,(#Toestopcount>0):#Room12ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room12Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room12Shoefencecount = [#Room12Shoefencecount+#Toestopcount]
+
+Set,#Room12BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room12hasbacking=1
+set,(#specialback=1):#Room12Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room12needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room12BoxDrawertype= <#BoxDrawertype>
+Set,#Room12BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room12BoxDrawercount=[#Room12BoxDrawercount+1]
+Set,(#swapglides=1):#Room12Drawerswitchcount=[#Room12Drawerswitchcount+1]
+}
+Set,#Room12Glidecount=[(#Room12BoxDrawercount-#Room12Drawerswitchcount)]
+Set, #Room12Switchglidecount=[#Room12Drawerswitchcount]
+
+Do,(#Room12BoxDrawertype<>"*Melamine*")&(#Room12BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room12BoxGlideTag
+Len, #size,#Room12BoxDrawertype
+Left,#Room12boxname, #Size-#tagsize, #Room12BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room12SSGlidecount=[#Room12SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room12SSUMGlidecount=[#Room12SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room12POGlidecount=[#Room12POGlidecount+1]
+Set,(#UMPullout=1):#Room12POUMGlidecount=[#Room12POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room12VDGlidecount=[#Room12VDGlidecount+1]
+Set,(#VD2unit=1):#Room12VD2Glidecount=[#Room12VD2Glidecount+1]
+Set, #Room12VDTotalGlidecount=[#Room12VDGlidecount+#Room12VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room12ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room12HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room12KnobPN=<#DoorKnobPN>
+
+Set,#Room12notchdepth= <#notchdepth>
+Set,#Room12notchheight= <#notchheight>
+Set, #Room12notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room12StdDoorHingeCount = [#Room12StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room12OverlayDoorHingeCount = [#Room12OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room12TopDoorHingeCount=[#Room12TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room12BottomDoorHingeCount=[#Room12BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom12.pcb for others.
+Set,#Room12dogearpanelcount=[#Room12dogearpanelcount+#dogearadd]
+Set,#Room12Cchannel2shelfcount=[#Room12Cchannel2shelfcount+#addcchannel2]
+Set,#Room12Cchannel1shelfcount=[#Room12Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room12Cchannelcount=[#Room12Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room12Cchannellengthcount=[#Room12Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room12thickadjshelfcount=[#Room12thickadjshelfcount+#addadjtothickshelf]
+Set,#Room12adjtoeuroshelfcount=[#Room12adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room12frontlipshelfcount=[#Room12frontlipshelfcount+#addfrontlips]
+Set,#Room12ledFpanelcount=[#Room12ledFpanelcount+#ledFpaneladd]
+Set,#Room12ledHpanelcount=[#Room12ledHpanelcount+#ledHpaneladd]
+Set,#Room12ledshelfcount=[#Room12ledshelfcount+#addledshelf]
+Set,#Room12Routedpuckshelfcount=[#Room12Routedpuckshelfcount+#addpuckshelf]
+Set,#Room12Surfacepuckshelfcount=[#Room12Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room12task12inshelfcount=[#Room12Task12inshelfcount+#add12intaskshelf]
+Set,#Room12task24inshelfcount=[#Room12Task24inshelfcount+#add24intaskshelf]
+Set,#Room12task30inshelfcount=[#Room12Task30inshelfcount+#add30intaskshelf]
+Set,#Room12task36inshelfcount=[#Room12Task36inshelfcount+#add36intaskshelf]
+Set,#Room12task42inshelfcount=[#Room12Task42inshelfcount+#add42intaskshelf]
+Set,#Room12task45inshelfcount=[#Room12Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room12EBTopofPanelcount=[#Room12EBTopofPanelcount+#TopEBadd]
+Set,#Room12EBBackofPanelcount=[#Room12EBBackofPanelcount+#BackEBadd]
+Set,#Room12RWshelfcount=[#Room12RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room12Wbusbarcount=[#Room12Wbusbarcount+#wBusbaradd]
+Set,#Room12WLEDshelfcount=[#Room12WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom12options.pcb
+
+
+}
+,end Room12
+
+
+Do,(#RoomNum = 13):1
+{
+
+Set,#Room13Subtotal = [#Room13Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room13Material = <#UnitMaterialname>
+Set,#Room13Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room13ContrastMaterial= <#ContrastMaterialname>
+Set, #Room13ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room13EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room13ClosetRodType= <#ClosetRodType>
+Set, #Room13ClosetRodcount= [#Room13ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room13ClosetRodlengthcount= [#Room13ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room13DoorDrawerType= <#DoorDrawerType>
+Set,#Room13DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room13DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room13Basicdoorcost=[#Room13Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room13DoorCost=[#Room13DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm13otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm13otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm13otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm13otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm13otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm13otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm13otherinsert7=Applied Molding
+
+
+Set,#Room13CrownMoldingType=<#CrownMoldingType>
+Set, #Room13CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room13BaseType= <#BaseType>
+Set,(#Room13BaseType<>"#BaseType0")&(#Room13BaseType<>"#BaseType00"):#Room13basecostgroup=<#BaseTypeCostGroup>:#Room13basecostgroup=0
+
+Set,(#Toestopcount>0):#Room13ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room13Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room13Shoefencecount = [#Room13Shoefencecount+#Toestopcount]
+
+Set,#Room13BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room13hasbacking=1
+set,(#specialback=1):#Room13Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room13needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room13BoxDrawertype= <#BoxDrawertype>
+Set,#Room13BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room13BoxDrawercount=[#Room13BoxDrawercount+1]
+Set,(#swapglides=1):#Room13Drawerswitchcount=[#Room13Drawerswitchcount+1]
+}
+Set,#Room13Glidecount=[(#Room13BoxDrawercount-#Room13Drawerswitchcount)]
+Set, #Room13Switchglidecount=[#Room13Drawerswitchcount]
+
+Do,(#Room13BoxDrawertype<>"*Melamine*")&(#Room13BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room13BoxGlideTag
+Len, #size,#Room13BoxDrawertype
+Left,#Room13boxname, #Size-#tagsize, #Room13BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room13SSGlidecount=[#Room13SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room13SSUMGlidecount=[#Room13SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room13POGlidecount=[#Room13POGlidecount+1]
+Set,(#UMPullout=1):#Room13POUMGlidecount=[#Room13POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room13VDGlidecount=[#Room13VDGlidecount+1]
+Set,(#VD2unit=1):#Room13VD2Glidecount=[#Room13VD2Glidecount+1]
+Set, #Room13VDTotalGlidecount=[#Room13VDGlidecount+#Room13VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room13ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room13HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room13KnobPN=<#DoorKnobPN>
+
+Set,#Room13notchdepth= <#notchdepth>
+Set,#Room13notchheight= <#notchheight>
+Set, #Room13notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room13StdDoorHingeCount = [#Room13StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room13OverlayDoorHingeCount = [#Room13OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room13TopDoorHingeCount=[#Room13TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room13BottomDoorHingeCount=[#Room13BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom13.pcb for others.
+Set,#Room13dogearpanelcount=[#Room13dogearpanelcount+#dogearadd]
+Set,#Room13Cchannel2shelfcount=[#Room13Cchannel2shelfcount+#addcchannel2]
+Set,#Room13Cchannel1shelfcount=[#Room13Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room13Cchannelcount=[#Room13Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room13Cchannellengthcount=[#Room13Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room13thickadjshelfcount=[#Room13thickadjshelfcount+#addadjtothickshelf]
+Set,#Room13adjtoeuroshelfcount=[#Room13adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room13frontlipshelfcount=[#Room13frontlipshelfcount+#addfrontlips]
+Set,#Room13ledFpanelcount=[#Room13ledFpanelcount+#ledFpaneladd]
+Set,#Room13ledHpanelcount=[#Room13ledHpanelcount+#ledHpaneladd]
+Set,#Room13ledshelfcount=[#Room13ledshelfcount+#addledshelf]
+Set,#Room13Routedpuckshelfcount=[#Room13Routedpuckshelfcount+#addpuckshelf]
+Set,#Room13Surfacepuckshelfcount=[#Room13Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room13task12inshelfcount=[#Room13Task12inshelfcount+#add12intaskshelf]
+Set,#Room13task24inshelfcount=[#Room13Task24inshelfcount+#add24intaskshelf]
+Set,#Room13task30inshelfcount=[#Room13Task30inshelfcount+#add30intaskshelf]
+Set,#Room13task36inshelfcount=[#Room13Task36inshelfcount+#add36intaskshelf]
+Set,#Room13task42inshelfcount=[#Room13Task42inshelfcount+#add42intaskshelf]
+Set,#Room13task45inshelfcount=[#Room13Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room13EBTopofPanelcount=[#Room13EBTopofPanelcount+#TopEBadd]
+Set,#Room13EBBackofPanelcount=[#Room13EBBackofPanelcount+#BackEBadd]
+Set,#Room13RWshelfcount=[#Room13RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room13Wbusbarcount=[#Room13Wbusbarcount+#wBusbaradd]
+Set,#Room13WLEDshelfcount=[#Room13WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom13options.pcb
+
+
+}
+,end Room13
+
+
+Do,(#RoomNum = 14):1
+{
+
+Set,#Room14Subtotal = [#Room14Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room14Material = <#UnitMaterialname>
+Set,#Room14Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room14ContrastMaterial= <#ContrastMaterialname>
+Set, #Room14ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room14EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room14ClosetRodType= <#ClosetRodType>
+Set, #Room14ClosetRodcount= [#Room14ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room14ClosetRodlengthcount= [#Room14ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room14DoorDrawerType= <#DoorDrawerType>
+Set,#Room14DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room14DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room14Basicdoorcost=[#Room14Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room14DoorCost=[#Room14DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm14otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm14otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm14otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm14otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm14otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm14otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm14otherinsert7=Applied Molding
+
+
+Set,#Room14CrownMoldingType=<#CrownMoldingType>
+Set, #Room14CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room14BaseType= <#BaseType>
+Set,(#Room14BaseType<>"#BaseType0")&(#Room14BaseType<>"#BaseType00"):#Room14basecostgroup=<#BaseTypeCostGroup>:#Room14basecostgroup=0
+
+Set,(#Toestopcount>0):#Room14ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room14Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room14Shoefencecount = [#Room14Shoefencecount+#Toestopcount]
+
+Set,#Room14BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room14hasbacking=1
+set,(#specialback=1):#Room14Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room14needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room14BoxDrawertype= <#BoxDrawertype>
+Set,#Room14BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room14BoxDrawercount=[#Room14BoxDrawercount+1]
+Set,(#swapglides=1):#Room14Drawerswitchcount=[#Room14Drawerswitchcount+1]
+}
+Set,#Room14Glidecount=[(#Room14BoxDrawercount-#Room14Drawerswitchcount)]
+Set, #Room14Switchglidecount=[#Room14Drawerswitchcount]
+
+Do,(#Room14BoxDrawertype<>"*Melamine*")&(#Room14BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room14BoxGlideTag
+Len, #size,#Room14BoxDrawertype
+Left,#Room14boxname, #Size-#tagsize, #Room14BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room14SSGlidecount=[#Room14SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room14SSUMGlidecount=[#Room14SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room14POGlidecount=[#Room14POGlidecount+1]
+Set,(#UMPullout=1):#Room14POUMGlidecount=[#Room14POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room14VDGlidecount=[#Room14VDGlidecount+1]
+Set,(#VD2unit=1):#Room14VD2Glidecount=[#Room14VD2Glidecount+1]
+Set, #Room14VDTotalGlidecount=[#Room14VDGlidecount+#Room14VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room14ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room14HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room14KnobPN=<#DoorKnobPN>
+
+Set,#Room14notchdepth= <#notchdepth>
+Set,#Room14notchheight= <#notchheight>
+Set, #Room14notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room14StdDoorHingeCount = [#Room14StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room14OverlayDoorHingeCount = [#Room14OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room14TopDoorHingeCount=[#Room14TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room14BottomDoorHingeCount=[#Room14BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom14.pcb for others.
+Set,#Room14dogearpanelcount=[#Room14dogearpanelcount+#dogearadd]
+Set,#Room14Cchannel2shelfcount=[#Room14Cchannel2shelfcount+#addcchannel2]
+Set,#Room14Cchannel1shelfcount=[#Room14Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room14Cchannelcount=[#Room14Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room14Cchannellengthcount=[#Room14Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room14thickadjshelfcount=[#Room14thickadjshelfcount+#addadjtothickshelf]
+Set,#Room14adjtoeuroshelfcount=[#Room14adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room14frontlipshelfcount=[#Room14frontlipshelfcount+#addfrontlips]
+Set,#Room14ledFpanelcount=[#Room14ledFpanelcount+#ledFpaneladd]
+Set,#Room14ledHpanelcount=[#Room14ledHpanelcount+#ledHpaneladd]
+Set,#Room14ledshelfcount=[#Room14ledshelfcount+#addledshelf]
+Set,#Room14Routedpuckshelfcount=[#Room14Routedpuckshelfcount+#addpuckshelf]
+Set,#Room14Surfacepuckshelfcount=[#Room14Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room14task12inshelfcount=[#Room14Task12inshelfcount+#add12intaskshelf]
+Set,#Room14task24inshelfcount=[#Room14Task24inshelfcount+#add24intaskshelf]
+Set,#Room14task30inshelfcount=[#Room14Task30inshelfcount+#add30intaskshelf]
+Set,#Room14task36inshelfcount=[#Room14Task36inshelfcount+#add36intaskshelf]
+Set,#Room14task42inshelfcount=[#Room14Task42inshelfcount+#add42intaskshelf]
+Set,#Room14task45inshelfcount=[#Room14Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room14EBTopofPanelcount=[#Room14EBTopofPanelcount+#TopEBadd]
+Set,#Room14EBBackofPanelcount=[#Room14EBBackofPanelcount+#BackEBadd]
+Set,#Room14RWshelfcount=[#Room14RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room14Wbusbarcount=[#Room14Wbusbarcount+#wBusbaradd]
+Set,#Room14WLEDshelfcount=[#Room14WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom14options.pcb
+
+
+}
+,end Room14
+
+
+Do,(#RoomNum = 15):1
+{
+
+Set,#Room15Subtotal = [#Room15Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room15Material = <#UnitMaterialname>
+Set,#Room15Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room15ContrastMaterial= <#ContrastMaterialname>
+Set, #Room15ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room15EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room15ClosetRodType= <#ClosetRodType>
+Set, #Room15ClosetRodcount= [#Room15ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room15ClosetRodlengthcount= [#Room15ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room15DoorDrawerType= <#DoorDrawerType>
+Set,#Room15DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room15DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room15Basicdoorcost=[#Room15Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room15DoorCost=[#Room15DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm15otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm15otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm15otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm15otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm15otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm15otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm15otherinsert7=Applied Molding
+
+
+Set,#Room15CrownMoldingType=<#CrownMoldingType>
+Set, #Room15CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room15BaseType= <#BaseType>
+Set,(#Room15BaseType<>"#BaseType0")&(#Room15BaseType<>"#BaseType00"):#Room15basecostgroup=<#BaseTypeCostGroup>:#Room15basecostgroup=0
+
+Set,(#Toestopcount>0):#Room15ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room15Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room15Shoefencecount = [#Room15Shoefencecount+#Toestopcount]
+
+Set,#Room15BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room15hasbacking=1
+set,(#specialback=1):#Room15Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room15needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room15BoxDrawertype= <#BoxDrawertype>
+Set,#Room15BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room15BoxDrawercount=[#Room15BoxDrawercount+1]
+Set,(#swapglides=1):#Room15Drawerswitchcount=[#Room15Drawerswitchcount+1]
+}
+Set,#Room15Glidecount=[(#Room15BoxDrawercount-#Room15Drawerswitchcount)]
+Set, #Room15Switchglidecount=[#Room15Drawerswitchcount]
+
+Do,(#Room15BoxDrawertype<>"*Melamine*")&(#Room15BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room15BoxGlideTag
+Len, #size,#Room15BoxDrawertype
+Left,#Room15boxname, #Size-#tagsize, #Room15BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room15SSGlidecount=[#Room15SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room15SSUMGlidecount=[#Room15SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room15POGlidecount=[#Room15POGlidecount+1]
+Set,(#UMPullout=1):#Room15POUMGlidecount=[#Room15POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room15VDGlidecount=[#Room15VDGlidecount+1]
+Set,(#VD2unit=1):#Room15VD2Glidecount=[#Room15VD2Glidecount+1]
+Set, #Room15VDTotalGlidecount=[#Room15VDGlidecount+#Room15VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room15ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room15HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room15KnobPN=<#DoorKnobPN>
+
+Set,#Room15notchdepth= <#notchdepth>
+Set,#Room15notchheight= <#notchheight>
+Set, #Room15notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room15StdDoorHingeCount = [#Room15StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room15OverlayDoorHingeCount = [#Room15OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room15TopDoorHingeCount=[#Room15TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room15BottomDoorHingeCount=[#Room15BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom15.pcb for others.
+Set,#Room15dogearpanelcount=[#Room15dogearpanelcount+#dogearadd]
+Set,#Room15Cchannel2shelfcount=[#Room15Cchannel2shelfcount+#addcchannel2]
+Set,#Room15Cchannel1shelfcount=[#Room15Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room15Cchannelcount=[#Room15Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room15Cchannellengthcount=[#Room15Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room15thickadjshelfcount=[#Room15thickadjshelfcount+#addadjtothickshelf]
+Set,#Room15adjtoeuroshelfcount=[#Room15adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room15frontlipshelfcount=[#Room15frontlipshelfcount+#addfrontlips]
+Set,#Room15ledFpanelcount=[#Room15ledFpanelcount+#ledFpaneladd]
+Set,#Room15ledHpanelcount=[#Room15ledHpanelcount+#ledHpaneladd]
+Set,#Room15ledshelfcount=[#Room15ledshelfcount+#addledshelf]
+Set,#Room15Routedpuckshelfcount=[#Room15Routedpuckshelfcount+#addpuckshelf]
+Set,#Room15Surfacepuckshelfcount=[#Room15Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room15task12inshelfcount=[#Room15Task12inshelfcount+#add12intaskshelf]
+Set,#Room15task24inshelfcount=[#Room15Task24inshelfcount+#add24intaskshelf]
+Set,#Room15task30inshelfcount=[#Room15Task30inshelfcount+#add30intaskshelf]
+Set,#Room15task36inshelfcount=[#Room15Task36inshelfcount+#add36intaskshelf]
+Set,#Room15task42inshelfcount=[#Room15Task42inshelfcount+#add42intaskshelf]
+Set,#Room15task45inshelfcount=[#Room15Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room15EBTopofPanelcount=[#Room15EBTopofPanelcount+#TopEBadd]
+Set,#Room15EBBackofPanelcount=[#Room15EBBackofPanelcount+#BackEBadd]
+Set,#Room15RWshelfcount=[#Room15RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room15Wbusbarcount=[#Room15Wbusbarcount+#wBusbaradd]
+Set,#Room15WLEDshelfcount=[#Room15WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom15options.pcb
+
+
+}
+,end Room15
+
+
+Do,(#RoomNum = 16):1
+{
+
+Set,#Room16Subtotal = [#Room16Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room16Material = <#UnitMaterialname>
+Set,#Room16Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room16ContrastMaterial= <#ContrastMaterialname>
+Set, #Room16ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room16EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room16ClosetRodType= <#ClosetRodType>
+Set, #Room16ClosetRodcount= [#Room16ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room16ClosetRodlengthcount= [#Room16ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room16DoorDrawerType= <#DoorDrawerType>
+Set,#Room16DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room16DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room16Basicdoorcost=[#Room16Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room16DoorCost=[#Room16DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm16otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm16otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm16otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm16otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm16otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm16otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm16otherinsert7=Applied Molding
+
+
+Set,#Room16CrownMoldingType=<#CrownMoldingType>
+Set, #Room16CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room16BaseType= <#BaseType>
+Set,(#Room16BaseType<>"#BaseType0")&(#Room16BaseType<>"#BaseType00"):#Room16basecostgroup=<#BaseTypeCostGroup>:#Room16basecostgroup=0
+
+Set,(#Toestopcount>0):#Room16ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room16Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room16Shoefencecount = [#Room16Shoefencecount+#Toestopcount]
+
+Set,#Room16BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room16hasbacking=1
+set,(#specialback=1):#Room16Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room16needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room16BoxDrawertype= <#BoxDrawertype>
+Set,#Room16BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room16BoxDrawercount=[#Room16BoxDrawercount+1]
+Set,(#swapglides=1):#Room16Drawerswitchcount=[#Room16Drawerswitchcount+1]
+}
+Set,#Room16Glidecount=[(#Room16BoxDrawercount-#Room16Drawerswitchcount)]
+Set, #Room16Switchglidecount=[#Room16Drawerswitchcount]
+
+Do,(#Room16BoxDrawertype<>"*Melamine*")&(#Room16BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room16BoxGlideTag
+Len, #size,#Room16BoxDrawertype
+Left,#Room16boxname, #Size-#tagsize, #Room16BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room16SSGlidecount=[#Room16SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room16SSUMGlidecount=[#Room16SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room16POGlidecount=[#Room16POGlidecount+1]
+Set,(#UMPullout=1):#Room16POUMGlidecount=[#Room16POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room16VDGlidecount=[#Room16VDGlidecount+1]
+Set,(#VD2unit=1):#Room16VD2Glidecount=[#Room16VD2Glidecount+1]
+Set, #Room16VDTotalGlidecount=[#Room16VDGlidecount+#Room16VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room16ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room16HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room16KnobPN=<#DoorKnobPN>
+
+Set,#Room16notchdepth= <#notchdepth>
+Set,#Room16notchheight= <#notchheight>
+Set, #Room16notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room16StdDoorHingeCount = [#Room16StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room16OverlayDoorHingeCount = [#Room16OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room16TopDoorHingeCount=[#Room16TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room16BottomDoorHingeCount=[#Room16BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom16.pcb for others.
+Set,#Room16dogearpanelcount=[#Room16dogearpanelcount+#dogearadd]
+Set,#Room16Cchannel2shelfcount=[#Room16Cchannel2shelfcount+#addcchannel2]
+Set,#Room16Cchannel1shelfcount=[#Room16Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room16Cchannelcount=[#Room16Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room16Cchannellengthcount=[#Room16Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room16thickadjshelfcount=[#Room16thickadjshelfcount+#addadjtothickshelf]
+Set,#Room16adjtoeuroshelfcount=[#Room16adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room16frontlipshelfcount=[#Room16frontlipshelfcount+#addfrontlips]
+Set,#Room16ledFpanelcount=[#Room16ledFpanelcount+#ledFpaneladd]
+Set,#Room16ledHpanelcount=[#Room16ledHpanelcount+#ledHpaneladd]
+Set,#Room16ledshelfcount=[#Room16ledshelfcount+#addledshelf]
+Set,#Room16Routedpuckshelfcount=[#Room16Routedpuckshelfcount+#addpuckshelf]
+Set,#Room16Surfacepuckshelfcount=[#Room16Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room16task12inshelfcount=[#Room16Task12inshelfcount+#add12intaskshelf]
+Set,#Room16task24inshelfcount=[#Room16Task24inshelfcount+#add24intaskshelf]
+Set,#Room16task30inshelfcount=[#Room16Task30inshelfcount+#add30intaskshelf]
+Set,#Room16task36inshelfcount=[#Room16Task36inshelfcount+#add36intaskshelf]
+Set,#Room16task42inshelfcount=[#Room16Task42inshelfcount+#add42intaskshelf]
+Set,#Room16task45inshelfcount=[#Room16Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room16EBTopofPanelcount=[#Room16EBTopofPanelcount+#TopEBadd]
+Set,#Room16EBBackofPanelcount=[#Room16EBBackofPanelcount+#BackEBadd]
+Set,#Room16RWshelfcount=[#Room16RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room16Wbusbarcount=[#Room16Wbusbarcount+#wBusbaradd]
+Set,#Room16WLEDshelfcount=[#Room16WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom16options.pcb
+
+
+}
+,end Room16
+
+
+Do,(#RoomNum = 17):1
+{
+
+Set,#Room17Subtotal = [#Room17Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room17Material = <#UnitMaterialname>
+Set,#Room17Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room17ContrastMaterial= <#ContrastMaterialname>
+Set, #Room17ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room17EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room17ClosetRodType= <#ClosetRodType>
+Set, #Room17ClosetRodcount= [#Room17ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room17ClosetRodlengthcount= [#Room17ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room17DoorDrawerType= <#DoorDrawerType>
+Set,#Room17DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room17DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room17Basicdoorcost=[#Room17Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room17DoorCost=[#Room17DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm17otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm17otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm17otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm17otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm17otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm17otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm17otherinsert7=Applied Molding
+
+
+Set,#Room17CrownMoldingType=<#CrownMoldingType>
+Set, #Room17CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room17BaseType= <#BaseType>
+Set,(#Room17BaseType<>"#BaseType0")&(#Room17BaseType<>"#BaseType00"):#Room17basecostgroup=<#BaseTypeCostGroup>:#Room17basecostgroup=0
+
+Set,(#Toestopcount>0):#Room17ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room17Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room17Shoefencecount = [#Room17Shoefencecount+#Toestopcount]
+
+Set,#Room17BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room17hasbacking=1
+set,(#specialback=1):#Room17Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room17needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room17BoxDrawertype= <#BoxDrawertype>
+Set,#Room17BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room17BoxDrawercount=[#Room17BoxDrawercount+1]
+Set,(#swapglides=1):#Room17Drawerswitchcount=[#Room17Drawerswitchcount+1]
+}
+Set,#Room17Glidecount=[(#Room17BoxDrawercount-#Room17Drawerswitchcount)]
+Set, #Room17Switchglidecount=[#Room17Drawerswitchcount]
+
+Do,(#Room17BoxDrawertype<>"*Melamine*")&(#Room17BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room17BoxGlideTag
+Len, #size,#Room17BoxDrawertype
+Left,#Room17boxname, #Size-#tagsize, #Room17BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room17SSGlidecount=[#Room17SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room17SSUMGlidecount=[#Room17SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room17POGlidecount=[#Room17POGlidecount+1]
+Set,(#UMPullout=1):#Room17POUMGlidecount=[#Room17POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room17VDGlidecount=[#Room17VDGlidecount+1]
+Set,(#VD2unit=1):#Room17VD2Glidecount=[#Room17VD2Glidecount+1]
+Set, #Room17VDTotalGlidecount=[#Room17VDGlidecount+#Room17VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room17ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room17HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room17KnobPN=<#DoorKnobPN>
+
+Set,#Room17notchdepth= <#notchdepth>
+Set,#Room17notchheight= <#notchheight>
+Set, #Room17notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room17StdDoorHingeCount = [#Room17StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room17OverlayDoorHingeCount = [#Room17OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room17TopDoorHingeCount=[#Room17TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room17BottomDoorHingeCount=[#Room17BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom17.pcb for others.
+Set,#Room17dogearpanelcount=[#Room17dogearpanelcount+#dogearadd]
+Set,#Room17Cchannel2shelfcount=[#Room17Cchannel2shelfcount+#addcchannel2]
+Set,#Room17Cchannel1shelfcount=[#Room17Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room17Cchannelcount=[#Room17Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room17Cchannellengthcount=[#Room17Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room17thickadjshelfcount=[#Room17thickadjshelfcount+#addadjtothickshelf]
+Set,#Room17adjtoeuroshelfcount=[#Room17adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room17frontlipshelfcount=[#Room17frontlipshelfcount+#addfrontlips]
+Set,#Room17ledFpanelcount=[#Room17ledFpanelcount+#ledFpaneladd]
+Set,#Room17ledHpanelcount=[#Room17ledHpanelcount+#ledHpaneladd]
+Set,#Room17ledshelfcount=[#Room17ledshelfcount+#addledshelf]
+Set,#Room17Routedpuckshelfcount=[#Room17Routedpuckshelfcount+#addpuckshelf]
+Set,#Room17Surfacepuckshelfcount=[#Room17Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room17task12inshelfcount=[#Room17Task12inshelfcount+#add12intaskshelf]
+Set,#Room17task24inshelfcount=[#Room17Task24inshelfcount+#add24intaskshelf]
+Set,#Room17task30inshelfcount=[#Room17Task30inshelfcount+#add30intaskshelf]
+Set,#Room17task36inshelfcount=[#Room17Task36inshelfcount+#add36intaskshelf]
+Set,#Room17task42inshelfcount=[#Room17Task42inshelfcount+#add42intaskshelf]
+Set,#Room17task45inshelfcount=[#Room17Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room17EBTopofPanelcount=[#Room17EBTopofPanelcount+#TopEBadd]
+Set,#Room17EBBackofPanelcount=[#Room17EBBackofPanelcount+#BackEBadd]
+Set,#Room17RWshelfcount=[#Room17RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room17Wbusbarcount=[#Room17Wbusbarcount+#wBusbaradd]
+Set,#Room17WLEDshelfcount=[#Room17WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom17options.pcb
+
+
+}
+,end Room17
+
+
+Do,(#RoomNum = 18):1
+{
+
+Set,#Room18Subtotal = [#Room18Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room18Material = <#UnitMaterialname>
+Set,#Room18Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room18ContrastMaterial= <#ContrastMaterialname>
+Set, #Room18ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room18EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room18ClosetRodType= <#ClosetRodType>
+Set, #Room18ClosetRodcount= [#Room18ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room18ClosetRodlengthcount= [#Room18ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room18DoorDrawerType= <#DoorDrawerType>
+Set,#Room18DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room18DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room18Basicdoorcost=[#Room18Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room18DoorCost=[#Room18DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm18otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm18otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm18otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm18otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm18otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm18otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm18otherinsert7=Applied Molding
+
+
+Set,#Room18CrownMoldingType=<#CrownMoldingType>
+Set, #Room18CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room18BaseType= <#BaseType>
+Set,(#Room18BaseType<>"#BaseType0")&(#Room18BaseType<>"#BaseType00"):#Room18basecostgroup=<#BaseTypeCostGroup>:#Room18basecostgroup=0
+
+Set,(#Toestopcount>0):#Room18ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room18Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room18Shoefencecount = [#Room18Shoefencecount+#Toestopcount]
+
+Set,#Room18BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room18hasbacking=1
+set,(#specialback=1):#Room18Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room18needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room18BoxDrawertype= <#BoxDrawertype>
+Set,#Room18BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room18BoxDrawercount=[#Room18BoxDrawercount+1]
+Set,(#swapglides=1):#Room18Drawerswitchcount=[#Room18Drawerswitchcount+1]
+}
+Set,#Room18Glidecount=[(#Room18BoxDrawercount-#Room18Drawerswitchcount)]
+Set, #Room18Switchglidecount=[#Room18Drawerswitchcount]
+
+Do,(#Room18BoxDrawertype<>"*Melamine*")&(#Room18BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room18BoxGlideTag
+Len, #size,#Room18BoxDrawertype
+Left,#Room18boxname, #Size-#tagsize, #Room18BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room18SSGlidecount=[#Room18SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room18SSUMGlidecount=[#Room18SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room18POGlidecount=[#Room18POGlidecount+1]
+Set,(#UMPullout=1):#Room18POUMGlidecount=[#Room18POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room18VDGlidecount=[#Room18VDGlidecount+1]
+Set,(#VD2unit=1):#Room18VD2Glidecount=[#Room18VD2Glidecount+1]
+Set, #Room18VDTotalGlidecount=[#Room18VDGlidecount+#Room18VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room18ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room18HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room18KnobPN=<#DoorKnobPN>
+
+Set,#Room18notchdepth= <#notchdepth>
+Set,#Room18notchheight= <#notchheight>
+Set, #Room18notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room18StdDoorHingeCount = [#Room18StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room18OverlayDoorHingeCount = [#Room18OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room18TopDoorHingeCount=[#Room18TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room18BottomDoorHingeCount=[#Room18BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom18.pcb for others.
+Set,#Room18dogearpanelcount=[#Room18dogearpanelcount+#dogearadd]
+Set,#Room18Cchannel2shelfcount=[#Room18Cchannel2shelfcount+#addcchannel2]
+Set,#Room18Cchannel1shelfcount=[#Room18Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room18Cchannelcount=[#Room18Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room18Cchannellengthcount=[#Room18Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room18thickadjshelfcount=[#Room18thickadjshelfcount+#addadjtothickshelf]
+Set,#Room18adjtoeuroshelfcount=[#Room18adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room18frontlipshelfcount=[#Room18frontlipshelfcount+#addfrontlips]
+Set,#Room18ledFpanelcount=[#Room18ledFpanelcount+#ledFpaneladd]
+Set,#Room18ledHpanelcount=[#Room18ledHpanelcount+#ledHpaneladd]
+Set,#Room18ledshelfcount=[#Room18ledshelfcount+#addledshelf]
+Set,#Room18Routedpuckshelfcount=[#Room18Routedpuckshelfcount+#addpuckshelf]
+Set,#Room18Surfacepuckshelfcount=[#Room18Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room18task12inshelfcount=[#Room18Task12inshelfcount+#add12intaskshelf]
+Set,#Room18task24inshelfcount=[#Room18Task24inshelfcount+#add24intaskshelf]
+Set,#Room18task30inshelfcount=[#Room18Task30inshelfcount+#add30intaskshelf]
+Set,#Room18task36inshelfcount=[#Room18Task36inshelfcount+#add36intaskshelf]
+Set,#Room18task42inshelfcount=[#Room18Task42inshelfcount+#add42intaskshelf]
+Set,#Room18task45inshelfcount=[#Room18Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room18EBTopofPanelcount=[#Room18EBTopofPanelcount+#TopEBadd]
+Set,#Room18EBBackofPanelcount=[#Room18EBBackofPanelcount+#BackEBadd]
+Set,#Room18RWshelfcount=[#Room18RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room18Wbusbarcount=[#Room18Wbusbarcount+#wBusbaradd]
+Set,#Room18WLEDshelfcount=[#Room18WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom18options.pcb
+
+
+}
+,end Room18
+
+
+Do,(#RoomNum = 19):1
+{
+
+Set,#Room19Subtotal = [#Room19Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room19Material = <#UnitMaterialname>
+Set,#Room19Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room19ContrastMaterial= <#ContrastMaterialname>
+Set, #Room19ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room19EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room19ClosetRodType= <#ClosetRodType>
+Set, #Room19ClosetRodcount= [#Room19ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room19ClosetRodlengthcount= [#Room19ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room19DoorDrawerType= <#DoorDrawerType>
+Set,#Room19DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room19DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room19Basicdoorcost=[#Room19Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room19DoorCost=[#Room19DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm19otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm19otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm19otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm19otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm19otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm19otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm19otherinsert7=Applied Molding
+
+
+Set,#Room19CrownMoldingType=<#CrownMoldingType>
+Set, #Room19CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room19BaseType= <#BaseType>
+Set,(#Room19BaseType<>"#BaseType0")&(#Room19BaseType<>"#BaseType00"):#Room19basecostgroup=<#BaseTypeCostGroup>:#Room19basecostgroup=0
+
+Set,(#Toestopcount>0):#Room19ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room19Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room19Shoefencecount = [#Room19Shoefencecount+#Toestopcount]
+
+Set,#Room19BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room19hasbacking=1
+set,(#specialback=1):#Room19Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room19needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room19BoxDrawertype= <#BoxDrawertype>
+Set,#Room19BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room19BoxDrawercount=[#Room19BoxDrawercount+1]
+Set,(#swapglides=1):#Room19Drawerswitchcount=[#Room19Drawerswitchcount+1]
+}
+Set,#Room19Glidecount=[(#Room19BoxDrawercount-#Room19Drawerswitchcount)]
+Set, #Room19Switchglidecount=[#Room19Drawerswitchcount]
+
+Do,(#Room19BoxDrawertype<>"*Melamine*")&(#Room19BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room19BoxGlideTag
+Len, #size,#Room19BoxDrawertype
+Left,#Room19boxname, #Size-#tagsize, #Room19BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room19SSGlidecount=[#Room19SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room19SSUMGlidecount=[#Room19SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room19POGlidecount=[#Room19POGlidecount+1]
+Set,(#UMPullout=1):#Room19POUMGlidecount=[#Room19POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room19VDGlidecount=[#Room19VDGlidecount+1]
+Set,(#VD2unit=1):#Room19VD2Glidecount=[#Room19VD2Glidecount+1]
+Set, #Room19VDTotalGlidecount=[#Room19VDGlidecount+#Room19VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room19ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room19HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room19KnobPN=<#DoorKnobPN>
+
+Set,#Room19notchdepth= <#notchdepth>
+Set,#Room19notchheight= <#notchheight>
+Set, #Room19notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room19StdDoorHingeCount = [#Room19StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room19OverlayDoorHingeCount = [#Room19OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room19TopDoorHingeCount=[#Room19TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room19BottomDoorHingeCount=[#Room19BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom19.pcb for others.
+Set,#Room19dogearpanelcount=[#Room19dogearpanelcount+#dogearadd]
+Set,#Room19Cchannel2shelfcount=[#Room19Cchannel2shelfcount+#addcchannel2]
+Set,#Room19Cchannel1shelfcount=[#Room19Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room19Cchannelcount=[#Room19Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room19Cchannellengthcount=[#Room19Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room19thickadjshelfcount=[#Room19thickadjshelfcount+#addadjtothickshelf]
+Set,#Room19adjtoeuroshelfcount=[#Room19adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room19frontlipshelfcount=[#Room19frontlipshelfcount+#addfrontlips]
+Set,#Room19ledFpanelcount=[#Room19ledFpanelcount+#ledFpaneladd]
+Set,#Room19ledHpanelcount=[#Room19ledHpanelcount+#ledHpaneladd]
+Set,#Room19ledshelfcount=[#Room19ledshelfcount+#addledshelf]
+Set,#Room19Routedpuckshelfcount=[#Room19Routedpuckshelfcount+#addpuckshelf]
+Set,#Room19Surfacepuckshelfcount=[#Room19Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room19task12inshelfcount=[#Room19Task12inshelfcount+#add12intaskshelf]
+Set,#Room19task24inshelfcount=[#Room19Task24inshelfcount+#add24intaskshelf]
+Set,#Room19task30inshelfcount=[#Room19Task30inshelfcount+#add30intaskshelf]
+Set,#Room19task36inshelfcount=[#Room19Task36inshelfcount+#add36intaskshelf]
+Set,#Room19task42inshelfcount=[#Room19Task42inshelfcount+#add42intaskshelf]
+Set,#Room19task45inshelfcount=[#Room19Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room19EBTopofPanelcount=[#Room19EBTopofPanelcount+#TopEBadd]
+Set,#Room19EBBackofPanelcount=[#Room19EBBackofPanelcount+#BackEBadd]
+Set,#Room19RWshelfcount=[#Room19RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room19Wbusbarcount=[#Room19Wbusbarcount+#wBusbaradd]
+Set,#Room19WLEDshelfcount=[#Room19WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom19options.pcb
+
+
+}
+,end Room19
+
+
+Do,(#RoomNum = 20):1
+{
+
+Set,#Room20Subtotal = [#Room20Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room20Material = <#UnitMaterialname>
+Set,#Room20Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room20ContrastMaterial= <#ContrastMaterialname>
+Set, #Room20ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room20EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room20ClosetRodType= <#ClosetRodType>
+Set, #Room20ClosetRodcount= [#Room20ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room20ClosetRodlengthcount= [#Room20ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room20DoorDrawerType= <#DoorDrawerType>
+Set,#Room20DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room20DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room20Basicdoorcost=[#Room20Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room20DoorCost=[#Room20DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm20otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm20otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm20otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm20otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm20otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm20otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm20otherinsert7=Applied Molding
+
+
+Set,#Room20CrownMoldingType=<#CrownMoldingType>
+Set, #Room20CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room20BaseType= <#BaseType>
+Set,(#Room20BaseType<>"#BaseType0")&(#Room20BaseType<>"#BaseType00"):#Room20basecostgroup=<#BaseTypeCostGroup>:#Room20basecostgroup=0
+
+Set,(#Toestopcount>0):#Room20ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room20Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room20Shoefencecount = [#Room20Shoefencecount+#Toestopcount]
+
+Set,#Room20BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room20hasbacking=1
+set,(#specialback=1):#Room20Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room20needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room20BoxDrawertype= <#BoxDrawertype>
+Set,#Room20BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room20BoxDrawercount=[#Room20BoxDrawercount+1]
+Set,(#swapglides=1):#Room20Drawerswitchcount=[#Room20Drawerswitchcount+1]
+}
+Set,#Room20Glidecount=[(#Room20BoxDrawercount-#Room20Drawerswitchcount)]
+Set, #Room20Switchglidecount=[#Room20Drawerswitchcount]
+
+Do,(#Room20BoxDrawertype<>"*Melamine*")&(#Room20BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room20BoxGlideTag
+Len, #size,#Room20BoxDrawertype
+Left,#Room20boxname, #Size-#tagsize, #Room20BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room20SSGlidecount=[#Room20SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room20SSUMGlidecount=[#Room20SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room20POGlidecount=[#Room20POGlidecount+1]
+Set,(#UMPullout=1):#Room20POUMGlidecount=[#Room20POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room20VDGlidecount=[#Room20VDGlidecount+1]
+Set,(#VD2unit=1):#Room20VD2Glidecount=[#Room20VD2Glidecount+1]
+Set, #Room20VDTotalGlidecount=[#Room20VDGlidecount+#Room20VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room20ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room20HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room20KnobPN=<#DoorKnobPN>
+
+Set,#Room20notchdepth= <#notchdepth>
+Set,#Room20notchheight= <#notchheight>
+Set, #Room20notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room20StdDoorHingeCount = [#Room20StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room20OverlayDoorHingeCount = [#Room20OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room20TopDoorHingeCount=[#Room20TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room20BottomDoorHingeCount=[#Room20BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom20.pcb for others.
+Set,#Room20dogearpanelcount=[#Room20dogearpanelcount+#dogearadd]
+Set,#Room20Cchannel2shelfcount=[#Room20Cchannel2shelfcount+#addcchannel2]
+Set,#Room20Cchannel1shelfcount=[#Room20Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room20Cchannelcount=[#Room20Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room20Cchannellengthcount=[#Room20Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room20thickadjshelfcount=[#Room20thickadjshelfcount+#addadjtothickshelf]
+Set,#Room20adjtoeuroshelfcount=[#Room20adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room20frontlipshelfcount=[#Room20frontlipshelfcount+#addfrontlips]
+Set,#Room20ledFpanelcount=[#Room20ledFpanelcount+#ledFpaneladd]
+Set,#Room20ledHpanelcount=[#Room20ledHpanelcount+#ledHpaneladd]
+Set,#Room20ledshelfcount=[#Room20ledshelfcount+#addledshelf]
+Set,#Room20Routedpuckshelfcount=[#Room20Routedpuckshelfcount+#addpuckshelf]
+Set,#Room20Surfacepuckshelfcount=[#Room20Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room20task12inshelfcount=[#Room20Task12inshelfcount+#add12intaskshelf]
+Set,#Room20task24inshelfcount=[#Room20Task24inshelfcount+#add24intaskshelf]
+Set,#Room20task30inshelfcount=[#Room20Task30inshelfcount+#add30intaskshelf]
+Set,#Room20task36inshelfcount=[#Room20Task36inshelfcount+#add36intaskshelf]
+Set,#Room20task42inshelfcount=[#Room20Task42inshelfcount+#add42intaskshelf]
+Set,#Room20task45inshelfcount=[#Room20Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room20EBTopofPanelcount=[#Room20EBTopofPanelcount+#TopEBadd]
+Set,#Room20EBBackofPanelcount=[#Room20EBBackofPanelcount+#BackEBadd]
+Set,#Room20RWshelfcount=[#Room20RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room20Wbusbarcount=[#Room20Wbusbarcount+#wBusbaradd]
+Set,#Room20WLEDshelfcount=[#Room20WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom20options.pcb
+
+
+}
+,end Room20
+
+
+Do,(#RoomNum = 21):1
+{
+
+Set,#Room21Subtotal = [#Room21Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room21Material = <#UnitMaterialname>
+Set,#Room21Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room21ContrastMaterial= <#ContrastMaterialname>
+Set, #Room21ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room21EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room21ClosetRodType= <#ClosetRodType>
+Set, #Room21ClosetRodcount= [#Room21ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room21ClosetRodlengthcount= [#Room21ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room21DoorDrawerType= <#DoorDrawerType>
+Set,#Room21DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room21DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room21Basicdoorcost=[#Room21Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room21DoorCost=[#Room21DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm21otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm21otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm21otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm21otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm21otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm21otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm21otherinsert7=Applied Molding
+
+
+Set,#Room21CrownMoldingType=<#CrownMoldingType>
+Set, #Room21CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room21BaseType= <#BaseType>
+Set,(#Room21BaseType<>"#BaseType0")&(#Room21BaseType<>"#BaseType00"):#Room21basecostgroup=<#BaseTypeCostGroup>:#Room21basecostgroup=0
+
+Set,(#Toestopcount>0):#Room21ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room21Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room21Shoefencecount = [#Room21Shoefencecount+#Toestopcount]
+
+Set,#Room21BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room21hasbacking=1
+set,(#specialback=1):#Room21Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room21needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room21BoxDrawertype= <#BoxDrawertype>
+Set,#Room21BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room21BoxDrawercount=[#Room21BoxDrawercount+1]
+Set,(#swapglides=1):#Room21Drawerswitchcount=[#Room21Drawerswitchcount+1]
+}
+Set,#Room21Glidecount=[(#Room21BoxDrawercount-#Room21Drawerswitchcount)]
+Set, #Room21Switchglidecount=[#Room21Drawerswitchcount]
+
+Do,(#Room21BoxDrawertype<>"*Melamine*")&(#Room21BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room21BoxGlideTag
+Len, #size,#Room21BoxDrawertype
+Left,#Room21boxname, #Size-#tagsize, #Room21BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room21SSGlidecount=[#Room21SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room21SSUMGlidecount=[#Room21SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room21POGlidecount=[#Room21POGlidecount+1]
+Set,(#UMPullout=1):#Room21POUMGlidecount=[#Room21POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room21VDGlidecount=[#Room21VDGlidecount+1]
+Set,(#VD2unit=1):#Room21VD2Glidecount=[#Room21VD2Glidecount+1]
+Set, #Room21VDTotalGlidecount=[#Room21VDGlidecount+#Room21VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room21ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room21HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room21KnobPN=<#DoorKnobPN>
+
+Set,#Room21notchdepth= <#notchdepth>
+Set,#Room21notchheight= <#notchheight>
+Set, #Room21notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room21StdDoorHingeCount = [#Room21StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room21OverlayDoorHingeCount = [#Room21OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room21TopDoorHingeCount=[#Room21TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room21BottomDoorHingeCount=[#Room21BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom21.pcb for others.
+Set,#Room21dogearpanelcount=[#Room21dogearpanelcount+#dogearadd]
+Set,#Room21Cchannel2shelfcount=[#Room21Cchannel2shelfcount+#addcchannel2]
+Set,#Room21Cchannel1shelfcount=[#Room21Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room21Cchannelcount=[#Room21Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room21Cchannellengthcount=[#Room21Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room21thickadjshelfcount=[#Room21thickadjshelfcount+#addadjtothickshelf]
+Set,#Room21adjtoeuroshelfcount=[#Room21adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room21frontlipshelfcount=[#Room21frontlipshelfcount+#addfrontlips]
+Set,#Room21ledFpanelcount=[#Room21ledFpanelcount+#ledFpaneladd]
+Set,#Room21ledHpanelcount=[#Room21ledHpanelcount+#ledHpaneladd]
+Set,#Room21ledshelfcount=[#Room21ledshelfcount+#addledshelf]
+Set,#Room21Routedpuckshelfcount=[#Room21Routedpuckshelfcount+#addpuckshelf]
+Set,#Room21Surfacepuckshelfcount=[#Room21Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room21task12inshelfcount=[#Room21Task12inshelfcount+#add12intaskshelf]
+Set,#Room21task24inshelfcount=[#Room21Task24inshelfcount+#add24intaskshelf]
+Set,#Room21task30inshelfcount=[#Room21Task30inshelfcount+#add30intaskshelf]
+Set,#Room21task36inshelfcount=[#Room21Task36inshelfcount+#add36intaskshelf]
+Set,#Room21task42inshelfcount=[#Room21Task42inshelfcount+#add42intaskshelf]
+Set,#Room21task45inshelfcount=[#Room21Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room21EBTopofPanelcount=[#Room21EBTopofPanelcount+#TopEBadd]
+Set,#Room21EBBackofPanelcount=[#Room21EBBackofPanelcount+#BackEBadd]
+Set,#Room21RWshelfcount=[#Room21RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room21Wbusbarcount=[#Room21Wbusbarcount+#wBusbaradd]
+Set,#Room21WLEDshelfcount=[#Room21WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom21options.pcb
+
+
+}
+,end Room21
+
+
+Do,(#RoomNum = 22):1
+{
+
+Set,#Room22Subtotal = [#Room22Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room22Material = <#UnitMaterialname>
+Set,#Room22Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room22ContrastMaterial= <#ContrastMaterialname>
+Set, #Room22ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room22EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room22ClosetRodType= <#ClosetRodType>
+Set, #Room22ClosetRodcount= [#Room22ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room22ClosetRodlengthcount= [#Room22ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room22DoorDrawerType= <#DoorDrawerType>
+Set,#Room22DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room22DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room22Basicdoorcost=[#Room22Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room22DoorCost=[#Room22DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm22otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm22otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm22otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm22otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm22otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm22otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm22otherinsert7=Applied Molding
+
+
+Set,#Room22CrownMoldingType=<#CrownMoldingType>
+Set, #Room22CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room22BaseType= <#BaseType>
+Set,(#Room22BaseType<>"#BaseType0")&(#Room22BaseType<>"#BaseType00"):#Room22basecostgroup=<#BaseTypeCostGroup>:#Room22basecostgroup=0
+
+Set,(#Toestopcount>0):#Room22ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room22Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room22Shoefencecount = [#Room22Shoefencecount+#Toestopcount]
+
+Set,#Room22BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room22hasbacking=1
+set,(#specialback=1):#Room22Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room22needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room22BoxDrawertype= <#BoxDrawertype>
+Set,#Room22BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room22BoxDrawercount=[#Room22BoxDrawercount+1]
+Set,(#swapglides=1):#Room22Drawerswitchcount=[#Room22Drawerswitchcount+1]
+}
+Set,#Room22Glidecount=[(#Room22BoxDrawercount-#Room22Drawerswitchcount)]
+Set, #Room22Switchglidecount=[#Room22Drawerswitchcount]
+
+Do,(#Room22BoxDrawertype<>"*Melamine*")&(#Room22BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room22BoxGlideTag
+Len, #size,#Room22BoxDrawertype
+Left,#Room22boxname, #Size-#tagsize, #Room22BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room22SSGlidecount=[#Room22SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room22SSUMGlidecount=[#Room22SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room22POGlidecount=[#Room22POGlidecount+1]
+Set,(#UMPullout=1):#Room22POUMGlidecount=[#Room22POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room22VDGlidecount=[#Room22VDGlidecount+1]
+Set,(#VD2unit=1):#Room22VD2Glidecount=[#Room22VD2Glidecount+1]
+Set, #Room22VDTotalGlidecount=[#Room22VDGlidecount+#Room22VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room22ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room22HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room22KnobPN=<#DoorKnobPN>
+
+Set,#Room22notchdepth= <#notchdepth>
+Set,#Room22notchheight= <#notchheight>
+Set, #Room22notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room22StdDoorHingeCount = [#Room22StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room22OverlayDoorHingeCount = [#Room22OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room22TopDoorHingeCount=[#Room22TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room22BottomDoorHingeCount=[#Room22BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom22.pcb for others.
+Set,#Room22dogearpanelcount=[#Room22dogearpanelcount+#dogearadd]
+Set,#Room22Cchannel2shelfcount=[#Room22Cchannel2shelfcount+#addcchannel2]
+Set,#Room22Cchannel1shelfcount=[#Room22Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room22Cchannelcount=[#Room22Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room22Cchannellengthcount=[#Room22Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room22thickadjshelfcount=[#Room22thickadjshelfcount+#addadjtothickshelf]
+Set,#Room22adjtoeuroshelfcount=[#Room22adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room22frontlipshelfcount=[#Room22frontlipshelfcount+#addfrontlips]
+Set,#Room22ledFpanelcount=[#Room22ledFpanelcount+#ledFpaneladd]
+Set,#Room22ledHpanelcount=[#Room22ledHpanelcount+#ledHpaneladd]
+Set,#Room22ledshelfcount=[#Room22ledshelfcount+#addledshelf]
+Set,#Room22Routedpuckshelfcount=[#Room22Routedpuckshelfcount+#addpuckshelf]
+Set,#Room22Surfacepuckshelfcount=[#Room22Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room22task12inshelfcount=[#Room22Task12inshelfcount+#add12intaskshelf]
+Set,#Room22task24inshelfcount=[#Room22Task24inshelfcount+#add24intaskshelf]
+Set,#Room22task30inshelfcount=[#Room22Task30inshelfcount+#add30intaskshelf]
+Set,#Room22task36inshelfcount=[#Room22Task36inshelfcount+#add36intaskshelf]
+Set,#Room22task42inshelfcount=[#Room22Task42inshelfcount+#add42intaskshelf]
+Set,#Room22task45inshelfcount=[#Room22Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room22EBTopofPanelcount=[#Room22EBTopofPanelcount+#TopEBadd]
+Set,#Room22EBBackofPanelcount=[#Room22EBBackofPanelcount+#BackEBadd]
+Set,#Room22RWshelfcount=[#Room22RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room22Wbusbarcount=[#Room22Wbusbarcount+#wBusbaradd]
+Set,#Room22WLEDshelfcount=[#Room22WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom22options.pcb
+
+
+}
+,end Room22
+
+
+Do,(#RoomNum = 23):1
+{
+
+Set,#Room23Subtotal = [#Room23Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room23Material = <#UnitMaterialname>
+Set,#Room23Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room23ContrastMaterial= <#ContrastMaterialname>
+Set, #Room23ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room23EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room23ClosetRodType= <#ClosetRodType>
+Set, #Room23ClosetRodcount= [#Room23ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room23ClosetRodlengthcount= [#Room23ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room23DoorDrawerType= <#DoorDrawerType>
+Set,#Room23DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room23DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room23Basicdoorcost=[#Room23Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room23DoorCost=[#Room23DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm23otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm23otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm23otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm23otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm23otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm23otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm23otherinsert7=Applied Molding
+
+
+Set,#Room23CrownMoldingType=<#CrownMoldingType>
+Set, #Room23CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room23BaseType= <#BaseType>
+Set,(#Room23BaseType<>"#BaseType0")&(#Room23BaseType<>"#BaseType00"):#Room23basecostgroup=<#BaseTypeCostGroup>:#Room23basecostgroup=0
+
+Set,(#Toestopcount>0):#Room23ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room23Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room23Shoefencecount = [#Room23Shoefencecount+#Toestopcount]
+
+Set,#Room23BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room23hasbacking=1
+set,(#specialback=1):#Room23Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room23needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room23BoxDrawertype= <#BoxDrawertype>
+Set,#Room23BoxGlideTag= <#drawerboxglidetag>
+
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room23BoxDrawercount=[#Room23BoxDrawercount+1]
+Set,(#swapglides=1):#Room23Drawerswitchcount=[#Room23Drawerswitchcount+1]
+}
+Set,#Room23Glidecount=[(#Room23BoxDrawercount-#Room23Drawerswitchcount)]
+Set, #Room23Switchglidecount=[#Room23Drawerswitchcount]
+
+Do,(#Room23BoxDrawertype<>"*Melamine*")&(#Room23BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room23BoxGlideTag
+Len, #size,#Room23BoxDrawertype
+Left,#Room23boxname, #Size-#tagsize, #Room23BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room23SSGlidecount=[#Room23SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room23SSUMGlidecount=[#Room23SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room23POGlidecount=[#Room23POGlidecount+1]
+Set,(#UMPullout=1):#Room23POUMGlidecount=[#Room23POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room23VDGlidecount=[#Room23VDGlidecount+1]
+Set,(#VD2unit=1):#Room23VD2Glidecount=[#Room23VD2Glidecount+1]
+Set, #Room23VDTotalGlidecount=[#Room23VDGlidecount+#Room23VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room23ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room23HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room23KnobPN=<#DoorKnobPN>
+
+Set,#Room23notchdepth= <#notchdepth>
+Set,#Room23notchheight= <#notchheight>
+Set, #Room23notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room23StdDoorHingeCount = [#Room23StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room23OverlayDoorHingeCount = [#Room23OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room23TopDoorHingeCount=[#Room23TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room23BottomDoorHingeCount=[#Room23BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom23.pcb for others.
+Set,#Room23dogearpanelcount=[#Room23dogearpanelcount+#dogearadd]
+Set,#Room23Cchannel2shelfcount=[#Room23Cchannel2shelfcount+#addcchannel2]
+Set,#Room23Cchannel1shelfcount=[#Room23Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room23Cchannelcount=[#Room23Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room23Cchannellengthcount=[#Room23Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room23thickadjshelfcount=[#Room23thickadjshelfcount+#addadjtothickshelf]
+Set,#Room23adjtoeuroshelfcount=[#Room23adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room23frontlipshelfcount=[#Room23frontlipshelfcount+#addfrontlips]
+Set,#Room23ledFpanelcount=[#Room23ledFpanelcount+#ledFpaneladd]
+Set,#Room23ledHpanelcount=[#Room23ledHpanelcount+#ledHpaneladd]
+Set,#Room23ledshelfcount=[#Room23ledshelfcount+#addledshelf]
+Set,#Room23Routedpuckshelfcount=[#Room23Routedpuckshelfcount+#addpuckshelf]
+Set,#Room23Surfacepuckshelfcount=[#Room23Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room23task12inshelfcount=[#Room23Task12inshelfcount+#add12intaskshelf]
+Set,#Room23task24inshelfcount=[#Room23Task24inshelfcount+#add24intaskshelf]
+Set,#Room23task30inshelfcount=[#Room23Task30inshelfcount+#add30intaskshelf]
+Set,#Room23task36inshelfcount=[#Room23Task36inshelfcount+#add36intaskshelf]
+Set,#Room23task42inshelfcount=[#Room23Task42inshelfcount+#add42intaskshelf]
+Set,#Room23task45inshelfcount=[#Room23Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room23EBTopofPanelcount=[#Room23EBTopofPanelcount+#TopEBadd]
+Set,#Room23EBBackofPanelcount=[#Room23EBBackofPanelcount+#BackEBadd]
+Set,#Room23RWshelfcount=[#Room23RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room23Wbusbarcount=[#Room23Wbusbarcount+#wBusbaradd]
+Set,#Room23WLEDshelfcount=[#Room23WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom23options.pcb
+
+
+}
+,end Room23
+
+
+Do,(#RoomNum = 24):1
+{
+
+Set,#Room24Subtotal = [#Room24Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room24Material = <#UnitMaterialname>
+Set,#Room24Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room24ContrastMaterial= <#ContrastMaterialname>
+Set, #Room24ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room24EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room24ClosetRodType= <#ClosetRodType>
+Set, #Room24ClosetRodcount= [#Room24ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room24ClosetRodlengthcount= [#Room24ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room24DoorDrawerType= <#DoorDrawerType>
+Set,#Room24DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room24DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room24Basicdoorcost=[#Room24Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room24DoorCost=[#Room24DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm24otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm24otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm24otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm24otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm24otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm24otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm24otherinsert7=Applied Molding
+
+
+Set,#Room24CrownMoldingType=<#CrownMoldingType>
+Set, #Room24CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room24BaseType= <#BaseType>
+Set,(#Room24BaseType<>"#BaseType0")&(#Room24BaseType<>"#BaseType00"):#Room24basecostgroup=<#BaseTypeCostGroup>:#Room24basecostgroup=0
+
+Set,(#Toestopcount>0):#Room24ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room24Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room24Shoefencecount = [#Room24Shoefencecount+#Toestopcount]
+
+Set,#Room24BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room24hasbacking=1
+set,(#specialback=1):#Room24Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room24needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room24BoxDrawertype= <#BoxDrawertype>
+Set,#Room24BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room24BoxDrawercount=[#Room24BoxDrawercount+1]
+Set,(#swapglides=1):#Room24Drawerswitchcount=[#Room24Drawerswitchcount+1]
+}
+Set,#Room24Glidecount=[(#Room24BoxDrawercount-#Room24Drawerswitchcount)]
+Set, #Room24Switchglidecount=[#Room24Drawerswitchcount]
+
+Do,(#Room24BoxDrawertype<>"*Melamine*")&(#Room24BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room24BoxGlideTag
+Len, #size,#Room24BoxDrawertype
+Left,#Room24boxname, #Size-#tagsize, #Room24BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room24SSGlidecount=[#Room24SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room24SSUMGlidecount=[#Room24SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room24POGlidecount=[#Room24POGlidecount+1]
+Set,(#UMPullout=1):#Room24POUMGlidecount=[#Room24POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room24VDGlidecount=[#Room24VDGlidecount+1]
+Set,(#VD2unit=1):#Room24VD2Glidecount=[#Room24VD2Glidecount+1]
+Set, #Room24VDTotalGlidecount=[#Room24VDGlidecount+#Room24VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room24ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room24HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room24KnobPN=<#DoorKnobPN>
+
+Set,#Room24notchdepth= <#notchdepth>
+Set,#Room24notchheight= <#notchheight>
+Set, #Room24notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room24StdDoorHingeCount = [#Room24StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room24OverlayDoorHingeCount = [#Room24OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room24TopDoorHingeCount=[#Room24TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room24BottomDoorHingeCount=[#Room24BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom24.pcb for others.
+Set,#Room24dogearpanelcount=[#Room24dogearpanelcount+#dogearadd]
+Set,#Room24Cchannel2shelfcount=[#Room24Cchannel2shelfcount+#addcchannel2]
+Set,#Room24Cchannel1shelfcount=[#Room24Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room24Cchannelcount=[#Room24Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room24Cchannellengthcount=[#Room24Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room24thickadjshelfcount=[#Room24thickadjshelfcount+#addadjtothickshelf]
+Set,#Room24adjtoeuroshelfcount=[#Room24adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room24frontlipshelfcount=[#Room24frontlipshelfcount+#addfrontlips]
+Set,#Room24ledFpanelcount=[#Room24ledFpanelcount+#ledFpaneladd]
+Set,#Room24ledHpanelcount=[#Room24ledHpanelcount+#ledHpaneladd]
+Set,#Room24ledshelfcount=[#Room24ledshelfcount+#addledshelf]
+Set,#Room24Routedpuckshelfcount=[#Room24Routedpuckshelfcount+#addpuckshelf]
+Set,#Room24Surfacepuckshelfcount=[#Room24Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room24task12inshelfcount=[#Room24Task12inshelfcount+#add12intaskshelf]
+Set,#Room24task24inshelfcount=[#Room24Task24inshelfcount+#add24intaskshelf]
+Set,#Room24task30inshelfcount=[#Room24Task30inshelfcount+#add30intaskshelf]
+Set,#Room24task36inshelfcount=[#Room24Task36inshelfcount+#add36intaskshelf]
+Set,#Room24task42inshelfcount=[#Room24Task42inshelfcount+#add42intaskshelf]
+Set,#Room24task45inshelfcount=[#Room24Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room24EBTopofPanelcount=[#Room24EBTopofPanelcount+#TopEBadd]
+Set,#Room24EBBackofPanelcount=[#Room24EBBackofPanelcount+#BackEBadd]
+Set,#Room24RWshelfcount=[#Room24RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room24Wbusbarcount=[#Room24Wbusbarcount+#wBusbaradd]
+Set,#Room24WLEDshelfcount=[#Room24WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom24options.pcb
+
+
+}
+,end Room24
+
+
+Do,(#RoomNum = 25):1
+{
+
+Set,#Room25Subtotal = [#Room25Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+
+Do,(#name<>"RM*")|((#name="RM*")&(#name="*Door"))|((#name="RM*")&(#name="*Drfrt"))|((#name="RM*")&(#name="*Back*")):1
+{
+set, #stopafterprice=3
+Set,#Room25Material = <#UnitMaterialname>
+Set,#Room25Materialcostgroup = <#Materialcostgroup>
+
+
+Set, #Room25ContrastMaterial= <#ContrastMaterialname>
+Set, #Room25ContrastMaterialcostgroup=<#ContrastMaterialcostgroup>
+
+Set,#Room25EdgeBandingType= <#EdgeBandingType>
+
+Set,#Room25ClosetRodType= <#ClosetRodType>
+Set, #Room25ClosetRodcount= [#Room25ClosetRodcount+#stdrodcnt]
+Set, (#name="*rod*")&(opt=#CutToFitoptnum):#addtorodlength=#Wallwidthadj:#addtorodlength=0
+Set, (#name="*rod*"):#Room25ClosetRodlengthcount= [#Room25ClosetRodlengthcount+#shelfwidth+#addtorodlength]
+
+
+Set,#Room25DoorDrawerType= <#DoorDrawerType>
+Set,#Room25DoorDrawerFinishingType= <#DoorDrawerFinishingType>
+Set,(#presetinsertcost=0):#Room25DoorDrawerInsertType= <#DoorDrawerInsertType>
+set,(#name<>"*hinge*"):#Room25Basicdoorcost=[#Room25Basicdoorcost+#Basicdoorcost]
+set,(#name<>"*hinge*"):#Room25DoorCost=[#Room25DoorCost+#costofdoor] 
+
+
+Do,(#presetinsertcost=1):1
+{
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertMirror"):#Rm25otherinsert1=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertBevMirror"):#Rm25otherinsert2=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSpeaker"):#Rm25otherinsert3=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertSmoke"):#Rm25otherinsert4=<#DoorDrawerInsertType>
+Set, (#DoorDrawerInsertType="#DoorDrawerInsertFrost"):#Rm25otherinsert5=<#DoorDrawerInsertType>
+}
+set, (#Name="flatCFMirror*"):#Rm25otherinsert6=Applied Mirror
+set, (#Name="flatCFMold*"):#Rm25otherinsert7=Applied Molding
+
+
+Set,#Room25CrownMoldingType=<#CrownMoldingType>
+Set, #Room25CrownMoldingCostGroup=<#CrownMoldingTypeCostGroup>
+
+Set,#Room25BaseType= <#BaseType>
+Set,(#Room25BaseType<>"#BaseType0")&(#Room25BaseType<>"#BaseType00"):#Room25basecostgroup=<#BaseTypeCostGroup>:#Room25basecostgroup=0
+
+Set,(#Toestopcount>0):#Room25ShoeFenceType= <#ShoeFenceType>
+set,(#Toestopcount>0):#Room25Shoefencefinish=<#shoefencefinish>
+Set,(#Toestopcount>0):#Room25Shoefencecount = [#Room25Shoefencecount+#Toestopcount]
+
+Set,#Room25BackType = <#BackType> 
+Set,(#name="*Back-*")&(#specialback<>1):#Room25hasbacking=1
+set,(#specialback=1):#Room25Specialback=<#specialback>
+Set,(#name="*Back-None*")&(#specialback=1):#Room25needbackingselected=1
+
+set, #stopafterprice=0
+,Drawer glides
+Set,#Room25BoxDrawertype= <#BoxDrawertype>
+Set,#Room25BoxGlideTag= <#drawerboxglidetag>
+Do,(#drawernumber>0)&(#name<>"*add*"):1
+  {
+set,#Room25BoxDrawercount=[#Room25BoxDrawercount+1]
+Set,(#swapglides=1):#Room25Drawerswitchcount=[#Room25Drawerswitchcount+1]
+}
+Set,#Room25Glidecount=[(#Room25BoxDrawercount-#Room25Drawerswitchcount)]
+Set, #Room25Switchglidecount=[#Room25Drawerswitchcount]
+
+Do,(#Room25BoxDrawertype<>"*Melamine*")&(#Room25BoxDrawertype<>"*Veneer*"):1
+{
+Len, #tagSize, #Room25BoxGlideTag
+Len, #size,#Room25BoxDrawertype
+Left,#Room2boxname, #Size-#tagsize, #Room25BoxDrawertype
+}
+
+,Sliding Shelf Glides
+Set,(#slidingshelf=1):#Room25SSGlidecount=[#Room25SSGlidecount+1]
+Set,(#UMslidingshelf=1):#Room25SSUMGlidecount=[#Room25SSUMGlidecount+1]
+
+,Pullout Glides
+Set,(#Pullout=1):#Room25POGlidecount=[#Room25POGlidecount+1]
+Set,(#UMPullout=1):#Room25POUMGlidecount=[#Room25POUMGlidecount+1]
+
+,Caddy or Vertical Drawer Glides
+Set,(#VDunit=1):#Room25VDGlidecount=[#Room25VDGlidecount+1]
+Set,(#VD2unit=1):#Room25VD2Glidecount=[#Room25VD2Glidecount+1]
+Set, #Room25VDTotalGlidecount=[#Room25VDGlidecount+#Room25VD2Glidecount]
+
+set, #stopafterprice=1
+
+Set,(#ClosetHardwaretype<>"None"):#Room25ClosetHardwareType= <#ClosetHardwaretype>
+Set,(#ClosetHardwaretype<>"None"): #Room25HandlePN=<#DoorHandlePN>
+Set, (#ClosetHardwaretype<>"None"):#Room25KnobPN=<#DoorKnobPN>
+
+Set,#Room25notchdepth= <#notchdepth>
+Set,#Room25notchheight= <#notchheight>
+Set, #Room25notchdepthhasshoe=<#notchdepthhasshoe>
+
+}
+
+Set,(#Stdhingeadd>0):#Room25StdDoorHingeCount = [#Room25StdDoorHingeCount+(#StdHingeadd)]
+Set,(#Overlayhingeadd>0):#Room25OverlayDoorHingeCount = [#Room25OverlayDoorHingeCount+(#OverlayHingeadd)]
+Set,(#Tophingeadd>0):#Room25TopDoorHingeCount=[#Room25TopDoorHingeCount+(#Tophingeadd)]
+Set,(#Bottomhingeadd>0):#Room25BottomDoorHingeCount=[#Room25BottomDoorHingeCount+(#Bottomhingeadd)]
+Set, #Tophingeadd=0
+set, #Bottomhingeadd=0
+Set, #Overlayhingeadd=0
+Set, #Stdhingeadd=0
+,These are multi-piece per unit options, see cfcountoptionRoom25.pcb for others.
+Set,#Room25dogearpanelcount=[#Room25dogearpanelcount+#dogearadd]
+Set,#Room25Cchannel2shelfcount=[#Room25Cchannel2shelfcount+#addcchannel2]
+Set,#Room25Cchannel1shelfcount=[#Room25Cchannel1shelfcount+#addcchannel1]
+Set,((#addcchannel1>0)|(#addcchannel2>0))&(opt=#CutToFitoptnum):#addtocchannellength=#Wallwidthadj:#addtocchannellength=0
+Set,(#addcchannel1>0)|(#addcchannel2>0):#Room25Cchannelcount=[#Room25Cchannelcount+#addcchannel1+(#addcchannel2*2)]
+set,(#addcchannel1>0)|(#addcchannel2>0):#Room25Cchannellengthcount=[#Room25Cchannellengthcount+((#shelfwidth+#addtocchannellength)*#addcchannel2*2)+((#shelfwidth+#addtocchannellength)*#addcchannel1)]
+Set,#Room25thickadjshelfcount=[#Room25thickadjshelfcount+#addadjtothickshelf]
+Set,#Room25adjtoeuroshelfcount=[#Room25adjtoeuroshelfcount+#addadjtoeuroshelf]
+Set,#Room25frontlipshelfcount=[#Room25frontlipshelfcount+#addfrontlips]
+Set,#Room25ledFpanelcount=[#Room25ledFpanelcount+#ledFpaneladd]
+Set,#Room25ledHpanelcount=[#Room25ledHpanelcount+#ledHpaneladd]
+Set,#Room25ledshelfcount=[#Room25ledshelfcount+#addledshelf]
+Set,#Room25Routedpuckshelfcount=[#Room25Routedpuckshelfcount+#addpuckshelf]
+Set,#Room25Surfacepuckshelfcount=[#Room25Surfacepuckshelfcount+#addSpuckshelf]
+
+Set,#Room25task12inshelfcount=[#Room25Task12inshelfcount+#add12intaskshelf]
+Set,#Room25task24inshelfcount=[#Room25Task24inshelfcount+#add24intaskshelf]
+Set,#Room25task30inshelfcount=[#Room25Task30inshelfcount+#add30intaskshelf]
+Set,#Room25task36inshelfcount=[#Room25Task36inshelfcount+#add36intaskshelf]
+Set,#Room25task42inshelfcount=[#Room25Task42inshelfcount+#add42intaskshelf]
+Set,#Room25task45inshelfcount=[#Room25Task45inshelfcount+#add45intaskshelf]
+
+Set,#Room25EBTopofPanelcount=[#Room25EBTopofPanelcount+#TopEBadd]
+Set,#Room25EBBackofPanelcount=[#Room25EBBackofPanelcount+#BackEBadd]
+Set,#Room25RWshelfcount=[#Room25RWshelfcount+#addRWShelfnotch]
+
+
+Set,#Room25Wbusbarcount=[#Room25Wbusbarcount+#wBusbaradd]
+Set,#Room25WLEDshelfcount=[#Room25WLEDshelfcount+#Waddledshelf] 
+
+
+load, cfafterpriceRoom25options.pcb
+
+
+}
+,end Room25
+
+}
+
+load, xxafterpriceok.pcb
+,end #stopfinalOK
+
+Do,(#stopfinalOK=1):1
+{
+ Do,(#name = "*RM1*"):1
+ {
+ Set,#Room1Subtotal = [#Room1Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM2*"):1
+ {
+ Set,#Room2Subtotal = [#Room2Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM3*"):1
+ {
+ Set,#Room3Subtotal = [#Room3Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM4*"):1
+ {
+ Set,#Room4Subtotal = [#Room4Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM5*"):1
+ {
+ Set,#Room5Subtotal = [#Room5Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM6*"):1
+ {
+ Set,#Room6Subtotal = [#Room6Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM7*"):1
+ {
+ Set,#Room7Subtotal = [#Room7Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM8*"):1
+ {
+ Set,#Room8Subtotal = [#Room8Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM9*"):1
+ {
+ Set,#Room9Subtotal = [#Room9Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM10*"):1
+ {
+ Set,#Room10Subtotal = [#Room10Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM11*"):1
+ {
+ Set,#Room11Subtotal = [#Room11Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM12*"):1
+ {
+ Set,#Room12Subtotal = [#Room12Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM13*"):1
+ {
+ Set,#Room13Subtotal = [#Room13Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM14*"):1
+ {
+ Set,#Room14Subtotal = [#Room14Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM15*"):1
+ {
+ Set,#Room15Subtotal = [#Room15Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM16*"):1
+ {
+ Set,#Room16Subtotal = [#Room16Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM17*"):1
+ {
+ Set,#Room17Subtotal = [#Room17Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM18*"):1
+ {
+ Set,#Room18Subtotal = [#Room18Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM19*"):1
+ {
+ Set,#Room19Subtotal = [#Room19Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM20*"):1
+ {
+ Set,#Room20Subtotal = [#Room20Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM21*"):1
+ {
+ Set,#Room21Subtotal = [#Room21Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM22*"):1
+ {
+ Set,#Room22Subtotal = [#Room22Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM23*"):1
+ {
+ Set,#Room23Subtotal = [#Room23Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM24*"):1
+ {
+ Set,#Room24Subtotal = [#Room24Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+ Do,(#name = "*RM25*"):1
+ {
+ Set,#Room25Subtotal = [#Room25Subtotal + (#Cost*#Number*1.#notusedheredesignermarkup)]
+ }
+
+}
+
+
+
+
+
+
+
+Set, #stopxxafterprice=2
+
+,Adding together closet rods 
+Do,(#Name="#ClosetPoleName"):1
+{
+set,#UnitHangPoleNum=[#UnitHangPoleNum+#Number]
+set,#UnitHangPoleCost=[#UnitHangPoleCost+(#Cost*#Number)]
+set,#UnitHangPoleLength=[#UnitHangPoleLength+#Width]
+}
+
+,Adding together shoe shelf costs
+,Do,(#Hasshoeshelves=1)&(#Name="#ShoeShelfName")&(SSN>0):1
+Do,(#Hasshoeshelves=1)&(SSN>0):1
+{
+set,#UnitShoeShelfCost=[#UnitShoeShelfCost+(#Cost*#Number)]
+}
+
+,Adding together wire shelves
+Do,(#Name="#WireShelfName"):1
+{
+set,#UnitWireShelfNum=[#UnitWireShelfNum+#Number]
+set,#UnitWireShelfCost=[#UnitWireShelfCost+(#Cost*#Number)]
+set,#UnitWireShelfLength=[#UnitWireShelfLength+(#Width*#Number)]
+set,#UnitWireShelfSquare=[#UnitWireShelfSquare+(#Width*#Length*#Number)]
+}
+
+
+
+,Adding together wire supports for wire shelves
+Do,(#Name="#WireSupportName")&(wss>0):1
+{
+set,#UnitWSSNum=[#UnitWSSNum+#Number]
+set,#UnitWSSCost=[#UnitWSSCost+(#Cost*#Number)]
+}
+set, #afterpricestop=778
+Do,(#TurnOnSendTOFile=Yes)&(#Cost>0):1
+{
+SendToFile, #DestinationPath\#CSVName.CSV,#StuffForCSV
+}
+
+load, CSVexport.pcb
+
+
+Set,#ledFpaneladd=0
+set,#ledHpaneladd=0
+Set,#ledBOpaneladd=0
+set,#dogearadd=0
+set,#Toestopcount=0
+Set, #addfrontlips=0
+Set, #addcchannel1=0
+Set, #addcchannel2=0
+Set, #addadjtothickshelf=0
+set, #addadjtoeuroshelf=0
+Set, #addledshelf=0
+Set, #Waddledshelf=0
+Set, #addPuckshelf=0
+Set, #addSpuckshelf=0
+Set, #addSXLpuckshelf=0
+set, #add12intaskshelf=0
+set, #add24intaskshelf=0
+set, #add30intaskshelf=0
+set, #add36intaskshelf=0
+set, #add42intaskshelf=0
+set, #add45intaskshelf=0
+set, #TopEBadd=0
+set, #BackEBadd=0
+set, #addRWShelfnotch=0
+set,#AddCutToFitopt=0
+Set,#wBusbaradd=0
+Set,#wLEDshelfadd=0
+
+Set,#Cost=0
+

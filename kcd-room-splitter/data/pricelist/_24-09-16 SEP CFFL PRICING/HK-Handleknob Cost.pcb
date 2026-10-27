@@ -1,0 +1,1097 @@
+,NOT USED ANYMORE
+,Use Grid
+
+,**Set up Extruded Handles (Selected with Door in KCD)
+Displayset, #exthandlename=Aluminum Extruded Handles-specify finish, What is your extruded handle name?
+,**
+Displayset, #exthandlesize1=24IN, What is your small size price point?
+Displayset, #extrudedhandlecost1=15, Cost for smallest?
+,**
+Displayset, #exthandlesize2=48IN, What is your Medium size price point?
+Displayset, #extrudedhandlecost2=18, Cost for Medium?
+,**
+Displayset, #exthandlesize3=96IN, What is your Large size price point?
+Displayset, #extrudedhandlecost3=36, Cost for Large?
+,**
+
+,   Handle and Knob
+DisplaySet,#HandleName0=None,         Set 0 Name
+DisplaySet,#$Handle-Style-0=0,10.0    #HandleName0  Handle Cost
+Displayset,#Handle-Style-0PN=None Selected,10.0    #HandleName0 Handle Part Number
+DisplaySet,#$Knob-Style-0=0,10.0    #HandleName0  Knob Cost
+Displayset,#Knob-Style-0PN=None Selected,10.0    #HandleName0 Knob Part Number,**
+,**
+DisplaySet,#HandleName1=Client Supplied,         Set 1 Name
+DisplaySet,#$Handle-Style-1=10,10.1    #HandleName1  Handle Cost
+Displayset,#Handle-Style-1PN=Client Supplied,10.1    #HandleName1 Handle Part Number
+DisplaySet,#$Knob-Style-1=10,10.1    #HandleName1  Knob Cost
+Displayset,#Knob-Style-1PN=Client Supplied,10.1    #HandleName1 Knob Part Number,**
+,**
+DisplaySet,#HandleName2=G1-Wire96ChanterelleKnobCHR,         Set 2 Name
+DisplaySet,#$Handle-Style-2=0,10.2    #HandleName2  Handle Cost
+Displayset,#Handle-Style-2PN=Hafele 116.07.228,10.2    #HandleName2 Handle Part Number
+DisplaySet,#$Knob-Style-2=0,10.2    #HandleName2  Knob Cost
+Displayset,#Knob-Style-2PN=Hafele 155.99.030,10.2    #HandleName2  Knob Part Number
+,**
+DisplaySet,#HandleName3=G1-Wire96ChanterelleKnobMNL,         Set 3 Name
+DisplaySet,#$Handle-Style-3=0,10.3    #HandleName3  Handle Cost
+Displayset,#Handle-Style-3PN=Hafele 116.07.621,10.3    #HandleName3 Handle Part Number
+DisplaySet,#$Knob-Style-3=0,10.3    #HandleName3  Knob Cost
+Displayset,#Knob-Style-3PN=Hafele 134.06.641,10.3    #HandleName3  Knob Part Number
+,**
+DisplaySet,#HandleName4=G1-Wire96ChanterelleKnobSSBN,         Set 4 Name
+DisplaySet,#$Handle-Style-4=0,10.4    #HandleName4  Handle Cost
+Displayset,#Handle-Style-4PN=Hafele 116.07.024,10.4    #HandleName4 Handle Part Number
+DisplaySet,#$Knob-Style-4=0,10.4    #HandleName4  Knob Cost
+Displayset,#Knob-Style-4PN=Hafele 155.99.029,10.4    #HandleName4  Knob Part Number
+,**
+DisplaySet,#HandleName5=G1-Wire96ChanterelleKnobCPORB,         Set 5 Name
+DisplaySet,#$Handle-Style-5=0,10.5    #HandleName5  Handle Cost
+Displayset,#Handle-Style-5PN=Hafele 116.07.118,10.5    #HandleName5 Handle Part Number
+DisplaySet,#$Knob-Style-5=0,10.5    #HandleName5  Knob Cost
+Displayset,#Knob-Style-5PN=Hafele 155.01.818,10.5    #HandleName5  Knob Part Number
+,**
+DisplaySet,#HandleName6=G1-Wire96ChanterelleKnobMB,         Set 6 Name
+DisplaySet,#$Handle-Style-6=0,10.6    #HandleName6  Handle Cost
+Displayset,#Handle-Style-6PN=Hafele 116.07.329,10.6    #HandleName6 Handle Part Number
+DisplaySet,#$Knob-Style-6=0,10.6    #HandleName6  Knob Cost
+Displayset,#Knob-Style-6PN=Hafele 155.99.028,10.6    #HandleName6  Knob Part Number
+,**
+DisplaySet,#HandleName7=G1-Wire96ChanterelleKnobMG,         Set 7 Name
+DisplaySet,#$Handle-Style-7=0,10.7    #HandleName7  Handle Cost
+Displayset,#Handle-Style-7PN=Hafele 116.07.229,10.7    #HandleName7 Handle Part Number
+DisplaySet,#$Knob-Style-7=0,10.7    #HandleName7  Knob Cost
+Displayset,#Knob-Style-7PN=Hafele 155.01.819,10.7    #HandleName7  Knob Part Number,**
+,**
+DisplaySet,#HandleName8=G1-Wire96FootballKnobCHR,         Set 8 Name
+DisplaySet,#$Handle-Style-8=0,10.8    #HandleName8  Handle Cost
+Displayset,#Handle-Style-8PN=Hafele 116.07.228,10.8    #HandleName8 Handle Part Number
+DisplaySet,#$Knob-Style-8=0,10.8    #HandleName8  Knob Cost
+Displayset,#Knob-Style-8PN=Hafele 137.45.202,10.8    #HandleName8  Knob Part Number
+,**
+DisplaySet,#HandleName9=G1-Wire96FootballKnobSSBN,         Set 9 Name
+DisplaySet,#$Handle-Style-9=0,10.9    #HandleName9  Handle Cost
+Displayset,#Handle-Style-9PN=Hafele 116.07.024,10.9    #HandleName9 Handle Part Number
+DisplaySet,#$Knob-Style-9=0,10.9    #HandleName9  Knob Cost
+Displayset,#Knob-Style-9PN=Hafele 137.45.002,10.9    #HandleName9  Knob Part Number
+,**
+DisplaySet,#HandleName10=G1-Bow96ChanterelleKnobCHR,         Set 10 Name
+DisplaySet,#$Handle-Style-10=0,10.10    #HandleName10  Handle Cost
+Displayset,#Handle-Style-10PN=Hafele 155.99.018,10.10    #HandleName10 Handle Part Number
+DisplaySet,#$Knob-Style-10=0,10.10    #HandleName10  Knob Cost
+Displayset,#Knob-Style-10PN=Hafele 155.99.030,10.10    #HandleName10  Knob Part Number
+,**
+DisplaySet,#HandleName11=G1-Bow96ChanterelleKnobMNL,         Set 11 Name
+DisplaySet,#$Handle-Style-11=0,10.11    #HandleName11  Handle Cost
+Displayset,#Handle-Style-11PN=Hafele 155.00.840,10.11    #HandleName11 Handle Part Number
+DisplaySet,#$Knob-Style-11=0,10.11    #HandleName11  Knob Cost
+Displayset,#Knob-Style-11PN=Hafele 134.06.641,10.11    #HandleName11  Knob Part Number
+,**
+DisplaySet,#HandleName12=G1-Bow96ChanterelleKnobCPORB,         Set 12 Name
+DisplaySet,#$Handle-Style-12=0,10.12    #HandleName12  Handle Cost
+Displayset,#Handle-Style-12PN=Hafele 155.99.020,10.12    #HandleName12 Handle Part Number
+DisplaySet,#$Knob-Style-12=0,10.12    #HandleName12  Knob Cost
+Displayset,#Knob-Style-12PN=Hafele 155.01.818,10.12    #HandleName12  Knob Part Number
+,**
+DisplaySet,#HandleName13=G1-Bow96ChanterelleKnobMB,         Set 13 Name
+DisplaySet,#$Handle-Style-13=0,10.13    #HandleName13  Handle Cost
+Displayset,#Handle-Style-13PN=Hafele 155.99.019,10.13    #HandleName13 Handle Part Number
+DisplaySet,#$Knob-Style-13=0,10.13    #HandleName13  Knob Cost
+Displayset,#Knob-Style-13PN=Hafele 155.99.028,10.13    #HandleName13  Knob Part Number
+,**
+DisplaySet,#HandleName14=G1-Bow96ChanterelleKnobMG,         Set 14 Name
+DisplaySet,#$Handle-Style-14=0,10.14    #HandleName14  Handle Cost
+Displayset,#Handle-Style-14PN=Hafele 155.99.032,10.14    #HandleName14 Handle Part Number
+DisplaySet,#$Knob-Style-14=0,10.14    #HandleName14  Knob Cost
+Displayset,#Knob-Style-14PN=Hafele 155.01.819,10.14    #HandleName14  Knob Part Number,**
+,**
+DisplaySet,#HandleName15=Unused,         Set 15 Name
+DisplaySet,#$Handle-Style-15=0,10.15    #HandleName15  Handle Cost
+Displayset,#Handle-Style-15PN=,10.15    #HandleName15 Handle Part Number
+DisplaySet,#$Knob-Style-15=0,10.15    #HandleName15  Knob Cost
+Displayset,#Knob-Style-15PN=,10.15    #HandleName15  Knob Part Number
+,**
+DisplaySet,#HandleName16=G1-5inBar96ChanterelleKnobCHR,         Set 16 Name
+DisplaySet,#$Handle-Style-16=0,10.16    #HandleName16  Handle Cost
+Displayset,#Handle-Style-16PN=Hafele 155.99.003,10.16    #HandleName16 Handle Part Number
+DisplaySet,#$Knob-Style-16=0,10.16    #HandleName16  Knob Cost
+Displayset,#Knob-Style-16PN=Hafele 155.99.030,10.16    #HandleName16  Knob Part Number
+,**
+DisplaySet,#HandleName17=G1-5inBar96ChanterelleKnobSSBN,         Set 17 Name
+DisplaySet,#$Handle-Style-17=0,10.17    #HandleName17  Handle Cost
+Displayset,#Handle-Style-17PN=Hafele 155.99.000,10.17    #HandleName17 Handle Part Number
+DisplaySet,#$Knob-Style-17=0,10.17    #HandleName17  Knob Cost
+Displayset,#Knob-Style-17PN=Hafele 155.99.029,10.17    #HandleName17  Knob Part Number
+,**
+DisplaySet,#HandleName18=G1-5inBar96ChanterelleKnobCPORB,         Set 18 Name
+DisplaySet,#$Handle-Style-18=0,10.18    #HandleName18  Handle Cost
+Displayset,#Handle-Style-18PN=Hafele 155.99.004,10.18    #HandleName18 Handle Part Number
+DisplaySet,#$Knob-Style-18=0,10.18    #HandleName18  Knob Cost
+Displayset,#Knob-Style-18PN=Hafele 155.01.818,10.18    #HandleName18  Knob Part Number
+,**
+DisplaySet,#HandleName19=G1-5inBar96ChanterelleKnobMB,         Set 19 Name
+DisplaySet,#$Handle-Style-19=0,10.19    #HandleName19  Handle Cost
+Displayset,#Handle-Style-19PN=Hafele 155.99.002,10.19    #HandleName19 Handle Part Number
+DisplaySet,#$Knob-Style-19=0,10.19    #HandleName19  Knob Cost
+Displayset,#Knob-Style-19PN=Hafele 155.99.028,10.19    #HandleName19  Knob Part Number
+,**
+DisplaySet,#HandleName20=G1-5inBar96ChanterelleKnobMG,         Set 20 Name
+DisplaySet,#$Handle-Style-20=0,10.20    #HandleName20  Handle Cost
+Displayset,#Handle-Style-20PN=Hafele 155.02.411,10.20    #HandleName20 Handle Part Number
+DisplaySet,#$Knob-Style-20=0,10.20    #HandleName20  Knob Cost
+Displayset,#Knob-Style-20PN=Hafele 155.01.819,10.20    #HandleName20  Knob Part Number,**
+,**
+DisplaySet,#HandleName21=unused,         Set 21 Name
+DisplaySet,#$Handle-Style-21=0,10.21    #HandleName21  Handle Cost
+Displayset,#Handle-Style-21PN=,10.21    #HandleName21 Handle Part Number
+DisplaySet,#$Knob-Style-21=0,10.21    #HandleName21  Knob Cost
+Displayset,#Knob-Style-21PN=,10.21    #HandleName21  Knob Part Number
+,**
+DisplaySet,#HandleName22=G1-5inBar96FootballKnobSSBN,         Set 22 Name
+DisplaySet,#$Handle-Style-22=0,10.22    #HandleName22  Handle Cost
+Displayset,#Handle-Style-22PN=Hafele 155.99.029,10.22    #HandleName22 Handle Part Number
+DisplaySet,#$Knob-Style-22=0,10.22    #HandleName22  Knob Cost
+Displayset,#Knob-Style-22PN=Hafele 137.45.002,10.22    #HandleName22  Knob Part Number
+,**
+DisplaySet,#HandleName23=G1-Carmel96ChanterelleKnobSSBN,         Set 23 Name
+DisplaySet,#$Handle-Style-23=0,10.23    #HandleName23  Handle Cost
+Displayset,#Handle-Style-23PN=Hafele 107.18.612,10.23    #HandleName23 Handle Part Number
+DisplaySet,#$Knob-Style-23=0,10.23    #HandleName23  Knob Cost
+Displayset,#Knob-Style-23PN=Hafele 155.99.029,10.23    #HandleName23  Knob Part Number
+,**
+DisplaySet,#HandleName24=G1-Carmel96ChanterelleKnobMB,         Set 24 Name
+DisplaySet,#$Handle-Style-24=0,10.24    #HandleName24  Handle Cost
+Displayset,#Handle-Style-24PN=Hafele 107.18.362,10.24    #HandleName24 Handle Part Number
+DisplaySet,#$Knob-Style-24=0,10.24    #HandleName24  Knob Cost
+Displayset,#Knob-Style-24PN=Hafele 155.99.028,10.24    #HandleName24  Knob Part Number
+,**
+DisplaySet,#HandleName25=G1-Carmel96FootballKnobSSBN,         Set 25 Name
+DisplaySet,#$Handle-Style-25=0,10.25    #HandleName25  Handle Cost
+Displayset,#Handle-Style-25PN=Hafele 107.18.612,10.25    #HandleName25 Handle Part Number
+DisplaySet,#$Knob-Style-25=0,10.25    #HandleName25  Knob Cost
+Displayset,#Knob-Style-25PN=Hafele 137.45.002,10.25    #HandleName25  Knob Part Number
+,**
+DisplaySet,#HandleName26=G1-Americana96AmericanaKnobSSBN,         Set 26 Name
+DisplaySet,#$Handle-Style-26=0,10.26    #HandleName26  Handle Cost
+Displayset,#Handle-Style-26PN=Hafele 125.68.051,10.26    #HandleName26 Handle Part Number
+DisplaySet,#$Knob-Style-26=0,10.26    #HandleName26  Knob Cost
+Displayset,#Knob-Style-26PN=Hafele 133.79.051,10.26    #HandleName26  Knob Part Number
+,**
+DisplaySet,#HandleName27=G1-Americana96AmericanaKnobCPORB,         Set 27 Name
+DisplaySet,#$Handle-Style-27=0,10.27    #HandleName27  Handle Cost
+Displayset,#Handle-Style-27PN=Hafele 125.68.351,10.27    #HandleName27 Handle Part Number
+DisplaySet,#$Knob-Style-27=0,10.27    #HandleName27  Knob Cost
+Displayset,#Knob-Style-27PN=Hafele 133.79.351,10.27    #HandleName27  Knob Part Number
+,**
+DisplaySet,#HandleName28=G2-6.5inBar128ChanterelleKnobCHR,         Set 28 Name
+DisplaySet,#$Handle-Style-28=5,10.28    #HandleName28  Handle Cost
+Displayset,#Handle-Style-28PN=Hafele 155.99.014,10.28    #HandleName28 Handle Part Number
+DisplaySet,#$Knob-Style-28=0,10.28    #HandleName28  Knob Cost
+Displayset,#Knob-Style-28PN=Hafele 155.99.030,10.28    #HandleName28  Knob Part Number
+,**
+DisplaySet,#HandleName29=G2-6.5inBar128ChanterelleKnobSSBN,         Set 29 Name
+DisplaySet,#$Handle-Style-29=5,10.29    #HandleName29  Handle Cost
+Displayset,#Handle-Style-29PN=Hafele 155.99.016,10.29    #HandleName29 Handle Part Number
+DisplaySet,#$Knob-Style-29=0,10.29    #HandleName29  Knob Cost
+Displayset,#Knob-Style-29PN=Hafele 155.99.029,10.29    #HandleName29  Knob Part Number
+,**
+DisplaySet,#HandleName30=G2-6.5inBar128ChanterelleKnobCPORB,         Set 30 Name
+DisplaySet,#$Handle-Style-30=5,10.30    #HandleName30  Handle Cost
+Displayset,#Handle-Style-30PN=Hafele 155.99.013,10.30    #HandleName30 Handle Part Number
+DisplaySet,#$Knob-Style-30=0,10.30    #HandleName30  Knob Cost
+Displayset,#Knob-Style-30PN=Hafele 155.01.818,10.30    #HandleName30  Knob Part Number
+,**
+DisplaySet,#HandleName31=G2-6.5inBar128ChanterelleKnobMB,         Set 31 Name
+DisplaySet,#$Handle-Style-31=5,10.31    #HandleName31  Handle Cost
+Displayset,#Handle-Style-31PN=Hafele 155.99.017,10.31    #HandleName31 Handle Part Number
+DisplaySet,#$Knob-Style-31=0,10.31    #HandleName31  Knob Cost
+Displayset,#Knob-Style-31PN=Hafele 155.99.028,10.31    #HandleName31  Knob Part Number
+,**
+DisplaySet,#HandleName32=G2-6.5inBar128ChanterelleKnobMG,         Set 32 Name
+DisplaySet,#$Handle-Style-32=5,10.32    #HandleName32  Handle Cost
+Displayset,#Handle-Style-32PN=Hafele 155.02.413,10.32    #HandleName32 Handle Part Number
+DisplaySet,#$Knob-Style-32=0,10.32    #HandleName32  Knob Cost
+Displayset,#Knob-Style-32PN=Hafele 155.01.819,10.32    #HandleName32  Knob Part Number,**
+,**
+DisplaySet,#HandleName33=Unused,         Set 33 Name
+DisplaySet,#$Handle-Style-33=0,10.33    #HandleName33  Handle Cost
+Displayset,#Handle-Style-33PN=,10.33    #HandleName33 Handle Part Number
+DisplaySet,#$Knob-Style-33=0,10.33    #HandleName33  Knob Cost
+Displayset,#Knob-Style-33PN=,10.33    #HandleName33  Knob Part Number
+,**
+DisplaySet,#HandleName34=G2-6.5inBar128FootballKnobSSBN,         Set 34 Name
+DisplaySet,#$Handle-Style-34=5,10.34    #HandleName34  Handle Cost
+Displayset,#Handle-Style-34PN=Hafele 155.99.016,10.34    #HandleName34 Handle Part Number
+DisplaySet,#$Knob-Style-34=0,10.34    #HandleName34  Knob Cost
+Displayset,#Knob-Style-34PN=Hafele 137.45.002,10.34    #HandleName34  Knob Part Number
+,**
+DisplaySet,#HandleName35=G2-9inBar192ChanterelleKnobCHR,         Set 35 Name
+DisplaySet,#$Handle-Style-35=5,10.35    #HandleName35  Handle Cost
+Displayset,#Handle-Style-35PN=155.99.009,10.35    #HandleName35 Handle Part Number
+DisplaySet,#$Knob-Style-35=0,10.35    #HandleName35  Knob Cost
+Displayset,#Knob-Style-35PN=155.99.030,10.35    #HandleName35  Knob Part Number
+,**
+DisplaySet,#HandleName36=G2-9inBar192ChanterelleKnobSSBN,         Set 36 Name
+DisplaySet,#$Handle-Style-36=5,10.36    #HandleName36  Handle Cost
+Displayset,#Handle-Style-36PN=Hafele 155.99.011,10.36    #HandleName36 Handle Part Number
+DisplaySet,#$Knob-Style-36=0,10.36    #HandleName36  Knob Cost
+Displayset,#Knob-Style-36PN=Hafele 155.99.029,10.36    #HandleName36  Knob Part Number
+,**
+DisplaySet,#HandleName37=G2-9inBar192ChanterelleKnobCPORB,         Set 37 Name
+DisplaySet,#$Handle-Style-37=5,10.37    #HandleName37  Handle Cost
+Displayset,#Handle-Style-37PN=Hafele 155.00.765,10.37    #HandleName37 Handle Part Number
+DisplaySet,#$Knob-Style-37=0,10.37    #HandleName37  Knob Cost
+Displayset,#Knob-Style-37PN=Hafele 155.01.818,10.37    #HandleName37  Knob Part Number
+,**
+DisplaySet,#HandleName38=G2-9inBar192ChanterelleKnobMB,         Set 38 Name
+DisplaySet,#$Handle-Style-38=5,10.38    #HandleName38  Handle Cost
+Displayset,#Handle-Style-38PN=Hafele 155.99.012,10.38    #HandleName38 Handle Part Number
+DisplaySet,#$Knob-Style-38=0,10.38    #HandleName38  Knob Cost
+Displayset,#Knob-Style-38PN=Hafele 155.99.028,10.38    #HandleName38  Knob Part Number
+,**
+DisplaySet,#HandleName39=G2-9inBar192ChanterelleKnobMG,         Set 39 Name
+DisplaySet,#$Handle-Style-39=5,10.39    #HandleName39  Handle Cost
+Displayset,#Handle-Style-39PN=Hafele 155.02.415,10.39    #HandleName39 Handle Part Number
+DisplaySet,#$Knob-Style-39=0,10.39    #HandleName39  Knob Cost
+Displayset,#Knob-Style-39PN=Hafele 155.01.819,10.39    #HandleName39  Knob Part Number,**
+,**
+DisplaySet,#HandleName40=Unused,         Set 40 Name
+DisplaySet,#$Handle-Style-40=0,10.40    #HandleName40  Handle Cost
+Displayset,#Handle-Style-40PN=,10.40    #HandleName40 Handle Part Number
+DisplaySet,#$Knob-Style-40=0,10.40    #HandleName40  Knob Cost
+Displayset,#Knob-Style-40PN=,10.40    #HandleName40  Knob Part Number
+,**
+DisplaySet,#HandleName41=G2-9inBar192FootballKnobSSBN,         Set 41 Name
+DisplaySet,#$Handle-Style-41=5,10.41    #HandleName41  Handle Cost
+Displayset,#Handle-Style-41PN=Hafele 155.99.011,10.41    #HandleName41 Handle Part Number
+DisplaySet,#$Knob-Style-41=0,10.41    #HandleName41  Knob Cost
+Displayset,#Knob-Style-41PN=Hafele 137.45.002,10.41    #HandleName41  Knob Part Number
+,**
+DisplaySet,#HandleName42=G2-Carmel128ChanterelleKnobSSBN,         Set 42 Name
+DisplaySet,#$Handle-Style-42=5,10.42    #HandleName42  Handle Cost
+Displayset,#Handle-Style-42PN=Hafele 107.18.613,10.42    #HandleName42 Handle Part Number
+DisplaySet,#$Knob-Style-42=0,10.42    #HandleName42  Knob Cost
+Displayset,#Knob-Style-42PN=Hafele 155.99.029,10.42    #HandleName42  Knob Part Number
+,**
+DisplaySet,#HandleName43=G2-Carmel128ChanterelleKnobMB,         Set 43 Name
+DisplaySet,#$Handle-Style-43=5,10.43    #HandleName43  Handle Cost
+Displayset,#Handle-Style-43PN=Hafele 107.18.363,10.43    #HandleName43 Handle Part Number
+DisplaySet,#$Knob-Style-43=0,10.43    #HandleName43  Knob Cost
+Displayset,#Knob-Style-43PN=Hafele 155.99.028,10.43    #HandleName43  Knob Part Number
+,**
+DisplaySet,#HandleName44=G2-Carmel128FootballKnobSSBN,         Set 44 Name
+DisplaySet,#$Handle-Style-44=5,10.44    #HandleName44  Handle Cost
+Displayset,#Handle-Style-44PN=Hafele 107.18.613,10.44    #HandleName44 Handle Part Number
+DisplaySet,#$Knob-Style-44=0,10.44    #HandleName44  Knob Cost
+Displayset,#Knob-Style-44PN=Hafele 137.45.002,10.44    #HandleName44  Knob Part Number
+,**
+DisplaySet,#HandleName45=G2-Americana128AmericanaKnobSSBN,         Set 45 Name
+DisplaySet,#$Handle-Style-45=5,10.45    #HandleName45  Handle Cost
+Displayset,#Handle-Style-45PN=Hafele 125.68.052,10.45    #HandleName45 Handle Part Number
+DisplaySet,#$Knob-Style-45=0,10.45    #HandleName45  Knob Cost
+Displayset,#Knob-Style-45PN=Hafele 133.79.051,10.45    #HandleName45  Knob Part Number
+,**
+DisplaySet,#HandleName46=G2-Americana128AmericanaKnobCPORB,         Set 46 Name
+DisplaySet,#$Handle-Style-46=5,10.46    #HandleName46  Handle Cost
+Displayset,#Handle-Style-46PN=Hafele 125.68.352,10.46    #HandleName46 Handle Part Number
+DisplaySet,#$Knob-Style-46=0,10.46    #HandleName46  Knob Cost
+Displayset,#Knob-Style-46PN=Hafele 133.79.351,10.46    #HandleName46  Knob Part Number
+,**
+DisplaySet,#HandleName47=G2-ModernFlair96ChanterelleKnobSSBN,         Set 47 Name
+DisplaySet,#$Handle-Style-47=5,10.47    #HandleName47  Handle Cost
+Displayset,#Handle-Style-47PN=Hafele 155.00.440,10.47    #HandleName47 Handle Part Number
+DisplaySet,#$Knob-Style-47=0,10.47    #HandleName47  Knob Cost
+Displayset,#Knob-Style-47PN=Hafele 155.99.029,10.47    #HandleName47  Knob Part Number
+,**
+DisplaySet,#HandleName48=G2-ModernFlair96FootballKnobSSBN,         Set 48 Name
+DisplaySet,#$Handle-Style-48=5,10.48    #HandleName48  Handle Cost
+Displayset,#Handle-Style-48PN=Hafele 155.00.440,10.48    #HandleName48 Handle Part Number
+DisplaySet,#$Knob-Style-48=0,10.48    #HandleName48  Knob Cost
+Displayset,#Knob-Style-48PN=Hafele 137.45.002,10.48    #HandleName48  Knob Part Number
+,**
+DisplaySet,#HandleName49=G2-Ribbon128ChanterelleKnobSSBN,         Set 49 Name
+DisplaySet,#$Handle-Style-49=5,10.49    #HandleName49  Handle Cost
+Displayset,#Handle-Style-49PN=Hafele 104.08.000,10.49    #HandleName49 Handle Part Number
+DisplaySet,#$Knob-Style-49=0,10.49    #HandleName49  Knob Cost
+Displayset,#Knob-Style-49PN=Hafele 155.99.029,10.49    #HandleName49  Knob Part Number
+,**
+DisplaySet,#HandleName50=G2-Vogue96ChanterelleKnobCHR,         Set 50 Name
+DisplaySet,#$Handle-Style-50=5,10.50    #HandleName50  Handle Cost
+Displayset,#Handle-Style-50PN=Hafele 155.00.040,10.50    #HandleName50 Handle Part Number
+DisplaySet,#$Knob-Style-50=0,10.50    #HandleName50  Knob Cost
+Displayset,#Knob-Style-50PN=Hafele 155.99.030,10.50    #HandleName50  Knob Part Number
+,**
+DisplaySet,#HandleName51=G2-Vogue96ChanterelleKnobSSBN,         Set 51 Name
+DisplaySet,#$Handle-Style-51=5,10.51    #HandleName51  Handle Cost
+Displayset,#Handle-Style-51PN=Hafele 155.00.060,10.51    #HandleName51 Handle Part Number
+DisplaySet,#$Knob-Style-51=0,10.51    #HandleName51  Knob Cost
+Displayset,#Knob-Style-51PN=Hafele 155.99.029,10.51    #HandleName51  Knob Part Number
+,**
+DisplaySet,#HandleName52=G2-Vogue96NotSpecifiedKnobBRBS,         Set 52 Name
+DisplaySet,#$Handle-Style-52=5,10.52    #HandleName52  Handle Cost
+Displayset,#Handle-Style-52PN=Hafele 155.01.620,10.52    #HandleName52 Handle Part Number
+DisplaySet,#$Knob-Style-52=0,10.52    #HandleName52  Knob Cost
+Displayset,#Knob-Style-52PN=Not Specified,10.52    #HandleName52  Knob Part Number
+,**
+DisplaySet,#HandleName53=G2-Vogue96ChanterelleKnobMB,         Set 53 Name
+DisplaySet,#$Handle-Style-53=5,10.53    #HandleName53  Handle Cost
+Displayset,#Handle-Style-53PN=Hafele 155.01.610,10.53    #HandleName53 Handle Part Number
+DisplaySet,#$Knob-Style-53=0,10.53    #HandleName53  Knob Cost
+Displayset,#Knob-Style-53PN=Hafele 155.99.028,10.53    #HandleName53  Knob Part Number
+,**
+DisplaySet,#HandleName54=G2-Vogue128ChanterelleKnobCHR,         Set 54 Name
+DisplaySet,#$Handle-Style-54=5,10.54    #HandleName54  Handle Cost
+Displayset,#Handle-Style-54PN=Hafele 155.00.041,10.54    #HandleName54 Handle Part Number
+DisplaySet,#$Knob-Style-54=0,10.54    #HandleName54  Knob Cost
+Displayset,#Knob-Style-54PN=Hafele 155.99.030,10.54    #HandleName54  Knob Part Number
+,**
+DisplaySet,#HandleName55=G2-Vogue128ChanterelleKnobSSBN,         Set 55 Name
+DisplaySet,#$Handle-Style-55=5,10.55    #HandleName55  Handle Cost
+Displayset,#Handle-Style-55PN=Hafele 155.00.061,10.55    #HandleName55 Handle Part Number
+DisplaySet,#$Knob-Style-55=0,10.55    #HandleName55  Knob Cost
+Displayset,#Knob-Style-55PN=Hafele 155.99.029,10.55    #HandleName55  Knob Part Number
+,**
+DisplaySet,#HandleName56=G2-Vogue128NotSpecifiedKnobBRBS,         Set 56 Name
+DisplaySet,#$Handle-Style-56=5,10.56    #HandleName56  Handle Cost
+Displayset,#Handle-Style-56PN=Hafele 155.01.621,10.56    #HandleName56 Handle Part Number
+DisplaySet,#$Knob-Style-56=0,10.56    #HandleName56  Knob Cost
+Displayset,#Knob-Style-56PN=Not Specified,10.56    #HandleName56  Knob Part Number
+,**
+DisplaySet,#HandleName57=G2-Vogue128ChanterelleKnobMB,         Set 57 Name
+DisplaySet,#$Handle-Style-57=5,10.57    #HandleName57  Handle Cost
+Displayset,#Handle-Style-57PN=Hafele 155.01.611,10.57    #HandleName57 Handle Part Number
+DisplaySet,#$Knob-Style-57=0,10.57    #HandleName57  Knob Cost
+Displayset,#Knob-Style-57PN=Hafele 155.99.028,10.57    #HandleName57  Knob Part Number
+,**
+DisplaySet,#HandleName58=G2-Soho128ChanterelleKnobCHR,         Set 58 Name
+DisplaySet,#$Handle-Style-58=5,10.58    #HandleName58  Handle Cost
+Displayset,#Handle-Style-58PN=Hafele 109.86.202,10.58    #HandleName58 Handle Part Number
+DisplaySet,#$Knob-Style-58=0,10.58    #HandleName58  Knob Cost
+Displayset,#Knob-Style-58PN=Hafele 155.99.030,10.58    #HandleName58  Knob Part Number
+,**
+DisplaySet,#HandleName59=G2-Soho128ChanterelleKnobCPORB,         Set 59 Name
+DisplaySet,#$Handle-Style-59=5,10.59    #HandleName59  Handle Cost
+Displayset,#Handle-Style-59PN=Hafele 109.86.125,10.59    #HandleName59 Handle Part Number
+DisplaySet,#$Knob-Style-59=0,10.59    #HandleName59  Knob Cost
+Displayset,#Knob-Style-59PN=Hafele 155.01.818,10.59    #HandleName59  Knob Part Number
+,**
+DisplaySet,#HandleName60=G2-Soho128ChanterelleKnobSSBN,         Set 60 Name
+DisplaySet,#$Handle-Style-60=5,10.60    #HandleName60  Handle Cost
+Displayset,#Handle-Style-60PN=Hafele 109.86.002,10.60    #HandleName60 Handle Part Number
+DisplaySet,#$Knob-Style-60=0,10.60    #HandleName60  Knob Cost
+Displayset,#Knob-Style-60PN=Hafele 155.99.029,10.60    #HandleName60  Knob Part Number
+,**
+DisplaySet,#HandleName61=G3-Vogue192ChanterelleKnobCHR,         Set 61 Name
+DisplaySet,#$Handle-Style-61=10,10.61    #HandleName61  Handle Cost
+Displayset,#Handle-Style-61PN=Hafele 155.00.071,10.61    #HandleName61 Handle Part Number
+DisplaySet,#$Knob-Style-61=0,10.61    #HandleName61  Knob Cost
+Displayset,#Knob-Style-61PN=Hafele 155.99.030,10.61    #HandleName61  Knob Part Number
+,**
+DisplaySet,#HandleName62=G3-Vogue192ChanterelleKnobSSBN,         Set 62 Name
+DisplaySet,#$Handle-Style-62=10,10.62    #HandleName62  Handle Cost
+Displayset,#Handle-Style-62PN=Hafele 155.00.091,10.62    #HandleName62 Handle Part Number
+DisplaySet,#$Knob-Style-62=0,10.62    #HandleName62  Knob Cost
+Displayset,#Knob-Style-62PN=Hafele 155.99.029,10.62    #HandleName62  Knob Part Number
+,**
+DisplaySet,#HandleName63=G3-Vogue192NotSpecifiedKnobBRBS,         Set 63 Name
+DisplaySet,#$Handle-Style-63=10,10.63    #HandleName63  Handle Cost
+Displayset,#Handle-Style-63PN=Hafele 155.01.622,10.63    #HandleName63 Handle Part Number
+DisplaySet,#$Knob-Style-63=0,10.63    #HandleName63  Knob Cost
+Displayset,#Knob-Style-63PN=Not Specified,10.63    #HandleName63  Knob Part Number
+,**
+DisplaySet,#HandleName64=G3-Vogue192ChanterelleKnobMB,         Set 64 Name
+DisplaySet,#$Handle-Style-64=10,10.64    #HandleName64  Handle Cost
+Displayset,#Handle-Style-64PN=Hafele 155.01.612,10.64    #HandleName64 Handle Part Number
+DisplaySet,#$Knob-Style-64=0,10.64    #HandleName64  Knob Cost
+Displayset,#Knob-Style-64PN=Hafele 155.99.028,10.64    #HandleName64  Knob Part Number
+,**
+DisplaySet,#HandleName65=G3-Vogue224ChanterelleKnobCHR,         Set 65 Name
+DisplaySet,#$Handle-Style-65=10,10.65    #HandleName65  Handle Cost
+Displayset,#Handle-Style-65PN=Hafele 155.00.072,10.65    #HandleName65 Handle Part Number
+DisplaySet,#$Knob-Style-65=0,10.65    #HandleName65  Knob Cost
+Displayset,#Knob-Style-65PN=Hafele 155.99.030,10.65    #HandleName65  Knob Part Number
+,**
+DisplaySet,#HandleName66=G3-Vogue224ChanterelleKnobSSBN,         Set 66 Name
+DisplaySet,#$Handle-Style-66=10,10.66    #HandleName66  Handle Cost
+Displayset,#Handle-Style-66PN=Hafele 155.00.092,10.66    #HandleName66 Handle Part Number
+DisplaySet,#$Knob-Style-66=0,10.66    #HandleName66  Knob Cost
+Displayset,#Knob-Style-66PN=Hafele 155.99.029,10.66    #HandleName66  Knob Part Number
+,**
+DisplaySet,#HandleName67=G3-Vogue224NotSpecifiedKnobBRBS,         Set 67 Name
+DisplaySet,#$Handle-Style-67=10,10.67    #HandleName67  Handle Cost
+Displayset,#Handle-Style-67PN=Hafele 155.01.623,10.67    #HandleName67 Handle Part Number
+DisplaySet,#$Knob-Style-67=0,10.67    #HandleName67  Knob Cost
+Displayset,#Knob-Style-67PN=Not Specified,10.67    #HandleName67  Knob Part Number
+,**
+DisplaySet,#HandleName68=G3-Vogue224ChanterelleKnobMB,         Set 68 Name
+DisplaySet,#$Handle-Style-68=10,10.68    #HandleName68  Handle Cost
+Displayset,#Handle-Style-68PN=Hafele 155.01.613,10.68    #HandleName68 Handle Part Number
+DisplaySet,#$Knob-Style-68=0,10.68    #HandleName68  Knob Cost
+Displayset,#Knob-Style-68PN=Hafele 155.99.028,10.68    #HandleName68  Knob Part Number
+,**
+DisplaySet,#HandleName69=G3-Keystone96KeystoneKnobAB,         Set 69 Name
+DisplaySet,#$Handle-Style-69=10,10.69    #HandleName69  Handle Cost
+Displayset,#Handle-Style-69PN=Hafele 110.93.361,10.69    #HandleName69 Handle Part Number
+DisplaySet,#$Knob-Style-69=10,10.69    #HandleName69  Knob Cost
+Displayset,#Knob-Style-69PN=Hafele 110.93.362,10.69    #HandleName69  Knob Part Number
+,**
+DisplaySet,#HandleName70=G3-Keystone96KeystoneKnobSN,         Set 70 Name
+DisplaySet,#$Handle-Style-70=10,10.70    #HandleName70  Handle Cost
+Displayset,#Handle-Style-70PN=Hafele 110.93.661,10.70    #HandleName70 Handle Part Number
+DisplaySet,#$Knob-Style-70=10,10.70    #HandleName70  Knob Cost
+Displayset,#Knob-Style-70PN=Hafele 110.93.662,10.70    #HandleName70  Knob Part Number
+,**
+DisplaySet,#HandleName71=G3-Keystone96KeystoneKnobCPORB,         Set 71 Name
+DisplaySet,#$Handle-Style-71=10,10.71    #HandleName71  Handle Cost
+Displayset,#Handle-Style-71PN=Hafele 110.93.161,10.71    #HandleName71 Handle Part Number
+DisplaySet,#$Knob-Style-71=10,10.71    #HandleName71  Knob Cost
+Displayset,#Knob-Style-71PN=Hafele 110.93.162,10.71    #HandleName71  Knob Part Number
+,**
+DisplaySet,#HandleName72=G3-Keystone96KeystoneKnobSP,         Set 72 Name
+DisplaySet,#$Handle-Style-72=10,10.72    #HandleName72  Handle Cost
+Displayset,#Handle-Style-72PN=Hafele 110.93.961,10.72    #HandleName72 Handle Part Number
+DisplaySet,#$Knob-Style-72=10,10.72    #HandleName72  Knob Cost
+Displayset,#Knob-Style-72PN=Hafele 110.93.962,10.72    #HandleName72  Knob Part Number
+,**
+DisplaySet,#HandleName73=G3-Keystone96KeystoneKnobASBR,         Set 73 Name
+DisplaySet,#$Handle-Style-73=10,10.73    #HandleName73  Handle Cost
+Displayset,#Handle-Style-73PN=Hafele 110.93.461,10.73    #HandleName73 Handle Part Number
+DisplaySet,#$Knob-Style-73=10,10.73    #HandleName73  Knob Cost
+Displayset,#Knob-Style-73PN=Hafele 110.93.462,10.73    #HandleName73  Knob Part Number
+,**
+DisplaySet,#HandleName74=G3-Nouveau160NotSpecifiedKnobCHR,         Set 74 Name
+DisplaySet,#$Handle-Style-74=10,10.74    #HandleName74  Handle Cost
+Displayset,#Handle-Style-74PN=Hafele 110.34.227,10.74    #HandleName74 Handle Part Number
+DisplaySet,#$Knob-Style-74=0,10.74    #HandleName74  Knob Cost
+Displayset,#Knob-Style-74PN=Not Specified,10.74    #HandleName74  Knob Part Number
+,**
+DisplaySet,#HandleName75=G3-Nouveau160NotSpecifiedKnobSSBN,         Set 75 Name
+DisplaySet,#$Handle-Style-75=10,10.75    #HandleName75  Handle Cost
+Displayset,#Handle-Style-75PN=Hafele 110.34.627,10.75    #HandleName75 Handle Part Number
+DisplaySet,#$Knob-Style-75=0,10.75    #HandleName75  Knob Cost
+Displayset,#Knob-Style-75PN=Not Specified,10.75    #HandleName75  Knob Part Number
+,**
+DisplaySet,#HandleName76=G3-Nouveau160NotSpecifiedKnobMB,         Set 76 Name
+DisplaySet,#$Handle-Style-76=10,10.76    #HandleName76  Handle Cost
+Displayset,#Handle-Style-76PN=Hafele 110.34.327,10.76    #HandleName76 Handle Part Number
+DisplaySet,#$Knob-Style-76=0,10.76    #HandleName76  Knob Cost
+Displayset,#Knob-Style-76PN=Not Specified,10.76    #HandleName76  Knob Part Number
+,**
+DisplaySet,#HandleName77=G3-Revival96NotSpecifiedKnobCPORB,         Set 77 Name
+DisplaySet,#$Handle-Style-77=10,10.77    #HandleName77  Handle Cost
+Displayset,#Handle-Style-77PN=Hafele 125.67.351,10.77    #HandleName77 Handle Part Number
+DisplaySet,#$Knob-Style-77=0,10.77    #HandleName77  Knob Cost
+Displayset,#Knob-Style-77PN=Not Specified,10.77    #HandleName77  Knob Part Number
+,**
+DisplaySet,#HandleName78=G3-Revival128NotSpecifiedKnobCPORB,         Set 78 Name
+DisplaySet,#$Handle-Style-78=10,10.78    #HandleName78  Handle Cost
+Displayset,#Handle-Style-78PN=Hafele 125.67.352,10.78    #HandleName78 Handle Part Number
+DisplaySet,#$Knob-Style-78=0,10.78    #HandleName78  Knob Cost
+Displayset,#Knob-Style-78PN=Not Specified,10.78    #HandleName78  Knob Part Number
+,**
+DisplaySet,#HandleName79=G4-EliteDeco96EliteSquareKnobCHR,         Set 79 Name
+DisplaySet,#$Handle-Style-79=15,10.79    #HandleName79  Handle Cost
+Displayset,#Handle-Style-79PN=Hafele 111.95.260,10.79    #HandleName79 Handle Part Number
+DisplaySet,#$Knob-Style-79=15,10.79    #HandleName79  Knob Cost
+Displayset,#Knob-Style-79PN=Hafele 111.95.000,10.79    #HandleName79  Knob Part Number
+,**
+DisplaySet,#HandleName80=G4-EliteDeco96EliteSquareKnobMB,         Set 80 Name
+DisplaySet,#$Handle-Style-80=15,10.80    #HandleName80  Handle Cost
+Displayset,#Handle-Style-80PN=Hafele 111.95.305,10.80    #HandleName80 Handle Part Number
+DisplaySet,#$Knob-Style-80=15,10.80    #HandleName80  Knob Cost
+Displayset,#Knob-Style-80PN=Hafele 111.95.303,10.80    #HandleName80  Knob Part Number
+,**
+DisplaySet,#HandleName81=G4-EliteDeco96EliteSquareKnobMNL,         Set 81 Name
+DisplaySet,#$Handle-Style-81=15,10.81    #HandleName81  Handle Cost
+Displayset,#Handle-Style-81PN=Hafele 111.95.263,10.81    #HandleName81 Handle Part Number
+DisplaySet,#$Knob-Style-81=15,10.81    #HandleName81  Knob Cost
+Displayset,#Knob-Style-81PN=Hafele 111.95.004,10.81    #HandleName81  Knob Part Number
+,**
+DisplaySet,#HandleName82=G4-EliteDeco96EliteSquareKnobMAL,         Set 82 Name
+DisplaySet,#$Handle-Style-82=15,10.82    #HandleName82  Handle Cost
+Displayset,#Handle-Style-82PN=Hafele 111.95.261,10.82    #HandleName82 Handle Part Number
+DisplaySet,#$Knob-Style-82=15,10.82    #HandleName82  Knob Cost
+Displayset,#Knob-Style-82PN=Hafele 111.95.001,10.82    #HandleName82  Knob Part Number
+,**
+DisplaySet,#HandleName83=G4-EliteDeco96EliteSquareKnobMG,         Set 83 Name
+DisplaySet,#$Handle-Style-83=15,10.83    #HandleName83  Handle Cost
+Displayset,#Handle-Style-83PN=Hafele 111.95.262,10.83    #HandleName83 Handle Part Number
+DisplaySet,#$Knob-Style-83=15,10.83    #HandleName83  Knob Cost
+Displayset,#Knob-Style-83PN=Hafele 111.95.003,10.83    #HandleName83  Knob Part Number
+,**
+DisplaySet,#HandleName84=G4-EliteDeco96EliteSquareKnobSG,         Set 84 Name
+DisplaySet,#$Handle-Style-84=15,10.84    #HandleName84  Handle Cost
+Displayset,#Handle-Style-84PN=Hafele 111.95.265,10.84    #HandleName84 Handle Part Number
+DisplaySet,#$Knob-Style-84=15,10.84    #HandleName84  Knob Cost
+Displayset,#Knob-Style-84PN=Hafele 111.95.005,10.84    #HandleName84  Knob Part Number,**
+,**
+DisplaySet,#HandleName85=G4-EliteDeco128EliteSquareKnobCHR,         Set 85 Name
+DisplaySet,#$Handle-Style-85=15,10.85    #HandleName85  Handle Cost
+Displayset,#Handle-Style-85PN=Hafele 111.95.270,10.85    #HandleName85 Handle Part Number
+DisplaySet,#$Knob-Style-85=15,10.85    #HandleName85  Knob Cost
+Displayset,#Knob-Style-85PN=Hafele 111.95.000,10.85    #HandleName85  Knob Part Number
+,**
+DisplaySet,#HandleName86=G4-EliteDeco128EliteSquareKnobMB,         Set 86 Name
+DisplaySet,#$Handle-Style-86=15,10.86    #HandleName86  Handle Cost
+Displayset,#Handle-Style-86PN=Hafele 111.95.306,10.86    #HandleName86 Handle Part Number
+DisplaySet,#$Knob-Style-86=15,10.86    #HandleName86  Knob Cost
+Displayset,#Knob-Style-86PN=Hafele 111.95.303,10.86    #HandleName86  Knob Part Number
+,**
+DisplaySet,#HandleName87=G4-EliteDeco128EliteSquareKnobMNL,         Set 87 Name
+DisplaySet,#$Handle-Style-87=15,10.87    #HandleName87  Handle Cost
+Displayset,#Handle-Style-87PN=Hafele 111.95.273,10.87    #HandleName87 Handle Part Number
+DisplaySet,#$Knob-Style-87=15,10.87    #HandleName87  Knob Cost
+Displayset,#Knob-Style-87PN=Hafele 111.95.004,10.87    #HandleName87  Knob Part Number
+,**
+DisplaySet,#HandleName88=G4-EliteDeco128EliteSquareKnobMAL,         Set 88 Name
+DisplaySet,#$Handle-Style-88=15,10.88    #HandleName88  Handle Cost
+Displayset,#Handle-Style-88PN=Hafele 111.95.271,10.88    #HandleName88 Handle Part Number
+DisplaySet,#$Knob-Style-88=15,10.88    #HandleName88  Knob Cost
+Displayset,#Knob-Style-88PN=Hafele 111.95.001,10.88    #HandleName88  Knob Part Number
+,**
+DisplaySet,#HandleName89=G4-EliteDeco128EliteSquareKnobMG,         Set 89 Name
+DisplaySet,#$Handle-Style-89=15,10.89    #HandleName89  Handle Cost
+Displayset,#Handle-Style-89PN=Hafele 111.95.272,10.89    #HandleName89 Handle Part Number
+DisplaySet,#$Knob-Style-89=15,10.89    #HandleName89  Knob Cost
+Displayset,#Knob-Style-89PN=Hafele 111.95.003,10.89    #HandleName89  Knob Part Number
+,**
+DisplaySet,#HandleName90=G4-EliteDeco128EliteSquareKnobSG,         Set 90 Name
+DisplaySet,#$Handle-Style-90=15,10.90    #HandleName90  Handle Cost
+Displayset,#Handle-Style-90PN=Hafele 111.95.275,10.90    #HandleName90 Handle Part Number
+DisplaySet,#$Knob-Style-90=15,10.90    #HandleName90  Knob Cost
+Displayset,#Knob-Style-90PN=Hafele 111.95.005,10.90    #HandleName90  Knob Part Number,**
+,**
+DisplaySet,#HandleName91=G4-EliteBow128EliteDishKnobCHR,         Set 91 Name
+DisplaySet,#$Handle-Style-91=15,10.91    #HandleName91  Handle Cost
+Displayset,#Handle-Style-91PN=Hafele 111.95.180,10.91    #HandleName91 Handle Part Number
+DisplaySet,#$Knob-Style-91=15,10.91    #HandleName91  Knob Cost
+Displayset,#Knob-Style-91PN=Hafele 111.95.140,10.91    #HandleName91  Knob Part Number
+,**
+DisplaySet,#HandleName92=G4-EliteBow128EliteDishKnobMB,         Set 92 Name
+DisplaySet,#$Handle-Style-92=15,10.92    #HandleName92  Handle Cost
+Displayset,#Handle-Style-92PN=Hafele 111.95.310,10.92    #HandleName92 Handle Part Number
+DisplaySet,#$Knob-Style-92=15,10.92    #HandleName92  Knob Cost
+Displayset,#Knob-Style-92PN=Hafele 111.95.300,10.92    #HandleName92  Knob Part Number
+,**
+DisplaySet,#HandleName93=G4-EliteBow128EliteDishKnobMNL,         Set 93 Name
+DisplaySet,#$Handle-Style-93=15,10.93    #HandleName93  Handle Cost
+Displayset,#Handle-Style-93PN=Hafele 111.95.182,10.93    #HandleName93 Handle Part Number
+DisplaySet,#$Knob-Style-93=15,10.93    #HandleName93  Knob Cost
+Displayset,#Knob-Style-93PN=Hafele 111.95.142,10.93    #HandleName93  Knob Part Number
+,**
+DisplaySet,#HandleName94=G4-EliteBow128EliteDishKnobMAL,         Set 94 Name
+DisplaySet,#$Handle-Style-94=15,10.94    #HandleName94  Handle Cost
+Displayset,#Handle-Style-94PN=Hafele 111.95.181,10.94    #HandleName94 Handle Part Number
+DisplaySet,#$Knob-Style-94=15,10.94    #HandleName94  Knob Cost
+Displayset,#Knob-Style-94PN=Hafele 111.95.141,10.94    #HandleName94  Knob Part Number
+,**
+DisplaySet,#HandleName95=G4-EliteBow128EliteDishKnobMG,         Set 95 Name
+DisplaySet,#$Handle-Style-95=15,10.95    #HandleName95  Handle Cost
+Displayset,#Handle-Style-95PN=Hafele 111.95.184,10.95    #HandleName95 Handle Part Number
+DisplaySet,#$Knob-Style-95=15,10.95    #HandleName95  Knob Cost
+Displayset,#Knob-Style-95PN=Hafele 111.95.144,10.95    #HandleName95  Knob Part Number
+,**
+DisplaySet,#HandleName96=G4-EliteBow128EliteDishKnobSG,         Set 96 Name
+DisplaySet,#$Handle-Style-96=15,10.96    #HandleName96  Handle Cost
+Displayset,#Handle-Style-96PN=Hafele 111.95.185,10.96    #HandleName96 Handle Part Number
+DisplaySet,#$Knob-Style-96=15,10.96    #HandleName96  Knob Cost
+Displayset,#Knob-Style-96PN=Hafele 111.95.145,10.96    #HandleName96  Knob Part Number
+,**
+DisplaySet,#HandleName97=G4-EliteModern128EliteFingerPullKnobCHR,         Set 97 Name
+DisplaySet,#$Handle-Style-97=15,10.97    #HandleName97  Handle Cost
+Displayset,#Handle-Style-97PN=Hafele 111.95.100,10.97    #HandleName97 Handle Part Number
+DisplaySet,#$Knob-Style-97=15,10.97    #HandleName97  Knob Cost
+Displayset,#Knob-Style-97PN=Hafele 111.95.110,10.97    #HandleName97  Knob Part Number
+,**
+DisplaySet,#HandleName98=G4-EliteModern128EliteFingerPullKnobMB,         Set 98 Name
+DisplaySet,#$Handle-Style-98=15,10.98    #HandleName98  Handle Cost
+Displayset,#Handle-Style-98PN=Hafele 111.95.311,10.98    #HandleName98 Handle Part Number
+DisplaySet,#$Knob-Style-98=15,10.98    #HandleName98  Knob Cost
+Displayset,#Knob-Style-98PN=Hafele 111.95.304,10.98    #HandleName98  Knob Part Number
+,**
+DisplaySet,#HandleName99=G4-EliteModern128EliteFingerPullKnobMNL,         Set 99 Name
+DisplaySet,#$Handle-Style-99=15,10.99    #HandleName99  Handle Cost
+Displayset,#Handle-Style-99PN=Hafele 111.95.102,10.99    #HandleName99 Handle Part Number
+DisplaySet,#$Knob-Style-99=15,10.99    #HandleName99  Knob Cost
+Displayset,#Knob-Style-99PN=Hafele 111.95.112,10.99    #HandleName99  Knob Part Number
+,**
+DisplaySet,#HandleName100=G4-EliteModern128EliteFingerPullKnobMAL,         Set 100 Name
+DisplaySet,#$Handle-Style-100=15,10.100    #HandleName100  Handle Cost
+Displayset,#Handle-Style-100PN=Hafele 111.95.101,10.100    #HandleName100 Handle Part Number
+DisplaySet,#$Knob-Style-100=15,10.100    #HandleName100  Knob Cost
+Displayset,#Knob-Style-100PN=Hafele 111.95.111,10.100    #HandleName100  Knob Part Number
+,**
+DisplaySet,#HandleName101=G4-EliteModern128EliteFingerPullKnobMG,         Set 101 Name
+DisplaySet,#$Handle-Style-101=15,10.101    #HandleName101  Handle Cost
+Displayset,#Handle-Style-101PN=Hafele 111.95.104,10.101    #HandleName101 Handle Part Number
+DisplaySet,#$Knob-Style-101=15,10.101    #HandleName101  Knob Cost
+Displayset,#Knob-Style-101PN=Hafele 111.95.114,10.101    #HandleName101  Knob Part Number
+,**
+DisplaySet,#HandleName102=G4-EliteModern128EliteFingerPullKnobSG,         Set 102 Name
+DisplaySet,#$Handle-Style-102=15,10.102    #HandleName102  Handle Cost
+Displayset,#Handle-Style-102PN=Hafele 111.95.105,10.102    #HandleName102 Handle Part Number
+DisplaySet,#$Knob-Style-102=15,10.102    #HandleName102  Knob Cost
+Displayset,#Knob-Style-102PN=Hafele 111.95.115,10.102    #HandleName102  Knob Part Number,**
+,**
+DisplaySet,#HandleName103=G4-EliteArch160EliteDishKnobCHR,         Set 103 Name
+DisplaySet,#$Handle-Style-103=15,10.103    #HandleName103  Handle Cost
+Displayset,#Handle-Style-103PN=Hafele 111.95.130,10.103    #HandleName103 Handle Part Number
+DisplaySet,#$Knob-Style-103=15,10.103    #HandleName103  Knob Cost
+Displayset,#Knob-Style-103PN=Hafele 111.95.140,10.103    #HandleName103  Knob Part Number
+,**
+DisplaySet,#HandleName104=G4-EliteArch160EliteDishKnobMB,         Set 104 Name
+DisplaySet,#$Handle-Style-104=15,10.104    #HandleName104  Handle Cost
+Displayset,#Handle-Style-104PN=Hafele 111.95.308,10.104    #HandleName104 Handle Part Number
+DisplaySet,#$Knob-Style-104=15,10.104    #HandleName104  Knob Cost
+Displayset,#Knob-Style-104PN=Hafele 111.95.300,10.104    #HandleName104  Knob Part Number
+,**
+DisplaySet,#HandleName105=G4-EliteArch160EliteDishKnobMNL,         Set 105 Name
+DisplaySet,#$Handle-Style-105=15,10.105    #HandleName105  Handle Cost
+Displayset,#Handle-Style-105PN=Hafele 111.95.132,105    #HandleName105 Handle Part Number
+DisplaySet,#$Knob-Style-105=15,10.105    #HandleName105  Knob Cost
+Displayset,#Knob-Style-105PN=Hafele 111.95.142,10.105    #HandleName105  Knob Part Number
+,**
+DisplaySet,#HandleName106=G4-EliteArch160EliteDishKnobMAL,         Set 106 Name
+DisplaySet,#$Handle-Style-106=15,10.106    #HandleName106  Handle Cost
+Displayset,#Handle-Style-106PN=Hafele 111.95.131,10.106    #HandleName106 Handle Part Number
+DisplaySet,#$Knob-Style-106=15,10.106    #HandleName106  Knob Cost
+Displayset,#Knob-Style-106PN=Hafele 111.95.141,10.106    #HandleName106  Knob Part Number
+,**
+DisplaySet,#HandleName107=G4-EliteArch160EliteDishKnobMG,         Set 107 Name
+DisplaySet,#$Handle-Style-107=15,10.107    #HandleName107  Handle Cost
+Displayset,#Handle-Style-107PN=Hafele 111.95.134,10.107    #HandleName107 Handle Part Number
+DisplaySet,#$Knob-Style-107=15,10.107    #HandleName107  Knob Cost
+Displayset,#Knob-Style-107PN=Hafele 111.95.144,10.107    #HandleName107  Knob Part Number
+,**
+DisplaySet,#HandleName108=G4-EliteArch160EliteDishKnobSG,         Set 108 Name
+DisplaySet,#$Handle-Style-108=15,10.108    #HandleName108  Handle Cost
+Displayset,#Handle-Style-108PN=Hafele 111.95.135,10.108    #HandleName108 Handle Part Number
+DisplaySet,#$Knob-Style-108=15,10.108    #HandleName108  Knob Cost
+Displayset,#Knob-Style-108PN=Hafele 111.95.145,10.108    #HandleName108  Knob Part Number,**
+,**
+DisplaySet,#HandleName109=G4-3inTabNotSpecifiedKnobCHR,         Set 109 Name
+DisplaySet,#$Handle-Style-109=15,10.109    #HandleName109  Handle Cost
+Displayset,#Handle-Style-109PN=Hafele 111.95.230,10.109    #HandleName109 Handle Part Number
+DisplaySet,#$Knob-Style-109=0,10.109    #HandleName109  Knob Cost
+Displayset,#Knob-Style-109PN=Not Specified,10.109    #HandleName109  Knob Part Number
+,**
+DisplaySet,#HandleName110=G4-3inTabNotSpecifiedKnobMB,         Set 110 Name
+DisplaySet,#$Handle-Style-110=15,10.110    #HandleName110  Handle Cost
+Displayset,#Handle-Style-110PN=Hafele 111.95.320,10.110    #HandleName110 Handle Part Number
+DisplaySet,#$Knob-Style-110=0,10.110    #HandleName110  Knob Cost
+Displayset,#Knob-Style-110PN=Not Specified,10.110    #HandleName110  Knob Part Number
+,**
+DisplaySet,#HandleName111=G4-3inTabNotSpecifiedKnobMNL,         Set 111 Name
+DisplaySet,#$Handle-Style-111=15,10.111    #HandleName111  Handle Cost
+Displayset,#Handle-Style-111PN=Hafele 111.95.250,10.111    #HandleName111 Handle Part Number
+DisplaySet,#$Knob-Style-111=0,10.111    #HandleName111  Knob Cost
+Displayset,#Knob-Style-111PN=Not Specified,10.111    #HandleName111  Knob Part Number
+,**
+DisplaySet,#HandleName112=G4-3inTabNotSpecifiedKnobMAL,         Set 112 Name
+DisplaySet,#$Handle-Style-112=15,10.112    #HandleName112  Handle Cost
+Displayset,#Handle-Style-112PN=Hafele 111.95.190,10.112    #HandleName112 Handle Part Number
+DisplaySet,#$Knob-Style-112=0,10.112    #HandleName112  Knob Cost
+Displayset,#Knob-Style-112PN=Not Specified,10.112    #HandleName112  Knob Part Number
+,**
+DisplaySet,#HandleName113=G4-3inTabNotSpecifiedKnobMG,         Set 113 Name
+DisplaySet,#$Handle-Style-113=15,10.113    #HandleName113  Handle Cost
+Displayset,#Handle-Style-113PN=Hafele 111.95.192,10.113    #HandleName113 Handle Part Number
+DisplaySet,#$Knob-Style-113=0,10.113    #HandleName113  Knob Cost
+Displayset,#Knob-Style-113PN=Not Specified,10.113    #HandleName113  Knob Part Number
+,**
+DisplaySet,#HandleName114=G4-3inTabNotSpecifiedKnobSG,         Set 114 Name
+DisplaySet,#$Handle-Style-114=15,10.114    #HandleName114  Handle Cost
+Displayset,#Handle-Style-114PN=Hafele 111.95.220,10.114    #HandleName114 Handle Part Number
+DisplaySet,#$Knob-Style-114=0,10.114    #HandleName114  Knob Cost
+Displayset,#Knob-Style-114PN=Not Specified,10.114    #HandleName114  Knob Part Number,**
+,**
+DisplaySet,#HandleName115=G4-EliteDeco96EliteRoundKnobCHR,         Set 115 Name
+DisplaySet,#$Handle-Style-115=15,10.115    #HandleName115  Handle Cost
+Displayset,#Handle-Style-115PN=Hafele 111.95.260,10.115    #HandleName115 Handle Part Number
+DisplaySet,#$Knob-Style-115=15,10.115    #HandleName115  Knob Cost
+Displayset,#Knob-Style-115PN=Hafele 111.95.170,10.115    #HandleName115  Knob Part Number
+,**
+DisplaySet,#HandleName116=G4-EliteDeco96EliteRoundKnobMB,         Set 116 Name
+DisplaySet,#$Handle-Style-116=15,10.116    #HandleName116  Handle Cost
+Displayset,#Handle-Style-116PN=Hafele 111.95.305,10.116    #HandleName116 Handle Part Number
+DisplaySet,#$Knob-Style-116=15,10.116    #HandleName116  Knob Cost
+Displayset,#Knob-Style-116PN=Hafele 111.95.302,10.116    #HandleName116  Knob Part Number
+,**
+DisplaySet,#HandleName117=G4-EliteDeco96EliteRoundKnobMNL,         Set 117 Name
+DisplaySet,#$Handle-Style-117=15,10.117    #HandleName117  Handle Cost
+Displayset,#Handle-Style-117PN=Hafele 111.95.263,10.117    #HandleName117 Handle Part Number
+DisplaySet,#$Knob-Style-117=15,10.117    #HandleName117  Knob Cost
+Displayset,#Knob-Style-117PN=Hafele 111.95.172,10.117    #HandleName117  Knob Part Number
+,**
+DisplaySet,#HandleName118=G4-EliteDeco96EliteRoundKnobMAL,         Set 118 Name
+DisplaySet,#$Handle-Style-118=15,10.118    #HandleName118  Handle Cost
+Displayset,#Handle-Style-118PN=Hafele 111.95.261,10.118    #HandleName118 Handle Part Number
+DisplaySet,#$Knob-Style-118=15,10.118    #HandleName118  Knob Cost
+Displayset,#Knob-Style-118PN=Hafele 111.95.171,10.118    #HandleName118  Knob Part Number
+,**
+DisplaySet,#HandleName119=G4-EliteDeco96EliteRoundKnobMG,         Set 119 Name
+DisplaySet,#$Handle-Style-119=15,10.119    #HandleName119  Handle Cost
+Displayset,#Handle-Style-119PN=Hafele 111.95.262,10.119    #HandleName119 Handle Part Number
+DisplaySet,#$Knob-Style-119=15,10.119    #HandleName119  Knob Cost
+Displayset,#Knob-Style-119PN=Hafele 111.95.174,10.119    #HandleName119  Knob Part Number
+,**
+DisplaySet,#HandleName120=G4-EliteDeco96EliteRoundKnobSG,         Set 120 Name
+DisplaySet,#$Handle-Style-120=15,10.120    #HandleName120  Handle Cost
+Displayset,#Handle-Style-120PN=Hafele 111.95.265,10.120    #HandleName120 Handle Part Number
+DisplaySet,#$Knob-Style-120=15,10.120    #HandleName120  Knob Cost
+Displayset,#Knob-Style-120PN=Hafele 111.95.175,10.120    #HandleName120  Knob Part Number,**
+,**
+DisplaySet,#HandleName121=G4-EliteDeco128EliteRoundKnobCHR,         Set 121 Name
+DisplaySet,#$Handle-Style-121=15,10.121    #HandleName121  Handle Cost
+Displayset,#Handle-Style-121PN=Hafele 111.95.270,10.121    #HandleName121 Handle Part Number
+DisplaySet,#$Knob-Style-121=15,10.121    #HandleName121  Knob Cost
+Displayset,#Knob-Style-121PN=Hafele 111.95.170,10.121    #HandleName121  Knob Part Number
+,**
+DisplaySet,#HandleName122=G4-EliteDeco128EliteRoundKnobMB,         Set 122 Name
+DisplaySet,#$Handle-Style-122=15,10.122    #HandleName122  Handle Cost
+Displayset,#Handle-Style-122PN=Hafele 111.95.306,10.122    #HandleName122 Handle Part Number
+DisplaySet,#$Knob-Style-122=15,10.122    #HandleName122  Knob Cost
+Displayset,#Knob-Style-122PN=Hafele 111.95.302,10.122    #HandleName122  Knob Part Number
+,**
+DisplaySet,#HandleName123=G4-EliteDeco128EliteRoundKnobMNL,         Set 123 Name
+DisplaySet,#$Handle-Style-123=15,10.123    #HandleName123  Handle Cost
+Displayset,#Handle-Style-123PN=Hafele 111.95.273,10.123    #HandleName123 Handle Part Number
+DisplaySet,#$Knob-Style-123=15,10.123    #HandleName123  Knob Cost
+Displayset,#Knob-Style-123PN=Hafele 111.95.172,10.123    #HandleName123  Knob Part Number
+,**
+DisplaySet,#HandleName124=G4-EliteDeco128EliteRoundKnobMAL,         Set 124 Name
+DisplaySet,#$Handle-Style-124=15,10.124    #HandleName124  Handle Cost
+Displayset,#Handle-Style-124PN=Hafele 111.95.271,10.124    #HandleName124 Handle Part Number
+DisplaySet,#$Knob-Style-124=15,10.124    #HandleName124  Knob Cost
+Displayset,#Knob-Style-124PN=Hafele 111.95.171,10.124    #HandleName124  Knob Part Number
+,**
+DisplaySet,#HandleName125=G4-EliteDeco128EliteRoundKnobMG,         Set 125 Name
+DisplaySet,#$Handle-Style-125=15,10.125    #HandleName125  Handle Cost
+Displayset,#Handle-Style-125PN=Hafele 111.95.272,10.125    #HandleName125 Handle Part Number
+DisplaySet,#$Knob-Style-125=15,10.125    #HandleName125  Knob Cost
+Displayset,#Knob-Style-125PN=Hafele 111.95.174,10.125    #HandleName125  Knob Part Number
+,**
+DisplaySet,#HandleName126=G4-EliteDeco128EliteRoundKnobSG,         Set 126 Name
+DisplaySet,#$Handle-Style-126=15,10.126    #HandleName126  Handle Cost
+Displayset,#Handle-Style-126PN=Hafele 111.95.275,10.126    #HandleName126 Handle Part Number
+DisplaySet,#$Knob-Style-126=15,10.126    #HandleName126  Knob Cost
+Displayset,#Knob-Style-126PN=Hafele 111.95.175,10.126    #HandleName126  Knob Part Number,**
+,**
+DisplaySet,#HandleName127=SH-EliteDeco192EliteRoundKnobCHR,         Set 127 Name
+DisplaySet,#$Handle-Style-127=20,10.127    #HandleName127  Handle Cost
+Displayset,#Handle-Style-127PN=Hafele 111.95.280,10.127    #HandleName127 Handle Part Number
+DisplaySet,#$Knob-Style-127=15,10.127    #HandleName127  Knob Cost
+Displayset,#Knob-Style-127PN=Hafele 111.95.170,10.127    #HandleName127  Knob Part Number
+,**
+DisplaySet,#HandleName128=SH-EliteDeco192EliteRoundKnobMB,         Set 128 Name
+DisplaySet,#$Handle-Style-128=20,10.128    #HandleName128  Handle Cost
+Displayset,#Handle-Style-128PN=Hafele 111.95.307,10.128    #HandleName128 Handle Part Number
+DisplaySet,#$Knob-Style-128=15,10.128    #HandleName128  Knob Cost
+Displayset,#Knob-Style-128PN=Hafele 111.95.302,10.128    #HandleName128  Knob Part Number
+,**
+DisplaySet,#HandleName129=SH-EliteDeco192EliteRoundKnobMNL,         Set 129 Name
+DisplaySet,#$Handle-Style-129=20,10.129    #HandleName129  Handle Cost
+Displayset,#Handle-Style-129PN=Hafele 111.95.283,10.129    #HandleName129 Handle Part Number
+DisplaySet,#$Knob-Style-129=15,10.129    #HandleName129  Knob Cost
+Displayset,#Knob-Style-129PN=Hafele 111.95.172,10.129    #HandleName129  Knob Part Number
+,**
+DisplaySet,#HandleName130=SH-EliteDeco192EliteRoundKnobMAL,         Set 130 Name
+DisplaySet,#$Handle-Style-130=20,10.130    #HandleName130  Handle Cost
+Displayset,#Handle-Style-130PN=Hafele 111.95.281,10.130    #HandleName130 Handle Part Number
+DisplaySet,#$Knob-Style-130=15,10.130    #HandleName130  Knob Cost
+Displayset,#Knob-Style-130PN=Hafele 111.95.171,10.130    #HandleName130  Knob Part Number
+,**
+DisplaySet,#HandleName131=SH-EliteDeco192EliteRoundKnobMG,         Set 131 Name
+DisplaySet,#$Handle-Style-131=20,10.131    #HandleName131  Handle Cost
+Displayset,#Handle-Style-131PN=Hafele 111.95.282,10.131    #HandleName131 Handle Part Number
+DisplaySet,#$Knob-Style-131=15,10.131    #HandleName131  Knob Cost
+Displayset,#Knob-Style-131PN=Hafele 111.95.174,10.131    #HandleName131  Knob Part Number
+,**
+DisplaySet,#HandleName132=SH-EliteDeco192EliteRoundKnobSG,         Set 132 Name
+DisplaySet,#$Handle-Style-132=20,10.132    #HandleName132  Handle Cost
+Displayset,#Handle-Style-132PN=Hafele 111.95.285,10.132    #HandleName132 Handle Part Number
+DisplaySet,#$Knob-Style-132=15,10.132    #HandleName132  Knob Cost
+Displayset,#Knob-Style-132PN=Hafele 111.95.175,10.132    #HandleName132  Knob Part Number,**
+,**
+DisplaySet,#HandleName133=SH-EliteDeco192EliteSquareKnobCHR,         Set 133 Name
+DisplaySet,#$Handle-Style-133=20,10.133    #HandleName133  Handle Cost
+Displayset,#Handle-Style-133PN=Hafele 111.95.280,10.133    #HandleName133 Handle Part Number
+DisplaySet,#$Knob-Style-133=15,10.133    #HandleName133  Knob Cost
+Displayset,#Knob-Style-133PN=Hafele 111.95.000,10.133    #HandleName133  Knob Part Number
+,**
+DisplaySet,#HandleName134=SH-EliteDeco192EliteSquareKnobMB,         Set 134 Name
+DisplaySet,#$Handle-Style-134=20,10.134    #HandleName134  Handle Cost
+Displayset,#Handle-Style-134PN=Hafele 111.95.307,10.134    #HandleName134 Handle Part Number
+DisplaySet,#$Knob-Style-134=15,10.134    #HandleName134  Knob Cost
+Displayset,#Knob-Style-134PN=Hafele 111.95.303,10.134    #HandleName134  Knob Part Number
+,**
+DisplaySet,#HandleName135=SH-EliteDeco192EliteSquareKnobMNL,         Set 135 Name
+DisplaySet,#$Handle-Style-135=20,10.135    #HandleName135  Handle Cost
+Displayset,#Handle-Style-135PN=Hafele 111.95.283,10.135    #HandleName135 Handle Part Number
+DisplaySet,#$Knob-Style-135=15,10.135    #HandleName135  Knob Cost
+Displayset,#Knob-Style-135PN=Hafele 111.95.004,10.135    #HandleName135  Knob Part Number
+,**
+DisplaySet,#HandleName136=SH-EliteDeco192EliteSquareKnobMAL,         Set 136 Name
+DisplaySet,#$Handle-Style-136=20,10.136    #HandleName136  Handle Cost
+Displayset,#Handle-Style-136PN=Hafele 111.95.281,10.136    #HandleName136 Handle Part Number
+DisplaySet,#$Knob-Style-136=15,10.136    #HandleName136  Knob Cost
+Displayset,#Knob-Style-136PN=Hafele 111.95.001,10.136    #HandleName136  Knob Part Number
+,**
+DisplaySet,#HandleName137=SH-EliteDeco192EliteSquareKnobMG,         Set 137 Name
+DisplaySet,#$Handle-Style-137=20,10.137    #HandleName137  Handle Cost
+Displayset,#Handle-Style-137PN=Hafele 111.95.282,10.137    #HandleName137 Handle Part Number
+DisplaySet,#$Knob-Style-137=15,10.137    #HandleName137  Knob Cost
+Displayset,#Knob-Style-137PN=Hafele 111.95.003,10.137    #HandleName137  Knob Part Number
+,**
+DisplaySet,#HandleName138=SH-EliteDeco192EliteSquareKnobSG,         Set 138 Name
+DisplaySet,#$Handle-Style-138=20,10.138    #HandleName138  Handle Cost
+Displayset,#Handle-Style-138PN=Hafele 111.95.285,10.138    #HandleName138 Handle Part Number
+DisplaySet,#$Knob-Style-138=15,10.138    #HandleName138  Knob Cost
+Displayset,#Knob-Style-138PN=Hafele 111.95.005,10.138    #HandleName138  Knob Part Number,**
+,**
+DisplaySet,#HandleName139=SH-24inContinuousTabNotSpecifiedKnobCHR,         Set 139 Name
+DisplaySet,#$Handle-Style-139=45,10.139    #HandleName139  Handle Cost
+Displayset,#Handle-Style-139PN=Hafele 111.95.232,10.139    #HandleName139 Handle Part Number
+DisplaySet,#$Knob-Style-139=0,10.139    #HandleName139  Knob Cost
+Displayset,#Knob-Style-139PN=Not Specified,10.139    #HandleName139  Knob Part Number
+,**
+DisplaySet,#HandleName140=SH-24inContinuousTabNotSpecifiedKnobMB,         Set 140 Name
+DisplaySet,#$Handle-Style-140=45,10.140    #HandleName140  Handle Cost
+Displayset,#Handle-Style-140PN=Hafele 111.95.323,10.140    #HandleName140 Handle Part Number
+DisplaySet,#$Knob-Style-140=0,10.140    #HandleName140  Knob Cost
+Displayset,#Knob-Style-140PN=Not Specified,10.140    #HandleName140  Knob Part Number
+,**
+DisplaySet,#HandleName141=SH-24inContinuousTabNotSpecifiedKnobMNL,         Set 141 Name
+DisplaySet,#$Handle-Style-141=45,10.141    #HandleName141  Handle Cost
+Displayset,#Handle-Style-141PN=Hafele 111.95.253,10.141    #HandleName141 Handle Part Number
+DisplaySet,#$Knob-Style-141=0,10.141    #HandleName141  Knob Cost
+Displayset,#Knob-Style-141PN=Not Specified,10.141    #HandleName141  Knob Part Number
+,**
+DisplaySet,#HandleName142=SH-24inContinuousTabNotSpecifiedKnobMAL,         Set 142 Name
+DisplaySet,#$Handle-Style-142=45,10.142    #HandleName142  Handle Cost
+Displayset,#Handle-Style-142PN=Hafele 111.95.200,10.142    #HandleName142 Handle Part Number
+DisplaySet,#$Knob-Style-142=0,10.142    #HandleName142  Knob Cost
+Displayset,#Knob-Style-142PN=Not Specified,10.142    #HandleName142  Knob Part Number
+,**
+DisplaySet,#HandleName143=SH-24inContinuousTabNotSpecifiedKnobMG,         Set 143 Name
+DisplaySet,#$Handle-Style-143=45,10.143    #HandleName143  Handle Cost
+Displayset,#Handle-Style-143PN=Hafele 111.95.202,10.143    #HandleName143 Handle Part Number
+DisplaySet,#$Knob-Style-143=0,10.143    #HandleName143  Knob Cost
+Displayset,#Knob-Style-143PN=Not Specified,10.143    #HandleName143  Knob Part Number
+,**
+DisplaySet,#HandleName144=SH-24inContinuousTabNotSpecifiedKnobSG,         Set 144 Name
+DisplaySet,#$Handle-Style-144=45,10.144    #HandleName144  Handle Cost
+Displayset,#Handle-Style-144PN=Hafele 111.95.222,10.144    #HandleName144 Handle Part Number
+DisplaySet,#$Knob-Style-144=0,10.144    #HandleName144  Knob Cost
+Displayset,#Knob-Style-144PN=Not Specified,10.144    #HandleName144  Knob Part Number,**
+,**
+DisplaySet,#HandleName145=SH-30inContinuousTabNotSpecifiedKnobCHR,         Set 145 Name
+DisplaySet,#$Handle-Style-145=50,10.145    #HandleName145  Handle Cost
+Displayset,#Handle-Style-145PN=Hafele 111.95.233,10.145    #HandleName145 Handle Part Number
+DisplaySet,#$Knob-Style-145=0,10.145    #HandleName145  Knob Cost
+Displayset,#Knob-Style-145PN=Not Specified,10.145    #HandleName145  Knob Part Number
+,**
+DisplaySet,#HandleName146=SH-30inContinuousTabNotSpecifiedKnobMB,         Set 146 Name
+DisplaySet,#$Handle-Style-146=50,10.146    #HandleName146  Handle Cost
+Displayset,#Handle-Style-146PN=Hafele 111.95.324,10.146    #HandleName146 Handle Part Number
+DisplaySet,#$Knob-Style-146=0,10.146    #HandleName146  Knob Cost
+Displayset,#Knob-Style-146PN=Not Specified,10.146    #HandleName146  Knob Part Number
+,**
+DisplaySet,#HandleName147=SH-30inContinuousTabNotSpecifiedKnobMNL,         Set 147 Name
+DisplaySet,#$Handle-Style-147=50,10.147    #HandleName147  Handle Cost
+Displayset,#Handle-Style-147PN=Hafele 111.95.254,10.147    #HandleName147 Handle Part Number
+DisplaySet,#$Knob-Style-147=0,10.147    #HandleName147  Knob Cost
+Displayset,#Knob-Style-147PN=Not Specified,10.147    #HandleName147  Knob Part Number
+,**
+DisplaySet,#HandleName148=SH-30inContinuousTabNotSpecifiedKnobMAL,         Set 148 Name
+DisplaySet,#$Handle-Style-148=50,10.148    #HandleName148  Handle Cost
+Displayset,#Handle-Style-148PN=Hafele 111.95.205,10.148    #HandleName148 Handle Part Number
+DisplaySet,#$Knob-Style-148=0,10.148    #HandleName148  Knob Cost
+Displayset,#Knob-Style-148PN=Not Specified,10.148    #HandleName148  Knob Part Number
+,**
+DisplaySet,#HandleName149=SH-30inContinuousTabNotSpecifiedKnobMG,         Set 149 Name
+DisplaySet,#$Handle-Style-149=50,10.149    #HandleName149  Handle Cost
+Displayset,#Handle-Style-149PN=Hafele 111.95.207,10.149    #HandleName149 Handle Part Number
+DisplaySet,#$Knob-Style-149=0,10.149    #HandleName149  Knob Cost
+Displayset,#Knob-Style-149PN=Not Specified,10.149    #HandleName149  Knob Part Number
+,**
+DisplaySet,#HandleName150=SH-30inContinuousTabNotSpecifiedKnobSG,         Set 150 Name
+DisplaySet,#$Handle-Style-150=50,10.150    #HandleName150  Handle Cost
+Displayset,#Handle-Style-150PN=Hafele 111.95.223,10.150    #HandleName150 Handle Part Number
+DisplaySet,#$Knob-Style-150=0,10.150    #HandleName150  Knob Cost
+Displayset,#Knob-Style-150PN=Not Specified,10.150    #HandleName150  Knob Part Number,**
+,**
+DisplaySet,#HandleName151=SH-36inContinuousTabNotSpecifiedKnobCHR,         Set 151 Name
+DisplaySet,#$Handle-Style-151=55,10.151    #HandleName151  Handle Cost
+Displayset,#Handle-Style-151PN=Hafele 111.95.234,10.151    #HandleName151 Handle Part Number
+DisplaySet,#$Knob-Style-151=0,10.151    #HandleName151  Knob Cost
+Displayset,#Knob-Style-151PN=Not Specified,10.151    #HandleName151  Knob Part Number
+,**
+DisplaySet,#HandleName152=SH-36inContinuousTabNotSpecifiedKnobMB,         Set 152 Name
+DisplaySet,#$Handle-Style-152=55,10.152    #HandleName152  Handle Cost
+Displayset,#Handle-Style-152PN=Hafele 111.95.234,10.152    #HandleName152 Handle Part Number
+DisplaySet,#$Knob-Style-152=0,10.152    #HandleName152  Knob Cost
+Displayset,#Knob-Style-152PN=Not Specified,10.152    #HandleName152  Knob Part Number
+,**
+DisplaySet,#HandleName153=SH-36inContinuousTabNotSpecifiedKnobMNL,         Set 153 Name
+DisplaySet,#$Handle-Style-153=55,10.153    #HandleName153  Handle Cost
+Displayset,#Handle-Style-153PN=Hafele 111.95.255,10.153    #HandleName153 Handle Part Number
+DisplaySet,#$Knob-Style-153=0,10.153    #HandleName153  Knob Cost
+Displayset,#Knob-Style-153PN=Not Specified,10.153    #HandleName153  Knob Part Number
+,**
+DisplaySet,#HandleName154=SH-36inContinuousTabNotSpecifiedKnobMAL,         Set 154 Name
+DisplaySet,#$Handle-Style-154=55,10.154    #HandleName154  Handle Cost
+Displayset,#Handle-Style-154PN=Hafele 111.95.210,10.154    #HandleName154 Handle Part Number
+DisplaySet,#$Knob-Style-154=0,10.154    #HandleName154  Knob Cost
+Displayset,#Knob-Style-154PN=Not Specified,10.154    #HandleName154  Knob Part Number
+,**
+DisplaySet,#HandleName155=SH-36inContinuousTabNotSpecifiedKnobMG,         Set 155 Name
+DisplaySet,#$Handle-Style-155=55,10.155    #HandleName155  Handle Cost
+Displayset,#Handle-Style-155PN=Hafele 111.95.212,10.155    #HandleName155 Handle Part Number
+DisplaySet,#$Knob-Style-155=0,10.155    #HandleName155  Knob Cost
+Displayset,#Knob-Style-155PN=Not Specified,10.155    #HandleName155  Knob Part Number
+,**
+DisplaySet,#HandleName156=SH-36inContinuousTabNotSpecifiedKnobSG,         Set 156 Name
+DisplaySet,#$Handle-Style-156=55,10.156    #HandleName156  Handle Cost
+Displayset,#Handle-Style-156PN=Hafele 111.95.224,10.156    #HandleName156 Handle Part Number
+DisplaySet,#$Knob-Style-156=0,10.156    #HandleName156  Knob Cost
+Displayset,#Knob-Style-156PN=Not Specified,10.156    #HandleName156  Knob Part Number,**
+,**
+DisplaySet,#HandleName157=SH-13inBarNotSpecifiedKnobSSBN,         Set 157 Name
+DisplaySet,#$Handle-Style-157=20,10.157    #HandleName157  Handle Cost
+Displayset,#Handle-Style-157PN=Hafele 155.00.787,10.157    #HandleName157 Handle Part Number
+DisplaySet,#$Knob-Style-157=0,10.157    #HandleName157  Knob Cost
+Displayset,#Knob-Style-157PN=Not Specified,10.157    #HandleName157  Knob Part Number
+,**
+DisplaySet,#HandleName158=SH-15inBarNotSpecifiedKnobSSBN,         Set 158 Name
+DisplaySet,#$Handle-Style-158=20,10.158    #HandleName158  Handle Cost
+Displayset,#Handle-Style-158PN=Hafele 155.00.789,10.158    #HandleName158 Handle Part Number
+DisplaySet,#$Knob-Style-158=0,10.158    #HandleName158  Knob Cost
+Displayset,#Knob-Style-158PN=Not Specified,10.158    #HandleName158  Knob Part Number
+,**
+DisplaySet,#HandleName159=SH-21inBarNotSpecifiedKnobSSBN,         Set 159 Name
+DisplaySet,#$Handle-Style-159=20,10.159    #HandleName159  Handle Cost
+Displayset,#Handle-Style-159PN=Hafele 155.00.795,10.159    #HandleName159 Handle Part Number
+DisplaySet,#$Knob-Style-159=0,10.159    #HandleName159  Knob Cost
+Displayset,#Knob-Style-159PN=Not Specified,10.159    #HandleName159  Knob Part Number
+,**
+DisplaySet,#HandleName160=SH-32inBarNotSpecifiedKnobSSBN,         Set 160 Name
+DisplaySet,#$Handle-Style-160=20,10.160    #HandleName160  Handle Cost
+Displayset,#Handle-Style-160PN=Hafele 155.00.800,10.160    #HandleName160 Handle Part Number
+DisplaySet,#$Knob-Style-160=0,10.160    #HandleName160  Knob Cost
+Displayset,#Knob-Style-160PN=Not Specified,10.160    #HandleName160  Knob Part Number
+,**
+DisplaySet,#HandleName161=SH-EliteModern256EliteFingerPullKnobCHR,         Set 161 Name
+DisplaySet,#$Handle-Style-161=40,10.161    #HandleName161  Handle Cost
+Displayset,#Handle-Style-161PN=Hafele 111.95.290,10.161    #HandleName161 Handle Part Number
+DisplaySet,#$Knob-Style-161=15,10.161    #HandleName161  Knob Cost
+Displayset,#Knob-Style-161PN=Hafele 111.95.110,10.161    #HandleName161  Knob Part Number
+,**
+DisplaySet,#HandleName162=SH-EliteModern256EliteFingerPullKnobMB,         Set 162 Name
+DisplaySet,#$Handle-Style-162=40,10.162    #HandleName162  Handle Cost
+Displayset,#Handle-Style-162PN=Hafele 111.95.312,10.162    #HandleName162 Handle Part Number
+DisplaySet,#$Knob-Style-162=15,10.162    #HandleName162  Knob Cost
+Displayset,#Knob-Style-162PN=Hafele 111.95.304,10.162    #HandleName162  Knob Part Number
+,**
+DisplaySet,#HandleName163=SH-EliteModern256EliteFingerPullKnobMNL,         Set 163 Name
+DisplaySet,#$Handle-Style-163=40,10.163    #HandleName163  Handle Cost
+Displayset,#Handle-Style-163PN=Hafele 111.95.292,10.163    #HandleName163 Handle Part Number
+DisplaySet,#$Knob-Style-163=15,10.163    #HandleName163  Knob Cost
+Displayset,#Knob-Style-163PN=Hafele 111.95.112,10.163    #HandleName163  Knob Part Number
+,**
+DisplaySet,#HandleName164=SH-EliteModern256EliteFingerPullKnobMAL,         Set 164 Name
+DisplaySet,#$Handle-Style-164=40,10.164    #HandleName164  Handle Cost
+Displayset,#Handle-Style-164PN=Hafele 111.95.291,10.164    #HandleName164 Handle Part Number
+DisplaySet,#$Knob-Style-164=15,10.164    #HandleName164  Knob Cost
+Displayset,#Knob-Style-164PN=Hafele 111.95.111,10.164    #HandleName164  Knob Part Number
+,**
+DisplaySet,#HandleName165=SH-EliteModern256EliteFingerPullKnobMG,         Set 165 Name
+DisplaySet,#$Handle-Style-165=40,10.165    #HandleName165  Handle Cost
+Displayset,#Handle-Style-165PN=Hafele 111.95.294,10.165    #HandleName165 Handle Part Number
+DisplaySet,#$Knob-Style-165=15,10.165    #HandleName165  Knob Cost
+Displayset,#Knob-Style-165PN=Hafele 111.95.114,10.165    #HandleName165  Knob Part Number
+,**
+DisplaySet,#HandleName166=SH-EliteModern256EliteFingerPullKnobSG,         Set 166 Name
+DisplaySet,#$Handle-Style-166=40,10.166    #HandleName166  Handle Cost
+Displayset,#Handle-Style-166PN=Hafele 111.95.295,10.166    #HandleName166 Handle Part Number
+DisplaySet,#$Knob-Style-166=15,10.166    #HandleName166  Knob Cost
+Displayset,#Knob-Style-166PN=Hafele 111.95.115,10.166    #HandleName166  Knob Part Number
+,**
+DisplaySet,#HandleName167=SH-EliteModernDrop128EliteFingerPullKnobCHR,         Set 167 Name
+DisplaySet,#$Handle-Style-167=25,10.167    #HandleName167  Handle Cost
+Displayset,#Handle-Style-167PN=Hafele 111.95.120,10.167    #HandleName167 Handle Part Number
+DisplaySet,#$Knob-Style-167=15,10.167    #HandleName167  Knob Cost
+Displayset,#Knob-Style-167PN=Hafele 111.95.110,10.167    #HandleName167  Knob Part Number
+,**
+DisplaySet,#HandleName168=SH-EliteModernDrop128EliteFingerPullKnobMB,         Set 168 Name
+DisplaySet,#$Handle-Style-168=25,10.168    #HandleName168  Handle Cost
+Displayset,#Handle-Style-168PN=Hafele 111.95.313 ,10.168    #HandleName168 Handle Part Number
+DisplaySet,#$Knob-Style-168=15,10.168   #HandleName168  Knob Cost
+Displayset,#Knob-Style-168PN=Hafele 111.95.304,10.168    #HandleName168  Knob Part Number
+,**
+DisplaySet,#HandleName169=SH-EliteModernDrop128EliteFingerPullKnobMNL,         Set 169 Name
+DisplaySet,#$Handle-Style-169=25,10.169    #HandleName169  Handle Cost
+Displayset,#Handle-Style-169PN=Hafele 111.95.122,10.169   #HandleName169 Handle Part Number
+DisplaySet,#$Knob-Style-169=15,10.169    #HandleName169  Knob Cost
+Displayset,#Knob-Style-169PN=Hafele 111.95.112,10.169    #HandleName169  Knob Part Number
+,**
+DisplaySet,#HandleName170=SH-EliteModernDrop128EliteFingerPullKnobMAL,         Set 170 Name
+DisplaySet,#$Handle-Style-170=25,10.170    #HandleName170  Handle Cost
+Displayset,#Handle-Style-170PN=Hafele 111.95.121,10.170    #HandleName170 Handle Part Number
+DisplaySet,#$Knob-Style-170=15,10.170    #HandleName170  Knob Cost
+Displayset,#Knob-Style-170PN=Hafele 111.95.111,10.170    #HandleName170  Knob Part Number
+,**
+DisplaySet,#HandleName171=SH-EliteModernDrop128EliteFingerPullKnobMG,         Set 171 Name
+DisplaySet,#$Handle-Style-171=25,10.171   #HandleName171  Handle Cost
+Displayset,#Handle-Style-171PN=Hafele 111.95.124,10.171    #HandleName171 Handle Part Number
+DisplaySet,#$Knob-Style-171=15,10.101    #HandleName171  Knob Cost
+Displayset,#Knob-Style-171PN=Hafele 111.95.114,10.171    #HandleName171  Knob Part Number
+,**
+DisplaySet,#HandleName172=SH-EliteModernDrop128EliteFingerPullKnobSG,         Set 172 Name
+DisplaySet,#$Handle-Style-172=25,10.172    #HandleName172  Handle Cost
+Displayset,#Handle-Style-172PN=Hafele 111.95.125,10.172    #HandleName172 Handle Part Number
+DisplaySet,#$Knob-Style-172=15,10.172    #HandleName172  Knob Cost
+Displayset,#Knob-Style-172PN=Hafele 111.95.115,10.172   #HandleName172  Knob Part Number,**
+,**
+DisplaySet,#HandleName173=SH-EliteCrest160CrestPullCHR,         Set 173 Name
+DisplaySet,#$Handle-Style-173=15,10.173    #HandleName173  Handle Cost
+Displayset,#Handle-Style-173PN=Hafele 111.95.150,10.173    #HandleName173 Handle Part Number
+DisplaySet,#$Knob-Style-173=15,10.173    #HandleName173  Knob Cost
+Displayset,#Knob-Style-173PN=Hafele 111.95.160,10.173    #HandleName173  Knob Part Number
+,**
+DisplaySet,#HandleName174=SH-EliteCrest160CrestPullMB,         Set 174 Name
+DisplaySet,#$Handle-Style-174=15,10.174    #HandleName174  Handle Cost
+Displayset,#Handle-Style-174PN=Hafele 111.95.309,10.174    #HandleName174 Handle Part Number
+DisplaySet,#$Knob-Style-174=15,10.174   #HandleName174  Knob Cost
+Displayset,#Knob-Style-174PN=Hafele 111.95.301,10.174    #HandleName174  Knob Part Number
+,**
+DisplaySet,#HandleName175=SH-EliteCrest160CrestPullMNL,         Set 175 Name
+DisplaySet,#$Handle-Style-175=15,10.175    #HandleName175  Handle Cost
+Displayset,#Handle-Style-175PN=Hafele 111.95.152,10.175   #HandleName175 Handle Part Number
+DisplaySet,#$Knob-Style-175=15,10.175    #HandleName175  Knob Cost
+Displayset,#Knob-Style-175PN=Hafele 111.95.162,10.175    #HandleName175  Knob Part Number
+,**
+DisplaySet,#HandleName176=SH-EliteCrest160CrestPullMAL,         Set 176 Name
+DisplaySet,#$Handle-Style-176=15,10.176    #HandleName176  Handle Cost
+Displayset,#Handle-Style-176PN=Hafele 111.95.151,10.176    #HandleName176 Handle Part Number
+DisplaySet,#$Knob-Style-176=15,10.176    #HandleName176  Knob Cost
+Displayset,#Knob-Style-176PN=Hafele 111.95.161,10.176    #HandleName176  Knob Part Number
+,**
+DisplaySet,#HandleName177=SH-EliteCrest160CrestPullMG,         Set 177 Name
+DisplaySet,#$Handle-Style-177=15,10.177   #HandleName177  Handle Cost
+Displayset,#Handle-Style-177PN=Hafele 111.95.154,10.177    #HandleName177 Handle Part Number
+DisplaySet,#$Knob-Style-177=15,10.177    #HandleName177  Knob Cost
+Displayset,#Knob-Style-177PN=Hafele 111.95.164,10.177    #HandleName177  Knob Part Number
+,**
+DisplaySet,#HandleName178=SH-EliteCrest160CrestPullSG,         Set 178 Name
+DisplaySet,#$Handle-Style-178=15,10.178    #HandleName178  Handle Cost
+Displayset,#Handle-Style-178PN=Hafele 111.95.155,10.178    #HandleName178 Handle Part Number
+DisplaySet,#$Knob-Style-178=15,10.178    #HandleName178  Knob Cost
+Displayset,#Knob-Style-178PN=Hafele 111.95.165,10.178   #HandleName178  Knob Part Number
+,**
+DisplaySet,#HandleName179=SO-SpecialOrder,         Set 179 Name
+DisplaySet,#$Handle-Style-179=999,10.179    #HandleName179  Handle Cost
+Displayset,#Handle-Style-179PN=SpecialOrder,10.179    #HandleName179 Handle Part Number
+DisplaySet,#$Knob-Style-179=999,10.179    #HandleName179  Knob Cost
+Displayset,#Knob-Style-179PN=SpecialOrder,10.179    #HandleName179  Knob Part Number
+,**

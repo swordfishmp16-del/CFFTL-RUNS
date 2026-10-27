@@ -1,0 +1,113 @@
+,CF Prices and counts ALL LEFT corner shelves  
+
+Do, (TR>0):1
+{
+set, #tempshelfcount = 1
+set, #ShelfTH=TR
+Load, C-Shelf Cost.pcb
+set, ((opt=#eurofrontlipoption )&(#ShelfTH>#ShelfThickA)):#shelfTH={#ShelfThickA}:#shelfTH={TR}
+Load, Countshelves.pcb
+Price, (TR>0):1,    #TopShelfName-#shelfTH"-#edgebandingtype,         #CostOfTopShelf + #ShelfCostLS,        #ShelfDepth, #ShelfWidth,  #TopShelfPrintOrderNumber,                
+Price, ((opt=#eurofrontlipoption )&(TR>#ShelfThickA)):1, #fixedlipname Cost,  #frontlipoptioncost,  #Lipheight, #ShelfWidth,  #TopShelfPrintOrderNumber,
+Set, (#CostOfTopShelf>0)&(opt=#OptLEDTopshelf):#addledshelf=1
+Set, (#CostOfTopShelf>0)&(opt=#OptRoutedPuckTopshelf):#addpuckshelf=1
+Set, (#CostOfTopShelf>0)&(opt=#OptRouted2PuckTopshelf):#addpuckshelf=2
+Set, (#CostOfTopShelf>0)&(opt=#OptRouted3PuckTopshelf):#addpuckshelf=3
+Set, (#CostOfTopShelf>0)&(opt=#OptSurfacePuckTopshelf):#addspuckshelf=1
+Set, (#CostOfTopShelf>0)&(opt=#OptSurface2PuckTopshelf):#addspuckshelf=2
+Set, (#CostOfTopShelf>0)&(opt=#OptSurface3PuckTopshelf):#addspuckshelf=3
+Set, (#CostOfTopShelf>0)&(opt=#OptSurfaceXLPuckTopshelf):#addsXLpuckshelf=1
+Set, (#CostOfTopShelf>0)&(opt=#OptSurface2XLPuckTopshelf):#addsXLpuckshelf=2
+Set, (#CostOfTopShelf>0)&(opt=#OptSurface3XLPuckTopshelf):#addsXLpuckshelf=3
+Set, (#CostOfTopShelf>0)&(opt=#OptSurface12intaskTopShelf):#add12intaskshelf=1
+Set, (#CostOfTopShelf>0)&(opt=#OptSurface24intaskTopShelf):#add24intaskshelf=1
+Set, (#CostOfTopShelf>0)&(opt=#OptSurface30intaskTopShelf):#add30intaskshelf=1
+Set, (#CostOfTopShelf>0)&(opt=#OptSurface36intaskTopShelf):#add36intaskshelf=1
+Set, (#CostOfTopShelf>0)&(opt=#OptSurface42intaskTopShelf):#add42intaskshelf=1
+Set, (#CostOfTopShelf>0)&(opt=#OptSurface45intaskTopShelf):#add45intaskshelf=1
+Set, (#CostOfTopShelf>0)&(opt=#OptWirelessLEDTopshelf):#Waddledshelf=2
+
+}  
+Do, (BR>0):1
+{
+set, #tempshelfcount = 1
+set, #ShelfTH=BR
+Load, C-Shelf Cost.Pcb 
+set, #shelfTH={BR}
+Load, Countshelves.pcb       
+Price, (BR>0):1,    #BottomShelfName-#shelfTH"-#edgebandingtype,      #CostOfBottomShelf + #ShelfCostLS,      #ShelfDepth, #ShelfWidth,  #BottomShelfPrintOrderNumber, 
+Price, ((opt=#eurofrontlipoption )&(BR>#ShelfThickA)):1, #fixedlipname Cost,  #frontlipoptioncost,  #Lipheight, #ShelfWidth,  #BottomShelfPrintOrderNumber,
+Set, (#CostOfBottomShelf>0)&(opt=#eurofrontlipoption )&(BR>#ShelfThickA):#addfrontlips=1
+Set, (#CostOfBottomShelf>0)&(opt=#OptLEDUpperbottomshelf):#addledshelf=1
+Set, (#CostOfBottomShelf>0)&(opt=#OptRoutedPuckUpperbottomshelf):#addpuckshelf=1
+Set, (#CostOfBottomShelf>0)&(opt=#OptRouted2PuckUpperbottomshelf):#addpuckshelf=2
+Set, (#CostOfBottomShelf>0)&(opt=#OptRouted3PuckUpperbottomshelf):#addpuckshelf=3
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurfacePuckUpperbottomshelf):#addspuckshelf=1
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurface2PuckUpperbottomshelf):#addspuckshelf=2
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurface3PuckUpperbottomshelf):#addspuckshelf=3
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurfaceXLPuckUpperbottomshelf):#addsXLpuckshelf=1
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurface2XLPuckUpperbottomshelf):#addsXLpuckshelf=2
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurface3XLPuckUpperbottomshelf):#addsXLpuckshelf=3
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurface12intaskUpperBottomShelf):#add12intaskshelf=1
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurface24intaskUpperBottomShelf):#add24intaskshelf=1
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurface30intaskUpperBottomShelf):#add30intaskshelf=1
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurface36intaskUpperBottomShelf):#add36intaskshelf=1
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurface42intaskUpperBottomShelf):#add42intaskshelf=1
+Set, (#CostOfBottomShelf>0)&(opt=#OptSurface45intaskUpperBottomShelf):#add45intaskshelf=1
+Set, (Z>0)&(#CostOfBottomShelf>0)&(opt=#OptWirelessLEDUpperbottomShelf):#Waddledshelf=2
+}             
+,*****************************************
+
+      
+
+
+,*********** All ADJ SHELVES *************
+,
+Do, (SH>0):1
+{
+set, #tempshelfcount = SH
+Set, #shelfTH=#ShelfThickA
+set, (opt=#adjtodoublethickoption): #ShelfTH=#ShelfThickB
+Load, C-Shelf Cost.Pcb
+Load, Countshelves.pcb
+set, #DisplayTH={#ShelfTh}
+Price, SH,         #AdjustableShelfName-#DisplayTH-#edgebandingtype,  #CostOfAdjustableShelf + #ShelfCostLS,  #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber, 
+Price, (opt=#adjfrontlipoption ):SH, #fixedlipname Cost,  #frontlipoptioncost,  #Lipheight, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptLEDAdjshelf):#addledshelf=#Tempshelfcount
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptLEDAdjshelf):#Tempshelfcount, #option107name Cost,  #OptLEDAdjshelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptRoutedPuckAdjshelf):#addpuckshelf=(#Tempshelfcount)*2
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptRoutedPuckAdjshelf):#Tempshelfcount, #optionRouted1Puckshelfname Cost,  #OptRoutedPuckAdjshelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptRouted2PuckAdjshelf):#addpuckshelf=#Tempshelfcount*2
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptRouted2PuckAdjshelf):#Tempshelfcount, #optionRouted2Puckshelfname Cost,  #OptRouted2PuckAdjshelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptRouted3PuckAdjshelf):#addpuckshelf=#Tempshelfcount*3
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptRouted3PuckAdjshelf):#Tempshelfcount, #optionRouted3Puckshelfname Cost,  #OptRouted3PuckAdjshelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurfacePuckAdjshelf):#addspuckshelf=#Tempshelfcount
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurfacePuckAdjshelf):#Tempshelfcount, #optionSurfacePuckAdjShelfname Cost,  #OptSurfacePuckAdjshelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurface2PuckAdjshelf):#addspuckshelf=#Tempshelfcount*2
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurface2PuckAdjshelf):#Tempshelfcount, #optionSurface2PuckAdjShelfname Cost,  #OptSurface2PuckAdjshelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurface3PuckAdjshelf):#addspuckshelf=#Tempshelfcount*3
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurface3PuckAdjshelf):#Tempshelfcount, #optionSurface3PuckAdjShelfname Cost,  #OptSurface3PuckAdjshelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurfaceXLPuckAdjshelf):#addsXLpuckshelf=#Tempshelfcount
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurfaceXLPuckAdjshelf):#Tempshelfcount, #OptSurfaceXLPuckAdjShelfName Cost,  #OptSurfaceXLPuckAdjshelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurface2XLPuckAdjshelf):#addsXLpuckshelf=#Tempshelfcount*2
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurface2XLPuckAdjshelf):#Tempshelfcount, #OptSurface2XLPuckAdjShelfName Cost,  #OptSurface2XLPuckAdjshelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurface3XLPuckAdjshelf):#addsXLpuckshelf=#Tempshelfcount*3
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurface3XLPuckAdjshelf):#Tempshelfcount, #OptSurface3XLPuckAdjShelfName Cost,  #OptSurface3XLPuckAdjshelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurface12intaskAdjShelf):#add12intaskshelf=#Tempshelfcount
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurface12intaskAdjShelf):#Tempshelfcount, #optionSurface12intaskname Cost,  #OptSurface12intaskAdjShelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurface24intaskAdjShelf):#add24intaskshelf=#Tempshelfcount
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurface24intaskAdjShelf):#Tempshelfcount, #optionSurface24intaskname Cost,  #OptSurface24intaskAdjShelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurface30intaskAdjShelf):#add30intaskshelf=#Tempshelfcount
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurface30intaskAdjShelf):#Tempshelfcount, #optionSurface30intaskname Cost,  #OptSurface30intaskAdjShelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurface36intaskAdjShelf):#add36intaskshelf=#Tempshelfcount
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurface36intaskAdjShelf):#Tempshelfcount, #optionSurface36intaskname Cost,  #OptSurface36intaskAdjShelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurface42intaskAdjShelf):#add42intaskshelf=#Tempshelfcount
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurface42intaskAdjShelf):#Tempshelfcount, #optionSurface42intaskname Cost,  #OptSurface42intaskAdjShelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptSurface45intaskAdjShelf):#add45intaskshelf=#Tempshelfcount
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptSurface45intaskAdjShelf):#Tempshelfcount, #optionSurface45intaskname Cost,  #OptSurface45intaskAdjShelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+Set, (#CostOfAdjustableShelf>0)&(opt=#OptWirelessLEDAdjshelf):#Waddledshelf=(#Tempshelfcount)*2
+Price, (#CostOfAdjustableShelf>0)&(opt=#OptWirelessLEDAdjshelf):#Tempshelfcount, #optionWirelessLEDAdjShelfname Cost,  #OptWirelessLEDAdjshelfcost,  ,#ShelfWidth ,  #AdjustableShelfPrintOrderNumber,
+
+}  
+
+

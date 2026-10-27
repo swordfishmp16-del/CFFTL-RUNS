@@ -1,0 +1,74 @@
+Set, #W = [w]
+Set, #H = H
+Set, #D = [D]
+
+load, Doors.pcb
+
+,CF Library - Closet Pieces
+,******** ALL PULLOUTS Standard *************
+
+Set, #PulloutOpeningWidth = W
+Set, #ShelfWidth = [(W)]     
+Set, #ShelfDepth = [(D)]
+
+Set, #shelfTH=#ShelfThickA
+
+Set, #W = [(#PulloutOpeningWidth/NDiv) -1]
+Set, #H = H
+Set, #D = [D]
+
+
+Set, #H = {#H}
+
+set, #showpofacename=
+Set, (#unitfilename<>"*Under Mt*"):#showponame=Pullout Tray:#showponame=Under Mt Pullout Tray 
+set, (#unitfilename="*drawer*")&(#doordrawertype="#doordrawertypename1"):#showpofacename=w #unitmaterialname #doordrawertype Drawer Face included  
+set, (#unitfilename="*drawer*")&(#doordrawertype<>"#doordrawertypename1"):#showpofacename=w #doordrawertype Drawer Face added
+
+
+Do, (#traypricemethod="Shelf Cost Plus"):1
+{
+ Set, #PulloutOpeningWidth = W
+ Set, #ShelfWidth = [(W)]     
+ Set, #ShelfDepth = [(D)]
+ set, #Tempshelfcount=1
+ Set, #shelfTH=#ShelfThickA
+ Load, C-Shelf Cost.pcb
+ set, #displaycost=#CostofAdjustableShelf
+
+,**
+'Price Pullout Box
+
+,Set, #W = [(#PulloutOpeningWidth/NDiv) -1]
+,Set, #H = H
+,Set, #D = [D]
+
+
+,Set, #H = {#H}
+
+
+, #### SET PULLOUT COST BELOW #######
+set, #pullout=1
+
+Price,(#unitfilename<>"*Under*"):1,RM#Roomnum #showponame #showpofacename #H"-#unitmaterialname     ,   (#Costfortray+#Displaycost),   D,   W,   #PulloutPrintOrderNumber,
+set, #pullout=0
+set, #UMpullout=1
+Price,(#unitfilename="*Under*"):1, RM#Roomnum #showponame #showpofacename #H"-#unitmaterialname,   (#Costfortray+#Displaycost+#undermttraycost),   D,   W,   #PulloutPrintOrderNumber,
+set, #UMpullout=0
+}
+
+Do, (#traypricemethod="Fixed Style Cost"):1
+{
+
+set, #pullout=1
+
+Price,(#unitfilename<>"*Under*"):1,RM#Roomnum #showponame #showpofacename #H"-#unitmaterialname     ,   (#Costfortray),   D,   W,   #PulloutPrintOrderNumber,
+set, #pullout=0
+set, #UMpullout=1
+Price,(#unitfilename="*Under*"):1, RM#Roomnum #showponame #showpofacename #H"-#unitmaterialname,   (#Costfortray+#undermttraycost),   D,   W,   #PulloutPrintOrderNumber,
+set, #UMpullout=0
+
+}
+
+
+

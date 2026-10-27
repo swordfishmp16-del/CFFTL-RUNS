@@ -1,0 +1,38 @@
+
+
+,CF Library - Closet Pieces
+,******** ALL PULLOUTS Standard *************
+Set, #PulloutOpeningWidth = W
+Set, #ShelfWidth = [(W)]     
+Set, #ShelfDepth = [(D)]
+set, #Tempshelfcount=1
+,Set, (#UnitFileName<>"*Flat*"):#shelfTH=#ShelfThickA:#shelfTH=[H]
+set, #shelfTH=BR
+Load, C-Shelf Cost.pcb
+set, #displaycost=#CostofAdjustableShelf
+,Load, Priceadjshelves.pcb
+
+
+,**
+'Price Pullout Box
+
+Set, #W = [(#PulloutOpeningWidth/NDiv) -1]
+Set, #H = BR
+Set, #D = [D]
+
+
+Set, (#UnitFileName="*Flat*"):#H = {#H}:#H = {#Shelfth}
+
+, #### SET SLIDING SHELF COST BELOW #######
+Set, #slidingshelf=Yes
+Price, (#Unitfilename<>"*Under*")&(#Unitfilename="*flat*"):1, #H" Flat Sliding Shelf-#unitmaterialname-#edgebandingtype,   (#Costforslidingshelf+#Displaycost),   D,   W,   #PulloutPrintOrderNumber,
+Price, (#Unitfilename<>"*Under*")&(#Unitfilename="*Face*"):1, #H" Sliding Shelf with EB Match Melamine Stop-#unitmaterialname-#edgebandingtype,   (#Costforslidingshelf+#Costtomelamine+#Displaycost),   D,   W,   #PulloutPrintOrderNumber,
+Price, (#Unitfilename<>"*Under*")&(#Unitfilename="*Glass*"):1, #H" Sliding Shelf with Clear Acrylic Stop-#unitmaterialname-#edgebandingtype,   (#Costforslidingshelf+#Costtoacrylic+#Displaycost),   D,   W,   #PulloutPrintOrderNumber,
+Set, #slidingshelf=No
+
+Set, #umslidingshelf=Yes
+Price, (#Unitfilename="*Under*")&(#Unitfilename="*flat*"):1,#H" Under Mt Flat Sliding Shelf-#unitmaterialname-#edgebandingtype,   (#Costforslidingshelf+#Displaycost+#undermttraycost),   D,   W,   #PulloutPrintOrderNumber,
+Price, (#Unitfilename="*Under*")&(#Unitfilename="*Face*"):1, #H" Under Mt Sliding Shelf with EB Match Melamine Stop-#unitmaterialname-#edgebandingtype,   (#Costforslidingshelf+#Costtomelamine+#Displaycost+#undermttraycost),   D,   W,   #PulloutPrintOrderNumber,
+Price, (#Unitfilename="*Under*")&(#Unitfilename="*Glass*"):1,#H" Under Mt Sliding Shelf with Clear Acrylic Stop-#unitmaterialname-#edgebandingtype,   (#Costforslidingshelf+#Costtoacrylic+#Displaycost+#undermttraycost),   D,   W,   #PulloutPrintOrderNumber,
+
+Set, #UMslidingshelf=No

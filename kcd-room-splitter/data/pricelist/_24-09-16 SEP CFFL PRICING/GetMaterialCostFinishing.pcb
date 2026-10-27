@@ -1,0 +1,90 @@
+,Set Item Costs factor for Finishing shelves and panels
+
+,**
+
+,Calculating subtotals
+
+Set,#FinishCostGroup=0
+
+
+Set,(#FinishingType = "#FinishType1"):#FinishCostGroup=[#FinishTypeCost1]
+,Set,(#FinishingType = "#FinishType2"):#FinishCostGroup=[#FinishTypeCost2]
+
+,Set,(#FinishingType = "#FinishType3"):#FinishCostGroup=[#FinishTypeCost3]
+,Set,(#FinishingType = "#FinishType4"):#FinishCostGroup=[#FinishTypeCost4]
+,Set,(#FinishingType = "#FinishType5"):#FinishCostGroup=[#FinishTypeCost5]
+,Set,(#FinishingType = "#FinishType6"):#FinishCostGroup=[#FinishTypeCost6]
+,Set,(#FinishingType = "#FinishType7"):#FinishCostGroup=[#FinishTypeCost7]
+,Set,(#FinishingType = "#FinishType8"):#FinishCostGroup=[#FinishTypeCost8]
+,Set,(#FinishingType = "#FinishType9"):#FinishCostGroup=[#FinishTypeCost9]
+,Set,(#FinishingType = "#FinishType10"):#FinishCostGroup=[#FinishTypeCost10]
+,Set,(#FinishingType = "#FinishType11"):#FinishCostGroup=[#FinishTypeCost11]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

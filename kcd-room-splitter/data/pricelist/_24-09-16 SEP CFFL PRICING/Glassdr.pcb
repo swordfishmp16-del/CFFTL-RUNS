@@ -1,0 +1,214 @@
+Set, #presetinsertcost=0
+set, #stopglass=1
+set, #includeinsert=0
+, Indicates that mirror door drawn
+,Set,(#Codedoor="Mirror"):#IncludeInsert=1
+Set,(#Codedoor="SMP"):#IncludeInsert=1
+Set,(#Codedoor="SMP"):#presetinsertcost=1
+Set,(#Codedoor="SMP-bevel"):#IncludeInsert=1
+Set,(#Codedoor="SMP-bevel"):#presetinsertcost=1
+Set,(#Codedoor="CMP"):#IncludeInsert=1
+Set,(#Codedoor="CMP"):#presetinsertcost=1
+Set,(#Codedoor="AMP"): #IncludeInsert=1                                
+Set,(#Codedoor="AMP"): #presetinsertcost=1
+Set, (#Codedoor="SGFP"): #IncludeInsert=1
+Set,(#Codedoor="SGFP"): #presetinsertcost=1
+Set,(#Codedoor="SM2P"):#IncludeInsert=1
+Set,(#Codedoor="SM2P"):#presetinsertcost=1
+Set, (#Codedoor="SGF2P"): #IncludeInsert=1
+Set,(#Codedoor="SGF2P"): #presetinsertcost=1
+Set,(#Codedoor="SM2P3-7"):#IncludeInsert=1
+Set,(#Codedoor="SM2P3-7"):#presetinsertcost=1
+
+Set, (#Codedoor="Etched Insert"): #IncludeInsert=1
+Set,(#Codedoor="Etched Insert"): #presetinsertcost=1
+Set, (#Codedoor="Etched Insert w Mullion"): #IncludeInsert=1
+Set,(#Codedoor="Etched Insert w Mulion"): #presetinsertcost=1
+
+, Indicates that Glass insert door drawn
+Set,(#Codedoor="SGP"):#IncludeInsert=1
+Set,(#Codedoor="SG4P"):#IncludeInsert=1
+Set,(#Codedoor="SG6P"):#IncludeInsert=1
+Set,(#Codedoor="AGP"): #IncludeInsert=1
+Set,(#Codedoor="AG4P"):#IncludeInsert=1
+Set,(#Codedoor="AG6P"):#IncludeInsert=1
+Set,(#Codedoor="CGP"): #IncludeInsert=1
+Set,(#Codedoor="CG4P"):#IncludeInsert=1
+Set,(#Codedoor="CG6P"):#IncludeInsert=1
+Set,(#Codedoor="Flat Glass"): #IncludeInsert=1
+,Set,(#Codedoor="Glass"): #IncludeInsert=1
+Set,(#Codedoor="SG2P"):#IncludeInsert=1
+Set,(#CodeDoor="SG2P 70/30"):#IncludeInsert=1
+Set,(#Codedoor="SG2P 30/70"):#IncludeInsert=1
+Set,(#Codedoor="SG2VP"):#IncludeInsert=1
+Set,(#Codedoor="SG6-4P"):#IncludeInsert=1
+Set,(#Codedoor="SG8P"):#IncludeInsert=1
+Set,(#Codedoor="AG2P 70/30"):#IncludeInsert=1
+Set,(#Codedoor="AG6-4P"):#IncludeInsert=1
+Set,(#Codedoor="AG8P"):#IncludeInsert=1
+Set,(#Codedoor="DAGP"):#IncludeInsert=1
+Set,(#Codedoor="CG2P"):#IncludeInsert=1
+Set,(#Codedoor="CG2P7"):#IncludeInsert=1
+Set,(#Codedoor="CG2P 70/30"):#IncludeInsert=1
+Set,(#Codedoor="CG2P 60/40"):#IncludeInsert=1
+Set,(#Codedoor="CG6-4P"):#IncludeInsert=1
+Set,(#Codedoor="CG8P"):#IncludeInsert=1
+Set,(#Codedoor="DCGP"): #IncludeInsert=1
+Set,(#Codedoor="DCG4P"): #IncludeInsert=1
+Set,(#Codedoor="DCG6P"): #IncludeInsert=1
+Set,(#Codedoor="DCG8P"): #IncludeInsert=1
+Set,(#Codedoor="SG33P"):#IncludeInsert=1
+Set,(#Codedoor="Shaker Mullion"):#IncludeInsert=1
+Set,(#Codedoor="SG34P"):#IncludeInsert=1
+Set,(#Codedoor="Square Glass 9 Panel Offset"):#IncludeInsert=1
+Set,(#Codedoor="Wide Arch Glass Panel"): #IncludeInsert=1
+Set,(#Codedoor="Wide Arch Glass 4 Panel"): #IncludeInsert=1
+Set,(#Codedoor="Wide Arch Glass 6 Panel"): #IncludeInsert=1
+Set,(#Codedoor="Wide Arch Glass 8 Panel"): #IncludeInsert=1
+Set,(#Codedoor="OGP"): #IncludeInsert=1
+Set,(#Codedoor="Mitered Square Glass"): #IncludeInsert=1
+Set,(#Codedoor="Mitered Square Glass 2"):#IncludeInsert=1
+Set,(#Codedoor="Mitered Square Glass 2 70/30"):#IncludeInsert=1
+Set,(#Codedoor="Mitered Square Glass 8"):#IncludeInsert=1
+Set,(#Codedoor="Mitered Square Glass 2 Vertical"):#IncludeInsert=1
+Set,(#Codedoor="Mitered Square Glass 4"):#IncludeInsert=1
+Set,(#Codedoor="Mitered Square Glass 6"):#IncludeInsert=1
+Set,(#Codedoor="Mitered Square Glass 2 60/40"):#IncludeInsert=1
+
+
+Set,(#Codedoor="Left Arch Glass Panel"): #IncludeInsert=1
+Set,(#Codedoor="HAG3P-L"):#IncludeInsert=1
+Set,(#Codedoor="Left Arch Glass 4 Panel"):#IncludeInsert=1
+Set,(#Codedoor="Left Arch Glass 6 Panel"):#IncludeInsert=1
+Set,(#Codedoor="Left Arch Glass 8 Panel"):#IncludeInsert=1
+Set,(#Codedoor="Right Arch Glass Panel"): #IncludeInsert=1
+Set,(#Codedoor="HAG3P-R"):#IncludeInsert=1
+Set,(#Codedoor="Right Arch Glass 4 Panel"):#IncludeInsert=1
+Set,(#Codedoor="Right Arch Glass 6 Panel"):#IncludeInsert=1
+Set,(#Codedoor="Right Arch Glass 8 Panel"):#IncludeInsert=1
+Set,(#Codedoor="Left Cath Glass Panel"): #IncludeInsert=1
+Set,(#Codedoor="Left Cath Glass 4 Panel"):#IncludeInsert=1
+Set,(#Codedoor="HCG4PS-L"):#IncludeInsert=1
+Set,(#Codedoor="Left Cath Glass 6 Panel"):#IncludeInsert=1
+Set,(#Codedoor="HCG6PS-L"):#IncludeInsert=1
+Set,(#Codedoor="Left Cath Glass 8 Panel"):#IncludeInsert=1
+Set,(#Codedoor="HCG8PS-L"):#IncludeInsert=1
+Set,(#Codedoor="Right Cath Glass Panel"): #IncludeInsert=1
+Set,(#Codedoor="Right Cath Glass 4 Panel"):#IncludeInsert=1
+Set,(#Codedoor="HCG4PS-R"):#IncludeInsert=1
+Set,(#Codedoor="Right Cath Glass 6 Panel"):#IncludeInsert=1
+Set,(#Codedoor="HCG6PS-R"):#IncludeInsert=1
+Set,(#Codedoor="Right Cath Glass 8 Panel"):#IncludeInsert=1
+Set,(#Codedoor="HCG8PS-R"):#IncludeInsert=1
+Set,(#Codedoor="SH-Mull"):#IncludeInsert=1
+Set,(#Codedoor="Half Circle Glass Panel"):#IncludeInsert=1
+Set,(#Codedoor="Left Qtr Circle Glass"):#IncludeInsert=1
+Set,(#Codedoor="Right Qtr Circle Glass"):#IncludeInsert=1
+Set,(#Codedoor="Half Circle Glass 4 Panel"):#IncludeInsert=1
+Set,(#Codedoor="Left Qtr Circle 4 Glass"):#IncludeInsert=1
+Set,(#Codedoor="Right Qtr Circle 4 Glass"):#IncludeInsert=1
+Set,(#Codedoor="Half Circle Glass 6 Panel"):#IncludeInsert=1
+Set,(#Codedoor="Left Qtr Circle 6 Glass"):#IncludeInsert=1
+Set,(#Codedoor="Right Qtr Circle 6 Glass"):#IncludeInsert=1
+Set,(#Codedoor="Half Circle Glass 8 Panel"):#IncludeInsert=1
+Set, (#Codedoor="Left Qtr Circle 8 Glass"): #IncludeInsert=1
+Set, (#Codedoor="Right Qtr Circle 8 Glass"): #IncludeInsert=1
+
+Set, (#Codedoor="Tud-M"): #IncludeInsert=1
+Set, (#Codedoor="STG2"): #IncludeInsert=1
+Set, (#Codedoor="STG3"): #IncludeInsert=1
+Set, (#Codedoor="WKR"): #IncludeInsert=1
+Set, (#Codedoor="WKR2"): #IncludeInsert=1
+Set, (#Codedoor="AFPH-DR"): #IncludeInsert=1
+
+Set, (#Codedoor="SGF2P7-3"): #IncludeInsert=1
+Set, (#Codedoor="SGF2P3-7"): #IncludeInsert=1
+
+
+Set,(#Codedoor="SGXP"):#IncludeInsert=1   
+Set,(#Codedoor="SFGP"):#IncludeInsert=1 
+  
+Set,(#Codedoor="SFG2P"):#IncludeInsert=1    
+,Set,(#Codedoor="Solid Glass"):#IncludeInsert=1  
+Set,(#Codedoor="RG4P"):#IncludeInsert=1
+Set,(#Codedoor="RG4P-R"):#IncludeInsert=1 
+Set,(#Codedoor="RG4P-L"):#IncludeInsert=1
+Set,(#Codedoor="RG6P"): #IncludeInsert=1 
+Set,(#Codedoor="RG6P-R"):#IncludeInsert=1 
+Set,(#Codedoor="RG6P-L"):#IncludeInsert=1
+Set,(#Codedoor="RG8P"): #IncludeInsert=1
+Set,(#Codedoor="RG8P-R"):#IncludeInsert=1 
+Set,(#Codedoor="RG8P-L"):#IncludeInsert=1 
+Set,(#Codedoor="RGP"): #IncludeInsert=1 
+Set,(#Codedoor="RGP-R"):#IncludeInsert=1 
+Set,(#Codedoor="RGP-L"):#IncludeInsert=1 
+Set,(#Codedoor="Sbev"):#IncludeInsert=1 
+Set,(#Codedoor="AG2P"):#IncludeInsert=1
+Set,(#Codedoor="QSG4P-R"):#IncludeInsert=1
+Set,(#Codedoor="QSG4P-L"): #IncludeInsert=1
+Set,(#Codedoor="QSG6P-R"): #IncludeInsert=1
+Set,(#Codedoor="QSG6P-L"): #IncludeInsert=1 
+Set,(#Codedoor="QSG8P-R"): #IncludeInsert=1
+Set,(#Codedoor="QSG8P-L"): #IncludeInsert=1 
+
+
+Set,(#Codedoor="Sg4PO-L"): #IncludeInsert=1
+Set,(#Codedoor="Sg4PO-R"): #IncludeInsert=1
+Set,(#Codedoor="SFG7P"): #IncludeInsert=1  
+Set,(#Codedoor="SFG7VP"): #IncludeInsert=1 
+Set,(#Codedoor="SG9P"): #IncludeInsert=1 
+Set,(#Codedoor="SG12P"): #IncludeInsert=1
+Set,(#Codedoor="Stain Glass Door"): #IncludeInsert=1
+Set,(#Codedoor="SG2P 60/40"): #IncludeInsert=1
+Set,(#Codedoor="AG2P 60/40"): #IncludeInsert=1
+Set,(#Codedoor="SFG4P3-7"): #IncludeInsert=1
+Set,(#Codedoor="SFG4P"): #IncludeInsert=1
+Set,(#Codedoor="Deco-M"): #IncludeInsert=1
+Set,(#Codedoor="SGP-M"): #IncludeInsert=1
+Set,(#Codedoor="SGPDR"): #IncludeInsert=1
+Set,(#Codedoor="SG34P-M"): #IncludeInsert=1
+Set,(#Codedoor="SG8P-M"): #IncludeInsert=1
+Set,(#Codedoor="SGP9-M"): #IncludeInsert=1
+Set,(#Codedoor="SG33P-M"): #IncludeInsert=1
+Set,(#Codedoor="SG6P-M"): #IncludeInsert=1
+Set,(#Codedoor="SG4P-M"): #IncludeInsert=1
+Set,(#Codedoor="MSG4P-M"): #IncludeInsert=1
+Set,(#Codedoor="MSGP-M"): #IncludeInsert=1
+Set,(#Codedoor="MSG8P-M"): #IncludeInsert=1
+Set,(#Codedoor="MSG6P-M"): #IncludeInsert=1
+Set,(#Codedoor="MSG4P-M2"): #IncludeInsert=1
+Set,(#Codedoor="MSG6P-M2"): #IncludeInsert=1
+Set,(#Codedoor="MSG8P-M2"): #IncludeInsert=1
+Set,(#Codedoor="MSGP-M2"): #IncludeInsert=1
+Set,(#Codedoor="Square Speaker Panel"): #IncludeInsert=1
+Set,(#Codedoor="Square Speaker Panel"): #presetinsertcost=1 
+Set,(#Codedoor="St-Glass"): #IncludeInsert=1
+Set,(#Codedoor="cf5piece"): #IncludeInsert=1
+Set,(#Codedoor="cf5piece"): #presetinsertcost=1
+Set,(#Codedoor="Flat-VG-Clear"):#IncludeInsert=1
+Set,(#Codedoor="Flat-HG-Clear"):#IncludeInsert=1
+Set,(#Codedoor="Flat-VG-Mirror"):#IncludeInsert=1
+Set,(#Codedoor="Flat-VG-Mirror"):#presetinsertcost=1
+Set,(#Codedoor="Flat-HG-Mirror"):#IncludeInsert=1
+Set,(#Codedoor="Flat-HG-Mirror"):#presetinsertcost=1
+Set,(#Codedoor="Flat-VG-Solid"):#IncludeInsert=1
+Set,(#Codedoor="Flat-VG-Solid"):#presetinsertcost=1
+Set,(#Codedoor="Flat-HG-Solid"):#IncludeInsert=1
+Set,(#Codedoor="Flat-HG-Solid"):#presetinsertcost=1
+Set,(#Codedoor="Flat-VG-Speaker"):#IncludeInsert=1
+Set,(#Codedoor="Flat-VG-Speaker"):#presetinsertcost=1
+Set,(#Codedoor="Flat-HG-Speaker"):#IncludeInsert=1
+Set,(#Codedoor="Flat-HG-Speaker"):#presetinsertcost=1
+Set,(#Codedoor="Flat-VG-Matte"):#IncludeInsert=1
+Set,(#Codedoor="Flat-VG-Matte"):#presetinsertcost=1
+Set,(#Codedoor="Flat-HG-Matte"):#IncludeInsert=1
+Set,(#Codedoor="Flat-HG-Matte"):#presetinsertcost=1
+Set,(#Codedoor="Flat-VG-Smoke"):#IncludeInsert=1
+Set,(#Codedoor="Flat-VG-Smoke"):#presetinsertcost=1
+Set,(#Codedoor="Flat-HG-Smoke"):#IncludeInsert=1
+Set,(#Codedoor="Flat-HG-Smoke"):#presetinsertcost=1
+
+Set,(#Codedoor="SGWA"): #IncludeInsert=1
+Set,(#Codedoor="SGRD"): #IncludeInsert=1
+
+set, #stopglass=2

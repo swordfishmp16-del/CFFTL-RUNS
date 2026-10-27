@@ -1,0 +1,742 @@
+,Use Grid
+
+
+,**
+,***************************************************  DOOR AND DRAWER COST SETUP  *****************************************************************
+,**
+,Update V7.2.9 start
+DisplaySet,#PriceMethodDoors =Square Foot,         --------   PRICING METHOD FOR DOORS & DRAWER FRONTS - (By Square Foot)-(Fixed Cost) [Basic Plus;Square Foot;Fixed Cost]
+,Update V7.2.9 end
+,**
+,{
+DisplaySet,#NoChargeDrawerFront=1, Set to zero for No charge on Drawer Fronts or 1 if you want to charge
+,**
+
+,Set, #DoorArea = [#DoorA/144]
+,Update V7.2.9 start
+,Set, (#Endpanel=0): #DoorArea = (#DoorH*#DoorW)/144:#DoorArea=(#EndpanelH*#EndpanelW)/144
+,Update V7.2.9 end
+Set,  #DoorArea = (#DoorH*#DoorW)/144
+
+,Update 7.2.1 Start
+Displayset, #DrFrtfactor=1, Q------- Is there a different charge for custom drawer faces? (*1.00=no >1.00=multiplier higher <1.00=multiplier lower) or +fixed charge)
+,Update 7.2.1 End 
+Displayset, #showincludedsdrawerfaceonreport=No, Q----Do you want to show 0 charge Drawer Faces on the pricing report? [Yes;No]
+,
+,CHANGED HEREDisplaySet,#GlassDoorExtraCost=0, Extra Cost for Glass?
+, Setting the insert cost
+,Update V7.2.12 start
+DisplaySet,#GlassDoorExtraCost=#DoorArea*#DoorDrawerInsertCostGroup, Extra Cost for Selected Door Insert?
+,Update V8.0 start
+,**Speaker cloth, 1/4 melamine, Mirror, beveled mirror,and smoke acrylic set in AA-User.
+Set,#SpeakerDoorExtraCost=#DoorArea*#DoorDrawerInsertCostSpeaker, Extra Cost for Speaker Door Insert?
+Set,#MirrorDoorExtraCost=#DoorArea*#DoorDrawerInsertCostMirror, Extra Cost for Mirror Door Insert?
+Set,#BevelMirrorDoorExtraCost=#DoorArea*#DoorDrawerInsertCostBevmirror, Extra Cost for Bevel Mirror Door Insert?
+Set,#14melamineDoorExtraCost=#DoorArea*#DoorDrawerInsertCost14Mel, Extra Cost for 1/4 Melamine Door Insert?
+Set,#SmokeDoorExtraCost=#DoorArea*#DoorDrawerInsertCostSmoke, Extra Cost for Smoke Acrylic Door Insert?
+Set,#FrostedDoorExtraCost=#DoorArea*#DoorDrawerInsertCostFrost, Extra Cost for Frosted Glass Door Insert?
+Set,#EtchedDoorExtraCost=#DoorArea*#DoorDrawerInsertCostEtched, Extra Cost for Etched Glass Door Insert?
+,update V8.0end
+
+,Update V7.2.12 end
+,**
+,CHANGED HERESet,#PriceDoorsSqFT=(#DoorArea  *  (#DoorDrawerStyleCostGroup+#DoorDrawerFinishingCostGroup+#DoorDrawerInsertCostGroup))
+Set,(#DoorDrawerType="*RTF*"):#PriceDoorsSqFT=(#DoorArea*(#DoorDrawerStyleCostGroup*#DoorDrawerFinishingCostGroup)):#PriceDoorsSqFT=(#DoorArea*(#DoorDrawerStyleCostGroup+#DoorDrawerFinishingCostGroup))
+Set,#PriceDoorsFixed=(#DoorDrawerStyleCostGroup)
+,Update V7.2.9 start
+Set,(#DoorDrawerType="*RTF*"):#PriceDoorsbasicplus=(#basicdoorcost+(#DoorArea*(#DoorDrawerStyleCostGroup*#DoorDrawerFinishingCostGroup))):#PriceDoorsbasicplus=(#basicdoorcost+(#DoorArea*(#DoorDrawerStyleCostGroup+#DoorDrawerFinishingCostGroup)))
+,Update V7.2.9 end
+
+,**
+,Update 7.2.3 start - removed above 7.2.2 location and relocated it here.
+Load,GetDoorStyleCost.pcb
+,Update 7.2.3 end
+
+,**
+Set,(#PriceMethodDoors="Square Foot"):#PricingDoors=(#PriceDoorsSqFT)
+Set,(#PriceMethodDoors="Fixed Cost"):#PricingDoors=(#PriceDoorsFixed)
+,Update V7.2.9 start
+Set,(#PriceMethodDoors="Basic Plus"):#PricingDoors=(#PriceDoorsbasicplus)
+
+,Set,(#PriceMethodDoors="Square Foot"):#PricingDoors=(#PriceDoorsSqFT)
+,Set,(#PriceMethodDoors="Fixed Cost"):#PricingDoors=(#PriceDoorsFixed)
+,Update V7.2.9 end
+
+,**update 7.2.1 copy from here to where noted below and replace in franchise D-Door Cost.pcb file Door Drawer Type 1 and Door Drawer Type 2 setup
+,**
+,** Hinge Costs
+Displayset, #Standarddoorhingecost=0, Cost for Standard door Hinges per hinge
+Displayset, #Overlaydoorhingecost=0, Cost for Overlay door Hinges per hinge
+Displayset, #tipoutdoorhingecost=0, Cost for Tip-out door Hinges per hinge
+Displayset, #Liftupdoorhingecost=25, Cost for Lift-up door Hinges per hinge
+Displayset, #LUHNote=Lift Up Hinge, Note for Lift-up Hinge
+,Displayset, #Insetdoorhingecost=10, Cost for Inset door Hinges per hinge
+
+,Displayset, #Liftupdoorhingecost=55, Cost for Lift-up door Hinges per door
+set, #Addmoldingtodoor=0, set default
+,**
+,Update V7.2.9 start
+set, #basicdoorcost=0
+,Update V7.2.9 end
+
+set, #Tempdoorcost=0
+,**   Door and Drawer Type
+,** 
+,**Set up for Melamine style doors same color as panels/shelves
+,**These doors are priced by size.
+DisplaySet,#DoorDrawerTypeName1=Melamine,         Door Drawer Type 1 Name
+DisplaySet,#DoorDrawerTypeCostFactor1=1, 1.1    #DoorDrawerTypeName1 Door Drawer Type Cost Factor
+DisplaySet,#Doorheightcount=2,Q...     HOW MANY DIFFERENT Door Heights DO YOU USE?  [1;2;3]
+  Do, (#Doorheightcount >0):1
+  {
+   DisplaySet, #DoorheightA =48,Q1...     WHAT IS THE smallest door Height ? (Shortest)
+   Displayset, #AppliedmoldingA=95, Cost of Applied Molding on #DoorheightA #DoorDrawerTypeName1 Door
+   DisplaySet, #Doorwidthcount=2,Q1.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS door?  [1;2;3;4;5]
+    Do, (#Doorwidthcount>0):1
+    {
+    DisplaySet, #Doorwidth1A =38,         1.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost1A =160*#MaterialCostGroup,                   Cost of a door (up to #DoorheightA" tall)   by   (up to #DoorWidth1A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth1A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Tempdoorcost = #DoorCost1A ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth1A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Addmoldingtodoor = #AppliedmoldingA 
+    ,Update v7.2.9 start
+    Set, ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>0)&(#DoorW<=#Doorwidth1A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #basicdoorcost = #DoorCost1A ,Set the Cost of basic door
+    ,Update v7.2.9 end
+    }
+    Do, (#Doorwidthcount>1):1
+    {
+    DisplaySet, #Doorwidth2A =40,         1.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2A =237*#MaterialCostGroup,                   Cost of a door (up to #DoorheightA" tall)   by   (up to #DoorWidth2A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth1A)&(#DoorW<=#Doorwidth2A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Tempdoorcost = #DoorCost2A ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth1A)&(#DoorW<=#Doorwidth2A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Addmoldingtodoor = #AppliedmoldingA 
+    ,Update v7.2.9 start
+    Set, ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth1A)&(#DoorW<=#Doorwidth2A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Basicdoorcost = #DoorCost2A ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+    Do, (#Doorwidthcount>2):1
+    {
+    DisplaySet, #Doorwidth3A =48.625,          1.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost3A =145*#MaterialCostGroup,                   Cost of a door (up to #DoorheightA" tall)   by   (up to #DoorWidth3A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth2A)&(#DoorW<=#Doorwidth3A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Tempdoorcost = #DoorCost3A ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth2A)&(#DoorW<=#Doorwidth3A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Addmoldingtodoor = #AppliedmoldingA
+    ,Update v7.2.9 start
+    Set, ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth2A)&(#DoorW<=#Doorwidth3A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #basicdoorcost = #DoorCost3A ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+    Do, (#Doorwidthcount>3):1
+    {
+    DisplaySet, #Doorwidth4A =36,          1.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost4A =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightA" tall)   by   (up to #DoorWidth4A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth3A)&(#DoorW<=#Doorwidth4A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Tempdoorcost = #DoorCost4A ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth3A)&(#DoorW<=#Doorwidth4A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Addmoldingtodoor = #AppliedmoldingA
+    ,Update v7.2.9 start
+    Set, ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth3A)&(#DoorW<=#Doorwidth4A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Basicdoorcost = #DoorCost4A ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+    Do, (#Doorwidthcount>4):1
+    {
+    DisplaySet, #Doorwidth5A =36,          1.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost5A =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightA" tall)   by   (up to #DoorWidth5A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth4A)&(#DoorW<=#Doorwidth5A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Tempdoorcost = #DoorCost5A ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth4A)&(#DoorW<=#Doorwidth5A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #Addmoldingtodoor = #AppliedmoldingA
+    ,Update v7.2.9 start
+    Set, ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth4A)&(#DoorW<=#Doorwidth5A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #basicdoorcost = #DoorCost5A ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+  }
+  Do, (#Doorheightcount >1):1
+  {
+   DisplaySet, #DoorheightB =96,Q2...     WHAT IS THE 2nd smallest door Height ? (next tallest), 
+   Displayset, #AppliedmoldingB=170, Cost of Applied Molding on #DoorheightB #DoorDrawerTypeName1 Door
+   DisplaySet, #DoorwidthcountB=1,Q2.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS door?  [1;2;3;4;5]
+    Do, (#DoorwidthcountB>0):1
+    {
+    DisplaySet, #Doorwidth1B =42,          2.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost1B =237*#MaterialCostGroup,                   Cost of a door (up to #DoorheightB" tall)   by   (up to #DoorWidth1B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth1B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Tempdoorcost = #DoorCost1B ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth1B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Addmoldingtodoor=#AppliedmoldingB
+    ,Update v7.2.9 start
+    Set, ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>0)&(#DoorW<=#Doorwidth1B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #basicdoorcost = #DoorCost1B ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+    Do, (#DoorwidthcountB>1):1
+    {
+    DisplaySet, #Doorwidth2B =36.625,          2.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2B =145*1.25*#MaterialCostGroup,                   Cost of a door (up to #DoorheightB" tall)   by   (up to #DoorWidth2B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth1B)&(#DoorW<=#Doorwidth2B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Tempdoorcost = #DoorCost2B ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth1B)&(#DoorW<=#Doorwidth2B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Addmoldingtodoor=#AppliedmoldingB
+    ,Update v7.2.9 start
+    Set, ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth1B)&(#DoorW<=#Doorwidth2B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #basicdoorcost = #DoorCost2B ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+    Do, (#DoorwidthcountB>2):1
+    {
+    DisplaySet, #Doorwidth3B =43,          2.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost3B =145*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightB" tall)   by   (up to #DoorWidth3B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth2B)&(#DoorW<=#Doorwidth3B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Tempdoorcost = #DoorCost3B ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth2B)&(#DoorW<=#Doorwidth3B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Addmoldingtodoor=#AppliedmoldingB
+    ,Update v7.2.9 start
+    Set, ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth2B)&(#DoorW<=#Doorwidth3B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #basicdoorcost = #DoorCost3B ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+    Do, (#DoorwidthcountB>3):1
+    {
+    DisplaySet, #Doorwidth4B =36,          2.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost4B =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightB" tall)   by   (up to #DoorWidth4B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth3B)&(#DoorW<=#Doorwidth4B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Tempdoorcost = #DoorCost4B ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth3B)&(#DoorW<=#Doorwidth4B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Addmoldingtodoor=#AppliedmoldingB
+    ,Update v7.2.9 start
+    Set, ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth3B)&(#DoorW<=#Doorwidth4B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Basicdoorcost = #DoorCost4B ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+    Do, (#DoorwidthcountB>4):1
+    {
+    DisplaySet, #Doorwidth5B =36,          2.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost5B =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightB" tall)   by   (up to #DoorWidth5B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth4B)&(#DoorW<=#Doorwidth5B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Tempdoorcost = #DoorCost5B ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth4B)&(#DoorW<=#Doorwidth5B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Addmoldingtodoor=#AppliedmoldingB
+    ,Update v7.2.9 start
+    Set, ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth4B)&(#DoorW<=#Doorwidth5B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #Basicdoorcost = #DoorCost5B ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+  }
+  Do, (#Doorheightcount >2):1
+  {
+   DisplaySet, #DoorheightC =96,Q3...     WHAT IS THE 3rd  door Height ? (next tallest), 
+   Displayset, #AppliedmoldingC=150, Cost of Applied Molding on #DoorheightC #DoorDrawerTypeName1 Door
+   DisplaySet, #DoorwidthcountC=2,Q3.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS door?  [1;2;3;4;5]
+    Do, (#DoorwidthcountC>0):1
+    {
+    DisplaySet, #Doorwidth1C =18.625,          3.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost1C =190*#MaterialCostGroup,                   Cost of a door (up to #DoorheightC" tall)   by   (up to #DoorWidth1C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth1C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Tempdoorcost = #DoorCost1C ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth1C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Addmoldingtodoor=#AppliedmoldingC
+    ,Update v7.2.9 start
+    Set,  ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>0)&(#DoorW<=#Doorwidth1C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Basicdoorcost = #DoorCost1C ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+    Do, (#DoorwidthcountC>1):1
+    {
+    DisplaySet, #Doorwidth2C =24.625,          3.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2C =190*1.25*#MaterialCostGroup,                   Cost of a door (up to #DoorheightC" tall)   by   (up to #DoorWidth2C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth1C)&(#DoorW<=#Doorwidth2C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Tempdoorcost = #DoorCost2C ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth1C)&(#DoorW<=#Doorwidth2C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Addmoldingtodoor=#AppliedmoldingC
+    ,Update v7.2.9 start
+    Set,  ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth1C)&(#DoorW<=#Doorwidth2C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Basicdoorcost = #DoorCost2C ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+    Do, (#DoorwidthcountC>2):1
+    {
+    DisplaySet, #Doorwidth3C =41,          3.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost3C =190*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightC" tall)   by   (up to #DoorWidth3C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth2C)&(#DoorW<=#Doorwidth3C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Tempdoorcost = #DoorCost3C ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth2C)&(#DoorW<=#Doorwidth3C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Addmoldingtodoor=#AppliedmoldingC
+    ,Update v7.2.9 start
+    Set,  ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth2C)&(#DoorW<=#Doorwidth3C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Basicdoorcost = #DoorCost3C ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+    Do, (#DoorwidthcountC>3):1
+    {
+    DisplaySet, #Doorwidth4C =36,          3.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost4C =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightC" tall)   by   (up to #DoorWidth4C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth3C)&(#DoorW<=#Doorwidth4C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Tempdoorcost = #DoorCost4C ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth3C)&(#DoorW<=#Doorwidth4C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Addmoldingtodoor=#AppliedmoldingC
+    ,Update v7.2.9 start
+    Set,  ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth3C)&(#DoorW<=#Doorwidth4C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Basicdoorcost = #DoorCost4C ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+    Do, (#DoorwidthcountC>4):1
+    {
+    DisplaySet, #Doorwidth5C =36,          3.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost5C =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightC" tall)   by   (up to #DoorWidth5C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth4C)&(#DoorW<=#Doorwidth5C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Tempdoorcost = #DoorCost5C ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=0)&(#DoorW>#Doorwidth4C)&(#DoorW<=#Doorwidth5C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Addmoldingtodoor=#AppliedmoldingC
+    ,Update v7.2.9 start
+    Set,  ((#doorT<>3)|((#doorT=3)&(#HasHinges=1)))&(#DoorW>#Doorwidth4C)&(#DoorW<=#Doorwidth5C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #Basicdoorcost = #DoorCost5C ,Set the Cost of This Door
+    ,Update v7.2.9 end
+    }
+  }
+set, ((#wallbeddepthtrack=1)&(#chargeallwbdoors=No)&(#doorH>48)):#Basicdoorcost=0
+,}
+Set, #Basicdoorcost=[#basicdoorcost*#universalupcharge]
+,**
+DisplaySet,#DoorheightFramecount=2,Q...     HOW MANY DIFFERENT FRAMED Door Heights DO YOU USE?  [1;2;3]
+  Do, (#DoorheightFramecount >0):1
+  {
+   DisplaySet, #DoorheightFrameA =48,Q1...     WHAT IS THE smallest Framed door Height ? (Shortest)
+   DisplaySet, #Doorwidthcountframe=1,Q1.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS Framed door?  [1;2;3;4;5]
+    Do, (#Doorwidthcountframe>0):1
+    {
+    DisplaySet, #DoorwidthFrame1A =38,         1.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostFrame1A =310*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeA" tall)   by   (up to #DoorWidthframe1A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>0)&(#DoorW<=#DoorwidthFrame1A) & (#DoorH>0)&(#DoorH<=#DoorHeightFrameA): #Tempdoorcost = #DoorCostFrame1A ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcountframe>1):1
+    {
+    DisplaySet, #Doorwidthframe2A =30,         1.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2A =265*1.25*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeA" tall)   by   (up to #DoorWidthframe2A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame1A)&(#DoorW<=#DoorwidthFrame2A) & (#DoorH>0)&(#DoorH<=#DoorHeightFrameA): #Tempdoorcost = #DoorCostFrame2A ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcountframe>2):1
+    {
+    DisplaySet, #Doorwidthframe3A =36.625,          1.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe3A =265*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeA" tall)   by   (up to #DoorWidthframe3A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2A)&(#DoorW<=#DoorwidthFrame3A) & (#DoorH>0)&(#DoorH<=#DoorHeightFrameA): #Tempdoorcost = #DoorCostFrame3A ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcountframe>3):1
+    {
+    DisplaySet, #Doorwidthframe4A =36,          1.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe4A =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeA" tall)   by   (up to #DoorWidthframe4A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame3A)&(#DoorW<=#DoorwidthFrame4A) & (#DoorH>0)&(#DoorH<=#DoorHeightFrameA): #Tempdoorcost = #DoorCostFrame4A ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcountframe>4):1
+    {
+    DisplaySet, #Doorwidthframe5A =36,          1.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe5A =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeA" tall)   by   (up to #DoorWidthframe5A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame4A)&(#DoorW<=#DoorwidthFrame5A) & (#DoorH>0)&(#DoorH<=#DoorHeightFrameA): #Tempdoorcost = #DoorCostFrame5A ,Set the Cost of This Door
+    }
+  }
+  Do, (#Doorheightframecount >1):1
+  {
+   DisplaySet, #DoorheightframeB =96,Q2...     WHAT IS THE 2nd smallest Framed door Height ? (next tallest), 
+   DisplaySet, #DoorwidthcountframeB=1,Q2.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS Framed door?  [1;2;3;4;5]
+    Do, (#DoorwidthcountframeB>0):1
+    {
+    DisplaySet, #Doorwidthframe1B =25.375,          2.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe1B =387*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeB" tall)   by   (up to #DoorWidthframe1B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>0)&(#DoorW<=#DoorwidthFrame1B) & (#DoorH>#DoorHeightFrameA)&(#DoorH<=#DoorHeightFrameB): #Tempdoorcost = #DoorCostFrame1B ,Set the Cost of This Door
+    }
+    Do, (#DoorwidthcountframeB>1):1
+    {
+    DisplaySet, #Doorwidthframe2B =24.625,          2.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2B =290*1.25*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeB" tall)   by   (up to #DoorWidthframe2B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#Doorwidthframe1B)&(#DoorW<=#DoorwidthFrame2B) & (#DoorH>#DoorHeightFrameA)&(#DoorH<=#DoorHeightFrameB): #Tempdoorcost = #DoorCostFrame2B ,Set the Cost of This Door
+    }
+    Do, (#DoorwidthcountframeB>2):1
+    {
+    DisplaySet, #Doorwidthframe3B =36.625,          2.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe3B =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeB" tall)   by   (up to #DoorWidthframe3B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#Doorwidthframe2B)&(#DoorW<=#DoorwidthFrame3B) & (#DoorH>#DoorHeightFrameA)&(#DoorH<=#DoorHeightFrameB): #Tempdoorcost = #DoorCostFrame3B ,Set the Cost of This Door
+    }
+    Do, (#DoorwidthcountframeB>3):1
+    {
+    DisplaySet, #Doorwidthframe4B =36,          2.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe4B =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeB" tall)   by   (up to #DoorWidthframe4B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#Doorwidthframe3B)&(#DoorW<=#DoorwidthFrame4B) & (#DoorH>#DoorHeightFrameA)&(#DoorH<=#DoorHeightFrameB): #Tempdoorcost = #DoorCostFrame4B ,Set the Cost of This Door
+    }
+    Do, (#DoorwidthcountframeB>4):1
+    {
+    DisplaySet, #Doorwidthframe5B =36,          2.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe5B =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeB" tall)   by   (up to #DoorWidthframe5B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#Doorwidthframe4B)&(#DoorW<=#DoorwidthFrame5B) & (#DoorH>#DoorHeightFrameA)&(#DoorH<=#DoorHeightFrameB): #Tempdoorcost = #DoorCostFrame5B ,Set the Cost of This Door
+    }
+  }
+  Do, (#Doorheightframecount >2):1
+  {
+   DisplaySet, #DoorheightframeC =96,Q3...     WHAT IS THE 3rd Framed door Height ? (next tallest), 
+   DisplaySet, #DoorwidthcountframeC=2,Q3.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS Framed door?  [1;2;3;4;5]
+    Do, (#DoorwidthcountframeC>0):1
+    {
+    DisplaySet, #Doorwidthframe1C =18,          3.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe1C =160*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeC" tall)   by   (up to #DoorWidthframe1C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>0)&(#DoorW<=#DoorwidthFrame1C) & (#DoorH>#DoorHeightFrameB)&(#DoorH<=#DoorHeightFrameC): #Tempdoorcost = #DoorCostFrame1C ,Set the Cost of This Door
+    }
+    Do, (#DoorwidthcountframeC>1):1
+    {
+    DisplaySet, #Doorwidthframe2C =24,          3.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2C =160*1.25*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeC" tall)   by   (up to #DoorWidthframe2C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame1C)&(#DoorW<=#DoorwidthFrame2C) & (#DoorH>#DoorHeightFrameB)&(#DoorH<=#DoorHeightFrameC): #Tempdoorcost = #DoorCostFrame2C ,Set the Cost of This Door
+    }
+    Do, (#DoorwidthcountframeC>2):1
+    {
+    DisplaySet, #Doorwidthframe3C =36,          3.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe3C =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeC" tall)   by   (up to #DoorWidthframe3C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2C)&(#DoorW<=#DoorwidthFrame3C) & (#DoorH>#DoorHeightFrameB)&(#DoorH<=#DoorHeightFrameC): #Tempdoorcost = #DoorCostFrame3C ,Set the Cost of This Door
+    }
+    Do, (#DoorwidthcountframeC>3):1
+    {
+    DisplaySet, #Doorwidthframe4C =36,          3.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe4C =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeC" tall)   by   (up to #DoorWidthframe4C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame3C)&(#DoorW<=#DoorwidthFrame4C) & (#DoorH>#DoorHeightFrameB)&(#DoorH<=#DoorHeightFrameC): #Tempdoorcost = #DoorCostFrame4C ,Set the Cost of This Door
+    }
+    Do, (#DoorwidthcountframeC>4):1
+    {
+    DisplaySet, #Doorwidthframe5C =36,          3.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe5C =120*1.5*#MaterialCostGroup,                   Cost of a door (up to #DoorheightframeC" tall)   by   (up to #DoorWidthframe5C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame4C)&(#DoorW<=#DoorwidthFrame5C) & (#DoorH>#DoorHeightFrameB)&(#DoorH<=#DoorHeightFrameC): #Tempdoorcost = #DoorCostFrame5C ,Set the Cost of This Door
+    }
+  }
+
+
+,}
+
+,*********************************************************************************************************
+,** Specialty Door pricing
+Displayset,#FramedDrawerFrontCost=145*#MaterialCostGroup*#universalupcharge, Cost of Framed drawer front (add insert)
+Displayset,#Appliedmirrorcostdoor=60*#DoorArea, Cost of Applied Mirror (added to Flat Edgeband door)
+Displayset,#Appliedmirrorcostdwr=60*#DoorArea, Cost of Applied Mirror (added to Flat Edgeband Drawer)
+
+
+Displayset,#ClearAcrylicDoorcost=40*#DoorArea, Cost factor of Clear Acrylic Door 
+Displayset,#MatteAcrylicDoorcost=40*#DoorArea, Cost factor of Matte Acrylic Door
+Displayset,#SmokeAcrylicdoorcost=55*#DoorArea, Cost factor of Smoke Acrylic Door
+Displayset,#solidglassdoorcost=65*#doorarea,Cost Factor for Solid Glass Door
+Displayset,#solidfrostedglassdoorcost=75*#doorarea,  Cost Factor for Solid Frosted Glass Door
+Displayset,#metalframedoorcost=75*#doorarea,  Cost Factor for Metal Frame Door
+Displayset,#StyliteAcrylicMirrordoorcost=50*#doorarea, Cost for Stylite Acrylic Mirror Door Cost
+
+,****
+Displayset, #DefaultWallBeddoorcost=473*#MaterialCostGroup,Cost of your Twin wallbed single door matching material
+,********************************************************************************************************
+
+,**
+,**Set up for Melamine style doors different material from panels/shelves
+**These doors are priced by size.
+DisplaySet,#DoorDrawerTypeName2=Melamine 2nd Material,         Door Drawer Type 2 Name
+DisplaySet,#DoorDrawerTypeCostFactor2=1, 1.2   #DoorDrawerTypeName2 Door Drawer Type Cost Factor
+DisplaySet,#Doorheight2ndcount=2,Q...     HOW MANY DIFFERENT Door Heights DO YOU USE?  [1;2;3]
+  Do, (#Doorheight2ndcount >0):1
+  {
+   DisplaySet, #Doorheight2ndA =48,Q1...     WHAT IS THE smallest door Height ? (Shortest), 
+   Displayset, #Appliedmolding2ndA=88, Cost of Applied Molding on #Doorheight2ndA #DoorDrawerTypeName2 Door
+   DisplaySet, #Doorwidth2ndcount=2,Q1.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS door?  [1;2;3;4;5]
+    Do, (#Doorwidth2ndcount>0):1
+    {
+    DisplaySet, #Doorwidth2nd1A =36.625,         1.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd1A =160*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndA" tall)   by   (up to #DoorWidth2nd1A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth2nd1A) & (#DoorH>0)&(#DoorH<=#DoorHeight2ndA): #Tempdoorcost = #DoorCost2nd1A ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth2nd1A) & (#DoorH>0)&(#DoorH<=#DoorHeight2ndA): #Addmoldingtodoor=#Appliedmolding2ndA
+    }
+    Do, (#Doorwidth2ndcount>1):1
+    {
+    DisplaySet, #Doorwidth2nd2A =40,         1.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd2A =237*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndA" tall)   by   (up to #DoorWidth2nd2A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd1A)&(#DoorW<=#Doorwidth2nd2A) & (#DoorH>0)&(#DoorH<=#DoorHeight2ndA): #Tempdoorcost = #DoorCost2nd2A ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd1A)&(#DoorW<=#Doorwidth2nd2A) & (#DoorH>0)&(#DoorH<=#DoorHeight2ndA): #Addmoldingtodoor=#Appliedmolding2ndA
+    }
+    Do, (#Doorwidth2ndcount>2):1
+    {
+    DisplaySet, #Doorwidth2nd3A =36.625,          1.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd3A =145*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndA" tall)   by   (up to #DoorWidth2nd3A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd2A)&(#DoorW<=#Doorwidth2nd3A) & (#DoorH>0)&(#DoorH<=#DoorHeight2ndA): #Tempdoorcost = #DoorCost2nd3A ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd2A)&(#DoorW<=#Doorwidth2nd3A) & (#DoorH>0)&(#DoorH<=#DoorHeight2ndA): #Addmoldingtodoor=#Appliedmolding2ndA
+    }
+    Do, (#Doorwidth2ndcount>3):1
+    {
+    DisplaySet, #Doorwidth2nd4A =36,          1.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd4A =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndA" tall)   by   (up to #DoorWidth2nd4A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd3A)&(#DoorW<=#Doorwidth2nd4A) & (#DoorH>0)&(#DoorH<=#DoorHeight2ndA): #Tempdoorcost = #DoorCost2nd4A ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd3A)&(#DoorW<=#Doorwidth2nd4A) & (#DoorH>0)&(#DoorH<=#DoorHeight2ndA): #Addmoldingtodoor=#Appliedmolding2ndA
+    }
+    Do, (#Doorwidth2ndcount>4):1
+    {
+    DisplaySet, #Doorwidth2nd5A =36,          1.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd5A =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndA" tall)   by   (up to #DoorWidth2nd5A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd4A)&(#DoorW<=#Doorwidth2nd5A) & (#DoorH>0)&(#DoorH<=#DoorHeight2ndA): #Tempdoorcost = #DoorCost2nd5A ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd4A)&(#DoorW<=#Doorwidth2nd5A) & (#DoorH>0)&(#DoorH<=#DoorHeight2ndA): #Addmoldingtodoor=#Appliedmolding2ndA
+    }
+  }
+  Do, (#Doorheight2ndcount >1):1
+  {
+   DisplaySet, #Doorheight2ndB =96,Q2...     WHAT IS THE 2nd smallest door Height ? (next tallest), 
+   Displayset, #Appliedmolding2ndB=170, Cost of Applied Molding on #Doorheight2ndB #DoorDrawerTypeName2 Door
+   DisplaySet, #Doorwidth2ndcountB=1,Q2.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS door?  [1;2;3;4;5]
+    Do, (#Doorwidth2ndcountB>0):1
+    {
+    DisplaySet, #Doorwidth2nd1B =42,          2.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd1B =237*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndB" tall)   by   (up to #DoorWidth2nd1B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth2nd1B) & (#DoorH>#DoorHeight2ndA)&(#DoorH<=#DoorHeight2ndB): #Tempdoorcost = #DoorCost2nd1B ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth2nd1B) & (#DoorH>#DoorHeight2ndA)&(#DoorH<=#DoorHeight2ndB): #Addmoldingtodoor=#Appliedmolding2ndB
+    }
+    Do, (#Doorwidth2ndcountB>1):1
+    {
+    DisplaySet, #Doorwidth2nd2B =36.625,          2.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd2B =145*1.25*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndB" tall)   by   (up to #DoorWidth2nd2B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd1B)&(#DoorW<=#Doorwidth2nd2B) & (#DoorH>#DoorHeight2ndA)&(#DoorH<=#DoorHeight2ndB): #Tempdoorcost = #DoorCost2nd2B ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd1B)&(#DoorW<=#Doorwidth2nd2B) & (#DoorH>#DoorHeight2ndA)&(#DoorH<=#DoorHeight2ndB): #Addmoldingtodoor=#Appliedmolding2ndB
+    }
+    Do, (#Doorwidth2ndcountB>2):1
+    {
+    DisplaySet, #Doorwidth2nd3B =41,          2.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd3B =160*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndB" tall)   by   (up to #DoorWidth2nd3B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd2B)&(#DoorW<=#Doorwidth2nd3B) & (#DoorH>#DoorHeight2ndA)&(#DoorH<=#DoorHeight2ndB): #Tempdoorcost = #DoorCost2nd3B ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd2B)&(#DoorW<=#Doorwidth2nd3B) & (#DoorH>#DoorHeight2ndA)&(#DoorH<=#DoorHeight2ndB): #Addmoldingtodoor=#Appliedmolding2ndB
+    }
+    Do, (#Doorwidth2ndcountB>3):1
+    {
+    DisplaySet, #Doorwidth2nd4B =36,          2.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd4B =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndB" tall)   by   (up to #DoorWidth2nd4B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd3B)&(#DoorW<=#Doorwidth2nd4B) & (#DoorH>#DoorHeight2ndA)&(#DoorH<=#DoorHeight2ndB): #Tempdoorcost = #DoorCost2nd4B ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd3B)&(#DoorW<=#Doorwidth2nd4B) & (#DoorH>#DoorHeight2ndA)&(#DoorH<=#DoorHeight2ndB): #Addmoldingtodoor=#Appliedmolding2ndB
+    }
+    Do, (#Doorwidth2ndcountB>4):1
+    {
+    DisplaySet, #Doorwidth2nd5B =36,          2.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd5B =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndB" tall)   by   (up to #DoorWidth2nd5B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd4B)&(#DoorW<=#Doorwidth2nd5B) & (#DoorH>#DoorHeight2ndA)&(#DoorH<=#DoorHeight2ndB): #Tempdoorcost = #DoorCost2nd5B ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd4B)&(#DoorW<=#Doorwidth2nd5B) & (#DoorH>#DoorHeight2ndA)&(#DoorH<=#DoorHeight2ndB): #Addmoldingtodoor=#Appliedmolding2ndB
+    }
+  }
+  Do, (#Doorheight2ndcount >2):1
+  {
+   DisplaySet, #Doorheight2ndC =96,Q3...     WHAT IS THE 3rd  door Height ? (next tallest), 
+   Displayset, #Appliedmolding2ndC=150, Cost of Applied Molding on #Doorheight2ndC #DoorDrawerTypeName2 Door
+   DisplaySet, #Doorwidth2ndcountC=2,Q3.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS door?  [1;2;3;4;5]
+    Do, (#Doorwidth2ndcountC>0):1
+    {
+    DisplaySet, #Doorwidth2nd1C =18.625,          3.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd1C =190*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndC" tall)   by   (up to #DoorWidth2nd1C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth2nd1C) & (#DoorH>#DoorHeight2ndB)&(#DoorH<=#DoorHeight2ndC): #Tempdoorcost = #DoorCost2nd1C ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>0)&(#DoorW<=#Doorwidth2nd1C) & (#DoorH>#DoorHeight2ndB)&(#DoorH<=#DoorHeight2ndC): #Addmoldingtodoor=#Appliedmolding2ndC
+    }
+    Do, (#Doorwidth2ndcountC>1):1
+    {
+    DisplaySet, #Doorwidth2nd2C =24.625,          3.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd2C =190*1.25*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndC" tall)   by   (up to #DoorWidth2nd2C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd1C)&(#DoorW<=#Doorwidth2nd2C) & (#DoorH>#DoorHeight2ndB)&(#DoorH<=#DoorHeight2ndC): #Tempdoorcost = #DoorCost2nd2C ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd1C)&(#DoorW<=#Doorwidth2nd2C) & (#DoorH>#DoorHeight2ndB)&(#DoorH<=#DoorHeight2ndC): #Addmoldingtodoor=#Appliedmolding2ndB
+    }
+    Do, (#Doorwidth2ndcountC>2):1
+    {
+    DisplaySet, #Doorwidth2nd3C =36,          3.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd3C =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndC" tall)   by   (up to #DoorWidth2nd3C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd2C)&(#DoorW<=#Doorwidth2nd3C) & (#DoorH>#DoorHeight2ndB)&(#DoorH<=#DoorHeight2ndC): #Tempdoorcost = #DoorCost2nd3C ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd2C)&(#DoorW<=#Doorwidth2nd3C) & (#DoorH>#DoorHeight2ndB)&(#DoorH<=#DoorHeight2ndC): #Addmoldingtodoor=#Appliedmolding2ndB
+   }
+    Do, (#Doorwidth2ndcountC>3):1
+    {
+    DisplaySet, #Doorwidth2nd4C =36,          3.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd4C =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndC" tall)   by   (up to #DoorWidth2nd4C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd3C)&(#DoorW<=#Doorwidth2nd4C) & (#DoorH>#DoorHeight2ndB)&(#DoorH<=#DoorHeight2ndC): #Tempdoorcost = #DoorCost2nd4C ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd3C)&(#DoorW<=#Doorwidth2nd4C) & (#DoorH>#DoorHeight2ndB)&(#DoorH<=#DoorHeight2ndC): #Addmoldingtodoor=#Appliedmolding2ndB
+    }
+    Do, (#Doorwidth2ndcountC>4):1
+    {
+    DisplaySet, #Doorwidth2nd5C =36,          3.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCost2nd5C =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheight2ndC" tall)   by   (up to #DoorWidth2nd5C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd4C)&(#DoorW<=#Doorwidth2nd5C) & (#DoorH>#DoorHeight2ndB)&(#DoorH<=#DoorHeight2ndC): #Tempdoorcost = #DoorCost2nd5C ,Set the Cost of This Door
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=0)&(#DoorW>#Doorwidth2nd3C)&(#DoorW<=#Doorwidth2nd4C) & (#DoorH>#DoorHeight2ndB)&(#DoorH<=#DoorHeight2ndC): #Addmoldingtodoor=#Appliedmolding2ndB
+    }
+  }
+
+,}
+
+,**
+DisplaySet,#DoorheightFrame2ndcount=2,Q...     HOW MANY DIFFERENT FRAMED Door Heights DO YOU USE?  [1;2;3]
+  Do, (#DoorheightFrame2ndcount >0):1
+  {
+   DisplaySet, #DoorheightFrame2ndA =48,Q1...     WHAT IS THE smallest Framed door Height ? (Shortest), 
+   DisplaySet, #Doorwidthcount2ndframe=1,Q1.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS Framed door?  [1;2;3;4;5]
+    Do, (#Doorwidthcount2ndframe>0):1
+    {
+    DisplaySet, #DoorwidthFrame2nd1A =36.375,         1.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostFrame2nd1A =310*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndA" tall)   by   (up to #DoorWidthframe2nd1A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>0)&(#DoorW<=#DoorwidthFrame2nd1A) & (#DoorH>0)&(#DoorH<=#DoorHeightFrame2ndA): #Tempdoorcost = #DoorCostFrame2nd1A ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframe>1):1
+    {
+    DisplaySet, #Doorwidthframe2nd2A =30,         1.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd2A =265*1.25*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndA" tall)   by   (up to #DoorWidthframe2nd2A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd1A)&(#DoorW<=#DoorwidthFrame2nd2A) & (#DoorH>0)&(#DoorH<=#DoorHeightFrame2ndA): #Tempdoorcost = #DoorCostFrame2nd2A ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframe>2):1
+    {
+    DisplaySet, #Doorwidthframe2nd3A =36.625,          1.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd3A =265*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndA" tall)   by   (up to #DoorWidthframe2nd3A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd2A)&(#DoorW<=#DoorwidthFrame2nd3A) & (#DoorH>0)&(#DoorH<=#DoorHeightFrame2ndA): #Tempdoorcost = #DoorCostFrame2nd3A ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframe>3):1
+    {
+    DisplaySet, #Doorwidthframe2nd4A =36,          1.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd4A =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndA" tall)   by   (up to #DoorWidthframe2nd4A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd3A)&(#DoorW<=#DoorwidthFrame2nd4A) & (#DoorH>0)&(#DoorH<=#DoorHeightFrame2ndA): #Tempdoorcost = #DoorCostFrame2nd4A ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframe>4):1
+    {
+    DisplaySet, #Doorwidthframe2nd5A =36,          1.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd5A =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndA" tall)   by   (up to #DoorWidthframe2nd5A" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd4A)&(#DoorW<=#DoorwidthFrame2nd5A) & (#DoorH>0)&(#DoorH<=#DoorHeightFrame2ndA): #Tempdoorcost = #DoorCostFrame2nd5A ,Set the Cost of This Door
+    }
+  }
+  Do, (#Doorheightframe2ndcount >1):1
+  {
+   DisplaySet, #Doorheightframe2ndB =96,Q2...     WHAT IS THE 2nd smallest Framed door Height ? (next tallest), 
+   DisplaySet, #Doorwidthcount2ndframeB=1,Q2.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS Framed door?  [1;2;3;4;5]
+    Do, (#Doorwidthcount2ndframeB>0):1
+    {
+    DisplaySet, #Doorwidthframe2nd1B =25.375,          2.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd1B =387*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndB" tall)   by   (up to #DoorWidthframe2nd1B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>0)&(#DoorW<=#DoorwidthFrame2nd1B) & (#DoorH>#DoorHeightFrame2ndA)&(#DoorH<=#DoorHeightFrame2ndB): #Tempdoorcost = #DoorCostFrame2nd1B ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframeB>1):1
+    {
+    DisplaySet, #Doorwidthframe2nd2B =24.625,          2.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd2B =290*1.25*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndB" tall)   by   (up to #DoorWidthframe2nd2B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd1B)&(#DoorW<=#DoorwidthFrame2nd2B) & (#DoorH>#DoorHeightFrame2ndA)&(#DoorH<=#DoorHeightFrame2ndB): #Tempdoorcost = #DoorCostFrame2nd2B ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframeB>2):1
+    {
+    DisplaySet, #Doorwidthframe2nd3B =36,          2.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd3B =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndB" tall)   by   (up to #DoorWidthframe2nd3B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd2B)&(#DoorW<=#DoorwidthFrame2nd3B) & (#DoorH>#DoorHeightFrame2ndA)&(#DoorH<=#DoorHeightFrame2ndB): #Tempdoorcost = #DoorCostFrame2nd3B ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframeB>3):1
+    {
+    DisplaySet, #Doorwidthframe2nd4B =36,          2.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd4B =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndB" tall)   by   (up to #DoorWidthframe2nd4B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd3B)&(#DoorW<=#DoorwidthFrame2nd4B) & (#DoorH>#DoorHeightFrame2ndA)&(#DoorH<=#DoorHeightFrame2ndB): #Tempdoorcost = #DoorCostFrame2nd4B ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframeB>4):1
+    {
+    DisplaySet, #Doorwidthframe2nd5B =36,          2.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd5B =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndB" tall)   by   (up to #DoorWidthframe2nd5B" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd4B)&(#DoorW<=#DoorwidthFrame2nd5B) & (#DoorH>#DoorHeightFrame2ndA)&(#DoorH<=#DoorHeightFrame2ndB): #Tempdoorcost = #DoorCostFrame2nd5B ,Set the Cost of This Door
+    }
+  }
+  Do, (#Doorheightframe2ndcount >2):1
+  {
+   DisplaySet, #Doorheightframe2ndC =96,Q3...     WHAT IS THE 3rd Framed door Height ? (next tallest), 
+   DisplaySet, #Doorwidthcount2ndframeC=2,Q3.1...     HOW MANY DIFFERENT Widths DO YOU USE FOR THIS Framed door?  [1;2;3;4;5]
+    Do, (#Doorwidthcount2ndframeC>0):1
+    {
+    DisplaySet, #Doorwidthframe2nd1C =18,          3.1.1 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd1C =160*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndC" tall)   by   (up to #DoorWidthframe2nd1C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>0)&(#DoorW<=#DoorwidthFrame2nd1C) & (#DoorH>#DoorHeightFrame2ndB)&(#DoorH<=#DoorHeightFrame2ndC): #Tempdoorcost = #DoorCostFrame2nd1C ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframeC>1):1
+    {
+    DisplaySet, #Doorwidthframe2nd2C =24,          3.1.2 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd2C =160*1.25*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndC" tall)   by   (up to #DoorWidthframe2nd2C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd1C)&(#DoorW<=#DoorwidthFrame2nd2C) & (#DoorH>#DoorHeightFrame2ndB)&(#DoorH<=#DoorHeightFrame2ndC): #Tempdoorcost = #DoorCostFrame2nd2C ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframeC>2):1
+    {
+    DisplaySet, #Doorwidthframe2nd3C =36,          3.1.3 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd3C =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndC" tall)   by   (up to #DoorWidthframe2nd3C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd2C)&(#DoorW<=#DoorwidthFrame2nd3C) & (#DoorH>#DoorHeightFrame2ndB)&(#DoorH<=#DoorHeightFrame2ndC): #Tempdoorcost = #DoorCostFrame2nd3C ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframeC>3):1
+    {
+    DisplaySet, #Doorwidthframe2nd4C =36,          3.1.4 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd4C =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndC" tall)   by   (up to #DoorWidthframe2nd4C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd3C)&(#DoorW<=#DoorwidthFrame2nd4C) & (#DoorH>#DoorHeightFrame2ndB)&(#DoorH<=#DoorHeightFrame2ndC): #Tempdoorcost = #DoorCostFrame2nd4C ,Set the Cost of This Door
+    }
+    Do, (#Doorwidthcount2ndframeC>4):1
+    {
+    DisplaySet, #Doorwidthframe2nd5C =36,          3.1.5 Door width is Less than or Equal to, 
+    DisplaySet, #DoorCostframe2nd5C =120*1.5*#ContrastMaterialCostGroup,                   Cost of a door (up to #Doorheightframe2ndC" tall)   by   (up to #DoorWidthframe2nd5C" wide), 
+    Set, (#DoorDrawerType = "#DoorDrawerTypeName2")&(#Includeinsert=1)&(#DoorW>#DoorwidthFrame2nd4C)&(#DoorW<=#DoorwidthFrame2nd5C) & (#DoorH>#DoorHeightFrame2ndB)&(#DoorH<=#DoorHeightFrame2ndC): #Tempdoorcost = #DoorCostFrame2nd5C ,Set the Cost of This Door
+    }
+  }
+
+,}
+
+,**
+,Update V7.2.2 start
+Displayset,#basicwhitecolorname=White, What do you name your base white material color?
+,UpdateV7.2.2 end
+Displayset,#2ndcolorFramedDrawerFrontCost=145*#ContrastMaterialCostGroup, Cost of Framed drawer front (add insert)2nd color
+Displayset,#2ndcolorFlatEdgeBandDrawerFront=30*#ContrastMaterialCostGroup, Cost of Flat Edgeband drawer front -(use hashtagContrastMaterialCostGroupe to increase by the 2nd material multiplier)
+Displayset, #DefaultWallBeddoor2ndcost=415*#ContrastMaterialCostGroup,Cost of your Twin wallbed single door 2nd material
+Displayset, #AddmoldingtoDrawer=60, Cost of Applied Moulding on #DoorDrawerTypeName1 or #DoorDrawerTypeName2 Drawer
+
+,**
+Displayset,#Maxdoorwidth=37.5, Maximum door width for wood doors
+Displayset,#Maxdrawerwidth=40, Maximum face width for all drawers
+
+,Update V8.0 start
+Displayset, #Mullioncost=20, For custom doors what do you charge per mullions? Will price based on doors selected from Sq. Panel, Sq. Glass, Arch Panel, Cath Panel in drawing.
+,Update V8.0 end
+
+,***************************************************************************************************************************
+,**Set Up CF 5-Piece Door Pricing Below 
+,***************************************************************************************************************************
+
+DisplaySet,#DoorDrawerTypeName3=B CF 5-Piece #unitmaterialname,         Door Drawer Type 3 Name
+DisplaySet,#DoorDrawerTypeCostFactor3=50, 1.3  #DoorDrawerTypeName3 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName4=B CF 5-Piece 2nd Material #contrastmaterialname,         Door Drawer Type 4 Name
+DisplaySet,#DoorDrawerTypeCostFactor4=50, 1.4   #DoorDrawerTypeName4 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName5=M CF 5-Piece #unitmaterialname,         Door Drawer Type 5 Name
+DisplaySet,#DoorDrawerTypeCostFactor5=50, 1.5  #DoorDrawerTypeName5 Door Drawer Type Cost Factor
+,**
+DisplaySet,#DoorDrawerTypeName6=M CF 5-Piece 2nd Material #contrastmaterialname,         Door Drawer Type 6 Name
+DisplaySet,#DoorDrawerTypeCostFactor6=50, 1.6   #DoorDrawerTypeName6 Door Drawer Type Cost Factor
+
+,***************************************************************************************************************************
+,**For Additional Custom Ordered Doors pricing Please Edit Special Order Doors Price List.csv file in your pricing folder.
+,***************************************************************************************************************************
+
+,           ***** Go back to A-Setup to change the method of pricing Doors *****
+
+,Line below is managed in AA-User file under Door setup
+Set, #PriceDrawerFronts =Yes,                 Price Drawer Fronts like Doors = Yes     OR     Include Drawer Fronts with Drawer Box cost = No  [No;Yes]
+
+
+,Initialize a few variables
+Set, #CostOfDoor = 0
+Set, #DoorTypeFactor=1
+,Update V7.2.9 start
+,set, (#Endpanel=0):#UnitDoorArea=[(#UnitDoorArea+#DoorA)*num]:#UnitDoorArea=[(#UnitDoorArea+(#EndpanelH*#EndpanelW))]
+,set, #UnitDoorArea=[(#UnitDoorArea+#DoorA)*num]
+,set, #UnitDoorNum=[(#UnitDoorNum+1)*num]
+,Update V7.2.9 end
+,Update 7.2.2 start comment out line below
+,Load,GetDoorStyleCost.pcb
+,Load,GetDoorDrawerFinishCost.pcb
+,Load,GetDoorDrawerInsertCost.pcb
+
+,Price Doors by List is not used for Closet Factory
+,DisplaySet,#PriceMethodDoors =Square Foot,         --------   PRICING METHOD FOR DOORS & DRAWER FRONTS - (By Square Foot)-(Fixed Cost) or (From Size Look Up List) [Square Foot;Fixed Cost;List]
+
+set,(#PriceMethodDoors = "List"):#DoorCostMethod =List
+set,(#PriceMethodDoors = "Square Foot"):#DoorCostMethod =Sqft
+set,(#PriceMethodDoors = "Fixed Cost"):#DoorCostMethod =Fixed Cost
+,Update V7.2.9 start
+set,(#PriceMethodDoors = "Basic Plus"):#DoorCostMethod =Sqft
+,Update V7.2.9 end
+
+,**
+
+Load, Door Pricing Method.pcb
+
+
+
+
+,Set the Final Cost of Each Door
+Set, #CostOfDoor =  [#CostOfDoor]       ,Add Handle and Hinge Cost to EACH DOOR
+
+
+
+
+,Blank Lines at the end of the Grid (for Looks Only)
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+,**
+
+
+
+
+
+
+
+
+
+
+
+
+
+

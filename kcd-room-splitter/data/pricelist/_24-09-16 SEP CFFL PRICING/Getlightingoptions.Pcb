@@ -1,0 +1,25 @@
+
+,**== Section 1 ==             ### LED STRIP LIGHTING ###
+,**               
+set, #yeslighting=0
+set,(opt=#OptLEDFpanel):#RouteFullpanel=1:#RouteFullpanel=0,
+set,(opt=#OptLEDHpanel):#RouteHalfpanel=1:#RouteHalfpanel=0, 
+
+set,(opt=#OptLEDTopshelf):#RouteTopshelf=1:#RouteTopshelf=0,
+set,(opt=#OptLEDMidShelf):#RouteMidshelf=1:#RouteMidshelf=0, 
+set,(opt=#OptLEDLowerMidshelf):#RouteLowerMidshelf=1:#RouteLowerMidshelf=0, 
+set,(opt=#OptLEDAdjShelf):#RouteAdjshelf=1:#RouteAdjshelf=0, 
+,set,(opt=#OptLEDBottomkickshelf):#RouteBottomKickshelf=1:#RouteBottomKickshelf=0, 
+set,(opt=#OptLEDUpperBottomShelf):#RouteUpperBottomshelf=1:#RouteUpperBottomshelf=0, 
+
+set,(opt=#OptLEDFpanel):#yeslighting=1
+set,(opt=#OptLEDHpanel):#yeslighting=1
+
+set,(opt=#OptLEDTopshelf):#yeslighting=1
+set,(opt=#OptLEDMidShelf):#yeslighting=1 
+set,(opt=#OptLEDLowerMidshelf):#yeslighting=1
+set,(opt=#OptLEDAdjShelf):#yeslighting=1
+,set,(opt=#OptLEDBottomkickshelf):#yeslighting=1
+set,(opt=#OptLEDUpperBottomShelf):#yeslighting=1
+
+set,(opt=#OptLEDAdjShelf):#makeadjeuro=1:#makeadjeuro=0

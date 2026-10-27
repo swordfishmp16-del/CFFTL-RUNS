@@ -1,0 +1,52 @@
+
+,CF Library - Closet Pieces
+,******** ALL PULLOUTS finger pull *************
+
+Set, #PulloutOpeningWidth = W
+Set, #ShelfWidth = [(W)]     
+Set, #ShelfDepth = [(D)]
+
+Set, #shelfTH=#ShelfThickA
+
+Set, #W = [(#PulloutOpeningWidth/NDiv) -1]
+Set, #H = H
+Set, #D = [D]
+
+
+Set, #H = {#H}
+
+Do, (#traypricemethod="Shelf Cost Plus"):1
+{
+Set, #PulloutOpeningWidth = W
+Set, #ShelfWidth = [(W)]     
+Set, #ShelfDepth = [(D)]
+set, #Tempshelfcount=1
+Set, #shelfTH=#ShelfThickA
+Load, C-Shelf Cost.pcb
+set, #displaycost=#CostofAdjustableShelf
+,Load, Priceadjshelves.pcb
+
+
+,**
+'Price Pullout Box
+
+Set, #W = [(#PulloutOpeningWidth/NDiv) -1]
+Set, #H = H
+Set, #D = [D]
+
+
+Set, #H = {#H}
+
+, #### SET PULLOUT COST BELOW #######
+
+Price, (#Unitfilename<>"*Under*"):1, RM#Roomnum Pullout Tray w/Fingerpull #H"-#unitmaterialname,   (#Costfortray+#fingerpullcost+#Displaycost),   D,   W,   #PulloutPrintOrderNumber,
+Price,(#Unitfilename="*Under*"):1,RM#Roomnum Under Mt Pullout Tray w/Fingerpull #H"-#unitmaterialname,   (#Costfortray+#fingerpullcost+#Displaycost+#undermttraycost),   D,   W,   #PulloutPrintOrderNumber,
+}
+
+Do, (#traypricemethod="Fixed Style Cost"):1
+{
+Price, (#Unitfilename<>"*Under*"):1, RM#Roomnum Pullout Tray w/Fingerpull #H"-#unitmaterialname,   (#fingerpullcost),   D,   W,   #PulloutPrintOrderNumber,
+Price,(#Unitfilename="*Under*"):1,RM#Roomnum Under Mt Pullout Tray w/Fingerpull #H"-#unitmaterialname,   (#fingerpullcost+#undermttraycost),   D,   W,   #PulloutPrintOrderNumber,
+}
+
+

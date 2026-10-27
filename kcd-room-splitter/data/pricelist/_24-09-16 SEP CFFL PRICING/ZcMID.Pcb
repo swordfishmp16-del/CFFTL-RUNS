@@ -1,0 +1,11 @@
+
+
+,*********** All FIXED SHELVES ***********
+Set, #ShelfWidth = [(W)]
+Set, #ShelfDepth = [(D)]
+Load, C-Shelf Cost.Pcb
+Price, 1,     #MiddleShelfName,      #CostOfMiddleShelf,      #ShelfDepth, #ShelfWidth,  #MiddleShelfPrintOrderNumber,       
+
+,*****************************************
+
+

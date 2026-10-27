@@ -1,0 +1,48 @@
+,CF melamine door with applied mirror or molding door
+
+
+Do,(#ThisDoor <> #DoorDR)|((#ThisDoor = #DoorDR)&(#HasHinges=1)):1
+{
+,mirrored doors all sizes matching melamine
+Set,(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor1 , flatCFMirror door 
+,applied molding doors all sizes matching melamine
+Set,(#Codedoor="flatcfmolding")&(#ContrastMaterialName="None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Addmoldingtodoor)*#DoorDrawerTypeCostFactor1 , Applied Molding door 
+
+,mirrored doors all sizes 2nd color melamine
+Set,(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Appliedmirrorcostdoor)*#DoorDrawerTypeCostFactor2 , flatCFMirror door 
+Set,(#Codedoor="flatCFMirror")&(#Tempdoorcost=0):#CostofDoor=0
+,applied molding doors all sizes 2nd color melamine
+Set,(#Codedoor="flatcfmolding")&(#ContrastMaterialName<>"None"):#CostOfDoor=((#TempDoorCost*#edgebanddoorspecialfinishcost)+#Addmoldingtodoor)*#DoorDrawerTypeCostFactor2 , applied molding door 
+Set,(#Codedoor="flatcfmolding")&(#Tempdoorcost=0):#CostofDoor=0
+
+Price,(#CostOfDoor>0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):1 ,RM#Roomnum Door-#CodeDoor-#UnitMaterialName#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#Codedoor="flatcfmolding*")&(#ContrastMaterialName="None"):1 ,RM#Roomnum Door-#CodeDoor-#UnitMaterialName#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+
+Price,(#CostOfDoor>0)&(#Codedoor="flatcfmolding*")&(#ContrastMaterialName<>"None"): 1 ,RM#Roomnum Door-#CodeDoor-#ContrastMaterialName#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+Price,(#CostOfDoor>0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"): 1 ,RM#Roomnum Door-#CodeDoor-#ContrastMaterialName#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+}
+
+,Drawers
+
+Do,((#ThisDoor = #DoorDR)&(#HasHinges=0)):1
+{
+Set,(#DoorW>#Maxdrawerwidth): #Costofdoor=0, invalid size
+
+,Drawer face with mirror or molding. Same color.
+Set,(#DoorW<=#Maxdrawerwidth)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):#CostOfDoor=(#Appliedmirrorcostdwr)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+Set,(#DoorW<=#Maxdrawerwidth)&(#Codedoor="flatcfmolding*")&(#ContrastMaterialName="None"):#CostOfDoor=(#Addmoldingtodrawer)*#DoorDrawerTypeCostFactor1 , Small flatCFMirror door 
+
+,Drawer face with mirror or molding. 2nd color color.
+Set,(#DoorW<=#Maxdrawerwidth)&(#Codedoor="flatcfmolding*")&(#ContrastMaterialName<>"None"):#CostOfDoor=(#2ndcolorFlatEdgeBandDrawerFront+#Addmoldingtodrawer)*#DoorDrawerTypeCostFactor2 , Small flatCFMirror door 2nd color
+Set,(#DoorW<=#Maxdrawerwidth)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"):#CostOfDoor=((#2ndcolorFlatEdgeBandDrawerFront)+#Appliedmirrorcostdwr)*#DoorDrawerTypeCostFactor2 , Small flatCFMirror door 2nd color
+
+Price,(#CostOfDoor>0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName="None"):1 ,RM#Roomnum DrFrt-#CodeDoor-#UnitMaterialName#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+Price,(#CostOfDoor>0)&(#Codedoor="flatcfmolding*")&(#ContrastMaterialName="None"):1 ,RM#Roomnum DrFrt-#CodeDoor-#UnitMaterialName#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+
+Price,(#CostOfDoor>0)&(#Codedoor="flatcfmolding*")&(#ContrastMaterialName<>"None"): 1 ,RM#Roomnum DrFrt-#CodeDoor-#ContrastMaterialName#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+Price,(#CostOfDoor>0)&(#Codedoor="flatCFMirror")&(#ContrastMaterialName<>"None"): 1 ,RM#Roomnum DrFrt-#CodeDoor-#ContrastMaterialName#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+}
+
+
+

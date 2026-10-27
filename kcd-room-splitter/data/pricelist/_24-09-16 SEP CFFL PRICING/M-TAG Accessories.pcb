@@ -1,0 +1,193 @@
+,
+,Use Grid
+
+set, #stopmtag=0
+,**
+,**
+,** SET COSTS FOR TAG ACCESSORIES
+,** 
+,**
+,**ENGAGE  
+,** COSTS FOR PULLOUT SHELF 
+
+DisplaySet,#ESShelf18 =260,1.0  Cost for 18" Pull-out Shelf no Dividers or Folding Station
+DisplaySet,#ESShelf24 =280,2.0  Cost for 24" Pull-out Shelf no Dividers or Folding Station
+DisplaySet,#ESShelf30 =305,3.0  Cost for 30" Pull-out Shelf no Dividers or Folding Station
+DisplaySet,#ESShelf36 =325,4.0  Cost for 36" Pull-out Shelf no Dividers or Folding Station
+
+,** COSTS FOR PULLOUT FOLDING STATION
+
+DisplaySet,#ESFold18 =260+#CostOfAdjustableShelf,1.1  Cost for 18" Pull-out Shelf no Dividers or Folding Station
+DisplaySet,#ESFold24 =280+#CostOfAdjustableShelf,2.1  Cost for 24" Pull-out Shelf no Dividers or Folding Station
+DisplaySet,#ESFold30 =305+#CostOfAdjustableShelf,3.1  Cost for 30" Pull-out Shelf no Dividers or Folding Station
+DisplaySet,#ESFold36 =325+#CostOfAdjustableShelf,4.1  Cost for 36" Pull-out Shelf no Dividers or Folding Station
+
+,** COSTS FOR PULLOUT SHELF AND 2 DIVIDERS
+DisplaySet,#ESShelfDiv18 =260+66,1.2  Cost for 18" Pull-out Shelf with 2 dividers
+DisplaySet,#ESShelfDiv24 =280+66,2.2  Cost for 24" Pull-out Shelf with 2 dividers
+DisplaySet,#ESShelfDiv30 =305+66,3.2  Cost for 30" Pull-out Shelf with 2 dividers
+DisplaySet,#ESShelfDiv36 =325+66,4.2  Cost for 36" Pull-out Shelf with 2 dividers
+
+,** COSTS FOR PULLOUT SHELF AND JEWLERY ORGANIZER 
+DisplaySet,#ESJewelry18 =260+95,5.0  Cost for 18" Pull-out Shelf with Jewelry Organizer
+DisplaySet,#ESJewelry24 =280+125,6.0  Cost for 24" Pull-out Shelf with Jewelry Organizer
+DisplaySet,#ESJewelry30 =305+155,7.0  Cost for 30" Pull-out Shelf with Jewelry Organizer
+DisplaySet,#ESJewelry36 =325+185,8.0  Cost for 36" Pull-out Shelf with Jewelry Organizer
+
+,** COSTS FOR DIVIDED LINGERIE DRAWER
+DisplaySet,#ESDivLinDrw18 =325,9.0  Cost for 18" Divided Lingerie Drawer (2 dividers)
+DisplaySet,#ESDivLinDrw24 =355,10.0  Cost for 24" Divided Lingerie Drawer (3 dividers)
+DisplaySet,#ESDivLinDrw30 =390,11.0  Cost for 30" Divided Lingerie Drawer (4 dividers)
+DisplaySet,#ESDivLinDrw36 =425,12.0  Cost for 36" Divided Lingerie Drawer (5 dividers)
+
+,** COSTS FOR DIVIDED DEEP DRAWER
+DisplaySet,#ESDivDpDrw18 =315,9.0  Cost for 18" Divided Deep Drawer (1 dividers)
+DisplaySet,#ESDivDpDrw24 =365,10.0  Cost for 24" Divided Deep Drawer (2 dividers)
+DisplaySet,#ESDivDpDrw30 =390,11.0  Cost for 30" Divided Deep Drawer (2 dividers)
+DisplaySet,#ESDivDpDrw36 =415,12.0  Cost for 36" Divided Deep Drawer (2 dividers)
+
+,** COSTS FOR PULL-OUT SHOE ORGANIZER
+DisplaySet,#ESShoe18 =345,13.0  Cost for 18" Pull-out Shoe Organizer (6 pairs)
+DisplaySet,#ESShoe24 =385,14.0  Cost for 24" Pull-out Shoe Organizer (9 pairs)
+DisplaySet,#ESShoe30 =425,15.0  Cost for 30" Pull-out Shoe Organizer (12 pairs)
+DisplaySet,#ESShoe36 =470,16.0  Cost for 36" Pull-out Shoe Organizer (15 pairs)
+
+,** COSTS FOR STORAGE BOX
+DisplaySet,#EStorBox15 =85,17.0  Cost for 15" Storage Box
+DisplaySet,#EStorBox18 =105,18.0  Cost for 18" Storage Box
+DisplaySet,#EStorBox24 =125,19.0  Cost for 24" Storage Box
+
+,** COSTS FOR SWIVEL AND FIXED TAG MIRROR
+Displayset,#CostofSwivelmirror35=475, 20.0 Cost of Full Rotation 35" Mirror
+Displayset,#CostofSwivelmirror47=500, 21.0 Cost of Full Rotation 47" Mirror
+Displayset,#CostofFixedmirror35=200, 22.0 Cost of 35"Fixed Mirror
+Displayset,#CostofFixedmirror47=245, 23.0 Cost of 47"Fixed Mirror
+
+,** COSTS FOR SHELF FENCES (Not for Shoe Fences - See AA_USER)
+DisplaySet,#TagShelffence12 =35,13.0  Cost for 12" Shelf Fence 
+DisplaySet,#TagShelffence18 =35,13.0  Cost for 18" Shelf Fence 
+DisplaySet,#TagShelffence24 =35,14.0  Cost for 24" Shelf Fence 
+DisplaySet,#TagShelffence30 =35,15.0  Cost for 30" Shelf Fence 
+DisplaySet,#TagShelffence36 =35,16.0  Cost for 36" Shelf Fence 
+
+
+
+Do, (#Name = "*shelf no*"):1
+{
+Set,(w<=18):#CostOfTAG = #ESshelf18
+Set,(w>18)&(w<=24):#CostOfTAG = #ESshelf24  
+Set,(w>24)&(w<=30):#CostOfTAG = #ESshelf30 
+Set,(w>30)&(w<=36):#CostOfTAG = #ESshelf36
+
+Set, W={W}
+Price, 1, RM#Roomnum #Name #Code,(#CostofTAG)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*folding*"):1
+{
+set, #shelfwidth=w-3.1875
+set, #shelfdepth=12.0625
+set, #shelfTH=.75
+set, #tempshelfcount = 1
+Load, C-Shelf Cost.Pcb
+Set,(w<=18):#CostOfTAG = #ESfold18
+Set,(w>18)&(w<=24):#CostOfTAG = #ESfold24  
+Set,(w>24)&(w<=30):#CostOfTAG = #ESfold30 
+Set,(w>30)&(w<=36):#CostOfTAG = #ESfold36
+
+Set, W={W}
+Price, 1, RM#Roomnum #Name #Code,(#CostofTAG)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*shelf and dividers*"):1
+{
+Set,(w<=18):#CostOfTAG = #ESShelfDiv18
+Set,(w>18)&(w<=24):#CostOfTAG = #ESShelfDiv24  
+Set,(w>24)&(w<=30):#CostOfTAG = #ESShelfDiv30 
+Set,(w>30)&(w<=36):#CostOfTAG = #ESShelfDiv36
+
+Set, W={W}
+Price, 1, RM#Roomnum #Name #Code,(#CostofTAG)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*jewelry*"):1
+{
+Set,(w<=18):#CostOfTAG = #ESjewelry18
+Set,(w>18)&(w<=24):#CostOfTAG = #ESjewelry24  
+Set,(w>24)&(w<=30):#CostOfTAG = #ESjewelry30 
+Set,(w>30)&(w<=36):#CostOfTAG = #ESjewelry36
+
+Set, W={W}
+Price, 1, RM#Roomnum #Name #Code,(#CostofTAG)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*lingerie*"):1
+{
+Set,(w<=18):#CostOfTAG = #ESDivLinDrw18
+Set,(w>18)&(w<=24):#CostOfTAG = #ESDivLinDrw24 
+Set,(w>24)&(w<=30):#CostOfTAG = #ESDivLinDrw30 
+Set,(w>30)&(w<=36):#CostOfTAG = #ESDivLinDrw36
+
+Set, W={W}
+Price, 1, RM#Roomnum #Name #Code,(#CostofTAG)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Deep*"):1
+{
+Set,(w<=18):#CostOfTAG = #ESDivDpDrw18
+Set,(w>18)&(w<=24):#CostOfTAG = #ESDivDpDrw24 
+Set,(w>24)&(w<=30):#CostOfTAG = #ESDivDpDrw30 
+Set,(w>30)&(w<=36):#CostOfTAG = #ESDivDpDrw36
+
+Set, W={W}
+Price, 1, RM#Roomnum #Name #Code,(#CostofTAG)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Shoe Organizer*"):1
+{
+Set,(w<=18):#CostOfTAG = #ESShoe18
+Set,(w>18)&(w<=24):#CostOfTAG = #ESShoe24 
+Set,(w>24)&(w<=30):#CostOfTAG = #ESShoe30 
+Set,(w>30)&(w<=36):#CostOfTAG = #ESShoe36
+
+Set, W={W}
+Price, 1, RM#Roomnum #Name #Code,(#CostofTAG)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Box*"):1
+{
+Set,(w<=15):#CostOfTAG = #EStorBox15
+Set,(w>15)&(w<=18):#CostOfTAG = #EStorBox18
+Set,(w>18)&(w<=24):#CostOfTAG = #EStorBox24 
+
+Set, W={W}
+Price, 1, RM#Roomnum #Name #Code,(#CostofTAG)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Shoe Fence*"):1
+{
+load, TAG-USES SET UNIT INFO.pcb
+end
+}
+
+Do, (#Name = "*Shelf Fence*"):1
+{
+Set,(w<=12):#CostOfTAG = #TagShelffence12
+Set,(w>12)&(w<=18):#CostOfTAG = #TagShelffence18 
+Set,(w>18)&(w<=24):#CostOfTAG = #TagShelffence24
+Set,(w>24)&(w<=30):#CostOfTAG = #TagShelffence30 
+Set,(w>30)&(w<=36):#CostOfTAG = #TagShelffence36
+
+Set, W={W}
+Price, 1, RM#Roomnum #Name #Code,(#CostofTAG)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+
+
+Do, (#Name = "*Full Rotation*"):1
+{
+Set,(h<47):#CostOfTAG = #CostofSwivelmirror35:#CostOfTAG = #CostofSwivelmirror47
+Price, 1, RM#Roomnum #Name #Code,(#CostofTAG)*#universalupcharge, , ,#ClosetPolePrintOrderNumber,
+end 
+}
+Do, (#Name = "*Fixed Mirror*"):1
+{
+Set,(h<47):#CostOfTAG = #CostofFixedmirror35:#CostOfTAG = #CostofFixedmirror47
+Price, 1, RM#Roomnum #Name #Code,(#CostofTAG)*#universalupcharge, , ,#ClosetPolePrintOrderNumber,
+end 
+}
+,**
+,**
+
+set, #stopmtag=1

@@ -1,0 +1,631 @@
+,KCDw System File. Do NOT Change in any way.
+,set,#moldremainder=0
+,set, #measurescale=-
+,set,(#incm="-inch")&(#moldingscale="inch"):#measurescale=-in
+,set,(#incm="-inch")&(#moldingscale="foot"):#measurescale=-ft
+,set,(#incm="-inch")&(#moldingscale="8 foot"):#measurescale=-8 ft Segments
+,set,(#incm="-Mm")&(#moldingscale="metric"):#measurescale=-Millimeter
+,set,(#incm="-Cm")&(#moldingscale="metric"):#measurescale=-Centimeter
+
+
+, BASE MOULDING LENGTHS FOR REPORT
+     Do,(#Rm1BaseLengthtotal>0):1
+     {
+
+
+     Set,(#moldingscale="inch"):#Room1BaseMoldLength=[#Rm1BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room1BaseMoldLength=[#Rm1BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm1BaseLengthtotal/12)-(#Rm1BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room1BaseMoldLength = [#Room1BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room1BaseMoldLength=[#Rm1BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm1BaseLengthtotal/96)-(#Rm1BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room1BaseMoldLength = [#Room1BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room1BaseMoldLength=[#Rm1BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm1basecost=[#Room1BaseMoldLength*#Room1basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm1BaseQty=[#Room1BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm1basecost=[#Rm1BaseQty*#Room1basecostgroup]
+
+     Set, #Rm1basecost=[#Rm1basecost*#universalupcharge]
+     }
+     Do,(#Rm1GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm1GarageWoodBaselengthtotal<=96):#Rm1WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm1GarageWoodBaselengthtotal>96)&(#Rm1GarageWoodBaselengthtotal<=144)):#Rm1WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm1GarageWoodBaselengthtotal>144):#Rm1WGbasecost=#woodgaragebaselargecost
+     Set, #Rm1WGbasecost=[#Rm1WGbasecost*#universalupcharge]
+     }
+
+  Do,(#Rm2BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room2BaseMoldLength=[#Rm2BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room2BaseMoldLength=[#Rm2BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm2BaseLengthtotal/12)-(#Rm2BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room2BaseMoldLength = [#Room2BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room2BaseMoldLength=[#Rm2BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm2BaseLengthtotal/96)-(#Rm2BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room2BaseMoldLength = [#Room2BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room2BaseMoldLength=[#Rm2BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm2basecost=[#Room2BaseMoldLength*#Room2basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm2BaseQty=[#Room2BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm2basecost=[#Rm2BaseQty*#Room2basecostgroup]
+
+     Set, #Rm2basecost=[#Rm2basecost*#universalupcharge]
+     }
+     Do,(#Rm2GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm2GarageWoodBaselengthtotal<=96):#Rm2WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm2GarageWoodBaselengthtotal>96)&(#Rm2GarageWoodBaselengthtotal<=144)):#Rm2WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm2GarageWoodBaselengthtotal>144):#Rm2WGbasecost=#woodgaragebaselargecost
+     Set, #Rm2WGbasecost=[#Rm2WGbasecost*#universalupcharge]
+     }
+
+  Do,(#Rm3BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room3BaseMoldLength=[#Rm3BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room3BaseMoldLength=[#Rm3BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm3BaseLengthtotal/12)-(#Rm3BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room3BaseMoldLength = [#Room3BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room3BaseMoldLength=[#Rm3BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm3BaseLengthtotal/96)-(#Rm3BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room3BaseMoldLength = [#Room3BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room3BaseMoldLength=[#Rm3BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm3basecost=[#Room3BaseMoldLength*#Room3basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm3BaseQty=[#Room3BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm3basecost=[#Rm3BaseQty*#Room3basecostgroup]
+
+     Set, #Rm3basecost=[#Rm3basecost*#universalupcharge]
+     }
+     Do,(#Rm3GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm3GarageWoodBaselengthtotal<=96):#Rm3WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm3GarageWoodBaselengthtotal>96)&(#Rm3GarageWoodBaselengthtotal<=144)):#Rm3WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm3GarageWoodBaselengthtotal>144):#Rm3WGbasecost=#woodgaragebaselargecost
+     Set, #Rm3WGbasecost=[#Rm3WGbasecost*#universalupcharge]
+     }
+
+     Do,(#Rm4BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room4BaseMoldLength=[#Rm4BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room4BaseMoldLength=[#Rm4BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm4BaseLengthtotal/12)-(#Rm4BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room4BaseMoldLength = [#Room4BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room4BaseMoldLength=[#Rm4BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm4BaseLengthtotal/96)-(#Rm4BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room4BaseMoldLength = [#Room4BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room4BaseMoldLength=[#Rm4BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm4basecost=[#Room4BaseMoldLength*#Room4basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm4BaseQty=[#Room4BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm4basecost=[#Rm4BaseQty*#Room4basecostgroup]
+
+     Set, #Rm4basecost=[#Rm4basecost*#universalupcharge]
+     }
+     Do,(#Rm4GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm4GarageWoodBaselengthtotal<=96):#Rm4WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm4GarageWoodBaselengthtotal>96)&(#Rm4GarageWoodBaselengthtotal<=144)):#Rm4WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm4GarageWoodBaselengthtotal>144):#Rm4WGbasecost=#woodgaragebaselargecost
+     Set, #Rm4WGbasecost=[#Rm4WGbasecost*#universalupcharge]
+     }
+
+
+   Do,(#Rm5BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room5BaseMoldLength=[#Rm5BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room5BaseMoldLength=[#Rm5BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm5BaseLengthtotal/12)-(#Rm5BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room5BaseMoldLength = [#Room5BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room5BaseMoldLength=[#Rm5BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm5BaseLengthtotal/96)-(#Rm5BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room5BaseMoldLength = [#Room5BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room5BaseMoldLength=[#Rm5BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm5basecost=[#Room5BaseMoldLength*#Room5basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm5BaseQty=[#Room5BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm5basecost=[#Rm5BaseQty*#Room5basecostgroup]
+
+     Set, #Rm5basecost=[#Rm5basecost*#universalupcharge]
+     }
+     Do,(#Rm5GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm5GarageWoodBaselengthtotal<=96):#Rm5WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm5GarageWoodBaselengthtotal>96)&(#Rm5GarageWoodBaselengthtotal<=144)):#Rm5WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm5GarageWoodBaselengthtotal>144):#Rm5WGbasecost=#woodgaragebaselargecost
+     Set, #Rm5WGbasecost=[#Rm5WGbasecost*#universalupcharge]
+     }
+
+
+   Do,(#Rm6BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room6BaseMoldLength=[#Rm6BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room6BaseMoldLength=[#Rm6BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm6BaseLengthtotal/12)-(#Rm6BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room6BaseMoldLength = [#Room6BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room6BaseMoldLength=[#Rm6BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm6BaseLengthtotal/96)-(#Rm6BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room6BaseMoldLength = [#Room6BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room6BaseMoldLength=[#Rm6BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm6basecost=[#Room6BaseMoldLength*#Room6basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm6BaseQty=[#Room6BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm6basecost=[#Rm6BaseQty*#Room6basecostgroup]
+
+     Set, #Rm6basecost=[#Rm6basecost*#universalupcharge]
+     }
+     Do,(#Rm6GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm6GarageWoodBaselengthtotal<=96):#Rm6WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm6GarageWoodBaselengthtotal>96)&(#Rm6GarageWoodBaselengthtotal<=144)):#Rm6WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm6GarageWoodBaselengthtotal>144):#Rm6WGbasecost=#woodgaragebaselargecost
+     Set, #Rm6WGbasecost=[#Rm6WGbasecost*#universalupcharge]
+     }
+
+
+     Do,(#Rm7BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room7BaseMoldLength=[#Rm7BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room7BaseMoldLength=[#Rm7BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm7BaseLengthtotal/12)-(#Rm7BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room7BaseMoldLength = [#Room7BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room7BaseMoldLength=[#Rm7BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm7BaseLengthtotal/96)-(#Rm7BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room7BaseMoldLength = [#Room7BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room7BaseMoldLength=[#Rm7BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm7basecost=[#Room7BaseMoldLength*#Room7basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm7BaseQty=[#Room7BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm7basecost=[#Rm7BaseQty*#Room7basecostgroup]
+
+     Set, #Rm7basecost=[#Rm7basecost*#universalupcharge]
+     }
+     Do,(#Rm7GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm7GarageWoodBaselengthtotal<=96):#Rm7WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm7GarageWoodBaselengthtotal>96)&(#Rm7GarageWoodBaselengthtotal<=144)):#Rm7WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm7GarageWoodBaselengthtotal>144):#Rm7WGbasecost=#woodgaragebaselargecost
+     Set, #Rm7WGbasecost=[#Rm7WGbasecost*#universalupcharge]
+     }
+
+
+     Do,(#Rm8BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room8BaseMoldLength=[#Rm8BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room8BaseMoldLength=[#Rm8BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm8BaseLengthtotal/12)-(#Rm8BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room8BaseMoldLength = [#Room8BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room8BaseMoldLength=[#Rm8BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm8BaseLengthtotal/96)-(#Rm8BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room8BaseMoldLength = [#Room8BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room8BaseMoldLength=[#Rm8BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm8basecost=[#Room8BaseMoldLength*#Room8basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm8BaseQty=[#Room8BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm8basecost=[#Rm8BaseQty*#Room8basecostgroup]
+
+     Set, #Rm8basecost=[#Rm8basecost*#universalupcharge]
+     }
+     Do,(#Rm8GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm8GarageWoodBaselengthtotal<=96):#Rm8WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm8GarageWoodBaselengthtotal>96)&(#Rm8GarageWoodBaselengthtotal<=144)):#Rm8WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm8GarageWoodBaselengthtotal>144):#Rm8WGbasecost=#woodgaragebaselargecost
+     Set, #Rm8WGbasecost=[#Rm8WGbasecost*#universalupcharge]
+     }
+
+
+     Do,(#Rm9BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room9BaseMoldLength=[#Rm9BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room9BaseMoldLength=[#Rm9BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm9BaseLengthtotal/12)-(#Rm9BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room9BaseMoldLength = [#Room9BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room9BaseMoldLength=[#Rm9BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm9BaseLengthtotal/96)-(#Rm9BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room9BaseMoldLength = [#Room9BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room9BaseMoldLength=[#Rm9BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm9basecost=[#Room9BaseMoldLength*#Room9basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm9BaseQty=[#Room9BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm9basecost=[#Rm9BaseQty*#Room9basecostgroup]
+
+     Set, #Rm9basecost=[#Rm9basecost*#universalupcharge]
+     }
+     Do,(#Rm9GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm9GarageWoodBaselengthtotal<=96):#Rm9WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm9GarageWoodBaselengthtotal>96)&(#Rm9GarageWoodBaselengthtotal<=144)):#Rm9WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm9GarageWoodBaselengthtotal>144):#Rm9WGbasecost=#woodgaragebaselargecost
+     Set, #Rm9WGbasecost=[#Rm9WGbasecost*#universalupcharge]
+     }
+
+
+
+     Do,(#Rm10BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room10BaseMoldLength=[#Rm10BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room10BaseMoldLength=[#Rm10BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm10BaseLengthtotal/12)-(#Rm10BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room10BaseMoldLength = [#Room10BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room10BaseMoldLength=[#Rm10BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm10BaseLengthtotal/96)-(#Rm10BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room10BaseMoldLength = [#Room10BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room10BaseMoldLength=[#Rm10BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm10basecost=[#Room10BaseMoldLength*#Room10basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm10BaseQty=[#Room10BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm10basecost=[#Rm10BaseQty*#Room10basecostgroup]
+
+     Set, #Rm10basecost=[#Rm10basecost*#universalupcharge]
+     }
+     Do,(#Rm10GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm10GarageWoodBaselengthtotal<=96):#Rm10WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm10GarageWoodBaselengthtotal>96)&(#Rm10GarageWoodBaselengthtotal<=144)):#Rm10WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm10GarageWoodBaselengthtotal>144):#Rm10WGbasecost=#woodgaragebaselargecost
+     Set, #Rm10WGbasecost=[#Rm10WGbasecost*#universalupcharge]
+     }
+
+     Do,(#Rm11BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room11BaseMoldLength=[#Rm11BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room11BaseMoldLength=[#Rm11BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm11BaseLengthtotal/12)-(#Rm11BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room11BaseMoldLength = [#Room11BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room11BaseMoldLength=[#Rm11BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm11BaseLengthtotal/96)-(#Rm11BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room11BaseMoldLength = [#Room11BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room11BaseMoldLength=[#Rm11BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm11basecost=[#Room11BaseMoldLength*#Room11basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm11BaseQty=[#Room11BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm11basecost=[#Rm11BaseQty*#Room11basecostgroup]
+
+     Set, #Rm11basecost=[#Rm11basecost*#universalupcharge]
+     }
+     Do,(#Rm11GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm11GarageWoodBaselengthtotal<=96):#Rm11WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm11GarageWoodBaselengthtotal>96)&(#Rm11GarageWoodBaselengthtotal<=144)):#Rm11WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm11GarageWoodBaselengthtotal>144):#Rm11WGbasecost=#woodgaragebaselargecost
+     Set, #Rm11WGbasecost=[#Rm11WGbasecost*#universalupcharge]
+     }
+
+     Do,(#Rm12BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room12BaseMoldLength=[#Rm12BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room12BaseMoldLength=[#Rm12BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm12BaseLengthtotal/12)-(#Rm12BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room12BaseMoldLength = [#Room12BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room12BaseMoldLength=[#Rm12BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm12BaseLengthtotal/96)-(#Rm12BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room12BaseMoldLength = [#Room12BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room12BaseMoldLength=[#Rm12BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm12basecost=[#Room12BaseMoldLength*#Room12basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm12BaseQty=[#Room12BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm12basecost=[#Rm12BaseQty*#Room12basecostgroup]
+
+     Set, #Rm12basecost=[#Rm12basecost*#universalupcharge]
+     }
+     Do,(#Rm12GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm12GarageWoodBaselengthtotal<=96):#Rm12WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm12GarageWoodBaselengthtotal>96)&(#Rm12GarageWoodBaselengthtotal<=144)):#Rm12WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm12GarageWoodBaselengthtotal>144):#Rm12WGbasecost=#woodgaragebaselargecost
+     Set, #Rm12WGbasecost=[#Rm12WGbasecost*#universalupcharge]
+     }
+
+     Do,(#Rm13BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room13BaseMoldLength=[#Rm13BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room13BaseMoldLength=[#Rm13BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm13BaseLengthtotal/12)-(#Rm13BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room13BaseMoldLength = [#Room13BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room13BaseMoldLength=[#Rm13BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm13BaseLengthtotal/96)-(#Rm13BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room13BaseMoldLength = [#Room13BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room13BaseMoldLength=[#Rm13BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm13basecost=[#Room13BaseMoldLength*#Room13basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm13BaseQty=[#Room13BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm13basecost=[#Rm13BaseQty*#Room13basecostgroup]
+
+     Set, #Rm13basecost=[#Rm13basecost*#universalupcharge]
+     }
+     Do,(#Rm13GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm13GarageWoodBaselengthtotal<=96):#Rm13WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm13GarageWoodBaselengthtotal>96)&(#Rm13GarageWoodBaselengthtotal<=144)):#Rm13WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm13GarageWoodBaselengthtotal>144):#Rm13WGbasecost=#woodgaragebaselargecost
+     Set, #Rm13WGbasecost=[#Rm13WGbasecost*#universalupcharge]
+     }
+
+     Do,(#Rm14BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room14BaseMoldLength=[#Rm14BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room14BaseMoldLength=[#Rm14BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm14BaseLengthtotal/12)-(#Rm14BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room14BaseMoldLength = [#Room14BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room14BaseMoldLength=[#Rm14BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm14BaseLengthtotal/96)-(#Rm14BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room14BaseMoldLength = [#Room14BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room14BaseMoldLength=[#Rm14BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm14basecost=[#Room14BaseMoldLength*#Room14basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm14BaseQty=[#Room14BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm14basecost=[#Rm14BaseQty*#Room14basecostgroup]
+
+     Set, #Rm14basecost=[#Rm14basecost*#universalupcharge]
+     }
+     Do,(#Rm14GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm14GarageWoodBaselengthtotal<=96):#Rm14WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm14GarageWoodBaselengthtotal>96)&(#Rm14GarageWoodBaselengthtotal<=144)):#Rm14WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm14GarageWoodBaselengthtotal>144):#Rm14WGbasecost=#woodgaragebaselargecost
+     Set, #Rm14WGbasecost=[#Rm14WGbasecost*#universalupcharge]
+     }
+
+
+     Do,(#Rm15BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room15BaseMoldLength=[#Rm15BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room15BaseMoldLength=[#Rm15BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm15BaseLengthtotal/12)-(#Rm15BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room15BaseMoldLength = [#Room15BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room15BaseMoldLength=[#Rm15BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm15BaseLengthtotal/96)-(#Rm15BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room15BaseMoldLength = [#Room15BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room15BaseMoldLength=[#Rm15BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm15basecost=[#Room15BaseMoldLength*#Room15basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm15BaseQty=[#Room15BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm15basecost=[#Rm15BaseQty*#Room15basecostgroup]
+
+     Set, #Rm15basecost=[#Rm15basecost*#universalupcharge]
+     }
+     Do,(#Rm15GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm15GarageWoodBaselengthtotal<=96):#Rm15WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm15GarageWoodBaselengthtotal>96)&(#Rm15GarageWoodBaselengthtotal<=144)):#Rm15WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm15GarageWoodBaselengthtotal>144):#Rm15WGbasecost=#woodgaragebaselargecost
+     Set, #Rm15WGbasecost=[#Rm15WGbasecost*#universalupcharge]
+     }
+
+     Do,(#Rm16BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room16BaseMoldLength=[#Rm16BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room16BaseMoldLength=[#Rm16BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm16BaseLengthtotal/12)-(#Rm16BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room16BaseMoldLength = [#Room16BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room16BaseMoldLength=[#Rm16BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm16BaseLengthtotal/96)-(#Rm16BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room16BaseMoldLength = [#Room16BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room16BaseMoldLength=[#Rm16BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm16basecost=[#Room16BaseMoldLength*#Room16basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm16BaseQty=[#Room16BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm16basecost=[#Rm16BaseQty*#Room16basecostgroup]
+
+     Set, #Rm16basecost=[#Rm16basecost*#universalupcharge]
+     }
+     Do,(#Rm16GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm16GarageWoodBaselengthtotal<=96):#Rm16WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm16GarageWoodBaselengthtotal>96)&(#Rm16GarageWoodBaselengthtotal<=144)):#Rm16WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm16GarageWoodBaselengthtotal>144):#Rm16WGbasecost=#woodgaragebaselargecost
+     Set, #Rm16WGbasecost=[#Rm16WGbasecost*#universalupcharge]
+     }
+
+
+     Do,(#Rm17BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room17BaseMoldLength=[#Rm17BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room17BaseMoldLength=[#Rm17BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm17BaseLengthtotal/12)-(#Rm17BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room17BaseMoldLength = [#Room17BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room17BaseMoldLength=[#Rm17BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm17BaseLengthtotal/96)-(#Rm17BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room17BaseMoldLength = [#Room17BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room17BaseMoldLength=[#Rm17BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm17basecost=[#Room17BaseMoldLength*#Room17basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm17BaseQty=[#Room17BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm17basecost=[#Rm17BaseQty*#Room17basecostgroup]
+
+     Set, #Rm17basecost=[#Rm17basecost*#universalupcharge]
+     }
+     Do,(#Rm17GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm17GarageWoodBaselengthtotal<=96):#Rm17WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm17GarageWoodBaselengthtotal>96)&(#Rm17GarageWoodBaselengthtotal<=144)):#Rm17WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm17GarageWoodBaselengthtotal>144):#Rm17WGbasecost=#woodgaragebaselargecost
+     Set, #Rm17WGbasecost=[#Rm17WGbasecost*#universalupcharge]
+     }
+
+
+
+     Do,(#Rm18BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room18BaseMoldLength=[#Rm18BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room18BaseMoldLength=[#Rm18BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm18BaseLengthtotal/12)-(#Rm18BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room18BaseMoldLength = [#Room18BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room18BaseMoldLength=[#Rm18BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm18BaseLengthtotal/96)-(#Rm18BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room18BaseMoldLength = [#Room18BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room18BaseMoldLength=[#Rm18BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm18basecost=[#Room18BaseMoldLength*#Room18basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm18BaseQty=[#Room18BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm18basecost=[#Rm18BaseQty*#Room18basecostgroup]
+
+     Set, #Rm18basecost=[#Rm18basecost*#universalupcharge]
+     }
+     Do,(#Rm18GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm18GarageWoodBaselengthtotal<=96):#Rm18WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm18GarageWoodBaselengthtotal>96)&(#Rm18GarageWoodBaselengthtotal<=144)):#Rm18WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm18GarageWoodBaselengthtotal>144):#Rm18WGbasecost=#woodgaragebaselargecost
+     Set, #Rm18WGbasecost=[#Rm18WGbasecost*#universalupcharge]
+     }
+
+     Do,(#Rm19BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room19BaseMoldLength=[#Rm19BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room19BaseMoldLength=[#Rm19BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm19BaseLengthtotal/12)-(#Rm19BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room19BaseMoldLength = [#Room19BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room19BaseMoldLength=[#Rm19BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm19BaseLengthtotal/96)-(#Rm19BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room19BaseMoldLength = [#Room19BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room19BaseMoldLength=[#Rm19BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm19basecost=[#Room19BaseMoldLength*#Room19basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm19BaseQty=[#Room19BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm19basecost=[#Rm19BaseQty*#Room19basecostgroup]
+
+     Set, #Rm19basecost=[#Rm19basecost*#universalupcharge]
+     }
+     Do,(#Rm19GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm19GarageWoodBaselengthtotal<=96):#Rm19WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm19GarageWoodBaselengthtotal>96)&(#Rm19GarageWoodBaselengthtotal<=144)):#Rm19WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm19GarageWoodBaselengthtotal>144):#Rm19WGbasecost=#woodgaragebaselargecost
+     Set, #Rm19WGbasecost=[#Rm19WGbasecost*#universalupcharge]
+     }
+
+
+     Do,(#Rm20BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room20BaseMoldLength=[#Rm20BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room20BaseMoldLength=[#Rm20BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm20BaseLengthtotal/12)-(#Rm20BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room20BaseMoldLength = [#Room20BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room20BaseMoldLength=[#Rm20BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm20BaseLengthtotal/96)-(#Rm20BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room20BaseMoldLength = [#Room20BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room20BaseMoldLength=[#Rm20BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm20basecost=[#Room20BaseMoldLength*#Room20basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm20BaseQty=[#Room20BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm20basecost=[#Rm20BaseQty*#Room20basecostgroup]
+
+     Set, #Rm20basecost=[#Rm20basecost*#universalupcharge]
+     }
+     Do,(#Rm20GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm20GarageWoodBaselengthtotal<=96):#Rm20WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm20GarageWoodBaselengthtotal>96)&(#Rm20GarageWoodBaselengthtotal<=144)):#Rm20WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm20GarageWoodBaselengthtotal>144):#Rm20WGbasecost=#woodgaragebaselargecost
+     Set, #Rm20WGbasecost=[#Rm20WGbasecost*#universalupcharge]
+     }
+
+     Do,(#Rm21BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room21BaseMoldLength=[#Rm21BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room21BaseMoldLength=[#Rm21BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm21BaseLengthtotal/12)-(#Rm21BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room21BaseMoldLength = [#Room21BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room21BaseMoldLength=[#Rm21BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm21BaseLengthtotal/96)-(#Rm21BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room21BaseMoldLength = [#Room21BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room21BaseMoldLength=[#Rm21BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm21basecost=[#Room21BaseMoldLength*#Room21basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm21BaseQty=[#Room21BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm21basecost=[#Rm21BaseQty*#Room21basecostgroup]
+
+     Set, #Rm21basecost=[#Rm21basecost*#universalupcharge]
+     }
+     Do,(#Rm21GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm21GarageWoodBaselengthtotal<=96):#Rm21WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm21GarageWoodBaselengthtotal>96)&(#Rm21GarageWoodBaselengthtotal<=144)):#Rm21WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm21GarageWoodBaselengthtotal>144):#Rm21WGbasecost=#woodgaragebaselargecost
+     Set, #Rm21WGbasecost=[#Rm21WGbasecost*#universalupcharge]
+     }
+
+
+     Do,(#Rm22BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room22BaseMoldLength=[#Rm22BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room22BaseMoldLength=[#Rm22BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm22BaseLengthtotal/12)-(#Rm22BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room22BaseMoldLength = [#Room22BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room22BaseMoldLength=[#Rm22BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm22BaseLengthtotal/96)-(#Rm22BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room22BaseMoldLength = [#Room22BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room22BaseMoldLength=[#Rm22BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm22basecost=[#Room22BaseMoldLength*#Room22basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm22BaseQty=[#Room22BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm22basecost=[#Rm22BaseQty*#Room22basecostgroup]
+
+     Set, #Rm22basecost=[#Rm22basecost*#universalupcharge]
+     }
+     Do,(#Rm22GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm22GarageWoodBaselengthtotal<=96):#Rm22WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm22GarageWoodBaselengthtotal>96)&(#Rm22GarageWoodBaselengthtotal<=144)):#Rm22WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm22GarageWoodBaselengthtotal>144):#Rm22WGbasecost=#woodgaragebaselargecost
+     Set, #Rm22WGbasecost=[#Rm22WGbasecost*#universalupcharge]
+     }
+
+     Do,(#Rm23BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room23BaseMoldLength=[#Rm23BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room23BaseMoldLength=[#Rm23BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm23BaseLengthtotal/12)-(#Rm23BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room23BaseMoldLength = [#Room23BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room23BaseMoldLength=[#Rm23BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm23BaseLengthtotal/96)-(#Rm23BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room23BaseMoldLength = [#Room23BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room23BaseMoldLength=[#Rm23BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm23basecost=[#Room23BaseMoldLength*#Room23basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm23BaseQty=[#Room23BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm23basecost=[#Rm23BaseQty*#Room23basecostgroup]
+
+     Set, #Rm23basecost=[#Rm23basecost*#universalupcharge]
+     }
+     Do,(#Rm23GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm23GarageWoodBaselengthtotal<=96):#Rm23WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm23GarageWoodBaselengthtotal>96)&(#Rm23GarageWoodBaselengthtotal<=144)):#Rm23WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm23GarageWoodBaselengthtotal>144):#Rm23WGbasecost=#woodgaragebaselargecost
+     Set, #Rm23WGbasecost=[#Rm23WGbasecost*#universalupcharge]
+     }
+
+
+     Do,(#Rm24BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room24BaseMoldLength=[#Rm24BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room24BaseMoldLength=[#Rm24BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm24BaseLengthtotal/12)-(#Rm24BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room24BaseMoldLength = [#Room24BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room24BaseMoldLength=[#Rm24BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm24BaseLengthtotal/96)-(#Rm24BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room24BaseMoldLength = [#Room24BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room24BaseMoldLength=[#Rm24BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm24basecost=[#Room24BaseMoldLength*#Room24basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm24BaseQty=[#Room24BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm24basecost=[#Rm24BaseQty*#Room24basecostgroup]
+
+     Set, #Rm24basecost=[#Rm24basecost*#universalupcharge]
+     }
+     Do,(#Rm24GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm24GarageWoodBaselengthtotal<=96):#Rm24WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm24GarageWoodBaselengthtotal>96)&(#Rm24GarageWoodBaselengthtotal<=144)):#Rm24WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm24GarageWoodBaselengthtotal>144):#Rm24WGbasecost=#woodgaragebaselargecost
+     Set, #Rm24WGbasecost=[#Rm24WGbasecost*#universalupcharge]
+     }
+
+     Do,(#Rm25BaseLengthtotal>0):1
+     {
+     Set,(#moldingscale="inch"):#Room25BaseMoldLength=[#Rm25BaseLengthtotal]
+     Set,(#moldingscale="foot"):#Room25BaseMoldLength=[#Rm25BaseLengthtotal\12]
+     set,(#moldingscale="foot"):#basemoldremainder = [(#Rm25BaseLengthtotal/12)-(#Rm25BaseLengthtotal\12)]
+     set,(#moldingscale="foot")&(#basemoldremainder>0):#Room25BaseMoldLength = [#Room25BaseMoldLength + 1]
+     Set,(#moldingscale="8 foot"):#Room25BaseMoldLength=[#Rm25BaseLengthtotal\96]
+     set,(#moldingscale="8 foot"):#basemoldremainder = [(#Rm25BaseLengthtotal/96)-(#Rm25BaseLengthtotal\96)]
+     set,(#moldingscale="8 foot")&(#basemoldremainder>0):#Room25BaseMoldLength = [#Room25BaseMoldLength + 1]
+     Set,(#moldingscale="metric"):#Room25BaseMoldLength=[#Rm25BaseLengthtotal] 
+     Set,(#moldingscale<>"Section"):#Rm25basecost=[#Room25BaseMoldLength*#Room25basecostgroup]
+     Set,(#moldingscale<>"Section"):#Rm25BaseQty=[#Room25BaseMoldLength]
+     Set,(#moldingscale="Section"):#Rm25basecost=[#Rm25BaseQty*#Room25basecostgroup]
+
+     Set, #Rm25basecost=[#Rm25basecost*#universalupcharge]
+     }
+     Do,(#Rm25GarageWoodBaseLengthtotal>0):1
+     {
+     Set,(#Rm25GarageWoodBaselengthtotal<=96):#Rm25WGbasecost=#woodgaragebasesmallcost
+     Set,((#Rm25GarageWoodBaselengthtotal>96)&(#Rm25GarageWoodBaselengthtotal<=144)):#Rm25WGbasecost=#woodgaragebasemediumcost
+     Set,(#Rm25GarageWoodBaselengthtotal>144):#Rm25WGbasecost=#woodgaragebaselargecost
+     Set, #Rm25WGbasecost=[#Rm25WGbasecost*#universalupcharge]
+     }
+
+
+
+End
+

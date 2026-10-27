@@ -1,0 +1,57 @@
+
+,Edgeband doors allowed sizes matching melamine
+ 
+,Doors
+
+Set,(#DoorDrawerType = "#DoorDrawerTypeName1"): #CostOfDoor=(#TempDoorCost*#edgebanddoorspecialfinishcost)*#DoorDrawerTypeCostFactor1 ,  flat door same color
+Set,(#DoorDrawerType = "#DoorDrawerTypeName2"): #CostOfDoor=(#TempDoorCost*#edgebanddoorspecialfinishcost)*#DoorDrawerTypeCostFactor2 ,  flat door 2md material
+
+Do,(#ThisDoor <> #DoorDR)|((#ThisDoor = #DoorDR)&(#HasHinges=1)):1
+{
+Price,(#CostOfDoor>0)&(#ContrastMaterialName="None")&(#DoorDrawerType = "#DoorDrawerTypeName1"):1 ,Door-#doordrawertype-#UnitMaterialName#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+
+Price,(#CostOfDoor>0)&(#ContrastMaterialName<>"None")&(#DoorDrawerType = "#DoorDrawerTypeName2"): 1 ,Door-#doordrawertype-#ContrastMaterialName#edgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+
+Do,((#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2"):1
+{
+ Price,(#CostOfDoor>0): 1 ,Door-#DoorDrawerType-#DoorDrawerFinishingType,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, Doors price as 5piece custom
+}
+}
+
+
+,Drawers
+
+Do,((#ThisDoor = #DoorDR)&(#HasHinges=0)):1
+{
+ Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#BoxDrawertype="White*"):1        ,Flat edgeband Drawer front cost with white box 
+ {
+ Set,(#ContrastMaterialName="None")&(#Unitmaterialname<>"#basicwhitecolorname"):#ContrastMaterialCostGroup=#materialcostgroup
+ Set,(#DoorW<=#Maxdrawerwidth):#CostOfDoor=#2ndcolorFlatEdgeBandDrawerFront , Standard edgeband drawer front
+ Set,#includeddrawerface = 1
+
+ Price,(#CostOfDoor>0):1   ,DrFrt-#DoorDrawerType-#UnitMaterialName#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+ }
+
+ Do, (#DoorDrawerType = "#DoorDrawerTypeName1")&(#BoxDrawertype<>"White*"):1              ,Flat edgeband Drawer front cost with matching material boxes
+ {
+ Set,(#DoorW<=#Maxdrawerwidth):#CostOfDoor=0 , Standard edgeband drawer front
+ Set,(#DoorW<=#Maxdrawerwidth):#Includeddrawerface=1 , Standard edgeband drawer front
+
+ Price,(#CostOfDoor>0):1   ,DrFrt-#DoorDrawerType-#UnitMaterialName#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+ }
+
+ Do, (#DoorDrawerType = "#DoorDrawerTypeName2"):1        ,Flat edgeband Drawer front cost 2nd Material
+ {
+ Set,(#DoorW<=#Maxdrawerwidth):#CostOfDoor=#2ndcolorFlatEdgeBandDrawerFront , Standard edgeband drawer front 2nd color
+
+ Price,(#CostOfDoor>0):1   ,DrFrt-#DoorDrawerType-#ContrastMaterialName#dredgebandfinish,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber, 
+ }
+
+ Do, (#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2"):1 ,Door or Drawer is a door is custom style SOLID
+ {
+ Set, #facetypefactor=#DrFrtfactor
+ load, GetDoorStyleCostSolid.pcb
+ set, #costofdoor=#pricingdoors
+ Price,(#CostOfDoor>0):1   ,DrFrt-Solid #DoorDrawerType-#DoorDrawerFinishingType,    #CostOfDoor*#facetypefactor,    #DoorW, #DoorH, #DoorPrintOrderNumber,
+ }
+}

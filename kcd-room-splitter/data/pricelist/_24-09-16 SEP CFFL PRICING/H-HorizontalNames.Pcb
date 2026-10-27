@@ -1,0 +1,45 @@
+,This Calculates the Name of all Vertical Sides (IF NEEDED)
+
+
+
+,Set the WidthName     ** #VertD is the Depth of the item
+Set, #DN=0 
+Set, (#VertD>0) &(#VertD<=11.875): #DN=11.8x
+Set, (#VertD>11.875)&(#VertD<=12): #DN=12
+Set, (#VertD>12)&(#VertD<=13): #DN=13
+Set, (#VertD>13)&(#VertD<=14): #DN=14
+Set, (#VertD>14)&(#VertD<=16): #DN=16
+Set, (#VertD>16)&(#VertD<=20): #DN=20
+Set, (#VertD>20)&(#VertD<=22): #DN=22
+Set, (#VertD>22)&(#VertD<=24): #DN=24
+Set, (#VertD>24)&(#VertD<=30): #DN=30
+
+
+,Set the WidthName     ** #ShelfWidth is the Width of the horizontal shelves
+Set, (#ShelfWidth>0) &(#ShelfWidth<=12): #WN=12
+Set, (#ShelfWidth>12)&(#ShelfWidth<=14): #WN=14
+Set, (#ShelfWidth>14)&(#ShelfWidth<=15): #WN=15
+Set, (#ShelfWidth>15)&(#ShelfWidth<=18): #WN=18
+Set, (#ShelfWidth>18)&(#ShelfWidth<=24): #WN=24
+Set, (#ShelfWidth>24)&(#ShelfWidth<=30): #WN=30
+Set, (#ShelfWidth>30)&(#ShelfWidth<=36): #WN=36
+Set, (#ShelfWidth>36)&(#ShelfWidth<=48): #WN=48
+Set, (#ShelfWidth>48)&(#ShelfWidth<=60): #WN=60
+Set, (#ShelfWidth>60)&(#ShelfWidth<=72): #WN=72
+Set, (#ShelfWidth>72)&(#ShelfWidth<=84): #WN=84
+Set, (#ShelfWidth>84)&(#ShelfWidth<=96): #WN=96
+Set, (#ShelfWidth>96)&(#ShelfWidth<=97): #WN=97
+
+
+
+
+
+
+,Build the Final Vertical Side Name (This will replace the default name with this new name)
+Set, #TopShelfName        =   W-S#DN#WNC
+Set, #MiddleShelfName     =   W-S#DN#WNC
+Set, #BottomShelfName     =   W-S#DN#WNC
+Set, #AdjustableShelfName =   W-S#DN#WN
+
+
+

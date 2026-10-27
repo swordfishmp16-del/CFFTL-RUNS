@@ -1,0 +1,60 @@
+,
+,Use Grid
+
+set, #stoplaundry=0
+,**
+,**
+,** SET COSTS FOR LAUNDRY ACCESSORIES
+,** 
+,**
+ 
+,** COSTS FOR Tilt-out Laundry with Black Bags 
+DisplaySet,#Tiltout18 =150,1.0  Cost for 18" Tilt-out Laundry BLK
+DisplaySet,#Tiltout24 =175,2.0  Cost for 24" Tilt-out Laundry BLK (2 bags)
+DisplaySet,#Tiltout30 =200,3.0  Cost for 30" Tilt-out Laundry BLK (2 bags)
+
+,** COSTS FOR Synergy Sliding Laundry with Black Bags
+DisplaySet,#SSLaundry18 =230,4.0  Cost for 18" Laundry Hamper BLK
+DisplaySet,#SSLaundry24 =265,5.0  Cost for 24" Laundry Hamper BLK (2 bags)
+DisplaySet,#SSLaundry30 =310,6.0  Cost for 30" Laundry Hamper BLK (2 bags)
+
+,** COSTS FOR Engage Sliding Laundry with Color Bags
+DisplaySet,#ESLaundry18 =365,7.0  Cost for 18" Laundry Organizer
+DisplaySet,#ESLaundry24 =485,8.0  Cost for 24" Laundry Organizer (2 bags)
+DisplaySet,#ESLaundry30 =515,9.0  Cost for 30" Laundry Organizer (2 bags)
+DisplaySet,#ESLaundry36 =545,10.0  Cost for 36" Laundry Organizer (2 bags)
+
+Do, (#Name = "*tilt*"):1
+{
+Set,(w<=18):#CostOfLaundry = #Tiltout18
+Set,(w>18)&(w<=24):#CostOfLaundry = #Tiltout24  
+Set,(w>24)&(w<=30):#CostOfLaundry = #Tiltout30 
+
+Set, W={W}
+Price, 1, RM#Roomnum #Name #code,(#CostofLaundry)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Name = "*Hamper*"):1
+{
+Set,(w<=18):#CostOfLaundry = #SSLaundry18
+Set,(w>18)&(w<=24):#CostOfLaundry = #SSLaundry24  
+Set,(w>24)&(w<=30):#CostOfLaundry = #SSLaundry30 
+
+Set, W={W}
+Price, 1, RM#Roomnum Synergy #Name #code,(#CostofLaundry)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+
+Do, (#Name = "*Laundry Organizer*"):1
+{
+Set,(w<=18):#CostOfLaundry = #ESLaundry18 
+Set,(w>18)&(w<=24):#CostOfLaundry = #ESLaundry24  
+Set,(w>24)&(w<=30):#CostOfLaundry = #ESLaundry30
+Set,(w>30)&(w<=36):#CostOfLaundry = #ESLaundry36
+
+Set, W={W}
+Price, 1, RM#Roomnum Engage #Name #code,(#CostofLaundry)*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 
+}
+
+,**
+,**
+
+set, #stoplaundry=1

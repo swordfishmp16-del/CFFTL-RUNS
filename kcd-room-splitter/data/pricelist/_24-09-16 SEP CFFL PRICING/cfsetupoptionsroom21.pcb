@@ -1,0 +1,58 @@
+,**********Initial options Room21************************
+
+
+
+set,#Room21hasoptions=0
+set, #Room21cedarbottomcount=0
+set, #Room21falsebottomcount=0
+set, #Room21doubledeckercount=0
+set, #Room21locknotchcount=0
+set, #Room21slidingdoorcount=0
+set, #Room21drawerfaceonlycount=0
+set, #Room21drawerFileFrameboxcount=0
+set, #Room21Bot75count=0
+set, #Room21CedarBot25count=0
+set, #Room21switchglidescount=0
+Set,#Room21Routedpuckshelfcount=0
+Set,#Room21Surfacepuckshelfcount=0
+
+Set,#Room21SurfaceXLpuckshelfcount=0
+Set,#Room21task12inshelfcount=0
+Set,#Room21task24inshelfcount=0
+Set,#Room21task30inshelfcount=0
+Set,#Room21task36inshelfcount=0
+Set,#Room21task42inshelfcount=0
+Set,#Room21task45inshelfcount=0
+Set, #Room21CuttoFitcount=0
+set, #Room21scarcleatcount=0
+set, #Room21CenterBackborecount=0
+set, #Room21DBLBackborecount=0
+set, #Room21setholescustomcount=0
+set, #Room21adjholescustomcount=0
+set, #Room21noholesdrillonsitecount=0
+set, #Room21SlantedHeadboardcount=0
+
+set, #Room21Singledoorcleatcount=0
+set, #Room21Dbldoorcleatcount=0
+
+set, #Room21SlidingdoorCount=0
+
+set, #Room21FalsebottomDrwCount=0
+set, #Room21DoubleDeckerDrwCount=0
+set, #Room21with34bottomDrwCount=0
+set, #Room21switchtosidemountDrwCount=0
+set, #Room21FileframecutdownDrwCount=0
+set, #Room21LocknotchDrwCount=0
+set, #Room21with25cedarbotDrwCount=0
+set, #Room21boxcutbackDrwCount=0
+set, #Room21Drwboxtoshelfcount=0
+set, #Room21EBTopofPanelcount=0
+set, #Room21EBBackofPanelcount=0
+set, #Room21RWNotchcount=0
+Set,#Room21RWshelfcount=0
+
+Set,#Room21Wbusbarcount=0
+Set,#Room21WLEDshelfcount=0
+
+set,#Room21LeftHangercount=0
+set,#Room21RightHangercount=0

@@ -1,0 +1,63 @@
+,Use Grid
+
+set, #stopstem=1
+,StemWareHolder
+  
+Displayset, #numberofstemholders=1, How Many Sizes of Stemware Holders do you have? [1;2;3;4]
+Displayset, #widthordepth=Depth, How are the different holders determined?[Depth;Width]
+set, #stemholdercost= 0
+set, #stemholdername=Invalid Size
+Set,(#widthordepth="Width"): #stemholdermeasure=W
+Set,(#widthordepth="Depth"): #stemholdermeasure=D
+
+,***
+Do, (#numberofstemholders>0):1
+{
+ 
+ Displayset, #stemholdernameA=Stem Ware Holder-315011CR,   Name Stem 1st Holder 
+ Displayset, #stemholdersizeA=11 ,   Size of #stemholdernameA
+ Displayset, #StemholdercostA=30 ,   Cost for #stemholdernameA
+ Set, ((#stemholdermeasure>0)&(#stemholdermeasure<=#stemholdersizeA)):  #stemholdercost= #StemholdercostA
+ Set, ((#stemholdermeasure>0)&(#stemholdermeasure<=#stemholdersizeA)):  #stemholdername= #StemholdernameA
+
+}
+,***
+Do, (#numberofstemholders>1):1
+{
+ Displayset, #stemholdernameB=Stem Ware Holder-30in 541.98.187,   Name Stem 2nd Holder
+ Displayset, #stemholdersizeB=30 ,   Size of #stemholdernameB
+ Displayset, #StemholdercostB=200,   Cost for #stemholdernameB
+ Set, ((#stemholdermeasure>#stemholdersizeA)&(#stemholdermeasure<=#stemholdersizeB)):   #stemholdercost= #StemholdercostB
+ Set, ((#stemholdermeasure>#stemholdersizeA)&(#stemholdermeasure<=#stemholdersizeB)):   #stemholdername= #StemholdernameB             
+}
+,***
+Do, (#numberofstemholders>2):1
+{
+ Displayset, #stemholdernameC=Stem Ware Holder-36in 541.98.188 ,   Name Stem 3rd Holder
+ Displayset, #stemholdersizeC=36 ,   Size of #stemholdernameC
+ Displayset, #StemholdercostC=225,   Cost for #stemholdernameC
+ Set, ((#stemholdermeasure>#stemholdersizeB)&(#stemholdermeasure<=#stemholdersizeC)):#stemholdercost= #StemholdercostC
+ Set, ((#stemholdermeasure>#stemholdersizeB)&(#stemholdermeasure<=#stemholdersizeC)):#stemholdername= #StemholdernameC
+
+}
+,***
+Do, (#numberofstemholders>3):1
+{
+ Displayset, #stemholdernameD=,   Name Stem 4th Holder
+ Displayset, #stemholdersizeD=,   Size of #stemholdernameD
+ Displayset, #StemholdercostD=,   Cost for #stemholdernameD
+ Set, ((#stemholdermeasure>#stemholdersizeC)&(#stemholdermeasure<=#stemholdersizeD)):#stemholdercost= #StemholdercostD
+ Set, ((#stemholdermeasure>#stemholdersizeC)&(#stemholdermeasure<=#stemholdersizeD)):#stemholdername= #StemholdernameD   
+
+}
+
+
+
+           
+     
+Price, (#stemholdercost>0):1,   RM#Roomnum #stemholdername,         #stemholdercost*#universalupcharge, w,d,      1000, 
+
+Load,(#stemholdercost=0):Eachunit.pcb
+    
+        
+

@@ -1,0 +1,1405 @@
+
+Do, (#DoorCostMethod = "SqFt")|(#DoorCostMethod = "Fixed Cost"):1
+{
+   ,*************************************************** Individual Door Pricing set to use #PriceMethodDoors from above *****************************************************************
+   ,**
+   
+   DisplaySet,#ShowDoorCost =Yes,         --------   Show detailed door cost for all door styles [No;Yes]
+   ,**
+   Do, (#ShowDoorCost="Yes")|(#DisplayEdit):1
+   {
+      
+      ,***************** By placing #Pricing Doors below (with no space between PricingDoors) in the door cost lines KCD will use the price method selected above (Sqft or fixed) with the value set in Section 2 of AA-USER.pcb
+      ,***************** If you wish to use a different formula or cost method you can. Just select doors below and type a value or use #Variables in combination.
+      , Common variables to use are: DoorArea = Sqft of door and DoorDrawerStyleCostGroup = cost of door set in AA-User file under Door Setup
+      ,**
+      ,**
+,Update V7.2.12 start
+,Update V8.0 start
+      ,**     Each Door and Drawer Front is priced by multiplying its Area by the Cost Per SqFt plus a Fixed Cost. (Each style may be priced differently)
+      DisplaySet,(#ThisDoor=@ARP):#CostOfDoor =(#PricingDoors), 1       Arch Raised Panel Door Cost,  KCDw\Arp.jpg
+      DisplaySet,(#ThisDoor=@SRP):#CostOfDoor =(#PricingDoors), 2       Square Raised Panel Door Cost,   KCDw\SRP.jpg
+      DisplaySet,(#ThisDoor=@RPDR):#CostOfDoor =(#PricingDoors), 3       Raised Panel Drawer Door Cost,   KCDw\RPDR.jpg
+      DisplaySet,(#ThisDoor=@RPDR-M):#CostOfDoor =(#PricingDoors), 3       Raised Panel w/Applied Molding Drawer Door Cost,   KCDw\RPDR-M.jpg
+      DisplaySet,(#ThisDoor=@AAFP):#CostOfDoor =(#PricingDoors), 4       Double Arch Flat Panel Door Cost,   KCDw\AAFP.jpg
+      DisplaySet,(#ThisDoor=@AAGP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 5       Double Arch Glass Panel Door Cost,   KCDw\AAGP.jpg
+      DisplaySet,(#ThisDoor=@AGP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 5b       Arch Glass Panel Door Cost,   KCDw\AGP.jpg
+      DisplaySet,(#ThisDoor=@AARP):#CostOfDoor =(#PricingDoors), 6       Double Arch Raised Panel Door Cost,   KCDw\AARP.jpg
+      DisplaySet,(#ThisDoor=@ADOBE):#CostOfDoor =(#PricingDoors), 7       Adobe Door Cost,   KCDw\ADOBE.jpg
+      DisplaySet,(#ThisDoor=@AF2P7-3):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 8       Arch Flat 2 Panel 70/30 Door Cost,   KCDw\AF2P7-3.jpg
+      DisplaySet,(#ThisDoor=@AF2P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 9       Arch Flat 2 Panel Door Cost,   KCDw\AF2P.jpg
+      DisplaySet,(#ThisDoor=@AF6-4P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 10     Arch Flat 2 Panel 60/40 Door Cost,   KCDw\AF6-4P.jpg
+      DisplaySet,(#ThisDoor=@AG2P7-3):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 11     Arch Flat Panel Door Cost,   KCDw\AG2P7-3.jpg
+      DisplaySet,(#ThisDoor=@AG4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*2), 12     Arch Glass 4 Panel Door Cost,   KCDw\AG4P.jpg
+      DisplaySet,(#ThisDoor=@AG6P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*3), 13     Arch Glass 6 Panel Door Cost,   KCDw\AG6P.jpg
+      DisplaySet,(#ThisDoor=@AG8P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*4), 14     Arch Glass 8 Panel Door Cost,   KCDw\AG8P.jpg
+      DisplaySet,(#ThisDoor=@AG2P6-4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 15     Arch Glass 2 Panel 60/40 Door Cost,  KCDw\AG2P6-4P.jpg
+      DisplaySet,(#ThisDoor=@AR2P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 16     Arch Raised 2 Panel Door Cost,   KCDw\AR2P.jpg
+      DisplaySet,(#ThisDoor=@AR3P):#CostOfDoor =(#PricingDoors)+(#Mullioncost*2), 17     Arch Raised 3 Panel Door Cost,   KCDw\AR3P.jpg
+      DisplaySet,(#ThisDoor=@AR2P7-3):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 18     Arch Raised 2 Panel 70/30 Door Cost,   KCDw\AR2P7-3.jpg
+      DisplaySet,(#ThisDoor=@AR6-4P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 19     Arch Raised 2 Panel 60/40 Door Cost,  KCDw\AR6-4P.jpg
+      DisplaySet,(#ThisDoor=@ARP-B):#CostOfDoor =(#PricingDoors), 20     Arch Raised Panel Beaded Door Cost,   KCDw\ARP-B.jpg
+      DisplaySet,(#ThisDoor=@AFPH-DR):#CostOfDoor =(#PricingDoors), 21     Horiz Arch Flat Panel Drawer Door Cost,   KCDw\AFPH-DR.jpg
+      DisplaySet,(#ThisDoor=@AVGP):#CostOfDoor =(#PricingDoors), 22     Arch Flat Panel V Groove Door Cost,   KCDw\AVGP.jpg
+      DisplaySet,(#ThisDoor=@AVGRP):#CostOfDoor =(#PricingDoors), 23     Arch Raised Panel V Groove Door Cost,   KCDw\AVGRP.jpg
+      DisplaySet,(#ThisDoor=@AGRV):#CostOfDoor =(#PricingDoors), 24     Arch Groove Door Cost,   KCDw\AGRV.jpg
+      
+      DisplaySet,(#ThisDoor=@BATTEN):#CostOfDoor =(#PricingDoors), 25     Batten Door Cost,   KCDw\BATTEN.jpg
+      DisplaySet,(#ThisDoor=@BOTPUL):#CostOfDoor =(#PricingDoors), 26     Bottom Pull Door Cost,  KCDw\BOTPUL.jpg
+      DisplaySet,(#ThisDoor=@CCFP):#CostOfDoor =(#PricingDoors), 27     Double Cathedral Flat Panel Door Cost,   KCDw\CCFP.jpg
+      DisplaySet,(#ThisDoor=@CCGP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 28     Double Cathedral Glass Panel Door Cost,   KCDw\CCGP.jpg
+      DisplaySet,(#ThisDoor=@CCRP):#CostOfDoor =(#PricingDoors), 29     Double Cathedral Raised Panel Door Cost,   KCDw\CCRP.jpg
+      DisplaySet,(#ThisDoor=@CFP):#CostOfDoor =(#PricingDoors), 30     Cathedral Flat Panel Door Cost,   KCDw\CFP.jpg
+      DisplaySet,(#ThisDoor=@CG2P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 31     Cathedral Glass 2 Panel Door Cost,   KCDw\CG2P.jpg
+      DisplaySet,(#ThisDoor=@CG2P7):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 32     Cathedral Glass 2 Panel 7 Door Cost,   KCDw\CG2P7.jpg
+      DisplaySet,(#ThisDoor=@CG2P7-3):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 33     Cathedral Glass 2 Panel 70/30,   KCDw\CG2P7-3.jpg
+      DisplaySet,(#ThisDoor=@CG4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*2), 34     Cathedral Glass 4 Panel Door Cost,   KCDw\CG4P.jpg
+      DisplaySet,(#ThisDoor=@CG6-4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 35     Cathedral Glass 2 Panel 60/40 Door Cost,   KCDw\CG6-4P.jpg
+      DisplaySet,(#ThisDoor=@CG6P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*3), 36     Cathedral Glass 6 Panel Door Cost,   KCDw\CG6P.jpg
+      DisplaySet,(#ThisDoor=@CGP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 37     Cathedral Glass Panel Door Cost,   KCDw\CGP.jpg
+      DisplaySet,(#ThisDoor=@CF2P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 38     Cathedral Flat 2 Panel Door Cost,   KCDw\CF2P.jpg
+      DisplaySet,(#ThisDoor=@CF2P7):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 39     Cathedral Flat 2 Panel 7 Door Cost,   KCDw\CF2P7.jpg
+      DisplaySet,(#ThisDoor=@CF2P7-3):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 40     Cathedral Flat 2 Panel 70/30 Door Cost,   KCDw\CF2P7-3.jpg
+      DisplaySet,(#ThisDoor=@CF6-4P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 41     Cathedral Flat 2 Panel 60/40 Door Cost,   KCDw\CF6-4P.jpg
+      DisplaySet,(#ThisDoor=@CR2P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 42     Cathedral Raised 2 Panel Door Cost,   KCDw\CR2P.jpg
+      DisplaySet,(#ThisDoor=@CR2P7):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 43     Cathedral Raised 2 Panel 7 in. Door Cost,   KCDw\CR2P7.jpg
+      DisplaySet,(#ThisDoor=@CR2P7-3):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 44     Cathedral Raised 2 Panel 70/30 Door Cost,   KCDw\CR2P7-3.jpg
+      DisplaySet,(#ThisDoor=@CR6-4P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 45     Cathedral Raised 2 Panel 60/40 Door Cost,   KCDw\CR6-4P.jpg
+      DisplaySet,(#ThisDoor=@CRP):#CostOfDoor =(#PricingDoors), 46     Cathedral Raised Panel Door Cost,   KCDw\CRP.jpg
+      DisplaySet,(#ThisDoor=@CRP-B):#CostOfDoor =(#PricingDoors), 47     Cathedral Raised Panel Beaded Door Cost,   KCDw\CRP-B.jpg
+      DisplaySet,(#ThisDoor=@CRVGRV):#CostOfDoor =(#PricingDoors), 48     Cathedral Grooved Door Cost,   KCDw\CRVGRV.jpg
+      DisplaySet,(#ThisDoor=@CVGP):#CostOfDoor =(#PricingDoors), 49     Cathedral Flat V-Panel Door Cost,   KCDw\CVGP.jpg
+      DisplaySet,(#ThisDoor=@DCFP):#CostOfDoor =(#PricingDoors), 50     Double  Cathedral Flat Panel Door Cost,   KCDw\DCFP.jpg
+      DisplaySet,(#ThisDoor=@DCG4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 51     Double Cathedral Glass 4 Panel Door Cost,   KCDw\DCG4P.jpg
+      DisplaySet,(#ThisDoor=@DCG6P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 52     Double  Cathedral Glass 6 Panel Door Cost,   KCDw\DCG6P.jpg
+      DisplaySet,(#ThisDoor=@DCG8P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 53     Double  Cathedral Glass 8 Panel Door Cost,   KCDw\DCG8P.jpg
+      DisplaySet,(#ThisDoor=@DCGP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 54     Double  Cathedral Glass Panel Door Cost,   KCDw\DCGP.jpg
+      DisplaySet,(#ThisDoor=@DCRP):#CostOfDoor =(#PricingDoors), 55     Double  Cathedral Raised Panel Door Cost,   KCDw\DCRP.jpg
+      DisplaySet,(#ThisDoor=@FINGER PULL):#CostOfDoor =(#PricingDoors), 55b   Finger Pull Door Cost,   KCDw\Finger Pull.jpg
+      DisplaySet,(#ThisDoor=@FLAT GLASS):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 55c   Flat Glass Door Cost,   KCDw\Flat Glass.jpg
+      DisplaySet,(#ThisDoor=@FLAT):#CostOfDoor =(#PricingDoors), 56     Flat Door Cost,   KCDw\FLAT.jpg
+      DisplaySet,(#ThisDoor=@FLTDR):#CostOfDoor =(#PricingDoors), 57     Flat Drawer Door Cost,   KCDw\FLTDR.jpg
+      DisplaySet,(#ThisDoor=@FLATDR):#CostOfDoor =(#PricingDoors), 58     Flat Drawer Door Cost,   KCDw\FLATDR.jpg
+      DisplaySet,(#ThisDoor=@FLATDR-ME):#CostOfDoor =(#PricingDoors), 58b     Flat Drawer Door Cost,   KCDw\FLATDR-ME.jpg
+      DisplaySet,(#ThisDoor=@FLAT-ME):#CostOfDoor =(#PricingDoors), 58c     Flat Drawer Door Cost,   KCDw\FLAT-ME.jpg
+      DisplaySet,(#ThisDoor=@FLATDR-V):#CostOfDoor =(#PricingDoors), 59     Flat Vertical Grain Drawer Door Cost,   KCDw\FLATDR-V.jpg
+      DisplaySet,(#ThisDoor=@GLASS):#CostOfDoor =(#solidglassdoorcost), 60     Solid Glass Door Cost,   KCDw\GLASS.jpg
+      DisplaySet,(#ThisDoor=@FROSTED GLASS):#CostOfDoor =(#solidfrostedglassdoorcost), 60     Solid Frosted Glass Door Cost,   KCDw\Frosted GLASS.jpg
+      DisplaySet,(#ThisDoor=@HAFP-L):#CostOfDoor =(#PricingDoors), 61     Half Arch Flat Panel Left Door Cost,   KCDw\HAFP-L.jpg
+      DisplaySet,(#ThisDoor=@HAFP-R):#CostOfDoor =(#PricingDoors), 62     Half Arch Flat Panel Right Door Cost,   KCDw\HAFP-R.jpg
+      DisplaySet,(#ThisDoor=@HAG3P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 63     Half Arch Glass 3 Panel Left Door Cost,   KCDw\HAG3P-L.jpg
+      DisplaySet,(#ThisDoor=@HAG3P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 64     Half Arch Glass 3 Panel Right Door Cost,   KCDw\HAG3P-R.jpg
+      DisplaySet,(#ThisDoor=@HAG4P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 65     Half Arch Glass 4 Panel Left Door Cost,   KCDw\HAG4P-L.jpg
+      DisplaySet,(#ThisDoor=@HAG4P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 66     Half Arch Glass 4 Panel Right Door Cost,   KCDw\HAG4P-R.jpg
+      DisplaySet,(#ThisDoor=@HAG6P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 67     Half Arch Glass 6 Panel Left Door Cost,   KCDw\HAG6P-L.jpg
+      DisplaySet,(#ThisDoor=@HAG6P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 68     Half Arch Glass 6 Panel Right Door Cost,   KCDw\HAG6P-R.jpg
+      DisplaySet,(#ThisDoor=@HAG8P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 69     Half Arch Glass 8 Panel Door Cost,   KCDw\HAG8P-L.jpg
+      DisplaySet,(#ThisDoor=@HAG8P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 70     Half Arch Glass 8 Panel Right Door Cost,   KCDw\HAG8P-R.jpg
+      DisplaySet,(#ThisDoor=@HAGP-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 71     Half Arch Glass Panel Left Door Cost,   KCDw\HAGP-L.jpg
+      DisplaySet,(#ThisDoor=@HAGP-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 72     Half Arch Glass Panel Right Door Cost,   KCDw\HAGP-R.jpg
+      DisplaySet,(#ThisDoor=@HARP-L):#CostOfDoor =(#PricingDoors), 73     Half Arch Raised Panel Left Door Cost,  KCDw\HARP-L.jpg
+      DisplaySet,(#ThisDoor=@HARP-R):#CostOfDoor =(#PricingDoors), 74     Half Arch Raised Panel Right Door Cost,   KCDw\HARP-R.jpg
+      DisplaySet,(#ThisDoor=@HCFP-L):#CostOfDoor =(#PricingDoors), 75     Half Cathedral Flat Panel Left Door Cost,   KCDw\HCFP-L.jpg
+      DisplaySet,(#ThisDoor=@HCFP-R):#CostOfDoor =(#PricingDoors), 76     Half Cathedral Flat Panel Right Door Cost,   KCDw\HCFP-R.jpg
+      DisplaySet,(#ThisDoor=@HCG4P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 77     Half Cathedral Glass 4 Panel Left Door Cost,   KCDw\HCG4P-L.jpg
+      DisplaySet,(#ThisDoor=@HCG4P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 78     Half Cathedral Glass 4 Panel Right Door Cost,   KCDw\HCG4P-R.jpg
+      DisplaySet,(#ThisDoor=@HCG6P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 79     Half Cathedral Glass 6 Panel Left Door Cost,   KCDw\HCG6P-L.jpg
+      DisplaySet,(#ThisDoor=@HCG6P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 80     Half Cathedral Glass 6 Panel Right Door Cost,   KCDw\HCG6P-R.jpg
+      DisplaySet,(#ThisDoor=@HCG8P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 81     Half Cathedral Glass 8 Panel Left Door Cost,   KCDw\HCG8P-L.jpg
+      DisplaySet,(#ThisDoor=@HCG8P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 82     Half Cathedral Glass 8 Panel Right Door Cost,   KCDw\HCG8P-R.jpg
+      
+      DisplaySet,(#ThisDoor=@HCG4PS-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 83     Half Cathedral Glass 4 Panel Left Door Cost,   KCDw\HCG4PS-L.jpg
+      DisplaySet,(#ThisDoor=@HCG4PS-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 84     Half Cathedral Glass 4 Panel Right Door Cost,   KCDw\HCG4PS-R.jpg
+      DisplaySet,(#ThisDoor=@HCG6PS-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 85     Half Cathedral Glass 6 Panel Left Door Cost,   KCDw\HCG6PS-L.jpg
+      DisplaySet,(#ThisDoor=@HCG6PS-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 86     Half Cathedral Glass 6 Panel Right Door Cost,   KCDw\HCG6PS-R.jpg
+      DisplaySet,(#ThisDoor=@HCG8PS-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 87     Half Cathedral Glass 8 Panel Left Door Cost,   KCDw\HCG8PS-L.jpg
+      DisplaySet,(#ThisDoor=@HCG8PS-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 88     Half Cathedral Glass 8 Panel Right Door Cost,   KCDw\HCG8PS-R.jpg
+      
+      DisplaySet,(#ThisDoor=@HCGP-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 89     Half Cathedral Glass Door Cost,   KCDw\HCGP-L.jpg
+      DisplaySet,(#ThisDoor=@HCGP-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 90     Half Cathedral Glass Panel Right Door Cost,   KCDw\HCGP-R.jpg
+      DisplaySet,(#ThisDoor=@HCRP-L):#CostOfDoor =(#PricingDoors), 91     Half Cathedral Raised Panel Left Door Cost,   KCDw\HCRP-L.jpg
+      DisplaySet,(#ThisDoor=@HCRP-R):#CostOfDoor =(#PricingDoors), 92     Half Cathedral Raised Panel Right Door Cost,   KCDw\HCRP-R.jpg
+      DisplaySet,(#ThisDoor=@MISSION):#CostOfDoor =(#PricingDoors), 93     Mission Door Cost,   KCDw\MISSION.jpg
+      DisplaySet,(#ThisDoor=@MSF2P):#CostOfDoor =(#PricingDoors), 94     Mitered Square Flat 2 Door Cost,  KCDw\MSF2P.jpg
+      DisplaySet,(#ThisDoor=@MSF2P7-3):#CostOfDoor =(#PricingDoors), 95     Mitered Square Flat 2 70/30 Door Cost,   KCDw\MSF2P7-3.jpg
+      DisplaySet,(#ThisDoor=@MSF2VP):#CostOfDoor =(#PricingDoors), 96     Mitered Square Flat 2 Vertical Door Cost,   KCDw\MSF2VP.jpg
+      DisplaySet,(#ThisDoor=@MSF6-4P):#CostOfDoor =(#PricingDoors), 97     Mitered Square Flat 2 60/40 Door Cost,   KCDw\MSF6-4P.jpg
+      DisplaySet,(#ThisDoor=@MSFP):#CostOfDoor =(#PricingDoors), 98     Mitered Square Flat Door Cost,   KCDw\MSFP.jpg
+      DisplaySet,(#ThisDoor=@MSFP-M):#CostOfDoor =(#PricingDoors), 99     Mitered Square Flat w/Applied Molding Door Cost,   KCDw\MSFP-M.jpg
+      DisplaySet,(#ThisDoor=@MSFP-M2):#CostOfDoor =(#PricingDoors), 100     Mitered Square Flat w/2 Applied Molding Door Cost,   KCDw\MSFP-M2.jpg
+      DisplaySet,(#ThisDoor=@MSFPDR-M):#CostOfDoor =(#PricingDoors), 101     Mitered Square Flat w/Applied Molding Drawer Door Cost,   KCDw\MSFPDR-M.jpg
+      DisplaySet,(#ThisDoor=@MSFP-DR):#CostOfDoor =(#PricingDoors), 101a     Mitered Square Flat  Drawer Door Cost,   KCDw\MSFP-DR.jpg
+      DisplaySet,(#ThisDoor=@MSG2P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 102     Mitered Square Glass 2 Door Cost,   KCDw\MSG2P.jpg
+      DisplaySet,(#ThisDoor=@MSG2P7-3):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 103     Mitered Square Glass 2 70/30 Door Cost,   KCDw\MSG2P7-3.jpg
+      DisplaySet,(#ThisDoor=@MSG2VP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 104     Mitered Square Glass 2 Vertical Door Cost,   KCDw\MSG2VP.jpg
+      DisplaySet,(#ThisDoor=@MSG4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 105     Mitered Square Glass 4 Door Cost,   KCDw\MSG4P.jpg
+      DisplaySet,(#ThisDoor=@MSG6P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 106     Mitered Square Glass 6 Door Cost,   KCDw\MSG6P.jpg
+      DisplaySet,(#ThisDoor=@MSG6-4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 107     Mitered Square Glass 2 60/40 Door Cost,   KCDw\MSG6-4P.jpg
+      DisplaySet,(#ThisDoor=@MSG8P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 108     Mitered Square Glass 8 Door Cost,   KCDw\MSG8P.jpg
+      DisplaySet,(#ThisDoor=@MSGP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 109     Mitered Square Glass Door Cost,   KCDw\MSGP.jpg
+      
+      
+      DisplaySet,(#ThisDoor=@MSG4P-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 110     Mitered Square Glass 4 w/Applied Molding Door Cost,   KCDw\MSG4P-M.jpg
+      DisplaySet,(#ThisDoor=@MSG6P-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 111     Mitered Square Glass 6 w/Applied Molding Door Cost,   KCDw\MSG6P-M.jpg
+      DisplaySet,(#ThisDoor=@MSG8P-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 112     Mitered Square Glass 8 w/Applied Molding Door Cost,   KCDw\MSG8P-M.jpg
+      DisplaySet,(#ThisDoor=@MSGP-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 113     Mitered Square Glass w/Applied Molding Door Cost,   KCDw\MSGP-M.jpg
+      DisplaySet,(#ThisDoor=@MSG4P-M2):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 114     Mitered Square Glass 4 w/2 Applied Molding Door Cost,   KCDw\MSG4P-M2.jpg
+      DisplaySet,(#ThisDoor=@MSG6P-M2):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 115     Mitered Square Glass 6 w/2 Applied Molding Door Cost,   KCDw\MSG6P-M2.jpg
+      DisplaySet,(#ThisDoor=@MSG8P-M2):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 116     Mitered Square Glass 8 w/2 Applied Molding Door Cost,   KCDw\MSG8P-M2.jpg
+      DisplaySet,(#ThisDoor=@MSGP-M2):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 117     Mitered Square Glass w/2 Applied Molding Door Cost,   KCDw\MSGP-M2.jpg
+      
+      
+      DisplaySet,(#ThisDoor=@MSR2P):#CostOfDoor =(#PricingDoors), 118     Mitered Square Raised 2 Door Cost,   KCDw\MSR2P.jpg
+      DisplaySet,(#ThisDoor=@MSR2VP):#CostOfDoor =(#PricingDoors), 119     Mitered Square Raised 2 V Door Cost,   KCDw\MSR2VP.jpg
+      DisplaySet,(#ThisDoor=@MSR2P7-3):#CostOfDoor =(#PricingDoors), 120     Mitered Square Raised 2 70/30 Door Cost,   KCDw\MSR2P7-3.jpg
+      DisplaySet,(#ThisDoor=@MSR3P):#CostOfDoor =(#PricingDoors), 121     Mitered Square Raised 3 Door Cost,   KCDw\MSR3P.jpg
+      DisplaySet,(#ThisDoor=@MSR4P):#CostOfDoor =(#PricingDoors), 122     Mitered Square Raised 4 Door Cost,   KCDw\MSR4P.jpg
+      DisplaySet,(#ThisDoor=@MSR6P):#CostOfDoor =(#PricingDoors), 123     Mitered Square Raised 6 Door Cost,   KCDw\MSR6P.jpg
+      DisplaySet,(#ThisDoor=@MSR6-4P):#CostOfDoor =(#PricingDoors), 124     Mitered Square Raised 2 60/40 Door Cost,   KCDw\MSR6-4P.jpg
+      DisplaySet,(#ThisDoor=@MSRP):#CostOfDoor =(#PricingDoors), 125     Mitered Square Raised Door Cost,   KCDw\MSRP.jpg
+      DisplaySet,(#ThisDoor=@MSRP-M):#CostOfDoor =(#PricingDoors), 126     Mitered Square Raised Panel w/Applied Molding Door Cost,   KCDw\MSRP-M.jpg
+      DisplaySet,(#ThisDoor=@MSRP-M2):#CostOfDoor =(#PricingDoors), 127     Mitered Square Raised Panel w/2 Applied Molding Door Cost,   KCDw\MSRP-M2.jpg
+      DisplaySet,(#ThisDoor=@MSRPDR-M):#CostOfDoor =(#PricingDoors), 128     Mitered Square Raised Panel w/Applied Molding Drawer Door Cost,   KCDw\MSRPDR-M.jpg
+      DisplaySet,(#ThisDoor=@MSRP-DR):#CostOfDoor =(#PricingDoors), 128a     Mitered Square Raised Panel Drawer Door Cost,   KCDw\MSRP-DR.jpg
+      DisplaySet,(#ThisDoor=@OFP):#CostOfDoor =(#PricingDoors), 129   Oval Flat Panel Door Cost,   KCDw\OFP.jpg
+      DisplaySet,(#ThisDoor=@OGP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 130   Oval Glass Panel Door Cost,   KCDw\OGP.jpg
+      DisplaySet,(#ThisDoor=@RDR):#CostOfDoor =(#PricingDoors), 131   Raised Drawer Door Cost,   KCDw\RDR.jpg
+      DisplaySet,(#ThisDoor=@RPDR-B):#CostOfDoor =(#PricingDoors), 132   Raised Panel Drw Beaded Door Cost,   KCDw\RPDR-B.jpg
+      DisplaySet,(#ThisDoor=@S-WEST):#CostOfDoor =(#PricingDoors), 133   Southwestern Door Cost,   KCDw\S-WEST.jpg
+      DisplaySet,(#ThisDoor=@aafpsw):#CostOfDoor =(#PricingDoors), 134   Southwestern 2 arches Door Cost,   KCDw\aafpsw.jpg
+      DisplaySet,(#ThisDoor=@afpsw):#CostOfDoor =(#PricingDoors), 135   Southwestern 1 arch Door Cost,   KCDw\afpsw.jpg
+      DisplaySet,(#ThisDoor=@SF2P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 136   Square Flat 2 Panel Door Cost,   KCDw\SF2P.jpg
+      DisplaySet,(#ThisDoor=@SF2P-M):#CostOfDoor =(#PricingDoors), 137   Square Flat 2 Panel w/Applied Molding Door Cost,   KCDw\SF2P-M.jpg
+      DisplaySet,(#ThisDoor=@Sf4PO-L):#CostOfDoor =(#PricingDoors), 138   Square Flat 4 Panel Offset Left Door Cost,   KCDw\Sf4PO-L.jpg
+      DisplaySet,(#ThisDoor=@Sf4PO-R):#CostOfDoor =(#PricingDoors), 139   Square Flat 4 Panel Offset Right Door Cost,   KCDw\Sf4PO-R.jpg
+
+      DisplaySet,(#ThisDoor=@Sf3P):#CostOfDoor =(#PricingDoors)+(#Mullioncost*2), 139a   Square Flat 3 Panel  Door Cost,   KCDw\Sf3P.jpg
+      DisplaySet,(#ThisDoor=@Sf4P):#CostOfDoor =(#PricingDoors)+(#Mullioncost*2), 139b   Square Flat 4 Panel  Door Cost,   KCDw\Sf4P.jpg
+      DisplaySet,(#ThisDoor=@Sf6P):#CostOfDoor =(#PricingDoors)+(#Mullioncost*3), 139c   Square Flat 6 Panel  Door Cost,   KCDw\Sf6P.jpg
+
+      DisplaySet,(#ThisDoor=@SF2P7-3):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 140   Square Flat 2 Panel 70/30 Door Cost,   KCDw\SF2P7-3.jpg
+      DisplaySet,(#ThisDoor=@SF2P3-7):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 141   Square Flat 2 Panel 30/70 Door Cost,   KCDw\SF2P3-7.jpg
+      DisplaySet,(#ThisDoor=@SF2VP):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 142   Square Flat 2 Vertical Panel Door Cost,   KCDw\SF2VP.jpg
+      DisplaySet,(#ThisDoor=@SF6-4P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 143   Square Flat 2 Panel 60/40 Door Cost,   KCDw\SF6-4P.jpg
+      DisplaySet,(#ThisDoor=@SFPSW):#CostOfDoor =(#PricingDoors), 145   Square Flat Panel South West Door Cost,   KCDw\SFPSW.jpg
+      DisplaySet,(#ThisDoor=@SFP-M):#CostOfDoor =(#PricingDoors), 146   Square Flat Panel w/Applied Molding Door Cost,   KCDw\SFP-M.jpg
+      DisplaySet,(#ThisDoor=@SFP-B):#CostOfDoor =(#PricingDoors), 147   Square Flat Panel Beaded Door Cost,   KCDw\SFP-B.jpg
+      DisplaySet,(#ThisDoor=@SFDR):#CostOfDoor =(#PricingDoors), 148   Square Flat Panel Drawer Door Cost,   KCDw\SFDR.jpg
+      DisplaySet,(#ThisDoor=@SFDR-B):#CostOfDoor =(#PricingDoors), 149   Square Flat Panel Drw Beaded Door Cost,   KCDw\SFDR-B.jpg
+      DisplaySet,(#ThisDoor=@FpDR-M):#CostOfDoor =(#PricingDoors), 150   Square Flat Panel w/Applied Molding Drawer Door Cost,   KCDw\FpDR-M.jpg
+      DisplaySet,(#ThisDoor=@SGF2P7-3):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 151   70 Square Flat 30 Glass Panel Door Cost,   KCDw\SGF2P7-3.jpg
+      DisplaySet,(#ThisDoor=@SGF2P3-7):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 152   30 Glass 70 Square Flat Panel Door Cost,   KCDw\SGF2P3-7.jpg
+      DisplaySet,(#ThisDoor=@SFG4P3-7):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 153   30 Split Glass 70 Square Flat Panel Door Cost,   KCDw\SFG4P3-7.jpg
+      DisplaySet,(#ThisDoor=@SFG4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 154   Square Flat Glass 4 Panel Door Cost,   KCDw\SFG4P.jpg
+      DisplaySet,(#ThisDoor=@SFG7P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 155   Square Flat Glass 7 Panel Door Cost,   KCDw\SFG7P.jpg
+      DisplaySet,(#ThisDoor=@SFG7VP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 156   Square Flat Glass 7 Vertical Panel Door Cost,   KCDw\SFG7VP.jpg
+      DisplaySet,(#ThisDoor=@SFGP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 157   Square Flat Glass Multi Panel Door Cost,   KCDw\SFGP.jpg
+      DisplaySet,(#ThisDoor=@Sg4PO-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 158   Square Glass 4 Panel Offset Left Door Cost,   KCDw\Sg4PO-L.jpg
+      DisplaySet,(#ThisDoor=@Sg4PO-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 159   Square Glass 4 Panel Offset Right Door Cost,   KCDw\Sg4PO-R.jpg
+      DisplaySet,(#ThisDoor=@SG2P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 160   Square Glass 2 Panel Door Cost,   KCDw\SG2P.jpg
+      DisplaySet,(#ThisDoor=@SG2P7-3):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 161   Square Glass 2 Panel 70/30 Door Cost,   KCDw\SG2P7-3.jpg
+      DisplaySet,(#ThisDoor=@SG2P3-7):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 162   Square Glass 2 Panel 30/70 Door Cost,   KCDw\SG2P3-7.jpg
+      DisplaySet,(#ThisDoor=@SG4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*2), 163   Square Glass 4 Panel Door Cost,   KCDw\SG4P.jpg
+      DisplaySet,(#ThisDoor=@SG6P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*3), 164   Square Glass 6 Panel Door Cost,   KCDw\SG6P.jpg
+      DisplaySet,(#ThisDoor=@SG8P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*4), 165   Square Glass 8 Panel Door Cost,   KCDw\SG8P.jpg
+      DisplaySet,(#ThisDoor=@SG33P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*4), 166   Square Glass 9 Panel Door Cost,   KCDw\SG33P.jpg
+      DisplaySet,(#ThisDoor=@SGP9):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 167   Square Glass 9 Panel Offset Door Cost,   KCDw\SGP9.jpg
+      DisplaySet,(#ThisDoor=@SG34P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*5), 168   Square Glass 12 Panel Door Cost,   KCDw\SG34P.jpg
+      DisplaySet,(#ThisDoor=@SG4P-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 169   Square Glass 4 Panel w/Applied Molding Door Cost,   KCDw\SG4P-M.jpg
+      DisplaySet,(#ThisDoor=@SG6P-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 170   Square Glass 6 Panel w/Applied Molding Door Cost,   KCDw\SG6P-M.jpg
+      DisplaySet,(#ThisDoor=@SG8P-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 171   Square Glass 8 Panel w/Applied Molding Door Cost,   KCDw\SG8P-M.jpg
+      DisplaySet,(#ThisDoor=@SG33P-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 172   Square Glass 9 Panel w/Applied Molding Door Cost,   KCDw\SG33P-M.jpg
+      DisplaySet,(#ThisDoor=@SGP9-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 173   Square Glass 9 Panel Offset w/Applied Molding Door Cost,   KCDw\SGP9-M.jpg
+      DisplaySet,(#ThisDoor=@SG34P-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 174   Square Glass 12 Panel w/Applied Molding Door Cost,   KCDw\SG34P-M.jpg
+      DisplaySet,(#ThisDoor=@SGP-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 175   Square Glass Panel w/Applied Molding Door Cost,   KCDw\SGP-M.jpg
+      DisplaySet,(#ThisDoor=@SG6-4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 176   Square Glass 2 Panel 60/40 Door Cost,   KCDw\SG6-4P.jpg
+      DisplaySet,(#ThisDoor=@SGP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 177   Square Glass Panel Door Cost,   KCDw\SGP.jpg
+      DisplaySet,(#ThisDoor=@SGPdr):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 177a   Square Glass Panel Drawer Cost,   KCDw\SGPdr.jpg
+
+      DisplaySet,(#ThisDoor=@STG2):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 178   Square Smoked Glass Panel Door Cost Pattern 2,   KCDw\STG2.jpg
+      DisplaySet,(#ThisDoor=@STG3):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 179   Square Smoked Glass Panel Door Cost Pattern 3,   KCDw\STG3.jpg
+      DisplaySet,(#ThisDoor=@Deco-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 180   Square Glass Panel w Decorative Mullions Door Cost ,   KCDw\DECO-M.jpg
+      DisplaySet,(#ThisDoor=@SHGP):#CostOfDoor =(#PricingDoors), 181   Square Horizontal Groove Panel Door Cost,   KCDw\SHGP.jpg
+      DisplaySet,(#ThisDoor=@SQGRV):#CostOfDoor =(#PricingDoors), 182   Square Grooved Door Cost,   KCDw\SQGRV.jpg
+      DisplaySet,(#ThisDoor=@SQGRV2):#CostOfDoor =(#PricingDoors), 183   Square Grooved 2 Door Cost,   KCDw\SQGRV2.jpg
+      DisplaySet,(#ThisDoor=@SrP-WF):#CostOfDoor =(#PricingDoors), 184   Square Raised Panel Wide Frame Door Cost,   KCDw\SrP-WF.jpg
+      DisplaySet,(#ThisDoor=@Sr2P-WF):#CostOfDoor =(#PricingDoors), 185   Square Raised 2 Panel Wide Frame Door Cost,   KCDw\Sr2P-WF.jpg
+      DisplaySet,(#ThisDoor=@Sr4PO-L):#CostOfDoor =(#PricingDoors), 186   Square Raised 4 Panel Offset Left Door Cost,   KCDw\Sr4PO-L.jpg
+      DisplaySet,(#ThisDoor=@Sr4PO-R):#CostOfDoor =(#PricingDoors), 187   Square Raised 4 Panel Offset Right Door Cost,   KCDw\Sr4PO-R.jpg
+      DisplaySet,(#ThisDoor=@SRGP):#CostOfDoor =(#PricingDoors), 188   Square Raised Groove Panel Door Cost,   KCDw\SRGP.jpg
+      DisplaySet,(#ThisDoor=@SRGP-DR):#CostOfDoor =(#PricingDoors), 189   Square Raised Groove Panel Drawer Door Cost,   KCDw\SRGP-DR.jpg
+      DisplaySet,(#ThisDoor=@SRP-M):#CostOfDoor =(#PricingDoors), 190   Square Raised Panel w Applied Molding Door Cost,   KCDw\SRP-M.jpg
+      DisplaySet,(#ThisDoor=@SR2P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 191   Square Raised 2 Panel Door Cost,   KCDw\SR2P.jpg
+      DisplaySet,(#ThisDoor=@SR2P-M):#CostOfDoor =(#PricingDoors), 192   Square Raised 2 Panel w Applied Molding Door Cost,   KCDw\SR2P-M.jpg
+      DisplaySet,(#ThisDoor=@SR2P7-3):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 193   Square Raised 2 Panel 70/30 Door Cost,   KCDw\SR2P7-3.jpg
+      DisplaySet,(#ThisDoor=@SR2P3-7):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 194   Square Raised 2 Panel 30/70 Door Cost,   KCDw\SR2P3-7.jpg
+      DisplaySet,(#ThisDoor=@SR2VP):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 195   Square Raised 2 VPanel Door Cost,   KCDw\SR2VP.jpg
+      DisplaySet,(#ThisDoor=@SR3P):#CostOfDoor =(#PricingDoors)+(#Mullioncost*2), 196   Square Raised 3 Panel Door Cost,   KCDw\SR3P.jpg
+      DisplaySet,(#ThisDoor=@SR4P):#CostOfDoor =(#PricingDoors)+(#Mullioncost*2), 197   Square Raised 4 Panel Door Cost,   KCDw\SR4P.jpg
+      DisplaySet,(#ThisDoor=@SR6P):#CostOfDoor =(#PricingDoors)+(#Mullioncost*3), 198   Square Raised 6 Panel Door Cost,   KCDw\SR6P.jpg
+      DisplaySet,(#ThisDoor=@SR6-4P):#CostOfDoor =(#PricingDoors)+(#Mullioncost), 199   Square Raised 2 Panel 60/40 Door Cost,   KCDw\SR6-4P.jpg
+      DisplaySet,(#ThisDoor=@SRP-B):#CostOfDoor =(#PricingDoors), 200   Square Raised Panel Beaded Door Cost,   KCDw\SRP-B.jpg
+      DisplaySet,(#ThisDoor=@SWRP):#CostOfDoor =(#PricingDoors), 201   Square Wide Raised Panel Door Cost,   KCDw\SWRP.jpg
+      DisplaySet,(#ThisDoor=@SWRP-Dr):#CostOfDoor =(#PricingDoors), 202   Square Wide Raised Panel Drawer Cost,   KCDw\SWRP-DR.jpg
+      DisplaySet,(#ThisDoor=@STG):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 203   Stain Glass Door Door Cost,   KCDw\STG.jpg
+      DisplaySet,(#ThisDoor=@SVGP):#CostOfDoor =(#PricingDoors), 204   Square Flat V-Panel Door Cost,   KCDw\SVGP.jpg
+      DisplaySet,(#ThisDoor=@SVGRP):#CostOfDoor =(#PricingDoors), 205   Square Raised V-Panel Door Cost,   KCDw\SVGRP.jpg
+      DisplaySet,(#ThisDoor=@SQGRVDR):#CostOfDoor =(#PricingDoors), 206   Square Groove Drawer Cost,   KCDw\SQGRVDR.jpg
+      DisplaySet,(#ThisDoor=@SQGRV2DR):#CostOfDoor =(#PricingDoors), 207   2 Square Groove Drawer Cost,   KCDw\SQGRV2DR.jpg
+      DisplaySet,(#ThisDoor=@SVGPDR):#CostOfDoor =(#PricingDoors), 207A   Square Grooved Vertical Panled Drwr Cost,   KCDw\SVGPDR.jpg
+      
+      DisplaySet,(#ThisDoor=@VGR-DR):#CostOfDoor =(#PricingDoors), 208   Flat V Groove Drawer Door Cost,   KCDw\VGR-DR.jpg
+      DisplaySet,(#ThisDoor=@VGR-DR-V):#CostOfDoor =(#PricingDoors), 209   Flat V Groove Vertical Grain Drawer Door Cost,   KCDw\VGR-DR-V.jpg
+      
+      
+      DisplaySet,(#ThisDoor=@TAMBOR):#CostOfDoor =(#PricingDoors), 210   Tambor Door Cost,   KCDw\TAMBOR.jpg
+      DisplaySet,(#ThisDoor=@TOPPUL):#CostOfDoor =(#PricingDoors), 211   Top Pull Door Cost,   KCDw\TOPPUL.jpg
+      DisplaySet,(#ThisDoor=@VGR):#CostOfDoor =(#PricingDoors), 212   V Grooved  Door Cost,  KCDw\VGR.jpg
+      DisplaySet,(#ThisDoor=@Z-BTN-L):#CostOfDoor =(#PricingDoors), 213   Z Batten Left Door Cost,   KCDw\Z-BTN-L.jpg
+      DisplaySet,(#ThisDoor=@Z-BTN-R):#CostOfDoor =(#PricingDoors), 214   Z Batten Right Door Cost,   KCDw\Z-BTN-R.jpg
+      DisplaySet,(#ThisDoor=@AMP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 215   Arch Mirror Panel Door Cost,   KCDw\AMP.jpg
+      DisplaySet,(#ThisDoor=@CMP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 216   Cathedral Mirror Panel Door Cost,   KCDw\CMP.jpg
+
+      DisplaySet,(#ThisDoor=@Mirror):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 218   Mirror Door Cost,   KCDw\Mirror.jpg
+      DisplaySet,(#ThisDoor=@FLAT-B):#CostOfDoor =(#PricingDoors), 220   Flat Beaded Door Cost,   KCDw\FLAT-B.jpg
+      DisplaySet,(#ThisDoor=@Wkr):#CostOfDoor =(#PricingDoors), 221   Wicker with Frame Door Cost,   KCDw\Wkr.jpg
+      DisplaySet,(#ThisDoor=@Wkr2):#CostOfDoor =(#PricingDoors), 222   Wicker with Wide Frame Door Cost,   KCDw\Wkr2.jpg
+      DisplaySet,(#ThisDoor=@Tud-M):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 223   Thin Mullions Over Glass Door Cost,   KCDw\Tud-M.jpg
+      DisplaySet,(#ThisDoor=@FLTDR-B):#CostOfDoor =(#PricingDoors) , 224  Flat Drawer Beaded Door Cost,   KCDw\FLTDR-B.jpg
+      DisplaySet,(#ThisDoor=@MDF-ARP):#CostOfDoor =(#PricingDoors), 225    MDF Arch Raised Panel Door Cost,   KCDw\MDF-ARP.jpg
+      DisplaySet,(#ThisDoor=@MDF-CRP):#CostOfDoor =(#PricingDoors), 226   MDF Cathedral Raised Panel Door Cost,   KCDw\MDF-CRP.jpg
+      DisplaySet,(#ThisDoor=@MDF-SRP):#CostOfDoor =(#PricingDoors), 227   MDF Square Raised Panel Door Cost,   KCDw\MDF-SRP.jpg
+      DisplaySet,(#ThisDoor=@MDF-RPDR):#CostOfDoor =(#PricingDoors), 228   MDF Raised Panel Drawer Door Cost,   KCDw\MDF-RPDR.jpg
+      DisplaySet,(#ThisDoor=@MDF-RDR):#CostOfDoor =(#PricingDoors), 229   MDF Raised Drawer Door Cost,   KCDw\MDF-RDR.jpg
+      DisplaySet,(#ThisDoor=@SH-Mull):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 230   Shaker Mullion Door Cost,   KCDw\SH-Mull.jpg
+      DisplaySet,(#ThisDoor=@SRBP):#CostOfDoor =(#PricingDoors), 231   Square Raised Beaded Panel Door Cost,   KCDw\SRBP.jpg
+      DisplaySet,(#ThisDoor=@RBPDR):#CostOfDoor =(#PricingDoors), 232   Raised Beaded Panel Door Cost,   KCDw\RBPDR.jpg
+      DisplaySet,(#ThisDoor=@SR2BP):#CostOfDoor =(#PricingDoors), 233   Square Raised 2 Beaded Panel Door Cost,   KCDw\SR2BP.jpg
+      DisplaySet,(#ThisDoor=@SR2VBP):#CostOfDoor =(#PricingDoors), 234   Square Raised 2 V Beaded Panel Door Cost,   KCDw\SR2VBP.jpg
+      DisplaySet,(#ThisDoor=@FLAT-GRV-Dr):#CostOfDoor =(#PricingDoors), 235   Flat Grooved Dwr Frt Door Cost,   KCDw\FLAT-GRV-Dr.jpg
+      DisplaySet,(#ThisDoor=@QCG4P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 236   Quarter Circle Glass 4 Panel Left Door Cost,   KCDw\QCG4P-L.jpg
+      DisplaySet,(#ThisDoor=@QCG4P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 237   Quarter Circle Glass 4 Panel Right Door Cost,   KCDw\QCG4P-R.jpg
+      DisplaySet,(#ThisDoor=@QCG6P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 238   Quarter Circle Glass 6 Panel Left Door Cost,   KCDw\QCG6P-L.jpg
+      DisplaySet,(#ThisDoor=@QCG6P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 239   Quarter Circle Glass 6 Panel Right Door Cost,   KCDw\QCG6P-R.jpg
+      DisplaySet,(#ThisDoor=@QCG8P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 240   Quarter Circle Glass 8 Panel Left Door Cost,   KCDw\QCG8P-L.jpg
+      DisplaySet,(#ThisDoor=@QCG8P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 241   Quarter Circle Glass 8 Panel Right Door Cost,   KCDw\QCG8P-R.jpg
+      
+      DisplaySet,(#ThisDoor=@QSG4P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 242   Quarter Circle Glass 4 Straight Mull Panel Left Door Cost,   KCDw\QSG4P-L.jpg
+      DisplaySet,(#ThisDoor=@QSG4P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 243   Quarter Circle Glass 4 Straight Mull Panel Right Door Cost,   KCDw\QSG4P-R.jpg
+      DisplaySet,(#ThisDoor=@QSG6P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 244   Quarter Circle Glass 6 Panel Left Door Cost,   KCDw\QSG6P-L.jpg
+      DisplaySet,(#ThisDoor=@QSG6P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 245   Quarter Circle Glass 6 Straight Mull Panel Right Door Cost,   KCDw\QSG6P-R.jpg
+      DisplaySet,(#ThisDoor=@QSG8P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 246   Quarter Circle Glass 8 Straight Mull Panel Left Door Cost,   KCDw\QSG8P-L.jpg
+      DisplaySet,(#ThisDoor=@QSG8P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 247   Quarter Circle Glass 8 Straight Mull Panel Right Door Cost,   KCDw\QSG8P-R.jpg
+      
+      DisplaySet,(#ThisDoor=@QCGP-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 248   Quarter Circle Panel Left Door Cost,   KCDw\QCGP-L.jpg
+      DisplaySet,(#ThisDoor=@QCGP-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 249   Quarter Circle Glass Panel Right Door Cost,   KCDw\QCGP-R.jpg
+      DisplaySet,(#ThisDoor=@HACGP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 250   Half Circle Glass Panel Door Cost,   KCDw\HACGP.jpg
+      DisplaySet,(#ThisDoor=@HACG4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 251   Half Circle Glass 4 Panel Door Cost,   KCDw\HACG4P.jpg
+      DisplaySet,(#ThisDoor=@HACG6P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 252   Half Circle Glass 6 Panel Door Cost,   KCDw\HACG6P.jpg
+      DisplaySet,(#ThisDoor=@HACG8P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 252   Half Circle Glass 8 Panel Door Cost,   KCDw\HACG8P.jpg
+      DisplaySet,(#ThisDoor=@HACG8):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 253   Half Circle Glass 8 Panel Door Cost,   KCDw\HACG8.jpg
+
+      DisplaySet, (#ThisDoor=@SGXP): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 254  
+      DisplaySet, (#ThisDoor=@SGFP):    #CostOfDoor =(#PricingDoors)+(#frosteddoorextracost), 255
+      DisplaySet,(#ThisDoor=@SGFP): #DoorDrawerInsertType =#DoorDrawerInsertFrost,
+      Set,(#ThisDoor=@SGFP):#GlassDoorExtraCost=#FrostedDoorExtraCost
+      DisplaySet, (#ThisDoor=@SFG2P):   #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 256  
+
+      DisplaySet,(#ThisDoor=@RG4P): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 257  
+      DisplaySet,(#ThisDoor=@RG4P-R): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 258  
+      DisplaySet,(#ThisDoor=@RG4P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 259  
+      DisplaySet,(#ThisDoor=@RG6P): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 260  
+      DisplaySet,(#ThisDoor=@RG6P-R): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 261  
+      DisplaySet,(#ThisDoor=@RG6P-L): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 262  
+      DisplaySet,(#ThisDoor=@RG8P): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 263  
+      DisplaySet,(#ThisDoor=@RG8P-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 264  
+      DisplaySet,(#ThisDoor=@RG8P-L):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 265  
+      DisplaySet,(#ThisDoor=@RGP): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 266  
+      DisplaySet,(#ThisDoor=@RGP-R):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 267  
+      DisplaySet,(#ThisDoor=@RGP-L): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 268  
+
+      DisplaySet,(#ThisDoor=@Sbev): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 269
+      DisplaySet,(#ThisDoor=@AG2P): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 270 
+      ,Update V7.2.11 start
+      DisplaySet,(#ThisDoor=@FLAT-VG):#CostOfDoor =(#PricingDoors), 271     Flat Vertical Grain Door Cost,   
+      DisplaySet,(#ThisDoor=@FLAT-HG):#CostOfDoor =(#PricingDoors), 272     Flat Horizontal Grain Door Cost,   
+,Update V8.0start
+      DisplaySet,(#ThisDoor=@Flat-VG-Clear): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 273
+      DisplaySet,(#ThisDoor=@Flat-HG-Clear): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 274
+,Update V8.0end
+      DisplaySet,(#ThisDoor=@Bevel): #CostOfDoor =(#PricingDoors), 275
+      DisplaySet,(#ThisDoor=@BevelDr): #CostOfDoor =(#PricingDoors), 276
+      DisplaySet,(#ThisDoor=@SMP-bevel):#CostOfDoor =(#PricingDoors)+(#BevelMirrorDoorExtraCost), 277   Square Bevel Mirror Panel Door Cost,   KCDw\SMP-bevel.jpg
+      DisplaySet,(#ThisDoor=@SMP-bevel):#DoorDrawerInsertType =#DoorDrawerInsertBevMirror, 277   Square Bevel Mirror Panel Door Insert,   KCDw\SMP-bevel.jpg
+      Set,(#ThisDoor=@SMP-bevel): #GlassDoorExtraCost=#BevelMirrorDoorExtraCost
+      DisplaySet,(#ThisDoor=@SMP):#CostOfDoor =(#PricingDoors)+(#MirrorDoorExtraCost), 278   Square Mirror Panel Door Cost,   KCDw\SMP.jpg
+      DisplaySet,(#ThisDoor=@SMP):#DoorDrawerInsertType =#DoorDrawerInsertMirror, 278   Square Mirror Panel Door Insert,   KCDw\SMP.jpg
+      Set,(#ThisDoor=@SMP):#GlassDoorExtraCost=#MirrorDoorExtraCost
+      DisplaySet,(#ThisDoor=@SM2P):#CostOfDoor =(#PricingDoors)+(#MirrorDoorExtraCost)+(#Mullioncost), 278.1   Square Mirror 2 Panel Door Cost,   KCDw\SM2P.jpg
+      DisplaySet,(#ThisDoor=@SM2P):#DoorDrawerInsertType =#DoorDrawerInsertMirror, 278.1   Square Mirror 2 Panel Door Insert,   KCDw\SM2P.jpg
+      Set,(#ThisDoor=@SM2P):#GlassDoorExtraCost=#MirrorDoorExtraCost
+      DisplaySet, (#ThisDoor=@SGF2P):    #CostOfDoor =(#PricingDoors)+(#frosteddoorextracost)+(#Mullioncost), 278.2
+      DisplaySet,(#ThisDoor=@SGF2P): #DoorDrawerInsertType =#DoorDrawerInsertFrost,
+      Set,(#ThisDoor=@SGF2P):#GlassDoorExtraCost=#frostedDoorExtraCost
+
+      DisplaySet,(#ThisDoor=@SSP):#CostOfDoor =(#PricingDoors)+(#SpeakerDoorExtraCost), 279   Square  Speaker Panel Door Cost,   KCDw\SSP.jpg
+      DisplaySet,(#ThisDoor=@SSP):#DoorDrawerInsertType =#DoorDrawerInsertSpeaker, 279   Square  Speaker Panel Door insert,   KCDw\SSP.jpg
+      Set,(#ThisDoor=@SSP):#GlassDoorExtraCost=#SpeakerDoorExtraCost
+      DisplaySet,(#ThisDoor=@Speakercloth):#CostOfDoor =(#PricingDoors)+(#SpeakerDoorExtraCost), 279   Square  Speaker Panel Door Cost,   KCDw\SSP.jpg
+      DisplaySet,(#ThisDoor=@Speakercloth):#DoorDrawerInsertType =#DoorDrawerInsertSpeaker, 279   Square  Speaker Panel Door insert,   KCDw\SSP.jpg
+      Set,(#ThisDoor=@Speakercloth):#GlassDoorExtraCost=#SpeakerDoorExtraCost
+
+      DisplaySet,(#ThisDoor=@SFP):#CostOfDoor =(#PricingDoors), 280   Square Flat Panel Door Cost,   KCDw\SFP.jpg
+,Update V8.0start
+      DisplaySet,(#ThisDoor=@Flat-VG-Mirror): #CostOfDoor =(#PricingDoors)+(#MirrorDoorExtraCost), 281
+      DisplaySet,(#ThisDoor=@Flat-VG-Mirror): #DoorDrawerInsertType =#DoorDrawerInsertMirror, 281
+      DisplaySet,(#ThisDoor=@Flat-HG-Mirror): #CostOfDoor =(#PricingDoors)+(#MirrorDoorExtraCost), 282
+      DisplaySet,(#ThisDoor=@Flat-HG-Mirror): #DoorDrawerInsertType =#DoorDrawerInsertMirror, 282
+      DisplaySet,(#ThisDoor=@Flat-VG-Solid): #CostOfDoor =(#PricingDoors), 283
+      DisplaySet,(#ThisDoor=@Flat-HG-Solid): #CostOfDoor =(#PricingDoors), 284
+      DisplaySet,(#ThisDoor=@Flat-VG-Speaker): #CostOfDoor =(#PricingDoors)+(#SpeakerDoorExtraCost), 285
+      DisplaySet,(#ThisDoor=@Flat-VG-Speaker): #DoorDrawerInsertType =#DoorDrawerInsertSpeaker, 285
+      DisplaySet,(#ThisDoor=@Flat-HG-Speaker): #CostOfDoor =(#PricingDoors)+(#SpeakerDoorExtraCost), 286
+      DisplaySet,(#ThisDoor=@Flat-HG-Speaker): #DoorDrawerInsertType =#DoorDrawerInsertSpeaker, 286
+      DisplaySet,(#ThisDoor=@Flat-VG-Matte): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 287
+      DisplaySet,(#ThisDoor=@Flat-HG-Matte): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 288
+      DisplaySet,(#ThisDoor=@Flat-VG-Smoke): #CostOfDoor =(#PricingDoors)+(#SmokeDoorExtraCost), 289
+      DisplaySet,(#ThisDoor=@Flat-VG-Smoke): #DoorDrawerInsertType =#DoorDrawerInsertSmoke,
+      DisplaySet,(#ThisDoor=@Flat-HG-Smoke): #CostOfDoor =(#PricingDoors)+(#SmokeDoorExtraCost), 290
+      DisplaySet,(#ThisDoor=@Flat-HG-Smoke): #DoorDrawerInsertType =#DoorDrawerInsertSmoke,
+      DisplaySet,(#ThisDoor=@SG2Pvp):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*2), 291   Square Glass 2 Vertical Panel Door Cost,   KCDw\SG2vP.jpg
+      DisplaySet,(#ThisDoor=@AG6-4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost), 292     Arch Flat 2 Panel 60/40 Door Cost,   KCDw\Ag6-4P.jpg
+      DisplaySet,(#ThisDoor=@CG8P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost)+(#Mullioncost*4), 293     Cathedral Glass 8 Panel Door Cost,   KCDw\CG8P.jpg
+      DisplaySet,(#ThisDoor=@St-GLASS):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 294   Flat Steel Glass Door Cost,   KCDw\st-Glass.jpg
+      DisplaySet,(#ThisDoor=@St-FLAT):#CostOfDoor =(#PricingDoors), 295     Flat Steel Door Cost,   KCDw\st-FLAT.jpg
+      DisplaySet,(#ThisDoor=@AFP):#CostOfDoor =(#PricingDoors), 296       Arch Flat Panel Door Cost,  KCDw\Afp.jpg
+     
+      DisplaySet,(#ThisDoor=@Abev): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 297    
+      DisplaySet,(#ThisDoor=@WCFP):#CostOfDoor =(#PricingDoors), 298     Double  Cathedral Flat Panel Door Cost,   KCDw\WCFP.jpg
+      DisplaySet,(#ThisDoor=@WCG4P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 299     Double Cathedral Glass 4 Panel Door Cost,   KCDw\WCG4P.jpg
+      DisplaySet,(#ThisDoor=@WCG6P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 300     Double  Cathedral Glass 6 Panel Door Cost,   KCDw\WCG6P.jpg
+      DisplaySet,(#ThisDoor=@WCG8P):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 301     Double  Cathedral Glass 8 Panel Door Cost,   KCDw\WCG8P.jpg
+      DisplaySet,(#ThisDoor=@WCGP):#CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 302     Double  Cathedral Glass Panel Door Cost,   KCDw\WCGP.jpg
+      DisplaySet,(#ThisDoor=@WCRP):#CostOfDoor =(#PricingDoors), 303     Double  Cathedral Raised Panel Door Cost,   KCDw\WCRP.jpg
+      DisplaySet,(#ThisDoor=@EXTRUDED PULL BOT):#CostOfDoor =(#PricingDoors), 304     Extruded Handle Door Cost,  KCDw\EXTRUDEDPULLBOT.jpg
+      DisplaySet,(#ThisDoor=@EXTRUDED PULL TOP):#CostOfDoor =(#PricingDoors), 305     Extruded Handle Door Cost,  KCDw\EXTRUDEDPULLTOP.jpg
+      DisplaySet,(#ThisDoor=@EXTRUDED PULL LEFT):#CostOfDoor =(#PricingDoors), 306     Extruded Handle Door Cost,  KCDw\EXTRUDEDPULLLEFT.jpg
+      DisplaySet,(#ThisDoor=@EXTRUDED PULL RIGHT):#CostOfDoor =(#PricingDoors), 307     Extruded Handle Door Cost,  KCDw\EXTRUDEDPULLRIGHT.jpg
+      DisplaySet,(#ThisDoor=@FT-1):#CostOfDoor =(#PricingDoors), 308     Wall Bed FT-1,  KCDw\FT-1.jpg
+      DisplaySet,(#ThisDoor=@SM2P3-7):#CostOfDoor =(#PricingDoors)+(#MirrorDoorExtraCost)+(#Mullioncost), 309  Square Mirror 2 Panel 30/70 Door Cost,   KCDw\SM2P3-7.jpg
+      DisplaySet,(#ThisDoor=@SM2P3-7):#DoorDrawerInsertType =#DoorDrawerInsertMirror, 310   Square Mirror 2 Panel 30/70 Door Insert,   KCDw\SM2P3-7.jpg
+      Set,(#ThisDoor=@SM2P3-7):#GlassDoorExtraCost=#MirrorDoorExtraCost
+      
+      DisplaySet,(#ThisDoor=@Extruded Pull Bot DR):#CostOfDoor =(#PricingDoors),311     Extruded Handle Drawer Cost,  KCDw\EXTRUDEDPULLBOT DR.jpg
+      DisplaySet,(#ThisDoor=@Extruded Pull Top DR):#CostOfDoor =(#PricingDoors),312     Extruded Handle Drawer Cost,  KCDw\EXTRUDEDPULLTOP DR.jpg
+      DisplaySet,(#ThisDoor=@flatcfMolding-DR):#CostOfDoor =(#PricingDoors),313     CF Flat Molding Drawer Cost,  
+      DisplaySet,(#ThisDoor=@flat-HG-DR):#CostOfDoor =(#PricingDoors),314     Flat Horizontal Grain Drawer Cost,   
+      DisplaySet,(#ThisDoor=@flat-VG-DR):#CostOfDoor =(#PricingDoors),315    Flat Vertical Grain Drawer Cost,   
+      DisplaySet, (#ThisDoor=@Etched Insert):    #CostOfDoor =(#PricingDoors)+(#etcheddoorextracost), 316
+      Set,(#ThisDoor=@Etched Insert): #DoorDrawerInsertType =#DoorDrawerInsertEtched,
+      Set,(#ThisDoor=@Etched Insert):#GlassDoorExtraCost=#EtchedDoorExtraCost
+      DisplaySet, (#ThisDoor=@Etched Insert w Mullion):    #CostOfDoor =(#PricingDoors)+(#etcheddoorextracost)+(#Mullioncost), 317
+      Set,(#ThisDoor=@Etched Insert w Mullion): #DoorDrawerInsertType =#DoorDrawerInsertEtched,
+      Set,(#ThisDoor=@Etched Insert w Mullion):#GlassDoorExtraCost=#EtchedDoorExtraCost
+
+      DisplaySet,(#ThisDoor=@Melbourne):#CostOfDoor =(.01),318   Melbourne Cost, 
+      DisplaySet,(#ThisDoor=@Sanford):#CostOfDoor =(.01),319   Sanford Cost, 
+
+      DisplaySet,(#ThisDoor=@SGWA): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 297 
+      DisplaySet,(#ThisDoor=@SGRD): #CostOfDoor =(#PricingDoors)+(#GlassDoorExtraCost), 297 
+
+    }
+
+      
+,Update V8.0end
+      ,updateV7.2.12end
+      ,Update V7.2.11 end
+}
+
+
+
+
+
+Do,(#DoorCostMethod ="List"):1
+{
+   ,**
+   ,***************************************************  DOOR PRICE METHOD = PRICE FROM LIST *****************************************************************
+   ,**
+   
+   ,**              Set the cost of your "Standard" Doors by the following ranges. (other door designs set below)
+   ,**              Start with your smallest Door followed by its cost.
+   ,**              Set progressively larger ones as you go down the list
+   ,**              Each price applies to items from that size down to the size of the one before it.
+   ,**
+   
+   DisplaySet, #NumDoorHeight=10, Q...     HOW MANY DIFFERENT DOOR HEIGHTS DO YOU USE?  [1;2;3;4;5;6;7;8;9;10]
+   ,**              Example:  7 different sizes
+   ,**                  (Doors Smaller than 18")   -   (set to 17.99)
+   ,**                  (Doors Equal to 18")   -   (set to 18)
+   ,**                  (Doors Larger than 18" & Smaller than 30")   -   (set to 29.99)
+   ,**                  (Doors Equal to 30")   -   (set to 30)
+   ,**                  (Doors Larger than 30" & Smaller than 60")   -   (set to 59.99)
+   ,**                  (Doors Equal to 60")   -   (set to 60)
+   ,**                  (Doors Larger than 60" & Up to 96")   -   (set to 96.01)
+   ,**
+   
+   DisplaySet,#GlassDoorExtraCost=((#DoorArea*23)+33),         --------   Extra Cost for Glass Doors ?
+   
+   Set,#PriceDoorsFixed=(#DoorDrawerStyleCostGroup)
+   Set,(#PriceMethodDoors="List"):#PricingDoors=(#PriceDoorsFixed)
+   
+   Do,  (#NumDoorHeight>0):1
+   {
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      DisplaySet, #DoorHeightA =17.99, 1 Q...     WHAT IS THE HEIGHT OF YOUR 1st DOOR? (SMALLEST), DoorHeight.Bmp
+      
+      DisplaySet, #NumDoorWidthA=10, 1 Q...     HOW MANY DIFFERENT WIDTHS DO YOU USE FOR THIS DOOR HEIGHT?  [0;1;2;3;4;5;6;7;8;9;10]
+      ,**
+      
+      Do, (#NumDoorWidthA>0):1
+      {
+         DisplaySet, #DoorWidth1A =12,          1.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost1A =10.01,                   Cost of a Door   (up to #DoorHeightA" high)   by   (up to #DoorWidth1A" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>0)&(#DoorW<=#DoorWidth1A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #CostOfDoor = #DoorCost1A ,Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthA>1):1
+      {
+         DisplaySet, #DoorWidth2A =15,          2.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost2A =11.02,                   Cost of a Door   (up to #DoorHeightA" high)   by   (up to #DoorWidth2A" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth1A)&(#DoorW<=#DoorWidth2A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #CostOfDoor = #DoorCost2A , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthA>2):1
+      {
+         DisplaySet, #DoorWidth3A =18,          3.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost3A =12.03,                   Cost of a Door   (up to #DoorHeightA" high)   by   (up to #DoorWidth3A" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth2A)&(#DoorW<=#DoorWidth3A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #CostOfDoor = #DoorCost3A , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthA>3):1
+      {
+         DisplaySet, #DoorWidth4A =21,          4.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost4A =13.04,                   Cost of a Door   (up to #DoorHeightA" high)   by   (up to #DoorWidth4A" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth3A)&(#DoorW<=#DoorWidth4A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #CostOfDoor = #DoorCost4A , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthA>4):1
+      {
+         DisplaySet, #DoorWidth5A =24,          5.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost5A =14.05,                   Cost of a Door   (up to #DoorHeightA" high)   by   (up to #DoorWidth5A" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth4A)&(#DoorW<=#DoorWidth5A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #CostOfDoor = #DoorCost5A , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthA>5):1
+      {
+         DisplaySet, #DoorWidth6A =27,          6.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost6A =15.06,                   Cost of a Door   (up to #DoorHeightA" high)   by   (up to #DoorWidth6A" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth5A)&(#DoorW<=#DoorWidth6A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #CostOfDoor = #DoorCost6A , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthA>6):1
+      {
+         DisplaySet, #DoorWidth7A =30,          7.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost7A =17.07,                   Cost of a Door   (up to #DoorHeightA" high)   by   (up to #DoorWidth7A" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth6A)&(#DoorW<=#DoorWidth7A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #CostOfDoor = #DoorCost7A , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthA>7):1
+      {
+         DisplaySet, #DoorWidth8A =33,          8.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost8A =18.08,                    Cost of a Door   (up to #DoorHeightA" high)   by   (up to #DoorWidth8A" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth7A)&(#DoorW<=#DoorWidth8A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #CostOfDoor = #DoorCost8A , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthA>8):1
+      {
+         DisplaySet, #DoorWidth9A =36,          9.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost9A =19.09,                    Cost of a Door   (up to #DoorHeightA" high)   by   (up to #DoorWidth9A" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth8A)&(#DoorW<=#DoorWidth9A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #CostOfDoor = #DoorCost9A , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthA>9):1
+      {
+         DisplaySet, #DoorWidth10A =39,          10. Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost10A =20.10,                    Cost of a Door   (up to #DoorHeightA" high)   by   (up to #DoorWidth10A" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth9A)&(#DoorW<=#DoorWidth10A) & (#DoorH>0)&(#DoorH<=#DoorHeightA): #CostOfDoor = #DoorCost10A , Set the Cost of This Door
+      }
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   }
+   
+   
+   
+   
+   
+   Do,  (#NumDoorHeight>1):1
+   {
+      DisplaySet, #DoorHeightB =18, 2 Q...     WHAT IS THE HEIGHT OF YOUR 2nd DOOR? , DoorHeight.Bmp
+      
+      DisplaySet, #NumDoorWidthB=10, 2 Q...     HOW MANY DIFFERENT WIDTHS DO YOU USE FOR THIS DOOR HEIGHT?  [0;1;2;3;4;5;6;7;8;9;10]
+      ,**
+      
+      Do, (#NumDoorWidthB>0):1
+      {
+         DisplaySet, #DoorWidth1B =12,          1.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost1B =21.01,                   Cost of a Door   (up to #DoorHeightB" high)   by   (up to #DoorWidth1B" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>0)&(#DoorW<=#DoorWidth1B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #CostOfDoor = #DoorCost1B ,Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthB>1):1
+      {
+         DisplaySet, #DoorWidth2B =15,          2.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost2B =22.02,                   Cost of a Door   (up to #DoorHeightB" high)   by   (up to #DoorWidth2B" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth1B)&(#DoorW<=#DoorWidth2B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #CostOfDoor = #DoorCost2B , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthB>2):1
+      {
+         DisplaySet, #DoorWidth3B =18,          3.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost3B =23.03,                   Cost of a Door   (up to #DoorHeightB" high)   by   (up to #DoorWidth3B" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth2B)&(#DoorW<=#DoorWidth3B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #CostOfDoor = #DoorCost3B , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthB>3):1
+      {
+         DisplaySet, #DoorWidth4B =21,          4.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost4B =24.04,                   Cost of a Door   (up to #DoorHeightB" high)   by   (up to #DoorWidth4B" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth3B)&(#DoorW<=#DoorWidth4B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #CostOfDoor = #DoorCost4B , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthB>4):1
+      {
+         DisplaySet, #DoorWidth5B =24,          5.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost5B =25.05,                   Cost of a Door   (up to #DoorHeightB" high)   by   (up to #DoorWidth5B" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth4B)&(#DoorW<=#DoorWidth5B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #CostOfDoor = #DoorCost5B , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthB>5):1
+      {
+         DisplaySet, #DoorWidth6B =27,          6.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost6B =26.06,                   Cost of a Door   (up to #DoorHeightB" high)   by   (up to #DoorWidth6B" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth5B)&(#DoorW<=#DoorWidth6B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #CostOfDoor = #DoorCost6B , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthB>6):1
+      {
+         DisplaySet, #DoorWidth7B =30,          7.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost7B =27.07,                   Cost of a Door   (up to #DoorHeightB" high)   by   (up to #DoorWidth7B" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth6B)&(#DoorW<=#DoorWidth7B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #CostOfDoor = #DoorCost7B , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthB>7):1
+      {
+         DisplaySet, #DoorWidth8B =33,          8.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost8B =28.08,                    Cost of a Door   (up to #DoorHeightB" high)   by   (up to #DoorWidth8B" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth7B)&(#DoorW<=#DoorWidth8B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #CostOfDoor = #DoorCost8B , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthB>8):1
+      {
+         DisplaySet, #DoorWidth9B =36,          9.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost9B =29.09,                    Cost of a Door   (up to #DoorHeightB" high)   by   (up to #DoorWidth9B" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth8B)&(#DoorW<=#DoorWidth9B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #CostOfDoor = #DoorCost9B , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthB>9):1
+      {
+         DisplaySet, #DoorWidth10B =39,          10. Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost10B =30.10,                    Cost of a Door   (up to #DoorHeightB" high)   by   (up to #DoorWidth10B" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth9B)&(#DoorW<=#DoorWidth10B) & (#DoorH>#DoorHeightA)&(#DoorH<=#DoorHeightB): #CostOfDoor = #DoorCost10B , Set the Cost of This Door
+      }
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   }
+   
+   
+   
+   
+   
+   
+   
+   Do,  (#NumDoorHeight>2):1
+   {
+      DisplaySet, #DoorHeightC =29.99, 3 Q...     WHAT IS THE HEIGHT OF YOUR 3rd DOOR? , DoorHeight.Bmp
+      
+      DisplaySet, #NumDoorWidthC=10, 3 Q...     HOW MANY DIFFERENT WIDTHS DO YOU USE FOR THIS DOOR HEIGHT?  [0;1;2;3;4;5;6;7;8;9;10]
+      ,**
+      
+      Do, (#NumDoorWidthC>0):1
+      {
+         DisplaySet, #DoorWidth1C =12,          1.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost1C =31.01,                   Cost of a Door   (up to #DoorHeightC" high)   by   (up to #DoorWidth1C" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>0)&(#DoorW<=#DoorWidth1C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #CostOfDoor = #DoorCost1C ,Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthC>1):1
+      {
+         DisplaySet, #DoorWidth2C =15,          2.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost2C =32.02,                   Cost of a Door   (up to #DoorHeightC" high)   by   (up to #DoorWidth2C" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth1C)&(#DoorW<=#DoorWidth2C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #CostOfDoor = #DoorCost2C , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthC>2):1
+      {
+         DisplaySet, #DoorWidth3C =18,          3.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost3C =33.03,                   Cost of a Door   (up to #DoorHeightC" high)   by   (up to #DoorWidth3C" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth2C)&(#DoorW<=#DoorWidth3C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #CostOfDoor = #DoorCost3C , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthC>3):1
+      {
+         DisplaySet, #DoorWidth4C =21,          4.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost4C =34.04,                   Cost of a Door   (up to #DoorHeightC" high)   by   (up to #DoorWidth4C" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth3C)&(#DoorW<=#DoorWidth4C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #CostOfDoor = #DoorCost4C , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthC>4):1
+      {
+         DisplaySet, #DoorWidth5C =24,          5.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost5C =35.05,                   Cost of a Door   (up to #DoorHeightC" high)   by   (up to #DoorWidth5C" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth4C)&(#DoorW<=#DoorWidth5C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #CostOfDoor = #DoorCost5C , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthC>5):1
+      {
+         DisplaySet, #DoorWidth6C =27,          6.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost6C =36.06,                   Cost of a Door   (up to #DoorHeightC" high)   by   (up to #DoorWidth6C" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth5C)&(#DoorW<=#DoorWidth6C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #CostOfDoor = #DoorCost6C , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthC>6):1
+      {
+         DisplaySet, #DoorWidth7C =30,          7.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost7C =37.07,                   Cost of a Door   (up to #DoorHeightC" high)   by   (up to #DoorWidth7C" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth6C)&(#DoorW<=#DoorWidth7C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #CostOfDoor = #DoorCost7C , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthC>7):1
+      {
+         DisplaySet, #DoorWidth8C =33,          8.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost8C =38.08,                    Cost of a Door   (up to #DoorHeightC" high)   by   (up to #DoorWidth8C" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth7C)&(#DoorW<=#DoorWidth8C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #CostOfDoor = #DoorCost8C , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthC>8):1
+      {
+         DisplaySet, #DoorWidth9C =36,          9.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost9C =39.09,                    Cost of a Door   (up to #DoorHeightC" high)   by   (up to #DoorWidth9C" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth8C)&(#DoorW<=#DoorWidth9C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #CostOfDoor = #DoorCost9C , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthC>9):1
+      {
+         DisplaySet, #DoorWidth10C =39,          10. Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost10C =40.10,                    Cost of a Door   (up to #DoorHeightC" high)   by   (up to #DoorWidth10C" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth9C)&(#DoorW<=#DoorWidth10C) & (#DoorH>#DoorHeightB)&(#DoorH<=#DoorHeightC): #CostOfDoor = #DoorCost10C , Set the Cost of This Door
+      }
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   }
+   
+   
+   
+   
+   
+   
+   
+   Do,  (#NumDoorHeight>3):1
+   {
+      DisplaySet, #DoorHeightD =30, 4 Q...     WHAT IS THE HEIGHT OF YOUR 4th DOOR? , DoorHeight.Bmp
+      
+      DisplaySet, #NumDoorWidthD=10, 4 Q...     HOW MANY DIFFERENT WIDTHS DO YOU USE FOR THIS DOOR HEIGHT?  [0;1;2;3;4;5;6;7;8;9;10]
+      ,**
+      
+      Do, (#NumDoorWidthD>0):1
+      {
+         DisplaySet, #DoorWidth1D =12,          1.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost1D =41.01,                   Cost of a Door   (up to #DoorHeightD" high)   by   (up to #DoorWidth1D" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>0)&(#DoorW<=#DoorWidth1D) & (#DoorH>#DoorHeightC)&(#DoorH<=#DoorHeightD): #CostOfDoor = #DoorCost1D ,Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthD>1):1
+      {
+         DisplaySet, #DoorWidth2D =15,          2.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost2D =42.02,                   Cost of a Door   (up to #DoorHeightD" high)   by   (up to #DoorWidth2D" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth1D)&(#DoorW<=#DoorWidth2D) & (#DoorH>#DoorHeightC)&(#DoorH<=#DoorHeightD): #CostOfDoor = #DoorCost2D , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthD>2):1
+      {
+         DisplaySet, #DoorWidth3D =18,          3.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost3D =43.03,                   Cost of a Door   (up to #DoorHeightD" high)   by   (up to #DoorWidth3D" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth2D)&(#DoorW<=#DoorWidth3D) & (#DoorH>#DoorHeightC)&(#DoorH<=#DoorHeightD): #CostOfDoor = #DoorCost3D , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthD>3):1
+      {
+         DisplaySet, #DoorWidth4D =21,          4.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost4D =44.04,                   Cost of a Door   (up to #DoorHeightD" high)   by   (up to #DoorWidth4D" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth3D)&(#DoorW<=#DoorWidth4D) & (#DoorH>#DoorHeightC)&(#DoorH<=#DoorHeightD): #CostOfDoor = #DoorCost4D , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthD>4):1
+      {
+         DisplaySet, #DoorWidth5D =24,          5.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost5D =45.05,                   Cost of a Door   (up to #DoorHeightD" high)   by   (up to #DoorWidth5D" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth4D)&(#DoorW<=#DoorWidth5D) & (#DoorH>#DoorHeightC)&(#DoorH<=#DoorHeightD): #CostOfDoor = #DoorCost5D , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthD>5):1
+      {
+         DisplaySet, #DoorWidth6D =27,          6.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost6D =46.06,                   Cost of a Door   (up to #DoorHeightD" high)   by   (up to #DoorWidth6D" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth5D)&(#DoorW<=#DoorWidth6D) & (#DoorH>#DoorHeightC)&(#DoorH<=#DoorHeightD): #CostOfDoor = #DoorCost6D , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthD>6):1
+      {
+         DisplaySet, #DoorWidth7D =30,          7.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost7D =47.07,                   Cost of a Door   (up to #DoorHeightD" high)   by   (up to #DoorWidth7D" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth6D)&(#DoorW<=#DoorWidth7D) & (#DoorH>#DoorHeightC)&(#DoorH<=#DoorHeightD): #CostOfDoor = #DoorCost7D , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthD>7):1
+      {
+         DisplaySet, #DoorWidth8D =33,          8.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost8D =48.08,                    Cost of a Door   (up to #DoorHeightD" high)   by   (up to #DoorWidth8D" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth7D)&(#DoorW<=#DoorWidth8D) & (#DoorH>#DoorHeightC)&(#DoorH<=#DoorHeightD): #CostOfDoor = #DoorCost8D , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthD>8):1
+      {
+         DisplaySet, #DoorWidth9D =36,          9.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost9D =49.09,                    Cost of a Door   (up to #DoorHeightD" high)   by   (up to #DoorWidth9D" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth8D)&(#DoorW<=#DoorWidth9D) & (#DoorH>#DoorHeightC)&(#DoorH<=#DoorHeightD): #CostOfDoor = #DoorCost9D , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthD>9):1
+      {
+         DisplaySet, #DoorWidth10D =39,          10. Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost10D =50.10,                    Cost of a Door   (up to #DoorHeightD" high)   by   (up to #DoorWidth10D" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth9D)&(#DoorW<=#DoorWidth10D) & (#DoorH>#DoorHeightC)&(#DoorH<=#DoorHeightD): #CostOfDoor = #DoorCost10D , Set the Cost of This Door
+      }
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   }
+   
+   
+   
+   
+   
+   
+   Do,  (#NumDoorHeight>4):1
+   {
+      DisplaySet, #DoorHeightE =59.99, 5 Q...     WHAT IS THE HEIGHT OF YOUR 5th DOOR? , DoorHeight.Bmp
+      
+      DisplaySet, #NumDoorWidthE=10, 5 Q...     HOW MANY DIFFERENT WIDTHS DO YOU USE FOR THIS DOOR HEIGHT?  [0;1;2;3;4;5;6;7;8;9;10]
+      ,**
+      
+      Do, (#NumDoorWidthE>0):1
+      {
+         DisplaySet, #DoorWidth1E =12,          1.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost1E =51.01,                   Cost of a Door   (up to #DoorHeightE" high)   by   (up to #DoorWidth1E" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>0)&(#DoorW<=#DoorWidth1E) & (#DoorH>#DoorHeightD)&(#DoorH<=#DoorHeightE): #CostOfDoor = #DoorCost1E ,Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthE>1):1
+      {
+         DisplaySet, #DoorWidth2E =15,          2.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost2E =52.02,                   Cost of a Door   (up to #DoorHeightE" high)   by   (up to #DoorWidth2E" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth1E)&(#DoorW<=#DoorWidth2E) & (#DoorH>#DoorHeightD)&(#DoorH<=#DoorHeightE): #CostOfDoor = #DoorCost2E , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthE>2):1
+      {
+         DisplaySet, #DoorWidth3E =18,          3.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost3E =53.03,                   Cost of a Door   (up to #DoorHeightE" high)   by   (up to #DoorWidth3E" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth2E)&(#DoorW<=#DoorWidth3E) & (#DoorH>#DoorHeightD)&(#DoorH<=#DoorHeightE): #CostOfDoor = #DoorCost3E , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthE>3):1
+      {
+         DisplaySet, #DoorWidth4E =21,          4.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost4E =54.04,                   Cost of a Door   (up to #DoorHeightE" high)   by   (up to #DoorWidth4E" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth3E)&(#DoorW<=#DoorWidth4E) & (#DoorH>#DoorHeightD)&(#DoorH<=#DoorHeightE): #CostOfDoor = #DoorCost4E , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthE>4):1
+      {
+         DisplaySet, #DoorWidth5E =24,          5.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost5E =55.05,                   Cost of a Door   (up to #DoorHeightE" high)   by   (up to #DoorWidth5E" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth4E)&(#DoorW<=#DoorWidth5E) & (#DoorH>#DoorHeightD)&(#DoorH<=#DoorHeightE): #CostOfDoor = #DoorCost5E , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthE>5):1
+      {
+         DisplaySet, #DoorWidth6E =27,          6.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost6E =56.06,                   Cost of a Door   (up to #DoorHeightE" high)   by   (up to #DoorWidth6E" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth5E)&(#DoorW<=#DoorWidth6E) & (#DoorH>#DoorHeightD)&(#DoorH<=#DoorHeightE): #CostOfDoor = #DoorCost6E , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthE>6):1
+      {
+         DisplaySet, #DoorWidth7E =30,          7.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost7E =57.07,                   Cost of a Door   (up to #DoorHeightE" high)   by   (up to #DoorWidth7E" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth6E)&(#DoorW<=#DoorWidth7E) & (#DoorH>#DoorHeightD)&(#DoorH<=#DoorHeightE): #CostOfDoor = #DoorCost7E , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthE>7):1
+      {
+         DisplaySet, #DoorWidth8E =33,          8.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost8E =58.08,                    Cost of a Door   (up to #DoorHeightE" high)   by   (up to #DoorWidth8E" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth7E)&(#DoorW<=#DoorWidth8E) & (#DoorH>#DoorHeightD)&(#DoorH<=#DoorHeightE): #CostOfDoor = #DoorCost8E , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthE>8):1
+      {
+         DisplaySet, #DoorWidth9E =36,          9.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost9E =59.09,                    Cost of a Door   (up to #DoorHeightE" high)   by   (up to #DoorWidth9E" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth8E)&(#DoorW<=#DoorWidth9E) & (#DoorH>#DoorHeightD)&(#DoorH<=#DoorHeightE): #CostOfDoor = #DoorCost9E , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthA>9):1
+      {
+         DisplaySet, #DoorWidth10E =39,          10. Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost10E =60.10,                    Cost of a Door   (up to #DoorHeightE" high)   by   (up to #DoorWidth10E" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth9E)&(#DoorW<=#DoorWidth10E) & (#DoorH>#DoorHeightD)&(#DoorH<=#DoorHeightE): #CostOfDoor = #DoorCost10E , Set the Cost of This Door
+      }
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   }
+   
+   
+   
+   
+   
+   
+   Do,  (#NumDoorHeight>5):1
+   {
+      DisplaySet, #DoorHeightF =60, 6 Q...     WHAT IS THE HEIGHT OF YOUR 6th DOOR? , DoorHeight.Bmp
+      
+      DisplaySet, #NumDoorWidthF=10, 6 Q...     HOW MANY DIFFERENT WIDTHS DO YOU USE FOR THIS DOOR HEIGHT?  [0;1;2;3;4;5;6;7;8;9;10]
+      ,**
+      
+      Do, (#NumDoorWidthF>0):1
+      {
+         DisplaySet, #DoorWidth1F =12,          1.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost1F =61.01,                   Cost of a Door   (up to #DoorHeightF" high)   by   (up to #DoorWidth1F" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>0)&(#DoorW<=#DoorWidth1F) & (#DoorH>#DoorHeightE)&(#DoorH<=#DoorHeightF): #CostOfDoor = #DoorCost1F ,Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthF>1):1
+      {
+         DisplaySet, #DoorWidth2F =15,          2.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost2F =61.02,                   Cost of a Door   (up to #DoorHeightF" high)   by   (up to #DoorWidth2F" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth1F)&(#DoorW<=#DoorWidth2F) & (#DoorH>#DoorHeightE)&(#DoorH<=#DoorHeightF): #CostOfDoor = #DoorCost2F , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthF>2):1
+      {
+         DisplaySet, #DoorWidth3F =18,          3.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost3F =63.03,                   Cost of a Door   (up to #DoorHeightF" high)   by   (up to #DoorWidth3F" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth2F)&(#DoorW<=#DoorWidth3F) & (#DoorH>#DoorHeightE)&(#DoorH<=#DoorHeightF): #CostOfDoor = #DoorCost3F , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthF>3):1
+      {
+         DisplaySet, #DoorWidth4F =21,          4.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost4F =64.04,                   Cost of a Door   (up to #DoorHeightF" high)   by   (up to #DoorWidth4F" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth3F)&(#DoorW<=#DoorWidth4F) & (#DoorH>#DoorHeightE)&(#DoorH<=#DoorHeightF): #CostOfDoor = #DoorCost4F , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthF>4):1
+      {
+         DisplaySet, #DoorWidth5F =24,          5.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost5F =65.05,                   Cost of a Door   (up to #DoorHeightF" high)   by   (up to #DoorWidth5F" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth4F)&(#DoorW<=#DoorWidth5F) & (#DoorH>#DoorHeightE)&(#DoorH<=#DoorHeightF): #CostOfDoor = #DoorCost5F , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthF>5):1
+      {
+         DisplaySet, #DoorWidth6F =27,          6.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost6F =66.06,                   Cost of a Door   (up to #DoorHeightF" high)   by   (up to #DoorWidth6F" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth5F)&(#DoorW<=#DoorWidth6F) & (#DoorH>#DoorHeightE)&(#DoorH<=#DoorHeightF): #CostOfDoor = #DoorCost6F , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthF>6):1
+      {
+         DisplaySet, #DoorWidth7F =30,          7.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost7F =67.07,                   Cost of a Door   (up to #DoorHeightF" high)   by   (up to #DoorWidth7F" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth6F)&(#DoorW<=#DoorWidth7F) & (#DoorH>#DoorHeightE)&(#DoorH<=#DoorHeightF): #CostOfDoor = #DoorCost7F , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthF>7):1
+      {
+         DisplaySet, #DoorWidth8F =33,          8.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost8F =68.08,                    Cost of a Door   (up to #DoorHeightF" high)   by   (up to #DoorWidth8F" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth7F)&(#DoorW<=#DoorWidth8F) & (#DoorH>#DoorHeightE)&(#DoorH<=#DoorHeightF): #CostOfDoor = #DoorCost8F , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthF>8):1
+      {
+         DisplaySet, #DoorWidth9F =36,          9.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost9F =69.09,                    Cost of a Door   (up to #DoorHeightF" high)   by   (up to #DoorWidth9F" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth8F)&(#DoorW<=#DoorWidth9F) & (#DoorH>#DoorHeightE)&(#DoorH<=#DoorHeightF): #CostOfDoor = #DoorCost9F , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthF>9):1
+      {
+         DisplaySet, #DoorWidth10F =39,          10. Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost10F =70.10,                    Cost of a Door   (up to #DoorHeightF" high)   by   (up to #DoorWidth10F" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth9F)&(#DoorW<=#DoorWidth10F) & (#DoorH>#DoorHeightE)&(#DoorH<=#DoorHeightF): #CostOfDoor = #DoorCost10F , Set the Cost of This Door
+      }
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   }
+   
+   
+   
+   
+   
+   
+   Do,  (#NumDoorHeight>6):1
+   {
+      DisplaySet, #DoorHeightG =96.01, 7 Q...     WHAT IS THE HEIGHT OF YOUR 7th DOOR? , DoorHeight.Bmp
+      
+      DisplaySet, #NumDoorWidthG=10, 7 Q...     HOW MANY DIFFERENT WIDTHS DO YOU USE FOR THIS DOOR HEIGHT?  [0;1;2;3;4;5;6;7;8;9;10]
+      ,**
+      
+      Do, (#NumDoorWidthG>0):1
+      {
+         DisplaySet, #DoorWidth1G =12,          1.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost1G =71.01,                   Cost of a Door   (up to #DoorHeightG" high)   by   (up to #DoorWidth1G" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>0)&(#DoorW<=#DoorWidth1G) & (#DoorH>#DoorHeightF)&(#DoorH<=#DoorHeightG): #CostOfDoor = #DoorCost1G ,Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthG>1):1
+      {
+         DisplaySet, #DoorWidth2G =15,          2.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost2G =72.02,                   Cost of a Door   (up to #DoorHeightG" high)   by   (up to #DoorWidth2G" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth1G)&(#DoorW<=#DoorWidth2G) & (#DoorH>#DoorHeightF)&(#DoorH<=#DoorHeightG): #CostOfDoor = #DoorCost2G , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthG>2):1
+      {
+         DisplaySet, #DoorWidth3G =18,          3.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost3G =73.03,                   Cost of a Door   (up to #DoorHeightG" high)   by   (up to #DoorWidth3G" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth2G)&(#DoorW<=#DoorWidth3G) & (#DoorH>#DoorHeightF)&(#DoorH<=#DoorHeightG): #CostOfDoor = #DoorCost3G , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthG>3):1
+      {
+         DisplaySet, #DoorWidth4G =21,          4.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost4G =74.04,                   Cost of a Door   (up to #DoorHeightG" high)   by   (up to #DoorWidth4G" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth3G)&(#DoorW<=#DoorWidth4G) & (#DoorH>#DoorHeightF)&(#DoorH<=#DoorHeightG): #CostOfDoor = #DoorCost4G , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthG>4):1
+      {
+         DisplaySet, #DoorWidth5G =24,          5.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost5G =75.05,                   Cost of a Door   (up to #DoorHeightG" high)   by   (up to #DoorWidth5G" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth4G)&(#DoorW<=#DoorWidth5G) & (#DoorH>#DoorHeightF)&(#DoorH<=#DoorHeightG): #CostOfDoor = #DoorCost5G , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthG>5):1
+      {
+         DisplaySet, #DoorWidth6G =27,          6.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost6G =76.06,                   Cost of a Door   (up to #DoorHeightG" high)   by   (up to #DoorWidth6G" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth6G)&(#DoorW<=#DoorWidth6G) & (#DoorH>#DoorHeightF)&(#DoorH<=#DoorHeightG): #CostOfDoor = #DoorCost6G , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthG>6):1
+      {
+         DisplaySet, #DoorWidth7G =30,          7.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost7G =77.07,                   Cost of a Door   (up to #DoorHeightG" high)   by   (up to #DoorWidth7G" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth6G)&(#DoorW<=#DoorWidth7G) & (#DoorH>#DoorHeightF)&(#DoorH<=#DoorHeightG): #CostOfDoor = #DoorCost7G , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthG>7):1
+      {
+         DisplaySet, #DoorWidth8G =33,          8.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost8G =78.08,                    Cost of a Door   (up to #DoorHeightG" high)   by   (up to #DoorWidth8G" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth7G)&(#DoorW<=#DoorWidth8G) & (#DoorH>#DoorHeightF)&(#DoorH<=#DoorHeightG): #CostOfDoor = #DoorCost8G , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthG>8):1
+      {
+         DisplaySet, #DoorWidth9G =36,          9.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost9G =79.09,                    Cost of a Door   (up to #DoorHeightG" high)   by   (up to #DoorWidth9G" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth8G)&(#DoorW<=#DoorWidth9G) & (#DoorH>#DoorHeightF)&(#DoorH<=#DoorHeightG): #CostOfDoor = #DoorCost9G , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthG>9):1
+      {
+         DisplaySet, #DoorWidth10G =39,          10. Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost10G =80.10,                    Cost of a Door   (up to #DoorHeightG" high)   by   (up to #DoorWidth10G" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth9G)&(#DoorW<=#DoorWidth10G) & (#DoorH>#DoorHeightF)&(#DoorH<=#DoorHeightG): #CostOfDoor = #DoorCost10G , Set the Cost of This Door
+      }
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   }
+   
+   
+   
+   
+   
+   
+   Do,  (#NumDoorHeight>7):1
+   {
+      DisplaySet, #DoorHeightH =0, 8 Q...     WHAT IS THE HEIGHT OF YOUR 8th DOOR? , DoorHeight.Bmp
+      
+      DisplaySet, #NumDoorWidthH=1, 8 Q...     HOW MANY DIFFERENT WIDTHS DO YOU USE FOR THIS DOOR HEIGHT?  [0;1;2;3;4;5;6;7;8;9;10]
+      ,**
+      
+      Do, (#NumDoorWidthH>0):1
+      {
+         DisplaySet, #DoorWidth1H =0,          1.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost1H =0,                   Cost of a Door   (up to #DoorHeightH" high)   by   (up to #DoorWidth1H" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>0)&(#DoorW<=#DoorWidth1H) & (#DoorH>#DoorHeightG)&(#DoorH<=#DoorHeightH): #CostOfDoor = #DoorCost1H ,Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthH>1):1
+      {
+         DisplaySet, #DoorWidth2H =0,          2.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost2H =0,                   Cost of a Door   (up to #DoorHeightH" high)   by   (up to #DoorWidth2H" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth1H)&(#DoorW<=#DoorWidth2H) & (#DoorH>#DoorHeightG)&(#DoorH<=#DoorHeightH): #CostOfDoor = #DoorCost2H , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthH>2):1
+      {
+         DisplaySet, #DoorWidth3H =0,          3.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost3H =0,                   Cost of a Door   (up to #DoorHeightH" high)   by   (up to #DoorWidth3H" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth2H)&(#DoorW<=#DoorWidth3H) & (#DoorH>#DoorHeightG)&(#DoorH<=#DoorHeightH): #CostOfDoor = #DoorCost3H , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthH>3):1
+      {
+         DisplaySet, #DoorWidth4H =0,          4.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost4H =0,                   Cost of a Door   (up to #DoorHeightH" high)   by   (up to #DoorWidth4H" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth3H)&(#DoorW<=#DoorWidth4H) & (#DoorH>#DoorHeightG)&(#DoorH<=#DoorHeightH): #CostOfDoor = #DoorCost4H , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthH>4):1
+      {
+         DisplaySet, #DoorWidth5H =0,          5.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost5H =0,                   Cost of a Door   (up to #DoorHeightH" high)   by   (up to #DoorWidth5H" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth4H)&(#DoorW<=#DoorWidth5H) & (#DoorH>#DoorHeightG)&(#DoorH<=#DoorHeightH): #CostOfDoor = #DoorCost5H , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthH>5):1
+      {
+         DisplaySet, #DoorWidth6H =0,          6.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost6H =0,                   Cost of a Door   (up to #DoorHeightH" high)   by   (up to #DoorWidth6H" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth5H)&(#DoorW<=#DoorWidth6H) & (#DoorH>#DoorHeightG)&(#DoorH<=#DoorHeightH): #CostOfDoor = #DoorCost6H , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthH>6):1
+      {
+         DisplaySet, #DoorWidth7H =0,          7.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost7H =0,                   Cost of a Door   (up to #DoorHeightH" high)   by   (up to #DoorWidth7H" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth6H)&(#DoorW<=#DoorWidth7H) & (#DoorH>#DoorHeightG)&(#DoorH<=#DoorHeightH): #CostOfDoor = #DoorCost7H , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthH>7):1
+      {
+         DisplaySet, #DoorWidth8H =0 ,          8.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost8H =0   ,                    Cost of a Door   (up to #DoorHeightH" high)   by   (up to #DoorWidth8H" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth7H)&(#DoorW<=#DoorWidth8H) & (#DoorH>#DoorHeightG)&(#DoorH<=#DoorHeightH): #CostOfDoor = #DoorCost8H , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthH>8):1
+      {
+         DisplaySet, #DoorWidth9H =0 ,          9.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost9H =0   ,                    Cost of a Door   (up to #DoorHeightH" high)   by   (up to #DoorWidth9H" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth8H)&(#DoorW<=#DoorWidth9H) & (#DoorH>#DoorHeightG)&(#DoorH<=#DoorHeightH): #CostOfDoor = #DoorCost9H , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthH>9):1
+      {
+         DisplaySet, #DoorWidth10H =0,          10. Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost10H =0  ,                    Cost of a Door   (up to #DoorHeightH" high)   by   (up to #DoorWidth10H" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth9H)&(#DoorW<=#DoorWidth10H) & (#DoorH>#DoorHeightG)&(#DoorH<=#DoorHeightH): #CostOfDoor = #DoorCost10H , Set the Cost of This Door
+      }
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   }
+   
+   
+   
+   
+   
+   
+   Do,  (#NumDoorHeight>8):1
+   {
+      DisplaySet, #DoorHeightI =0, 9 Q...     WHAT IS THE HEIGHT OF YOUR 9th DOOR? , DoorHeight.Bmp
+      
+      DisplaySet, #NumDoorWidthI=0, 9 Q...     HOW MANY DIFFERENT WIDTHS DO YOU USE FOR THIS DOOR HEIGHT?  [0;1;2;3;4;5;6;7;8;9;10]
+      ,**
+      
+      Do, (#NumDoorWidthI>0):1
+      {
+         DisplaySet, #DoorWidth1I =0,          1.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost1I =0,                   Cost of a Door   (up to #DoorHeightI" high)   by   (up to #DoorWidth1I" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>0)&(#DoorW<=#DoorWidth1I) & (#DoorH>#DoorHeightH)&(#DoorH<=#DoorHeightI): #CostOfDoor = #DoorCost1I ,Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthI>1):1
+      {
+         DisplaySet, #DoorWidth2I =0,          2.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost2I =0,                   Cost of a Door   (up to #DoorHeightI" high)   by   (up to #DoorWidth2I" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth1I)&(#DoorW<=#DoorWidth2I) & (#DoorH>#DoorHeightH)&(#DoorH<=#DoorHeightI): #CostOfDoor = #DoorCost2I , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthI>2):1
+      {
+         DisplaySet, #DoorWidth3I =0,          3.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost3I =0,                   Cost of a Door   (up to #DoorHeightI" high)   by   (up to #DoorWidth3I" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth2I)&(#DoorW<=#DoorWidth3I) & (#DoorH>#DoorHeightH)&(#DoorH<=#DoorHeightI): #CostOfDoor = #DoorCost3I , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthI>3):1
+      {
+         DisplaySet, #DoorWidth4I =0,          4.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost4I =0,                   Cost of a Door   (up to #DoorHeightI" high)   by   (up to #DoorWidth4I" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth3I)&(#DoorW<=#DoorWidth4I) & (#DoorH>#DoorHeightH)&(#DoorH<=#DoorHeightI): #CostOfDoor = #DoorCost4I , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthI>4):1
+      {
+         DisplaySet, #DoorWidth5I =0,          5.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost5I =0,                   Cost of a Door   (up to #DoorHeightI" high)   by   (up to #DoorWidth5I" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth4I)&(#DoorW<=#DoorWidth5I) & (#DoorH>#DoorHeightH)&(#DoorH<=#DoorHeightI): #CostOfDoor = #DoorCost5I , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthI>5):1
+      {
+         DisplaySet, #DoorWidth6I =0,          6.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost6I =0,                   Cost of a Door   (up to #DoorHeightI" high)   by   (up to #DoorWidth6I" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth5I)&(#DoorW<=#DoorWidth6I) & (#DoorH>#DoorHeightH)&(#DoorH<=#DoorHeightI): #CostOfDoor = #DoorCost6I , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthI>6):1
+      {
+         DisplaySet, #DoorWidth7I =0,          7.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost7I =0,                   Cost of a Door   (up to #DoorHeightI" high)   by   (up to #DoorWidth7I" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth6I)&(#DoorW<=#DoorWidth7I) & (#DoorH>#DoorHeightH)&(#DoorH<=#DoorHeightI): #CostOfDoor = #DoorCost7I , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthI>7):1
+      {
+         DisplaySet, #DoorWidth8I =0 ,          8.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost8I =0   ,                    Cost of a Door   (up to #DoorHeightI" high)   by   (up to #DoorWidth8I" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth7I)&(#DoorW<=#DoorWidth8I) & (#DoorH>#DoorHeightH)&(#DoorH<=#DoorHeightI): #CostOfDoor = #DoorCost8I , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthI>8):1
+      {
+         DisplaySet, #DoorWidth9I =0 ,          9.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost9I =0   ,                    Cost of a Door   (up to #DoorHeightI" high)   by   (up to #DoorWidth9I" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth8I)&(#DoorW<=#DoorWidth9I) & (#DoorH>#DoorHeightH)&(#DoorH<=#DoorHeightI): #CostOfDoor = #DoorCost9I , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthI>9):1
+      {
+         DisplaySet, #DoorWidth10I =0,          10. Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost10I =0  ,                    Cost of a Door   (up to #DoorHeightI" high)   by   (up to #DoorWidth10I" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth9I)&(#DoorW<=#DoorWidth10I) & (#DoorH>#DoorHeightH)&(#DoorH<=#DoorHeightI): #CostOfDoor = #DoorCost10I , Set the Cost of This Door
+      }
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   }
+   
+   
+   
+   
+   
+   
+   Do,  (#NumDoorHeight>9):1
+   {
+      DisplaySet, #DoorHeightJ =0, 10 Q...     WHAT IS THE HEIGHT OF YOUR 10th DOOR? , DoorHeight.Bmp
+      
+      DisplaySet, #NumDoorWidthJ=0, 10 Q...     HOW MANY DIFFERENT WIDTHS DO YOU USE FOR THIS DOOR HEIGHT?  [0;1;2;3;4;5;6;7;8;9;10]
+      ,**
+      
+      Do, (#NumDoorWidthJ>0):1
+      {
+         DisplaySet, #DoorWidth1J =0,          1.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost1J =0,                   Cost of a Door   (up to #DoorHeightJ" high)   by   (up to #DoorWidth1J" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>0)&(#DoorW<=#DoorWidth1J) & (#DoorH>#DoorHeightI)&(#DoorH<=#DoorHeightJ): #CostOfDoor = #DoorCost1J ,Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthJ>1):1
+      {
+         DisplaySet, #DoorWidth2J =0,          2.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost2J =0,                   Cost of a Door   (up to #DoorHeightJ" high)   by   (up to #DoorWidth2J" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth1J)&(#DoorW<=#DoorWidth2J) & (#DoorH>#DoorHeightI)&(#DoorH<=#DoorHeightJ): #CostOfDoor = #DoorCost2J , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthJ>2):1
+      {
+         DisplaySet, #DoorWidth3J =0,          3.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost3J =0,                   Cost of a Door   (up to #DoorHeightJ" high)   by   (up to #DoorWidth3J" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth2J)&(#DoorW<=#DoorWidth3J) & (#DoorH>#DoorHeightI)&(#DoorH<=#DoorHeightJ): #CostOfDoor = #DoorCost3J , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthJ>3):1
+      {
+         DisplaySet, #DoorWidth4J =0,          4.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost4J =0,                   Cost of a Door   (up to #DoorHeightJ" high)   by   (up to #DoorWidth4J" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth3J)&(#DoorW<=#DoorWidth4J) & (#DoorH>#DoorHeightI)&(#DoorH<=#DoorHeightJ): #CostOfDoor = #DoorCost4J , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthJ>4):1
+      {
+         DisplaySet, #DoorWidth5J =0,          5.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost5J =0,                   Cost of a Door   (up to #DoorHeightJ" high)   by   (up to #DoorWidth5J" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth4J)&(#DoorW<=#DoorWidth5J) & (#DoorH>#DoorHeightI)&(#DoorH<=#DoorHeightJ): #CostOfDoor = #DoorCost5J , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthJ>5):1
+      {
+         DisplaySet, #DoorWidth6J =0,          6.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost6J =0,                   Cost of a Door   (up to #DoorHeightJ" high)   by   (up to #DoorWidth6J" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth5J)&(#DoorW<=#DoorWidth6J) & (#DoorH>#DoorHeightI)&(#DoorH<=#DoorHeightJ): #CostOfDoor = #DoorCost6J , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthJ>6):1
+      {
+         DisplaySet, #DoorWidth7J =0,          7.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost7J =0,                   Cost of a Door   (up to #DoorHeightJ" high)   by   (up to #DoorWidth7J" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth6J)&(#DoorW<=#DoorWidth7J) & (#DoorH>#DoorHeightI)&(#DoorH<=#DoorHeightJ): #CostOfDoor = #DoorCost7J , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthJ>7):1
+      {
+         DisplaySet, #DoorWidth8J =0 ,          8.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost8J =0   ,                    Cost of a Door   (up to #DoorHeightJ" high)   by   (up to #DoorWidth8J" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth7J)&(#DoorW<=#DoorWidth8J) & (#DoorH>#DoorHeightI)&(#DoorH<=#DoorHeightJ): #CostOfDoor = #DoorCost8J , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthJ>8):1
+      {
+         DisplaySet, #DoorWidth9J =0 ,          9.  Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost9J =0   ,                    Cost of a Door   (up to #DoorHeightJ" high)   by   (up to #DoorWidth9J" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth8J)&(#DoorW<=#DoorWidth9J) & (#DoorH>#DoorHeightI)&(#DoorH<=#DoorHeightJ): #CostOfDoor = #DoorCost9J , Set the Cost of This Door
+      }
+      
+      Do, (#NumDoorWidthJ>9):1
+      {
+         DisplaySet, #DoorWidth10J =0,          10. Door Width is Less than or Equal to, DoorWidth.Bmp
+         DisplaySet, #DoorCost10J =0  ,                    Cost of a Door   (up to #DoorHeightJ" high)   by   (up to #DoorWidth10J" wide), DoorWidthDepth.Bmp
+         Set, (#DoorW>#DoorWidth9J)&(#DoorW<=#DoorWidth10J) & (#DoorH>#DoorHeightI)&(#DoorH<=#DoorHeightJ): #CostOfDoor = #DoorCost10J , Set the Cost of This Door
+      }
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   }
+
+   ,**
+   ,**
+   ,**
+   
+   
+   
+   ,**  ******************************* SET DIFFERENT DOOR STYLE COST FACTORS ************************************
+   
+   
+   
+   ,**
+   
+   ,**              Set the "Door Name" and the "Cost Multiplier" for each ot your Door Styles.
+   ,**              Start with your Most Commonly used Door followed by the other door you use.
+   ,**              The Cost Multiplier is the amount that you would multiply your standard door cost by to get this door cost.
+   ,**
+   
+   DisplaySet, #NumDoorStyles=5, Q...     HOW MANY DIFFERENT DOOR STYLES DO YOU USE?  [1;2;3;4;5;6;7;8;9;10]
+   ,**
+   
+   ,set as a default
+   set, #DoorTypeFactor = 1
+   
+   
+   Do, (#NumDoorStyles>0):1
+   {
+      DisplaySet, #DoorName1 =FLAT,          1. Name of your "Standard" Door Style
+      DisplaySet, #DoorCostFactor1 =1.00,                      Cost factor for the  (#DoorName1)  Door
+      Set, (#ThisDoor=@#DoorName1): #DoorTypeFactor = #DoorCostFactor1
+      ,**
+   }
+   
+   Do, (#NumDoorStyles>1):1
+   {
+      DisplaySet, #DoorName2 =SRP,          2. Name of your 2nd Door Style
+      DisplaySet, #DoorCostFactor2 =1.50,                      Cost factor for the  (#DoorName2)  Door
+      Set, (#ThisDoor=@#DoorName2): #DoorTypeFactor = #DoorCostFactor2
+      ,**
+   }
+   
+   Do, (#NumDoorStyles>2):1
+   {
+      DisplaySet, #DoorName3 =SFP,          3. Name of your 3rd Door Style
+      DisplaySet, #DoorCostFactor3 =1.35,                      Cost factor for the  (#DoorName3)  Door
+      Set, (#ThisDoor=@#DoorName3): #DoorTypeFactor = #DoorCostFactor3
+      ,**
+   }
+   
+   Do, (#NumDoorStyles>3):1
+   {
+      DisplaySet, #DoorName4 =SGP,          4. Name of your 4th Door Style
+      DisplaySet, #DoorCostFactor4 =1.40,                      Cost factor for the  (#DoorName4)  Door
+      Set, (#ThisDoor=@#DoorName4): #DoorTypeFactor = #DoorCostFactor4
+      ,**
+   }
+   
+   Do, (#NumDoorStyles>4):1
+   {
+      DisplaySet, #DoorName5 =ARP,          5. Name of your 5th Door Style
+      DisplaySet, #DoorCostFactor5 =1.75,                      Cost factor for the  (#DoorName5)  Door
+      Set, (#ThisDoor=@#DoorName5): #DoorTypeFactor = #DoorCostFactor5
+      ,**
+   }
+   
+   
+   Do, (#NumDoorStyles>5):1
+   {
+      DisplaySet, #DoorName6 =None,          6. Name of your 6th Door Style
+      DisplaySet, #DoorCostFactor6 =1.00,                      Cost factor for the  (#DoorName6)  Door
+      Set, (#ThisDoor=@#DoorName6): #DoorTypeFactor = #DoorCostFactor6
+      ,**
+   }
+   
+   Do, (#NumDoorStyles>6):1
+   {
+      DisplaySet, #DoorName7 =None,          7. Name of your 7th Door Style
+      DisplaySet, #DoorCostFactor7 =1.00,                      Cost factor for the  (#DoorName7)  Door
+      Set, (#ThisDoor=@#DoorName7): #DoorTypeFactor = #DoorCostFactor7
+      ,**
+   }
+   
+   Do, (#NumDoorStyles>7):1
+   {
+      DisplaySet, #DoorName8 =None,          8. Name of your 8th Door Style
+      DisplaySet, #DoorCostFactor8 =1.00,                      Cost factor for the  (#DoorName8)  Door
+      Set, (#ThisDoor=@#DoorName8): #DoorTypeFactor = #DoorCostFactor8
+      ,**
+   }
+   
+   Do, (#NumDoorStyles>8):1
+   {
+      DisplaySet, #DoorName9 =None,          9. Name of your 9th Door Style
+      DisplaySet, #DoorCostFactor9 =1.00,                      Cost factor for the  (#DoorName9)  Door
+      Set, (#ThisDoor=@#DoorName9): #DoorTypeFactor = #DoorCostFactor9
+      ,**
+   }
+   
+   Do, (#NumDoorStyles>9):1
+   {
+      DisplaySet, #DoorName10 =None,          10. Name of your 10th Door Style
+      DisplaySet, #DoorCostFactor10 =1.00,                     Cost factor for the  (#DoorName10)  Door
+      Set, (#ThisDoor=@#DoorName10): #DoorTypeFactor = #DoorCostFactor10
+      ,**
+   }
+   
+   
+   
+   
+   
+   ,Multiply by the Door Type Factor If Needed
+   Set, (#DoorTypeFactor<=0)|(#DoorTypeFactor>10): #DoorTypeFactor=1  ,Must be Positive and Not TOO Large
+   Set, #CostOfDoor =  [#CostOfDoor * #DoorTypeFactor]                ,Multiply by DoorFactor (It MAY also ADD a value. Look at the Different DoorFactor lines)
+   
+   
+   ,**
+   ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+

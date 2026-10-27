@@ -1,0 +1,14 @@
+,Add to side depth if needed for cutbacks
+Set, #tempvertd=D 
+Set, #VertDL=D
+Set, #VertDR=D
+
+
+Do,((ls>0)&(lcb<>0)):1
+{
+Set, #VertDL = (#tempvertd+(lcb/2))
+}
+Do,((rs>0)&(rcb<>0)):1
+{
+Set, #VertDR = (#tempvertd+(rcb/2))
+}

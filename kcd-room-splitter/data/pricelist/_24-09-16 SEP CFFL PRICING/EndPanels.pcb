@@ -1,0 +1,45 @@
+,***********This calculates the cost of each End Panel as Door Type Selected
+
+Set, #CostOfDoor=0 ,Set as Default
+
+
+,Set,(#UseDoorCode=Yes):#DoorName=#CodeDoor:#DoorName=Door - #DoorDrawerType
+,Set,(#UseDoorCode=Yes):#DrFrtName=#CodeDoor:#DrFrtName=DrFrt - #DoorDrawerType
+
+
+
+,***Single End Panel Door
+Set, #Endpanel=1
+,Set, #DoorH=#EndpanelH
+,Set, #DoorW=#EndpanelW
+load,doors.pcb
+,Load, D-Door Cost.pcb
+,load, Getdoorstylecost.pcb
+Set, #Endpanel=0
+
+
+Do, (1=2):
+{
+Do, (#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2"):1              ,Custom Door cost
+{
+
+set, #costofdoor = #EndpanelW*#EndpanelH/144*(#DoorDrawerStyleCostGroup+#DoorDrawerFinishingCostGroup)
+set, (#EndPanelW>#MaxDoorWidth):#Costofdoor=0
+
+, solid doors
+Price,(#CostOfDoor>0)&(#IncludeInsert=0):1   ,#DecorativePanelName -#DoorDrawerType-#DoorDrawerFinishingType,    #CostOfDoor,   #EndpanelW, #EndpanelH, #DoorPrintOrderNumber,
+,Framed doors 
+Price,(#CostOfDoor>0)&(#IncludeInsert=1):1   ,#DecorativePanelName -#DoorDrawerType-#DoorDrawerFinishingType-#DoorDrawerInsertType,    #CostOfDoor,    #EndpanelW, #EndpanelH, #DoorPrintOrderNumber,
+
+
+
+}
+}
+,not doing this check anymore.
+,invalid door
+,Do, (#CostofDoor=0):1
+,{
+,set, #name =  No Color Selected or invalid size
+,load, Eachunit.pcb
+}
+

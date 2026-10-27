@@ -1,0 +1,57 @@
+,This is computing totals
+
+Load,MakeCalc.pcb
+,Load,GetHandleKnobCost.pcb
+,Set,#TotalDoorHandleCost = [#TotalDoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+,Set,#TotalDoorKnobCost = [#TotalDoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+,Set,#TotalDoorHingeCost = [#TotalDoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+
+
+Set,#TotalDoorHandleCost = [#TotalDoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,#TotalDoorKnobCost = [#TotalDoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+,Set,#TotalDoorHingeCost = [#TotalDoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Load,RoomTotals.pcb
+set,#TotalDoorCost=[#TotalDoorCost+(#UnitDoorCost*num)]
+set,#TotalDoorNum=[#TotalDoorNum+(#UnitDoorNum*num)]
+set,#TotalDoorArea=[#TotalDoorArea+(#UnitDoorArea*num)]
+
+set,#TotalDrawerCost=[#TotalDrawerCost+(#UnitDrawerCost*num)]
+set,#TotalDrawerNum=[#TotalDrawerNum+(#UnitDrawerNum*num)]
+set,#TotalPulloutCost=[#TotalPulloutCost+(#UnitPulloutCost*num)]
+set,#TotalPulloutNum=[#TotalPulloutNum+(#UnitPulloutNum*num)]
+
+set,#TotalHangPoleNum=[#TotalHangPoleNum+(#UnitHangPoleNum*num)]
+set,#TotalHangPoleCost=[#TotalHangPoleCost+(#UnitHangPoleCost*num)]
+set,#TotalHangPoleLength=[#TotalHangPoleLength+(#UnitHangPoleLength*num)]
+
+set,#TotalCubbyCost=[#TotalCubbyCost+(#UnitCubbyCost*num)]
+set,#TotalCubbyNum=[#TotalCubbyNum+(#UnitCubbyNum*num)]
+set,#TotalBasketNum=[#TotalBasketNum+(#UnitBasketNum*num)]
+set,#TotalBasketCost=[#TotalBasketCost+(#UnitBasketCost*num)]
+
+set,#TotalWireShelfNum=[#TotalWireShelfNum+(#UnitWireShelfNum*num)]
+set,#TotalWireShelfCost=[#TotalWireShelfCost+(#UnitWireShelfCost*num)]
+set,#TotalWireShelfLength=[#TotalWireShelfLength+(#UnitWireShelfLength*num)]
+set,#TotalWireShelfSquare=[#TotalWireShelfSquare+(#UnitWireShelfSquare*num)]
+set,#TotalWSSNum=[#TotalWSSNum+(#UnitWSSNum*num)]
+set,#TotalWSSCost=[#TotalWSSCost+(#UnitWSSCost*num)]
+
+set,#TotalShoeShelfCost=[#TotalShoeShelfCost+(#UnitShoeShelfCost*num)]
+
+,set,#TotalDrawerGuideCost=[#TotalDrawerGuideCost+(#UnitDrawerGuideCost*num)]
+,set,#TotalDrawerGuideNum=[#TotalDrawerGuideNum+(#UnitDrawerGuideNum*num)]
+,set,#TotalPulloutGuideCost=[#TotalPulloutGuideCost+(#UnitPulloutGuideCost*num)]
+,set,#TotalPulloutGuideNum=[#TotalPulloutGuideNum+(#UnitPulloutGuideNum*num)]
+
+,set,#TotalPlasticBinNum=[#TotalPlasticBinNum+(#UnitPlasticBinNum*num)]
+,set,#TotalPlasticBinCost=[#TotalPlasticBinCost+(#UnitPlasticBinCost*num)]
+
+,set,#TotalClosetAccCost=[#TotalClosetAccCost+(#UnitClosetAccCost*num)]
+
+,set,#subtotal=[#subtotal+(#CabTotal*num)]
+
+

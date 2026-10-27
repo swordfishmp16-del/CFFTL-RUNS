@@ -1,0 +1,656 @@
+,Set Item Costs by Size Increaments for 25 Rooms
+
+
+,Calculating subtotals
+
+Do,(#RoomNum = 1):1
+{
+
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#Room1DoorHandleCost = [#Room1DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#Room1DoorKnobCost = [#Room1DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#Room1DoorHingeCost = [#Room1DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#Room1HandleCostsubtotal=[#Room1DoorHandleCost+#Room1DoorKnobCost]
+Set,#Room1Counthandle=#UnitDoorHandleCount
+Set,#Room1Counthandletot=[#Room1Counthandletot+#Room1Counthandle]
+Set,#Room1Countknob=#UnitDoorKnobCount
+Set,#Room1Countknobtot=[#Room1Countknobtot+#Room1Countknob]
+,Set,#Room1handlePN=#UnitDoorHandlePN
+,Set,#Room1knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom1.pcb
+set, #room1totalpands= [#Room1panelscost+#Room1shelvescost]
+
+}
+,end Room 1
+
+Do,(#RoomNum = 2):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room2DoorHandleCost = [#room2DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room2DoorKnobCost = [#room2DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room2DoorHingeCost = [#room2DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room2HandleCostsubtotal=[#room2DoorHandleCost+#room2DoorKnobCost]
+Set,#room2Counthandle=#UnitDoorHandleCount
+Set,#room2Counthandletot=[#room2Counthandletot+#room2Counthandle]
+Set,#room2Countknob=#UnitDoorKnobCount
+Set,#room2Countknobtot=[#room2Countknobtot+#room2Countknob]
+,Set,#Room2handlePN=#UnitDoorHandlePN
+,Set,#Room2knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom2.pcb
+
+}
+,end Room 2
+
+Do,(#RoomNum = 3):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room3DoorHandleCost = [#room3DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room3DoorKnobCost = [#room3DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room3DoorHingeCost = [#room3DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room3HandleCostsubtotal=[#room3DoorHandleCost+#room3DoorKnobCost]
+Set,#room3Counthandle=#UnitDoorHandleCount
+Set,#room3Counthandletot=[#room3Counthandletot+#room3Counthandle]
+Set,#room3Countknob=#UnitDoorKnobCount
+Set,#room3Countknobtot=[#room3Countknobtot+#room3Countknob]
+,Set,#Room3handlePN=#UnitDoorHandlePN
+,Set,#Room3knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom3.pcb
+
+
+}
+,end Room 3
+
+Do,(#RoomNum = 4):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room4DoorHandleCost = [#room4DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room4DoorKnobCost = [#room4DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room4DoorHingeCost = [#room4DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room4HandleCostsubtotal=[#room4DoorHandleCost+#room4DoorKnobCost]
+Set,#room4Counthandle=#UnitDoorHandleCount
+Set,#room4Counthandletot=[#room4Counthandletot+#room4Counthandle]
+Set,#room4Countknob=#UnitDoorKnobCount
+Set,#room4Countknobtot=[#room4Countknobtot+#room4Countknob]
+,Set,#Room4handlePN=#UnitDoorHandlePN
+,Set,#Room4knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom4.pcb
+
+
+
+}
+,end Room 4
+
+Do,(#RoomNum = 5):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room5DoorHandleCost = [#room5DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room5DoorKnobCost = [#room5DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room5DoorHingeCost = [#room5DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room5HandleCostsubtotal=[#room5DoorHandleCost+#room5DoorKnobCost]
+Set,#room5Counthandle=#UnitDoorHandleCount
+Set,#room5Counthandletot=[#room5Counthandletot+#room5Counthandle]
+Set,#room5Countknob=#UnitDoorKnobCount
+Set,#room5Countknobtot=[#room5Countknobtot+#room5Countknob]
+,Set,#Room5handlePN=#UnitDoorHandlePN
+,Set,#Room5knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom5.pcb
+
+
+}
+,end Room 5
+
+Do,(#RoomNum = 6):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room6DoorHandleCost = [#room6DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room6DoorKnobCost = [#room6DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room6DoorHingeCost = [#room6DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room6HandleCostsubtotal=[#room6DoorHandleCost+#room6DoorKnobCost]
+Set,#room6Counthandle=#UnitDoorHandleCount
+Set,#room6Counthandletot=[#room6Counthandletot+#room6Counthandle]
+Set,#room6Countknob=#UnitDoorKnobCount
+Set,#room6Countknobtot=[#room6Countknobtot+#room6Countknob]
+,Set,#Room6handlePN=#UnitDoorHandlePN
+,Set,#Room6knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom6.pcb
+
+
+}
+,end Room 6
+
+Do,(#RoomNum = 7):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room7DoorHandleCost = [#room7DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room7DoorKnobCost = [#room7DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room7DoorHingeCost = [#room7DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room7HandleCostsubtotal=[#room7DoorHandleCost+#room7DoorKnobCost]
+Set,#room7Counthandle=#UnitDoorHandleCount
+Set,#room7Counthandletot=[#room7Counthandletot+#room7Counthandle]
+Set,#room7Countknob=#UnitDoorKnobCount
+Set,#room7Countknobtot=[#room7Countknobtot+#room7Countknob]
+,Set,#Room7handlePN=#UnitDoorHandlePN
+,Set,#Room7knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom7.pcb
+
+
+}
+,end Room 7
+
+Do,(#RoomNum = 8):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room8DoorHandleCost = [#room8DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room8DoorKnobCost = [#room8DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room8DoorHingeCost = [#room8DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room8HandleCostsubtotal=[#room8DoorHandleCost+#room8DoorKnobCost]
+Set,#room8Counthandle=#UnitDoorHandleCount
+Set,#room8Counthandletot=[#room8Counthandletot+#room8Counthandle]
+Set,#room8Countknob=#UnitDoorKnobCount
+Set,#room8Countknobtot=[#room8Countknobtot+#room8Countknob]
+,Set,#Room8handlePN=#UnitDoorHandlePN
+,Set,#Room8knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom8.pcb
+
+
+
+}
+,end Room 8
+
+Do,(#RoomNum = 9):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room9DoorHandleCost = [#room9DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room9DoorKnobCost = [#room9DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room9DoorHingeCost = [#room9DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room9HandleCostsubtotal=[#room9DoorHandleCost+#room9DoorKnobCost]
+Set,#room9Counthandle=#UnitDoorHandleCount
+Set,#room9Counthandletot=[#room9Counthandletot+#room9Counthandle]
+Set,#room9Countknob=#UnitDoorKnobCount
+Set,#room9Countknobtot=[#room9Countknobtot+#room9Countknob]
+,Set,#Room99handlePN=#UnitDoorHandlePN
+,Set,#Room9knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom9.pcb
+
+
+}
+,end Room 9
+
+Do,(#RoomNum = 10):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room10DoorHandleCost = [#room10DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room10DoorKnobCost = [#room10DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room10DoorHingeCost = [#room10DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room10HandleCostsubtotal=[#room10DoorHandleCost+#room10DoorKnobCost]
+Set,#room10Counthandle=#UnitDoorHandleCount
+Set,#room10Counthandletot=[#room10Counthandletot+#room10Counthandle]
+Set,#room10Countknob=#UnitDoorKnobCount
+Set,#room10Countknobtot=[#room10Countknobtot+#room10Countknob]
+,Set,#Room10handlePN=#UnitDoorHandlePN
+,Set,#Room10knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom10.pcb
+
+
+
+}
+,end Room 10
+
+Do,(#RoomNum = 11):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room11DoorHandleCost = [#room11DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room11DoorKnobCost = [#room11DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room11DoorHingeCost = [#room11DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room11HandleCostsubtotal=[#room11DoorHandleCost+#room11DoorKnobCost]
+Set,#room11Counthandle=#UnitDoorHandleCount
+Set,#room11Counthandletot=[#room11Counthandletot+#room11Counthandle]
+Set,#room11Countknob=#UnitDoorKnobCount
+Set,#room11Countknobtot=[#room11Countknobtot+#room11Countknob]
+,Set,#Room11handlePN=#UnitDoorHandlePN
+,Set,#Room11knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom11.pcb
+
+
+}
+,end Room 11
+
+Do,(#RoomNum = 12):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room12DoorHandleCost = [#room12DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room12DoorKnobCost = [#room12DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room12DoorHingeCost = [#room12DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room12HandleCostsubtotal=[#room12DoorHandleCost+#room12DoorKnobCost]
+Set,#room12Counthandle=#UnitDoorHandleCount
+Set,#room12Counthandletot=[#room12Counthandletot+#room12Counthandle]
+Set,#room12Countknob=#UnitDoorKnobCount
+Set,#room12Countknobtot=[#room12Countknobtot+#room12Countknob]
+,Set,#Room12handlePN=#UnitDoorHandlePN
+,Set,#Room12knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom12.pcb
+
+
+}
+,end Room 12
+
+Do,(#RoomNum = 13):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room13DoorHandleCost = [#room13DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room13DoorKnobCost = [#room13DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room13DoorHingeCost = [#room13DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room13HandleCostsubtotal=[#room13DoorHandleCost+#room13DoorKnobCost]
+Set,#room13Counthandle=#UnitDoorHandleCount
+Set,#room13Counthandletot=[#room13Counthandletot+#room13Counthandle]
+Set,#room13Countknob=#UnitDoorKnobCount
+Set,#room13Countknobtot=[#room13Countknobtot+#room13Countknob]
+,Set,#Room13handlePN=#UnitDoorHandlePN
+,Set,#Room13knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom13.pcb
+
+
+}
+,end Room 13
+
+Do,(#RoomNum = 14):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room14DoorHandleCost = [#room14DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room14DoorKnobCost = [#room14DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room14DoorHingeCost = [#room14DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room14HandleCostsubtotal=[#room14DoorHandleCost+#room14DoorKnobCost]
+Set,#room14Counthandle=#UnitDoorHandleCount
+Set,#room14Counthandletot=[#room14Counthandletot+#room14Counthandle]
+Set,#room14Countknob=#UnitDoorKnobCount
+Set,#room14Countknobtot=[#room14Countknobtot+#room14Countknob]
+,Set,#Room14handlePN=#UnitDoorHandlePN
+,Set,#Room14knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom14.pcb
+
+
+}
+,end Room 14
+
+Do,(#RoomNum = 15):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room15DoorHandleCost = [#room15DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room15DoorKnobCost = [#room15DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room15DoorHingeCost = [#room15DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room15HandleCostsubtotal=[#room15DoorHandleCost+#room15DoorKnobCost]
+Set,#room15Counthandle=#UnitDoorHandleCount
+Set,#room15Counthandletot=[#room15Counthandletot+#room15Counthandle]
+Set,#room15Countknob=#UnitDoorKnobCount
+Set,#room15Countknobtot=[#room15Countknobtot+#room15Countknob]
+,Set,#Room15handlePN=#UnitDoorHandlePN
+,Set,#Room15knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom15.pcb
+
+
+}
+,end Room 15
+
+Do,(#RoomNum = 16):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room16DoorHandleCost = [#room16DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room16DoorKnobCost = [#room16DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room16DoorHingeCost = [#room16DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room16HandleCostsubtotal=[#room16DoorHandleCost+#room16DoorKnobCost]
+Set,#room16Counthandle=#UnitDoorHandleCount
+Set,#room16Counthandletot=[#room16Counthandletot+#room16Counthandle]
+Set,#room16Countknob=#UnitDoorKnobCount
+Set,#room16Countknobtot=[#room16Countknobtot+#room16Countknob]
+,Set,#Room16handlePN=#UnitDoorHandlePN
+,Set,#Room16knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom16.pcb
+
+
+}
+,end Room 16
+
+Do,(#RoomNum = 17):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room17DoorHandleCost = [#room17DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room17DoorKnobCost = [#room17DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room17DoorHingeCost = [#room17DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room17HandleCostsubtotal=[#room17DoorHandleCost+#room17DoorKnobCost]
+Set,#room17Counthandle=#UnitDoorHandleCount
+Set,#room17Counthandletot=[#room17Counthandletot+#room17Counthandle]
+Set,#room17Countknob=#UnitDoorKnobCount
+Set,#room17Countknobtot=[#room17Countknobtot+#room17Countknob]
+,Set,#Room17handlePN=#UnitDoorHandlePN
+,Set,#Room17knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom17.pcb
+
+
+}
+,end Room 17
+
+Do,(#RoomNum = 18):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room18DoorHandleCost = [#room18DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room18DoorKnobCost = [#room18DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room18DoorHingeCost = [#room18DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room18HandleCostsubtotal=[#room18DoorHandleCost+#room18DoorKnobCost]
+Set,#room18Counthandle=#UnitDoorHandleCount
+Set,#room18Counthandletot=[#room18Counthandletot+#room18Counthandle]
+Set,#room18Countknob=#UnitDoorKnobCount
+Set,#room18Countknobtot=[#room18Countknobtot+#room18Countknob]
+,Set,#Room18handlePN=#UnitDoorHandlePN
+,Set,#Room18knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom18.pcb
+
+}
+,end Room 18
+
+Do,(#RoomNum = 19):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room19DoorHandleCost = [#room19DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room19DoorKnobCost = [#room19DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room19DoorHingeCost = [#room19DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room19HandleCostsubtotal=[#room19DoorHandleCost+#room19DoorKnobCost]
+Set,#room19Counthandle=#UnitDoorHandleCount
+Set,#room19Counthandletot=[#room19Counthandletot+#room19Counthandle]
+Set,#room19Countknob=#UnitDoorKnobCount
+Set,#room19Countknobtot=[#room19Countknobtot+#room19Countknob]
+,Set,#Room19handlePN=#UnitDoorHandlePN
+,Set,#Room19knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom19.pcb
+
+
+}
+,end Room 19
+
+Do,(#RoomNum = 20):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room20DoorHandleCost = [#room20DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room20DoorKnobCost = [#room20DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room20DoorHingeCost = [#room20DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room20HandleCostsubtotal=[#room20DoorHandleCost+#room20DoorKnobCost]
+Set,#room20Counthandle=#UnitDoorHandleCount
+Set,#room20Counthandletot=[#room20Counthandletot+#room20Counthandle]
+Set,#room20Countknob=#UnitDoorKnobCount
+Set,#room20Countknobtot=[#room20Countknobtot+#room20Countknob]
+,Set,#Room20handlePN=#UnitDoorHandlePN
+,Set,#Room20knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom20.pcb
+
+
+}
+,end Room 20
+
+Do,(#RoomNum = 21):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room21DoorHandleCost = [#room21DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room21DoorKnobCost = [#room21DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room21DoorHingeCost = [#room21DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room21HandleCostsubtotal=[#room21DoorHandleCost+#room21DoorKnobCost]
+Set,#room21Counthandle=#UnitDoorHandleCount
+Set,#room21Counthandletot=[#room21Counthandletot+#room21Counthandle]
+Set,#room21Countknob=#UnitDoorKnobCount
+Set,#room21Countknobtot=[#room21Countknobtot+#room21Countknob]
+,Set,#Room21handlePN=#UnitDoorHandlePN
+,Set,#Room21knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom21.pcb
+
+
+}
+,end Room 21
+
+Do,(#RoomNum = 22):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room22DoorHandleCost = [#room22DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room22DoorKnobCost = [#room22DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room22DoorHingeCost = [#room22DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room22HandleCostsubtotal=[#room22DoorHandleCost+#room22DoorKnobCost]
+Set,#room22Counthandle=#UnitDoorHandleCount
+Set,#room22Counthandletot=[#room22Counthandletot+#room22Counthandle]
+Set,#room22Countknob=#UnitDoorKnobCount
+Set,#room22Countknobtot=[#room22Countknobtot+#room22Countknob]
+,Set,#Room22handlePN=#UnitDoorHandlePN
+,Set,#Room22knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom22.pcb
+
+
+}
+,end Room 22
+
+Do,(#RoomNum = 23):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room23DoorHandleCost = [#room23DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room23DoorKnobCost = [#room23DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room23DoorHingeCost = [#room23DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room23HandleCostsubtotal=[#room23DoorHandleCost+#room23DoorKnobCost]
+Set,#room23Counthandle=#UnitDoorHandleCount
+Set,#room23Counthandletot=[#room23Counthandletot+#room23Counthandle]
+Set,#room23Countknob=#UnitDoorKnobCount
+Set,#room23Countknobtot=[#room23Countknobtot+#room23Countknob]
+,Set,#Room23handlePN=#UnitDoorHandlePN
+,Set,#Room23knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom23.pcb
+
+
+}
+,end Room 23
+
+Do,(#RoomNum = 24):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room24DoorHandleCost = [#room24DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room24DoorKnobCost = [#room24DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room24DoorHingeCost = [#room24DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room24HandleCostsubtotal=[#room24DoorHandleCost+#room24DoorKnobCost]
+Set,#room24Counthandle=#UnitDoorHandleCount
+Set,#room24Counthandletot=[#room24Counthandletot+#room24Counthandle]
+Set,#room24Countknob=#UnitDoorKnobCount
+Set,#room24Countknobtot=[#room24Countknobtot+#room24Countknob]
+,Set,#Room24handlePN=#UnitDoorHandlePN
+,Set,#Room24knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom24.pcb
+}
+,end Room 24
+
+Do,(#RoomNum = 25):1
+{
+Set,#SingleHandlecostKnob=(#UnitDoorKnobCost)
+Set,#SingleHandlecostDoor=(#UnitDoorHandleCost)
+
+
+Set,(#UnitDoorHandleCount>0):#room25DoorHandleCost = [#room25DoorHandleCost+(#UnitDoorHandleCost*#UnitDoorHandleCount)]
+Set,(#UnitDoorknobCount>0):#room25DoorKnobCost = [#room25DoorKnobCost+(#UnitDoorKnobCost*#UnitDoorKnobCount)]
+Set,(#UnitDoorHingeCount>0):#room25DoorHingeCost = [#room25DoorHingeCost+(#UnitDoorHingeCost*#UnitDoorHingeCount)]
+
+
+Set,(#SingleHandlecost>0):#DoorKnobRM1Handleprice=[#SingleHandlecost]
+Set,#room25HandleCostsubtotal=[#room25DoorHandleCost+#room25DoorKnobCost]
+Set,#room25Counthandle=#UnitDoorHandleCount
+Set,#room25Counthandletot=[#room25Counthandletot+#room25Counthandle]
+Set,#room25Countknob=#UnitDoorKnobCount
+Set,#room25Countknobtot=[#room25Countknobtot+#room25Countknob]
+,Set,#Room25handlePN=#UnitDoorHandlePN
+,Set,#Room25knobPN=#UnitDoorKnobPN
+
+load, CFCountoptionsroom25.pcb
+
+
+}
+,end Room 25
+
+

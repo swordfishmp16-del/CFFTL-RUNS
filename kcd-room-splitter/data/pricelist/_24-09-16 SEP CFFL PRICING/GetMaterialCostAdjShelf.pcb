@@ -1,0 +1,91 @@
+,Set Item Costs by Size Increaments
+
+
+Load, GetMaterialCostGroup.Pcb
+Load, GetShoeFencecost.pcb
+
+
+Do, (#edgebyfoot=yes):1
+{
+Set, #CostOfAdjustableShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+(((W/12)*#EdgeBandCostGroup))]
+Set, #CostOfCubbyShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+(((W/12)*#EdgeBandCostGroup))]
+}
+Do, (#edgebyfoot=no):1
+{
+Set, #CostOfAdjustableShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup))]
+Set, #CostOfCubbyShelf = [((#CostOfHorizontal + #CostAddedToAdjustableShelves)*#MaterialCostGroup)+((#CostOfHorizontal*#EdgeBandCostGroup))]
+}
+
+,leave file here
+End 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+
+      ,**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Do, (#IncludeInsert=0):1
+{
+      Set,(#DoorH<=#EBDoorHeightA)&(#DoorW<=#EBDoorWidth1A):#Costofdoor= #SmEBDoorCost                 
+      Set,(#DoorH<=#EBDoorHeightA)&((#DoorW>#EBDoorWidth1A)&(#DoorW<=#EBDoorWidth2A)):#Costofdoor= #SmEBDoorCostw
+      Set,(#DoorH<=#EBDoorHeightA)&((#DoorW>#EBDoorWidth2A)&(#DoorW<=#EBDoorWidth3A)):#Costofdoor= #SmEBDoorCostxw
+
+      Set,((#DoorH>#EBDoorHeightA)&(#DoorH<=#EBDoorHeightB))&(#DoorW<=#EBDoorWidth1B):#Costofdoor= #MedEBDoorCost                 
+      Set,((#DoorH>#EBDoorHeightA)&(#DoorH<=#EBDoorHeightB))&((#DoorW>#EBDoorWidth1B)&(#DoorW<=#EBDoorWidth2B)):#Costofdoor= #MedEBDoorCostw
+      ,Set,((#DoorH>#EBDoorHeightA)&(#DoorH<=#EBDoorHeightB))&((#DoorW>#EBDoorWidth2B)&(#DoorW<=#EBDoorWidth3B)):#Costofdoor= #MedEBDoorCostxw
+    
+
+      ,Set,((#DoorH>#EBDoorHeightB)&(#DoorH<=#EBDoorHeightC))&(#DoorW<=#EBDoorWidth1C):#Costofdoor= #LrgEBDoorCost                 
+      ,Set,((#DoorH>#EBDoorHeightB)&(#DoorH<=#EBDoorHeightC))&((#DoorW>#EBDoorWidth1C)&(#DoorW<=#EBDoorWidth2C)):#Costofdoor= #LrgEBDoorCostw
+      ,Set,((#DoorH>#EBDoorHeightB)&(#DoorH<=#EBDoorHeightC))&((#DoorW>#EBDoorWidth2C)&(#DoorW<=#EBDoorWidth3C)):#Costofdoor= #LrgEBDoorCostxw
+}     
+
+
+
+Do, (#IncludeInsert=1):1
+{
+      Set,(#DoorH<=#FEBDoorHeightA)&(#DoorW<=#FEBDoorWidth1A):#Costofdoor= #SmFEBDoorCost                 
+      ,Set,(#DoorH<=#FEBDoorHeightA)&((#DoorW>#FEBDoorWidth1A)&(#DoorW<=#FEBDoorWidth2A)):#Costofdoor= #SmFEBDoorCostw
+      ,Set,(#DoorH<=#FEBDoorHeightA)&((#DoorW>#FEBDoorWidth2A)&(#DoorW<=#FEBDoorWidth3A)):#Costofdoor= #SmFEBDoorCostxw
+
+      Set,((#DoorH>#FEBDoorHeightA)&(#DoorH<=#FEBDoorHeightB))&(#DoorW<=#FEBDoorWidth1B):#Costofdoor= #MedFEBDoorCost                 
+      Set,((#DoorH>#FEBDoorHeightA)&(#DoorH<=#FEBDoorHeightB))&((#DoorW>#FEBDoorWidth1B)&(#DoorW<=#FEBDoorWidth2B)):#Costofdoor= #MedFEBDoorCostw
+      ,Set,((#DoorH>#FEBDoorHeightA)&(#DoorH<=#FEBDoorHeightB))&((#DoorW>#FEBDoorWidth2B)&(#DoorW<=#FEBDoorWidth3B)):#Costofdoor= #MedFEBDoorCostxw
+      
+      ,Set,((#DoorH>#FEBDoorHeightB)&(#DoorH<=#FEBDoorHeightC))&(#DoorW<=#FEBDoorWidth1C):#Costofdoor= #LrgEBDoorCost                 
+      ,Set,((#DoorH>#FEBDoorHeightB)&(#DoorH<=#FEBDoorHeightC))&((#DoorW>#FEBDoorWidth1C)&(#DoorW<=#FEBDoorWidth2C)):#Costofdoor= #LrgFEBDoorCostw
+      ,Set,((#DoorH>#FEBDoorHeightB)&(#DoorH<=#FEBDoorHeightC))&((#DoorW>#FEBDoorWidth2C)&(#DoorW<=#FEBDoorWidth3C)):#Costofdoor= #LrgFEBDoorCostxw
+}     
+
+

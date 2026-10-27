@@ -1,0 +1,143 @@
+,Use Grid
+
+
+,**
+,**
+,** SET COSTS FOR Garage Base platform with legs
+,** 
+,**
+set, #setplatformcost=0
+DisplaySet,#gbmethod=0, Do you price garage leg bases per piece=0 or per section=1? [0;1]
+Do ,(#gbmethod=1):1
+{
+  Displayset,#GBsectionsize=37.5, Section size for pricing levelers by unit width
+  Displayset, #GBmaxsize=96, Max length for pricing platform unit length
+
+}
+Do ,(#gbmethod=0):1
+{
+Displayset,#setplatformcost=1, Do you price the platform shelf using standard shelf cost=0 or set ft/2 price=1? [0;1]
+  Displayset, #GBmaxsize=95, Max length for pricing platform unit length
+  Do, (#setplatformcost=1):1
+  {
+  Displayset,#garageplatformsqftprice=12*#Materialcostgroup, 1.0 What is the cost/ft2 for garage base platform?
+  }
+}
+,** COSTS FOR base legs 
+DisplaySet,#Garageleg1Name =Standard, 1.1 Name of Garage Leg
+DisplaySet,#Garageleg1cost =6, 1.1  Cost for #Garageleg1Name per leg or per section
+DisplaySet,#Garageleg1PN =stock, 1.1  Part Number for #Garageleg1Name 
+,**
+
+DisplaySet,#Garageleg2Name =Brushed Chrome, 1.2  Name of Garage Leg
+DisplaySet,#Garageleg2cost =17, 1.2 Cost for #Garageleg2Name per leg or per section
+DisplaySet,#Garageleg2PN =Rich 5010161210, 1.2  Part Number for #Garageleg2Name
+,**
+DisplaySet,#Garageleg3Name =Black Aluminum, 1.3  Name of Garage Leg
+DisplaySet,#Garageleg3cost =17, 1.3  Cost for #Garageleg3Name per leg or per section
+DisplaySet,#Garageleg3PN =RIch 50101612900, 1.3  Part Number for #Garageleg3Name
+,**
+DisplaySet,#Garageleg4Name =Stainless, 1.4  Name of Garage Leg
+DisplaySet,#Garageleg4cost =41, 1.4  Cost for #Garageleg4Name per leg or per section
+DisplaySet,#Garageleg4PN =550100170, 1.4  Part Number for #Garageleg4Name
+,**
+
+DisplaySet,#Garageleg5Name =Square BRCH, 1.5  Name of Garage Leg
+DisplaySet,#Garageleg5cost =19, 1.5  Cost for #Garageleg5Name per leg or per section
+DisplaySet,#Garageleg5PN =634.16.421, 1.5  Part Number for #Garageleg5Name
+,**
+
+DisplaySet,#Garageleg6Name =Square Chrome, 1.6  Name of Garage Leg
+DisplaySet,#Garageleg6cost =25, 1.6  Cost for #Garageleg6Name per leg or per section
+DisplaySet,#Garageleg6PN =634.16.221, 1.6  Part Number for #Garageleg6Name
+,**
+
+DisplaySet,#Garageleg7Name =, 1.7  Name of Garage Leg
+DisplaySet,#Garageleg7cost =, 1.7  Cost for #Garageleg7Name per leg or per section
+DisplaySet,#Garageleg7PN =, 1.7  Part Number for #Garageleg7Name
+,**
+
+DisplaySet,#Garageleg8Name =Caster Wheel, 1.8 Name of Garage Leg
+DisplaySet,#Garageleg8cost =100, 1.8 Cost for #Garageleg8Name per leg or per section
+DisplaySet,#Garageleg8PN =, 1.8  Part Number for #Garageleg8Name
+,**
+
+DisplaySet,#Garageleg9Name =type9, 1.9  Name of Garage Leg
+DisplaySet,#Garageleg9cost =0, 1.9  Cost for #Garageleg9Name per leg or per section
+DisplaySet,#Garageleg9PN =, 1.9  Part Number for #Garageleg9Name
+,**
+
+DisplaySet,#Garageleg10Name =type10, 1.10  Name of Garage Leg
+DisplaySet,#Garageleg10cost =0, 1.10  Cost for #Garageleg10Name per leg or per section
+DisplaySet,#Garageleg10PN =, 1.10 Part Number for #Garageleg10Name
+
+,**
+DisplaySet,#Garageleg11Name =type11, 1.11  Name of Garage Leg
+DisplaySet,#Garageleg11cost =0, 1.11  Cost for #Garageleg11Name per leg or per section
+DisplaySet,#Garageleg11PN =, 1.11  Part Number for #Garageleg11Name
+,**
+
+
+
+
+Do,(#UnitFileName="Llegtype1.cab"):1
+{
+set, #LegLevelersName=#Garageleg1Name #Garageleg1PN
+set, #CostOfLegLevelers=#Garageleg1cost
+}
+
+Do,(#UnitFileName="Llegtype2.cab"):1
+{
+set, #LegLevelersName=#Garageleg2Name #Garageleg2PN
+set, #CostOfLegLevelers=#Garageleg2cost
+}
+Do,(#UnitFileName="Llegtype3.cab"):1
+{
+set, #LegLevelersName=#Garageleg3Name #Garageleg3PN
+set, #CostOfLegLevelers=#Garageleg3cost
+}
+Do,(#UnitFileName="Llegtype4.cab"):1
+{
+set, #LegLevelersName=#Garageleg4Name #Garageleg4PN
+set, #CostOfLegLevelers=#Garageleg4cost
+}
+Do,(#UnitFileName="Llegtype5.cab"):1
+{
+set, #LegLevelersName=#Garageleg5Name #Garageleg5PN
+set, #CostOfLegLevelers=#Garageleg5cost
+}
+
+Do,(#UnitFileName="Llegtype6.cab"):1
+{
+set, #LegLevelersName=#Garageleg6Name #Garageleg6PN
+set, #CostOfLegLevelers=#Garageleg6cost
+}
+Do,(#UnitFileName="Llegtype7.cab"):1
+{
+set, #LegLevelersName=#Garageleg7Name #Garageleg7PN
+set, #CostOfLegLevelers=#Garageleg7cost
+}
+Do,(#UnitFileName="Llegtype8.cab"):1
+{
+set, #LegLevelersName=#Garageleg8Name #Garageleg8PN
+set, #CostOfLegLevelers=#Garageleg8cost
+}
+Do,(#UnitFileName="Llegtype9.cab"):1
+{
+set, #LegLevelersName=#Garageleg9Name #Garageleg9PN
+set, #CostOfLegLevelers=#Garageleg9cost
+}
+Do,(#UnitFileName="Llegtype10.cab"):1
+{
+set, #LegLevelersName=#Garageleg10Name #Garageleg10PN
+set, #CostOfLegLevelers=#Garageleg10cost
+}
+Do,(#UnitFileName="Llegtype11.cab"):1
+{
+set, #LegLevelersName=#Garageleg11Name #Garageleg11PN
+set, #CostOfLegLevelers=#Garageleg11cost
+}
+,**
+,**
+
+

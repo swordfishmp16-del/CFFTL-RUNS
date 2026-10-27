@@ -1,0 +1,63 @@
+Load,(CodePre=DW-PAN): zappan1.pcb
+Load,(CodePre=REF-PAN): zappan1.pcb
+Load,(CodePre=TC-PAN): zappan1.pcb
+
+Load,(CodePre=WP): Paneling.pcb
+Load,(CodePre=WPB): Paneling.pcb
+Load,(CodePre=BP): Paneling.pcb
+Load,(CodePre=BPB): Paneling.pcb
+Load,(CodePre=PP): Paneling.pcb
+Load,(CodePre=TP): Paneling.pcb
+Load,(CodePre=PL): Paneling.pcb
+Load,(CodePre=BB-WP): Paneling.pcb
+Load,(CodePre=BB-BP): Paneling.pcb
+Load,(CodePre=BB-W): Paneling.pcb
+Load,(CodePre=BB-B): Paneling.pcb
+Load,(CodePre=BB-T): Paneling.pcb
+,PANELING SECTION
+Set,#panelstyle=+0
+Set,#PanelDetail=+0
+Set,#NumberPanel=+0
+Set,#PanelCost=0
+
+
+Set,(pt=1)&(pd=1):#PanelCost=#SquareFlat$
+Set,(pt=2)&(pd=1):#PanelCost=#SquareRaise$
+Set,(pt=1)&(pd=2):#PanelCost=#ArchFlat$
+Set,(pt=2)&(pd=2):#PanelCost=#ArchRaise$
+Set,(pt=1)&(pd=3):#PanelCost=#CathFlat$
+Set,(pt=2)&(pd=3):#PanelCost=#CathRaise$
+
+
+,Memo below for Number of Panels
+Set,(Pn>0):#NumberPanel=+5
+
+,UNITS WITH PANELS
+Price ,(CodePre=WPB)&(pn>0):1    ,Top Back Panel,     ((w*h)/144*(#PanelCost))*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=BPB)&(pn>0):1    ,Base Back Panel,    ((w*h)/144*(#PanelCost))*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=WP)&(pn>0):1     ,Top End Panel,      ((d*h)/144*(#PanelCost))*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=BP)&(pn>0):1     ,Base End Panel,     ((d*h)/144*(#PanelCost))*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=PP)&(pn>0):1     ,Tall End Panel,     ((d*h)/144*(#PanelCost))*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=TP)&(pn>0):1     ,Tall End Panel,     ((d*h)/144*(#PanelCost))*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+
+
+
+,UNITS WITHOUT PANELS
+Price ,(CodePre=WPB)&(pn=0):1     ,Top Back Panel,     ((w*h)/144*#FlatPanel$)*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=BPB)&(pn=0):1     ,Base Back Panel,    ((w*h)/144*#FlatPanel$)*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=WP)&(pn=0):1      ,Top End Panel,      ((d*h)/144*#FlatPanel$)*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=BP)&(pn=0):1      ,Base End Panel,     ((d*h)/144*#FlatPanel$)*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=PP)&(pn=0):1      ,Tall End Panel,     ((d*h)/144*#FlatPanel$)*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=TP)&(pn=0):1      ,Tall End Panel,     ((d*h)/144*#FlatPanel$)*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+
+,BEAD BOARD
+Price ,(CodePre=BB-WP):1     ,Top Beaded Back Panel,     ((w*h)/144*#BeadBoard$)*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=BB-BP):1     ,Base Beaded Back Panel,    ((w*h)/144*#BeadBoard$)*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=BB-W):1      ,Top Beaded End Panel,      ((d*h)/144*#BeadBoard$)*#Percent     ,d,h,w, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=BB-B):1      ,Base Beaded End Panel,     ((d*h)/144*#BeadBoard$)*#Percent     ,d,h,w, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+Price ,(CodePre=BB-T):1      ,Tall Beaded End Panel,     ((d*h)/144*#BeadBoard$)*#Percent     ,d,h,w, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]
+
+
+
+,FLUTED PILASTER
+Price ,(CodePre=PL):1     ,Fluted Pilaster,     ((w*h)/144*#FlutePil$)*#Percent     ,w,h,d, ; #NumOfUnits = [#NumOfUnits + 1]; #LinealFt=[#LinealFt+W]

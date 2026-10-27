@@ -1,0 +1,34 @@
+
+
+set,#installnum=[#NumofUnits]
+set,(#InstallationNumOfUnits="Total Number of Units"):#installnum=[#NumofUnits]
+set,(#InstallationNumOfUnits="Total Number of Cabinets"):#installnum=[#AllNumofUnits]
+set,(#InstallationNumOfUnits="Total Number of Cabinets/Closets"):#installnum=[#AllCabClosetNumofUnits]
+set,(#InstallationNumOfUnits="Total Number of Base Cabinets"):#installnum=[#BaseNumofUnits]
+set,(#InstallationNumOfUnits="Total Number of Wall Cabinets"):#installnum=[#WallNumofUnits]
+set,(#InstallationNumOfUnits="Total Number of Tall Cabinets"):#installnum=[#TallNumofUnits]
+set,(#InstallationNumOfUnits="Total Number of Panels"):#installnum=[#PanelNumofUnits]
+
+set,#installlength=#LinealTotal#Linealfactor
+set, (#InstallationMeasurement="Lineal Footage of All Units"):#installlength=#LinealTotal#Linealfactor
+set, (#InstallationMeasurement="Square Footage of All Units"):#installlength=#SquareTotal#SquareFactor
+set, (#InstallationMeasurement="Cubic Footage of All Units"):#installlength=#CubicTotal#CubicFactor
+set, (#InstallationMeasurement="Lineal Footage of All Cabinets"):#installlength=#AllLinealTotal#Linealfactor
+set, (#InstallationMeasurement="Square Footage of All Cabinets"):#installlength=#AllSquareTotal#SquareFactor
+set, (#InstallationMeasurement="Cubic Footage of All Cabinets"):#installlength=#AllCubicTotal#CubicFactor
+
+set, (#InstallationMeasurement="Lineal Footage of All Cabinets/Closets"):#installlength=#AllCabClosetLinealTotal#Linealfactor
+set, (#InstallationMeasurement="Square Footage of All Cabinets/Closets"):#installlength=#AllCabClosetSquareTotal#SquareFactor
+set, (#InstallationMeasurement="Cubic Footage of All Cabinets/Closets"):#installlength=#AllCabClosetCubicTotal#CubicFactor
+set, (#InstallationMeasurement="Lineal Footage of Base Cabinets"):#installlength=#BaseLinealTotal#Linealfactor
+set, (#InstallationMeasurement="Square Footage of Base Cabinets"):#installlength=#BaseSquareTotal#SquareFactor
+set, (#InstallationMeasurement="Cubic Footage of Base Cabinets"):#installlength=#BaseCubicTotal#CubicFactor
+set, (#InstallationMeasurement="Lineal Footage of Wall Cabinets"):#installlength=#WallLinealTotal#Linealfactor
+set, (#InstallationMeasurement="Square Footage of Wall Cabinets"):#installlength=#WallSquareTotal#SquareFactor
+set, (#InstallationMeasurement="Cubic Footage of Wall Cabinets"):#installlength=#WallCubicTotal#CubicFactor
+set, (#InstallationMeasurement="Lineal Footage of Tall Cabinets"):#installlength=#TallLinealTotal#Linealfactor
+set, (#InstallationMeasurement="Square Footage of Tall Cabinets"):#installlength=#TallSquareTotal#SquareFactor
+set, (#InstallationMeasurement="Cubic Footage of Tall Cabinets"):#installlength=#TallCubicTotal#CubicFactor
+
+
+set,#TotalInstallationCost=[(#installnum*#InstallationCostNumOfUnits)+(#installlength*#InstallationMeasurementCost)]

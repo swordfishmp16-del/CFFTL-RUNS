@@ -1,0 +1,40 @@
+set, #stopeach=0
+
+,load, (#unitfilename<>"*TAG*"):eachunit2.pcb
+load,(#UnitLibrary="Tag *"):eachunit2.pcb
+
+
+,Do,(#UnitFileName="*symphony*")&(1=2):1
+,{
+,load, S-TAG Symphony System.pcb
+,end
+,}
+
+
+,Do,(#UnitFileName="*illuminated*")&(#unitfilename="*TAG*"):1
+,{
+,load, IS-TAG Illuminated Shelves.pcb
+,end
+,}
+,set, #stopeach=1
+,Do,((#UnitFileName="*TAG*")|(#name="*TAG*")):1
+,{
+,set, #stopeach=2
+,load, M-TAG Accessories.pcb
+,load, L-Laundry Costs.PCB
+,load, K-Pant Racks Costs.pcb
+,load, P-Elite Hooks and Holders.pcb
+,load, N-TAG Trackwall System.pcb
+,end
+,}
+
+
+
+
+,This line is used ONLY when there is NO PRICE SET FOR A UNIT
+,Price ,(t<>1000)&(ct=0):1         ,#Name - CALL FOR QUOTE,       0         ,W,H,1000 
+Price ,(#name<>"*drawer*")&(#tagpricedone=0):1         ,RM#Roomnum #Name - !*!*!*CALL FOR QUOTE*!*!*!,       0         ,,,#CallforQuotePrintOrderNumber, 
+Price ,(#name="*drawer*")&(#TagLibrary<>1):1         ,RM#Roomnum #Name - !*!*!*PLEASE CORRECT DRAWING*!*!*!,       0         ,,,#CallforQuotePrintOrderNumber, 
+
+
+

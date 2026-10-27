@@ -1,0 +1,6 @@
+
+
+,Calculates the price for each part
+Set, #singlerod=Yes
+load, Pricerods.pcb
+Set, #singlerod=No

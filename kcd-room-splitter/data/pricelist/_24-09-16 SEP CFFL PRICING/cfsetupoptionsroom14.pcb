@@ -1,0 +1,59 @@
+,**********Initial options Room14************************
+
+
+
+set,#Room14hasoptions=0
+set, #Room14cedarbottomcount=0
+set, #Room14falsebottomcount=0
+set, #Room14doubledeckercount=0
+set, #Room14locknotchcount=0
+set, #Room14slidingdoorcount=0
+set, #Room14drawerfaceonlycount=0
+set, #Room14drawerFileFrameboxcount=0
+set, #Room14Bot75count=0
+set, #Room14CedarBot25count=0
+set, #Room14switchglidescount=0
+Set,#Room14Routedpuckshelfcount=0
+Set,#Room14Surfacepuckshelfcount=0
+
+Set,#Room14SurfaceXLpuckshelfcount=0
+Set,#Room14task12inshelfcount=0
+Set,#Room14task24inshelfcount=0
+Set,#Room14task30inshelfcount=0
+Set,#Room14task36inshelfcount=0
+Set,#Room14task42inshelfcount=0
+Set,#Room14task45inshelfcount=0
+Set, #Room14CuttoFitcount=0
+set, #Room14scarcleatcount=0
+set, #Room14CenterBackborecount=0
+set, #Room14DBLBackborecount=0
+set, #Room14setholescustomcount=0
+set, #Room14adjholescustomcount=0
+set, #Room14noholesdrillonsitecount=0
+set, #Room14SlantedHeadboardcount=0
+
+set, #Room14Singledoorcleatcount=0
+set, #Room14Dbldoorcleatcount=0
+
+set, #Room14SlidingdoorCount=0
+
+set, #Room14FalsebottomDrwCount=0
+set, #Room14DoubleDeckerDrwCount=0
+set, #Room14with34bottomDrwCount=0
+set, #Room14switchtosidemountDrwCount=0
+set, #Room14FileframecutdownDrwCount=0
+set, #Room14LocknotchDrwCount=0
+set, #Room14with25cedarbotDrwCount=0
+set, #Room14boxcutbackDrwCount=0
+set, #Room14Drwboxtoshelfcount=0
+set, #Room14EBTopofPanelcount=0
+set, #Room14EBBackofPanelcount=0
+set, #Room14RWNotchcount=0
+Set,#Room14RWshelfcount=0
+
+Set,#Room14Wbusbarcount=0
+Set,#Room14WLEDshelfcount=0
+
+set,#Room14LeftHangercount=0
+set,#Room14RightHangercount=0
+

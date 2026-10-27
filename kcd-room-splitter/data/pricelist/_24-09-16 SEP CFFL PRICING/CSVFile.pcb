@@ -1,0 +1,432 @@
+Do,(1=2):1
+{
+Do,(#TurnOnRBRSendTOFile=Yes):1
+{
+   Do,(#Room1Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName1#Comma#Room1Total
+   }
+   Do,(#Room2Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName2#Comma#Room2Total
+   }
+   Do,(#Room3Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName3#Comma#Room3Total
+   }
+   Do,(#Room4Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName4#Comma#Room4Total
+   }
+   Do,(#Room5Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName5#Comma#Room5Total
+   }
+   Do,(#Room6Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName6#Comma#Room6Total
+   }
+   Do,(#Room7Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName7#Comma#Room7Total
+   }
+   Do,(#Room8Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName8#Comma#Room8Total
+   }
+   Do,(#Room9Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName9#Comma#Room9Total
+   }
+   Do,(#Room10Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName10#Comma#Room10Total
+   }
+   Do,(#Room11Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName11#Comma#Room11Total
+   }
+   Do,(#Room12Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName12#Comma#Room12Total
+   }
+   Do,(#Room13Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName13#Comma#Room13Total
+   }
+   Do,(#Room14Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName14#Comma#Room14Total
+   }
+   Do,(#Room15Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName15#Comma#Room15Total
+   }
+   Do,(#Room16Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName16#Comma#Room16Total
+   }
+   Do,(#Room17Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName17#Comma#Room17Total
+   }
+   Do,(#Room18Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName18#Comma#Room18Total
+   }
+   Do,(#Room19Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName19#Comma#Room19Total
+   }
+   Do,(#Room20Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName20#Comma#Room20Total
+   }
+   Do,(#Room21Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName21#Comma#Room21Total
+   }
+   Do,(#Room22Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName22#Comma#Room22Total
+   }
+   Do,(#Room23Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName23#Comma#Room23Total
+   }
+   Do,(#Room24Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName24#Comma#Room24Total
+   }
+   Do,(#Room25Total>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#RoomName25#Comma#Room25Total
+   }
+   Do,(#Subtotal11Cost11>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal11Name#Comma#Subtotal11Cost11
+   }
+   Do,(#Subtotal12Cost12>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal12Name#Comma#Subtotal12Cost12
+   }
+   Do,(#Subtotal13Cost13>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal13Name#Comma#Subtotal13Cost13
+   }
+   
+   Do,(#includeMolding>0):1
+   {
+      Do,(MldNum>0):1
+      {
+         SendToFile, #DestinationPath\#RBRName.CSV,#MoldingName1 Molding#Comma#MoldingLength1 #InCM#Comma#MoldingCost1
+      }
+      Do,(MldNum>1):1
+      {
+         SendToFile, #DestinationPath\#RBRName.CSV,#MoldingName2 Molding#Comma#MoldingLength2 #InCM#Comma#MoldingCost2
+      }
+      Do,(MldNum>2):1
+      {
+         SendToFile, #DestinationPath\#RBRName.CSV,#MoldingName3 Molding#Comma#MoldingLength3 #InCM#Comma#MoldingCost3
+      }
+      Do,(MldNum>3):1
+      {
+         SendToFile, #DestinationPath\#RBRName.CSV,#MoldingName4 Molding#Comma#MoldingLength4 #InCM#Comma#MoldingCost4
+      }
+      Do,(MldNum>4):1
+      {
+         SendToFile, #DestinationPath\#RBRName.CSV,#MoldingName5 Molding#Comma#MoldingLength5 #InCM#Comma#MoldingCost5
+      }
+      Do,(MldNum>5):1
+      {
+         SendToFile, #DestinationPath\#RBRName.CSV,#MoldingName6 Molding#Comma#MoldingLength6 #InCM#Comma#MoldingCost6
+      }
+      Do,(MldNum>6):1
+      {
+         SendToFile, #DestinationPath\#RBRName.CSV,#MoldingName7 Molding#Comma#MoldingLength7 #InCM#Comma#MoldingCost7
+      }
+      Do,(MldNum>7):1
+      {
+         SendToFile, #DestinationPath\#RBRName.CSV,#MoldingName8 Molding#Comma#MoldingLength8 #InCM#Comma#MoldingCost8
+      }
+      Do,(MldNum>8):1
+      {
+         SendToFile, #DestinationPath\#RBRName.CSV,#MoldingName9 Molding#Comma#MoldingLength9 #InCM#Comma#MoldingCost9
+      }
+      Do,(MldNum>9):1
+      {
+         SendToFile, #DestinationPath\#RBRName.CSV,#MoldingName10 Molding#Comma#MoldingLength10 #InCM#Comma#MoldingCost10
+      }
+      
+      
+   },end molding do statements
+   Do,(#Subtotal4Cost4>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal4Name#Comma#Subtotal4Cost4
+   }
+   Do,(#Subtotal5Cost5>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal5Name#Comma#Subtotal5Cost5
+   }
+   Do,(#Subtotal6Cost6>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal6Name#Comma#Subtotal6Cost6
+   }
+   Do,(#Subtotal7Cost7>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal7Name#Comma#Subtotal7Cost7
+   }
+   Do,(#Subtotal8Cost8>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal8Name#Comma#Subtotal8Cost8
+   }
+   Do,(#Subtotal9Cost9>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal9Name#Comma#Subtotal9Cost9
+   }
+   Do,(#Subtotal10Cost10>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal10Name#Comma#Subtotal10Cost10
+   }
+   Do,(#Subtotal14Cost14>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal14Name#Comma#Subtotal14Cost14
+   }
+   Do,(#Subtotal15Cost15>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal15Name#Comma#Subtotal15Cost15
+   }
+   Do,(#Subtotal16Cost16>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal16Name#Comma#Subtotal16Cost16
+   }
+   Do,(#Subtotal17Cost17>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal17Name#Comma#Subtotal17Cost17
+   }
+   Do,(#Subtotal18Cost18>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal18Name#Comma#Subtotal18Cost18
+   }
+   Do,(#Subtotal19Cost19>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal19Name#Comma#Subtotal19Cost19
+   }
+   Do,(#Subtotal20Cost20>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal20Name#Comma#Subtotal20Cost20
+   }
+   Do,(#Subtotal21Cost21>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal21Name#Comma#Subtotal21Cost21
+   }
+   Do,(#Subtotal22Cost22>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal22Name#Comma#Subtotal22Cost22
+   }
+   Do,(#Subtotal23Cost23>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal23Name#Comma#Subtotal23Cost23
+   }
+   Do,(#Subtotal24Cost24>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal24Name#Comma#Subtotal24Cost24
+   }
+   Do,(#Subtotal25Cost25>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal25Name#Comma#Subtotal25Cost25
+   }
+   Do,(#Subtotal26Cost26>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal26Name#Comma#Subtotal26Cost26
+   }
+   Do,(#Subtotal27Cost27>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal27Name#Comma#Subtotal27Cost27
+   }
+   Do,(#Subtotal28Cost28>0):1
+   {
+      SendToFile, #DestinationPath\#RBRName.CSV,#Subtotal28Name#Comma#Subtotal28Cost28
+   }
+   
+   SendToFile, #DestinationPath\#RBRName.CSV,Total Cost#Comma#Subtotal
+   
+   
+}
+
+Do,(#TurnOnSendToFile=No):1
+{
+   SendToFile, #DestinationPath\#CSVName.CSV,Subtotal#Comma#CabTotal
+   Do,(#CTopCost>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#CTopName#Comma#CTopCost
+   }
+   
+   Do,(#CTopCostV>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#CTopNameV#Comma#CTopCostV
+   }
+   
+   Do,(#Subtotal11Cost11>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal11Name#Comma#Subtotal11Cost11
+   }
+   Do,(#Subtotal12Cost12>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal12Name#Comma#Subtotal12Cost12
+   }
+   Do,(#Subtotal13Cost13>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal13Name#Comma#Subtotal13Cost13
+   }
+   Do,(#Subtotal1Cost1>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal1Name#Comma#HandleCount#Comma#Subtotal1Cost1
+   }
+   Do,(#Subtotal2Cost2>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal2Name#Comma#KnobCount#Comma#Subtotal2Cost2
+   }
+   Do,(#Subtotal3Cost3>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal1Name#Comma#HingeCount#Comma#Subtotal3Cost3
+   }
+   
+   Do,(#includeMolding>0):1
+   {
+      Do,(MldNum>0):1
+      {
+         SendToFile, #DestinationPath\#CSVName.CSV,#MoldingName1 Molding#Comma#MoldingLength1 #InCM#Comma#MoldingCost1
+      }
+      Do,(MldNum>1):1
+      {
+         SendToFile, #DestinationPath\#CSVName.CSV,#MoldingName2 Molding#Comma#MoldingLength2 #InCM#Comma#MoldingCost2
+      }
+      Do,(MldNum>2):1
+      {
+         SendToFile, #DestinationPath\#CSVName.CSV,#MoldingName3 Molding#Comma#MoldingLength3 #InCM#Comma#MoldingCost3
+      }
+      Do,(MldNum>3):1
+      {
+         SendToFile, #DestinationPath\#CSVName.CSV,#MoldingName4 Molding#Comma#MoldingLength4 #InCM#Comma#MoldingCost4
+      }
+      Do,(MldNum>4):1
+      {
+         SendToFile, #DestinationPath\#CSVName.CSV,#MoldingName5 Molding#Comma#MoldingLength5 #InCM#Comma#MoldingCost5
+      }
+      Do,(MldNum>5):1
+      {
+         SendToFile, #DestinationPath\#CSVName.CSV,#MoldingName6 Molding#Comma#MoldingLength6 #InCM#Comma#MoldingCost6
+      }
+      Do,(MldNum>6):1
+      {
+         SendToFile, #DestinationPath\#CSVName.CSV,#MoldingName7 Molding#Comma#MoldingLength7 #InCM#Comma#MoldingCost7
+      }
+      Do,(MldNum>7):1
+      {
+         SendToFile, #DestinationPath\#CSVName.CSV,#MoldingName8 Molding#Comma#MoldingLength8 #InCM#Comma#MoldingCost8
+      }
+      Do,(MldNum>8):1
+      {
+         SendToFile, #DestinationPath\#CSVName.CSV,#MoldingName9 Molding#Comma#MoldingLength9 #InCM#Comma#MoldingCost9
+      }
+      Do,(MldNum>9):1
+      {
+         SendToFile, #DestinationPath\#CSVName.CSV,#MoldingName10 Molding#Comma#MoldingLength10 #InCM#Comma#MoldingCost10
+      }
+      
+      
+   },end molding do statements
+   Do,(#Subtotal4Cost4>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal4Name#Comma#Subtotal4Cost4
+   }
+   Do,(#Subtotal5Cost5>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal5Name#Comma#Subtotal5Cost5
+   }
+   Do,(#Subtotal6Cost6>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal6Name#Comma#Subtotal6Cost6
+   }
+   Do,(#Subtotal7Cost7>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal7Name#Comma#Subtotal7Cost7
+   }
+   Do,(#Subtotal8Cost8>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal8Name#Comma#Subtotal8Cost8
+   }
+   Do,(#Subtotal9Cost9>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal9Name#Comma#Subtotal9Cost9
+   }
+   Do,(#Subtotal10Cost10>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal10Name#Comma#Subtotal10Cost10
+   }
+   Do,(#Subtotal14Cost14>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal14Name#Comma#Subtotal14Cost14
+   }
+   Do,(#Subtotal15Cost15>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal15Name#Comma#Subtotal15Cost15
+   }
+   Do,(#Subtotal16Cost16>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal16Name#Comma#Subtotal16Cost16
+   }
+   Do,(#Subtotal17Cost17>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal17Name#Comma#Subtotal17Cost17
+   }
+   Do,(#Subtotal18Cost18>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal18Name#Comma#Subtotal18Cost18
+   }
+   Do,(#Subtotal19Cost19>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal19Name#Comma#Subtotal19Cost19
+   }
+   Do,(#Subtotal20Cost20>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal20Name#Comma#Subtotal20Cost20
+   }
+   Do,(#Subtotal21Cost21>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal21Name#Comma#Subtotal21Cost21
+   }
+   Do,(#Subtotal22Cost22>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal22Name#Comma#Subtotal22Cost22
+   }
+   Do,(#Subtotal23Cost23>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal23Name#Comma#Subtotal23Cost23
+   }
+   Do,(#Subtotal24Cost24>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal24Name#Comma#Subtotal24Cost24
+   }
+   Do,(#Subtotal25Cost25>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal25Name#Comma#Subtotal25Cost25
+   }
+   Do,(#Subtotal26Cost26>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal26Name#Comma#Subtotal26Cost26
+   }
+   Do,(#Subtotal27Cost27>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal27Name#Comma#Subtotal27Cost27
+   }
+   Do,(#Subtotal28Cost28>0):1
+   {
+      SendToFile, #DestinationPath\#CSVName.CSV,#Subtotal28Name#Comma#Subtotal28Cost28
+   }
+   
+   SendToFile, #DestinationPath\#CSVName.CSV,Total Cost#Comma#Subtotal
+   
+}
+}

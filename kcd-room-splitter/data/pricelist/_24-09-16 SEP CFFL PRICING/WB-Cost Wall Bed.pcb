@@ -1,0 +1,554 @@
+,Use Grid
+
+
+
+
+,**
+,**
+,** SET COSTS FOR WALL BED CABINETRY BELOW
+
+Displayset, #chargeallwbdoors=Yes, Are basic doors costs added to the Wall Bed Cabinet? [Yes;No]
+Displayset, #upchargeWBwooddoors=0, What is the added charge for Wood Wall Bed Fronts? (Put 0 if there is no added charge.)
+,Displayset, #upchargeforaddeddoors=440*#MaterialCostGroup, Upcharge for shelf and divider over wallbed. Added Doors charged seperate from Wall Bed Cabinet.
+,** ALL OTHER DOOR STYLE COSTS WILL BE APPLIED TO WALL BED CABINET AFTER
+,**
+Set,#CostOfMurphyBed = 1000, set default cost for murphy bed 
+
+,** COSTS FOR TWIN WALL BED CABINETRY 
+DisplaySet,#TwinRange =47,1.0  If the width of the wall bed is equal to or less than this amount it will be considered a twin size bed
+DisplaySet,#MurphyBedTwin =1130*#MaterialCostGroup,1.1  Cost for Twin wall Bed 
+
+,**
+,** COSTS FOR FULL WALL BED CABINETRY 
+DisplaySet,#FullRange =62,2.0  If the width of the wall bed is equal to or less than this amount it will be considered a full size bed
+DisplaySet,#FullHeightRange =66.5,2.0a  If the height of the wall bed is equal to or less than this amount it will be considered a full size bed
+DisplaySet,#FullRangeSideFold =81,2.0b  If the width of the SideFold wall bed is equal to or less than this amount it will be considered a full size bed
+DisplaySet,#MurphyBedFull =1180*#MaterialCostGroup,2.1  Cost for Full wall Bed 
+
+,**
+,** COSTS FOR QUEEN WALL BED CABINETRY 
+DisplaySet,#QueenRange =68,3.0  If the width of the wall bed is equal to or less than this amount it will be considered a queen size bed
+DisplaySet,#QueenHeightRange =72.5,3.0a  If the height of the wall bed is equal to or less than this amount it will be considered a queen size bed
+DisplaySet,#QueenRangeSideFold =86,3.0b  If the width of the SideFold wall bed is equal to or less than this amount it will be considered a queen size bed
+DisplaySet,#MurphyBedQueen =1230*#MaterialCostGroup,3.1  Cost for Queen wall Bed 
+,**
+,** COSTS FOR KING WALL BED CABINETRY 
+DisplaySet,#KingRange =86,4.0  If the width of the wall bed is equal to or less than this amount it will be considered a king size bed
+DisplaySet,#MurphyBedKing =1280*#MaterialCostGroup,4.1  Cost for King wall Bed
+
+,**
+
+,,** MISCELLANEOUS WALL BED CABINETRY QUESTIONS
+,DisplaySet, #MurphyBedShelfDepth=10,         3.1      Depth of adjustable shelves and middle par for zoom room 
+,DisplaySet, #MurphyBedBackHeight=(DH1+TR+MR),         3.2      Height of back in zoom room unit 
+
+
+
+
+Set,(w<=#TwinRange):#CostOfMurphyBed = #MurphyBedTwin 
+Set,(w<=#FullRangeSideFold)&(H<#twinrange):#CostOfMurphyBed = #MurphyBedTwin 
+Set, (w>#TwinRange)&(w<=#FullRange):#CostOfMurphyBed = #MurphyBedFull 
+Set, (w>#FullRange)&(w<=#FullRangeSideFold)&(h<=#FullHeightRange)&(h>#Twinrange):#CostOfMurphyBed = #MurphyBedFull 
+Set, (w>#FullRange)&(w<=#QueenRange)&(h>#FullHeightRange):#CostOfMurphyBed = #MurphyBedQueen 
+Set, (w>#FullRange)&(h>#fullrange)&(w<=#QueenRangeSideFold)&(h<=#QueenHeightRange):#CostOfMurphyBed = #MurphyBedQueen 
+Set, (w>#QueenRange)&(w<=#KingRange)&(h>#QueenHeightRange):#CostOfMurphyBed = #MurphyBedKing 
+
+,**
+,**
+
+
+,** COSTS FOR Wall Bed Mechanisms 
+DisplaySet,#Wallbedmech1Name =Eurobed T, 1.1 Name of Wall bed mechanism
+DisplaySet,#Wallbedmech1cost =3400, 1.1  Cost for #Wallbedmech1Name per Unit
+DisplaySet,#Wallbedmech1PN =PN-4182-ENNC-_ _ _ _, 1.1  PN for #Wallbedmech1Name 
+,**
+DisplaySet,#Wallbedmech2Name =Eurobed D/F, 1.2  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech2cost =3700, 1.2 Cost for #Wallbedmech2Name per Unit
+DisplaySet,#Wallbedmech2PN =PN-5682-ENNC-_ _ _ _, 1.2  PN for #Wallbedmech2Name 
+,**
+DisplaySet,#Wallbedmech3Name =Eurobed Q, 1.3  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech3cost =4225, 1.3  Cost for #Wallbedmech3Name per Unit
+DisplaySet,#Wallbedmech3PN =PN-6387-ENNC-_ _ _ _, 1.3  PN for #Wallbedmech3Name 
+,**
+DisplaySet,#Wallbedmech4Name =Murphy T, 1.4  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech4cost =868, 1.4  Cost for #Wallbedmech4Name per Unit
+DisplaySet,#Wallbedmech4PN =PN-SBF-S + SBLM, 1.4  PN for #Wallbedmech4Name 
+,**
+DisplaySet,#Wallbedmech5Name =Murphy D, 1.5  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech5cost =934, 1.5  Cost for #Wallbedmech5Name per Unit
+DisplaySet,#Wallbedmech5PN =PN-SBF-D + SBLM, 1.5 PN for #Wallbedmech5Name 
+,**
+DisplaySet,#Wallbedmech6Name =Murphy Q, 1.6  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech6cost =958, 1.6  Cost for #Wallbedmech6Name per Unit
+DisplaySet,#Wallbedmech6PN =PN-SBF-Q + SBLM, 1.6  PN for #Wallbedmech6Name 
+,**
+DisplaySet,#Wallbedmech7Name =Murphy K, 1.7  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech7cost =1146, 1.7  Cost for #Wallbedmech7Name per Unit
+DisplaySet,#Wallbedmech7PN =PN-SBF-K +  SBLM, 1.7  PN for #Wallbedmech7Name 
+,**
+DisplaySet,#Wallbedmech8Name =Unused, 1.8 Name of Wall bed mechanism
+DisplaySet,#Wallbedmech8cost =0, 1.8 Cost for #Wallbedmech8Name per Unit
+DisplaySet,#Wallbedmech8PN =, 1.8  PN for #Wallbedmech8Name 
+,**
+DisplaySet,#Wallbedmech9Name =Eurobed D/F S-F, 1.9  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech9cost =3775, 1.9  Cost for #Wallbedmech9Name per Unit
+DisplaySet,#Wallbedmech9PN =PN-7856-ENNC-_ _ _ _, 1.9  PN for #Wallbedmech9Name 
+,**
+DisplaySet,#Wallbedmech10Name =Eurobed Q S-F, 1.10  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech10cost =4290, 1.10  Cost for #Wallbedmech10Name per Unit
+DisplaySet,#Wallbedmech10PN =PN-8362-ENNC-_ _ _ _, 1.10  PN for #Wallbedmech10Name 
+,**
+DisplaySet,#Wallbedmech11Name =RoomMaker T, 1.11  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech11cost =3650, 1.11  Cost for #Wallbedmech11Name per Unit
+DisplaySet,#Wallbedmech11PN =PN-4187-RNNC-_ _ _ _, 1.11  PN for #Wallbedmech11Name 
+,**
+DisplaySet,#Wallbedmech12Name =RoomMaker D/F, 1.12  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech12cost =3250, 1.12 Cost for #Wallbedmech12Name per Unit 
+DisplaySet,#Wallbedmech12PN =PN-5687-RNNC-_ _ _ _, 1.12  PN for #Wallbedmech12Name 
+,**
+DisplaySet,#Wallbedmech13Name =RoomMaker Q, 1.13  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech13cost =3400, 1.13  Cost for #Wallbedmech13Name per Unit
+DisplaySet,#Wallbedmech13PN =PN-6392-RNNC-_ _ _ _, 1.13  PN for #Wallbedmech13Name 
+,**
+DisplaySet,#Wallbedmech14Name =RoomMaker K, 1.14  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech14cost =3800, 1.14  Cost for #Wallbedmech14Name per Unit
+DisplaySet,#Wallbedmech14PN =PN-7992-RNNC-_ _ _ _, 1.14  PN for #Wallbedmech14Name 
+,**
+DisplaySet,#Wallbedmech15Name =Unused Sico Twin 247, 1.15  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech15cost =3400, 1.15  Cost for #Wallbedmech15Name per Unit
+DisplaySet,#Wallbedmech15PN =PN-5690T-ENNC-_ _ _ _, 1.15  PN for #Wallbedmech15Name 
+,**
+DisplaySet,#Wallbedmech16Name =Sico D/F 247, 1.16  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech16cost =3700, 1.16  Cost for #Wallbedmech16Name per Unit
+DisplaySet,#Wallbedmech16PN =PN-5690T-ENNC-_ _ _ _, 1.16  PN for #Wallbedmech16Name 
+,**
+DisplaySet,#Wallbedmech17Name =Sico Q 247, 1.17  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech17cost =4225, 1.17  Cost for #Wallbedmech17Name per Unit
+DisplaySet,#Wallbedmech17PN =PN-6395T-ENNC-_ _ _ _, 1.17 PN for #Wallbedmech17Name 
+,**
+DisplaySet,#Wallbedmech18Name =Cielo T, 1.18 Name of Wall bed mechanism
+DisplaySet,#Wallbedmech18cost =2625, 1.18 Cost for #Wallbedmech18Name per Unit
+DisplaySet,#Wallbedmech18PN =PN-8420012 , 1.18 PN for #Wallbedmech18Name
+DisplaySet,#Wallbedmech18costsh =2855, 1.18 Cost for #Wallbedmech18Name w/Shelf per Unit 
+DisplaySet,#Wallbedmech18PNsh =PN-8421012, 1.18a PN for #Wallbedmech18Name w/Shelf
+,**
+DisplaySet,#Wallbedmech19Name =Cielo D/F, 1.19  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech19cost =2900, 1.19  Cost for #Wallbedmech19Name per Unit
+DisplaySet,#Wallbedmech19PN =PN-8420014 , 1.19 PN for #Wallbedmech19Name
+DisplaySet,#Wallbedmech19costel =3675, 1.19  Cost for #Wallbedmech19Name Extended Leg per Unit
+DisplaySet,#Wallbedmech19PNel =PN-8422014 , 1.19a PN for #Wallbedmech19Name Extended Leg
+DisplaySet,#Wallbedmech19costsh =3150, 1.19  Cost for #Wallbedmech19Name w/Shelf per Unit
+DisplaySet,#Wallbedmech19PNsh =PN-8421014 , 1.19b PN for #Wallbedmech19Name w/Shelf
+,**
+DisplaySet,#Wallbedmech20Name =Cielo Q, 1.20  Name of Wall bed mechanism
+ DisplaySet,#Wallbedmech20cost =1480, 1.20  Cost for #Wallbedmech20Name per Unit
+ DisplaySet,#Wallbedmech20PN =PN-8420016 , 1.20 PN for #Wallbedmech20Name
+ DisplaySet,#Wallbedmech20costhf =4000, 1.20  Cost for #Wallbedmech20Name per Unit Half Frame
+ DisplaySet,#Wallbedmech20PNhf =PN-8420018 , 1.20a PN for #Wallbedmech20Name H-F
+DisplaySet,#Wallbedmech20costel =3775, 1.20  Cost for #Wallbedmech20Name Extended Leg per Unit 
+DisplaySet,#Wallbedmech20PNel =PN-8422016 , 1.20b PN for #Wallbedmech20Name Extended Leg
+DisplaySet,#Wallbedmech20costsh =3365, 1.20  Cost for #Wallbedmech20Name w/Shelf per Unit 
+DisplaySet,#Wallbedmech20PNsh =PN-8421016 , 1.20c PN for #Wallbedmech20Name w/Shelf
+DisplaySet,#Wallbedmech20costshel =3480, 1.20  Cost for #Wallbedmech20Name w/Shelf Extended Leg per Unit 
+DisplaySet,#Wallbedmech20PNshel =PN-8423016 , 1.20d PN for #Wallbedmech20Name w/Shelf Extended Leg
+DisplaySet,#Wallbedmech20costshhf =3510, 1.20  Cost for #Wallbedmech20Name shelf Half Frame per Unit 
+DisplaySet,#Wallbedmech20PNshhf =PN-8421018 , 1.20e PN for #Wallbedmech20Name w/Shelf half frame
+,**
+DisplaySet,#Wallbedmech21Name =Hafele T, 1.21  Name of bed mechanism
+DisplaySet,#Wallbedmech21cost =3401, 1.21  Cost for #Wallbedmech21Name per Unit
+DisplaySet,#Wallbedmech21PN =PN-271.92.016, 1.21 PN for #Wallbedmech21Name
+,**
+DisplaySet,#Wallbedmech22Name =Hafele D/F, 1.22  Name of bed mechanism
+DisplaySet,#Wallbedmech22cost =3402, 1.22  Cost for #Wallbedmech22Name per Unit
+DisplaySet,#Wallbedmech22PN =PN-271.92.025, 1.22 PN for #Wallbedmech22Name
+,**
+DisplaySet,#Wallbedmech23Name =Hafele Q, 1.23  Name of bed mechanism
+DisplaySet,#Wallbedmech23cost =2372, 1.23  Cost for #Wallbedmech23Name per Unit
+DisplaySet,#Wallbedmech23PN =PN-271.92.132, 1.23 PN for #Wallbedmech23Name
+,**
+DisplaySet,#Wallbedmech24Name =Stella T, 1.24 Name of Wall bed mechanism
+DisplaySet,#Wallbedmech24cost =4270, 1.24 Cost for #Wallbedmech24Name w/Desk per Unit
+DisplaySet,#Wallbedmech24PN =PN-8521012, 1.24 PN for #Wallbedmech24Name w/Desk
+DisplaySet,#Wallbedmech24costsh =4800, 1.24 Cost for #Wallbedmech24Name w/Desk and Shelf per Unit
+DisplaySet,#Wallbedmech24PNsh =PN-8520012, 1.24a PN for #Wallbedmech24Name w/Desk and Shelf
+,**
+DisplaySet,#Wallbedmech25Name =Stella D/F, 1.25  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech25cost =4575, 1.25  Cost for #Wallbedmech25Name w/Desk per Unit 
+DisplaySet,#Wallbedmech25PN =PN-8520014 , 1.25 PN for #Wallbedmech25Name w/Desk
+DisplaySet,#Wallbedmech25costsh =5200, 1.25  Cost for #Wallbedmech25Name w/Desk and Shelf per Unit 
+DisplaySet,#Wallbedmech25PNsh =PN-8521014 , 1.25a PN for #Wallbedmech25Name w/Desk and Shelf
+,**
+DisplaySet,#Wallbedmech26Name =Stella Q, 1.26  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech26cost =4645, 1.26  Cost for #Wallbedmech26Name w/Desk per Unit
+DisplaySet,#Wallbedmech26PN =PN-8520016 , 1.26 PN for #Wallbedmech26Name w/Desk
+DisplaySet,#Wallbedmech26costsh =5500, 1.26  Cost for #Wallbedmech26Name w/Desk and Shelf per Unit
+DisplaySet,#Wallbedmech26PNsh =PN-8521016 , 1.26a PN for #Wallbedmech26Name w/Desk and Shelf
+,**
+DisplaySet,#Wallbedmech27Name =Cielo T S-F, 1.27  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech27cost =3560, 1.27  Cost for #Wallbedmech27Name per Unit
+DisplaySet,#Wallbedmech27PN =PN-8410012 , 1.27 PN for #Wallbedmech27Name
+,**
+DisplaySet,#Wallbedmech28Name =Not Available Tandem T S-F, 1.28  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech28cost =6175, 1.28  Cost for #Wallbedmech28Name w/Desk per Unit
+DisplaySet,#Wallbedmech28PN =PN-WEBKIT1213194 , 1.28 PN for #Wallbedmech28Name w/Desk
+,**
+DisplaySet,#Wallbedmech29Name =Cielo D/F S-F, 1.29  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech29cost =3740, 1.29  Cost for #Wallbedmech29Name per Unit
+DisplaySet,#Wallbedmech29PN =PN-8410014 , 1.29 PN for #Wallbedmech29Name
+DisplaySet,#Wallbedmech29costel =3860, 1.29  Cost for #Wallbedmech29NameExtended Leg per Unit
+DisplaySet,#Wallbedmech29PNel =PN-8412014 , 1.29a PN for #Wallbedmech29Name Extended Leg
+,**
+DisplaySet,#Wallbedmech30Name =Cielo Q S-F, 1.30  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech30cost =3835, 1.30  Cost for #Wallbedmech30Name per Unit
+DisplaySet,#Wallbedmech30PN =PN-8410016 , 1.30 PN for #Wallbedmech30Name
+DisplaySet,#Wallbedmech30costel =3955, 1.30  Cost for #Wallbedmech30Name per Unit
+DisplaySet,#Wallbedmech30PNel =PN-8412016 , 1.30a PN for #Wallbedmech30Name Extended Leg
+,**
+DisplaySet,#Wallbedmech31Name =Stella D/F S-F, 1.31  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech31cost =5900, 1.31  Cost for #Wallbedmech31Name w/Desk per Unit
+DisplaySet,#Wallbedmech31PN =PN-8510014 , 1.31 PN for #Wallbedmech31Name w/Desk
+,**
+DisplaySet,#Wallbedmech32Name =Stella Q S-F, 1.32  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech32cost =6000, 1.32  Cost for #Wallbedmech32Name w/Desk per Unit
+DisplaySet,#Wallbedmech32PN =PN-8510016 , 1.32 PN for #Wallbedmech32Name w/Desk
+,**
+DisplaySet,#Wallbedmech33Name =Hafele Steel Q, 1.33  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech33cost =9999, 1.33  Cost for #Wallbedmech33Name per Unit
+DisplaySet,#Wallbedmech33PN =271.92.200 , 1.33 PN for #Wallbedmech33Name 
+,**
+DisplaySet,#Wallbedmech34Name =Hafele Steel D/F, 1.34  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech34cost =9999, 1.34  Cost for #Wallbedmech34Name per Unit
+DisplaySet,#Wallbedmech34PN =271.92.202 , 1.34 PN for #Wallbedmech34Name 
+,**
+DisplaySet,#Wallbedmech35Name =Hafele Steel T, 1.35  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech35cost =9999, 1.35  Cost for #Wallbedmech35Name per Unit
+DisplaySet,#Wallbedmech35PN =271.92.201 , 1.35 PN for #Wallbedmech35Name 
+,**
+DisplaySet,#Wallbedmech36Name =Murphy T SF, 1.36  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech36cost =1000, 1.36  Cost for #Wallbedmech36Name per Unit
+DisplaySet,#Wallbedmech36PN =PN SFB-S + L-7700 + SBLM, 1.36  PN for #Wallbedmech36Name 
+,**
+DisplaySet,#Wallbedmech37Name =Murphy D SF, 1.37  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech37cost =1000, 1.37  Cost for #Wallbedmech37Name per Unit
+DisplaySet,#Wallbedmech37PN =PN SFB-D + L-7700 + SBLM, 1.37 PN for #Wallbedmech37Name 
+,**
+DisplaySet,#Wallbedmech38Name =Murphy Q SF, 1.38  Name of Wall bed mechanism
+DisplaySet,#Wallbedmech38cost =1200, 1.38  Cost for #Wallbedmech38Name per Unit
+DisplaySet,#Wallbedmech38PN =PN SFB-Q + L-8200 +  SBLM, 1.38  PN for #Wallbedmech38Name 
+,**
+set, #deskwidth = 0
+set, #deskdepth=0
+set, #wbshwidth=0
+
+
+Do,(#UnitFileName="Wallbed Sico Twin.cab")|(#UnitFileName="WallbedType1.cab"):1
+{
+set,#Wallbedname=#Wallbedmech1Name 
+set,#CostOfWallBed=#Wallbedmech1cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech1PN 
+}
+Do,(#UnitFileName="Wallbed Sico Double or Full.cab")|(#UnitFileName="WallbedType2.cab"):1
+{
+set,#Wallbedname=#Wallbedmech2Name 
+set,#CostOfWallBed=#Wallbedmech2cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech2PN 
+}
+Do,(#UnitFileName="Wallbed Sico Queen.cab")|(#UnitFileName="WallbedType3.cab"):1
+{
+set,#Wallbedname=#Wallbedmech3Name 
+set,#CostOfWallBed=#Wallbedmech3cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech3PN 
+}
+Do,(#UnitFileName="Wallbed Murphy Twin SBFS.cab")|(#UnitFileName="WallbedType4.cab"):1
+{
+set,#Wallbedname=#Wallbedmech4Name 
+set,#CostOfWallBed=#Wallbedmech4cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech4PN 
+}
+Do,(#UnitFileName="Wallbed Murphy Double SBFD.cab")|(#UnitFileName="WallbedType5.cab"):1
+{
+set,#Wallbedname=#Wallbedmech5Name 
+set,#CostOfWallBed=#Wallbedmech5cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech5PN 
+}
+Do,(#UnitFileName="Wallbed Murphy Queen SBFQ.cab")|(#UnitFileName="WallbedType6.cab"):1
+{
+set,#Wallbedname=#Wallbedmech6Name 
+set,#CostOfWallBed=#Wallbedmech6cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech6PN 
+}
+Do,(#UnitFileName="Wallbed Murphy King SBFK.cab")|(#UnitFileName="WallbedType7.cab"):1
+{
+set,#Wallbedname=#Wallbedmech7Name 
+set,#CostOfWallBed=#Wallbedmech7cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech7PN 
+}
+Do,(#UnitFileName="Wallbedtype8.cab"):1
+{
+set,#Wallbedname=#Wallbedmech8Name 
+set,#CostOfWallBed=#Wallbedmech8cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech8PN 
+}
+Do,(#UnitFileName="Wallbed Sico Double or Full SF.cab")|(#UnitFileName="WallbedType9.cab"):1
+{
+set,#Wallbedname=#Wallbedmech9Name 
+set,#CostOfWallBed=#Wallbedmech9cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech9PN 
+}
+Do,(#UnitFileName="Wallbed Sico Queen SF.cab")|(#UnitFileName="WallbedType10.cab"):1
+{
+set,#Wallbedname=#Wallbedmech10Name 
+set,#CostOfWallBed=#Wallbedmech10cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech10PN 
+}
+Do,(#UnitFileName="Wallbed Sico RoomMaker Twin.cab")|(#UnitFileName="WallbedType11.cab"):1
+{
+set,#Wallbedname=#Wallbedmech11Name 
+set,#CostOfWallBed=#Wallbedmech11cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech11PN 
+}
+Do,(#UnitFileName="Wallbed Sico RoomMaker Double or Full.cab")|(#UnitFileName="WallbedType12.cab"):1
+{
+set,#Wallbedname=#Wallbedmech12Name 
+set,#CostOfWallBed=#Wallbedmech12cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech12PN 
+}
+set, #stopwb=13
+Do,(#UnitFileName="Wallbed Sico RoomMaker Queen.cab")|(#UnitFileName="WallbedType13.cab"):1
+{
+set,#Wallbedname=#Wallbedmech13Name 
+set,#CostOfWallBed=#Wallbedmech13cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech13PN 
+}
+
+Do,(#UnitFileName="Wallbed Sico RoomMaker King.cab")|(#UnitFileName="WallbedType14.cab"):1
+{
+set,#Wallbedname=#Wallbedmech14Name 
+set,#CostOfWallBed=#Wallbedmech14cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech14PN 
+}
+set, #stopwb=15
+Do,(#UnitFileName="Wallbed Sico Twin 247.cab")|(#UnitFileName="WallbedType15.cab"):1
+{
+set,#Wallbedname=#Wallbedmech15Name 
+set,#CostOfWallBed=#Wallbedmech15cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech15PN 
+},**
+Do,(#UnitFileName="Wallbed Sico Double or Full 247.cab")|(#UnitFileName="WallbedType16.cab"):1
+{
+set,#Wallbedname=#Wallbedmech16Name 
+set,#CostOfWallBed=#Wallbedmech16cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech16PN 
+}
+Do,(#UnitFileName="Wallbed Sico Queen 247.cab")|(#UnitFileName="WallbedType17.cab"):1
+{
+set,#Wallbedname=#Wallbedmech17Name 
+set,#CostOfWallBed=#Wallbedmech17cost+#CostOfMurphyBed
+Set,#wallbedpartnumber=#Wallbedmech17PN 
+}
+Do,(#UnitFileName="Wallbed Richelieu Cielo Twin.cab"):1
+{
+Set, (I203>0)&(I204>0): #Wallbedname=#Wallbedmech18Name w/Shelf
+Set, (I203=0)|(I204=0): #Wallbedname=#Wallbedmech18Name 
+set, #wbshwidth=41.99876
+Set,(I203=0)|(I204=0): #costofwallbed=#Wallbedmech18cost+#CostOfMurphyBed
+Set,(I203=0)|(I204=0): #wallbedpartnumber=#Wallbedmech18PN 
+Set,(I203>0)&(I204>0): #costofwallbed=#Wallbedmech18costsh+#CostOfMurphyBed
+Set,(I203>0)&(I204>0): #wallbedpartnumber=#Wallbedmech18PNsh 
+}
+Do,(#UnitFileName="Wallbed Richelieu Cielo Double or Full.cab"):1
+{
+Set, (I203>0)&(I204>0): #Wallbedname=#Wallbedmech19Name w/Shelf 
+Set, (I203=0)|(I204=0): #Wallbedname=#Wallbedmech19Name
+set, #wbshwidth=56.85
+Set,(I203=0)|(I204=0): #costofwallbed=#Wallbedmech19cost+#CostOfMurphyBed
+Set,(I203=0)|(I204=0): #wallbedpartnumber=#Wallbedmech19PN 
+Set,(I203>0)&(I204>0): #costofwallbed=#Wallbedmech19costsh+#CostOfMurphyBed
+Set,(I203>0)&(I204>0): #wallbedpartnumber=#Wallbedmech19PNsh 
+}
+Do,(#UnitFileName="Wallbed Richelieu Cielo Double or Full Extended Leg.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech19Name E-L
+Set, #costofwallbed=#Wallbedmech19costel+#CostOfMurphyBed
+Set, #wallbedpartnumber=#Wallbedmech19PNel 
+}
+Do,(#UnitFileName="Wallbed Richelieu Cielo Queen.cab"):1
+{ 
+Set, (I203>0)&(I204>0): #Wallbedname=#Wallbedmech20Name w/Shelf
+Set, (I203=0)|(I204=0): #Wallbedname=#Wallbedmech20Name
+set, #wbshwidth=62.756
+Set,(I203=0)|(I204=0): #costofwallbed=#Wallbedmech20cost+#CostOfMurphyBed
+Set,(I203=0)|(I204=0): #wallbedpartnumber=#Wallbedmech20PN 
+Set,(I203>0)&(I204>0): #costofwallbed=#Wallbedmech20costsh+#CostOfMurphyBed
+Set,(I203>0)&(I204>0): #wallbedpartnumber=#Wallbedmech20PNsh 
+}
+Do,(#UnitFileName="Wallbed Richelieu Cielo Queen Extended Leg.cab"):1
+{
+Set, (I203=0)|(I204=0): #Wallbedname=#Wallbedmech20Name E-L
+set, #wbshwidth=62.756
+Set,(I203=0)|(I204=0): #costofwallbed=#Wallbedmech20costel+#CostOfMurphyBed
+Set,(I203=0)|(I204=0): #wallbedpartnumber=#Wallbedmech20PNel 
+Set, (I203>0)&(I204>0): #Wallbedname=#Wallbedmech20Name E-L w/Shelf
+Set,(I203>0)&(I204>0): #costofwallbed=#Wallbedmech20costshel+#CostOfMurphyBed
+Set,(I203>0)&(I204>0): #wallbedpartnumber=#Wallbedmech20PNshel 
+}
+Do,(#UnitFileName="Wallbed Richelieu Cielo Queen Half Frame.cab"):1
+{
+Set, (I203=0)|(I204=0): #Wallbedname=#Wallbedmech20Name H-F
+set, #wbshwidth=62.756
+Set,(I203=0)|(I204=0): #costofwallbed=#Wallbedmech20costhf+#CostOfMurphyBed
+Set,(I203=0)|(I204=0): #wallbedpartnumber=#Wallbedmech20PNhf 
+Set, (I203>0)&(I204>0): #Wallbedname=#Wallbedmech20Name H-F w/Shelf 
+Set,(I203>0)&(I204>0): #costofwallbed=#Wallbedmech20costshhf+#CostOfMurphyBed
+Set,(I203>0)&(I204>0): #wallbedpartnumber=#Wallbedmech20PNshhf
+}
+Do,(#UnitFileName="Wallbed Hafele Twin.cab")|(#UnitFileName="WallbedType18.cab"):1
+{
+set,#Wallbedname=#Wallbedmech21Name 
+set,#CostOfWallBed=#Wallbedmech21cost+#CostOfMurphyBed
+Set, #wallbedpartnumber=#Wallbedmech21PN 
+}
+Do,(#UnitFileName="Wallbed Hafele Double or Full.cab")|(#UnitFileName="WallbedType19.cab"):1
+{
+set,#Wallbedname=#Wallbedmech22Name 
+set,#CostOfWallBed=#Wallbedmech22cost+#CostOfMurphyBed
+Set, #wallbedpartnumber=#Wallbedmech22PN 
+}
+Do,(#UnitFileName="Wallbed Hafele Queen.cab")|(#UnitFileName="WallbedType20.cab"):1
+{
+set,#Wallbedname=#Wallbedmech23Name 
+set,#CostOfWallBed=#Wallbedmech23cost+#CostOfMurphyBed
+Set, #wallbedpartnumber=#Wallbedmech23PN 
+}
+Do,(#UnitFileName="Wallbed Richelieu Stella Twin.cab"):1
+{
+Set, (I203>0)&(I204>0): #Wallbedname=#Wallbedmech24Name w/Shelf and Desk 
+set,(I203>0)&(I204>0):#CostOfWallBed=#Wallbedmech24costsh+#CostOfMurphyBed
+set,(I203>0)&(I204>0):#wallbedpartnumber=#Wallbedmech24PNsh 
+Set, (I203=0)|(I204=0): #Wallbedname=#Wallbedmech24Name w/Desk 
+set,(I203=0)|(I204=0):#CostOfWallBed=#Wallbedmech24cost+#CostOfMurphyBed
+set,(I203=0)|(I204=0):#wallbedpartnumber=#Wallbedmech24PN 
+set, #deskwidth = 42.52
+set, #deskdepth = 20.875
+set, #wbshwidth=41.99876
+}
+Do,(#UnitFileName="Wallbed Richelieu Stella Double or Full.cab"):1
+{
+Set, (I203>0)&(I204>0): #Wallbedname=#Wallbedmech25Name w/Shelf and Desk 
+set,(I203>0)&(I204>0):#CostOfWallBed=#Wallbedmech25costsh+#CostOfMurphyBed
+set,(I203>0)&(I204>0):#wallbedpartnumber=#Wallbedmech25PNsh 
+Set, (I203=0)|(I204=0): #Wallbedname=#Wallbedmech25Name w/Desk 
+set,(I203=0)|(I204=0):#CostOfWallBed=#Wallbedmech25cost+#CostOfMurphyBed
+set,(I203=0)|(I204=0):#wallbedpartnumber=#Wallbedmech25PN 
+set, #deskwidth = 57.48
+set, #deskdepth = 20.875
+set, #wbshwidth=56.85
+}
+Do,(#UnitFileName="Wallbed Richelieu Stella Queen.cab"):1
+{
+Set, (I203>0)&(I204>0): #Wallbedname=#Wallbedmech26Name w/Shelf and Desk 
+set,(I203>0)&(I204>0):#CostOfWallBed=#Wallbedmech26costsh+#CostOfMurphyBed
+set,(I203>0)&(I204>0):#wallbedpartnumber=#Wallbedmech26PNsh 
+Set, (I203=0)|(I204=0): #Wallbedname=#Wallbedmech26Name w/Desk 
+set,(I203=0)|(I204=0):#CostOfWallBed=#Wallbedmech26cost+#CostOfMurphyBed
+set,(I203=0)|(I204=0):#wallbedpartnumber=#Wallbedmech26PN 
+set, #deskwidth = 63.38583
+set, #deskdepth = 20.875
+set, #wbshwidth=62.756
+}
+Do,(#UnitFileName="Wallbed Richelieu Cielo Twin SF.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech27Name
+set,#CostOfWallBed=#Wallbedmech27cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech27PN 
+}
+Do,(#UnitFileName="Wallbed Richelieu Tandem Twin SF.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech28Name w/Desk 
+set,#CostOfWallBed=#Wallbedmech28cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech28PN 
+set, #deskwidth = 75.1968504
+set, #deskdepth = 20.875
+}
+Do,(#UnitFileName="Wallbed Richelieu Cielo Double or Full SF.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech29Name
+set,#CostOfWallBed=#Wallbedmech29cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech29PN 
+}
+Do,(#UnitFileName="Wallbed Richelieu Cielo Double or Full SF Extended Leg.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech29Name E-L
+set,#CostOfWallBed=#Wallbedmech29costel+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech29PNel 
+}
+Do,(#UnitFileName="Wallbed Richelieu Cielo Queen SF.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech30Name
+set,#CostOfWallBed=#Wallbedmech30cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech30PN 
+}
+Do,(#UnitFileName="Wallbed Richelieu Cielo Queen SF Extended Leg.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech30Name E-L
+set,#CostOfWallBed=#Wallbedmech30costel+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech30PNel 
+}
+Do,(#UnitFileName="Wallbed Richelieu Stella Double or Full SF.cab"):1
+{ 
+Set, #Wallbedname=#Wallbedmech31Name w/Desk 
+set,#CostOfWallBed=#Wallbedmech31cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech31PN 
+set, #deskwidth = 77.5625
+set, #deskdepth = 20.875
+}
+Do,(#UnitFileName="Wallbed Richelieu Stella Queen SF.cab"):1
+{ 
+Set, #Wallbedname=#Wallbedmech32Name w/Desk 
+set,#CostOfWallBed=#Wallbedmech32cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech32PN 
+set, #deskwidth = 83.5
+set, #deskdepth = 18.875
+}
+Do,(#UnitFileName="Wallbed Hafele Steel Queen.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech33Name
+set,#CostOfWallBed=#Wallbedmech33cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech33PN 
+}
+Do,(#UnitFileName="Wallbed Hafele Steel Double or Full.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech34Name
+set,#CostOfWallBed=#Wallbedmech34cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech34PN 
+}
+Do,(#UnitFileName="Wallbed Hafele Steel Twin.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech35Name
+set,#CostOfWallBed=#Wallbedmech35cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech35PN 
+}
+Do,(#UnitFileName="Wallbed Murphy Twin SBFS SF.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech36Name
+set,#CostOfWallBed=#Wallbedmech36cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech36PN 
+}
+Do,(#UnitFileName="Wallbed Murphy Double SBFD SF.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech37Name
+set,#CostOfWallBed=#Wallbedmech37cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech37PN 
+}
+Do,(#UnitFileName="Wallbed Murphy Queen SBFQ SF.cab"):1
+{
+Set,  #Wallbedname=#Wallbedmech38Name
+set,#CostOfWallBed=#Wallbedmech38cost+#CostOfMurphyBed
+set,#wallbedpartnumber=#Wallbedmech38PN 
+}
+set, #stopwb=0
+set, #CostOfWallBed=[(#CostOfWallBed)*#universalupcharge]
+set, #stopwb=1
+,**
+
+

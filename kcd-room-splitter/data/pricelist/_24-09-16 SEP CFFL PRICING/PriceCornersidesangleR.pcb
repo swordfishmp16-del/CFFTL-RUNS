@@ -1,0 +1,20 @@
+,CF Prices and counts the left and right and 3rd (panels) sides for LEFT corner units open end and angled end
+
+Do, (LS>0):1
+{
+set, #sideTH = LS
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH = {LS}
+Price, (LS>0):1,  #LeftSideName-#sideTH"-#edgebandingtype,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber,          
+}
+Do, (RS>0):1
+{
+set, #sideTH = RS
+set, #temppanelcount=1
+Set, #VertD = [W-LS]
+Load, B-Side Cost.Pcb
+set, #sideTH = {RS}
+Price, (RS>0):1,  #RightSideName-#sideTH"-#edgebandingtype,        #CostOfSide,             #VertD, #VertH,          #RightSidePrintOrderNumber,    
+}
+

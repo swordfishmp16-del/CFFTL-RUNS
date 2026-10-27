@@ -1,0 +1,188 @@
+,CF Calculates the price for each part
+,Set,#ZUnitType=Murphybed
+
+Set, #Wallbeddesk=0
+Set, #Wallbedshelf=0
+Set, #wallbedmidshelffordoors=0
+,********** COST FOR Wall Bed UNIT ***********
+Load,WB-Cost Wall Bed.pcb
+Price, 1,   RM#roomnum #Wallbedname-#unitmaterialname-#EdgeBandingType-#wallbedpartnumber,         #CostOfWallBed,             W, H,          #LeftSidePrintOrderNumber, 
+
+,***The following tracks the depth for the contract, does not count panels
+set, #VertH=H
+set, #VertD=D
+set, #wallbeddepthtrack=1
+load, Pricesides.pcb
+,load, b-side cost.pcb
+set, #wallbeddepthtrack=0        
+,*****************************************
+   
+Set, #ShelfWidth = [(W-LS-RS)]  
+
+
+
+Do, (D3H>0)&(D1H<>D3H):1
+{
+,*********** All ADJ SHELVES *************
+Do, (D3H>0)&(D1H>18):1
+{
+
+,Top Adj Shelves
+Set, #ShelfWidth = [(W-LS-RS-MS)/2]
+Set, #Shelfdepth=D 
+Set, #tempshelfcount=2
+Load, Priceadjshelves.pcb  
+
+}
+,********* All VERTICAL DIVIDERS *********
+,Top Vertical Divider
+Set, #VertH = [D1H]
+Set, #VertD = [D]
+Load,(MS>0): PriceDividers.pcb        
+,*****************************************
+
+,*********** All ADJ SHELVES *************
+Set, #wallbedmidshelffordoors=1
+,Top Adj Shelves
+Set, #ShelfWidth = [(W-LS-RS)]
+Set, #Shelfdepth=D 
+Set, #tempshelfcount=1
+Load, Priceadjshelves.pcb 
+Set, #wallbedmidshelffordoors=0 
+
+}
+,************* OTHER PARTS ***************
+set, #Backheight = [H]
+set, #ShelfWidth = [(W-LS-RS)]
+Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,           
+,Price, (CRodHt1>0):1,            #ClosetPoleName,       #ClosetPoleCost,         (W-LS-RS), 1,  #ClosetPolePrintOrderNumber,       
+,Price, (CRodHt2>0):1,            #ClosetPoleName,       #ClosetPoleCost,         (W-LS-RS), 1,  #ClosetPolePrintOrderNumber,        
+,Price, (K>0):1,      #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,              
+,*****************************************
+
+set, #door=D1
+
+load, D-Door cost.pcb
+set,#Thisdoor=#DoorSD
+load, DoorCode.pcb
+load, DoorMemo.pcb
+set, (#chargeallwbdoors=No):#Basicdoorcost=0
+
+,price when there are upper doors.
+,do,(#DoorDrawerType = "#DoorDrawerTypeName1")&(#chargeallwbdoors=No)&(TR>.75):1
+do,(#DoorDrawerType = "#DoorDrawerTypeName1")&(#chargeallwbdoors=No)&(((D2H>0)&(D1H<>D2H))|((D3H>0)&(D1H<>D3H))):1
+{
+set, #stopallwallbed=11
+set, #door=D1
+load,(((D2H>0)&(D1H<>D2H))|((D3H>0)&(D1H<>D3H))): DoorsWB1.pcb
+set, #door=D2
+load, ((D3H>0)&(D1H<>D3H)):DoorsWB2.pcb
+Do, ((D3H>0)&(D1H=D3H)):1
+{
+set, #wallbeddepthtrack=1
+set, #costofdoor=0
+set, #door=D2
+set, #doorHK=D2HK
+Set, #DoorHKN=D2HKN
+Load, (#DoorSD>0): DoorHandleKnob.Pcb
+}
+,counting handles and knobs only for WB doors
+set, #wallbeddepthtrack=1
+set, #costofdoor=0
+set, #door=D3
+set, #doorHK=D3HK
+Set, #DoorHKN=D3HKN
+Load, (#DoorSD>0): DoorHandleKnob.Pcb
+set, #door=D4
+set, #doorHK=D4HK
+Set, #DoorHKN=D4HKN
+Load, (#DoorSD>0): DoorHandleKnob.Pcb
+set, #door=D5
+set, #doorHK=D5HK
+Set, #DoorHKN=D5HKN
+Load, (#DoorSD>0): DoorHandleKnob.Pcb
+set, #wallbeddepthtrack=0
+}
+set, #stopallWB=11
+,WB fronts only and included in cabinet
+do,(#DoorDrawerType = "#DoorDrawerTypeName1")&(#chargeallwbdoors=No)&((D2H=0)|((D1H=D2H)&(D3H=0))):1
+{
+,counting handles and knobs only
+set, #wallbeddepthtrack=1
+set, #costofdoor=0
+set, #door=D1
+set, #doorHK=D1HK
+Set, #DoorHKN=D1HKN
+Load, (#DoorSD>0): DoorHandleKnob.Pcb
+set, #door=D2
+set, #doorHK=D2HK
+Set, #DoorHKN=D2HKN
+Load, (#DoorSD>0): DoorHandleKnob.Pcb
+set, #door=D3
+set, #doorHK=D3HK
+Set, #DoorHKN=D3HKN
+Load, (#DoorSD>0): DoorHandleKnob.Pcb
+set, #door=D4
+set, #doorHK=D4HK
+Set, #DoorHKN=D4HKN
+Load, (#DoorSD>0): DoorHandleKnob.Pcb
+set, #door=D5
+set, #doorHK=D5HK
+Set, #DoorHKN=D5HKN
+Load, (#DoorSD>0): DoorHandleKnob.Pcb
+
+
+set, #wallbeddepthtrack=0
+}
+
+,do,(#DoorDrawerType = "#DoorDrawerTypeName1")&(#chargeallwbdoors=No)&(D2H<43):1
+,{
+,set, #door=D2
+,load, DoorsWB.pcb
+,}
+
+,do,(#DoorDrawerType = "#DoorDrawerTypeName1")&(#chargeallwbdoors=No)&(D2H>43):1
+,{
+,set, #costofdoor=0
+,}
+
+do,(#DoorDrawerType <> "#DoorDrawerTypeName1")|(#chargeallwbdoors=Yes)|(#CodeDoor="flatCFMirror")|(#CodeDoor="cfMolding"):1
+{
+set, #door=D1
+set, #wallbeddepthtrack=1
+load, Doors.pcb
+set, #wallbeddepthtrack=0
+}
+
+
+do,(#DoorDrawerType <> "#DoorDrawerTypeName1")&(#DoorDrawerType <> "#DoorDrawerTypeName2")&(#DoorDrawerType <> "#DoorDrawerTypeName3")&(#DoorDrawerType<>"*TH*")&(#DoorDrawerType<>"*RTF*")&(#CodeDoor<>"flatCFMirror")&(#CodeDoor<>"cfMolding"):1
+{
+Price, (#upchargeWBwooddoors<>0):1,    Wood Wall Bed Door Support,             #upchargeWBwooddoors,D1W, D1H,          #KickPrintOrderNumber,              
+}
+
+Do,((#DoorDrawerType = "#DoorDrawerTypeName1")|(#DoorDrawerType = "#DoorDrawerTypeName2"))&((#codedoor="FT-1")):1
+{
+Price, (#codedoor="FT-1"):1,      RM#Roomnum Wall Bed Face Trim #memodoor,             300,             D1W, D1H,          #KickPrintOrderNumber,              
+
+}
+
+,*********** All SHELVES for Richelieu Beds *************
+,
+Set, (I201>0)&(I202>0):#Wallbeddesk=1
+Set, (I201>0)&(I202>0):#ShelfWidth = #DeskWidth:#shelfwidth=0
+Set, (I201>0)&(I202>0):#ShelfDepth = #deskdepth:#shelfdepth=0
+Set, (I201>0)&(I202>0):#Tempshelfcount=1
+load, (#shelfwidth>0):Priceadjshelves.pcb
+Set, #Wallbeddesk=0
+
+Set, (I203>0)&(I204>0):#Wallbedshelf=1
+Set, (I203>0)&(I204>0):#ShelfWidth = #wbshwidth:#shelfwidth=0
+Set, (I203>0)&(I204>0):#ShelfDepth = 7.875:#shelfdepth=0
+Set, (I203>0)&(I204>0):#Tempshelfcount=1
+load, (#shelfwidth>0): Priceadjshelves.pcb
+Set, #Wallbedshelf=0
+
+
+,*****************************************
+
+

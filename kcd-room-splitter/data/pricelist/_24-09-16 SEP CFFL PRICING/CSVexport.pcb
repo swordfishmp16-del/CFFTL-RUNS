@@ -1,0 +1,96 @@
+
+
+
+
+,set, #thicknessoutput=[#thicknessmm]
+,set, #widthoutput = [#widthsum]
+,set, #lengthoutput = [#lengthsum]
+
+,6THFACE OPERATION NOTES 
+,#6thfacenote
+
+,WALL Number
+,#Wallname
+
+,ROOM NAME
+,#Roomname
+
+,PART NOTE
+,#Note
+
+,EDGEBAND color and thickness
+,#EdgeBandName
+
+,EDGEBANDLINE (These can also be listed with commas between)
+,#BandedgeFront#BandedgeBack#BandedgeLeft#BandedgeRight
+
+,UNIT NUMBER
+,#UnitNumber
+
+,MIRRORED
+,#PartMirrored
+
+,ALLOW TO ROTATE
+,#AllowPartToRotate
+
+,DFX FILE NAME WITHOUT EXTENSION (Use for Cut-rite CSV)
+,#DXFFileNamewithoutextension
+
+,THICKNESS
+,#thicknes
+
+,LENGTH
+,#Length
+
+,WIDTH
+,#Width
+
+,MATERIAL
+,#Material
+
+,PART NAME
+,#Name
+
+,JOB EXPORT NAME
+,#JobExportName
+
+,QUANTITY
+,#Number
+
+,ROOMNAME
+,#Roomname
+
+,WALLNumber
+,#wallname
+
+,F or B
+,#Frontback
+
+,File Path
+,#Path\
+
+
+set, (#qty>0):#number=[#qty]
+set, #kcdnewcsvlistline=  #NewName#Comma#UnitNumber#Comma#Number#Comma#Note#Comma#Width#comma#Length#Comma#Roomname#comma#wallname#comma#JobExportName 
+set, #qty=0
+
+
+set, #stopcsvoutput=0
+
+,---------------------------------------------------------------------------
+,Get Room number (Trim off RM and room number from name)
+Len, #Size, #name
+Right, #newname, #Size-4, #name
+,---------------------------------------------------------------------------
+set, #stopcsvoutput=1
+
+,Do, (((#xmachineBothsides=No)&(#TemplateName<>"*#6thfacefileID*"))|((#xmachineBothsides=Yes)&(#TemplateName<>"")))&(#thicknessoutput>0):1
+do, (#name="*RM*")&(#name<>"Door-*")&(#name<>"Drfrt-*")&(#name<>"*form*")&(#name <>"*Label*")&(#name<>"*Hinge*")&(#makevalence="No"):1
+{
+SendtoFile, #CSVoutputfile , #kcdnewcsvlistline
+}
+
+
+
+
+

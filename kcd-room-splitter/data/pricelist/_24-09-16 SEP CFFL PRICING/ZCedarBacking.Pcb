@@ -1,0 +1,36 @@
+
+, Cedar backing  - Closet Pieces
+
+
+
+Set, #TempCostBackPerSqFt=0
+
+
+
+Do,(#UnitFileName="500-BackingCedarTG.cab")|(#UnitFileName="500-BackingCedarTGcutbetween.cab"):1
+{
+Set, #TempCostBackPerSqFt=#CostTGCedarPerSqFt
+,******** BACKING *******
+set, #cedarTG=1
+  
+set, #Backheight = [H]
+set, #ShelfWidth = [W]
+Price, 1,   RM#Roomnum Tongue and Groove Cedar Back,           ((W*H)/144)*#TempCostBackPerSqFt*#universalupcharge,                    w,h,         #BackPrintOrderNumber,
+,*********************************
+}
+
+Do,(#UnitFileName="500-backingcedar.cab")|(#UnitFileName="500-backingcedarcutbetween.cab"):1
+{
+Set, #TempCostBackPerSqFt=#CostqtrincedarPerSqFt
+,******** BACKING *******
+set, #cedarqtrinch=1
+
+  
+set, #Backheight = [H]
+set, #ShelfWidth = [W]
+Price, 1,   RM#Roomnum Cedar Back 1/4"  ,          ((W*H)/144)*#TempCostBackPerSqFt*#universalupcharge,                    w,h,         #BackPrintOrderNumber,
+,*********************************
+}
+
+
+ 

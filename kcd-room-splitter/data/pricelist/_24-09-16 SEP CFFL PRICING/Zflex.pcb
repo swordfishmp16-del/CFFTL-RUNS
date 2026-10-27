@@ -1,0 +1,255 @@
+
+load, FLX-Flex Pricing.pcb
+set, #stopflexpricing=1
+,Determine Pricing
+Do, (#Unitfilename="48 Hang Rail.cab"): 1
+{
+Price, 1, #Name #flexPN48inhangrail,#48inhangrail, , ,#ClosetPolePrintOrderNumber, 
+}
+,**
+Do, (#Unitfilename="48 Hang Rail with Cover.cab"): 1
+{
+set, #name = 48 Hang Rail with Cover
+Price, 1, #Name #flexPN48inhangrailwcover,#48inhangrailwcover, , ,#ClosetPolePrintOrderNumber, 
+}
+,**
+Do, (#Unitfilename="48 Std Support.cab"): 1
+{
+Price, 1, #Name #flexPN48instandard,#48instandard, , ,#ClosetPolePrintOrderNumber, 
+}
+,**
+Do, (#Unitfilename="78 Std Support.cab"): 1
+{
+Price, 1, #Name #flexPN78instandard,#78instandard, , ,#ClosetPolePrintOrderNumber, 
+}
+,**
+DisplaySet, #30inStdExpKit=73.94, 1.4 Cost for 30in Standard Expansion Kit
+DisplaySet, #flexPN30inStdExpKit=KT-0119-29-CN, 1.4a PN for 30in Standard Expansion Kit
+,**
+DisplaySet, #16inBracket=31.12, 1.5 Cost for 16in Bracket
+DisplaySet, #flexPN16inBracket=0323-161CN, 1.5a PN for 16in Bracket
+,**
+DisplaySet, #HWpack=13.89, 1.6 Cost for Hardware Pack
+DisplaySet, #flexPNHWpack=CD-0300HDWR, 1.6a PN for Hardware Pack
+,**
+DisplaySet, #SHHWpack=45.83, 1.7 Cost for Shelf Hardware Pack
+DisplaySet, #flexPNSHHWpack=CD-033HDWR, 1.7a PN for Shelf Hardware Pack
+,**
+,** COSTS FLEX ACCESSORIES
+,** 
+Do, (#Unitfilename="Flexbasket.cab"): 1
+{
+Price, 1, #Name #flexPN7inbasket,#7inbasket, , ,#ClosetPolePrintOrderNumber, 
+}
+,DisplaySet,  #7inbasket=168.11, 2.0 Cost for 7" Basket
+,DisplaySet,  #flexPN7inbasket=0335-BSKT-7CN, 2.0a PN for 7" Basket
+,** 
+DisplaySet,  #flexpantsrack=364.92, 2.1 Cost for Pants Rack
+DisplaySet,  #flexPNflexpantsrack=0335-PRK-CN, 2.1a PN for Pants Rack
+,** 
+DisplaySet,  #flexshoerack=407.29, 2.2 Cost for Shoe Rack
+DisplaySet,  #flexPNflexshoerack=0335-SRK-CN, 2.2a PN for Shoe Rack
+,** 
+,DisplaySet,  #flexjewelrytray=576.92, 2.3 Cost for Jewelry Tray
+,DisplaySet,  #flexPNflexjewelrytray=CF-1JEW, 2.3a PN for Jewelry Tray
+,** 
+Do, (#Unitfilename="Flexwireshelf.cab"): 1
+{
+Price, 1, #Name #flexPNFlexwireshelf,#Flexwireshelf, , ,#ClosetPolePrintOrderNumber, 
+}
+,DisplaySet,  #flexwireshelf=104.78, 2.4 Cost for Flex Wire Shelf
+,DisplaySet,  #flexPNflexwireshelf=0331-161623CN, 2.4a PN for Flex Wire Shelf
+,** 
+Do, (#Unitfilename="FlexRod.cab"): 1
+{
+Price, 1, #Name #flexPNFlexRod,#FlexRod, , ,#ClosetPolePrintOrderNumber, 
+}
+,** 
+DisplaySet,  #CPHook=18.69, 2.6 Cost for Closet Pole Hook
+DisplaySet,  #flexPNCPHook=CD-123CN, 2.6a PN for Closet Pole Hook
+,** 
+
+,**
+,** SET COSTS FOR FLEX COMPONENTS
+,** 
+Do, (#Unitfilename="Basketsurround.cab"): 1
+{
+Price, 1, #Name #flexPNBasketsurroundkit,#Basketsurroundkit, , ,#ClosetPolePrintOrderNumber, 
+}
+,Displayset, #Basketsurroundkit=247.15, 3.0 Cost for Basket Surround Kit
+,Displayset, #flexPNBasketsurroundkit=0335-SRND-CN, 3.0a PN for Basket Surround Kit
+,**
+Do, (#Unitfilename="1Drw.cab"): 1
+{
+Price, 1, #Name #flexPN1DRWmod,#1DRWmod, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Unitfilename="1Drwplustray.cab"): 1
+{
+Price, 1, #Name #flexPN1DRWmod,#1DRWmod, , ,#ClosetPolePrintOrderNumber, 
+Price, 1, CF Jewlery Tray Insert #flexPNflexjewelrytray,#flexjewelrytray, , ,#ClosetPolePrintOrderNumber, 
+}
+,DisplaySet, #1DRWmod=384.62, 3.1 Cost for 1 Drawer Module
+,DisplaySet, #flexPN1DRWmod=CF-1DRW, 3.1a PN for 1 Drawer Module
+,DisplaySet,  #flexjewelrytray=576.92, 2.3 Cost for Jewelry Tray
+,DisplaySet,  #flexPNflexjewelrytray=CF-1JEW, 2.3a PN for Jewelry Tray
+,**
+Do, (#Unitfilename="2Drw.cab"): 1
+{
+Price, 1, #Name #flexPN2DRWmod,#2DRWmod, , ,#ClosetPolePrintOrderNumber, 
+}
+,DisplaySet, #2DRWmod=538.46, 3.2 Cost for 2 Drawer Module
+,DisplaySet, #flexPN2DRWmod=CF-2DRW, 3.2a PN for 2 Drawer Module
+,**
+Do, (#Unitfilename="2Drwplustraytop.cab"): 1
+{
+Price, 1, #Name #flexPN2DRWmod,#2DRWmod, , ,#ClosetPolePrintOrderNumber, 
+Price, 1, CF Jewlery Tray Insert-Top Drawer #flexPNflexjewelrytray,#flexjewelrytray, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Unitfilename="2Drwplustraybot.cab"): 1
+{
+Price, 1, #Name #flexPN2DRWmod,#2DRWmod, , ,#ClosetPolePrintOrderNumber, 
+Price, 1, CF Jewlery Tray Insert-Bottom Drawer #flexPNflexjewelrytray,#flexjewelrytray, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Unitfilename="2Drwplustrayboth.cab"): 1
+{
+Price, 1, #Name #flexPN2DRWmod,#2DRWmod, , ,#ClosetPolePrintOrderNumber, 
+Price, 1, CF Jewlery Tray Insert-Both Drawers Qty 2-#flexPNflexjewelrytray,#flexjewelrytray*2, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Unitfilename="3Drw.cab"): 1
+{
+Price, 1, #Name #flexPN3DRWmod,#3DRWmod, , ,#ClosetPolePrintOrderNumber, 
+}
+,DisplaySet, #3DRWmod=692.31, 3.3 Cost for 3 Drawer Module
+,DisplaySet, #flexPN3DRWmod=CF-3DRW, 3.3a PN for 3 Drawer Module
+,**
+Do, (#Unitfilename="3Drwplustraytop.cab"): 1
+{
+Price, 1, #Name #flexPN3DRWmod,#3DRWmod, , ,#ClosetPolePrintOrderNumber, 
+Price, 1, CF Jewlery Tray Insert-Top Drawer #flexPNflexjewelrytray,#flexjewelrytray, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Unitfilename="3Drwplustraymid.cab"): 1
+{
+Price, 1, #Name #flexPN3DRWmod,#3DRWmod, , ,#ClosetPolePrintOrderNumber, 
+Price, 1, CF Jewlery Tray Insert-Middle Drawer #flexPNflexjewelrytray,#flexjewelrytray, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Unitfilename="3Drwplustraybot.cab"): 1
+{
+Price, 1, #Name #flexPN3DRWmod,#3DRWmod, , ,#ClosetPolePrintOrderNumber, 
+Price, 1, CF Jewlery Tray Insert-Bottom Drawer #flexPNflexjewelrytray,#flexjewelrytray, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Unitfilename="3Drwplustraytopmid.cab"): 1
+{
+Price, 1, #Name #flexPN3DRWmod,#3DRWmod, , ,#ClosetPolePrintOrderNumber, 
+Price, 1, CF Jewlery Tray Inserts-Top and Middle Drawers Qty 2-#flexPNflexjewelrytray,#flexjewelrytray*2, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Unitfilename="3Drwplustraytopbot.cab"): 1
+{
+Price, 1, #Name #flexPN3DRWmod,#3DRWmod, , ,#ClosetPolePrintOrderNumber, 
+Price, 1, CF Jewlery Tray Inserts-Top and Bottom Drawers Qty 2-#flexPNflexjewelrytray,#flexjewelrytray*2, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Unitfilename="3Drwplustraymidbot.cab"): 1
+{
+Price, 1, #Name #flexPN3DRWmod,#3DRWmod, , ,#ClosetPolePrintOrderNumber, 
+Price, 1, CF Jewlery Tray Inserts-Middle and Bottom Drawers Qty 2-#flexPNflexjewelrytray,#flexjewelrytray*2, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Unitfilename="3Drwplustrayall.cab"): 1
+{
+Price, 1, #Name #flexPN3DRWmod,#3DRWmod, , ,#ClosetPolePrintOrderNumber, 
+Price, 1, CF Jewlery Tray Inserts-All Drawers Qty 3-#flexPNflexjewelrytray,#flexjewelrytray*3, , ,#ClosetPolePrintOrderNumber, 
+}
+Do, (#Unitfilename="Closed Module.cab"): 1
+{
+Price, 1, #Name #flexPNClosedmod,#Closedmod, , ,#ClosetPolePrintOrderNumber, 
+}
+,DisplaySet, #Closedmod=438.46, 3.4 Cost for Closed Module
+,DisplaySet, #flexPNClosedmod=CF-CLSD, 3.4a PN for Closed Module
+,**
+Do, (#Unitfilename="Open Module.cab"): 1
+{
+Price, 1, #Name #flexPNOpenmod,#Openmod, , ,#ClosetPolePrintOrderNumber, 
+}
+,DisplaySet, #Openmod=323.08, 3.5 Cost for Open Module
+,DisplaySet, #flexPNOpenmod=CF-OPN, 3.5a PN for Open Module
+,**
+Do, (#Unitfilename="Open Cubby.cab"): 1
+{
+Price, 1, #Name #flexPNCubbymod,#Cubbymod, , ,#ClosetPolePrintOrderNumber, 
+}
+,DisplaySet, #Cubbymod=592.31, 3.6 Cost for Cubby Module
+,DisplaySet, #flexPNCubbymod=CF-CUB, 3.6a PN for Cubby Module
+,**
+Do, (#Unitfilename="shelf23.cab"): 1
+{
+Price, 1, #Name #flexPN23inShelf,#23inShelf, , ,#ClosetPolePrintOrderNumber, 
+}
+,**
+Do, (#Unitfilename="shelf29.cab"): 1
+{
+Price, 1, #Name #flexPN29inShelf,#29inShelf, , ,#ClosetPolePrintOrderNumber, 
+}
+,**
+Do, (#Unitfilename="shelf35.cab"): 1
+{
+Price, 1, #Name #flexPN35inShelf,#35inShelf, , ,#ClosetPolePrintOrderNumber, 
+}
+,**
+Do, (#Unitfilename="fascia23.cab"): 1
+{
+Price, 1, #Name #flexPN23infascia,#23infascia, , ,#ClosetPolePrintOrderNumber, 
+}
+,DisplaySet, #23infascia=38.46, 3.10 Cost for 23in fascia
+,DisplaySet, #flexPN23infascia=CF-SHF523, 3.10a PN for 23in fascia
+,**
+Do, (#Unitfilename="fascia29.cab"): 1
+{
+Price, 1, #Name #flexPN29infascia,#29infascia, , ,#ClosetPolePrintOrderNumber, 
+}
+,DisplaySet, #29infascia=46.15, 3.11 Cost for 29in fascia
+,DisplaySet, #flexPN29infascia=CF-SHF529, 3.11a PN for 29in fascia
+,**
+Do, (#Unitfilename="fascia35.cab"): 1
+{
+Price, 1, #Name #flexPN35infascia,#35infascia, , ,#ClosetPolePrintOrderNumber, 
+}
+
+,DisplaySet, #35infascia=53.85, 3.12 Cost for 35in fascia
+,DisplaySet, #flexPN35infascia=CF-SHF535, 3.12a PN for 35in fascia
+,**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+set, #stopflexpricing=2

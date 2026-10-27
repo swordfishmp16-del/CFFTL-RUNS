@@ -1,0 +1,15 @@
+,Clear Acrylic Doors
+
+Set,(#Codedoor="Clear Acrylic"):#CostOfDoor=(#ClearAcrylicdoorcost), clear acrylic door
+Set,(#Codedoor="Matte Acrylic"):#CostOfDoor=(#MatteAcrylicdoorcost), Matte acrylic door
+
+Do,(#ThisDoor <> #DoorDR)|((#ThisDoor = #DoorDR)&(#HasHinges=1)):1
+{
+Price,1 ,Door-#CodeDoor,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+}
+
+Do,((#ThisDoor = #DoorDR)&(#HasHinges=0)):1
+{
+set, (#DoorW>#Maxdrawerwidth):#CostOfDoor=0
+Price,1 ,DrFrt-#CodeDoor,    #CostOfDoor,    #DoorW, #DoorH, #DoorPrintOrderNumber 
+}

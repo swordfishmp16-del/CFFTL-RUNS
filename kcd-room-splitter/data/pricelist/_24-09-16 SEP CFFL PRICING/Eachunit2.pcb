@@ -1,0 +1,72 @@
+set, #tagpricedone=0
+
+,Chelsea was here 7-8-21 - Added TAG and Hafele numbers to go out to reports - If the unit library matches, sets the variable to 1 and we can grab pricing from CSV tables below.
+Set,#TotalUnitCost=0
+Set,#TempTotalUnitCost=0
+Set,((#UnitLibrary="Tag Hardware Closet Accessories")|(#UnitLibrary="Tag Hardware Engage Collection")|(#UnitLibrary="Tag Hardware Track Wall System")|(#UnitLibrary="Tag Hardware Symphony Office")|(#UnitLibrary="Tag Hardware Symphony")|(#UnitLibrary="TAG Hardware Illuminated Glass Shelf")):#TagLibrary=1:#TagLibrary=0
+
+Do, ((#TagLibrary=1)&(#TAGCSVFILE=Yes)&(#FirstTimeHere=0))&(1=2):1
+{
+,Set up the words that will print on the top row of the CSV file, easier to rearrange this way.
+ Set, #FirstColName="Name"
+ Set, #SecondColName="Unit Code"
+ Set, #ThirdColName="Width"
+ Set, #FourthColName="Length"
+ Set, #FifthColName="Depth"
+ Set, #SixthColName="Quantity"
+ Set, #SeventhColName="Unit Cost"
+
+   SendToFile, #TagDestinationPath\#CSVName TAG Hardware Order List.CSV,#FirstColName#Comma#SecondColName#Comma#ThirdColName#Comma#FourthColName#Comma#FifthColName#Comma#SixthColName#Comma#SeventhColName
+
+}
+
+Do,(#UnitLibrary="Tag Hardware Closet Accessories"):1
+ {
+  ReadCSVFile,Tag Hardware Closet Accessories.csv,1,2,3
+  ReadCsvValue,Tag Hardware Closet Accessories.csv,#Name,#tagcode,#TemptotalunitCost
+ }
+
+Do,(#UnitLibrary="Tag Hardware Engage Collection"):1
+ {
+  ReadCSVFile,Tag Hardware Engage Collection.csv,1,2,3
+  ReadCsvValue,Tag Hardware Engage Collection.csv,#Name,#tagcode,#TemptotalunitCost
+ }
+
+Do,(#UnitLibrary="Tag Hardware Track Wall System"):1
+ {
+  ReadCSVFile,Tag Hardware Track Wall System.csv,1,2,3
+  ReadCsvValue,Tag Hardware Track Wall System.csv,#Name,#tagcode,#TemptotalunitCost
+ }
+
+Do,(#UnitLibrary="Tag Hardware Symphony Office"):1
+ {
+  ReadCSVFile,Tag Hardware Symphony Office.csv,1,2,3
+  ReadCsvValue,Tag Hardware Symphony Office.csv,#Name,#tagcode,#TemptotalunitCost
+ }
+
+Do,(#UnitLibrary="TAG Hardware Illuminated Glass Shelf"):1
+ {
+  ReadCSVFile,Tag Hardware Illuminated Glass Shelf.csv,1,2,3
+  ReadCsvValue,Tag Hardware Illuminated Glass Shelf.csv,#Name,#tagcode,#TemptotalunitCost
+ }
+
+Do,(#UnitLibrary="Tag Hardware Symphony"):1
+ {
+  ReadCSVFile,Tag Hardware Symphony.csv,1,2,3
+  ReadCsvValue,Tag Hardware Symphony.csv,#Name,#tagcode,#TemptotalunitCost
+ }
+
+Do,(#TagLibrary=1):1
+{
+Set, #TotalUnitCost=[#TempTotalUnitCost*#universalupcharge]
+
+Price,1, RM#roomnum #Name #tagcode ,#TotalUnitCost, w, h, d 
+set, #tagpricedone=1
+}
+
+
+
+
+end
+
+

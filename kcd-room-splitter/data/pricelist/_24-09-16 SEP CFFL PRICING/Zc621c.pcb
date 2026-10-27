@@ -1,0 +1,89 @@
+,Calculates the price for each part
+
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+Load, B-Side Cost.Pcb
+Set,(ul=1)&(LS>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+
+Price, (LS>0):1,   #LeftSideName,         #CostOfSide+#UsePanelTouchingWallCost,             #VertD, #VertH,          #LeftSidePrintOrderNumber,
+  
+Set,(ur=1)&(RS>0):#UsePanelTouchingWallCost=#PanelTouchingWallCost:#UsePanelTouchingWallCost=0
+        
+Price, (RS>0):1,   #RightSideName,        #CostOfSide+#UsePanelTouchingWallCost,             #VertD, #VertH,          #RightSidePrintOrderNumber,         
+,*****************************************
+
+
+
+,********* All VERTICAL DIVIDERS *********
+,Vertical Divider
+Set, #VertH = [DH1]
+Set, #VertD = [D]
+Load, B-Side Cost.Pcb
+Price, (MS>0):1,   #DividerName,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber,          
+,*****************************************
+
+
+
+,*********** All FIXED SHELVES ***********
+Set, #ShelfWidth = [(W-LS-RS)]     
+Set, #ShelfDepth = [(D)]
+Load, C-Shelf Cost.Pcb
+Price, (TR>0):1,     #TopShelfName,         #CostOfTopShelf,         #ShelfDepth, #ShelfWidth,  #TopShelfPrintOrderNumber,          
+Price, (MR>0):1,     #MiddleShelfName,      #CostOfMiddleShelf,      #ShelfDepth, #ShelfWidth,  #MiddleShelfPrintOrderNumber,       
+Price, (BR>0):1,     #BottomShelfName,      #CostOfBottomShelf,      #ShelfDepth, #ShelfWidth,  #BottomShelfPrintOrderNumber,       
+,*****************************************
+
+
+
+
+,*********** All ADJ SHELVES *************
+,Top Adj Shelves
+Set, (MS=0):#ShelfWidth = [(W-LS-RS)]:#ShelfWidth = [(W-LS-RS-MS)/2]
+Load, C-Shelf Cost.Pcb
+Price, SH1,          #AdjustableShelfName,  #CostOfAdjustableShelf,  #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,   
+Price, (MS>0):SH1,   #AdjustableShelfName,  #CostOfAdjustableShelf,  #ShelfDepth, #ShelfWidth,  #AdjustableShelfPrintOrderNumber,   
+,*****************************************
+
+
+
+
+,************* OTHER PARTS ***************
+Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,             w, h,          #BackPrintOrderNumber,              
+,Price, 1,            #ClosetPoleName,       #ClosetPoleCost,         (W-LS-RS), 1,  #ClosetPolePrintOrderNumber,        
+Price, (K>0):1,      #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,              
+,*****************************************
+
+
+
+
+,******* All DOORS & DRAWER FRONTS *******
+Load, Doors.pcb
+,*****************************************
+
+
+
+
+,*********** All DRAWER BOXES ************
+Load, Drawers.Pcb
+,*****************************************
+
+
+
+
+,************ All PULLOUTS ***************
+Set, #PulloutOpeningWidth = [W-LS-RS]
+,Load, (npo>0): G-Pullout Cost.Pcb
+,*****************************************
+
+
+
+
+,************ All CUBBY HOLES ************
+Set, #NumVertCubby = PT
+Set, #NumHorzCubby = PN
+Set, #CubbyHeight = DH2
+Set, #CubbyWidth = (W-LS-RS)
+Load, CubbyUnit.Pcb
+,******************************************

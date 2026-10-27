@@ -1,0 +1,134 @@
+,Set Item Costs for Crown Molding Type 8 foot sections
+
+,**
+
+,Calculating subtotals
+
+Set,#CrownMoldingTypeCostGroup=0
+
+Set,(#CrownMoldingType = "#CrownMoldingType0"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost0
+Set,(#CrownMoldingType = "#CrownMoldingType1"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost1
+Set,(#CrownMoldingType = "#CrownMoldingType2"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost2
+Set,(#CrownMoldingType = "#CrownMoldingType3"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost3
+Set,(#CrownMoldingType = "#CrownMoldingType3"):#use2ndmaterial=1
+Set,(#CrownMoldingType = "#CrownMoldingType4"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost4
+Set,(#CrownMoldingType = "#CrownMoldingType4"):#use2ndmaterial=1
+Set,(#CrownMoldingType = "#CrownMoldingType5"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost5
+Set,(#CrownMoldingType = "#CrownMoldingType6"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost6
+Set,(#CrownMoldingType = "#CrownMoldingType7"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost7
+Set,(#CrownMoldingType = "#CrownMoldingType8"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost8
+Set,(#CrownMoldingType = "#CrownMoldingType9"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost9
+Set,(#CrownMoldingType = "#CrownMoldingType10"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost10
+Set,(#CrownMoldingType = "#CrownMoldingType11"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost11
+Set,(#CrownMoldingType = "#CrownMoldingType12"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost12
+Set,(#CrownMoldingType = "#CrownMoldingType13"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost13
+Set,(#CrownMoldingType = "#CrownMoldingType14"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost14
+Set,(#CrownMoldingType = "#CrownMoldingType15"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost15
+Set,(#CrownMoldingType = "#CrownMoldingType16"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost16
+Set,(#CrownMoldingType = "#CrownMoldingType17"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost17
+Set,(#CrownMoldingType = "#CrownMoldingType18"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost18
+Set,(#CrownMoldingType = "#CrownMoldingType19"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost19
+Set,(#CrownMoldingType = "#CrownMoldingType20"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost20
+Set,(#CrownMoldingType = "#CrownMoldingType21"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost21
+Set,(#CrownMoldingType = "#CrownMoldingType22"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost22
+Set,(#CrownMoldingType = "#CrownMoldingType23"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost23
+Set,(#CrownMoldingType = "#CrownMoldingType24"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost24
+Set,(#CrownMoldingType = "#CrownMoldingType25"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost25
+Set,(#CrownMoldingType = "#CrownMoldingType26"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost26
+Set,(#CrownMoldingType = "#CrownMoldingType27"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost27
+Set,(#CrownMoldingType = "#CrownMoldingType28"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost28
+Set,(#CrownMoldingType = "#CrownMoldingType29"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost29
+Set,(#CrownMoldingType = "#CrownMoldingType30"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost30
+Set,(#CrownMoldingType = "#CrownMoldingType31"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost31
+Set,(#CrownMoldingType = "#CrownMoldingType32"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost32
+Set,(#CrownMoldingType = "#CrownMoldingType33"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost33
+Set,(#CrownMoldingType = "#CrownMoldingType34"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost34
+Set,(#CrownMoldingType = "#CrownMoldingType35"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost35
+Set,(#CrownMoldingType = "#CrownMoldingType36"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost36
+Set,(#CrownMoldingType = "#CrownMoldingType37"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost37
+Set,(#CrownMoldingType = "#CrownMoldingType38"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost38
+Set,(#CrownMoldingType = "#CrownMoldingType39"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost39
+Set,(#CrownMoldingType = "#CrownMoldingType40"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost40
+Set,(#CrownMoldingType = "#CrownMoldingType41"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost41
+Set,(#CrownMoldingType = "#CrownMoldingType42"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost42
+Set,(#CrownMoldingType = "#CrownMoldingType43"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost43
+Set,(#CrownMoldingType = "#CrownMoldingType44"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost44
+Set,(#CrownMoldingType = "#CrownMoldingType45"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost45
+Set,(#CrownMoldingType = "#CrownMoldingType46"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost46
+Set,(#CrownMoldingType = "#CrownMoldingType47"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost47
+Set,(#CrownMoldingType = "#CrownMoldingType48"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost48
+Set,(#CrownMoldingType = "#CrownMoldingType49"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost49
+Set,(#CrownMoldingType = "#CrownMoldingType50"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost50
+Set,(#CrownMoldingType = "#CrownMoldingType51"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost51
+Set,(#CrownMoldingType = "#CrownMoldingType52"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost52
+Set,(#CrownMoldingType = "#CrownMoldingType53"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost53
+Set,(#CrownMoldingType = "#CrownMoldingType54"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost54
+Set,(#CrownMoldingType = "#CrownMoldingType55"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost55
+Set,(#CrownMoldingType = "#CrownMoldingType56"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost56
+Set,(#CrownMoldingType = "#CrownMoldingType57"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost57
+Set,(#CrownMoldingType = "#CrownMoldingType58"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost58
+Set,(#CrownMoldingType = "#CrownMoldingType59"):#CrownMoldingTypeCostGroup=#CrownMoldingTypeCost59
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

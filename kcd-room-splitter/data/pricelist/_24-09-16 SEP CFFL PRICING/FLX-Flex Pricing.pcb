@@ -1,0 +1,106 @@
+,
+,Use Grid
+
+set, #stopflexpricing=3
+,**
+,**
+,** SET COSTS FOR FLEX COMPONENTS AND ACCESSORIES
+,** 
+,**
+,**  
+,** COSTS FLEX HARDWARE COMPONENTS
+,**
+DisplaySet, #48inhangrail=49.08, 1.0 Cost for 48in Hang Rail
+Displayset, #flexPN48inhangrail=0321-4CN, 1.0a PN for 48in Hang Rail
+,**
+DisplaySet, #48inhangrailwcover =49.08+15.78, 1.1 Cost for 48in Hang Rail with Cover
+DisplaySet, #flexPN48inhangrailwcover =0321-4CN+0321-CV22CN, 1.1a PN for 48in Hang Rail with Cover
+,**
+DisplaySet, #48instandard=38.40, 1.2 Cost for 48in Standard Support
+DisplaySet, #flexPN48instandard=0119-4848CN, 1.2a PN for 48in Standard Support
+,**
+DisplaySet, #78instandard=59.12, 1.3 Cost for 78in Standard Support
+DisplaySet, #flexPN78instandard=0119-7CN, 1.3a PN for 78in Standard Support
+,**
+DisplaySet, #30inStdExpKit=73.94, 1.4 Cost for 30in Standard Expansion Kit
+DisplaySet, #flexPN30inStdExpKit=KT-0119-29-CN, 1.4a PN for 30in Standard Expansion Kit
+,**
+DisplaySet, #16inBracket=31.12, 1.5 Cost for 16in Bracket
+DisplaySet, #flexPN16inBracket=0323-161CN, 1.5a PN for 16in Bracket
+,**
+DisplaySet, #HWpack=13.89, 1.6 Cost for Hardware Pack
+DisplaySet, #flexPNHWpack=CD-0300HDWR, 1.6a PN for Hardware Pack
+,**
+DisplaySet, #SHHWpack=45.83, 1.7 Cost for Shelf Hardware Pack
+DisplaySet, #flexPNSHHWpack=CD-033HDWR, 1.7a PN for Shelf Hardware Pack
+,**
+,** COSTS FLEX ACCESSORIES
+,** 
+DisplaySet,  #7inbasket=168.11, 2.0 Cost for 7" Basket
+DisplaySet,  #flexPN7inbasket=0335-BSKT-7CN, 2.0a PN for 7" Basket
+,** 
+DisplaySet,  #flexpantsrack=364.92, 2.1 Cost for Pants Rack
+DisplaySet,  #flexPNflexpantsrack=0335-PRK-CN, 2.1a PN for Pants Rack
+,** 
+DisplaySet,  #flexshoerack=407.29, 2.2 Cost for Shoe Rack
+DisplaySet,  #flexPNflexshoerack=0335-SRK-CN, 2.2a PN for Shoe Rack
+,** 
+DisplaySet,  #flexjewelrytray=576.92, 2.3 Cost for Jewelry Tray
+DisplaySet,  #flexPNflexjewelrytray=CF-1JEW, 2.3a PN for Jewelry Tray
+,** 
+DisplaySet,  #flexwireshelf=104.78, 2.4 Cost for Flex Wire Shelf
+DisplaySet,  #flexPNflexwireshelf=0331-161623CN, 2.4a PN for Flex Wire Shelf
+,** 
+DisplaySet,  #Flexrod=37.43, 2.5 Cost for Flex Pole Kit with End Caps
+DisplaySet,  #flexPNFlexrod=0312-2323CN, 2.5a PN for Flex Pole Kit with End Caps
+,** 
+DisplaySet,  #CPHook=18.69, 2.6 Cost for Closet Pole Hook
+DisplaySet,  #flexPNCPHook=CD-123CN, 2.6a PN for Closet Pole Hook
+,** 
+
+,**
+,** SET COSTS FOR FLEX COMPONENTS
+,** 
+Displayset, #Basketsurroundkit=247.15, 3.0 Cost for Basket Surround Kit
+Displayset, #flexPNBasketsurroundkit=0335-SRND-CN, 3.0a PN for Basket Surround Kit
+,**
+DisplaySet, #1DRWmod=384.62, 3.1 Cost for 1 Drawer Module
+DisplaySet, #flexPN1DRWmod=CF-1DRW, 3.1a PN for 1 Drawer Module
+,**
+DisplaySet, #2DRWmod=538.46, 3.2 Cost for 2 Drawer Module
+DisplaySet, #flexPN2DRWmod=CF-2DRW, 3.2a PN for 2 Drawer Module
+,**
+DisplaySet, #3DRWmod=692.31, 3.3 Cost for 3 Drawer Module
+DisplaySet, #flexPN3DRWmod=CF-3DRW, 3.3a PN for 3 Drawer Module
+,**
+DisplaySet, #Closedmod=438.46, 3.4 Cost for Closed Module
+DisplaySet, #flexPNClosedmod=CF-CLSD, 3.4a PN for Closed Module
+,**
+DisplaySet, #Openmod=323.08, 3.5 Cost for Open Module
+DisplaySet, #flexPNOpenmod=CF-OPN, 3.5a PN for Open Module
+,**
+DisplaySet, #Cubbymod=592.31, 3.6 Cost for Cubby Module
+DisplaySet, #flexPNCubbymod=CF-CUB, 3.6a PN for Cubby Module
+,**
+DisplaySet, #23inShelf=38.46, 3.7 Cost for 23in Shelf
+DisplaySet, #flexPN23inShelf=CF-SHF23, 3.7a PN for 23in Shelf
+,**
+DisplaySet, #29inShelf=46.15, 3.8 Cost for 29in Shelf
+DisplaySet, #flexPN29inShelf=CF-SHF29, 3.8a PN for 29in Shelf
+,**
+DisplaySet, #35inShelf=53.85, 3.9 Cost for 35in Shelf
+DisplaySet, #flexPN35inShelf=CF-SHF35, 3.9a PN for 35in Shelf
+,**
+DisplaySet, #23infascia=38.46, 3.10 Cost for 23in fascia
+DisplaySet, #flexPN23infascia=CF-SHF523, 3.10a PN for 23in fascia
+,**
+DisplaySet, #29infascia=46.15, 3.11 Cost for 29in fascia
+DisplaySet, #flexPN29infascia=CF-SHF529, 3.11a PN for 29in fascia
+,**
+DisplaySet, #35infascia=53.85, 3.12 Cost for 35in fascia
+DisplaySet, #flexPN35infascia=CF-SHF535, 3.12a PN for 35in fascia
+,**
+
+set, #stopflexpricing=4
+
+

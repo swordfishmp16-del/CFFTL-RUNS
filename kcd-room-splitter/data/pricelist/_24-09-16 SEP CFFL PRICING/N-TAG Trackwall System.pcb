@@ -1,0 +1,89 @@
+,
+,Use Grid
+
+
+,**
+,**
+,** SET COSTS FOR TAG TRACKWALL ACCESSORIES
+,** 
+,**
+set, #OTprice=0
+,**  
+,** COSTS OMNI TRACK SLATWALL
+DisplaySet,#OmniTrackslat =(W/12)*20,0.0  Cost for 97" by 5" Omni Track Aluminum Track
+
+,** COSTS FOR OMNI TRACK ACCESSORIES
+DisplaySet,#LDPliersHolder =10,1.0  Cost for Light Duty Pilers Holder
+DisplaySet,#LDWrenchHolder =10,2.0  Cost for Light Duty Wrench Holder
+DisplaySet,#LDScrewdriverHolder =15,3.0  Cost for Light Duty Screwdriver Holder
+DisplaySet,#LDSingleHook =10,4.0  Cost for Light Duty Single Hook
+DisplaySet,#LDPaperorgSet =31,5.0  Cost for Light Duty Paper Organizer Set
+DisplaySet,#LDBasketBracket =20,6.0  Cost for 2 Light Duty Basket Bracket
+DisplaySet,#LDHandtoolHook =21,7.0  Cost for Light Duty Hand Tool Hook
+
+
+DisplaySet,#HDActivityRack =65,8.0  Cost for Heavy Duty Activity Rack
+DisplaySet,#HD16Utilityhook =131,9.0  Cost for Heavy Duty 16" Utility Hook
+DisplaySet,#HDfishingrodholder =48,10.0  Cost for Heavy Huty Fishing Rod Holder
+DisplaySet,#HDGardentoolhook =39,11.0  Cost for Heavy Duty Garden Tool Hook
+DisplaySet,#HDBikeHook =31,12.0  Cost for Heavy Duty Bike Hook
+DisplaySet,#HDHosehook =54,13.0  Cost for Heavy Duty Hose Hook
+DisplaySet,#HD5Utilityhook =68,14.0  Cost for Heavy Duty 5" Utility Hook
+DisplaySet,#HD14Bracket =58,15.0  Cost for Heavy Duty 14" Bracket
+DisplaySet,#HDShelfbracket =30,16.0  Cost for Heavy Duty Shelf Bracket
+
+DisplaySet,#SmallBin =6,17.0  Cost for Small Storage Bin
+DisplaySet,#MediumBin =10,18.0  Cost for Medium Storage Bin
+DisplaySet,#LargeBin =27,19.0  Cost for Large Storage Bin
+
+DisplaySet,#Metalpapertray =37,20.0  Cost for Metal Paper Tray
+DisplaySet,#Metalpenciltray =17,21.0  Cost for Metal Pencil Tray
+DisplaySet,#Metalsmalltray =11,22.0  Cost for Metal Small Tray
+DisplaySet,#Metaluprighttray =20,23.0  Cost for Metal Upright Tray
+DisplaySet,#Metalfilehanger =34,24.0  Cost for Metal File Hanger
+
+DisplaySet,#OTTieholder =18,25.0  Cost for Tie Holder
+DisplaySet,#OTBeltholder =18,26.0  Cost for Belt Holder
+DisplaySet,#OTDoubleHook =12,27.0  Cost for Double Hook
+DisplaySet,#OTCoathook =18,28.0  Cost for Coat Hook
+DisplaySet,#OTBraceletholder =18,29.0  Cost for Bracelet Holder
+DisplaySet,#OTValethook =18,30.0  Cost for Valet Hook
+
+Set,(#Name = "*Track Wall*"): #OTprice = #OmniTrackslat 
+
+Set,(#Name = "*Pliers*"): #OTprice = #LDPliersHolder
+Set,(#Name = "*Wrench*"): #OTprice = #LDWrenchHolder 
+Set,(#Name = "*Screw*") : #OTprice = #LDScrewdriverHolder
+Set,(#Name = "*Single*") : #OTPrice = #LDSingleHook
+Set,(#Name = "*Paper Organizer*") : #OTprice= #LDPaperorgSet
+Set,(#Name = "*Bracket-Wire*") : #OTprice = #LDBasketBracket
+Set,(#Name = "*Hand Tool*"): #OTprice = #LDHandtoolHook
+
+Set,(#Name = "*Activity*"): #OTprice =#HDActivityRack
+Set,(#Name = "*16in Utility*"): #OTprice =#HD16Utilityhook
+Set,(#Name = "*fishing*"): #OTprice =#HDfishingrodholder
+Set,(#Name = "*Garden*"): #OTprice =#HDGardentoolhook
+Set,(#Name = "*Bike*"): #OTprice =#HDBikeHook
+Set,(#Name = "*Hose*"): #OTprice =#HDHosehook
+Set,(#Name = "*5in*")&(#Name <> "*Mirror*"): #OTprice =#HD5Utilityhook
+Set,(#Name = "*14in Bracket*"): #OTprice =#HD14Bracket
+Set,(#Name = "*HD Shelf*"): #OTprice =#HDShelfbracket
+
+Set,(#Name = "*Small Storage*"): #OTprice =#SmallBin
+Set,(#Name = "*Medium Storage*"): #OTprice =#MediumBin
+Set,(#Name = "*Large Storage*"): #OTprice =#LargeBin 
+
+Set,(#Name = "*paper tray*"): #OTprice =#Metalpapertray
+Set,(#Name = "*pencil tray*"): #OTprice =#Metalpenciltray 
+Set,(#Name = "*small tray*"): #OTprice =#Metalsmalltray 
+Set,(#Name = "*upright tray*"): #OTprice =#Metaluprighttray
+Set,(#Name = "*file hanger*"): #OTprice =#Metalfilehanger 
+
+Set,(#Name = "*TAG Tie holder*"): #OTprice =#OTTieholder 
+Set,(#Name = "*TAG Belt holder*"): #OTprice =#OTBeltholder 
+Set,(#Name = "*TAG Double Hook*"): #OTprice =#OTDoubleHook 
+Set,(#Name = "*TAG Coat hook*"): #OTprice =#OTCoathook 
+Set,(#Name = "*TAG Bracelet holder*"): #OTprice =#OTBraceletholder 
+Set,(#Name = "*TAG Valet hook *"): #OTprice =#OTValethook 
+
+Price,(#OTPrice<>0): 1, RM#Roomnum #Name #Code,#OTPrice*#universalupcharge, , ,#ClosetPolePrintOrderNumber, 

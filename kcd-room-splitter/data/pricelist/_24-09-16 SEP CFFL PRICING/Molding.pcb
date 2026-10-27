@@ -1,0 +1,873 @@
+,KCDw System File. Do NOT Change in any way.
+set,#moldremainder=0
+set, #measurescale=-
+set,(#incm="-inch")&(#moldingscale="inch"):#measurescale=-in
+set,(#incm="-inch")&(#moldingscale="foot"):#measurescale=-ft
+set,(#incm="-inch")&(#moldingscale="8 foot"):#measurescale=-8 ft Segments
+set,(#incm="-Mm")&(#moldingscale="metric"):#measurescale=-Millimeter
+set,(#incm="-Cm")&(#moldingscale="metric"):#measurescale=-Centimeter
+
+
+
+Do,(#Mld1Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength1=[#Mld1Len]
+   Set,(#moldingscale="foot"):#MoldLength1=[#Mld1Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength1=[#Mld1Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld1Len/96)-(#Mld1Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength1 = [#moldlength1 + 1]
+   Set,(#moldingscale="metric"):#MoldLength1=[#Mld1Len]
+   
+   Set,#MoldingName1 = <#Mld1Name>
+   Set,#MoldingCost1=[#Mld1Cost]
+}
+
+
+Do,(#Mld2Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength2=[#Mld2Len]
+   Set,(#moldingscale="foot"):#MoldLength2=[#Mld2Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength2=[#Mld2Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld2Len/96)-(#Mld2Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength2 = [#moldlength2 + 1]
+   Set,(#moldingscale="metric"):#MoldLength2=[#Mld2Len]
+   
+   Set,#MoldingName2 = <#Mld2Name>
+   Set,#MoldingCost2=[#Mld2Cost]
+}
+
+
+Do,(#Mld3Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength3=[#Mld3Len]
+   Set,(#moldingscale="foot"):#MoldLength3=[#Mld3Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength3=[#Mld3Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld3Len/96)-(#Mld3Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength3 = [#moldlength3 + 1]
+   Set,(#moldingscale="metric"):#MoldLength3=[#Mld3Len]
+   
+   Set,#MoldingName3 = <#Mld3Name>
+   Set,#MoldingCost3=[#Mld3Cost]
+}
+
+
+Do,(#Mld4Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength4=[#Mld4Len]
+   Set,(#moldingscale="foot"):#MoldLength4=[#Mld4Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength4=[#Mld4Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld4Len/96)-(#Mld4Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength4 = [#moldlength4 + 1]
+   Set,(#moldingscale="metric"):#MoldLength4=[#Mld4Len]
+   
+   Set,#MoldingName4 = <#Mld4Name>
+   Set,#MoldingCost4=[#Mld4Cost]
+}
+
+
+Do,(#Mld5Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength5=[#Mld5Len]
+   Set,(#moldingscale="foot"):#MoldLength5=[#Mld5Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength5=[#Mld5Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld5Len/96)-(#Mld5Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength5 = [#moldlength5 + 1]
+   Set,(#moldingscale="metric"):#MoldLength5=[#Mld5Len]
+   
+   Set,#MoldingName5 = <#Mld5Name>
+   Set,#MoldingCost5=[#Mld5Cost]
+}
+
+
+Do,(#Mld6Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength6=[#Mld6Len]
+   Set,(#moldingscale="foot"):#MoldLength6=[#Mld6Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength6=[#Mld6Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld6Len/96)-(#Mld6Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength6 = [#moldlength6 + 1]
+   Set,(#moldingscale="metric"):#MoldLength6=[#Mld6Len]
+   
+   Set,#MoldingName6 = <#Mld6Name>
+   Set,#MoldingCost6=[#Mld6Cost]
+}
+
+
+Do,(#Mld7Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength7=[#Mld7Len]
+   Set,(#moldingscale="foot"):#MoldLength7=[#Mld7Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength7=[#Mld7Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld7Len/96)-(#Mld7Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength7 = [#moldlength7 + 1]
+   Set,(#moldingscale="metric"):#MoldLength7=[#Mld7Len]
+   
+   Set,#MoldingName7 = <#Mld7Name>
+   Set,#MoldingCost7=[#Mld7Cost]
+}
+
+
+Do,(#Mld8Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength8=[#Mld8Len]
+   Set,(#moldingscale="foot"):#MoldLength8=[#Mld8Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength8=[#Mld8Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld8Len/96)-(#Mld8Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength8 = [#moldlength8 + 1]
+   Set,(#moldingscale="metric"):#MoldLength8=[#Mld8Len]
+   
+   Set,#MoldingName8 = <#Mld8Name>
+   Set,#MoldingCost8=[#Mld8Cost]
+}
+
+
+Do,(#Mld9Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength9=[#Mld9Len]
+   Set,(#moldingscale="foot"):#MoldLength9=[#Mld9Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength9=[#Mld9Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder =[(#Mld9Len/96)-(#Mld9Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength9 = [#moldlength9 + 1]
+   Set,(#moldingscale="metric"):#MoldLength9=[#Mld9Len]
+   
+   Set,#MoldingName9 = <#Mld9Name>
+   Set,#MoldingCost9=[#Mld9Cost]
+}
+
+Do,(#Mld10Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength10=[#Mld10Len]
+   Set,(#moldingscale="foot"):#MoldLength10=[#Mld10Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength10=[#Mld10Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld10Len/96)-(#Mld10Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength10 = [#moldlength10 + 1]
+   Set,(#moldingscale="metric"):#MoldLength10=[#Mld10Len]
+   
+   Set,#MoldingName10 = <#Mld10Name>
+   Set,#MoldingCost10=[#Mld10Cost]
+}
+
+
+Do,(#Mld11Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength11=[#Mld11Len]
+   Set,(#moldingscale="foot"):#MoldLength11=[#Mld11Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength11=[#Mld11Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld11Len/96)-(#Mld11Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength11 = [#moldlength11 + 1]
+   Set,(#moldingscale="metric"):#MoldLength11=[#Mld11Len]
+   
+   Set,#MoldingName11 = <#Mld11Name>
+   Set,#MoldingCost11=[#Mld11Cost]
+}
+
+
+Do,(#Mld12Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength12=[#Mld12Len]
+   Set,(#moldingscale="foot"):#MoldLength12=[#Mld12Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength12=[#Mld12Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld12Len/96)-(#Mld12Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength12 = [#moldlength12 + 1]
+   Set,(#moldingscale="metric"):#MoldLength12=[#Mld12Len]
+   
+   Set,#MoldingName12 = <#Mld12Name>
+   Set,#MoldingCost12=[#Mld12Cost]
+}
+
+
+Do,(#Mld13Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength13=[#Mld13Len]
+   Set,(#moldingscale="foot"):#MoldLength13=[#Mld13Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength13=[#Mld13Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld13Len/96)-(#Mld13Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength13 = [#moldlength13 + 1]
+   Set,(#moldingscale="metric"):#MoldLength13=[#Mld13Len]
+   
+   Set,#MoldingName13 = <#Mld13Name>
+   Set,#MoldingCost13=[#Mld13Cost]
+}
+
+
+Do,(#Mld14Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength14=[#Mld14Len]
+   Set,(#moldingscale="foot"):#MoldLength14=[#Mld14Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength14=[#Mld14Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder =[(#Mld14Len/96)-(#Mld14Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength14 = [#moldlength14 + 1]
+   Set,(#moldingscale="metric"):#MoldLength14=[#Mld14Len]
+   
+   Set,#MoldingName14 = <#Mld14Name>
+   Set,#MoldingCost14=[#Mld14Cost]
+}
+
+
+Do,(#Mld15Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength15=[#Mld15Len]
+   Set,(#moldingscale="foot"):#MoldLength15=[#Mld15Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength15=[#Mld15Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld15Len/96)-(#Mld15Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength15 = [#moldlength15 + 1]
+   Set,(#moldingscale="metric"):#MoldLength15=[#Mld15Len]
+   
+   Set,#MoldingName15 = <#Mld15Name>
+   Set,#MoldingCost15=[#Mld15Cost]
+}
+
+
+Do,(#Mld16Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength16=[#Mld16Len]
+   Set,(#moldingscale="foot"):#MoldLength16=[#Mld16Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength16=[#Mld16Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld16Len/96)-(#Mld16Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength16 = [#moldlength16 + 1]
+   Set,(#moldingscale="metric"):#MoldLength16=[#Mld16Len]
+   
+   Set,#MoldingName16 = <#Mld16Name>
+   Set,#MoldingCost16=[#Mld16Cost]
+}
+
+
+Do,(#Mld17Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength17=[#Mld17Len]
+   Set,(#moldingscale="foot"):#MoldLength17=[#Mld17Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength17=[#Mld17Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld17Len/96)-(#Mld17Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength17 = [#moldlength17 + 1]
+   Set,(#moldingscale="metric"):#MoldLength17=[#Mld17Len]
+   
+   Set,#MoldingName17 = <#Mld17Name>
+   Set,#MoldingCost17=[#Mld17Cost]
+}
+
+
+Do,(#Mld18Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength18=[#Mld18Len]
+   Set,(#moldingscale="foot"):#MoldLength18=[#Mld18Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength18=[#Mld18Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld18Len/96)-(#Mld18Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength18 = [#moldlength18 + 1]
+   Set,(#moldingscale="metric"):#MoldLength18=[#Mld18Len]
+   
+   Set,#MoldingName18 = <#Mld18Name>
+   Set,#MoldingCost18=[#Mld18Cost]
+}
+Do,(#Mld19Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength19=[#Mld19Len]
+   Set,(#moldingscale="foot"):#MoldLength19=[#Mld19Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength19=[#Mld19Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld19Len/96)-(#Mld19Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength19 = [#moldlength19 + 1]
+   Set,(#moldingscale="metric"):#MoldLength19=[#Mld19Len]
+   
+   Set,#MoldingName19 = <#Mld19Name>
+   Set,#MoldingCost19=[#Mld19Cost]
+}
+
+Do,(#Mld20Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength20=[#Mld20Len]
+   Set,(#moldingscale="foot"):#MoldLength20=[#Mld20Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength20=[#Mld20Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld20Len/96)-(#Mld20Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength20 = [#moldlength20 + 1]
+   Set,(#moldingscale="metric"):#MoldLength20=[#Mld20Len]
+   
+   Set,#MoldingName20 = <#Mld20Name>
+   Set,#MoldingCost20=[#Mld20Cost]
+}
+
+Do,(#Mld21Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength21=[#Mld21Len]
+   Set,(#moldingscale="foot"):#MoldLength21=[#Mld21Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength21=[#Mld21Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder =  [(#Mld21Len/96)-(#Mld21Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength21 = [#moldlength21 + 1]
+   Set,(#moldingscale="metric"):#MoldLength21=[#Mld21Len]
+   
+   Set,#MoldingName21 = <#Mld21Name>
+   Set,#MoldingCost21=[#Mld21Cost]
+}
+
+Do,(#Mld22Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength22=[#Mld22Len]
+   Set,(#moldingscale="foot"):#MoldLength22=[#Mld22Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength22=[#Mld22Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder =  [(#Mld22Len/96)-(#Mld22Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength22 = [#moldlength22 + 1]
+   Set,(#moldingscale="metric"):#MoldLength22=[#Mld22Len]
+   
+   Set,#MoldingName22 = <#Mld22Name>
+   Set,#MoldingCost22=[#Mld22Cost]
+}
+
+Do,(#Mld23Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength23=[#Mld23Len]
+   Set,(#moldingscale="foot"):#MoldLength23=[#Mld23Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength23=[#Mld23Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Mld23Len/96)-(#Mld23Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength23 = [#moldlength23 + 1]
+   Set,(#moldingscale="metric"):#MoldLength23=[#Mld23Len]
+   
+   Set,#MoldingName23 = <#Mld23Name>
+   Set,#MoldingCost23=[#Mld23Cost]
+}
+Do,(#Mld24Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength24=[#Mld24Len]
+   Set,(#moldingscale="foot"):#MoldLength24=[#Mld24Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength24=[#Mld24Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder =  [(#Mld24Len/96)-(#Mld24Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength24 = [#moldlength24 + 1]
+   Set,(#moldingscale="metric"):#MoldLength24=[#Mld24Len]
+   
+   Set,#MoldingName24 = <#Mld24Name>
+   Set,#MoldingCost24=[#Mld24Cost]
+}
+
+Do,(#Mld25Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength25=[#Mld25Len]
+   Set,(#moldingscale="foot"):#MoldLength25=[#Mld25Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength25=[#Mld25Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder =  [(#Mld25Len/96)-(#Mld25Len\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength25 = [#moldlength25 + 1]
+   Set,(#moldingscale="metric"):#MoldLength25=[#Mld25Len]
+   
+   Set,#MoldingName25 = <#Mld25Name>
+   Set,#MoldingCost25=[#Mld25Cost]
+}
+
+Do,(#Mld26Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength26=[#Mld26Len]
+   Set,(#moldingscale="foot"):#MoldLength26=[#Mld26Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength26=[#Mld26Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength26 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength26 = [#moldlength26 + 1]
+   Set,(#moldingscale="metric"):#MoldLength26=[#Mld26Len]
+   
+   Set,#MoldingName26 = <#Mld26Name>
+   Set,#MoldingCost26=[#Mld26Cost]
+}
+
+Do,(#Mld27Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength27=[#Mld27Len]
+   Set,(#moldingscale="foot"):#MoldLength27=[#Mld27Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength27=[#Mld27Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength27 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength27 = [#moldlength27 + 1]
+   Set,(#moldingscale="metric"):#MoldLength27=[#Mld27Len]
+   
+   Set,#MoldingName27 = <#Mld27Name>
+   Set,#MoldingCost27=[#Mld27Cost]
+}
+
+Do,(#Mld28Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength28=[#Mld28Len]
+   Set,(#moldingscale="foot"):#MoldLength28=[#Mld28Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength28=[#Mld28Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength28 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength28 = [#moldlength28 + 1]
+   Set,(#moldingscale="metric"):#MoldLength28=[#Mld28Len]
+   
+   Set,#MoldingName28 = <#Mld28Name>
+   Set,#MoldingCost28=[#Mld28Cost]
+}
+
+Do,(#Mld29Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength29=[#Mld29Len]
+   Set,(#moldingscale="foot"):#MoldLength29=[#Mld29Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength29=[#Mld29Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength29 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength29 = [#moldlength29 + 1]
+   Set,(#moldingscale="metric"):#MoldLength29=[#Mld29Len]
+   
+   Set,#MoldingName29 = <#Mld29Name>
+   Set,#MoldingCost29=[#Mld29Cost]
+}
+
+Do,(#Mld30Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength30=[#Mld30Len]
+   Set,(#moldingscale="foot"):#MoldLength30=[#Mld30Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength30=[#Mld30Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength30 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength30 = [#moldlength30 + 1]
+   Set,(#moldingscale="metric"):#MoldLength30=[#Mld30Len]
+   
+   Set,#MoldingName30 = <#Mld30Name>
+   Set,#MoldingCost30=[#Mld30Cost]
+}
+
+Do,(#Mld33Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength33=[#Mld33Len]
+   Set,(#moldingscale="foot"):#MoldLength33=[#Mld33Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength33=[#Mld33Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength33 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength33 = [#moldlength33 + 1]
+   Set,(#moldingscale="metric"):#MoldLength33=[#Mld33Len]
+   
+   Set,#MoldingName33 = <#Mld33Name>
+   Set,#MoldingCost33=[#Mld33Cost]
+}
+
+Do,(#Mld34Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength34=[#Mld34Len]
+   Set,(#moldingscale="foot"):#MoldLength34=[#Mld34Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength34=[#Mld34Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength34 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength34 = [#moldlength34 + 1]
+   Set,(#moldingscale="metric"):#MoldLength34=[#Mld34Len]
+   
+   Set,#MoldingName34 = <#Mld34Name>
+   Set,#MoldingCost34=[#Mld34Cost]
+}
+
+Do,(#Mld35Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength35=[#Mld35Len]
+   Set,(#moldingscale="foot"):#MoldLength35=[#Mld35Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength35=[#Mld35Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength35 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength35 = [#moldlength35 + 1]
+   Set,(#moldingscale="metric"):#MoldLength35=[#Mld35Len]
+   
+   Set,#MoldingName35 = <#Mld35Name>
+   Set,#MoldingCost35=[#Mld35Cost]
+}
+
+Do,(#Mld36Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength36=[#Mld36Len]
+   Set,(#moldingscale="foot"):#MoldLength36=[#Mld36Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength36=[#Mld36Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength36 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength36 = [#moldlength36 + 1]
+   Set,(#moldingscale="metric"):#MoldLength36=[#Mld36Len]
+   
+   Set,#MoldingName36 = <#Mld36Name>
+   Set,#MoldingCost36=[#Mld36Cost]
+}
+
+Do,(#Mld37Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength37=[#Mld37Len]
+   Set,(#moldingscale="foot"):#MoldLength37=[#Mld37Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength37=[#Mld37Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength37 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength37 = [#moldlength37 + 1]
+   Set,(#moldingscale="metric"):#MoldLength37=[#Mld37Len]
+   
+   Set,#MoldingName37 = <#Mld37Name>
+   Set,#MoldingCost37=[#Mld37Cost]
+}
+
+Do,(#Mld38Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength38=[#Mld38Len]
+   Set,(#moldingscale="foot"):#MoldLength38=[#Mld38Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength38=[#Mld38Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength38 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength38 = [#moldlength38 + 1]
+   Set,(#moldingscale="metric"):#MoldLength38=[#Mld38Len]
+   
+   Set,#MoldingName38 = <#Mld38Name>
+   Set,#MoldingCost38=[#Mld38Cost]
+}
+
+Do,(#Mld39Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength39=[#Mld39Len]
+   Set,(#moldingscale="foot"):#MoldLength39=[#Mld39Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength39=[#Mld39Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength39 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength39 = [#moldlength39 + 1]
+   Set,(#moldingscale="metric"):#MoldLength39=[#Mld39Len]
+   
+   Set,#MoldingName39 = <#Mld39Name>
+   Set,#MoldingCost39=[#Mld39Cost]
+}
+Do,(#Mld40Cost>0):1
+{
+   Set,(#moldingscale="inch"):#MoldLength40=[#Mld40Len]
+   Set,(#moldingscale="foot"):#MoldLength40=[#Mld40Len/12]
+   Set,(#moldingscale="8 foot"):#MoldLength40=[#Mld40Len\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [#moldlength40 % 8]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#moldlength40 = [#moldlength40 + 1]
+   Set,(#moldingscale="metric"):#MoldLength40=[#Mld40Len]
+   
+   Set,#MoldingName40 = <#Mld40Name>
+   Set,#MoldingCost40=[#Mld40Cost]
+}
+
+Do,(#Rm1MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room1MoldLength=[#Rm1MldLen]
+   Set,(#moldingscale="foot"):#Room1MoldLength=[#Rm1MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm1MldLen/12)-(#Rm1MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room1MoldLength = [#Room1MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room1MoldLength=[#Rm1MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm1MldLen/96)-(#Rm1MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room1MoldLength = [#Room1MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room1MoldLength=[#Rm1MldLen]
+   Set,(#moldingscale<>"Section"):#Rm1MldCnt=[#Room1MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm1MldCost=[#Rm1MldCnt*#Room1CrownMoldingCostGroup]
+   Set, #Rm1MldCost=[#Rm1MldCost*#universalupcharge]
+}
+Do,(#Rm2MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room2MoldLength=[#Rm2MldLen]
+   Set,(#moldingscale="foot"):#Room2MoldLength=[#Rm2MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm2MldLen/12)-(#Rm2MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room2MoldLength = [#Room2MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room2MoldLength=[#Rm2MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm2MldLen/96)-(#Rm2MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room2MoldLength = [#Room2MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room2MoldLength=[#Rm2MldLen]
+   Set,(#moldingscale<>"Section"):#Rm2MldCnt=[#Room2MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm2MldCost=[#Rm2MldCnt*#Room2CrownMoldingCostGroup]
+   Set, #Rm2MldCost=[#Rm2MldCost*#universalupcharge]
+}
+Do,(#Rm3MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room3MoldLength=[#Rm3MldLen]
+   Set,(#moldingscale="foot"):#Room3MoldLength=[#Rm3MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm3MldLen/12)-(#Rm3MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room3MoldLength = [#Room3MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room3MoldLength=[#Rm3MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm3MldLen/96)-(#Rm3MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room3MoldLength = [#Room3MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room3MoldLength=[#Rm3MldLen]
+   Set,(#moldingscale<>"Section"):#Rm3MldCnt=[#Room3MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm3MldCost=[#Rm3MldCnt*#Room3CrownMoldingCostGroup]
+   Set, #Rm3MldCost=[#Rm3MldCost*#universalupcharge]
+}
+Do,(#Rm4MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room4MoldLength=[#Rm4MldLen]
+   Set,(#moldingscale="foot"):#Room4MoldLength=[#Rm4MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm4MldLen/12)-(#Rm4MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room4MoldLength = [#Room4MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room4MoldLength=[#Rm4MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm4MldLen/96)-(#Rm4MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room4MoldLength = [#Room4MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room4MoldLength=[#Rm4MldLen]
+   Set,(#moldingscale<>"Section"):#Rm4MldCnt=[#Room4MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm4MldCost=[#Rm4MldCnt*#Room4CrownMoldingCostGroup]
+   Set, #Rm4MldCost=[#Rm4MldCost*#universalupcharge]
+}
+Do,(#Rm5MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room5MoldLength=[#Rm5MldLen]
+   Set,(#moldingscale="foot"):#Room5MoldLength=[#Rm5MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm5MldLen/12)-(#Rm5MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room5MoldLength = [#Room5MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room5MoldLength=[#Rm5MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm5MldLen/96)-(#Rm5MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room5MoldLength = [#Room5MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room5MoldLength=[#Rm5MldLen]
+   Set,(#moldingscale<>"Section"):#Rm5MldCnt=[#Room5MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm5MldCost=[#Rm5MldCnt*#Room5CrownMoldingCostGroup]
+   Set, #Rm5MldCost=[#Rm5MldCost*#universalupcharge]
+}
+Do,(#Rm6MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room6MoldLength=[#Rm6MldLen]
+   Set,(#moldingscale="foot"):#Room6MoldLength=[#Rm6MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm6MldLen/12)-(#Rm6MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room6MoldLength = [#Room6MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room6MoldLength=[#Rm6MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm6MldLen/96)-(#Rm6MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room6MoldLength = [#Room6MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room6MoldLength=[#Rm6MldLen]
+   Set,(#moldingscale<>"Section"):#Rm6MldCnt=[#Room6MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm6MldCost=[#Rm6MldCnt*#Room6CrownMoldingCostGroup]
+   Set, #Rm6MldCost=[#Rm6MldCost*#universalupcharge]
+}
+Do,(#Rm7MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room7MoldLength=[#Rm7MldLen]
+   Set,(#moldingscale="foot"):#Room7MoldLength=[#Rm7MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm7MldLen/12)-(#Rm7MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room7MoldLength = [#Room7MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room7MoldLength=[#Rm7MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm7MldLen/96)-(#Rm7MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room7MoldLength = [#Room7MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room7MoldLength=[#Rm7MldLen]
+   Set,(#moldingscale<>"Section"):#Rm7MldCnt=[#Room7MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm7MldCost=[#Rm7MldCnt*#Room7CrownMoldingCostGroup]
+   Set, #Rm7MldCost=[#Rm7MldCost*#universalupcharge]
+}
+Do,(#Rm8MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room8MoldLength=[#Rm8MldLen]
+   Set,(#moldingscale="foot"):#Room8MoldLength=[#Rm8MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm8MldLen/12)-(#Rm8MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room8MoldLength = [#Room8MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room8MoldLength=[#Rm8MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm8MldLen/96)-(#Rm8MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room8MoldLength = [#Room8MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room8MoldLength=[#Rm8MldLen]
+   Set,(#moldingscale<>"Section"):#Rm8MldCnt=[#Room8MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm8MldCost=[#Rm8MldCnt*#Room8CrownMoldingCostGroup]
+   Set, #Rm8MldCost=[#Rm8MldCost*#universalupcharge]
+}
+Do,(#Rm9MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room9MoldLength=[#Rm9MldLen]
+   Set,(#moldingscale="foot"):#Room9MoldLength=[#Rm9MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm9MldLen/12)-(#Rm9MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room9MoldLength = [#Room9MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room9MoldLength=[#Rm9MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm9MldLen/96)-(#Rm9MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room9MoldLength = [#Room9MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room9MoldLength=[#Rm9MldLen]
+   Set,(#moldingscale<>"Section"):#Rm9MldCnt=[#Room9MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm9MldCost=[#Rm9MldCnt*#Room9CrownMoldingCostGroup]
+   Set, #Rm9MldCost=[#Rm9MldCost*#universalupcharge]
+}
+Do,(#Rm10MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room10MoldLength=[#Rm10MldLen]
+   Set,(#moldingscale="foot"):#Room10MoldLength=[#Rm10MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm10MldLen/12)-(#Rm10MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room10MoldLength = [#Room10MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room10MoldLength=[#Rm10MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm10MldLen/96)-(#Rm10MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room10MoldLength = [#Room10MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room10MoldLength=[#Rm10MldLen]
+   Set,(#moldingscale<>"Section"):#Rm10MldCnt=[#Room10MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm10MldCost=[#Rm10MldCnt*#Room10CrownMoldingCostGroup]
+   Set, #Rm10MldCost=[#Rm10MldCost*#universalupcharge]
+}
+Do,(#Rm11MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room11MoldLength=[#Rm11MldLen]
+   Set,(#moldingscale="foot"):#Room11MoldLength=[#Rm11MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm11MldLen/12)-(#Rm11MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room11MoldLength = [#Room11MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room11MoldLength=[#Rm11MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm11MldLen/96)-(#Rm11MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room11MoldLength = [#Room11MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room11MoldLength=[#Rm11MldLen]
+   Set,(#moldingscale<>"Section"):#Rm11MldCnt=[#Room11MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm11MldCost=[#Rm11MldCnt*#Room11CrownMoldingCostGroup]
+   Set, #Rm11MldCost=[#Rm11MldCost*#universalupcharge]
+}
+Do,(#Rm12MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room12MoldLength=[#Rm12MldLen]
+   Set,(#moldingscale="foot"):#Room12MoldLength=[#Rm12MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm12MldLen/12)-(#Rm12MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room12MoldLength = [#Room12MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room12MoldLength=[#Rm12MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm12MldLen/96)-(#Rm12MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room12MoldLength = [#Room12MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room12MoldLength=[#Rm12MldLen]
+   Set,(#moldingscale<>"Section"):#Rm12MldCnt=[#Room12MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm12MldCost=[#Rm12MldCnt*#Room12CrownMoldingCostGroup]
+   Set, #Rm12MldCost=[#Rm12MldCost*#universalupcharge]
+}
+Do,(#Rm13MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room13MoldLength=[#Rm13MldLen]
+   Set,(#moldingscale="foot"):#Room13MoldLength=[#Rm13MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm13MldLen/12)-(#Rm13MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room13MoldLength = [#Room13MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room13MoldLength=[#Rm13MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm13MldLen/96)-(#Rm13MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room13MoldLength = [#Room13MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room13MoldLength=[#Rm13MldLen]
+   Set,(#moldingscale<>"Section"):#Rm13MldCnt=[#Room13MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm13MldCost=[#Rm13MldCnt*#Room13CrownMoldingCostGroup]
+   Set, #Rm13MldCost=[#Rm13MldCost*#universalupcharge]
+}
+Do,(#Rm14MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room14MoldLength=[#Rm14MldLen]
+   Set,(#moldingscale="foot"):#Room14MoldLength=[#Rm14MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm14MldLen/12)-(#Rm14MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room14MoldLength = [#Room14MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room14MoldLength=[#Rm14MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm14MldLen/96)-(#Rm14MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room14MoldLength = [#Room14MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room14MoldLength=[#Rm14MldLen]
+   Set,(#moldingscale<>"Section"):#Rm14MldCnt=[#Room14MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm14MldCost=[#Rm14MldCnt*#Room14CrownMoldingCostGroup]
+   Set, #Rm14MldCost=[#Rm14MldCost*#universalupcharge]
+}
+Do,(#Rm15MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room15MoldLength=[#Rm15MldLen]
+   Set,(#moldingscale="foot"):#Room15MoldLength=[#Rm15MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm15MldLen/12)-(#Rm15MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room15MoldLength = [#Room15MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room15MoldLength=[#Rm15MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm15MldLen/96)-(#Rm15MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room15MoldLength = [#Room15MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room15MoldLength=[#Rm15MldLen]
+   Set,(#moldingscale<>"Section"):#Rm15MldCnt=[#Room15MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm15MldCost=[#Rm15MldCnt*#Room15CrownMoldingCostGroup]
+   Set, #Rm15MldCost=[#Rm15MldCost*#universalupcharge]
+}
+Do,(#Rm16MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room16MoldLength=[#Rm16MldLen]
+   Set,(#moldingscale="foot"):#Room16MoldLength=[#Rm16MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm16MldLen/12)-(#Rm16MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room16MoldLength = [#Room16MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room16MoldLength=[#Rm16MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm16MldLen/96)-(#Rm16MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room16MoldLength = [#Room16MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room16MoldLength=[#Rm16MldLen]
+   Set,(#moldingscale<>"Section"):#Rm16MldCnt=[#Room16MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm16MldCost=[#Rm16MldCnt*#Room16CrownMoldingCostGroup]
+   Set, #Rm16MldCost=[#Rm16MldCost*#universalupcharge]
+}
+Do,(#Rm17MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room17MoldLength=[#Rm17MldLen]
+   Set,(#moldingscale="foot"):#Room17MoldLength=[#Rm17MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm17MldLen/12)-(#Rm17MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room17MoldLength = [#Room17MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room17MoldLength=[#Rm17MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm17MldLen/96)-(#Rm17MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room17MoldLength = [#Room17MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room17MoldLength=[#Rm17MldLen]
+   Set,(#moldingscale<>"Section"):#Rm17MldCnt=[#Room17MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm17MldCost=[#Rm17MldCnt*#Room17CrownMoldingCostGroup]
+   Set, #Rm17MldCost=[#Rm17MldCost*#universalupcharge]
+}
+Do,(#Rm18MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room18MoldLength=[#Rm18MldLen]
+   Set,(#moldingscale="foot"):#Room18MoldLength=[#Rm18MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm18MldLen/12)-(#Rm18MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room18MoldLength = [#Room18MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room18MoldLength=[#Rm18MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm18MldLen/96)-(#Rm18MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room18MoldLength = [#Room18MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room18MoldLength=[#Rm18MldLen]
+   Set,(#moldingscale<>"Section"):#Rm18MldCnt=[#Room18MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm18MldCost=[#Rm18MldCnt*#Room18CrownMoldingCostGroup]
+   Set, #Rm18MldCost=[#Rm18MldCost*#universalupcharge]
+}
+Do,(#Rm19MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room19MoldLength=[#Rm19MldLen]
+   Set,(#moldingscale="foot"):#Room19MoldLength=[#Rm19MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm19MldLen/12)-(#Rm19MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room19MoldLength = [#Room19MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room19MoldLength=[#Rm19MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm19MldLen/96)-(#Rm19MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room19MoldLength = [#Room19MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room19MoldLength=[#Rm19MldLen]
+   Set,(#moldingscale<>"Section"):#Rm19MldCnt=[#Room19MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm19MldCost=[#Rm19MldCnt*#Room19CrownMoldingCostGroup]
+   Set, #Rm19MldCost=[#Rm19MldCost*#universalupcharge]
+}
+Do,(#Rm20MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room20MoldLength=[#Rm20MldLen]
+   Set,(#moldingscale="foot"):#Room20MoldLength=[#Rm20MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm20MldLen/12)-(#Rm20MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room20MoldLength = [#Room20MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room20MoldLength=[#Rm20MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm20MldLen/96)-(#Rm20MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room20MoldLength = [#Room20MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room20MoldLength=[#Rm20MldLen]
+   Set,(#moldingscale<>"Section"):#Rm20MldCnt=[#Room20MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm20MldCost=[#Rm20MldCnt*#Room20CrownMoldingCostGroup]
+   Set, #Rm20MldCost=[#Rm20MldCost*#universalupcharge]
+}
+Do,(#Rm21MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room21MoldLength=[#Rm21MldLen]
+   Set,(#moldingscale="foot"):#Room21MoldLength=[#Rm21MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm21MldLen/12)-(#Rm21MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room21MoldLength = [#Room21MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room21MoldLength=[#Rm21MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm21MldLen/96)-(#Rm21MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room21MoldLength = [#Room21MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room21MoldLength=[#Rm21MldLen]
+   Set,(#moldingscale<>"Section"):#Rm21MldCnt=[#Room21MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm21MldCost=[#Rm21MldCnt*#Room21CrownMoldingCostGroup]
+   Set, #Rm21MldCost=[#Rm21MldCost*#universalupcharge]
+}
+Do,(#Rm22MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room22MoldLength=[#Rm22MldLen]
+   Set,(#moldingscale="foot"):#Room22MoldLength=[#Rm22MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm22MldLen/12)-(#Rm22MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room22MoldLength = [#Room22MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room22MoldLength=[#Rm22MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm22MldLen/96)-(#Rm22MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room22MoldLength = [#Room22MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room22MoldLength=[#Rm22MldLen]
+   Set,(#moldingscale<>"Section"):#Rm22MldCnt=[#Room22MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm22MldCost=[#Rm22MldCnt*#Room22CrownMoldingCostGroup]
+   Set, #Rm22MldCost=[#Rm22MldCost*#universalupcharge]
+}
+Do,(#Rm23MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room23MoldLength=[#Rm23MldLen]
+   Set,(#moldingscale="foot"):#Room23MoldLength=[#Rm23MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm23MldLen/12)-(#Rm23MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room23MoldLength = [#Room23MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room23MoldLength=[#Rm23MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm23MldLen/96)-(#Rm23MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room23MoldLength = [#Room23MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room23MoldLength=[#Rm23MldLen]
+   Set,(#moldingscale<>"Section"):#Rm23MldCnt=[#Room23MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm23MldCost=[#Rm23MldCnt*#Room23CrownMoldingCostGroup]
+   Set, #Rm23MldCost=[#Rm23MldCost*#universalupcharge]
+}
+Do,(#Rm24MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room24MoldLength=[#Rm24MldLen]
+   Set,(#moldingscale="foot"):#Room24MoldLength=[#Rm24MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm24MldLen/12)-(#Rm24MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room24MoldLength = [#Room24MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room24MoldLength=[#Rm24MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm24MldLen/96)-(#Rm24MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room24MoldLength = [#Room24MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room24MoldLength=[#Rm24MldLen]
+   Set,(#moldingscale<>"Section"):#Rm24MldCnt=[#Room24MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm24MldCost=[#Rm24MldCnt*#Room24CrownMoldingCostGroup]
+   Set, #Rm24MldCost=[#Rm24MldCost*#universalupcharge]
+}
+Do,(#Rm25MldLen>0):1
+{
+   Set,(#moldingscale="inch"):#Room25MoldLength=[#Rm25MldLen]
+   Set,(#moldingscale="foot"):#Room25MoldLength=[#Rm25MldLen\12]
+   set,(#moldingscale="foot"):#moldremainder = [(#Rm25MldLen/12)-(#Rm25MldLen\12)]
+   set,(#moldingscale="foot")&(#moldremainder>0):#Room25MoldLength = [#Room25MoldLength + 1]
+   Set,(#moldingscale="8 foot"):#Room25MoldLength=[#Rm25MldLen\96]
+   set,(#moldingscale="8 foot"):#moldremainder = [(#Rm25MldLen/96)-(#Rm25MldLen\96)]
+   set,(#moldingscale="8 foot")&(#moldremainder>0):#Room25MoldLength = [#Room25MoldLength + 1]
+   Set,(#moldingscale="metric"):#Room25MoldLength=[#Rm25MldLen]
+   Set,(#moldingscale<>"Section"):#Rm25MldCnt=[#Room25MoldLength]
+   Set,(#moldingscale<>"Section"):#Rm25MldCost=[#Rm25MldCnt*#Room25CrownMoldingCostGroup]
+   Set, #Rm25MldCost=[#Rm25MldCost*#universalupcharge]
+}
+Load, Basemolding.pcb
+
+
+End
+

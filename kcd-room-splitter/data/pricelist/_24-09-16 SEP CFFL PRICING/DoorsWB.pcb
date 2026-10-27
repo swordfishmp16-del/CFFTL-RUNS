@@ -1,0 +1,27 @@
+This is a KCD system file. Do NOT change it in any way!
+
+
+Set, #UnitDoorCost = 0
+Set, #UnitDrawerFrtCost = 0
+
+,Set, #TotalNumDoors = 0
+,Set, #TotalNumDrawers = 0
+
+
+Set, #Door=D1
+set, #DoorH=D1H
+Set, #DoorHL=D1HL
+Set, #DoorHK=D1HK
+Set, #DoorHG=D1HG
+Set, (D1HG<>0): #HasHinges=1:#HasHinges=0
+Set, #Hingeside=D1HG
+Set, (D1DR>0):#drawerfacenumber=1:#drawerfacenumber=0
+set, #nodrawerbox=0
+Set, ((Opt=#OptDrw1NDB)&(#drawerfacenumber=1)):#nodrawerbox=1
+Load, (D1T>0)&(D1H>2)&(D1W>2):Door.pcb
+Set, #HasHinges=0
+
+
+
+
+End of 'DOORS.PCB' KCD system file

@@ -1,0 +1,12 @@
+Set, (#EdgeBandingType="*2nd Material"): #FillerMaterial=#ContrastMaterialName:#FillerMaterial=#UnitMaterialName
+
+Set, (#ExtraUnitText3="*Wood*"):#FillerMaterial=Match Edge Material
+,******** ALL FILLERS *********
+Price,       1,    #FillerName-#FillerMaterial,           #CostOfFiller*#Universalupcharge,           w, h,          #FillerPrintOrderNumber,              
+,********************
+
+
+,No cost for filler kick
+,******** ALL KICKS ***********
+,Price, (K>0):1,    #KickName,             #CostOfKick,             w, K,          #KickPrintOrderNumber,              
+,******************************

@@ -1,0 +1,250 @@
+,Set Item Costs factor for edgebanding shelves and panels
+
+,**
+
+,Calculating subtotals
+
+
+Set,#EdgeBandCostGroup=0
+
+
+Set,(#EdgeBandingType = "#EdgeBandingType1"):#EdgeBandCostGroup=[#EdgeBandingTypeCost1]
+Set,(#EdgeBandingType = "#EdgeBandingType2"):#EdgeBandCostGroup=[#EdgeBandingTypeCost2]
+Set,(#EdgeBandingType = "#EdgeBandingType2"):#use2ndmaterial=1
+Set,(#EdgeBandingType = "#EdgeBandingType3"):#EdgeBandCostGroup=[#EdgeBandingTypeCost3]
+Set,(#EdgeBandingType = "#EdgeBandingType4"):#EdgeBandCostGroup=[#EdgeBandingTypeCost4]
+Set,(#EdgeBandingType = "#EdgeBandingType4"):#use2ndmaterial=1
+Set,(#EdgeBandingType = "#EdgeBandingType5"):#EdgeBandCostGroup=[#EdgeBandingTypeCost5]
+Set,(#EdgeBandingType = "#EdgeBandingType6"):#EdgeBandCostGroup=[#EdgeBandingTypeCost6]
+Set,(#EdgeBandingType = "#EdgeBandingType7"):#EdgeBandCostGroup=[#EdgeBandingTypeCost7]
+Set,(#EdgeBandingType = "#EdgeBandingType8"):#EdgeBandCostGroup=[#EdgeBandingTypeCost8]
+Set,(#EdgeBandingType = "#EdgeBandingType9"):#EdgeBandCostGroup=[#EdgeBandingTypeCost9]
+Set,(#EdgeBandingType = "#EdgeBandingType10"):#EdgeBandCostGroup=[#EdgeBandingTypeCost10]
+Set,(#EdgeBandingType = "#EdgeBandingType11"):#EdgeBandCostGroup=[#EdgeBandingTypeCost11]
+Set,(#EdgeBandingType = "#EdgeBandingType12"):#EdgeBandCostGroup=[#EdgeBandingTypeCost12]
+Set,(#EdgeBandingType = "#EdgeBandingType13"):#EdgeBandCostGroup=[#EdgeBandingTypeCost13]
+Set,(#EdgeBandingType = "#EdgeBandingType14"):#EdgeBandCostGroup=[#EdgeBandingTypeCost14]
+Set,(#EdgeBandingType = "#EdgeBandingType15"):#EdgeBandCostGroup=[#EdgeBandingTypeCost15]
+Set,(#EdgeBandingType = "#EdgeBandingType16"):#EdgeBandCostGroup=[#EdgeBandingTypeCost16]
+Set,(#EdgeBandingType = "#EdgeBandingType17"):#EdgeBandCostGroup=[#EdgeBandingTypeCost17]
+Set,(#EdgeBandingType = "#EdgeBandingType18"):#EdgeBandCostGroup=[#EdgeBandingTypeCost18]
+Set,(#EdgeBandingType = "#EdgeBandingType19"):#EdgeBandCostGroup=[#EdgeBandingTypeCost19]
+Set,(#EdgeBandingType = "#EdgeBandingType20"):#EdgeBandCostGroup=[#EdgeBandingTypeCost20]
+Set,(#EdgeBandingType = "#EdgeBandingType21"):#EdgeBandCostGroup=[#EdgeBandingTypeCost21]
+Set,(#EdgeBandingType = "#EdgeBandingType22"):#EdgeBandCostGroup=[#EdgeBandingTypeCost22]
+Set,(#EdgeBandingType = "#EdgeBandingType23"):#EdgeBandCostGroup=[#EdgeBandingTypeCost23]
+Set,(#EdgeBandingType = "#EdgeBandingType24"):#EdgeBandCostGroup=[#EdgeBandingTypeCost24]
+Set,(#EdgeBandingType = "#EdgeBandingType25"):#EdgeBandCostGroup=[#EdgeBandingTypeCost25]
+Set,(#EdgeBandingType = "#EdgeBandingType26"):#EdgeBandCostGroup=[#EdgeBandingTypeCost26]
+Set,(#EdgeBandingType = "#EdgeBandingType27"):#EdgeBandCostGroup=[#EdgeBandingTypeCost27]
+Set,(#EdgeBandingType = "#EdgeBandingType28"):#EdgeBandCostGroup=[#EdgeBandingTypeCost28]
+Set,(#EdgeBandingType = "#EdgeBandingType29"):#EdgeBandCostGroup=[#EdgeBandingTypeCost29]
+Set,(#EdgeBandingType = "#EdgeBandingType30"):#EdgeBandCostGroup=[#EdgeBandingTypeCost30]
+Set,(#EdgeBandingType = "#EdgeBandingType31"):#EdgeBandCostGroup=[#EdgeBandingTypeCost31]
+Set,(#EdgeBandingType = "#EdgeBandingType32"):#EdgeBandCostGroup=[#EdgeBandingTypeCost32]
+Set,(#EdgeBandingType = "#EdgeBandingType33"):#EdgeBandCostGroup=[#EdgeBandingTypeCost33]
+Set,(#EdgeBandingType = "#EdgeBandingType34"):#EdgeBandCostGroup=[#EdgeBandingTypeCost34]
+Set,(#EdgeBandingType = "#EdgeBandingType35"):#EdgeBandCostGroup=[#EdgeBandingTypeCost35]
+Set,(#EdgeBandingType = "#EdgeBandingType36"):#EdgeBandCostGroup=[#EdgeBandingTypeCost36]
+Set,(#EdgeBandingType = "#EdgeBandingType37"):#EdgeBandCostGroup=[#EdgeBandingTypeCost37]
+Set,(#EdgeBandingType = "#EdgeBandingType38"):#EdgeBandCostGroup=[#EdgeBandingTypeCost38]
+Set,(#EdgeBandingType = "#EdgeBandingType39"):#EdgeBandCostGroup=[#EdgeBandingTypeCost39]
+Set,(#EdgeBandingType = "#EdgeBandingType40"):#EdgeBandCostGroup=[#EdgeBandingTypeCost40]
+Set,(#EdgeBandingType = "#EdgeBandingType41"):#EdgeBandCostGroup=[#EdgeBandingTypeCost41]
+Set,(#EdgeBandingType = "#EdgeBandingType42"):#EdgeBandCostGroup=[#EdgeBandingTypeCost42]
+Set,(#EdgeBandingType = "#EdgeBandingType43"):#EdgeBandCostGroup=[#EdgeBandingTypeCost43]
+Set,(#EdgeBandingType = "#EdgeBandingType44"):#EdgeBandCostGroup=[#EdgeBandingTypeCost44]
+Set,(#EdgeBandingType = "#EdgeBandingType45"):#EdgeBandCostGroup=[#EdgeBandingTypeCost45]
+Set,(#EdgeBandingType = "#EdgeBandingType46"):#EdgeBandCostGroup=[#EdgeBandingTypeCost46]
+Set,(#EdgeBandingType = "#EdgeBandingType47"):#EdgeBandCostGroup=[#EdgeBandingTypeCost47]
+Set,(#EdgeBandingType = "#EdgeBandingType48"):#EdgeBandCostGroup=[#EdgeBandingTypeCost48]
+Set,(#EdgeBandingType = "#EdgeBandingType49"):#EdgeBandCostGroup=[#EdgeBandingTypeCost49]
+Set,(#EdgeBandingType = "#EdgeBandingType50"):#EdgeBandCostGroup=[#EdgeBandingTypeCost50]
+Set,(#EdgeBandingType = "#EdgeBandingType51"):#EdgeBandCostGroup=[#EdgeBandingTypeCost51]
+Set,(#EdgeBandingType = "#EdgeBandingType52"):#EdgeBandCostGroup=[#EdgeBandingTypeCost52]
+Set,(#EdgeBandingType = "#EdgeBandingType53"):#EdgeBandCostGroup=[#EdgeBandingTypeCost53]
+Set,(#EdgeBandingType = "#EdgeBandingType54"):#EdgeBandCostGroup=[#EdgeBandingTypeCost54]
+Set,(#EdgeBandingType = "#EdgeBandingType55"):#EdgeBandCostGroup=[#EdgeBandingTypeCost55]
+Set,(#EdgeBandingType = "#EdgeBandingType56"):#EdgeBandCostGroup=[#EdgeBandingTypeCost56]
+Set,(#EdgeBandingType = "#EdgeBandingType57"):#EdgeBandCostGroup=[#EdgeBandingTypeCost57]
+Set,(#EdgeBandingType = "#EdgeBandingType58"):#EdgeBandCostGroup=[#EdgeBandingTypeCost58]
+Set,(#EdgeBandingType = "#EdgeBandingType59"):#EdgeBandCostGroup=[#EdgeBandingTypeCost59]
+Set,(#EdgeBandingType = "#EdgeBandingType60"):#EdgeBandCostGroup=[#EdgeBandingTypeCost60]
+Set,(#EdgeBandingType = "#EdgeBandingType61"):#EdgeBandCostGroup=[#EdgeBandingTypeCost61]
+Set,(#EdgeBandingType = "#EdgeBandingType62"):#EdgeBandCostGroup=[#EdgeBandingTypeCost62]
+Set,(#EdgeBandingType = "#EdgeBandingType63"):#EdgeBandCostGroup=[#EdgeBandingTypeCost63]
+Set,(#EdgeBandingType = "#EdgeBandingType64"):#EdgeBandCostGroup=[#EdgeBandingTypeCost64]
+Set,(#EdgeBandingType = "#EdgeBandingType65"):#EdgeBandCostGroup=[#EdgeBandingTypeCost65]
+Set,(#EdgeBandingType = "#EdgeBandingType66"):#EdgeBandCostGroup=[#EdgeBandingTypeCost66]
+Set,(#EdgeBandingType = "#EdgeBandingType67"):#EdgeBandCostGroup=[#EdgeBandingTypeCost67]
+Set,(#EdgeBandingType = "#EdgeBandingType68"):#EdgeBandCostGroup=[#EdgeBandingTypeCost68]
+Set,(#EdgeBandingType = "#EdgeBandingType69"):#EdgeBandCostGroup=[#EdgeBandingTypeCost69]
+Set,(#EdgeBandingType = "#EdgeBandingType70"):#EdgeBandCostGroup=[#EdgeBandingTypeCost70]
+Set,(#EdgeBandingType = "#EdgeBandingType71"):#EdgeBandCostGroup=[#EdgeBandingTypeCost71]
+Set,(#EdgeBandingType = "#EdgeBandingType72"):#EdgeBandCostGroup=[#EdgeBandingTypeCost72]
+Set,(#EdgeBandingType = "#EdgeBandingType73"):#EdgeBandCostGroup=[#EdgeBandingTypeCost73]
+Set,(#EdgeBandingType = "#EdgeBandingType74"):#EdgeBandCostGroup=[#EdgeBandingTypeCost74]
+Set,(#EdgeBandingType = "#EdgeBandingType75"):#EdgeBandCostGroup=[#EdgeBandingTypeCost75]
+Set,(#EdgeBandingType = "#EdgeBandingType76"):#EdgeBandCostGroup=[#EdgeBandingTypeCost76]
+Set,(#EdgeBandingType = "#EdgeBandingType77"):#EdgeBandCostGroup=[#EdgeBandingTypeCost77]
+Set,(#EdgeBandingType = "#EdgeBandingType78"):#EdgeBandCostGroup=[#EdgeBandingTypeCost78]
+Set,(#EdgeBandingType = "#EdgeBandingType79"):#EdgeBandCostGroup=[#EdgeBandingTypeCost79]
+Set,(#EdgeBandingType = "#EdgeBandingType80"):#EdgeBandCostGroup=[#EdgeBandingTypeCost80]
+Set,(#EdgeBandingType = "#EdgeBandingType81"):#EdgeBandCostGroup=[#EdgeBandingTypeCost81]
+Set,(#EdgeBandingType = "#EdgeBandingType82"):#EdgeBandCostGroup=[#EdgeBandingTypeCost82]
+Set,(#EdgeBandingType = "#EdgeBandingType83"):#EdgeBandCostGroup=[#EdgeBandingTypeCost83]
+Set,(#EdgeBandingType = "#EdgeBandingType84"):#EdgeBandCostGroup=[#EdgeBandingTypeCost84]
+Set,(#EdgeBandingType = "#EdgeBandingType85"):#EdgeBandCostGroup=[#EdgeBandingTypeCost85]
+Set,(#EdgeBandingType = "#EdgeBandingType86"):#EdgeBandCostGroup=[#EdgeBandingTypeCost86]
+Set,(#EdgeBandingType = "#EdgeBandingType87"):#EdgeBandCostGroup=[#EdgeBandingTypeCost87]
+Set,(#EdgeBandingType = "#EdgeBandingType88"):#EdgeBandCostGroup=[#EdgeBandingTypeCost88]
+Set,(#EdgeBandingType = "#EdgeBandingType89"):#EdgeBandCostGroup=[#EdgeBandingTypeCost89]
+Set,(#EdgeBandingType = "#EdgeBandingType90"):#EdgeBandCostGroup=[#EdgeBandingTypeCost90]
+Set,(#EdgeBandingType = "#EdgeBandingType91"):#EdgeBandCostGroup=[#EdgeBandingTypeCost91]
+Set,(#EdgeBandingType = "#EdgeBandingType92"):#EdgeBandCostGroup=[#EdgeBandingTypeCost92]
+Set,(#EdgeBandingType = "#EdgeBandingType93"):#EdgeBandCostGroup=[#EdgeBandingTypeCost93]
+Set,(#EdgeBandingType = "#EdgeBandingType94"):#EdgeBandCostGroup=[#EdgeBandingTypeCost94]
+Set,(#EdgeBandingType = "#EdgeBandingType95"):#EdgeBandCostGroup=[#EdgeBandingTypeCost95]
+Set,(#EdgeBandingType = "#EdgeBandingType96"):#EdgeBandCostGroup=[#EdgeBandingTypeCost96]
+Set,(#EdgeBandingType = "#EdgeBandingType97"):#EdgeBandCostGroup=[#EdgeBandingTypeCost97]
+Set,(#EdgeBandingType = "#EdgeBandingType98"):#EdgeBandCostGroup=[#EdgeBandingTypeCost98]
+Set,(#EdgeBandingType = "#EdgeBandingType99"):#EdgeBandCostGroup=[#EdgeBandingTypeCost99]
+Set,(#EdgeBandingType = "#EdgeBandingType100"):#EdgeBandCostGroup=[#EdgeBandingTypeCost100]
+Set,(#EdgeBandingType = "#EdgeBandingType101"):#EdgeBandCostGroup=[#EdgeBandingTypeCost101]
+Set,(#EdgeBandingType = "#EdgeBandingType102"):#EdgeBandCostGroup=[#EdgeBandingTypeCost102]
+Set,(#EdgeBandingType = "#EdgeBandingType103"):#EdgeBandCostGroup=[#EdgeBandingTypeCost103]
+Set,(#EdgeBandingType = "#EdgeBandingType104"):#EdgeBandCostGroup=[#EdgeBandingTypeCost104]
+Set,(#EdgeBandingType = "#EdgeBandingType105"):#EdgeBandCostGroup=[#EdgeBandingTypeCost105]
+Set,(#EdgeBandingType = "#EdgeBandingType106"):#EdgeBandCostGroup=[#EdgeBandingTypeCost106]
+Set,(#EdgeBandingType = "#EdgeBandingType107"):#EdgeBandCostGroup=[#EdgeBandingTypeCost107]
+Set,(#EdgeBandingType = "#EdgeBandingType108"):#EdgeBandCostGroup=[#EdgeBandingTypeCost108]
+Set,(#EdgeBandingType = "#EdgeBandingType109"):#EdgeBandCostGroup=[#EdgeBandingTypeCost109]
+Set,(#EdgeBandingType = "#EdgeBandingType110"):#EdgeBandCostGroup=[#EdgeBandingTypeCost110]
+Set,(#EdgeBandingType = "#EdgeBandingType111"):#EdgeBandCostGroup=[#EdgeBandingTypeCost111]
+Set,(#EdgeBandingType = "#EdgeBandingType112"):#EdgeBandCostGroup=[#EdgeBandingTypeCost112]
+Set,(#EdgeBandingType = "#EdgeBandingType113"):#EdgeBandCostGroup=[#EdgeBandingTypeCost113]
+Set,(#EdgeBandingType = "#EdgeBandingType114"):#EdgeBandCostGroup=[#EdgeBandingTypeCost114]
+Set,(#EdgeBandingType = "#EdgeBandingType115"):#EdgeBandCostGroup=[#EdgeBandingTypeCost115]
+Set,(#EdgeBandingType = "#EdgeBandingType116"):#EdgeBandCostGroup=[#EdgeBandingTypeCost116]
+Set,(#EdgeBandingType = "#EdgeBandingType117"):#EdgeBandCostGroup=[#EdgeBandingTypeCost117]
+Set,(#EdgeBandingType = "#EdgeBandingType118"):#EdgeBandCostGroup=[#EdgeBandingTypeCost118]
+Set,(#EdgeBandingType = "#EdgeBandingType119"):#EdgeBandCostGroup=[#EdgeBandingTypeCost119]
+Set,(#EdgeBandingType = "#EdgeBandingType120"):#EdgeBandCostGroup=[#EdgeBandingTypeCost120]
+Set,(#EdgeBandingType = "#EdgeBandingType121"):#EdgeBandCostGroup=[#EdgeBandingTypeCost121]
+Set,(#EdgeBandingType = "#EdgeBandingType122"):#EdgeBandCostGroup=[#EdgeBandingTypeCost122]
+Set,(#EdgeBandingType = "#EdgeBandingType123"):#EdgeBandCostGroup=[#EdgeBandingTypeCost123]
+Set,(#EdgeBandingType = "#EdgeBandingType124"):#EdgeBandCostGroup=[#EdgeBandingTypeCost124]
+Set,(#EdgeBandingType = "#EdgeBandingType125"):#EdgeBandCostGroup=[#EdgeBandingTypeCost125]
+Set,(#EdgeBandingType = "#EdgeBandingType126"):#EdgeBandCostGroup=[#EdgeBandingTypeCost126]
+Set,(#EdgeBandingType = "#EdgeBandingType127"):#EdgeBandCostGroup=[#EdgeBandingTypeCost127]
+Set,(#EdgeBandingType = "#EdgeBandingType128"):#EdgeBandCostGroup=[#EdgeBandingTypeCost128]
+Set,(#EdgeBandingType = "#EdgeBandingType129"):#EdgeBandCostGroup=[#EdgeBandingTypeCost129]
+Set,(#EdgeBandingType = "#EdgeBandingType130"):#EdgeBandCostGroup=[#EdgeBandingTypeCost130]
+Set,(#EdgeBandingType = "#EdgeBandingType131"):#EdgeBandCostGroup=[#EdgeBandingTypeCost131]
+Set,(#EdgeBandingType = "#EdgeBandingType132"):#EdgeBandCostGroup=[#EdgeBandingTypeCost132]
+Set,(#EdgeBandingType = "#EdgeBandingType133"):#EdgeBandCostGroup=[#EdgeBandingTypeCost133]
+Set,(#EdgeBandingType = "#EdgeBandingType134"):#EdgeBandCostGroup=[#EdgeBandingTypeCost134]
+Set,(#EdgeBandingType = "#EdgeBandingType135"):#EdgeBandCostGroup=[#EdgeBandingTypeCost135]
+Set,(#EdgeBandingType = "#EdgeBandingType136"):#EdgeBandCostGroup=[#EdgeBandingTypeCost136]
+Set,(#EdgeBandingType = "#EdgeBandingType137"):#EdgeBandCostGroup=[#EdgeBandingTypeCost137]
+Set,(#EdgeBandingType = "#EdgeBandingType138"):#EdgeBandCostGroup=[#EdgeBandingTypeCost138]
+Set,(#EdgeBandingType = "#EdgeBandingType139"):#EdgeBandCostGroup=[#EdgeBandingTypeCost139]
+Set,(#EdgeBandingType = "#EdgeBandingType140"):#EdgeBandCostGroup=[#EdgeBandingTypeCost140]
+Set,(#EdgeBandingType = "#EdgeBandingType141"):#EdgeBandCostGroup=[#EdgeBandingTypeCost141]
+Set,(#EdgeBandingType = "#EdgeBandingType142"):#EdgeBandCostGroup=[#EdgeBandingTypeCost142]
+Set,(#EdgeBandingType = "#EdgeBandingType143"):#EdgeBandCostGroup=[#EdgeBandingTypeCost143]
+Set,(#EdgeBandingType = "#EdgeBandingType144"):#EdgeBandCostGroup=[#EdgeBandingTypeCost144]
+Set,(#EdgeBandingType = "#EdgeBandingType145"):#EdgeBandCostGroup=[#EdgeBandingTypeCost145]
+Set,(#EdgeBandingType = "#EdgeBandingType146"):#EdgeBandCostGroup=[#EdgeBandingTypeCost146]
+Set,(#EdgeBandingType = "#EdgeBandingType147"):#EdgeBandCostGroup=[#EdgeBandingTypeCost147]
+Set,(#EdgeBandingType = "#EdgeBandingType148"):#EdgeBandCostGroup=[#EdgeBandingTypeCost148]
+Set,(#EdgeBandingType = "#EdgeBandingType149"):#EdgeBandCostGroup=[#EdgeBandingTypeCost149]
+Set,(#EdgeBandingType = "#EdgeBandingType150"):#EdgeBandCostGroup=[#EdgeBandingTypeCost150]
+Set,(#EdgeBandingType = "#EdgeBandingType151"):#EdgeBandCostGroup=[#EdgeBandingTypeCost151]
+Set,(#EdgeBandingType = "#EdgeBandingType152"):#EdgeBandCostGroup=[#EdgeBandingTypeCost152]
+Set,(#EdgeBandingType = "#EdgeBandingType153"):#EdgeBandCostGroup=[#EdgeBandingTypeCost153]
+Set,(#EdgeBandingType = "#EdgeBandingType154"):#EdgeBandCostGroup=[#EdgeBandingTypeCost154]
+Set,(#EdgeBandingType = "#EdgeBandingType155"):#EdgeBandCostGroup=[#EdgeBandingTypeCost155]
+Set,(#EdgeBandingType = "#EdgeBandingType156"):#EdgeBandCostGroup=[#EdgeBandingTypeCost156]
+Set,(#EdgeBandingType = "#EdgeBandingType157"):#EdgeBandCostGroup=[#EdgeBandingTypeCost157]
+Set,(#EdgeBandingType = "#EdgeBandingType158"):#EdgeBandCostGroup=[#EdgeBandingTypeCost158]
+Set,(#EdgeBandingType = "#EdgeBandingType159"):#EdgeBandCostGroup=[#EdgeBandingTypeCost159]
+Set,(#EdgeBandingType = "#EdgeBandingType160"):#EdgeBandCostGroup=[#EdgeBandingTypeCost160]
+Set,(#EdgeBandingType = "#EdgeBandingType161"):#EdgeBandCostGroup=[#EdgeBandingTypeCost161]
+Set,(#EdgeBandingType = "#EdgeBandingType162"):#EdgeBandCostGroup=[#EdgeBandingTypeCost162]
+Set,(#EdgeBandingType = "#EdgeBandingType163"):#EdgeBandCostGroup=[#EdgeBandingTypeCost163]
+Set,(#EdgeBandingType = "#EdgeBandingType164"):#EdgeBandCostGroup=[#EdgeBandingTypeCost164]
+Set,(#EdgeBandingType = "#EdgeBandingType165"):#EdgeBandCostGroup=[#EdgeBandingTypeCost165]
+Set,(#EdgeBandingType = "#EdgeBandingType166"):#EdgeBandCostGroup=[#EdgeBandingTypeCost166]
+Set,(#EdgeBandingType = "#EdgeBandingType167"):#EdgeBandCostGroup=[#EdgeBandingTypeCost167]
+Set,(#EdgeBandingType = "#EdgeBandingType168"):#EdgeBandCostGroup=[#EdgeBandingTypeCost168]
+Set,(#EdgeBandingType = "#EdgeBandingType169"):#EdgeBandCostGroup=[#EdgeBandingTypeCost169]
+
+
+set, #EdgeBandCostGroup=[#EdgeBandCostGroup*#universalupcharge]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

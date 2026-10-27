@@ -1,0 +1,22 @@
+,CF Garage Base
+
+
+Load,GetMaterialCostBaseKick.pcb
+set, #sectioncount= [W\36]
+set,#sectioncountremainder = [#sectioncount % 8]
+   set,(#sectioncountremainder<5):#sectioncount = [#sectioncount + 1]
+   
+,Set,#BoardBaseLengthSub=(W/96)
+,Set,#BoardBaseLengthTotal=[(#BoardBaseLengthSub+#BoardBaseLengthTotal)]
+
+,Set,#boardBaseCostSub=(#BoardBaseLengthTotal*#BaseTypeCostGroup)
+,Set,#boardBaseTotCost=[#boardBaseTotCost+#boardBaseCostSub]
+
+set, (#costofkick=0):#costofkick=#addkickcost
+
+
+,******** ALL BASE BOARD **********
+,Price,(#BaseType = "*Garage Base*"):  1,   Wood Garage Base - Totaled in Base Molding Cost,    ,         H,  W,          #KickPrintOrderNumber,          
+,Price,(#BaseType <> "*Garage Base*"):  1,   Wood Garage Base - INCORRECT UNIT FOR SELECTED BASE TYPE,    ,         H,  W,          #KickPrintOrderNumber,          
+       
+,**********************************

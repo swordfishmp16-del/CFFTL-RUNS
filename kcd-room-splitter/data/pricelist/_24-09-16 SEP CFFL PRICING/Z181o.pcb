@@ -1,0 +1,67 @@
+,CF Upper 45 shelf Left and Door with open sides
+,Calculates the price for each part
+
+,********** All VERTICAL SIDES ***********
+Set, #VertH = [H]
+Set, #VertD = [D]
+,load, Calculatecutbacksaddtoside.pcb
+,Set, #VertD=#VertDL
+,Load, Pricesides.pcb  
+load, PriceCornersidesopenangleL.pcb 
+,*****************************************
+
+,********** All VERTICAL SIDES ***********
+,Set, #VertH = [H]
+,Set, #VertD = [LCCD]
+,Set, (PT=0):#ShelfWidth = [(W-RS-0.75)]:#Shelfwidth=[(W-RS)]
+,Set, (PT=0):#ShelfDepth = [(D-LS)]:#Shelfdepth=[(D-LS-0.75)]
+,load, PricecornersidesL.pcb        
+,*****************************************
+
+
+
+
+,*********** All SHELVES ***********
+Set, #ShelfWidth = [(W-LS)]
+Set, #ShelfDepth = [(D-RS)]
+load, Pricecornershelves.pcb      
+,*****************************************
+
+,*********** RODS ***********      
+,set, #ShelfWidth = [(W-LS-RS)]
+,Load, Pricerods.pcb
+,*****************************************
+
+
+,************* OTHER PARTS ***************
+,set, #Backheight = [H-TR-BR-K]
+,Set, (PT=0):#ShelfWidth = [(W-RS-0.75)]:#Shelfwidth=[(D-LS-0.75)]
+,Price, (#IncludeBacks>0):1,   #BackName,             #CostOfBack,            #shelfwidth, #Backheight,          #BackPrintOrderNumber,
+   
+,Price, 1,            #ClosetPoleName,       #ClosetPoleCost,         (W-LS-RS), 1,  #ClosetPolePrintOrderNumber,        
+,***one kick per unit  Price, (K>0):1,    #KickName,               #CostOfKick,             #ShelfWidth+3, K,        #KickPrintOrderNumber,              
+,Price, (K>0):1,    #KickName,               #CostOfKick,             #ShelfDepth+3, K,        #KickPrintOrderNumber,              
+,*****************************************
+
+
+
+
+,******* All DOORS & DRAWER FRONTS *******
+,Load, Doors.pcb
+,*****************************************
+
+
+
+,*********** All DRAWER BOXES ************
+,Load, Drawers.Pcb
+,*****************************************
+
+
+
+
+,************ All PULLOUTS ***************
+,Set, #PulloutOpeningWidth = [W-LS-RS]
+,Load, (npo>0): G-Pullout Cost.Pcb
+,*****************************************
+
+

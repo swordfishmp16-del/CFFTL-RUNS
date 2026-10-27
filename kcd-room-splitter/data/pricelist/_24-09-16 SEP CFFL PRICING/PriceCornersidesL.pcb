@@ -1,0 +1,62 @@
+,CF Prices and counts the left and right and 3rd (panels) sides for LEFT corner units
+
+Do, (LS>0):1
+{
+set, #sideTH = LS
+set, #temppanelcount=1
+Load, B-Side Cost.Pcb
+set, #sideTH = {LS}
+Price, (LS>0):1,  #LeftSideName-#sideTH"-#edgebandingtype,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber,          
+Price, (#notchheight>0)|(#Notchdepth>0):1,#Notchforroombasename-Left Panel,#Notchforroombasecost,,,#LeftSidePrintOrderNumber,
+}
+Do, (RS>0):1
+{
+set, #sideTH = RS
+set, #temppanelcount=1
+Set, #VertD = [RCCD]
+Load, B-Side Cost.Pcb
+set, #sideTH = {RS}
+Price, (RS>0):1,  #RightSideName-#sideTH"-#edgebandingtype,        #CostOfSide,             #VertD, #VertH,          #RightSidePrintOrderNumber,    
+Price, (#notchheight>0)|(#Notchdepth>0):1,#Notchforroombasename-Right Panel,#Notchforroombasecost,,,#LeftSidePrintOrderNumber,
+}
+Set, (opt=#OptLEDFpanel):#ledFpaneladd=[#ledFpaneladd+2]
+Set, (opt=#OptLEDHpanel):#ledHpaneladd=[#ledHpaneladd+2]
+
+set, ((opt=#OptWirelessLEDTopShelf)|(opt=#OptWirelessLEDMidShelf)|(opt=#OptWirelessLEDLowerMidShelf)|(opt=#OptWirelessLEDAdjShelf)|(opt=#OptWirelessLEDUpperbottomShelf)):#wBusbaradd=[#wbusbaradd+2]
+
+Do, (#Use3rdBack=Yes):1
+{
+set, #sideTH = #SideThickA
+Do,(PT=0):1
+   {
+    Do, (#IncludeBacks=0):1
+    {
+    set, (#3rdbacktype="Full"):#VertD = #Shelfdepth
+    set, (#3rdbacktype="Parallel Panel Depth"):#VertD=RCCD
+    set, (#3rdbacktype="Fixed Depth"):#VertD = #fixeddepth3rdpanel
+    }
+    Do, (#IncludeBacks=1):1
+    {
+    set, #VertD = #Shelfdepth
+    }
+   }
+Do,(PT>0):1
+   {
+    Do, (#IncludeBacks=0):1
+    {
+    set, (#3rdbacktype="Full"):#VertD=#Shelfwidth
+    set, (#3rdbacktype="Parallel Panel Depth"):#VertD=LCCD
+    set, (#3rdbacktype="Fixed Depth"):#VertD = #fixeddepth3rdpanel
+    }
+    Do, (#IncludeBacks=1):1
+    {
+    set, #VertD = #Shelfwidth
+    }
+   }
+set, #temppanelcount=1
+set, #donttrackdepth=1
+Load, B-Side Cost.Pcb
+set, #sideTH = {#SideThickA}
+Price, (#Use3rdBack=Yes):1, #BackSideName-#sideTH"-#edgebandingtype,         #CostOfSide,             #VertD, #VertH,          #LeftSidePrintOrderNumber,
+set, #donttrackdepth=0 
+}  

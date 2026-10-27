@@ -1,0 +1,450 @@
+,This File Sets The Door NAME For The Code
+,Use Grid
+,**
+,**                     ADAMS LIBRARY
+,**
+,** Tapered Legs   
+DisplaySet,#$AD091627$=0,A0916 27" 2 Sides Tapered 
+
+ 
+DisplaySet,#$AD091621$=0,A0916 21" 2 Sides Tapered
+  
+ 
+DisplaySet,#$AD091615$=0,A0916 15" 2 Sides Tapered
+  
+ 
+DisplaySet,#$AD090928$=0,A0909 28" 4 Sides Tapered
+  
+ 
+DisplaySet,#$AD090921$=0,A0909 21" 4 Sides Tapered
+  
+ 
+DisplaySet,#$AD090915$=0,A0909 15" 4 Sides Tapered
+  
+ 
+DisplaySet,#$AD090834$=0,A0908 34" 2 Sides Tapered
+  
+ 
+DisplaySet,#$AD090828$=0,A0908 28" 2 Sides Tapered
+  
+ 
+DisplaySet,#$AD090821$=0,A0908 21" 2 Sides Tapered
+  
+ 
+DisplaySet,#$AD090815$=0,A0908 15" 2 Sides Tapered
+  
+ 
+,** Kitchen Island Legs   
+DisplaySet,#$AD09343535$=0,A0934 35"x3.5 Vanity Leg
+  
+ 
+DisplaySet,#$AD094035$=0,A0940 35" Reeded Kitchen
+  
+ 
+DisplaySet,#$AD093935$=0,A0939 35" Fluted Kitchen
+  
+ 
+DisplaySet,#$AD093535$=0,A0935 35" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09264145$=0,A0926 41"x4.5" Octagonal Kitchen
+  
+ 
+DisplaySet,#$AD09264135$=0,A0926 41"x3.5" Octagonal Kitchen
+  
+ 
+DisplaySet,#$AD09263545$=0,A0926 35"x4.5" Octagonal Kitchen
+  
+ 
+DisplaySet,#$AD09263535$=0,A0926 35"x3.5" Octagonal Kitchen
+  
+ 
+DisplaySet,#$AD092435$=0,A0924 35" Reeded Kitchen
+  
+ 
+DisplaySet,#$AD092335$=0,A0923 35" Fluted Kitchen
+  
+ 
+DisplaySet,#$AD09214145$=0,A0921 41"x4.5" Rope Turned
+  
+ 
+DisplaySet,#$AD09214135$=0,A0921 41"x3.5" Rope Turned
+  
+ 
+DisplaySet,#$AD09213545$=0,A0921 35"x4.5" Rope Turned
+  
+ 
+DisplaySet,#$AD09213535$=0,A0921 35"x3.5" Rope Turned
+  
+ 
+DisplaySet,#$AD0921353$=0,A0921 35"x3" Rope Turned
+  
+ 
+DisplaySet,#$AD09204145$=0,A0920 41"x4.5" Reeded Turned
+  
+ 
+DisplaySet,#$AD09204135$=0,A0920 41"x3.5" Reeded Turned
+  
+ 
+DisplaySet,#$AD0920356$=0,A0920 35"x6" Reeded Turned
+  
+ 
+DisplaySet,#$AD92035450$=0,A0920 35"x4.5" Reeded Turned
+  
+ 
+DisplaySet,#$AD09203535$=0,A0920 35"x3.5" Reeded Turned
+  
+ 
+DisplaySet,#$AD0920353$=0,A0920 35"x3" Reeded Turned
+  
+ 
+DisplaySet,#$AD09194145$=0,A0919 41"x4.5" Fluted Turned
+  
+ 
+DisplaySet,#$AD09194135$=0,A0919 41"x3.5" Fluted Turned
+  
+ 
+DisplaySet,#$AD09193545$=0,A0919 35"x4.5" Fluted Turned
+  
+ 
+DisplaySet,#$AD09193535$=0,A0919 35"x3.5" Fluted Turned
+  
+ 
+DisplaySet,#$AD0919353$=0,A0919 35"x3" Fluted Turned
+  
+ 
+DisplaySet,#$AD09184145$=0,A0918 41"x4.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09184135$=0,A0918 41"x3.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09183545$=0,A0918 35"x4.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09183535$=0,A0918 35"x3.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD0918353$=0,A0918 35"x3" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09174145$=0,A0917 41"x4.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09174135$=0,A0917 41"x3.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09173545$=0,A0917 35"x4.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09173535$=0,A0917 35"x3.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD0917353$=0,A0917 35"x3" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09154145$=0,A0915 41"x4.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09154135$=0,A0915 41"x3.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD0915356$=0,A0915 35"x6" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09153545$=0,A0915 35"x4.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09153535$=0,A0915 35"x3.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD0915353$=0,A0915 35"x3" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09144145$=0,A0914 41"x4.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09144135$=0,A0914 41"x3.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09143545$=0,A0914 35"x4.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD09143535$=0,A0914 35"x3.5" Turned Kitchen
+  
+ 
+DisplaySet,#$AD0914353$=0,A0914 35"x3" Turned Kitchen
+  
+ 
+DisplaySet,#$AD0913$=0,A0913 Rope Turned Kitchen
+  
+ 
+DisplaySet,#$AD0905$=0,A0905 Reeded Kitchen
+  
+ 
+DisplaySet,#$AD0902$=0,A0902 Fluted Kitchen
+  
+ 
+DisplaySet,#$AD0901$=0,A0901 Turned Kitchen
+  
+ 
+DisplaySet,#$AD0900$=0,A0900 Turned Kitchen
+  
+ 
+,** Corbel   
+DisplaySet,#$AD075713$=0,A0757 13" Mission Corbel w/Cap
+  
+ 
+DisplaySet,#$AD075710$=0,A0757 10" Mission Corbel w/Cap
+  
+ 
+DisplaySet,#$AD075512$=0,A0755 12" Corbel
+  
+ 
+DisplaySet,#$AD07559$=0,A0755 9" Corbel
+  
+ 
+DisplaySet,#$AD075412$=0,A0754 12" Corbel
+  
+ 
+DisplaySet,#$AD07549$=0,A0754 9" Corbel
+  
+ 
+DisplaySet,#$AD075311$=0,A0753 11" Mission Corbel
+  
+ 
+DisplaySet,#$AD07539$=0,A0753 9" Mission Corbel
+  
+ 
+DisplaySet,#$AD075211$=0,A0752 11" Corbel
+  
+ 
+DisplaySet,#$AD07528$=0,A0752 8" Corbel
+  
+ 
+DisplaySet,#$AD075013$=0,A0750 13" Corbel
+  
+ 
+DisplaySet,#$AD07509$=0,A0750 9" Corbel
+  
+ 
+ 
+ 
+,** Split Onlays   
+DisplaySet,#$AD0979$=0,A0979 Splicer Spool
+  
+ 
+DisplaySet,#$AD097384$=0,A0973 84" Reeded  
+ 
+DisplaySet,#$AD097342$=0,A0973 42" Reeded
+  
+ 
+DisplaySet,#$AD097330$=0,A0973 30" Reeded
+  
+ 
+DisplaySet,#$AD097284$=0,A0972 84" Fluted
+  
+ 
+DisplaySet,#$AD097242$=0,A0972 42" Fluted
+  
+ 
+DisplaySet,#$AD097230$=0,A0972 30" Fluted
+  
+ 
+DisplaySet,#$AD097184$=0,A0971 84" Plain
+  
+ 
+DisplaySet,#$AD097142$=0,A0971 42" Plain
+  
+ 
+DisplaySet,#$AD097130$=0,A0971 30" Plain
+  
+ 
+DisplaySet,#$AD0970L$=0,A0970L End Post - Corner
+  
+ 
+DisplaySet,#$AD0970F$=0,A0970F End Post - Flat
+  
+ 
+DisplaySet,#$AD0970C$=0,A0970C End Post - Corner
+  
+ 
+DisplaySet,#$AD0969$=0,A0969 Splicer Spool
+  
+ 
+DisplaySet,#$AD096384$=0,A0963 84" Reeded
+  
+ 
+DisplaySet,#$AD096342$=0,A0963 42" Reeded
+  
+ 
+DisplaySet,#$AD096330$=0,A0963 30" Reeded
+  
+ 
+DisplaySet,#$AD096284$=0,A0962 84" Fluted
+  
+ 
+DisplaySet,#$AD096242$=0,A0962 42" Fluted
+  
+ 
+DisplaySet,#$AD096230$=0,A0962 30" Fluted
+  
+ 
+DisplaySet,#$AD096184$=0,A0961 84" Plain
+  
+ 
+DisplaySet,#$AD096142$=0,A0961 42" Plain
+  
+ 
+DisplaySet,#$AD096130$=0,A0961 30" Plain
+  
+ 
+DisplaySet,#$AD0960F$=0,A0960F End Post - Flat
+  
+ 
+DisplaySet,#$AD0959$=0,A0959 Splicer Spool
+  
+ 
+DisplaySet,#$AD095384$=0,A0953 84" Reeded
+  
+ 
+DisplaySet,#$AD095342$=0,A0953 42" Reeded
+  
+ 
+DisplaySet,#$AD095330$=0,A0953 30" Reeded
+  
+ 
+DisplaySet,#$AD095284$=0,A0952 84" Fluted
+  
+ 
+DisplaySet,#$AD095242$=0,A0952 42" Fluted
+  
+ 
+DisplaySet,#$AD095230$=0,A0952 30" Fluted
+  
+ 
+DisplaySet,#$AD095184$=0,A0951 84" Plain
+  
+ 
+DisplaySet,#$AD095142$=0,A0951 42" Plain
+  
+ 
+DisplaySet,#$AD095130$=0,A0951 30" Plain
+  
+ 
+DisplaySet,#$AD09508$=0,A0950 8" End Post - Flat
+  
+ 
+,** Cabinet Legs   
+DisplaySet,#$ADCP15$=0,ADCP 15" Chippendale
+  
+ 
+DisplaySet,#$AD090711$=0,A0907 11" Turned Legs
+  
+ 
+DisplaySet,#$AD09079$=0,A0907 9" Turned Legs
+  
+ 
+DisplaySet,#$AD090111$=0,A0901 11" Turned Legs
+  
+ 
+DisplaySet,#$AD09019$=0,A0901 9" Turned Legs
+  
+ 
+,** Bun Feet   
+DisplaySet,#$AD0559$=0,A0559 Round Tapered Bun Feet
+  
+ 
+DisplaySet,#$AD05586$=0,A0558 6" Contemporary Bun Feet
+  
+ 
+DisplaySet,#$AD05585$=0,A0558 5" Contemporary Bun Feet
+  
+ 
+DisplaySet,#$AD05576$=0,A0557 6" Round Bun Feet
+  
+ 
+DisplaySet,#$AD05575$=0,A0557 5" Round Bun Feet
+  
+ 
+DisplaySet,#$AD05574$=0,A0557 4" Round Bun Feet
+  
+ 
+DisplaySet,#$AD05568$=0,A0556 8" Round Bun Feet  
+ 
+DisplaySet,#$AD05566$=0,A0556 6" Round Bun Feet
+  
+ 
+DisplaySet,#$AD05565$=0,A0556 5" Round Bun Feet
+  
+ 
+DisplaySet,#$AD05564$=0,A0556 4" Round Bun Feet
+  
+ 
+DisplaySet,#$AD05554$=0,A0555 4" Square Bun Feet
+  
+ 
+DisplaySet,#$AD05553$=0,A0555 3" Square Bun Feet
+  
+ 
+DisplaySet,#$AD0554$=0,A0554 Flat Bun Feet
+  
+ 
+DisplaySet,#$AD0553$=0,A0553 Bun Feet
+  
+ 
+DisplaySet,#$AD05524$=0,A0552 4" Reeded Bun Feet
+  
+ 
+DisplaySet,#$AD05523$=0,A0552 3" Reeded Bun Feet
+  
+ 
+DisplaySet,#$AD0551$=0,A0551 Beaded Bun Feet
+  
+ 
+DisplaySet,#$AD05504$=0,A0550 4" Round Bun Feet
+  
+ 
+DisplaySet,#$AD05503$=0,A0550 3" Round Bun Feet  
+ 
+DisplaySet,#$AD0549$=0,A0549 Round Bun Feet
+  
+ 
+DisplaySet,#$AD0548$=0,A0548 Round Bun Feet
+  
+ 
+DisplaySet,#$AD0547$=0,A0547 Round Bun Feet
+  
+ 
+DisplaySet,#$AD05456$=0,A0545 6" Round Bun Feet
+  
+ 
+DisplaySet,#$AD05455$=0,A0545 5" Round Bun Feet
+  
+ 
+DisplaySet,#$AD05454$=0,A0545 4" Round Bun Feet
+  
+ 
+DisplaySet,#$AD05444$=0,A0544 4" Tapered Bun Feet
+  
+ 
+DisplaySet,#$AD05446$=0,A0544 6" Tapered Bun Feet
+  
+ 
+DisplaySet,#$AD05445$=0,A0544 5" Tapered Bun Feet
+  
+ 
+DisplaySet,#$AD0537$=0,A0537 Round Bun Feet
+  
+ 
+DisplaySet,#$AD0536$=0,A0536 Round Bun Feet
+  
+ 
+DisplaySet,#$AD0535$=0,A0535 Round Bun Feet
+  
+ 
+DisplaySet,#$AD0530$=0,A0530 Round Bun Feet  
+ 
+ 
+ 
+ 

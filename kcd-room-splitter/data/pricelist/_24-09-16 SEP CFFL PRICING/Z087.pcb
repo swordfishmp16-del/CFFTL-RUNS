@@ -1,0 +1,6 @@
+,KCDw SYSTEM FILE DO NOT CHANGE
+,QUEEN ANNE LEGS
+Set,#LCode=Closet
+Set,#UCode=Kick
+Set,#PCode=QLeg
+Load, Eachunit.pcb

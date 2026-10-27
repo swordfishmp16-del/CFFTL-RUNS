@@ -1,0 +1,10 @@
+,CF Library shelf with rod - closet pieces
+,***************************************
+Set, #ShelfWidth = [(W)]     
+Set, #ShelfDepth = [(D)]
+set, #tempshelfcount = 1,
+Load, Priceadjshelves.pcb
+
+   
+
+Load, Pricerods.pcb

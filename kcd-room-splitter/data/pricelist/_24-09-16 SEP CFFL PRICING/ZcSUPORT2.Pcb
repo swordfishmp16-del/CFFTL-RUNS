@@ -1,0 +1,17 @@
+,*********Cleat
+
+,Calculates the price for each part
+
+Do, (W<H):1
+{ 
+  Set, #Cleatlength=H 
+  Set, #Cleatthickness=W     
+}
+
+Do, (W>H):1
+{ 
+  Set, #Cleatlength=W 
+  Set, #Cleatthickness=H  
+}
+
+Price, 1,   #ShelfSupportName,      #CostOfShelfSupport,        #Cleatlength ,#Cleatthickness,          #ShelfSupportPrintOrderNumber,     
