@@ -39,8 +39,9 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
 0. `run 1084476` means: find the KCD file and the scan for that order, do steps 1-2 with the read-out JSON written
    next to the scan, then step 3 with `python3 kcdrun.py 1084476` (it finds the files itself). Where it looks:
    First read `TRAINING.md` at the repo root (Mike's rules from training; they win over an older line here).
-   - on Mike's own computer: the in folder `C:\REM IN GIT`, which is this project's own folder (the run project is
-     cloned there; `git pull` first; kcdrun.py takes the files from its own folder by itself). The job files are dropped flat in it, at the top, named like
+   - on Mike's own computer (a local session in `C:\REM IN GIT`, the clone of this project; `git pull` first): Mike
+     does not attach anything. Get the files yourself from the REM IN folder `C:\grok rem in` (or the top of
+     `C:\REM IN GIT`); kcdrun.py looks in the same two places by itself. The files sit flat in it, named like
      `ELIZABETH ROBERTS KCD.job` and `REM-1084476-ROBERTS.pdf`); the finished run lands in
      `C:\grok rem completed\1084476 ROBERTS\` (room files and workbooks only); the reports go to
      `C:\grok rem reports\1084476 ROBERTS\`, and the three input files are moved there when the run succeeds, so

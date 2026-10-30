@@ -14,9 +14,10 @@ Standing rule from the owner (Oct 10, 2026). It applies in every session.
 
 - `TRAINING.md` holds every rule Mike has taught in training. A run session reads it before every `run <order>`.
 - The run session works on Mike's laptop, in Claude Code, in a LOCAL session whose folder is `C:\REM IN GIT`
-  (the in folder): that folder IS the clone of this project (any folder name works; the run uses its own folder). Mike drops the designer's KCD file and the REM scan straight into it
-  and types `run <order>`. Before each run: `git pull` (so the rules are current), then take the files from the top
-  of that folder, with no searching. Render scan pages into the session's temp folder, never into the in folder.
+  (the in folder): that folder IS the clone of this project (any folder name works). Mike only types `run <order>`: he never attaches files. The session goes and gets the
+  designer's KCD file and the REM scan itself, from the REM IN folder `C:\grok rem in` (where Mike saves them), or
+  from the top of `C:\REM IN GIT`. Those two folders only, no other searching. Before each run: `git pull` (so the
+  rules are current). Render scan pages into the session's temp folder, never into the in folder.
   The laptop session never commits, pushes or edits the rules; results go to `C:\grok rem completed` and
   `C:\grok rem reports` (kcdrun.py does that).
 - The training session (a cloud session) saves every rule Mike states into `TRAINING.md`, and any tool or run book

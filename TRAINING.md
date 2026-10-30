@@ -17,9 +17,10 @@ How this file is kept (for the training session):
 - 2026-10-21: the finished folder `C:\grok rem completed\<order> <NAME>\` holds ONLY the room KCD files (.job)
   and the workbooks (.xlsm). A bot moves it as it is into the production folders on the server. Every report, the
   inputs and any work file go to `C:\grok rem reports\<order> <NAME>\`. (kcdrun.py does this itself.)
-- 2026-10-30: the run project lives IN the in folder: `C:\REM IN GIT` is the clone of `CFFTL-RUNS`. Mike drops the
-  designer's KCD file and the REM scan straight into it and types `run <order>`. Take them from there at once;
-  never search anywhere else.
+- 2026-10-30: the run project lives IN the in folder: `C:\REM IN GIT` is the clone of `CFFTL-RUNS`. 
+- 2026-10-30: Mike never attaches or drops files into a session. He saves the KCD file and the REM scan in the REM IN
+  folder `C:\grok rem in` and types only `run <order>`. The session goes and gets them from there itself (or from
+  the top of `C:\REM IN GIT`), at once; it never asks for them and never searches anywhere else.
 - 2026-10-30: one fresh LOCAL session per job, opened on `C:\REM IN GIT`; Mike types only `run <order>`. Everything
   else (the files, the sale page, the rules) the session finds itself. A cloud session cannot do this.
 - 2026-10-30: in a cloud session the only job files are the ones attached to the message; never search for them.
