@@ -106,7 +106,19 @@ WIN_INBOX = r'C:\grok rem in'                 # Mike's in folder on his own comp
 WIN_DONE = r'C:\grok rem completed'           # where a finished run lands, one folder per order
 
 
-def default_inbox():
+REPO_ROOT = os.path.normpath(os.path.join(HERE, '..'))
+
+
+def default_inbox(order=None):
+    """The in folder. On Mike's laptop the run project is cloned INTO the in folder (C:\\REM IN GIT, any name works),
+    so the project's own folder is the in folder when the scan or read-out of this order sits at its top; else
+    C:\\grok rem in when it exists; else none (the jobs/ folder is used, as in a cloud session)."""
+    try:
+        top = os.listdir(REPO_ROOT)
+    except OSError:
+        top = []
+    if order and any(order in f and f.lower().endswith(('.pdf', '.json')) for f in top):
+        return REPO_ROOT
     return WIN_INBOX if os.path.isdir(WIN_INBOX) else None
 
 
@@ -1366,10 +1378,10 @@ def parse_args(argv):
 
 def resolve_order(args):
     """'python3 kcdrun.py 1084476': find the designer's job and the read-out by the order number and fill in args.
-    With an in folder (--inbox, or C:\\grok rem in on Mike's computer) the two files are taken from there and the run
+    With an in folder (--inbox, the project's own folder when the files were dropped at its top, or C:\\grok rem in) the two files are taken from there and the run
     lands in the done folder; otherwise jobs/<order> <NAME>/ at the repo root is used."""
     order = args.job.strip()
-    inbox = args.inbox or default_inbox()
+    inbox = args.inbox or default_inbox(order)
     if inbox:
         return resolve_inbox(args, order, inbox)
     return resolve_folder(args, order, os.path.abspath(args.jobs or DEFAULT_JOBS_DIR))

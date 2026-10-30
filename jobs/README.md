@@ -1,6 +1,6 @@
 # jobs folder: where you drop a job to run it
 
-On your own computer you do not need this folder: drop the KCD file and the scan into `C:\grok rem in`, type
+On your own computer you do not need this folder: drop the KCD file and the scan into `C:\REM IN GIT` (the run project's own folder), type
 `run <order>`, and the finished run lands in `C:\grok rem completed\<order> <NAME>\`: only the room KCD files and the
 workbooks, ready to move into the production folders. The reports and the inputs go to `C:\grok rem reports\<order> <NAME>\`.
 In a cloud session the files are uploaded and this folder is used instead:

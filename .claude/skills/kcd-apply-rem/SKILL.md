@@ -39,8 +39,8 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
 0. `run 1084476` means: find the KCD file and the scan for that order, do steps 1-2 with the read-out JSON written
    next to the scan, then step 3 with `python3 kcdrun.py 1084476` (it finds the files itself). Where it looks:
    First read `TRAINING.md` at the repo root (Mike's rules from training; they win over an older line here).
-   - on Mike's own computer: the in folder `C:\grok rem in`, which is this project's own folder (the run project is
-     cloned there; `git pull` first). The job files are dropped flat in it, at the top, named like
+   - on Mike's own computer: the in folder `C:\REM IN GIT`, which is this project's own folder (the run project is
+     cloned there; `git pull` first; kcdrun.py takes the files from its own folder by itself). The job files are dropped flat in it, at the top, named like
      `ELIZABETH ROBERTS KCD.job` and `REM-1084476-ROBERTS.pdf`); the finished run lands in
      `C:\grok rem completed\1084476 ROBERTS\` (room files and workbooks only); the reports go to
      `C:\grok rem reports\1084476 ROBERTS\`, and the three input files are moved there when the run succeeds, so
@@ -48,7 +48,7 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
    - in a cloud session (Linux, no `C:` drive): the ONLY files are the ones attached to Mike's message; their paths
      are in the message itself (`/root/.claude/uploads/...`, also `/mnt/user-data/uploads/`). Copy them into
      `jobs/1084476 <NAME>/` and go. Never search for the job anywhere else: a cloud session cannot see Mike's
-     computer, `C:\grok rem in`, OneDrive, the server or the test laptop, and the `jobs/` folder of a fresh checkout is
+     computer, `C:\REM IN GIT`, OneDrive, the server or the test laptop, and the `jobs/` folder of a fresh checkout is
      empty. If the message has no `.job` or no REM scan attached, do not look: reply at once with one line,
      "Attach the KCD file and the REM scan to the message and type run <order> again." Room files and workbooks go
      in `out/`, every report in `reports/`.

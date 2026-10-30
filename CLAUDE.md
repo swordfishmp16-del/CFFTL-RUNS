@@ -13,8 +13,8 @@ Standing rule from the owner (Oct 10, 2026). It applies in every session.
 ## Training and the run session on Mike's laptop
 
 - `TRAINING.md` holds every rule Mike has taught in training. A run session reads it before every `run <order>`.
-- The run session works on Mike's laptop, in Claude Code, in a LOCAL session whose folder is `C:\grok rem in`:
-  that folder IS the clone of this project. Mike drops the designer's KCD file and the REM scan straight into it
+- The run session works on Mike's laptop, in Claude Code, in a LOCAL session whose folder is `C:\REM IN GIT`
+  (the in folder): that folder IS the clone of this project (any folder name works; the run uses its own folder). Mike drops the designer's KCD file and the REM scan straight into it
   and types `run <order>`. Before each run: `git pull` (so the rules are current), then take the files from the top
   of that folder, with no searching. Render scan pages into the session's temp folder, never into the in folder.
   The laptop session never commits, pushes or edits the rules; results go to `C:\grok rem completed` and
@@ -25,7 +25,7 @@ Standing rule from the owner (Oct 10, 2026). It applies in every session.
 
 ## Running a job in a cloud session: where the files are
 
-A cloud session cannot see Mike's computer (`C:\grok rem in`, OneDrive, the server) or the test laptop. For
+A cloud session cannot see Mike's computer (`C:\REM IN GIT`, OneDrive, the server) or the test laptop. For
 `run <order>` the only files are the ones attached to the message (their paths are in the message). Use those
 at once; never search the disk, the repo or any connector for them. Nothing attached: ask for the KCD file and the
 REM scan in one line and stop.

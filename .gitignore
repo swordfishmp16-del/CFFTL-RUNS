@@ -14,7 +14,7 @@ kcd-room-splitter/experiments/po/*.txt
 !kcd-room-splitter/experiments/po/doormark_ref.json
 .DS_Store
 ._*
-# the run project is cloned into C:\grok rem in: what Mike drops at its top and what a run writes there
+# the run project is cloned into the in folder (C:\REM IN GIT): what Mike drops at its top and what a run writes there
 /*.json
 /*.png
 /*.txt
