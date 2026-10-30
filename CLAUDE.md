@@ -10,6 +10,19 @@ Standing rule from the owner (Oct 10, 2026). It applies in every session.
 - Before any Shopify CLI command that changes a store (app deploy, theme push, and so on), confirm the target is the sandbox store, never the live one.
 - If a task seems to need a change to the live store, stop and tell the owner instead.
 
+## Training and the run session on Mike's laptop
+
+- `TRAINING.md` holds every rule Mike has taught in training. A run session reads it before every `run <order>`.
+- The run session works on Mike's laptop, in Claude Code, in a LOCAL session whose folder is `C:\grok rem in`:
+  that folder IS the clone of this project. Mike drops the designer's KCD file and the REM scan straight into it
+  and types `run <order>`. Before each run: `git pull` (so the rules are current), then take the files from the top
+  of that folder, with no searching. Render scan pages into the session's temp folder, never into the in folder.
+  The laptop session never commits, pushes or edits the rules; results go to `C:\grok rem completed` and
+  `C:\grok rem reports` (kcdrun.py does that).
+- The training session (a cloud session) saves every rule Mike states into `TRAINING.md`, and any tool or run book
+  change, in BOTH projects at the same commit: `CFFTL-RUNS` `main` and `CFFTL-WORKING-` `production` (see the top
+  of `TRAINING.md`).
+
 ## Running a job in a cloud session: where the files are
 
 A cloud session cannot see Mike's computer (`C:\grok rem in`, OneDrive, the server) or the test laptop. For

@@ -12,6 +12,10 @@ Two copies of the same tools, two jobs:
   CFFTL-RUNS as `main` (from the learning project: `git push runs production:main`, after `git remote add runs
   https://github.com/swordfishmp16-del/CFFTL-RUNS.git` once).
 
+On Mike's laptop the run project is cloned into the in folder `C:\grok rem in` itself, and a local Claude Code
+session runs there (see `CLAUDE.md` and `TRAINING.md`). Training happens in a cloud session; every rule it saves goes
+into both projects at the same commit (`CFFTL-RUNS` `main` = `CFFTL-WORKING-` `production`).
+
 Rules in the run project:
 - Do not change any tool there. If a tool fails or a rule looks wrong, write what happened into
   `jobs/<order> <NAME>/NOTES.txt` and tell Mike; the fix is made in the learning project.

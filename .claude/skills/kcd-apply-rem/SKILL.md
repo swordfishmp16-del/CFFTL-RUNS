@@ -38,7 +38,9 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
 ## Steps
 0. `run 1084476` means: find the KCD file and the scan for that order, do steps 1-2 with the read-out JSON written
    next to the scan, then step 3 with `python3 kcdrun.py 1084476` (it finds the files itself). Where it looks:
-   - on Mike's own computer: the in folder `C:\grok rem in` (the files dropped flat in it, named like
+   First read `TRAINING.md` at the repo root (Mike's rules from training; they win over an older line here).
+   - on Mike's own computer: the in folder `C:\grok rem in`, which is this project's own folder (the run project is
+     cloned there; `git pull` first). The job files are dropped flat in it, at the top, named like
      `ELIZABETH ROBERTS KCD.job` and `REM-1084476-ROBERTS.pdf`); the finished run lands in
      `C:\grok rem completed\1084476 ROBERTS\` (room files and workbooks only); the reports go to
      `C:\grok rem reports\1084476 ROBERTS\`, and the three input files are moved there when the run succeeds, so
@@ -51,7 +53,8 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
      "Attach the KCD file and the REM scan to the message and type run <order> again." Room files and workbooks go
      in `out/`, every report in `reports/`.
    If there are two `.job` files and neither is clearly this order, or no scan, stop and ask which.
-1. Render the scan (`pdftoppm -r 150 -png`, and `-r 260` crops for the handwritten numbers) and READ it yourself.
+1. Render the scan (`pdftoppm -r 150 -png`, and `-r 260` crops for the handwritten numbers) into a temp folder,
+   never into the in folder, and READ it yourself.
    On a Windows computer without `pdftoppm`, read the PDF pages directly with the Read tool (a few pages at a time).
    A printed wall number circled or ticked without a new number beside it is CONFIRMED as drawn. A wall measured in
    pieces (door wall: left part, door opening, right part) is the sum, and the pieces go in a fact line. Write the
