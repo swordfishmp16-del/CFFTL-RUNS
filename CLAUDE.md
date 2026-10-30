@@ -10,6 +10,13 @@ Standing rule from the owner (Oct 10, 2026). It applies in every session.
 - Before any Shopify CLI command that changes a store (app deploy, theme push, and so on), confirm the target is the sandbox store, never the live one.
 - If a task seems to need a change to the live store, stop and tell the owner instead.
 
+## Running a job in a cloud session: where the files are
+
+A cloud session cannot see Mike's computer (`C:\grok rem in`, OneDrive, the server) or the test laptop. For
+`run <order>` the only files are the ones attached to the message (their paths are in the message). Use those
+at once; never search the disk, the repo or any connector for them. Nothing attached: ask for the KCD file and the
+REM scan in one line and stop.
+
 ## Projects in this repo
 
 - `kcd-room-splitter/` holds the KCD tools (KCD ROOM SPLITTER and the KCD `.job` reader). Read `kcd-room-splitter/CLAUDE.md` before working on anything KCD-related; it holds the file-format knowledge, team conventions and test-laptop setup.

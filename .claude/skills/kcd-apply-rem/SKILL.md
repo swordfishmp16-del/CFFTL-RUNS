@@ -43,8 +43,13 @@ Tools: `kcd-room-splitter/` in this repo. Read `kcd-room-splitter/CLAUDE.md` onc
      `C:\grok rem completed\1084476 ROBERTS\` (room files and workbooks only); the reports go to
      `C:\grok rem reports\1084476 ROBERTS\`, and the three input files are moved there when the run succeeds, so
      the in folder is empty again for that order. Tell Mike which files were taken and where everything went.
-   - in a cloud session: `jobs/1084476 <NAME>/` (uploaded files go there); room files and workbooks in its `out/`
-     folder, every report in its `reports/` folder.
+   - in a cloud session (Linux, no `C:` drive): the ONLY files are the ones attached to Mike's message; their paths
+     are in the message itself (`/root/.claude/uploads/...`, also `/mnt/user-data/uploads/`). Copy them into
+     `jobs/1084476 <NAME>/` and go. Never search for the job anywhere else: a cloud session cannot see Mike's
+     computer, `C:\grok rem in`, OneDrive, the server or the test laptop, and the `jobs/` folder of a fresh checkout is
+     empty. If the message has no `.job` or no REM scan attached, do not look: reply at once with one line,
+     "Attach the KCD file and the REM scan to the message and type run <order> again." Room files and workbooks go
+     in `out/`, every report in `reports/`.
    If there are two `.job` files and neither is clearly this order, or no scan, stop and ask which.
 1. Render the scan (`pdftoppm -r 150 -png`, and `-r 260` crops for the handwritten numbers) and READ it yourself.
    On a Windows computer without `pdftoppm`, read the PDF pages directly with the Read tool (a few pages at a time).
