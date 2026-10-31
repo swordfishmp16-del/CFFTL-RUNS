@@ -58,6 +58,8 @@ The list in the GitHub repo, `kcd-room-splitter/data/pricelist/_24-09-16 SEP CFF
 
 Same rule for the counter-top list when the room has stone.
 
+If the chosen folder is missing a script the job calls, take that one file from `KCD23\NEW CFFL PRICING`. Do not switch the whole job to a newer month. On the Werner run, `CFClosetAccessory.pcb` was not in `_26-08-03 AUG CFFL PRICING`. It is in `KCD23\NEW CFFL PRICING\CFClosetAccessory.pcb`. Without it the outlets priced on the wrong script.
+
 ## Unit library: the rule
 
 The library the program ships was built October 13, 2026. It is behind KCD.
@@ -94,6 +96,50 @@ The priced line wins. If the sidebar and the priced line disagree, follow the pr
 
 A door turned off in KCD is still sitting in the drawing. Reading the drawing will order that door. The price scripts are what drop it. That is why the drawing count cannot be the form.
 
+## What a real price run did on Werner
+
+`kcdprice.py` was run on `C:\ENG KCD TESTING\1089471 WERNER\1089471 WERNER OFFICE.job` with `_26-08-03 AUG CFFL PRICING`. The sold date is not in the file. August 3 is the newest list on the laptop, so that is the list the rule picks for a sale after August 3.
+
+The engineer pasted 50 lines. The program produced 38.
+
+The program did not produce:
+
+- the 6 doors, `Door-Sarasota Shaker TH-Thermo Standard`
+- 3 filler lines
+- 3 adjustable shelves
+- 2 raceway-notch shelf lines
+
+The program did produce 2 lines that say no color selected, call for quote. Those must not be typed onto the form. They go on the report.
+
+The price run said why the doors were missing. The cabinet files in the bundle do not match the cabinets KCD23 has now:
+
+- `cse201nd.cab` uses names the pricer does not know: i20, i39, i41, i62
+- `231.cab` uses `sctovlp`
+- `260-sliding shelf-flat.cab` uses names the pricer does not know
+- `CSE201nd-slidingshelves.cab` is not in the bundle at all
+- `CFClosetAccessory.pcb` is not in the August folder, so the outlets used the wrong script
+- `eachunitcoutertops.pcb` was called and was not there
+
+The cover page on this job is already in the file and already matches the workbook: material Mysterious, edge 1 mm, face thermofoil. Style, type, size, and color of each door are on the priced line once the doors actually price (`Door-Sarasota Shaker TH-Thermo Standard`, then the width and the height). They are not a separate lookup.
+
+## Steps, in order
+
+Do these in this order. Do not skip to the forms.
+
+1. Rebuild `cat_compact.json.gz` and `rawlib.json.gz` from `KCD23\NEW CFFL UNIT LIBRARY`. Then price Werner again. The unknown-name flags on `cse201nd.cab`, `231.cab`, and the sliding shelf have to be gone, and the 6 Sarasota doors have to be in the output. If they are not, the library rebuild did not pick up the cabinets this job uses. Stop and fix that before touching the workbook.
+
+2. Ask the sold date. Choose the newest `CFFL PRICING` folder on or before that date. If one script is missing from that folder, take that file only from `KCD23\NEW CFFL PRICING`. Print the folder name on the report.
+
+3. Run `kcdprice.py` on the finished `.job`. Write that output into Data Entry with `kcdbook.py` (K price, L unit, M part, N and P sizes). Do not re-save the workbook with openpyxl. A line that says call for quote is not a part. Do not type it.
+
+4. Write the cover from the job. Material, edge color, and face material are already there (Werner: Mysterious, 1 mm, thermofoil). Install date is the one cover field that is always asked. Designer and who cut the list come from the heading, and are asked only when the heading is blank. Costco stays No.
+
+5. Fill the order form from the priced door lines, not from the sidebar. The line has the style, the color, and the size. Thermofoil goes to Doormark. CF5 goes to the CF5 tab. Melamine gets no form. Norwich linen is the check for that: zero door lines. Where the sidebar and the line disagree (Coco: sidebar Shaker Thin, line Gulfstream), the line wins.
+
+6. Hinge side is not on the priced line. Do not guess it. See Door swing below. Every other typical line is in steps 1 to 5.
+
+7. Werner has to come out as the engineer's 50 lines, same parts and sizes, including the 6 doors, the fillers, and the shelves. Then run the other sixteen the same way. One miss means it is not done.
+
 ## Order forms
 
 Data Entry feeds the headers. The order tabs get their line items from those same priced lines.
@@ -112,17 +158,8 @@ A door nobody flipped can be labeled from the cabinet the job names: `1` left, `
 
 A flipped door is masked in the job. It does not read back out as left or right. Do not guess it. The parts list KCD prints does say HL, HR, HB, or HT, because KCD has already resolved it. Until that mask can be read, a flipped door is the one line that cannot be filled from the `.job` alone. Find it and read it, or this item stays the exception. Do not ship a guess.
 
-## What Claude has to change
-
-1. Rebuild the two library bundles from `KCD23\NEW CFFL UNIT LIBRARY`. Fail the run if a job names a cabinet the bundle does not have. Do not skip that cabinet.
-2. Pick the price list with the sold-date rule above. Print the folder name on the report.
-3. Price the finished `.job` with that list and write the paste with `kcdbook.py`. This replaces the drawing-based door count.
-4. Ask only the questions in the table above, and only when the heading is blank. Always ask sold date and install date.
-5. Fill Doormark, CF5, the purchase order, and VJT from the priced lines, not from the sidebar when the two disagree.
-6. Do not run the rem or the filler step on a finished file.
-
 ## Not done until this passes
 
 For every one of the seventeen pairs: the Data Entry paste matches the engineer's paste on price, unit, part, and both sizes, and every order-form cell the engineer typed matches. A difference is a miss, not a note.
 
-The drawing-based door list already failed that test. Do not use it as the proof.
+The drawing-based door list already failed that test. The Werner price run also failed it, 38 lines against 50, with the 6 doors missing. Fix the library first, then price again. Do not call the drawing count the proof.
